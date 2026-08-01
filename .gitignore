@@ -1,0 +1,60 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.dmypy.json
+dmypy.json
+
+# Virtual envs
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Packaging / build
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Project outputs (keep directory via .gitkeep)
+# Per-seed run dumps are local; proof summaries may be committed.
+reports/runs/*
+!reports/runs/.gitkeep
+# Ignore bulk under summaries except proof JSON + README
+reports/summaries/*
+!reports/summaries/.gitkeep
+!reports/summaries/README.md
+!reports/summaries/v0_1_poc_summary.json
+!reports/.gitkeep
+
+# Large local data (fixtures small enough to commit are OK under data/fixtures)
+data/synthetic/generated/
+*.parquet
+!data/fixtures/**/*.parquet
+
+# Secrets / local overrides
+*.pem
+credentials.json
+
+# Hermes / agent local
+.hermes/plans/

@@ -1,0 +1,76 @@
+{
+  "anchor": "m_dict",
+  "delta": 0.0,
+  "n": 1000,
+  "poc_version": "v0_1_poc",
+  "rows": [
+    {
+      "H1_latent_rate": 0.0,
+      "H1b_rate": 1.0,
+      "anchor_in_M_star_rate": 1.0,
+      "cold_determinism_all_ok": true,
+      "empty_set_rate": 0.0,
+      "invalid_ever_admitted": [],
+      "mean_beta_m_slop": 0.48148150067681594,
+      "mean_false_admission": 0.0,
+      "mean_width": 0.04837446083549285,
+      "near_miss_ever_admitted": [],
+      "point_id_rate": 0.0,
+      "scenario": "oracle_easy",
+      "seeds": 5
+    },
+    {
+      "H1_latent_rate": 0.0,
+      "H1b_rate": 1.0,
+      "anchor_in_M_star_rate": 1.0,
+      "cold_determinism_all_ok": true,
+      "empty_set_rate": 0.0,
+      "invalid_ever_admitted": [],
+      "mean_beta_m_slop": 0.5469130103064221,
+      "mean_false_admission": 0.0,
+      "mean_width": 0.04837446083549285,
+      "near_miss_ever_admitted": [],
+      "point_id_rate": 0.0,
+      "scenario": "oracle_with_slop",
+      "seeds": 5
+    },
+    {
+      "H1_latent_rate": NaN,
+      "H1b_rate": NaN,
+      "anchor_in_M_star_rate": 0.0,
+      "cold_determinism_all_ok": true,
+      "empty_set_rate": 1.0,
+      "invalid_ever_admitted": [],
+      "mean_beta_m_slop": 0.48148150067681594,
+      "mean_false_admission": 0.0,
+      "mean_width": NaN,
+      "near_miss_ever_admitted": [],
+      "point_id_rate": 0.0,
+      "scenario": "harsh_theta",
+      "seeds": 5
+    },
+    {
+      "H1_latent_rate": NaN,
+      "H1b_rate": NaN,
+      "anchor_in_M_star_rate": 0.0,
+      "cold_determinism_all_ok": true,
+      "empty_set_rate": 1.0,
+      "invalid_ever_admitted": [],
+      "mean_beta_m_slop": 0.5173882365972549,
+      "mean_false_admission": 0.0,
+      "mean_width": NaN,
+      "near_miss_ever_admitted": [],
+      "point_id_rate": 0.0,
+      "scenario": "all_invalid",
+      "seeds": 5
+    }
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "ts_utc": "2026-08-01T22:54:11.408769+00:00"
+}
