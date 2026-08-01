@@ -182,6 +182,20 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — Public GitHub repo authorized as v0.1 symbolization
+
+**Decision:**
+- User requested: create **public** `Bonorinoa/cvprofiles` and initialize with documentation + green PoC script; this **symbolizes v0.1**.
+- Contents of v0.1: methods KB (`docs/01`–`13`), dual live logs, MIT license, museum monolith `evals/synthetic/v0_poc.py` (`v0_1_poc`), proof summary `reports/summaries/v0_1_poc_summary.json`.
+- **Not** in v0.1: `src/cvprofiles` package, bootstrap/θ-grid, `AGENTS.md`, H5/real baseline, PyPI publish.
+- Tag intent: annotated `v0.1` on the release commit after remote exists.
+- Monolith stays under `evals/synthetic/` forever as historical evidence — never import into `src/`.
+- Supersedes prior “no remote until requested” note: remote is now explicitly requested.
+
+**Rationale:** PoC gate was the prerequisite; user now wants the public artifact.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green.
@@ -190,7 +204,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - SCORE convention locked in PoC payload: z-score measures + v_aux/y/V_star; g binary.
 - Package name PyPI availability unknown.
 - Design Spec doc intentionally absent.
-- **No remote** until user explicitly requests GitHub.
+- Public remote + `v0.1` tag in progress / live after push (see next entry if needed).
 
 ---
 

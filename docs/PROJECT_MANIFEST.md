@@ -4,11 +4,19 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: scaffold_v0
+status: v0.1_poc
+version: "0.1.0"
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
-github: null  # intentionally unset until checkpoint confirmation
+github: https://github.com/Bonorinoa/cvprofiles  # set when remote exists / after push
+tag: v0.1
+poc:
+  script: evals/synthetic/v0_poc.py
+  version_string: v0_1_poc
+  proof_summary: reports/summaries/v0_1_poc_summary.json
+  museum: true  # do not import into src/
+
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]

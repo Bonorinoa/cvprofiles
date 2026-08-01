@@ -6,13 +6,15 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Status** | v0.1 synthetic PoC **gates green**; local git; **no GitHub remote yet** |
+| **Version** | **v0.1.0** — methods KB + green synthetic PoC |
+| **Status** | Public research scaffold; PoC gates green; package layout not started |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
 | **License** | MIT |
+| **GitHub** | https://github.com/Bonorinoa/cvprofiles |
 | **Hermes profile** | `cvprofiles` |
 | **Path** | `~/Hermes/Projects/cvprofiles` |
-| **PoC** | `evals/synthetic/v0_poc.py` (`v0_1_poc`) — museum monolith, not package |
+| **PoC** | `evals/synthetic/v0_poc.py` (`v0_1_poc`) — **museum monolith**, not package |
 | **Proof summary** | `reports/summaries/v0_1_poc_summary.json` |
 
 ## Thesis spine (one paragraph)
@@ -62,9 +64,16 @@ Start here, then read in order:
 
 Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.html`) and the two live logs — not from git archaeology alone. Paper numbers come only from **frozen score matrices + pinned network + fixed seed**.
 
-## Repo status
+## Repo status (v0.1)
 
-- Local git after green v0.1 PoC (prerequisite met).
-- **No GitHub remote** until explicitly requested.
-- Package layout (`src/cvprofiles`) not started — M1 next when ready.
-- Run PoC: `.venv/bin/python evals/synthetic/v0_poc.py` (expects exit 0).
+- **Tag intent:** `v0.1` = documentation suite + museum synthetic PoC with green gates.
+- **Not** a PyPI package release. **Not** `src/cvprofiles` yet (M1).
+- Run PoC (expects exit 0):
+
+```bash
+uv venv --python 3.11 .venv
+uv pip install --python .venv/bin/python numpy pandas
+.venv/bin/python evals/synthetic/v0_poc.py
+```
+
+- Progress is read from on-disk artifacts + `docs/12` / `docs/13`, not git archaeology alone.

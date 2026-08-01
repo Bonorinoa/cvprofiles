@@ -6,13 +6,24 @@ Format: keep newest first.
 
 ## [Unreleased]
 
+### Planned
+- Package `src/cvprofiles` layout (M1+)
+- Bootstrap / θ-grid
+- `AGENTS.md`
+- Paper prereg freeze
+- Public baseline H5 (USER-authored network only)
+
+## [0.1.0] — 2026-08-01
+
+**Symbolizes v0.1:** methods knowledge base + green synthetic PoC (museum monolith).  
+**Not** a PyPI release. **Not** the package API.
+
 ### Added
-- Day-0 project scaffold under `~/Hermes/Projects/cvprofiles`
+- Project scaffold under `~/Hermes/Projects/cvprofiles`
 - Methods-first documentation suite (`docs/01`–`13`, `PROJECT_MANIFEST.md`)
 - Dual live logs (decision/engineering + evaluations)
 - MIT `LICENSE`
-- Local `.venv` (Python 3.11) with numpy/pandas for PoC (gitignored)
-- **`evals/synthetic/v0_poc.py`** monolith (`v0_1_poc`) — SCORE→REPORT synthetic battery with gate check
+- **`evals/synthetic/v0_poc.py`** monolith (`POC_VERSION=v0_1_poc`) — SCORE→REPORT synthetic battery with gate check
 - Proof summary `reports/summaries/v0_1_poc_summary.json`
 
 ### Fixed / learned
@@ -20,9 +31,8 @@ Format: keep newest first.
 - **H1 split locked:** H1a/H1b gates; H1_latent diagnostic only (attenuation); no \(\theta\)-loosening
 - v0.1 battery **exit 0** (FA=0, empty honesty, anchor retention, cold OK)
 
-### Not yet
-- Package `src/cvprofiles` layout (M1+)
-- GitHub remote
-- Bootstrap / θ-grid
-- `AGENTS.md`
-- Paper prereg freeze
+### Explicit non-contents
+- No `src/cvprofiles` package layout
+- No bootstrap / θ-grid inference layer
+- No real-data baseline / H5 network
+- No LLM inside the engine
