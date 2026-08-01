@@ -22,3 +22,7 @@
 | **Run freeze** | Hashed `(scores, network, beta, seed, version)` bundle for reproducibility. |
 | **Score-agnostic** | Engine does not care how columns were produced. |
 | **Model-free (engine)** | No trained model or LLM call inside states 0–3. |
+| **Composite measure** | Scalar formed upstream by aggregating items/scores; recipe is researcher-owned (see `14_Researcher_Input_Guide`). |
+| **Criterion posture (P1)** | One measure is the standard; others judged by recovery of / agreement with it. |
+| **Peer posture (P2)** | Menu members face a common external network; no sacred measure. |
+| **Eval anchor** | Designated valid measure in synthetic gates (e.g. `m_dict` for H1a/H1b); not an empirical truth claim. |

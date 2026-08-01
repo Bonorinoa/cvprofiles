@@ -196,15 +196,52 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — Researcher input guide (composites, anchors, postures)
+
+**Decision:**
+- Add `docs/14_Researcher_Input_Guide.md` as the human-facing prep guide for SCORE/RESTRICT inputs.
+- **Guidelines (DRAFT, process — not a main-path network):**
+  - Scoring/composites stay **upstream**; engine remains score-agnostic.
+  - **Split by default** across objects, response technologies, and instrument families; composite only inside a coherent facet (opposite-movement test).
+  - Distinguish anchor roles: **P1 criterion**, **P2 peer**, **synthetic eval anchor**, optional **rank-ref**.
+  - Recommended empirical sequence when a system was trained to a standard (e.g. LLM→GPS): **criterion recovery first**, peer/external network second.
+  - Common unit required; no row-merge of distinct survey microdata; join at moments when needed.
+  - One construct per run; small \(J\); freeze recipes in `scoring_notes.md` beside runs.
+- Indexed from root README, `docs/README.md`, `PROJECT_MANIFEST.md`; glossary terms added.
+- Does **not** author SCA2/H5 empirical \(R\); SCA-style worked pattern is illustrative posture only.
+- Lands on **`main` after tag `v0.1`** — does **not** move the freeze.
+
+**Rationale:** User correctly noted scoring is a non-trivial researcher decision; docs needed durable guidelines (when to break composites, what to anchor on) without collapsing USER-owned theory into package defaults.
+
+---
+
+## 2026-08-01 — Public remote, tag v0.1, and GitHub Release LIVE
+
+**Decision:**
+- Public repo: https://github.com/Bonorinoa/cvprofiles
+- `origin` → `https://github.com/Bonorinoa/cvprofiles.git`
+- Annotated tag **`v0.1`** frozen on commit **`fb62b48`** (methods KB + green museum PoC only)
+- GitHub Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
+- **v0.1 contents:** docs 01–13, dual live logs, MIT, `evals/synthetic/v0_poc.py` (`v0_1_poc`), `reports/summaries/v0_1_poc_summary.json`
+- **v0.1 non-contents:** no `src/cvprofiles`, no bootstrap/θ-grid, no H5/real baseline, no PyPI, no `AGENTS.md`
+- Doc-14 cluster is a **post-v0.1** commit on `main` only — **tag not moved**, not part of the freeze symbolization
+- `main` may advance past `v0.1`; the tag remains the v0.1.0 symbolization point
+
+**Rationale:** User asked to create the public repo and symbolize v0.1 with documentation + PoC. Prerequisite green PoC was met; remote/tag/release complete the request.
+
+---
+
 ## Open Engineering Notes
 
-- Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green.
+- Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
+- Tag/release live at `fb62b48`; `main` may advance (doc-14 DRAFT companion, then M1 when requested).
 - Lock run_id hash spec at M1.
 - Restriction registry extension mechanism still open.
 - SCORE convention locked in PoC payload: z-score measures + v_aux/y/V_star; g binary.
 - Package name PyPI availability unknown.
 - Design Spec doc intentionally absent.
-- Public remote + `v0.1` tag in progress / live after push (see next entry if needed).
+- `14_Researcher_Input_Guide` DRAFT — promote locked subsections after Augusto review (composite defaults, min \(n\)).
+- Do **not** import museum monolith into `src/`.
 
 ---
 

@@ -7,6 +7,8 @@ Read in numbered order. Live documents:
 - [`12_Decision_Engineering_Log.md`](12_Decision_Engineering_Log.md) — engineering / scope locks  
 - [`13_Evaluations_Log.md`](13_Evaluations_Log.md) — synthetic and baseline run learnings  
 
+Human prep for real score matrices and networks: [`14_Researcher_Input_Guide.md`](14_Researcher_Input_Guide.md).
+
 Machine index: [`PROJECT_MANIFEST.md`](PROJECT_MANIFEST.md).
 
 **Rule:** if a design doc and the code disagree, update the doc and the decision log in the same change. Do not silently invent architecture in implementation.

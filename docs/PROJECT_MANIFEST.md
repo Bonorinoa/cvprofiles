@@ -38,6 +38,7 @@ docs:
     - docs/11_Glossary.md
     - docs/12_Decision_Engineering_Log.md
     - docs/13_Evaluations_Log.md
+    - docs/14_Researcher_Input_Guide.md
   live:
     - docs/12_Decision_Engineering_Log.md
     - docs/13_Evaluations_Log.md

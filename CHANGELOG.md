@@ -13,6 +13,9 @@ Format: keep newest first.
 - Paper prereg freeze
 - Public baseline H5 (USER-authored network only)
 
+### Added (post-v0.1 on main)
+- `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
+
 ## [0.1.0] — 2026-08-01
 
 **Symbolizes v0.1:** methods knowledge base + green synthetic PoC (museum monolith).  

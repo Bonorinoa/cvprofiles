@@ -40,6 +40,7 @@ Start here, then read in order:
 | [`docs/11_Glossary.md`](docs/11_Glossary.md) | Notation |
 | [`docs/12_Decision_Engineering_Log.md`](docs/12_Decision_Engineering_Log.md) | **LIVE** engineering decisions |
 | [`docs/13_Evaluations_Log.md`](docs/13_Evaluations_Log.md) | **LIVE** eval runs and learnings |
+| [`docs/14_Researcher_Input_Guide.md`](docs/14_Researcher_Input_Guide.md) | Composites, anchors, SCORE/RESTRICT prep |
 | [`docs/PROJECT_MANIFEST.md`](docs/PROJECT_MANIFEST.md) | Machine-readable index |
 
 ## MVP roadmap (sketch)
