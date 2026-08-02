@@ -6,8 +6,8 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **v0.1.0** — methods KB + green synthetic PoC |
-| **Status** | Public research scaffold; PoC gates green; package layout not started |
+| **Version** | **v0.1.0** tagged (methods KB + museum PoC); **v1.0 thin spine in progress** |
+| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; package spine sprint open |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
 | **License** | MIT |
@@ -19,7 +19,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 ## Thesis spine (one paragraph)
 
-Researcher supplies unit×measure scores (SCORE). Researcher authors a nomological network \(R\) with thresholds \(\theta\) and a target \(\beta(\cdot)\) (RESTRICT). Engine computes sample slacks, keeps admissible measures \(M^*\), maps survivors through \(\beta\), and reports \(B^* / [L,U]\) with bootstrap and \(\theta\)-sensitivity (IDENTIFY). Audit trail in HTML/JSON/LaTeX a non-coder can steer (REPORT). Engine is **score-agnostic and model-free**. No LLM lives inside the engine.
+Researcher supplies unit×measure scores (SCORE). Researcher authors a nomological network \(R\) with thresholds \(\theta\) and a target \(\beta(\cdot)\) (RESTRICT). Engine computes sample slacks, keeps admissible measures \(M^*\), maps survivors through \(\beta\), and reports \(B^* / [L,U]\) (IDENTIFY). **v1.0:** \([L,U]=\min/\max B^*\) only. Bootstrap and \(\theta\)-sensitivity are **v1.1**. Audit trail in HTML/JSON (LaTeX later) a non-coder can steer (REPORT). Engine is **score-agnostic and model-free**. No LLM lives inside the engine.
 
 ## Document map
 
@@ -43,13 +43,22 @@ Start here, then read in order:
 | [`docs/14_Researcher_Input_Guide.md`](docs/14_Researcher_Input_Guide.md) | Composites, anchors, SCORE/RESTRICT prep |
 | [`docs/PROJECT_MANIFEST.md`](docs/PROJECT_MANIFEST.md) | Machine-readable index |
 
-## MVP roadmap (sketch)
+## Roadmap
+
+### v1.0 (this sprint — thin first-principles spine)
 
 1. **Schemas + freeze contract** — typed score matrix, network, \(\beta\), run manifest  
-2. **IDENTIFY on synthetic truth** — known \(V^*\), known valid/invalid \(m_j\)  
-3. **Range + bootstrap + \(\theta\)-grid** — honest conservative \([L,U]\)  
-4. **REPORT** — HTML/JSON/LaTeX audit trail  
-5. **One public baseline** — boring, heavily documented association study (choice deferred)
+2. **SCORE → RESTRICT → IDENTIFY** — slacks, \(M^*\), \([L,U]=\min/\max B^*\) (no bootstrap)  
+3. **Thin REPORT** — HTML/JSON; empty \(M^*\) is a clean success  
+4. **Synth harness re-impl** under package/tests (H1a / H2 / H3 / H4; H1_latent diagnostic)  
+5. **Installable package + minimal CI**
+
+### Later
+
+- **v1.1:** bootstrap + \(\theta\)-grid  
+- **M10 / H5:** one public baseline — boring, heavily documented association study (USER-authored network only; choice deferred)
+
+See [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) for the locked v1.0 scope box and acceptance list.
 
 ## Hard non-goals (unless reopened in the decision log)
 
@@ -65,11 +74,13 @@ Start here, then read in order:
 
 Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.html`) and the two live logs — not from git archaeology alone. Paper numbers come only from **frozen score matrices + pinned network + fixed seed**.
 
-## Repo status (v0.1)
+## Repo status
 
-- **Tag intent:** `v0.1` = documentation suite + museum synthetic PoC with green gates.
-- **Not** a PyPI package release. **Not** `src/cvprofiles` yet (M1).
-- Run PoC (expects exit 0):
+- **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
+  Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
+- **v1.0 spine sprint:** package path in progress on `main`. Bootstrap/θ-grid deferred to v1.1.
+- **Not yet:** PyPI release; tagged `v1.0.0` (only when acceptance list is green).
+- Run museum PoC (expects exit 0; do not import into `src/`):
 
 ```bash
 uv venv --python 3.11 .venv

@@ -22,12 +22,17 @@ Machine-readable summaries may later live under `reports/summaries/`; this file 
 
 | Metric | Value |
 |---|---|
-| Coverage | |
-| False-admission | |
-| Empty-set rate | |
+| H1a (FA / anchor retention) | |
+| H1b (anchor β in [L,U]) | |
+| H1_latent (diagnostic only) | |
+| H2 False-admission | |
+| H3 Empty-set rate | |
+| H4 Cold repro | |
 | Point-ID rate | |
 | \|M*| (mean or per-seed) | |
-| [L,U] vs β* | |
+| [L,U] vs β(anchor) | |
+
+Package-battery rows name **H1a / H1b / H1_latent / H2 / H3 / H4** (do not revive bare “Coverage” as a gate).
 
 **Interpretation:**
 - …

@@ -231,10 +231,33 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — v1.0 open sprint: thin first-principles spine; bootstrap deferred
+
+**Decision (LOCKED this sprint):**
+
+- **v1.0 goal:** validate core first principles of the system we ship — not full MVP in historical `09` backlog, not paper-complete, not fully tested polish.
+- **In v1.0:** installable thin package `src/cvprofiles` + CLI; SCORE → RESTRICT → IDENTIFY → thin REPORT (HTML/JSON); finite menu; sample slacks → \(M^*\) → \([L,U]=\min/\max B^*\); freeze hash + bit-stable rerun; synthetic harness re-implemented under package/tests (H1a / H2 / H3 / H4); empty \(M^*\) clean success; no LLM in engine or installable import graph.
+- **Out of v1.0:** **M6 bootstrap / θ-grid → v1.1**; M10 / H5 / real baseline / USER empirical network content; sharp PI; prompt search / measure generation; GUI/SaaS; importing museum monolith into `src/`; moving tag `v0.1`; “fully tested MVP” polish.
+- **Build order (strict):** M1 → M2 → M3 → M4 → M5 → M7(thin) → M8 → M9. **No M6. No M10 this sprint.**
+- **Gate path:** G1 → G2 → G3 → G4 → G5 → G7-thin → G8-mini → package install/CI. G7/G8 re-enter from G5 (not G6) for this sprint. G6 deferred to v1.1.
+- **Hypothesis wording (unchanged):** H1a / H1b gates; H1_latent diagnostic only (attenuation). See `03`, `05`.
+- **Tag `v0.1` @ `fb62b48`:** immovable. Methods KB + museum PoC only. Do not move, delete, or retag.
+- **Museum:** `evals/synthetic/v0_poc.py` stays present and **unimported**. Package path must earn its own gates; museum was directional only.
+- **Authority split unchanged:** USER owns construct / every \(R,\theta\) / go-no-go / paper narrative. Agent may author oracle networks for synthetic DGPs only. Doc-14 remains DRAFT process guidance — not package defaults that author constructs.
+- **Sibling chat:** version-control evaluation / release review owns tag/release candidates. This sprint implements; propose `v1.0.0` only when acceptance list green and Augusto asks; do not tag from this chat by default.
+- **Phase 0 (this entry’s commit):** docs hygiene only — past-tense public repo + tag live; v1.0 scope box in `09` + manifest; G6/bootstrap wording deferred; H1a/H1b/H1_latent pointers. No methodology expansion; no hard non-goal reopening.
+
+**Rationale:** User opened v1.0 as a thin spine sprint with bootstrap explicitly deferred. Prevents full-MVP scope collapse and keeps first-principles validation observable.
+
+**Follow-ups:** M1 schemas + freeze hash + mini fixture + failing contract tests; lock run_id hash algorithm in a subsequent M1 decision-log entry.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
-- Tag/release live at `fb62b48`; `main` may advance (doc-14 DRAFT companion, then M1 when requested).
+- Tag/release live at `fb62b48`; `main` may advance (doc-14 DRAFT companion; v1.0 spine sprint live).
+- **v1.0 scope locked** this sprint: thin spine; M6 → v1.1; no M10.
 - Lock run_id hash spec at M1.
 - Restriction registry extension mechanism still open.
 - SCORE convention locked in PoC payload: z-score measures + v_aux/y/V_star; g binary.
@@ -242,6 +265,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - Design Spec doc intentionally absent.
 - `14_Researcher_Input_Guide` DRAFT — promote locked subsections after Augusto review (composite defaults, min \(n\)).
 - Do **not** import museum monolith into `src/`.
+- Do **not** move tag `v0.1`.
 
 ---
 

@@ -13,7 +13,7 @@ Construct validity under a **menu** of measurement functions is usefully cast as
 
 1. Researcher states a **nomological network** \(R\) (testable implications, often inequalities) with thresholds \(\theta\).  
 2. Engine admits measures that satisfy sample analogues of those restrictions → admissible set \(M^*\).  
-3. Downstream parameter of interest is the image \(B^* = \{\beta(m) : m \in M^*\}\), reported as a range \([L,U]\) with honest conservative inference and \(\theta\)-sensitivity.
+3. Downstream parameter of interest is the image \(B^* = \{\beta(m) : m \in M^*\}\), reported as a range \([L,U]\). **v1.0:** \([L,U]=\min/\max B^*\). Bootstrap and \(\theta\)-sensitivity are **v1.1**.
 
 Empty \(M^*\) and wide \([L,U]\) mean **“we don’t know under this theory”** — first-class scientific outputs.
 

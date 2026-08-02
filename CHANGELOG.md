@@ -6,15 +6,21 @@ Format: keep newest first.
 
 ## [Unreleased]
 
-### Planned
-- Package `src/cvprofiles` layout (M1+)
-- Bootstrap / θ-grid
+### Added
+- **Phase 0 (v1.0 sprint start):** scope box — thin first-principles spine; M6 bootstrap/θ-grid deferred to v1.1; no M10 this sprint
+- Past-tense docs: public repo + tag `v0.1` @ `fb62b48` live; G7/G8 re-enter from G5 for v1.0; H1a/H1b gates + H1_latent diagnostic pointers
+- `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
+
+### Planned (v1.0 spine)
+- Package `src/cvprofiles` layout (M1 → M9 thin path)
+- SCORE → RESTRICT → IDENTIFY → thin REPORT; \([L,U]=\min/\max B^*\)
+- Synth harness re-impl under package/tests (H1a / H2 / H3 / H4)
+
+### Planned (later)
+- Bootstrap / θ-grid (**v1.1**, not v1.0)
 - `AGENTS.md`
 - Paper prereg freeze
 - Public baseline H5 (USER-authored network only)
-
-### Added (post-v0.1 on main)
-- `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
 
 ## [0.1.0] — 2026-08-01
 

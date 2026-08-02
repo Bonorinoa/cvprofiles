@@ -32,7 +32,8 @@
               |  slacks s_r(m_j)          |
               |  M* = {m : s_r ≥ 0 ∀ r}   |
               |  B* = {β(m) : m ∈ M*}     |
-              |  [L,U], bootstrap, θ-grid |
+              |  [L,U]=min/max B* (v1.0)  |
+              |  bootstrap, θ-grid = v1.1 |
               +-------------+-------------+
                             |
                    identification bundle
@@ -101,10 +102,10 @@ Each state is a **pure-ish transform** with explicit inputs/outputs on disk. Pre
 | `slacks.parquet` | \(s_r(m_j)\) matrix (measures × restrictions) |
 | `admissible.json` | \(M^*\) member list + failure reasons for non-members |
 | `beta_values.json` | \(\beta(m)\) for each \(m \in M\) (flag survivors) |
-| `range.json` | \([L,U]\), point-ID flag, empty-set flag |
-| `bootstrap.json` | Replicates summary (not raw draws by default) |
-| `theta_grid.json` | Sensitivity surface summary |
-| `identify_manifest.json` | seed, n_boot, float policy, package version |
+| `range.json` | \([L,U]=\min/\max B^*\) (v1.0); point-ID flag; empty-set flag |
+| `bootstrap.json` | Replicates summary (not raw draws by default) — **v1.1** |
+| `theta_grid.json` | Sensitivity surface summary — **v1.1** |
+| `identify_manifest.json` | seed, float policy, package version; `n_boot` when M6 lands |
 
 ### REPORT out
 | Artifact | Role |
@@ -136,7 +137,7 @@ Upstream scorers (LLM APIs, dictionaries, PCA) are **user workflows** that produ
 ```
 [user scores] --> SCORE --> S_frozen ----------------+
 [network.yaml] -> RESTRICT -> bundle ----------------+--> IDENTIFY --> artifacts --> REPORT
-[beta.yaml]  ---/            seed, n_boot, theta_grid/
+[beta.yaml]  ---/     seed; n_boot/θ-grid = v1.1 ---/
 ```
 
 ## Failure aesthetics (architectural)
@@ -144,7 +145,7 @@ Upstream scorers (LLM APIs, dictionaries, PCA) are **user workflows** that produ
 | Condition | Engine behavior |
 |---|---|
 | Empty \(M^*\) | Success exit; `range.json` marks empty; report explains binding restrictions |
-| Singleton \(M^*\) | Point-ID flag true; still emit bootstrap/θ diagnostics |
+| Singleton \(M^*\) | Point-ID flag true; still emit range; bootstrap/θ diagnostics at v1.1 |
 | All measures fail one \(r\) | Surface that \(r\) as dominant; do not auto-loosen \(\theta\) |
 | Schema invalid | Fail loud at SCORE/RESTRICT; never partial-identify on garbage |
 

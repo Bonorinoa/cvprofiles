@@ -7,7 +7,7 @@
 | ID | Question | Options / notes | Blocking? |
 |---|---|---|---|
 | Q1 | Default slack tolerance \(\delta\) | `0` vs small positive; always grid-report | Soft for code; hard for H2 claims |
-| Q2 | Bootstrap endpoint procedure | Percentile on \(L,U\); projection; other conservative | Before H1 freeze |
+| Q2 | Bootstrap endpoint procedure | Percentile on \(L,U\); projection; other conservative | **v1.1** (bootstrap deferred; not blocking v1.0) |
 | Q3 | First \(\beta\) in demos | **closed default:** `corr_y` | Soft reopen |
 | Q4 | Spearman / rank restrictions in MVP | Include vs defer | Soft |
 | Q5 | Reference-measure restrictions | Risk of dictionary privilege | Design taste |
@@ -18,10 +18,10 @@
 
 | ID | Question | Notes | Blocking? |
 |---|---|---|---|
-| Q8 | Headline CI metric thresholds | \(f_{\max}=0.05\) working; PoC FA=0. Bootstrap \(c_{\min}\) later | Soft until bootstrap |
+| Q8 | Headline CI metric thresholds | \(f_{\max}=0.05\) working; PoC FA=0. Bootstrap \(c_{\min}\) later | Soft; bootstrap layer is **v1.1** |
 | Q9 | Paraphrase label | **closed:** valid | Soft reopen |
 | Q10 | Seed count for metric MC | 50 vs 200 | Soft |
-| Q11 | Mini fixture generation now vs M1 | Path reserved; content at M1 | No |
+| Q11 | Mini fixture generation now vs M1 | Path reserved; content at M1 (v1.0 spine sprint) | In progress at M1 |
 
 ## Empirical H5
 
@@ -62,4 +62,5 @@
 | Q22 H1 / attenuation | H1a+H1b gates; H1_latent diagnostic only; reject C on reported range | 2026-08-01 |
 | Q23 near_miss | Fail ≥1 restriction by DGP design under oracle \(R\); not FA | 2026-08-01 |
 | Q24 v0.1 before M1/git | Hygiene first; v0.1 exit 0 → local git OK | 2026-08-01 |
-| Git remote | Still **no remote** after green PoC; local init only | 2026-08-01 |
+| Git remote / public repo | **LIVE:** https://github.com/Bonorinoa/cvprofiles ; tag `v0.1` @ `fb62b48` | 2026-08-01 |
+| v1.0 scope / M6 | Thin spine; bootstrap/θ-grid deferred to v1.1; no M10 this sprint | 2026-08-01 |

@@ -4,19 +4,28 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v0.1_poc
-version: "0.1.0"
+status: v1.0_spine_in_progress
+version: "0.1.0"          # last tagged symbolization
+target_version: "1.0.0"   # thin spine sprint intent (not yet tagged)
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
-github: https://github.com/Bonorinoa/cvprofiles  # set when remote exists / after push
-tag: v0.1
+github: https://github.com/Bonorinoa/cvprofiles
+tag_v0_1: v0.1            # frozen forever at fb62b48 — do not move/retag
+tag_v0_1_sha: fb62b48
+
 poc:
   script: evals/synthetic/v0_poc.py
   version_string: v0_1_poc
   proof_summary: reports/summaries/v0_1_poc_summary.json
   museum: true  # do not import into src/
 
+v1_0:
+  scope: thin_first_principles_spine
+  states: [SCORE, RESTRICT, IDENTIFY, REPORT_thin]
+  bootstrap: deferred_to_v1.1
+  build_order: [M1, M2, M3, M4, M5, M7, M8, M9]  # no M6, no M10 this sprint
+  range: min_max_B_star   # no bootstrap / θ-grid in v1.0
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
@@ -62,4 +71,7 @@ locks:
   - user_owns_nomological_network
   - synthetic_dgp_before_real_baselines
   - dual_live_logs
+  - v0_1_tag_immovable
+  - museum_poc_unimported
+  - v1_0_no_bootstrap
 ```
