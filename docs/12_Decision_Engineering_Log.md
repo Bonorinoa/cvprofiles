@@ -309,6 +309,36 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — M3 G3 RESTRICT (LOCKED)
+
+**Decision:**
+- `cvprofiles.restrict`: load network/beta YAML → validate → bind columns against SCORE roles → `network_hash` / `beta_hash`.
+- Invalid schema/YAML/missing columns raise **`RestrictError`** (never raw pydantic at IO boundary).
+- No slacks at RESTRICT. No construct authorship; doc-14 remains process guidance only.
+- mini_v1 golden `network_hash` / `beta_hash` match `expected_freeze.json`.
+
+**G3 proof:** `tests/test_restrict.py` green.
+
+**Follow-ups:** M4 slacks + \(M^*\); M5 \(\beta\) + min/max range.
+
+---
+
+## 2026-08-01 — M4/M5 G4/G5 IDENTIFY (LOCKED)
+
+**Decision:**
+- Evaluators in v1.0 thin spine: **`corr_min`**, **`corr_sign`** only. Other schema types fail loud until a fixture demands them.
+- \(s_r \ge -\delta\); \(\delta=0\) default. Full slack matrix + `rejected` reasons.
+- \(M^*\) from survivors; empty \(M^*\) is **success** (not exception).
+- \(\beta\): **`corr_y` only**. \([L,U]=\min/\max B^*\) on survivors; non-survivors still get \(\beta(m)\) marked rejected.
+- Never loosen \(\theta\); never include rejected \(\beta\) in range; no bootstrap (v1.1).
+- Harsh fixture: `data/fixtures/mini_v1/network_harsh.yaml` with `corr_min` \(\theta=0.999\) (above max sample corr on mini) → true empty \(M^*\).
+
+**G4/G5 proof:** `tests/test_identify.py` — FA=0 on `m_slop`; empty harsh; cold double-run; range is image of \(B^*\) only.
+
+**Follow-ups:** M7 thin REPORT + `run` composition. No M6.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
@@ -316,6 +346,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - **v1.0 scope locked** this sprint: thin spine; M6 → v1.1; no M10.
 - **run_id / freeze hash algorithm LOCKED at M1** (see entry above).
 - **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.
+- **RESTRICT/IDENTIFY thin spine live:** corr_min/corr_sign + corr_y; other evaluators deferred.
 - Restriction registry **extension** mechanism still open (adding new type ids beyond schema list).
 - Package name PyPI availability unknown.
 - Design Spec doc intentionally absent.

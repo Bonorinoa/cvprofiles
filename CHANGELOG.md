@@ -7,6 +7,9 @@ Format: keep newest first.
 ## [Unreleased]
 
 ### Added
+- **M5 / G5:** \(\beta=\mathrm{corr}_y\); \([L,U]=\min/\max B^*\) on survivors only; empty/point-ID flags; `range.json` notes bootstrap deferred to v1.1
+- **M4 / G4:** IDENTIFY slacks (`corr_min`, `corr_sign`); \(M^*\) + rejection reasons; harsh empty fixture (`network_harsh.yaml`, \(\theta=0.999\)); FA=0 on `m_slop`
+- **M3 / G3:** RESTRICT load/bind network+beta; `RestrictError` at IO boundary; golden network/beta hashes
 - **M2 / G2:** SCORE pipeline (`run_score` / `write_score_artifacts`); default normalization `none`; optional `zscore_measures` on measures only; fail-loud on missing cols / empty / dup unit_id / non-finite; golden `scores_hash` match on mini_v1
 - **M1 / G1:** installable `src/cvprofiles` (`1.0.0a1`) + `pyproject.toml` + thin CLI
 - Pydantic v2 schemas (scores / network / beta / freeze run manifests)
@@ -18,7 +21,7 @@ Format: keep newest first.
 - `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
 
 ### Planned (v1.0 spine)
-- M3 RESTRICT → M4/M5 IDENTIFY → M7 thin REPORT
+- M7 thin REPORT + full `run` composition
 - Synth harness re-impl under package/tests (H1a / H2 / H3 / H4) — M8
 - Minimal CI + install polish — M9
 

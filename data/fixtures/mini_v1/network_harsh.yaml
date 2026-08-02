@@ -1,0 +1,16 @@
+schema_version: "1"
+name: mini_v1_harsh_empty
+delta: 0.0
+restrictions:
+  # θ above max sample corr(m, v_aux) on mini_v1 (~0.9977) so M* is truly empty.
+  - id: r_corr_min_aux
+    type: corr_min
+    theta: 0.999
+    params:
+      variable: v_aux
+  - id: r_corr_sign_aux
+    type: corr_sign
+    theta: 0.10
+    params:
+      variable: v_aux
+      sign: 1
