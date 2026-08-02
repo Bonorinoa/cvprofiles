@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>cvprofiles report — {{ run_id[:12] }}</title>
+  <style>
+    :root {
+      --ink: #1a1410;
+      --muted: #5c534c;
+      --paper: #f7f1e8;
+      --card: #fffdf8;
+      --line: #d9cfc0;
+      --ok: #1f6b3a;
+      --bad: #8b1e1e;
+      --accent: #6b2c2c;
+      --chip: #efe6d8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.35rem;
+    }
+    h1 { font-size: 1.75rem; margin: 0 0 0.35rem; font-weight: 600; }
+    .sub { color: var(--muted); margin: 0; font-size: 0.98rem; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 760px) {
+      .grid.two { grid-template-columns: 1.1fr 0.9fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.75rem;
+      font-family: Helvetica, Arial, sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .range-box {
+      border-left: 4px solid {% if empty %}var(--bad){% else %}var(--ok){% endif %};
+      padding: 0.85rem 1rem;
+      background: {% if empty %}#f8ecec{% else %}#eef6f0{% endif %};
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 0.75rem;
+    }
+    .range-box .label {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin: 0 0 0.25rem;
+    }
+    .range-box .value {
+      font-size: 1.45rem;
+      font-variant-numeric: tabular-nums;
+      margin: 0;
+    }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.45rem 0.35rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .tag {
+      display: inline-block;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      background: var(--chip);
+    }
+    .tag.ok { background: #d9eedf; color: var(--ok); }
+    .tag.bad { background: #f0d6d6; color: var(--bad); }
+    .tag.empty { background: #f0d6d6; color: var(--bad); }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.82rem;
+      word-break: break-all;
+    }
+    ul.compact { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+    footer {
+      margin-top: 1.75rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    .empty-callout {
+      border: 1px solid #e0b4b4;
+      background: #fbf1f1;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .empty-callout h2 { color: var(--bad); margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">cvprofiles · construct-validity profile</p>
+      <h1>{{ title }}</h1>
+      <p class="sub">
+        Admissible measurement set under a stated nomological network, and the
+        image of <em>β</em> on that set. Empty sets and wide ranges are scientific features.
+      </p>
+    </header>
+
+    {% if empty %}
+    <section class="empty-callout">
+      <h2>Empty admissible set — success, not a crash</h2>
+      <p style="margin:0">
+        Under this network and thresholds, <strong>no candidate measure survives</strong>.
+        The engine is not broken: the theory + data reject the whole menu.
+        Reported range is undefined; do not auto-loosen θ.
+      </p>
+    </section>
+    {% endif %}
+
+    <div class="grid two">
+      <section class="card">
+        <h2>Construct-identified range</h2>
+        <div class="range-box">
+          <p class="label">[L, U] · method = min/max B*</p>
+          {% if empty %}
+          <p class="value">∅ &nbsp;<span class="tag empty">empty M*</span></p>
+          <p class="muted" style="margin:0.4rem 0 0">No survivors → no image of β. Bootstrap deferred to v1.1.</p>
+          {% else %}
+          <p class="value">[{{ "%.6f"|format(L) }}, {{ "%.6f"|format(U) }}]</p>
+          <p class="muted" style="margin:0.4rem 0 0">
+            Width = {{ "%.6f"|format(U - L) }}
+            · {{ "point-ID" if point_id else (admissible|length)|string + " survivors" }}
+            · bootstrap: none (v1.0)
+          </p>
+          {% endif %}
+        </div>
+        <p class="muted" style="margin:0">
+          Target β = <span class="mono">{{ beta_type }}</span>
+          on outcome <span class="mono">{{ outcome }}</span>.
+          Range uses <strong>only</strong> measures in M*; rejected β values are shown below but never enter [L,U].
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Run freeze</h2>
+        <table>
+          <tr><th>run_id</th><td class="mono">{{ run_id }}</td></tr>
+          <tr><th>package</th><td class="mono">{{ package_version }}</td></tr>
+          <tr><th>scores_hash</th><td class="mono">{{ scores_hash }}</td></tr>
+          <tr><th>network_hash</th><td class="mono">{{ network_hash }}</td></tr>
+          <tr><th>beta_hash</th><td class="mono">{{ beta_hash }}</td></tr>
+          <tr><th>δ</th><td class="mono">{{ delta }}</td></tr>
+          <tr><th>seed</th><td class="mono">{{ seed }}</td></tr>
+          <tr><th>network</th><td>{{ network_name or "—" }}</td></tr>
+        </table>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Menu admission</h2>
+      <p class="muted" style="margin-top:0">
+        M* size = {{ admissible|length }} / {{ measures|length }}.
+        Slack rule: admit if s<sub>r</sub>(m) ≥ −δ for all r.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            <th>status</th>
+            <th>β(m)</th>
+            <th>failed restrictions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in measures %}
+          <tr>
+            <td class="mono">{{ m }}</td>
+            <td>
+              {% if m in admissible %}
+              <span class="tag ok">admissible</span>
+              {% else %}
+              <span class="tag bad">rejected</span>
+              {% endif %}
+            </td>
+            <td>{{ "%.6f"|format(beta_values[m]) }}</td>
+            <td class="mono">
+              {% if m in rejected and rejected[m] %}
+                {{ rejected[m]|join(", ") }}
+              {% else %}
+                —
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Slack matrix s<sub>r</sub>(m)</h2>
+      <p class="muted" style="margin-top:0">Positive / zero ≈ satisfied at δ={{ delta }}. Negative = violation magnitude.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            {% for rid in restriction_ids %}
+            <th class="mono">{{ rid }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in measures %}
+          <tr>
+            <td class="mono">{{ m }}</td>
+            {% for rid in restriction_ids %}
+            <td>{{ "%.6f"|format(slacks[m][rid]) }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Network (researcher-owned)</h2>
+      <ul class="compact">
+        {% for r in restrictions %}
+        <li>
+          <span class="mono">{{ r.id }}</span>
+          · type <span class="mono">{{ r.type }}</span>
+          · θ={{ r.theta }}
+          · params <span class="mono">{{ r.params }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="muted" style="margin:0.75rem 0 0">
+        Engine does not invent restrictions. Agent may author oracle R for synthetic DGPs only.
+      </p>
+    </section>
+
+    <footer>
+      cvprofiles {{ package_version }}
+      · four-state spine SCORE → RESTRICT → IDENTIFY → REPORT
+      · bootstrap / θ-grid deferred to v1.1
+      · generated {{ created_at or "—" }}
+    </footer>
+  </div>
+</body>
+</html>

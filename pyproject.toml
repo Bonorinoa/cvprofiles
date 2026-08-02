@@ -50,6 +50,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build]
 # hatchling auto-discovers src/cvprofiles (src-layout)
 
+[tool.hatch.build.targets.wheel.force-include]
+"src/cvprofiles/report/templates" = "cvprofiles/report/templates"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]

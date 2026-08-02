@@ -142,6 +142,37 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ---
 
+## 2026-08-01 — Package path M7 e2e (mini_v1; not full Monte Carlo)
+
+- **run_id(s):** golden freeze `f0f989992ad68099140a3ff9fbfe619eb5faabdf05315aa8c7beccfb2231ccac` (oracle, seed 0, `1.0.0a1`); harsh demo under `reports/runs/demo_mini_v1_harsh/` (gitignored)
+- **package / git:** `cvprofiles==1.0.0a1`; package path SCORE→REPORT (not museum)
+- **scenario(s):** mini_v1 oracle network; mini_v1 harsh (`corr_min` θ=0.999)
+- **n, J, seed(s), δ:** n=10, J=3 (`m_good`,`m_weak`,`m_slop`), seed 0, δ=0; β=`corr_y`
+- **network:** oracle synthetic fixture (agent-OK); not USER empirical R
+- **β:** `corr_y`; **no bootstrap** — `[L,U]=min/max B*`
+
+| Metric | Oracle | Harsh |
+|---|---:|---:|
+| H1a FA (`m_slop` admitted) | **0** | 0 |
+| Anchor / valids in M* | `m_good`,`m_weak` | none |
+| H1b (survivor β in [L,U]) | 1 by construction | n/a (empty) |
+| H1_latent diagnostic | not gated (n=10 toy) | n/a |
+| H3 empty-set honesty | 0 | **1** (exit 0) |
+| H4 cold double-run | True (`run_id`/M*/[L,U]) | True |
+
+Typical oracle cell: M*={m_good, m_weak}; m_slop fails `r_corr_min_aux` + `r_corr_sign_aux`; [L,U] ≈ [0.9908, 0.9930] (image of survivors only; slop β≈−0.98 never enters).
+
+**Interpretation:**
+1. Thin package spine works end-to-end without museum import.
+2. FA=0 and empty-M* beauty hold on the hand fixture (directional G7).
+3. **Not** a full H1–H4 Monte Carlo battery — that is **M8**.
+
+**Follow-ups:**
+- M8: re-impl synth harness under package/tests; append full battery row.
+- Do not tag `v1.0.0` from this chat; sibling release chat evaluates candidates.
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |

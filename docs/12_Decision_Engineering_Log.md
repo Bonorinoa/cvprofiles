@@ -339,6 +339,25 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — M7 G7 thin REPORT + full run composition (LOCKED)
+
+**Decision:**
+- Thin REPORT: `report.html` (Jinja2 one-page audit) + `report.json` (machine-complete). No TeX this sprint. No bootstrap/θ panels (footer notes v1.1).
+- Full composition: `cvprofiles.pipeline.run_profile` = SCORE → RESTRICT → IDENTIFY → REPORT into one run directory under `reports/runs/<run_id>/` (or `--out`).
+- CLI: `cvprofiles run --scores --roles --network --beta [--out] [--policy] [--seed] [--title]`.
+  - **stdout = pure JSON summary** (machine-parseable).
+  - Human status crumbs → **stderr only**.
+- Empty \(M^*\) is exit code **0**; HTML shows first-class “Empty admissible set — success, not a crash” callout; never auto-loosen \(\theta\).
+- G7 enters from **G5** (not G6) for v1.0 thin spine. Bootstrap remains v1.1.
+- Jinja template packaged via hatch `force-include` of `report/templates/`.
+- mini_v1 e2e: oracle \(M^*=\{m\_good,m\_weak\}\), FA=0 on `m_slop`; harsh empty clean; cold double-run same `run_id` / \(M^*\) / \([L,U]\); golden freeze hashes unchanged under `1.0.0a1`.
+
+**G7 proof:** `tests/test_report.py` + `tests/test_pipeline_e2e.py`; full suite green; live demos under `reports/runs/demo_mini_v1_*` (gitignored).
+
+**Follow-ups:** M8 package synth harness re-impl (H1a/H2/H3/H4); M9 minimal CI. **No M6 this sprint.** Do not tag `v1.0.0` from this chat.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
@@ -347,6 +366,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - **run_id / freeze hash algorithm LOCKED at M1** (see entry above).
 - **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.
 - **RESTRICT/IDENTIFY thin spine live:** corr_min/corr_sign + corr_y; other evaluators deferred.
+- **REPORT + `run` composition live (M7 / G7 from G5).**
 - Restriction registry **extension** mechanism still open (adding new type ids beyond schema list).
 - Package name PyPI availability unknown.
 - Design Spec doc intentionally absent.
