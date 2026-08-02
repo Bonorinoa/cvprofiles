@@ -207,6 +207,40 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ---
 
+## 2026-08-01 — Intermediate real-world audit: spam_validity (20newsgroups features)
+
+- **branch:** `feat/realworld-spam` (not merged to main by default)
+- **proof:** `evals/realworld/spam_validity/proof_summary.json` (from `verify_audit.py`)
+- **package / git:** `cvprofiles==1.0.0a1` @ `29bdea1` spine; real `run_profile` path
+- **data:** sklearn `fetch_20newsgroups` train (4 cats) → n=2192 multi-measure matrix; free, offline-cached
+- **construct:** incidental “spamminess / promo pressure” (domain-agnostic engine stress — **not** paper H5)
+- **network:** agent-authored intermediate only — `corr_min(v_aux,0.15)` + `corr_sign(v_aux,+,0.05)`; harsh θ=0.99
+- **β:** `corr_y`; no bootstrap
+- **verify_audit.py exit:** **0**
+
+| Check | Result |
+|---|---|
+| FA (`m_noise`, `m_topic_leak` in M*) | **0** |
+| Oracle M* | `{m_lexicon, m_money_url, m_caps_buy, m_llm_full, m_short_cap}` |
+| Oracle [L,U] | **[0.1873, 0.8460]** (min/max B* only) |
+| Harsh empty | **True** (exit 0; HTML empty callout) |
+| Cold H4 freeze core | **True** |
+| Same scores_hash oracle/harsh | **True** |
+
+**Interpretation:**
+1. Package spine works on a non-toy real-text feature matrix without museum code.
+2. Designed invalids excluded; designed valids retained under incidental oracle R.
+3. Wide construct-identified range (~0.66 width) is a feature — measurement fragility under multi-measure spamminess ops.
+4. **Not** a scientific claim about spam detection or 20newsgroups labels.
+5. **Not** H5; intermediate only per user authorization.
+
+**Follow-ups:**
+- Review before any merge to `main`.
+- M9 CI still open.
+- Paper path still requires Augusto-authored R.
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |

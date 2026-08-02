@@ -59,3 +59,7 @@ credentials.json
 
 # Hermes / agent local
 .hermes/plans/
+
+# Real-world audit run dumps (keep data/ + proof JSON; regenerate runs)
+evals/realworld/**/runs_*/
+evals/realworld/**/*.parquet

@@ -383,23 +383,35 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — Push main without M9; intermediate real-world audit authorized
+
+**Decision:**
+- User authorized **push of main** (`29bdea1`) **without M9 CI**. Known gap: no GitHub Actions yet; accepted deliberately.
+- User authorized agent to **author an intermediate (non-main-path) real-world audit** to stress the package on free public data — **not** H5 / paper empirical network.
+- Intermediate audit lives on branch **`feat/realworld-spam`**: spamminess construct over 20newsgroups-derived multi-measure matrix (sklearn, free, offline-cached). Agent-authored incidental \(R\) OK **only** here.
+- **Still locked:** no silent main-path H5 network; no museum import; no `v0.1` move; M6 bootstrap still v1.1.
+
+**Rationale:** Packaging confidence needs more than synthetic DGPs; intermediate domain-agnostic stress is allowed when user explicitly reopens that lane without collapsing H5 ownership.
+
+**Follow-ups:** Keep audit off `main` until Augusto reviews; M9 still recommended before tagging `v1.0.0`.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
-- Tag/release live at `fb62b48`; `main` may advance (doc-14 DRAFT companion; v1.0 spine sprint live).
-- **v1.0 scope locked** this sprint: thin spine; M6 → v1.1; no M10.
-- **run_id / freeze hash algorithm LOCKED at M1** (see entry above).
+- Tag/release live at `fb62b48`; **`main` @ `29bdea1` pushed** (M1–M8).
+- **v1.0 scope locked** this sprint: thin spine; M6 → v1.1; no M10 as thesis claim.
+- **M9 CI deferred** (user push without CI).
+- **Intermediate real-world audit** on `feat/realworld-spam` (not main-path H5).
+- **run_id / freeze hash algorithm LOCKED at M1**.
 - **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.
-- **RESTRICT/IDENTIFY thin spine live:** corr_min/corr_sign + corr_y; other evaluators deferred.
-- **REPORT + `run` composition live (M7 / G7 from G5).**
-- **M8 synth harness:** package-native battery; museum unimported.
-- Restriction registry **extension** mechanism still open (adding new type ids beyond schema list).
-- Package name PyPI availability unknown.
-- Design Spec doc intentionally absent.
-- `14_Researcher_Input_Guide` DRAFT — promote locked subsections after Augusto review (composite defaults, min \(n\)).
+- **RESTRICT/IDENTIFY thin spine live:** corr_min/corr_sign + corr_y.
+- **REPORT + `run` composition live (M7).**
+- **M8 synth harness green;** museum unimported.
 - Do **not** import museum monolith into `src/`.
 - Do **not** move tag `v0.1`.
-- Dev version `1.0.0a1` is not a release tag; propose `v1.0.0` only when acceptance list green + Augusto / sibling release chat.
+- Dev version `1.0.0a1` is not a release tag.
 
 ---
 

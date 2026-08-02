@@ -1,0 +1,88 @@
+{
+  "audit": "spam_validity_20newsgroups_features",
+  "cold_match": true,
+  "designed_invalid": [
+    "m_noise",
+    "m_topic_leak"
+  ],
+  "designed_valid": [
+    "m_caps_buy",
+    "m_lexicon",
+    "m_llm_full",
+    "m_money_url",
+    "m_short_cap"
+  ],
+  "failures": [],
+  "false_admissions": [],
+  "gates": {
+    "FA_zero": true,
+    "cold_H4": true,
+    "harsh_empty": true,
+    "harsh_html_empty_callout": true,
+    "oracle_nonempty": true,
+    "same_scores_hash": true
+  },
+  "harsh": {
+    "L": null,
+    "M_star": [],
+    "U": null,
+    "beta_hash": "d94474e81d48e07d8fc686abf56204315c27f3f4628e736653224ed490f3c648",
+    "empty": true,
+    "network_hash": "804d0a617e95427dc1298c5f1e04f3fb1fd98ea740d57f60bd201e5538b94f56",
+    "point_id": false,
+    "rejected": {
+      "m_caps_buy": [
+        "r_corr_min_aux"
+      ],
+      "m_lexicon": [
+        "r_corr_min_aux"
+      ],
+      "m_llm_full": [
+        "r_corr_min_aux"
+      ],
+      "m_money_url": [
+        "r_corr_min_aux"
+      ],
+      "m_noise": [
+        "r_corr_min_aux"
+      ],
+      "m_short_cap": [
+        "r_corr_min_aux"
+      ],
+      "m_topic_leak": [
+        "r_corr_min_aux"
+      ]
+    },
+    "scores_hash": "8f74d54db5820c61814d7d3341e80459298d627f00dc04417fcacf893614aa86"
+  },
+  "n_units": 2192,
+  "oracle": {
+    "L": 0.18731596370404668,
+    "M_star": [
+      "m_lexicon",
+      "m_money_url",
+      "m_caps_buy",
+      "m_llm_full",
+      "m_short_cap"
+    ],
+    "U": 0.8459763122298134,
+    "beta_hash": "d94474e81d48e07d8fc686abf56204315c27f3f4628e736653224ed490f3c648",
+    "empty": false,
+    "network_hash": "f92095ba737c03d1696fa35837979aa496f6f5771b55d7bd54bc871d6c234f88",
+    "point_id": false,
+    "rejected": {
+      "m_noise": [
+        "r_corr_min_aux",
+        "r_corr_sign_aux"
+      ],
+      "m_topic_leak": [
+        "r_corr_min_aux",
+        "r_corr_sign_aux"
+      ]
+    },
+    "scores_hash": "8f74d54db5820c61814d7d3341e80459298d627f00dc04417fcacf893614aa86"
+  },
+  "package": "cvprofiles",
+  "passed": true,
+  "path": "intermediate_not_main_path"
+}

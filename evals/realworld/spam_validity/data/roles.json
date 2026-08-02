@@ -1,0 +1,17 @@
+{
+  "unit_id": "unit_id",
+  "measures": [
+    "m_lexicon",
+    "m_money_url",
+    "m_caps_buy",
+    "m_llm_full",
+    "m_short_cap",
+    "m_noise",
+    "m_topic_leak"
+  ],
+  "aux": [
+    "v_aux"
+  ],
+  "outcome": "y",
+  "diagnostic": []
+}
