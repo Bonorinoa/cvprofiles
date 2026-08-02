@@ -39,15 +39,16 @@ M1 → M2 → M3 → M4 → M5 → M7(thin) → M8 → M9
 
 ### v1.0 acceptance (minimum)
 
-- [ ] `uv sync` / editable install runs without API keys
-- [ ] CLI or library: SCORE→REPORT on frozen mini fixture
-- [ ] Empty \(M^*\) → clean report (not a crash); fail loud only on bad schema
-- [ ] Oracle slop excluded; FA = 0 on designed invalids
-- [ ] Cold twice-run identical freeze outputs (H4)
-- [ ] No LLM dependency in package import graph
-- [ ] Museum `evals/synthetic/v0_poc.py` still present and **unimported**
-- [ ] `docs/12` / `docs/13` updated for package battery
-- [ ] Tag `v0.1` still points at `fb62b48`
+- [x] `uv sync` / editable install runs without API keys
+- [x] CLI or library: SCORE→REPORT on frozen mini fixture
+- [x] Empty \(M^*\) → clean report (not a crash); fail loud only on bad schema
+- [x] Oracle slop excluded; FA = 0 on designed invalids
+- [x] Cold twice-run identical freeze outputs (H4)
+- [x] No LLM dependency in package import graph
+- [x] Museum `evals/synthetic/v0_poc.py` still present and **unimported**
+- [x] `docs/12` / `docs/13` updated for package battery
+- [x] Tag `v0.1` still points at `fb62b48`
+- [x] M9 minimal CI workflow present (green on branch before merge)
 
 ---
 

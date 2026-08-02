@@ -6,16 +6,17 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **v0.1.0** tagged (methods KB + museum PoC); **v1.0 thin spine in progress** |
-| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; package spine sprint open |
+| **Version** | **v0.1.0** tagged (methods KB + museum PoC); **v1.0 thin spine** (`1.0.0a1` package) |
+| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 on branch for merge eval |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
+| **CI** | [![ci](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml) |
 | **Hermes profile** | `cvprofiles` |
 | **Path** | `~/Hermes/Projects/cvprofiles` |
 | **PoC** | `evals/synthetic/v0_poc.py` (`v0_1_poc`) — **museum monolith**, not package |
-| **Proof summary** | `reports/summaries/v0_1_poc_summary.json` |
+| **Proof summary** | `reports/summaries/v0_1_poc_summary.json` (+ package synth summary) |
 
 ## Thesis spine (one paragraph)
 
@@ -41,6 +42,7 @@ Start here, then read in order:
 | [`docs/12_Decision_Engineering_Log.md`](docs/12_Decision_Engineering_Log.md) | **LIVE** engineering decisions |
 | [`docs/13_Evaluations_Log.md`](docs/13_Evaluations_Log.md) | **LIVE** eval runs and learnings |
 | [`docs/14_Researcher_Input_Guide.md`](docs/14_Researcher_Input_Guide.md) | Composites, anchors, SCORE/RESTRICT prep |
+| [`docs/15_Merge_Safety_feat_realworld_spam.md`](docs/15_Merge_Safety_feat_realworld_spam.md) | Merge checklist for current eval branch |
 | [`docs/PROJECT_MANIFEST.md`](docs/PROJECT_MANIFEST.md) | Machine-readable index |
 
 ## Roadmap
@@ -78,9 +80,19 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
-- **v1.0 spine sprint:** package path in progress on `main`. Bootstrap/θ-grid deferred to v1.1.
+- **`main`:** package spine through M8 (`1.0.0a1`). Bootstrap/θ-grid deferred to v1.1.
+- **Merge candidate branch:** `feat/realworld-spam` — M9 CI + intermediate spam audit (not H5).
 - **Not yet:** PyPI release; tagged `v1.0.0` (only when acceptance list is green).
-- Run museum PoC (expects exit 0; do not import into `src/`):
+
+### Install (dev)
+
+```bash
+uv sync --extra dev
+uv run pytest -q
+uv run cvprofiles --version
+```
+
+### Museum PoC (expects exit 0; do not import into `src/`)
 
 ```bash
 uv venv --python 3.11 .venv

@@ -7,6 +7,8 @@ Format: keep newest first.
 ## [Unreleased]
 
 ### Added
+- **M9 / minimal CI:** `.github/workflows/ci.yml` — uv sync, ruff, pytest, CLI smoke, import-graph hygiene, mini fixture SCORE→REPORT on Python 3.11/3.12
+- **Merge-safety checklist:** `docs/15_Merge_Safety_feat_realworld_spam.md`
 - **Intermediate real-world audit (branch):** `evals/realworld/spam_validity/` — 20newsgroups multi-measure spamminess stress; `verify_audit.py` exit 0; FA=0; harsh empty; cold H4; **not** main-path H5
 - **M8 / G8:** package-native synth harness (`src/cvprofiles/synth/`); battery drives real SCORE→RESTRICT→IDENTIFY; H1a/H1b/H3/H4 **green** on seeds `0..4`, \(n=1000\); H1_latent diagnostic only (attenuation → 0); proof `reports/summaries/v1_0_package_synth_summary.json`; museum unimported
 - **M7 / G7:** thin REPORT (HTML/JSON); `run_profile` SCORE→REPORT composition; CLI `cvprofiles run` (stdout JSON / stderr crumbs); empty-\(M^*\) first-class; e2e on mini_v1 oracle + harsh
@@ -24,7 +26,8 @@ Format: keep newest first.
 - `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
 
 ### Planned (v1.0 spine)
-- Minimal CI + install polish — M9 (deferred; main pushed without CI by user)
+- Merge eval of `feat/realworld-spam` → `main` after CI green
+- Tag `v1.0.0` only via sibling release chat / Augusto
 
 ### Planned (later)
 - Bootstrap / θ-grid (**v1.1**, not v1.0)

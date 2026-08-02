@@ -38,7 +38,7 @@ This is not “numpy only forever.” It is “no learned nuisances in the valid
 | Tests | **pytest**, pytest-cov | Contract + oracle tests |
 | Lint/type | **ruff**, **mypy** | Strict on `src/` |
 | Docs site (later) | mkdocs-material *optional* | Not MVP-blocking; markdown in repo is source of truth |
-| CI | GitHub Actions | pytest + ruff on push (remote live; wire at M9) |
+| CI | GitHub Actions | pytest + ruff + mini smoke on 3.11/3.12 (M9; `.github/workflows/ci.yml`) |
 | Notebooks | optional Jupyter | Demos only; not engine |
 
 ## Explicitly rejected for engine core

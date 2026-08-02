@@ -1,0 +1,97 @@
+name: ci
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: test (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          python-version: ${{ matrix.python-version }}
+
+      - name: Sync project (dev extras)
+        run: uv sync --extra dev
+
+      - name: Ruff (src + tests)
+        run: uv run ruff check src tests
+
+      - name: Pytest
+        run: uv run pytest -q --tb=short
+
+      - name: CLI version smoke
+        run: |
+          uv run cvprofiles --version
+          uv run python -c "import cvprofiles; assert cvprofiles.__version__ == '1.0.0a1'"
+
+      - name: Editable install graph hygiene (no LLM / no museum import)
+        run: |
+          uv run python - <<'PY'
+          import ast
+          from pathlib import Path
+          forbidden = ("openai", "anthropic", "httpx", "requests", "litellm")
+          museum = ("v0_poc", "evals.synthetic")
+          bad = []
+          for p in Path("src/cvprofiles").rglob("*.py"):
+              tree = ast.parse(p.read_text(), filename=str(p))
+              for n in ast.walk(tree):
+                  if isinstance(n, ast.Import):
+                      for a in n.names:
+                          if any(a.name == f or a.name.startswith(f + ".") for f in forbidden):
+                              bad.append(f"{p}:{a.name}")
+                          if any(m in a.name for m in museum):
+                              bad.append(f"{p}:museum:{a.name}")
+                  elif isinstance(n, ast.ImportFrom):
+                      mod = n.module or ""
+                      if any(mod == f or mod.startswith(f + ".") for f in forbidden):
+                          bad.append(f"{p}:{mod}")
+                      if any(m in mod for m in museum):
+                          bad.append(f"{p}:museum:{mod}")
+          assert not bad, bad
+          assert Path("evals/synthetic/v0_poc.py").is_file()
+          print("import-graph ok; museum present")
+          PY
+
+      - name: Mini fixture SCORE→REPORT smoke
+        run: |
+          uv run cvprofiles run \
+            --scores data/fixtures/mini_v1/scores.csv \
+            --roles data/fixtures/mini_v1/roles.json \
+            --network data/fixtures/mini_v1/network.yaml \
+            --beta data/fixtures/mini_v1/beta.yaml \
+            --out /tmp/cvprofiles_ci_mini \
+            --seed 0
+          test -f /tmp/cvprofiles_ci_mini/report.html
+          test -f /tmp/cvprofiles_ci_mini/range.json
+          uv run python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path("/tmp/cvprofiles_ci_mini/range.json").read_text())
+          a = json.loads(Path("/tmp/cvprofiles_ci_mini/admissible.json").read_text())
+          assert r["empty"] is False
+          assert "m_slop" not in a["M_star"]
+          assert set(a["M_star"]) == {"m_good", "m_weak"}
+          print("mini fixture smoke ok", a["M_star"], r["L"], r["U"])
+          PY
+
+  # Optional: only runs if sklearn available path wanted later; keep default CI lean.
+  # Realworld spam audit remains a branch eval (needs sklearn + 20newsgroups cache).

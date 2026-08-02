@@ -397,12 +397,29 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — M9 minimal CI (LOCKED on branch for merge eval)
+
+**Decision:**
+- Add GitHub Actions workflow `.github/workflows/ci.yml`:
+  - triggers: push to `main` / `feat/**`, PRs to `main`
+  - matrix: Python **3.11**, **3.12**
+  - steps: `uv sync --extra dev` → `ruff check src tests` → `pytest` → CLI version smoke → AST import-graph hygiene (no LLM / no museum) → mini fixture `cvprofiles run` SCORE→REPORT smoke
+- CI does **not** require sklearn / spam audit (evals-only; optional local).
+- Merge-safety checklist: `docs/15_Merge_Safety_feat_realworld_spam.md`.
+- Still **no** PyPI publish, **no** `v1.0.0` tag from this change, **no** M6 bootstrap.
+
+**Rationale:** Close the known “main pushed without CI” gap before merge evaluation.
+
+**Follow-ups:** Confirm Actions green on branch/PR; merge only after checklist; sibling chat for `v1.0.0`.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
-- Tag/release live at `fb62b48`; **`main` @ `29bdea1` pushed** (M1–M8).
+- Tag/release live at `fb62b48`; **`main` @ `29bdea1`** (M1–M8); branch carries M9 + intermediate audit.
 - **v1.0 scope locked** this sprint: thin spine; M6 → v1.1; no M10 as thesis claim.
-- **M9 CI deferred** (user push without CI).
+- **M9 CI wired** (branch → merge candidate).
 - **Intermediate real-world audit** on `feat/realworld-spam` (not main-path H5).
 - **run_id / freeze hash algorithm LOCKED at M1**.
 - **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.
