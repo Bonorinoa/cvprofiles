@@ -7,14 +7,19 @@ Format: keep newest first.
 ## [Unreleased]
 
 ### Added
+- **M1 / G1:** installable `src/cvprofiles` (`1.0.0a1`) + `pyproject.toml` + thin CLI
+- Pydantic v2 schemas (scores / network / beta / freeze run manifests)
+- Freeze hash + `run_id` util (`cvprofiles.freeze`); algorithm locked in `docs/12`
+- Mini fixture `data/fixtures/mini_v1/` + golden `expected_freeze.json`
+- Contract tests (schemas, freeze bit-stability, import-graph hygiene, mini load)
 - **Phase 0 (v1.0 sprint start):** scope box — thin first-principles spine; M6 bootstrap/θ-grid deferred to v1.1; no M10 this sprint
 - Past-tense docs: public repo + tag `v0.1` @ `fb62b48` live; G7/G8 re-enter from G5 for v1.0; H1a/H1b gates + H1_latent diagnostic pointers
 - `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
 
 ### Planned (v1.0 spine)
-- Package `src/cvprofiles` layout (M1 → M9 thin path)
-- SCORE → RESTRICT → IDENTIFY → thin REPORT; \([L,U]=\min/\max B^*\)
-- Synth harness re-impl under package/tests (H1a / H2 / H3 / H4)
+- M2 SCORE → M3 RESTRICT → M4/M5 IDENTIFY → M7 thin REPORT
+- Synth harness re-impl under package/tests (H1a / H2 / H3 / H4) — M8
+- Minimal CI + install polish — M9
 
 ### Planned (later)
 - Bootstrap / θ-grid (**v1.1**, not v1.0)

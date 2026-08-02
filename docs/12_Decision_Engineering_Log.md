@@ -249,7 +249,46 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 **Rationale:** User opened v1.0 as a thin spine sprint with bootstrap explicitly deferred. Prevents full-MVP scope collapse and keeps first-principles validation observable.
 
-**Follow-ups:** M1 schemas + freeze hash + mini fixture + failing contract tests; lock run_id hash algorithm in a subsequent M1 decision-log entry.
+**Follow-ups:** M1 schemas + freeze hash + mini fixture + contract tests; lock run_id hash algorithm in a subsequent M1 decision-log entry.
+
+---
+
+## 2026-08-01 — M1 G1: schemas + freeze hash + mini_v1 (LOCKED)
+
+**Decision (LOCKED):**
+
+### Package / G1 exit
+- Installable package path begun: `src/cvprofiles` + `pyproject.toml` (hatchling src-layout) + thin Typer CLI (`cvprofiles --version`).
+- Version pin for development: **`1.0.0a1`** (not a `v1.0.0` tag).
+- Pydantic v2 schemas: `ScoreColumnRoles`, `ScoreManifest`, `RestrictionSpec`, `NetworkConfig`, `BetaSpec`, `FreezeBundle`, `RunManifest`.
+- Restriction **type registry at schema level** (v1.0 ids): `corr_sign`, `corr_min`, `mean_order`, `rank_agree`, `stability`. Unknown types fail loud. **Evaluators remain M4** — schema-only here.
+- Mini fixture: `data/fixtures/mini_v1/` (hand scores, roles, network, beta, golden `expected_freeze.json`).
+- Contract tests green (schemas + freeze + import-graph hygiene + mini load). Museum `evals/synthetic/v0_poc.py` present and **unimported**. No LLM client in package import graph.
+- **G1 exit met.** SCORE/IDENTIFY/REPORT logic not started (M2+).
+
+### Freeze / run_id algorithm (LOCKED — implementation: `cvprofiles.freeze`)
+1. Piece hashes are bare lowercase SHA-256 hex (64 chars); no `sha256:` prefix.
+2. Canonical JSON: UTF-8, `sort_keys=True`, separators `(",", ":")`, `allow_nan=False`.
+3. `network_hash` / `beta_hash`: SHA-256 of canonical JSON of `model_dump(mode="json")` for validated `NetworkConfig` / `BetaSpec`.
+4. `scores_hash`: SHA-256 of canonical CSV bytes of the score table:
+   - columns in caller-declared order;
+   - rows sorted by `unit_id` ascending (string sort, stable mergesort);
+   - header = comma-joined column names;
+   - floats with 17 significant digits (`format(x, ".17g")`); ints plain; bool `0`/`1`;
+   - **NaN/Inf fail loud** (never coerced to empty);
+   - other missing → empty field; UTF-8; trailing newline after last row.
+5. **Default freeze columns:** `unit_id + measures + aux + outcome`. **Diagnostics** (e.g. `V_star`) are **out** of `scores_hash` unless the caller intentionally versions them.
+6. `run_id` = SHA-256 of canonical JSON preimage with keys:
+   `beta_hash`, `config`, `delta`, `n_boot`, `network_hash`, `package_version`, `schema_version`, `scores_hash`, `seed`.
+   - v1.0: `n_boot` is JSON `null`.
+   - **`package_version` is inside `run_id`** — version bumps change `run_id` and require refreshing `data/fixtures/mini_v1/expected_freeze.json` in the same change.
+7. **Excluded from run_id preimage:** `created_at`, wall clock, absolute paths, hostnames, artifact path maps, report HTML.
+
+**Rationale:** Bit-stable freezes are load-bearing for H4 and paper discipline. Locking the algorithm at M1 prevents silent hash drift when SCORE/IDENTIFY land.
+
+**G1 proof:** `uv run pytest` green; golden hashes under `data/fixtures/mini_v1/expected_freeze.json`; tag `v0.1` still `@ fb62b48`.
+
+**Follow-ups:** M2 SCORE only (ingest → `S_frozen` + manifest). Do not start IDENTIFY until SCORE contracts pass.
 
 ---
 
@@ -258,14 +297,15 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
 - Tag/release live at `fb62b48`; `main` may advance (doc-14 DRAFT companion; v1.0 spine sprint live).
 - **v1.0 scope locked** this sprint: thin spine; M6 → v1.1; no M10.
-- Lock run_id hash spec at M1.
-- Restriction registry extension mechanism still open.
-- SCORE convention locked in PoC payload: z-score measures + v_aux/y/V_star; g binary.
+- **run_id / freeze hash algorithm LOCKED at M1** (see entry above).
+- Restriction registry **extension** mechanism still open (adding new type ids beyond schema list).
+- SCORE convention from museum PoC: z-score measures + v_aux/y/V_star; g binary — **M2 must lock package policy** (match PoC vs fixture `policy: none`) in a decision-log entry before implementing.
 - Package name PyPI availability unknown.
 - Design Spec doc intentionally absent.
 - `14_Researcher_Input_Guide` DRAFT — promote locked subsections after Augusto review (composite defaults, min \(n\)).
 - Do **not** import museum monolith into `src/`.
 - Do **not** move tag `v0.1`.
+- Dev version `1.0.0a1` is not a release tag; propose `v1.0.0` only when acceptance list green + Augusto / sibling release chat.
 
 ---
 

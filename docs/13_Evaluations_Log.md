@@ -134,6 +134,14 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ---
 
+## 2026-08-01 — Package path note (M1; no battery yet)
+
+- **status:** G1 schemas + freeze contracts green under `tests/`; no package synthetic battery row yet.
+- **museum:** `evals/synthetic/v0_poc.py` remains historical proof only.
+- **next eval log row expected:** after M8 package harness re-impl (H1a / H1b / H1_latent / H2 / H3 / H4).
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |
