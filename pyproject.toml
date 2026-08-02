@@ -57,6 +57,9 @@ build-backend = "hatchling.build"
 testpaths = ["tests"]
 pythonpath = ["src"]
 filterwarnings = ["ignore::DeprecationWarning"]
+markers = [
+  "slow: full synthetic battery (seeds 0-4, n=1000)",
+]
 
 [tool.ruff]
 line-length = 100

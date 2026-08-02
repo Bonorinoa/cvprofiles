@@ -173,6 +173,40 @@ Typical oracle cell: M*={m_good, m_weak}; m_slop fails `r_corr_min_aux` + `r_cor
 
 ---
 
+## 2026-08-01 — Package path M8 battery GREEN (v1_0_package_synth)
+
+- **proof:** `reports/summaries/v1_0_package_synth_summary.json`
+- **package / git:** `cvprofiles==1.0.0a1`; battery drives real spine `run_score` → `run_restrict` → `run_identify` (not a parallel identify)
+- **museum:** `evals/synthetic/v0_poc.py` present, **unimported** (AST import-graph checks)
+- **scenario(s):** `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`
+- **n, J, seed(s), δ:** \(n=1000\), \(J=10\), seeds `0..4`, \(\delta=0\); SCORE policy `none`
+- **network:** eval-only oracle \(R\): `corr_min(v_aux,0.35)` + `corr_sign(v_aux,+,0.10)`; harsh: `corr_min` \(\theta=0.95\), `corr_sign` \(\theta=0.50`
+- **β:** `corr_y`; **no bootstrap** — \([L,U]=\min/\max B^*\)
+- **passed:** `True` — all named gates green
+
+| Scenario | FA | anchor in \(M^*\) | empty | H1b | H1_latent (diag) | cold | mean \(\|M^*\|\) | mean width |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `oracle_easy` | **0.000** | **1.000** | 0.000 | **1.0** | **0.0** | **1.000** | 4.00 | ≈0.048 |
+| `oracle_with_slop` | **0.000** | **1.000** | 0.000 | **1.0** | **0.0** | **1.000** | 4.00 | ≈0.048 |
+| `harsh_theta` | 0.000 | 0.000 | **1.000** | n/a | n/a | **1.000** | 0.00 | n/a |
+| `all_invalid` | 0.000 | 0.000 | **1.000** | n/a | n/a | **1.000** | 0.00 | n/a |
+
+Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tail\}\); near_miss + invalids fail `r_corr_min_aux` (and/or sign); slop \(\beta\) does not enter \([L,U]\).
+
+**Interpretation:**
+1. **Package path earns H1a / H1b / H3 / H4** on the real engine — not museum numbers.
+2. **FA=0** on designed invalids; **anchor retained**; **empty honesty** on harsh + all_invalid; **cold double-run** True.
+3. **H1_latent=0** expected under attenuation (\(\beta=\mathrm{corr}_y\)); diagnostic only — **not** a gate; no \(\theta\)-loosening.
+4. `oracle_with_slop` is a distinct DGP path (higher \(\beta(m_{\mathrm{slop}})\)); FA still 0.
+5. Mini battery (5 seeds × 4 scenarios) is **sufficient for v1.0 first-principles confidence**, not a paper Monte Carlo freeze.
+
+**Follow-ups:**
+- M9 minimal CI only after this green exit.
+- Do not tag `v1.0.0` from this chat; sibling release chat evaluates candidates.
+- Do not import museum; do not move tag `v0.1`.
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |

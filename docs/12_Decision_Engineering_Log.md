@@ -358,6 +358,31 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — M8 package synth harness (LOCKED)
+
+**Decision:**
+- Re-implement synthetic DGP + oracle \(R\) + metrics + battery under `src/cvprofiles/synth/`.
+- **Museum** `evals/synthetic/v0_poc.py` remains historical only — **never import**.
+- Battery drives the **real package path**: `run_score` → `run_restrict` → `run_identify` (not a parallel identify).
+- Scenarios (v1.0 mini battery): `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`.
+- Seeds: `0..4`; \(n=1000\); \(\delta=0\); \(\beta=\mathrm{corr}_y\); SCORE policy `none` (DGP emits analysis-ready columns; optional internal centering is DGP-side only if needed).
+- Oracle \(R\) (eval-only, agent-OK): `corr_min(v_aux)` + `corr_sign(v_aux,+)` — uses existing evaluators only. Harsh raises `corr_min` \(\theta\). No bootstrap/θ-grid (M6 = v1.1).
+- Gates:
+  - **H1a:** FA of labels in `{invalid_confounded, invalid_noise, wrong_construct}` = 0 on oracle scenarios; anchor `m_dict` ∈ \(M^*\) on all oracle seeds.
+  - **H1b:** \(\beta(m_{\mathrm{dict}})\in[L,U]\) when nonempty (construction invariant).
+  - **H1_latent:** \(\mathrm{Corr}(V^*,y)\in[L,U]\) — **diagnostic only**; attenuation → often 0 is OK.
+  - **H3:** empty rate = 1.0 on `harsh_theta` and `all_invalid`.
+  - **H4:** cold independent double-run equality of slacks / \(M^*\) / \(L,U\).
+- Near-miss admissions logged separately; not FA. Near-miss must fail ≥1 oracle restriction by DGP design.
+- Artifacts: `reports/summaries/v1_0_package_synth_summary.json` (committed proof); per-seed dumps optional/gitignored.
+- Do **not** loosen \(\theta\) to chase H1_latent. Do **not** bump package version (`1.0.0a1`).
+
+**Rationale:** Package path must earn its own gates before M9 packaging confidence.
+
+**Follow-ups:** M9 minimal CI only after green M8. Sibling chat owns `v1.0.0` tag evaluation.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
@@ -367,6 +392,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.
 - **RESTRICT/IDENTIFY thin spine live:** corr_min/corr_sign + corr_y; other evaluators deferred.
 - **REPORT + `run` composition live (M7 / G7 from G5).**
+- **M8 synth harness:** package-native battery; museum unimported.
 - Restriction registry **extension** mechanism still open (adding new type ids beyond schema list).
 - Package name PyPI availability unknown.
 - Design Spec doc intentionally absent.

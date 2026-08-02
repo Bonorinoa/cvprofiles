@@ -39,6 +39,7 @@ def test_import_core_modules() -> None:
     importlib.import_module("cvprofiles.restrict")
     importlib.import_module("cvprofiles.identify")
     importlib.import_module("cvprofiles.report")
+    importlib.import_module("cvprofiles.synth")
 
 
 def test_cli_version() -> None:
@@ -100,9 +101,26 @@ def test_src_has_no_museum_or_llm_imports(repo_root: Path) -> None:
 
 
 def test_museum_file_still_present_unimported(repo_root: Path) -> None:
+    """Museum stays on disk; package must not *import* it (AST-only).
+
+    Docstrings may name the museum path to forbid it — that is not an import.
+    """
     museum = repo_root / "evals" / "synthetic" / "v0_poc.py"
     assert museum.is_file()
-    # Package tree must not reference the path string either (cheap scan).
-    src_text = "\n".join(p.read_text() for p in (repo_root / "src" / "cvprofiles").rglob("*.py"))
-    assert "v0_poc" not in src_text
-    assert "evals.synthetic" not in src_text
+    src = repo_root / "src" / "cvprofiles"
+    offenders: list[str] = []
+    for path in src.rglob("*.py"):
+        tree = ast.parse(path.read_text(), filename=str(path))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    if any(m in alias.name for m in MUSEUM_MARKERS):
+                        offenders.append(f"{path}:import {alias.name}")
+            elif isinstance(node, ast.ImportFrom):
+                mod = node.module or ""
+                if any(m in mod for m in MUSEUM_MARKERS):
+                    offenders.append(f"{path}:from {mod}")
+                for alias in node.names:
+                    if any(m in (alias.name or "") for m in MUSEUM_MARKERS):
+                        offenders.append(f"{path}:from-name {alias.name}")
+    assert not offenders, offenders
