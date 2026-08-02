@@ -292,14 +292,31 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — M2 SCORE normalization policy (LOCKED)
+
+**Decision (LOCKED before SCORE code):**
+
+1. **Default policy: `none`.** Frozen user matrices are trusted as supplied. SCORE validates and freezes; it does **not** silently rescale.
+2. **Optional opt-in:** `zscore_measures=True` z-scores **measure columns only** (ddof=0, sample std). Aux, outcome, diagnostics, unit_id are never z-scored by this flag.
+3. **mini_v1** uses `policy: none` so locked `scores_hash` / `expected_freeze.json` stay bit-stable under `1.0.0a1`.
+4. **Fail loud** (no partial freeze): missing role columns; empty frame; duplicate `unit_id`; non-finite values on freeze columns (unit_id + measures + aux + outcome). Diagnostics may be non-finite without blocking freeze of engine columns.
+5. **Freeze column order:** `unit_id`, then `roles.measures`, then `roles.aux`, then `outcome` if set. Diagnostics out of default `scores_hash`.
+6. **Museum PoC z-scoring** was a DGP convenience, not the package default. Package path does not import museum.
+
+**Rationale:** User owns upstream scaling. Silent z-score would move paper hashes and hide researcher choices.
+
+**Follow-ups:** implement SCORE library + tests; then M3.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
 - Tag/release live at `fb62b48`; `main` may advance (doc-14 DRAFT companion; v1.0 spine sprint live).
 - **v1.0 scope locked** this sprint: thin spine; M6 → v1.1; no M10.
 - **run_id / freeze hash algorithm LOCKED at M1** (see entry above).
+- **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.
 - Restriction registry **extension** mechanism still open (adding new type ids beyond schema list).
-- SCORE convention from museum PoC: z-score measures + v_aux/y/V_star; g binary — **M2 must lock package policy** (match PoC vs fixture `policy: none`) in a decision-log entry before implementing.
 - Package name PyPI availability unknown.
 - Design Spec doc intentionally absent.
 - `14_Researcher_Input_Guide` DRAFT — promote locked subsections after Augusto review (composite defaults, min \(n\)).

@@ -7,6 +7,7 @@ Format: keep newest first.
 ## [Unreleased]
 
 ### Added
+- **M2 / G2:** SCORE pipeline (`run_score` / `write_score_artifacts`); default normalization `none`; optional `zscore_measures` on measures only; fail-loud on missing cols / empty / dup unit_id / non-finite; golden `scores_hash` match on mini_v1
 - **M1 / G1:** installable `src/cvprofiles` (`1.0.0a1`) + `pyproject.toml` + thin CLI
 - Pydantic v2 schemas (scores / network / beta / freeze run manifests)
 - Freeze hash + `run_id` util (`cvprofiles.freeze`); algorithm locked in `docs/12`
@@ -17,7 +18,7 @@ Format: keep newest first.
 - `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
 
 ### Planned (v1.0 spine)
-- M2 SCORE → M3 RESTRICT → M4/M5 IDENTIFY → M7 thin REPORT
+- M3 RESTRICT → M4/M5 IDENTIFY → M7 thin REPORT
 - Synth harness re-impl under package/tests (H1a / H2 / H3 / H4) — M8
 - Minimal CI + install polish — M9
 
