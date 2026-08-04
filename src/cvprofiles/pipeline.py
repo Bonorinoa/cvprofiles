@@ -1,15 +1,32 @@
-"""Full SCORE → RESTRICT → IDENTIFY → REPORT composition (v1.0 thin spine)."""
+"""Full SCORE → RESTRICT → IDENTIFY → REPORT composition (v1.1 spine).
+
+v1.1 adds the inference layer on top of the v1.0 four-state spine:
+- bootstrap over units (additive percentile band; headline never replaced)
+- θ-grid sensitivity surface (diagnostic; NOT part of the freeze preimage)
+
+Freeze rule (docs/12): ``n_boot`` is normalized with
+``freeze.normalize_n_boot`` (< 1 ⇒ JSON null) before the preimage is built,
+so bootstrap-off runs keep their run_ids bit-stable. The θ-grid is a
+diagnostic viewport: same bundle + different grid ⇒ same run_id, different
+``theta_grid.json``. Run directories must reflect exactly the layers this run
+produced, so stale ``bootstrap.json`` / ``theta_grid.json`` from a previous
+run into the same directory are removed when the layer is off.
+"""
 
 from __future__ import annotations
 
+import json
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from cvprofiles import __version__
-from cvprofiles.freeze import build_freeze_bundle, compute_run_id
+from cvprofiles.freeze import build_freeze_bundle, compute_run_id, normalize_n_boot
 from cvprofiles.identify.pipeline import IdentifyResult, run_identify, write_identify_artifacts
+from cvprofiles.inference.bootstrap import BootstrapResult, bootstrap_payload, run_bootstrap
+from cvprofiles.inference.theta_grid import ThetaGridResult, run_theta_grid, theta_grid_payload
 from cvprofiles.report.pipeline import ReportResult, write_report
 from cvprofiles.restrict.pipeline import RestrictBundle, run_restrict, write_restrict_artifacts
 from cvprofiles.schemas.run import RunManifest
@@ -35,6 +52,8 @@ class FullRunResult:
     report: ReportResult
     run_manifest: RunManifest
     artifact_paths: dict[str, str]
+    bootstrap: BootstrapResult | None = None
+    theta_grid: ThetaGridResult | None = None
 
 
 def run_profile(
@@ -48,15 +67,24 @@ def run_profile(
     seed: int = 0,
     title: str = "Construct-validity profile",
     write_parquet: bool = True,
+    n_boot: int | None = None,
+    theta_grid_lambdas: Sequence[float] | None = None,
 ) -> FullRunResult:
-    """Compose four states and write a frozen run directory.
+    """Compose four states (+ v1.1 inference layers) and write a frozen run dir.
 
     Empty M* is a clean success path (report explains; no exception).
     Fail loud only on schema / IO / binding / evaluator errors.
+
+    Inference layers (both off unless requested):
+      n_boot >= 1  → bootstrap over units (seed = the run's seed).
+      theta_grid_lambdas non-empty → θ-sensitivity surface (diagnostic;
+      excluded from the freeze preimage by design).
     """
+    n_boot_norm = normalize_n_boot(n_boot)
+    grid = list(theta_grid_lambdas) if theta_grid_lambdas else None
+
     roles_m = load_roles(roles)
     df = load_table(scores)
-
     score = run_score(df, roles_m, policy=policy)
     restrict = run_restrict(score.roles, network, beta)
 
@@ -70,7 +98,7 @@ def run_profile(
         package_version=__version__,
         seed=seed,
         delta=float(restrict.delta),
-        n_boot=None,
+        n_boot=n_boot_norm,
         config={},
     )
     run_id = compute_run_id(
@@ -91,12 +119,40 @@ def run_profile(
         dest = Path(out_dir)
     dest.mkdir(parents=True, exist_ok=True)
 
+    # Run directories mirror exactly the layers this run produces: drop stale
+    # inference artifacts from any previous run into the same directory.
+    if n_boot_norm is None and (dest / "bootstrap.json").exists():
+        (dest / "bootstrap.json").unlink()
+    if grid is None and (dest / "theta_grid.json").exists():
+        (dest / "theta_grid.json").unlink()
+
     identify = run_identify(score.frame, score.roles, restrict)
+
+    # --- v1.1 inference layers (additive; headline [L,U] untouched) ---
+    boot: BootstrapResult | None = None
+    if n_boot_norm is not None:
+        boot = run_bootstrap(
+            score.frame, score.roles, restrict, n_boot=n_boot_norm, seed=seed
+        )
+
+    grid_result: ThetaGridResult | None = None
+    if grid is not None:
+        grid_result = run_theta_grid(score.frame, score.roles, restrict, grid)
 
     paths: dict[str, Path] = {}
     paths.update(write_score_artifacts(score, dest, parquet=write_parquet))
     paths.update(write_restrict_artifacts(restrict, dest))
     paths.update(write_identify_artifacts(identify, dest))
+    if boot is not None:
+        boot_path = dest / "bootstrap.json"
+        boot_path.write_text(json.dumps(bootstrap_payload(boot), indent=2, sort_keys=True) + "\n")
+        paths["bootstrap.json"] = boot_path
+    if grid_result is not None:
+        grid_path = dest / "theta_grid.json"
+        grid_path.write_text(
+            json.dumps(theta_grid_payload(grid_result), indent=2, sort_keys=True) + "\n"
+        )
+        paths["theta_grid.json"] = grid_path
 
     created_at = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     artifact_paths = {k: str(v.name) for k, v in paths.items()}
@@ -106,7 +162,7 @@ def run_profile(
         freeze=freeze,
         created_at=created_at,
         artifact_paths=artifact_paths,
-        notes="v1.0 thin spine; bootstrap deferred to v1.1",
+        notes="v1.1 spine; inference layer: bootstrap over units + theta-grid (diagnostic)",
     )
     man_path = dest / "run_manifest.json"
     man_path.write_text(run_manifest.model_dump_json(indent=2) + "\n")
@@ -118,6 +174,8 @@ def run_profile(
         identify=identify,
         out_dir=dest,
         title=title,
+        bootstrap=bootstrap_payload(boot) if boot is not None else None,
+        theta_grid=theta_grid_payload(grid_result) if grid_result is not None else None,
     )
     artifact_paths["report.html"] = report.html_path.name
     artifact_paths["report.json"] = report.json_path.name
@@ -141,12 +199,39 @@ def run_profile(
         report=report,
         run_manifest=run_manifest,
         artifact_paths=artifact_paths,
+        bootstrap=boot,
+        theta_grid=grid_result,
     )
 
 
 def summary_dict(result: FullRunResult) -> dict[str, Any]:
-    """Small console/JSON summary for CLI and demos."""
+    """Small console/JSON summary for CLI and demos (additive keys only)."""
     ident = result.identify
+    boot_summary: dict[str, Any] | None = None
+    if result.bootstrap is not None:
+        b = result.bootstrap
+        boot_summary = {
+            "n_boot": b.n_boot,
+            "seed": b.seed_used,
+            "band_L": b.band_L,
+            "band_U": b.band_U,
+            "replicates_nonempty": b.replicates_nonempty,
+            "replicates_empty": b.replicates_empty,
+            "replicates_degenerate": b.replicates_degenerate,
+            "empty_replicate_rate": b.empty_replicate_rate,
+            "degenerate_replicate_rate": b.degenerate_replicate_rate,
+            "note": b.note,
+            "artifact": "bootstrap.json",
+        }
+    grid_summary: dict[str, Any] | None = None
+    if result.theta_grid is not None:
+        g = result.theta_grid
+        grid_summary = {
+            "lambdas": list(g.lambdas),
+            "rows": len(g.rows),
+            "headline_lambda": 1.0,
+            "artifact": "theta_grid.json",
+        }
     return {
         "run_id": result.run_id,
         "out_dir": str(result.out_dir),
@@ -159,6 +244,9 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
         "scores_hash": result.score.manifest.scores_hash,
         "network_hash": result.restrict.network_hash,
         "beta_hash": result.restrict.beta_hash,
+        "n_boot": result.run_manifest.freeze.n_boot,
+        "bootstrap": boot_summary,
+        "theta_grid": grid_summary,
         "report_html": str(result.report.html_path),
         "report_json": str(result.report.json_path),
     }

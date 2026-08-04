@@ -161,13 +161,21 @@
           <p class="label">[L, U] · method = min/max B*</p>
           {% if empty %}
           <p class="value">∅ &nbsp;<span class="tag empty">empty M*</span></p>
-          <p class="muted" style="margin:0.4rem 0 0">No survivors → no image of β. Bootstrap deferred to v1.1.</p>
+          <p class="muted" style="margin:0.4rem 0 0">No survivors → no image of β. Inference diagnostics are additive and never loosen θ.</p>
           {% else %}
           <p class="value">[{{ "%.6f"|format(L) }}, {{ "%.6f"|format(U) }}]</p>
           <p class="muted" style="margin:0.4rem 0 0">
             Width = {{ "%.6f"|format(U - L) }}
             · {{ "point-ID" if point_id else (admissible|length)|string + " survivors" }}
-            · bootstrap: none (v1.0)
+            {% if bootstrap %}
+            {% if bootstrap.band_L is not none and bootstrap.band_U is not none %}
+            · bootstrap percentile band = [{{ "%.6f"|format(bootstrap.band_L) }}, {{ "%.6f"|format(bootstrap.band_U) }}]
+            {% else %}
+            · bootstrap band = ∅ (no non-empty replicates)
+            {% endif %}
+            {% else %}
+            · bootstrap: off
+            {% endif %}
           </p>
           {% endif %}
         </div>
@@ -192,6 +200,50 @@
         </table>
       </section>
     </div>
+
+    {% if bootstrap %}
+    <section class="card" style="margin-top:1rem">
+      <h2>Bootstrap inference · additive to headline range</h2>
+      <p class="muted" style="margin-top:0">
+        Units-only Efron resampling; percentile band over non-empty replicates.
+        The headline [L, U] above remains min/max β(M*) on the full sample.
+      </p>
+      <table>
+        <tr><th>replicates</th><td>{{ bootstrap.n_boot }}</td></tr>
+        <tr><th>seed</th><td>{{ bootstrap.seed }}</td></tr>
+        <tr><th>quantiles</th><td>{{ bootstrap.quantiles }}</td></tr>
+        <tr><th>non-empty</th><td>{{ bootstrap.replicates_nonempty }}</td></tr>
+        <tr><th>empty</th><td>{{ bootstrap.replicates_empty }} ({{ "%.3f"|format(bootstrap.empty_replicate_rate) }})</td></tr>
+        <tr><th>degenerate</th><td>{{ bootstrap.replicates_degenerate }} ({{ "%.3f"|format(bootstrap.degenerate_replicate_rate) }})</td></tr>
+        <tr><th>band</th><td>{% if bootstrap.band_L is not none and bootstrap.band_U is not none %}[{{ "%.6f"|format(bootstrap.band_L) }}, {{ "%.6f"|format(bootstrap.band_U) }}]{% else %}∅{% endif %}</td></tr>
+      </table>
+      {% if bootstrap.note %}<p class="muted" style="margin-bottom:0">{{ bootstrap.note }}</p>{% endif %}
+    </section>
+    {% endif %}
+
+    {% if theta_grid %}
+    <section class="card" style="margin-top:1rem">
+      <h2>θ-grid sensitivity · diagnostic viewport</h2>
+      <p class="muted" style="margin-top:0">
+        λ scales threshold magnitudes only. λ is never auto-selected; the headline is always λ=1.0.
+        This grid is not part of the freeze preimage.
+      </p>
+      <table>
+        <thead><tr><th>λ</th><th>|M*|</th><th>empty</th><th>L</th><th>U</th></tr></thead>
+        <tbody>
+          {% for row in theta_grid.rows %}
+          <tr>
+            <td>{{ row["lambda"] }}</td>
+            <td>{{ row.n_admissible }}</td>
+            <td>{{ "yes" if row.empty else "no" }}</td>
+            <td>{% if row.L is not none %}{{ "%.6f"|format(row.L) }}{% else %}—{% endif %}</td>
+            <td>{% if row.U is not none %}{{ "%.6f"|format(row.U) }}{% else %}—{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    {% endif %}
 
     <section class="card" style="margin-top:1rem">
       <h2>Menu admission</h2>
@@ -278,7 +330,7 @@
     <footer>
       cvprofiles {{ package_version }}
       · four-state spine SCORE → RESTRICT → IDENTIFY → REPORT
-      · bootstrap / θ-grid deferred to v1.1
+      · v1.1 inference: bootstrap over units + θ-grid (diagnostic)
       · generated {{ created_at or "—" }}
     </footer>
   </div>

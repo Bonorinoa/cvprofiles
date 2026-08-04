@@ -1,4 +1,4 @@
-"""Thin REPORT: JSON dump + one-page HTML audit trail (no bootstrap panels)."""
+"""REPORT: JSON dump + one-page HTML audit trail with optional diagnostics."""
 
 from __future__ import annotations
 
@@ -37,8 +37,15 @@ def build_report_payload(
     restrict: RestrictBundle,
     identify: IdentifyResult,
     title: str = "Construct-validity profile",
+    bootstrap: dict[str, Any] | None = None,
+    theta_grid: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Machine-complete report dict (also drives HTML)."""
+    """Machine-complete report dict (also drives HTML).
+
+    ``bootstrap`` / ``theta_grid`` are the v1.1 inference payloads (None when
+    the layer is off). Both are additive: the headline range block is always
+    the min/max B* image on M*.
+    """
     slacks_dict: dict[str, dict[str, float]] = {}
     for m in identify.measures:
         slacks_dict[m] = {
@@ -79,9 +86,23 @@ def build_report_payload(
             "empty": identify.empty,
             "point_id": identify.point_id,
             "method": "min_max_B_star",
-            "bootstrap": None,
-            "note": "v1.0 range is min/max of beta on M*; bootstrap deferred to v1.1",
+            "bootstrap": (
+                None
+                if bootstrap is None
+                else {
+                    "band_L": bootstrap.get("band_L"),
+                    "band_U": bootstrap.get("band_U"),
+                    "n_boot": bootstrap.get("n_boot"),
+                    "see": "bootstrap.json",
+                }
+            ),
+            "note": (
+                "range is min/max of beta on M*; bootstrap band is additive "
+                "metadata (v1.1) and never replaces the headline"
+            ),
         },
+        "bootstrap": bootstrap,
+        "theta_grid": theta_grid,
         "artifact_paths": run_manifest.artifact_paths,
     }
 
@@ -103,6 +124,8 @@ def write_report(
     identify: IdentifyResult,
     out_dir: Path | str,
     title: str = "Construct-validity profile",
+    bootstrap: dict[str, Any] | None = None,
+    theta_grid: dict[str, Any] | None = None,
 ) -> ReportResult:
     """Write report.html + report.json under out_dir."""
     out = Path(out_dir)
@@ -112,6 +135,8 @@ def write_report(
         restrict=restrict,
         identify=identify,
         title=title,
+        bootstrap=bootstrap,
+        theta_grid=theta_grid,
     )
     json_path = out / "report.json"
     json_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")

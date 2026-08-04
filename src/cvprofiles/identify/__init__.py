@@ -1,4 +1,4 @@
-"""IDENTIFY state — slacks, M*, β image, range (bootstrap deferred to v1.1)."""
+"""IDENTIFY state — slacks, M*, β image, and headline range."""
 
 from __future__ import annotations
 

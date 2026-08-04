@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 from typing import Annotated
 
@@ -16,6 +17,27 @@ app = typer.Typer(
     no_args_is_help=True,
     add_completion=False,
 )
+
+
+def _parse_theta_grid(raw: str | None) -> list[float] | None:
+    """Parse a comma-separated positive finite λ grid, fail-loudly."""
+    if raw is None:
+        return None
+    tokens = raw.split(",")
+    if not raw.strip() or any(not token.strip() for token in tokens):
+        raise ValueError("must be a non-empty comma-separated list of positive numbers")
+    values: list[float] = []
+    for token in tokens:
+        try:
+            value = float(token.strip())
+        except ValueError as exc:
+            raise ValueError(f"invalid lambda {token.strip()!r}") from exc
+        if not math.isfinite(value) or value <= 0.0:
+            raise ValueError(f"lambda {token.strip()!r} must be finite and > 0")
+        if value in values:
+            raise ValueError(f"duplicate lambda {token.strip()!r}")
+        values.append(value)
+    return values
 
 
 def _version_callback(value: bool) -> None:
@@ -65,12 +87,27 @@ def run_cmd(
         typer.Option("--policy", help="SCORE normalization: none | zscore_measures"),
     ] = "none",
     seed: Annotated[int, typer.Option("--seed", min=0)] = 0,
+    n_boot: Annotated[
+        int,
+        typer.Option(
+            "--n-boot",
+            min=0,
+            help="Bootstrap replicates over units; 0 disables bootstrap.",
+        ),
+    ] = 0,
+    theta_grid: Annotated[
+        str | None,
+        typer.Option(
+            "--theta-grid",
+            help="Comma-separated positive threshold scale multipliers.",
+        ),
+    ] = None,
     title: Annotated[
         str,
         typer.Option("--title"),
     ] = "Construct-validity profile",
 ) -> None:
-    """SCORE → RESTRICT → IDENTIFY → thin REPORT. Empty M* exits 0.
+    """SCORE → RESTRICT → IDENTIFY → REPORT. Empty M* exits 0.
 
     stdout is always a single JSON summary (machine-clean).
     Human status crumbs go to stderr only.
@@ -86,6 +123,12 @@ def run_cmd(
         raise typer.Exit(code=2)
 
     try:
+        theta_grid_lambdas = _parse_theta_grid(theta_grid)
+    except ValueError as exc:
+        typer.secho(f"error: theta-grid: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=2) from exc
+
+    try:
         result = run_profile(
             scores=scores,
             roles=roles,
@@ -95,6 +138,8 @@ def run_cmd(
             policy=policy,  # type: ignore[arg-type]
             seed=seed,
             title=title,
+            n_boot=n_boot,
+            theta_grid_lambdas=theta_grid_lambdas,
         )
     except (ScoreError, RestrictError, IdentifyError, ReportError, ValueError) as exc:
         typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)

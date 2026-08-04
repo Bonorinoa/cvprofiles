@@ -1,4 +1,4 @@
-"""IDENTIFY pipeline: slacks → M* → β(m) → [L,U]=min/max B* (no bootstrap)."""
+"""IDENTIFY pipeline: slacks → M* → β(m) → headline [L,U]=min/max B*."""
 
 from __future__ import annotations
 
@@ -171,7 +171,10 @@ def write_identify_artifacts(
         "point_id": result.point_id,
         "method": "min_max_B_star",
         "bootstrap": None,
-        "note": "v1.0 range is min/max of beta on M*; bootstrap deferred to v1.1",
+        "note": (
+            "range is min/max of beta on M*; bootstrap band is additive "
+            "metadata (bootstrap.json) when enabled"
+        ),
     }
     range_path = out / "range.json"
     range_path.write_text(json.dumps(range_payload, indent=2, sort_keys=True) + "\n")
