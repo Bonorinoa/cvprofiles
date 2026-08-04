@@ -6,8 +6,8 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **v0.1.0** tagged (methods KB + museum PoC); dev package `1.1.0a1` (v1.0 spine merged; v1.1 inference layer in progress) |
-| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 merged; v1.1 inference layer in progress |
+| **Version** | **v0.1.0** tagged (methods KB + museum PoC); dev package `1.1.0a1` (v1.1 inference layer shipped on `main`; release review pending) |
+| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 + v1.1 inference layer merged; handoff pending release review |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
 | **License** | MIT |
@@ -16,7 +16,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 | **Hermes profile** | `cvprofiles` |
 | **Path** | `~/Hermes/Projects/cvprofiles` |
 | **PoC** | `evals/synthetic/v0_poc.py` (`v0_1_poc`) — **museum monolith**, not package |
-| **Proof summary** | `reports/summaries/v0_1_poc_summary.json` (+ package synth summary) |
+| **Proof summary** | `reports/summaries/v0_1_poc_summary.json`, `v1_0_package_synth_summary.json`, `v1_1_package_synth_summary.json` |
 
 ## Thesis spine (one paragraph)
 
@@ -60,7 +60,7 @@ Start here, then read in order:
 - **v1.1:** bootstrap + \(\theta\)-grid  
 - **M10 / H5:** one public baseline — boring, heavily documented association study (USER-authored network only; choice deferred)
 
-See [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) for the locked v1.0 scope box and acceptance list.
+See [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) for the locked v1.0 scope box and [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) for the v1.1 handoff checklist.
 
 ## Hard non-goals (unless reopened in the decision log)
 
@@ -81,7 +81,7 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
 - **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit, merged.
-- **v1.1 in progress:** bootstrap over units + θ-grid sensitivity (diagnostic; headline \([L,U]=\min/\max B^*\) unchanged).
+- **v1.1 shipped on `main` as dev package `1.1.0a1`:** units-only bootstrap + θ-grid sensitivity (diagnostic; headline \([L,U]=\min/\max B^*\) unchanged); release-review handoff pending.
 - **Not yet:** PyPI release; any tag (release-review chat + Augusto decide).
 
 ### Install (dev)

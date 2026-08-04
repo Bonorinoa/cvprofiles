@@ -6,12 +6,13 @@ Format: keep newest first.
 
 ## [Unreleased]
 
-### Planned (v1.1)
-- Bootstrap over units (percentile band, non-empty replicates) — **M6 inference layer**
-- θ-grid sensitivity surface (diagnostic; λ-scales magnitudes only; headline stays λ=1.0)
-- Battery re-run under `1.1.0a1` → `v1_1_package_synth_summary.json`
+### Shipped on `main` (v1.1 dev package `1.1.0a1`; release review pending)
+- Bootstrap over observational units (percentile band over non-empty replicates; empty/degenerate counts reported) — **M6 inference layer**
+- Deterministic θ-grid sensitivity surface (diagnostic; λ scales threshold magnitudes only; headline stays λ=1.0; grid excluded from freeze preimage)
+- Additive pipeline, CLI (`--n-boot`, `--theta-grid`), JSON/HTML audit panels, and stale-layer cleanup
+- Package-native battery and inference evidence: `reports/summaries/v1_1_package_synth_summary.json`
 - MVP release checklist: `docs/15_MVP_Release_Checklist.md` (feeds release-review chat)
-- PyPI name availability note (Q19) — publish decision **not** in v1.1
+- PyPI name availability note (Q19) remains a handoff gate; publishing decision **not** in v1.1
 
 ## [1.0.0a1] — 2026-08-01 (spine shipped on `main`)
 

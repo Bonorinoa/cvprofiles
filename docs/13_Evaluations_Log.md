@@ -241,6 +241,40 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ---
 
+## 2026-08-04 — v1.1 package synthetic battery + inference diagnostics
+
+- **proof:** `reports/summaries/v1_1_package_synth_summary.json`
+- **regenerator:** `uv run python tools/v11_synth_summary.py`
+- **package / generation parent:** `cvprofiles==1.1.0a1`; evidence generated against parent SHA `098e2fa` (the evidence commit records this honestly)
+- **path:** package-native `run_battery` → `run_score` → `run_restrict` → `run_identify`, plus real `run_profile` inference wiring; museum PoC present and unimported
+- **battery:** `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`; `n=1000`, `J=10`, seeds `0..4`, `δ=0`, SCORE policy `none`, β=`corr_y`
+- **network:** eval-only oracle `R`: `corr_min(v_aux,0.35)` + `corr_sign(v_aux,+,0.10)`; harsh empty contrast; no USER empirical network
+- **scope:** bootstrap and θ-grid are additive diagnostics, not sharp-PI claims; headline remains full-sample `[L,U]=min/max B*`; spam audit remains intermediate and **not H5**
+
+| Scenario | FA | anchor in \(M^*\) | empty | H1b | H1_latent (diag) | cold | mean \(\|M^*\|\) | mean width |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `oracle_easy` | **0.000** | **1.000** | 0.000 | **1.0** | **0.0** | **1.000** | 4.00 | 0.048374 |
+| `oracle_with_slop` | **0.000** | **1.000** | 0.000 | **1.0** | **0.0** | **1.000** | 4.00 | 0.048374 |
+| `harsh_theta` | 0.000 | 0.000 | **1.000** | n/a | n/a | **1.000** | 0.00 | n/a |
+| `all_invalid` | 0.000 | 0.000 | **1.000** | n/a | n/a | **1.000** | 0.00 | n/a |
+
+**Inference probes (`oracle_easy`, seed 7):**
+
+- Units-only bootstrap, `n_boot=80`: percentile band `[0.364486, 0.506321]`; 80 non-empty, 0 empty, 0 degenerate replicates; same-seed payloads identical; enabling bootstrap changes `run_id` but leaves headline `[L,U]` unchanged.
+- θ-grid `λ=[0.5,1.0,2.0]`: deterministic; alternate grid changes only the diagnostic payload; `run_id` remains equal to the default; the `λ=1.0` row equals the headline (`|M*|=4`, `[L,U]=[0.419477,0.469777]`). No auto-selection or threshold loosening.
+- Harsh inference contrast: headline `M*=∅`, `L=U=null`; all 40 bootstrap replicates empty, so the bootstrap band is null with an explanatory note; exit/report path remains clean.
+
+**Interpretation:**
+1. H1a/H1b/H3/H4 package gates remain green under `1.1.0a1`; H1_latent remains diagnostic only and is 0 under attenuation.
+2. The inference layer adds observability without changing the construct-identified headline range or researcher-authored restrictions.
+3. This is package-native synthetic evidence, not a paper Monte Carlo freeze. The existing spam audit remains version-agnostic intermediate stress evidence, not H5.
+
+**Follow-ups:**
+- Release-review chat owns any v1.1.0 tag and PyPI publication decision.
+- Do not import the museum PoC, author a USER empirical network, or promote the spam stress to H5.
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |
