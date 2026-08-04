@@ -169,6 +169,18 @@ def _validate_hex64(name: str, value: str) -> None:
         raise ValueError(f"{name} must be 64-char lowercase hex string")
 
 
+def normalize_n_boot(n_boot: int | None) -> int | None:
+    """Normalize ``n_boot`` for the freeze preimage (docs/12 v1.1 lock).
+
+    ``< 1`` (or None) ⇒ JSON ``null`` so v1.0-era run_ids stay bit-stable
+    when bootstrap is off; ``>= 1`` ⇒ int. Every preimage producer must call
+    this before ``compute_run_id`` / ``build_freeze_bundle``.
+    """
+    if n_boot is None or n_boot < 1:
+        return None
+    return int(n_boot)
+
+
 def freeze_preimage(
     *,
     scores_hash: str,

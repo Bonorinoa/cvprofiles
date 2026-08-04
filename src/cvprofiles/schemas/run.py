@@ -19,8 +19,15 @@ class FreezeBundle(BaseModel):
     schema_version: str = "1"
     seed: int = Field(default=0, ge=0)
     delta: float = Field(default=0.0, ge=0.0)
-    # v1.0: bootstrap deferred — n_boot optional/absent
-    n_boot: int | None = Field(default=None, description="Unused in v1.0; reserved for v1.1.")
+    # v1.1: bootstrap over units. Producers must pass normalize_n_boot():
+    # < 1 (or None) serializes as JSON null so v1.0-era run_ids stay bit-stable.
+    n_boot: int | None = Field(
+        default=None,
+        description=(
+            "Bootstrap replicate count in the freeze preimage. "
+            "Normalize with freeze.normalize_n_boot(): < 1 -> None (null), >= 1 -> int."
+        ),
+    )
     config: dict[str, Any] = Field(
         default_factory=dict,
         description="Extra freeze-relevant knobs (must be JSON-canonical).",

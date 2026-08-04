@@ -38,6 +38,7 @@ def test_import_core_modules() -> None:
     importlib.import_module("cvprofiles.score")
     importlib.import_module("cvprofiles.restrict")
     importlib.import_module("cvprofiles.identify")
+    importlib.import_module("cvprofiles.inference")
     importlib.import_module("cvprofiles.report")
     importlib.import_module("cvprofiles.synth")
 
