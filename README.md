@@ -6,7 +6,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **v0.1.0** tagged (methods KB + museum PoC); **v1.0 thin spine** (`1.0.0a1` package) |
+| **Version** | **v0.1.0** tagged (methods KB + museum PoC); dev package `1.1.0a1` (v1.0 spine merged; v1.1 inference layer in progress) |
 | **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 merged; v1.1 inference layer in progress |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
@@ -80,7 +80,7 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
-- **`main`:** v1.0 spine through M9 (`1.0.0a1`) + intermediate spam audit, merged.
+- **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit, merged.
 - **v1.1 in progress:** bootstrap over units + θ-grid sensitivity (diagnostic; headline \([L,U]=\min/\max B^*\) unchanged).
 - **Not yet:** PyPI release; any tag (release-review chat + Augusto decide).
 
