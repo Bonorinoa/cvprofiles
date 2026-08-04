@@ -1,7 +1,7 @@
 # Real-world intermediate audit: spamminess (20newsgroups features)
 
 **Status:** intermediate evaluation · **NOT** main path · **NOT** paper H5  
-**Branch:** `feat/realworld-spam`  
+**Branch:** `feat/realworld-spam` (merged to `main` @ `3be6367`; deleted)  
 **Engine:** installed `cvprofiles` package (`SCORE → RESTRICT → IDENTIFY → REPORT`)
 
 ## What this is

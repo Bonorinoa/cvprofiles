@@ -7,7 +7,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 | | |
 |---|---|
 | **Version** | **v0.1.0** tagged (methods KB + museum PoC); **v1.0 thin spine** (`1.0.0a1` package) |
-| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 on branch for merge eval |
+| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 merged; v1.1 inference layer in progress |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
 | **License** | MIT |
@@ -42,7 +42,7 @@ Start here, then read in order:
 | [`docs/12_Decision_Engineering_Log.md`](docs/12_Decision_Engineering_Log.md) | **LIVE** engineering decisions |
 | [`docs/13_Evaluations_Log.md`](docs/13_Evaluations_Log.md) | **LIVE** eval runs and learnings |
 | [`docs/14_Researcher_Input_Guide.md`](docs/14_Researcher_Input_Guide.md) | Composites, anchors, SCORE/RESTRICT prep |
-| [`docs/15_Merge_Safety_feat_realworld_spam.md`](docs/15_Merge_Safety_feat_realworld_spam.md) | Merge checklist for current eval branch |
+| [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) | MVP release checklist (feeds release-review chat) |
 | [`docs/PROJECT_MANIFEST.md`](docs/PROJECT_MANIFEST.md) | Machine-readable index |
 
 ## Roadmap
@@ -80,9 +80,9 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
-- **`main`:** package spine through M8 (`1.0.0a1`). Bootstrap/θ-grid deferred to v1.1.
-- **Merge candidate branch:** `feat/realworld-spam` — M9 CI + intermediate spam audit (not H5).
-- **Not yet:** PyPI release; tagged `v1.0.0` (only when acceptance list is green).
+- **`main`:** v1.0 spine through M9 (`1.0.0a1`) + intermediate spam audit, merged.
+- **v1.1 in progress:** bootstrap over units + θ-grid sensitivity (diagnostic; headline \([L,U]=\min/\max B^*\) unchanged).
+- **Not yet:** PyPI release; any tag (release-review chat + Augusto decide).
 
 ### Install (dev)
 

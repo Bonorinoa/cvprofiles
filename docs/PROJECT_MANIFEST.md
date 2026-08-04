@@ -4,9 +4,10 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v1.0_spine_in_progress
+status: v1_1_in_progress
 version: "0.1.0"          # last tagged symbolization
-target_version: "1.0.0"   # thin spine sprint intent (not yet tagged)
+dev_version: "1.1.0a1"    # current dev package version (no tag)
+target_version: "1.1.0"   # v1.1 inference layer (not yet tagged)
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
@@ -26,6 +27,13 @@ v1_0:
   bootstrap: deferred_to_v1.1
   build_order: [M1, M2, M3, M4, M5, M7, M8, M9]  # no M6, no M10 this sprint
   range: min_max_B_star   # no bootstrap / θ-grid in v1.0
+
+v1_1:
+  scope: deferred_M6_inference_layer
+  bootstrap: units_only_percentile_nonempty_replicates
+  theta_grid: diagnostic_scale_multipliers
+  headline_range: min_max_B_star_unchanged
+  build_order: [version_bump_atomic, bootstrap, theta_grid, wiring, evidence, handoff]
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]

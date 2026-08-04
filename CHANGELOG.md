@@ -6,10 +6,20 @@ Format: keep newest first.
 
 ## [Unreleased]
 
+### Planned (v1.1)
+- Bootstrap over units (percentile band, non-empty replicates) — **M6 inference layer**
+- θ-grid sensitivity surface (diagnostic; λ-scales magnitudes only; headline stays λ=1.0)
+- Battery re-run under `1.1.0a1` → `v1_1_package_synth_summary.json`
+- MVP release checklist: `docs/15_MVP_Release_Checklist.md` (feeds release-review chat)
+- PyPI name availability note (Q19) — publish decision **not** in v1.1
+
+## [1.0.0a1] — 2026-08-01 (spine shipped on `main`)
+
+**v1.0 thin first-principles spine** — SCORE → RESTRICT → IDENTIFY → thin REPORT with `[L,U]=min/max B*`, freeze hashes, mini fixture, package-native synth battery, minimal CI, and an intermediate real-world spam audit (not H5). Merged to `main` @ `3be6367`. Tag decision owned by release-review chat.
+
 ### Added
 - **M9 / minimal CI:** `.github/workflows/ci.yml` — uv sync, ruff, pytest, CLI smoke, import-graph hygiene, mini fixture SCORE→REPORT on Python 3.11/3.12
-- **Merge-safety checklist:** `docs/15_Merge_Safety_feat_realworld_spam.md`
-- **Intermediate real-world audit (branch):** `evals/realworld/spam_validity/` — 20newsgroups multi-measure spamminess stress; `verify_audit.py` exit 0; FA=0; harsh empty; cold H4; **not** main-path H5
+- **Intermediate real-world audit:** `evals/realworld/spam_validity/` — 20newsgroups multi-measure spamminess stress; `verify_audit.py` exit 0; FA=0; harsh empty; cold H4; **not** main-path H5
 - **M8 / G8:** package-native synth harness (`src/cvprofiles/synth/`); battery drives real SCORE→RESTRICT→IDENTIFY; H1a/H1b/H3/H4 **green** on seeds `0..4`, \(n=1000\); H1_latent diagnostic only (attenuation → 0); proof `reports/summaries/v1_0_package_synth_summary.json`; museum unimported
 - **M7 / G7:** thin REPORT (HTML/JSON); `run_profile` SCORE→REPORT composition; CLI `cvprofiles run` (stdout JSON / stderr crumbs); empty-\(M^*\) first-class; e2e on mini_v1 oracle + harsh
 - **M5 / G5:** \(\beta=\mathrm{corr}_y\); \([L,U]=\min/\max B^*\) on survivors only; empty/point-ID flags; `range.json` notes bootstrap deferred to v1.1
@@ -25,15 +35,11 @@ Format: keep newest first.
 - Past-tense docs: public repo + tag `v0.1` @ `fb62b48` live; G7/G8 re-enter from G5 for v1.0; H1a/H1b gates + H1_latent diagnostic pointers
 - `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
 
-### Planned (v1.0 spine)
-- Merge eval of `feat/realworld-spam` → `main` after CI green
-- Tag `v1.0.0` only via sibling release chat / Augusto
-
 ### Planned (later)
-- Bootstrap / θ-grid (**v1.1**, not v1.0)
 - `AGENTS.md`
 - Paper prereg freeze
 - Public baseline H5 (USER-authored network only)
+- δ-grid, `mean_order`/`rank_agree` evaluators, `ols_coef`, LaTeX report (post-MVP backlog)
 
 ## [0.1.0] — 2026-08-01
 

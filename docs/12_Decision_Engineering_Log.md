@@ -414,21 +414,50 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-01 — v1.1 sprint opened: inference layer (M6) + MVP evidence (LOCKED)
+
+**Decision (LOCKED):**
+
+- **v1.1 scope:** deferred M6 — bootstrap over units + θ-grid sensitivity — plus packaging evidence (battery re-run, `docs/13` row, release checklist `docs/15_MVP_Release_Checklist.md`).
+- **Version:** dev `1.0.0a1` → `1.1.0a1`; bump is **atomic** with golden refresh (`data/fixtures/mini_v1/expected_freeze.json`) and **all** version literals (pyproject, `uv.lock`, tests, CI workflow, README). Tool: `tools/refresh_mini_golden.py` (shipped in the bump commit; reads `cvprofiles.__version__`, never hardcodes). **No** tag from this chat.
+- **Bootstrap (LOCKED semantics):**
+  - Units-only resampling with replacement; **menu fixed** (never resample measures).
+  - Single `numpy.random.default_rng(seed)` stream per run; no global RNG.
+  - Per replicate: slacks → \(M^*_b\) → \(\beta\) on survivors → \((L_b,U_b)\); percentile band \((2.5\%,97.5\%)\) over **non-empty** replicates only.
+  - `empty_replicate_rate` always reported; all-empty ⇒ band null + note.
+  - **Headline \([L,U]\) stays \(\min/\max B^*\)** on the full sample; bootstrap band is additive metadata and never replaces the headline.
+  - `bootstrap.json` written only when `n_boot ≥ 1`; default `n_boot=0` preserves v1.0 bit-stability of existing runs. `n_boot` in the freeze preimage: `< 1` ⇒ JSON `null` (v1.0 bit-stability), `≥ 1` ⇒ int.
+  - Bootstrap uses the run's existing `seed` (already in the preimage); **no** new preimage key.
+  - Degenerate replicates (NaN β, e.g. zero-variance resamples) counted as `degenerate_replicate_rate`, excluded from the band, never silently dropped.
+  - Band is **pointwise**: 2.5% of the \(L_b\) distribution, 97.5% of the \(U_b\) distribution — not the joint hull. Reflects sampling variation *conditional on admission*; \(M^*\) membership flips across replicates are real, not bugs.
+- **θ-grid (LOCKED semantics):**
+  - Declared scale multipliers \(\lambda\) applied to **all** \(\theta_r\) (\(\lambda=1.0\) = declared network).
+  - Diagnostic sensitivity surface only: per \(\lambda\) → \(M^*\), \([L,U]\), empty flag → `theta_grid.json`.
+  - **Never** auto-select \(\lambda\) (no coverage-chasing, no auto-loosening). Headline is always \(\lambda=1.0\).
+  - λ scales **threshold magnitudes only**; sign/direction constraints are never scaled. λ ∈ positive reals; grid config is **not** part of the freeze preimage (diagnostic viewport; same bundle + different grid ⇒ same run_id, different `theta_grid.json`). Off unless explicitly requested.
+- **Evidence:** battery re-run under `1.1.0a1` → `reports/summaries/v1_1_package_synth_summary.json`; `docs/13` row; spam audit proof is version-agnostic and remains v1.0-era evidence (optional re-verify under 1.1.0a1).
+- **Q19:** PyPI name availability check recorded as a note; publishing is **not** in v1.1.
+- Release checklist: former `docs/15_Merge_Safety_feat_realworld_spam.md` converted to `docs/15_MVP_Release_Checklist.md` (branch was merged + deleted).
+
+**Rationale:** User asked to close the v1.1 package with enough observed capability to promote as MVP. Tag / release decision stays with the release-review chat; this chat ships evidence only.
+
+**Follow-ups:** atomic version bump → bootstrap → θ-grid → wiring → evidence → handoff push. No tag, no PyPI, no sharp-PI claims, no δ-grid (separate decision).
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
-- Tag/release live at `fb62b48`; **`main` @ `29bdea1`** (M1–M8); branch carries M9 + intermediate audit.
-- **v1.0 scope locked** this sprint: thin spine; M6 → v1.1; no M10 as thesis claim.
-- **M9 CI wired** (branch → merge candidate).
-- **Intermediate real-world audit** on `feat/realworld-spam` (not main-path H5).
-- **run_id / freeze hash algorithm LOCKED at M1**.
+- Tag/release live at `fb62b48`; **`main` @ `3be6367`** (M1–M9 + intermediate spam audit merged).
+- **v1.0 spine shipped** on main; **v1.1 in progress:** bootstrap + θ-grid (M6) + MVP evidence.
+- **run_id / freeze hash algorithm LOCKED at M1**; version bumps move run_id (golden refresh in same commit).
 - **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.
 - **RESTRICT/IDENTIFY thin spine live:** corr_min/corr_sign + corr_y.
-- **REPORT + `run` composition live (M7).**
+- **REPORT + `run` composition live (M7).** M9 CI live on main.
 - **M8 synth harness green;** museum unimported.
 - Do **not** import museum monolith into `src/`.
 - Do **not** move tag `v0.1`.
-- Dev version `1.0.0a1` is not a release tag.
+- Dev version bumps are not release tags.
 
 ---
 

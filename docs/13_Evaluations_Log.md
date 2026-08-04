@@ -209,7 +209,7 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ## 2026-08-01 — Intermediate real-world audit: spam_validity (20newsgroups features)
 
-- **branch:** `feat/realworld-spam` (not merged to main by default)
+- **branch:** `feat/realworld-spam` → merged to `main` @ `3be6367` (intermediate, not H5); branch deleted
 - **proof:** `evals/realworld/spam_validity/proof_summary.json` (from `verify_audit.py`)
 - **package / git:** `cvprofiles==1.0.0a1` @ `29bdea1` spine; real `run_profile` path
 - **data:** sklearn `fetch_20newsgroups` train (4 cats) → n=2192 multi-measure matrix; free, offline-cached
