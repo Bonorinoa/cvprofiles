@@ -14,6 +14,8 @@ Format: keep newest first.
 - MVP release checklist: `docs/15_MVP_Release_Checklist.md` (feeds release-review chat)
 - Verification close-out: local ruff clean, 121 tests passed, version smoke and tag checks passed; GitHub Actions green confirmed by Augusto; no tag or PyPI publication attempted
 - PyPI name availability checked (HTTP 404); publication decision remains open and is **not** part of v1.1
+- Independent MC50 proof audit: `tools/verify_v11_protocol_synth_mc50.py` + `tests/test_v11_protocol_synth_mc50_audit.py` validate the provisional synthetic-only protocol table in a read-only pass
+- Strict typing enforcement: `uv run mypy src` is green and enforced in CI; `ruff` now also lints `tools/` in CI
 
 ## [1.0.0a1] — 2026-08-01 (spine shipped on `main`)
 
@@ -38,7 +40,6 @@ Format: keep newest first.
 - `docs/14_Researcher_Input_Guide.md` — DRAFT process guide for composites, anchors, SCORE/RESTRICT prep (not part of tag `v0.1`)
 
 ### Planned (later)
-- `AGENTS.md`
 - Paper prereg freeze
 - Public baseline H5 (USER-authored network only)
 - δ-grid, `mean_order`/`rank_agree` evaluators, `ols_coef`, LaTeX report (post-MVP backlog)

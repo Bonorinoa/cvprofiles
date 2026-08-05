@@ -527,3 +527,40 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 ## Reversal policy
 
 To reopen a LOCKED item: new dated entry here stating what changes and why. Chat agreement alone is not enough for future agents.
+
+---
+
+## 2026-08-04 — MC50 proof audit tool + strict typing enforcement
+
+**Decision (LOCKED):**
+- Add a read-only MC50 proof auditor `tools/verify_v11_protocol_synth_mc50.py` and its
+  TDD suite `tests/test_v11_protocol_synth_mc50_audit.py` (9 tests). The tool
+  validates the committed `reports/summaries/v1_1_protocol_synth_mc50_summary.json`
+  against the locked protocol: provenance/identity fields, settings (scenarios,
+  seeds `0..49`, `n=1000`, `delta=0`, `beta=corr_y`), per-seed structural
+  invariants, recomputed aggregates, gate agreement, strict JSON non-finite
+  rejection, bootstrap count/band semantics, harsh-empty contrast, and museum
+  import hygiene. It is deliberately read-only: it never reruns the generator,
+  writes artifacts, calls git, or touches the network.
+- Fix three pre-existing strict mypy failures without weakening configuration:
+  scalar narrowing via `pd.to_numeric(..., errors="raise")` in
+  `identify/pipeline.py` and `report/pipeline.py`, and removal of an obsolete
+  `type: ignore` in `inference/theta_grid.py`. No runtime behavior changed;
+  targeted suites (identify/report/theta_grid) remained green before and after.
+- Enforce strict typing in CI: `.github/workflows/ci.yml` now runs
+  `uv run mypy src` and `uv run ruff check src tests tools` (previously
+  `src tests` only). Local quality battery now matches CI scope.
+
+**Verification (2026-08-04):** ruff clean; mypy `Success: no issues found in 28
+source files`; pytest `130 passed`; MC50 auditor exits 0 with
+`{"errors": [], "passed": true, "protocol_id": "protocol-v1-synth-provisional-mc50",
+"scenario_seed_cells": 200}`; CLI version `1.1.0a1`; `v0.1` unchanged.
+
+**Review note:** an independent reviewer subagent confirmed the verifier is
+read-only and raised no blocking findings; a second review pass could not run
+because the subagent model had no credits. The audit evidence therefore rests on
+the tool's own tests plus that static review. Future evidence claims should cite
+the tool command, not remembered numbers.
+
+**Follow-ups:** documentation reconciliation (README/manifest/open questions) and
+the human-only release/protocol decisions remain open.

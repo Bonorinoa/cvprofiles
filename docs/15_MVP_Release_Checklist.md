@@ -16,7 +16,7 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 ## Must be green before promotion
 
 - [x] GitHub Actions `ci` green on `main` (py3.11 + py3.12) — **confirmed by Augusto via GitHub UI** at `9ece618` (not fetched by agent; release review may re-confirm)
-- [x] Local CI-equivalent: `uv run ruff check src tests tools` and `uv run pytest -q` — **121 passed**
+- [x] Local CI-equivalent: `uv run ruff check src tests tools`, `uv run mypy src`, and `uv run pytest -q` — **130 passed** (after the MC50 audit suite)
 - [x] Package version smoke: `uv run cvprofiles --version` → `1.1.0a1`
 - [x] Mini fixture freeze golden matches current package version; `n_boot` is JSON `null` when bootstrap is off
 - [x] Synth battery green (H1a FA=0, H1b=1, H3 empty honesty, H4 cold); proof summary audited

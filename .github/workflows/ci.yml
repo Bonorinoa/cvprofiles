@@ -32,8 +32,11 @@ jobs:
       - name: Sync project (dev extras)
         run: uv sync --extra dev
 
-      - name: Ruff (src + tests)
-        run: uv run ruff check src tests
+      - name: Ruff (src + tests + tools)
+        run: uv run ruff check src tests tools
+
+      - name: Mypy (strict package check)
+        run: uv run mypy src
 
       - name: Pytest
         run: uv run pytest -q --tb=short
