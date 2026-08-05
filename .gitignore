@@ -65,3 +65,9 @@ credentials.json
 # Real-world audit run dumps (keep data/ + proof JSON; regenerate runs)
 evals/realworld/**/runs_*/
 evals/realworld/**/*.parquet
+
+# H5 Trust: large local raw + aux caches (fetched/copied locally; frozen
+# scores.csv + manifest are committed under evals/h5_trust/data/)
+data/h5_trust_raw/
+data/h5_trust_aux/
+evals/h5_trust/runs_verify/
