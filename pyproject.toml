@@ -68,7 +68,11 @@ src = ["src", "tests"]
 select = ["E", "F", "I", "UP", "B"]
 
 [tool.mypy]
-python_version = "3.11"
+# Target the newest supported runtime: numpy>=2.5 stubs use PEP 695 `type`
+# statements, which mypy only accepts when targeting 3.12+. Our source is
+# 3.11-compatible and contains no 3.12-only syntax, so this is a strict
+# superset of the old 3.11 check (and matches the py3.12 CI job).
+python_version = "3.12"
 strict = true
 packages = ["cvprofiles"]
 mypy_path = "src"
