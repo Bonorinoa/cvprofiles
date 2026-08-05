@@ -1,0 +1,16 @@
+{
+  "unit_id": "unit_id",
+  "measures": [
+    "m_afford_raw",
+    "m_space_raw",
+    "m_uncrowded_raw",
+    "m_composite_raw",
+    "m_noise_raw",
+    "m_geo_dict_raw"
+  ],
+  "aux": [
+    "v_aux"
+  ],
+  "outcome": "y",
+  "diagnostic": []
+}

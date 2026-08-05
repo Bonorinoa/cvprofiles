@@ -158,6 +158,43 @@ def build() -> None:
     with (DATA / "beta.yaml").open("w") as f:
         yaml.safe_dump(beta, f, sort_keys=False)
 
+    # --- Raw heavy-skew variant (no log transforms) -------------------------
+    # Same menu structure, raw constructions: tests whether heavy tails change
+    # admission under the same incidental network. Diagnostic, not a gate.
+    df_skew = pd.DataFrame(
+        {
+            "unit_id": [f"u{i:06d}" for i in range(n)],
+            "m_afford_raw": z(med_inc),
+            "m_space_raw": z(ave_rooms),
+            "m_uncrowded_raw": z(-ave_occup),
+            "m_composite_raw": z(0.40 * med_inc + 0.30 * ave_rooms + 0.30 * (-ave_occup)),
+            "m_noise_raw": RANDOM.standard_normal(n) * 0.5,
+            "m_geo_dict_raw": z(longitude),
+            "v_aux": z(0.5 * ave_rooms + 0.5 * (-ave_occup)),
+            "y": 0.55 * z(med_inc)
+            + 0.30 * z(ave_rooms)
+            + 0.15 * z(-ave_occup)
+            + 0.10 * RANDOM.standard_normal(n),
+        }
+    )
+    df_skew.to_csv(DATA / "scores_skew.csv", index=False)
+    roles_skew = {
+        "unit_id": "unit_id",
+        "measures": [
+            "m_afford_raw",
+            "m_space_raw",
+            "m_uncrowded_raw",
+            "m_composite_raw",
+            "m_noise_raw",
+            "m_geo_dict_raw",
+        ],
+        "aux": ["v_aux"],
+        "outcome": "y",
+        "diagnostic": [],
+    }
+    with (DATA / "roles_skew.json").open("w") as f:
+        json.dump(roles_skew, f, indent=2)
+
     print("[4/4] Sanity check (oracle R at delta=0):")
     for m in roles["measures"]:
         c_aux = float(np.corrcoef(df[m], df["v_aux"])[0, 1])
@@ -169,6 +206,11 @@ def build() -> None:
     print(f"  lon_corr_y={lon_corr_y:+.3f} (weak geo proxy; must fail R)")
     max_corr_aux = max(float(np.corrcoef(df[m], df["v_aux"])[0, 1]) for m in roles["measures"])
     print(f"  max_corr_aux={max_corr_aux:.4f} (harsh theta must exceed this)")
+    print("  raw-skew variant (diagnostic):")
+    for m in roles_skew["measures"]:
+        c_aux = float(np.corrcoef(df_skew[m], df_skew["v_aux"])[0, 1])
+        c_y = float(np.corrcoef(df_skew[m], df_skew["y"])[0, 1])
+        print(f"    {m:20s}: corr_aux={c_aux:+.3f} corr_y={c_y:+.3f}")
 
 
 if __name__ == "__main__":

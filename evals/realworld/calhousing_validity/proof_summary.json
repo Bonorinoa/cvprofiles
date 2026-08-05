@@ -30,7 +30,10 @@
     "nan_fail_loud": true,
     "oracle_nonempty": true,
     "same_scores_hash": true,
-    "small_n_clean": true
+    "skew_clean": true,
+    "thin_samples_clean": true,
+    "zscore_m_star_invariant": true,
+    "zscore_range_invariant": true
   },
   "harsh": {
     "L": null,
@@ -103,22 +106,72 @@
   "package": "cvprofiles",
   "passed": true,
   "path": "intermediate_not_main_path",
-  "small_n_probe": {
-    "clean_exit": true,
-    "harsh_empty": true,
-    "n": 200,
-    "oracle_M_star": [
+  "skew_probe": {
+    "M_star": [
+      "m_space_raw",
+      "m_uncrowded_raw",
+      "m_composite_raw"
+    ],
+    "empty": false,
+    "exit_clean": true,
+    "range": [
+      0.1932080663561299,
+      0.6592495992928279
+    ],
+    "range_ok": true
+  },
+  "thin_sample_probes": [
+    {
+      "harsh_empty": true,
+      "n": 200,
+      "oracle_M_star": [
+        "m_afford",
+        "m_space",
+        "m_uncrowded",
+        "m_spacious_uncrowded",
+        "m_composite_quality",
+        "m_geo_dict"
+      ],
+      "oracle_nonempty": true,
+      "oracle_range": [
+        0.1935668981396403,
+        0.9752862061316966
+      ],
+      "range_ok": true
+    },
+    {
+      "harsh_empty": true,
+      "n": 50,
+      "oracle_M_star": [
+        "m_afford",
+        "m_space",
+        "m_spacious_uncrowded",
+        "m_composite_quality",
+        "m_geo_dict"
+      ],
+      "oracle_nonempty": true,
+      "oracle_range": [
+        0.7682665902086043,
+        0.9732986599369916
+      ],
+      "range_ok": true
+    }
+  ],
+  "zscore_probe": {
+    "M_star": [
       "m_afford",
       "m_space",
       "m_uncrowded",
       "m_spacious_uncrowded",
-      "m_composite_quality",
-      "m_geo_dict"
+      "m_age_pref",
+      "m_composite_quality"
     ],
-    "oracle_nonempty": true,
-    "oracle_range": [
-      0.1935668981396403,
-      0.9752862061316966
-    ]
+    "M_star_equal": true,
+    "exit_clean": true,
+    "range": [
+      0.1658044308648355,
+      0.9514033957148045
+    ],
+    "range_equal": true
   }
 }

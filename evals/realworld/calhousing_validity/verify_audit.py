@@ -16,7 +16,7 @@ from pathlib import Path
 import pandas as pd
 
 from cvprofiles.pipeline import run_profile, summary_dict
-from cvprofiles.score.pipeline import ScoreError, run_score
+from cvprofiles.score.pipeline import NormPolicy, ScoreError, run_score
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
@@ -58,7 +58,14 @@ def _core(summary: dict) -> dict:
     return {k: summary[k] for k in FREEZE_KEYS}
 
 
-def _run(network_name: str, out_name: str, title: str, scores: Path | None = None) -> dict:
+def _run(
+    network_name: str,
+    out_name: str,
+    title: str,
+    scores: Path | None = None,
+    roles: Path | None = None,
+    policy: NormPolicy = "none",
+) -> dict:
     out = RUNS / out_name
     if out.exists():
         for p in out.iterdir():
@@ -66,11 +73,11 @@ def _run(network_name: str, out_name: str, title: str, scores: Path | None = Non
                 p.unlink()
     result = run_profile(
         scores=scores if scores is not None else DATA / "scores.csv",
-        roles=DATA / "roles.json",
+        roles=roles if roles is not None else DATA / "roles.json",
         network=DATA / network_name,
         beta=DATA / "beta.yaml",
         out_dir=out,
-        policy="none",
+        policy=policy,
         seed=0,
         title=title,
         write_parquet=False,
@@ -78,14 +85,83 @@ def _run(network_name: str, out_name: str, title: str, scores: Path | None = Non
     return summary_dict(result)
 
 
-def _small_n_probe() -> tuple[dict, dict]:
-    """Deterministic small-n probe: first 200 units, oracle + harsh networks."""
-    small = RUNS / "small_scores.csv"
+def _thin_sample_probe(n: int, tag: str) -> dict:
+    """Deterministic thin-sample probe: first n units, oracle + harsh networks.
+
+    Admission is diagnostic here (it can flip with n); the gate is clean exit,
+    valid range contract, and a harsh empty contrast.
+    """
+    small = RUNS / f"small_{tag}_scores.csv"
     df = pd.read_csv(DATA / "scores.csv")
-    df.head(200).to_csv(small, index=False)
-    oracle = _run("network_oracle.yaml", "small_oracle", "Calhousing small-n oracle", scores=small)
-    harsh = _run("network_harsh.yaml", "small_harsh", "Calhousing small-n harsh", scores=small)
-    return oracle, harsh
+    df.head(n).to_csv(small, index=False)
+    oracle = _run(
+        "network_oracle.yaml",
+        f"small_{tag}_oracle",
+        f"Calhousing n={n} oracle",
+        scores=small,
+    )
+    harsh = _run(
+        "network_harsh.yaml",
+        f"small_{tag}_harsh",
+        f"Calhousing n={n} harsh",
+        scores=small,
+    )
+    return {
+        "n": n,
+        "oracle_nonempty": not oracle["empty"],
+        "oracle_M_star": oracle["M_star"],
+        "oracle_range": [oracle["L"], oracle["U"]],
+        "harsh_empty": bool(harsh["empty"]),
+        "range_ok": (
+            (oracle["L"] is None and oracle["U"] is None)
+            or (oracle["L"] is not None and oracle["U"] is not None and oracle["L"] <= oracle["U"])
+        ),
+    }
+
+
+def _zscore_probe(o_none: dict) -> dict:
+    """z-score normalization on real data must leave M* and [L,U] invariant."""
+    zs = _run(
+        "network_oracle.yaml",
+        "oracle_zscore",
+        "Calhousing validity (oracle R, zscore policy) verify",
+        policy="zscore_measures",
+    )
+    same_m = zs["M_star"] == o_none["M_star"]
+    same_range = (
+        zs["L"] is not None
+        and o_none["L"] is not None
+        and abs(zs["L"] - o_none["L"]) < 1e-9
+        and abs(zs["U"] - o_none["U"]) < 1e-9
+    )
+    return {
+        "exit_clean": True,
+        "M_star_equal": same_m,
+        "range_equal": same_range,
+        "M_star": zs["M_star"],
+        "range": [zs["L"], zs["U"]],
+    }
+
+
+def _skew_probe() -> dict:
+    """Raw heavy-skew variant: clean run + valid range; membership diagnostic."""
+    s = _run(
+        "network_oracle.yaml",
+        "skew_oracle",
+        "Calhousing raw-skew variant (oracle R) verify",
+        scores=DATA / "scores_skew.csv",
+        roles=DATA / "roles_skew.json",
+    )
+    return {
+        "exit_clean": True,
+        "empty": s["empty"],
+        "M_star": s["M_star"],
+        "range": [s["L"], s["U"]],
+        "range_ok": (
+            (s["L"] is None and s["U"] is None)
+            or (s["L"] is not None and s["U"] is not None and s["L"] <= s["U"])
+        ),
+    }
 
 
 def _nan_probe() -> dict:
@@ -161,21 +237,22 @@ def main() -> int:
         failures.append("scores_hash differs between oracle and harsh (same scores.csv)")
 
     # --- Capability probes ---
-    small_o, small_h = _small_n_probe()
-    small_probe = {
-        "n": 200,
-        "oracle_nonempty": not small_o["empty"],
-        "oracle_M_star": small_o["M_star"],
-        "oracle_range": [small_o["L"], small_o["U"]],
-        "harsh_empty": bool(small_h["empty"]),
-        "clean_exit": True,
-    }
-    if small_o["empty"]:
-        failures.append("small-n oracle run unexpectedly empty")
-    if small_o["L"] is None or small_o["U"] is None or small_o["L"] > small_o["U"]:
-        failures.append("small-n oracle range invalid")
-    if not small_h["empty"]:
-        failures.append("small-n harsh run not empty")
+    thin_samples = [_thin_sample_probe(n, f"n{n}") for n in (200, 50)]
+    for probe in thin_samples:
+        if not probe["harsh_empty"]:
+            failures.append(f"thin-sample n={probe['n']} harsh run not empty")
+        if not probe["range_ok"]:
+            failures.append(f"thin-sample n={probe['n']} oracle range invalid")
+
+    zscore_probe = _zscore_probe(o1)
+    if not zscore_probe["M_star_equal"]:
+        failures.append("zscore policy changed M*")
+    if not zscore_probe["range_equal"]:
+        failures.append("zscore policy changed [L,U]")
+
+    skew_probe = _skew_probe()
+    if not skew_probe["range_ok"]:
+        failures.append("raw-skew variant range invalid")
 
     nan_probe = _nan_probe()
     if not nan_probe["passed"]:
@@ -192,7 +269,9 @@ def main() -> int:
         "designed_valid": sorted(DESIGNED_VALID),
         "designed_invalid": sorted(DESIGNED_INVALID),
         "false_admissions": fa,
-        "small_n_probe": small_probe,
+        "thin_sample_probes": thin_samples,
+        "zscore_probe": zscore_probe,
+        "skew_probe": skew_probe,
         "nan_fail_loud_probe": nan_probe,
         "capability_notes": {
             "engine_does_not_impute_missing_values": True,
@@ -208,11 +287,12 @@ def main() -> int:
             "cold_H4": _core(o1) == _core(o2),
             "harsh_html_empty_callout": "Empty admissible set" in harsh_html,
             "same_scores_hash": o1["scores_hash"] == h["scores_hash"],
-            "small_n_clean": (
-                bool(small_probe["clean_exit"])
-                and not small_o["empty"]
-                and bool(small_h["empty"])
+            "thin_samples_clean": all(
+                p["harsh_empty"] and p["range_ok"] for p in thin_samples
             ),
+            "zscore_m_star_invariant": bool(zscore_probe["M_star_equal"]),
+            "zscore_range_invariant": bool(zscore_probe["range_equal"]),
+            "skew_clean": bool(skew_probe["range_ok"]),
             "nan_fail_loud": bool(nan_probe["passed"]),
         },
         "passed": len(failures) == 0,

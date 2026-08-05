@@ -46,8 +46,17 @@ Network (incidental, agent-authored): `corr_min(v_aux, 0.15)` +
 
 ## Capability probes (new in this audit)
 
-- **Small-n run (n=200):** engine completes cleanly; oracle nonempty, harsh
-  empty; range finite. Documents behavior under thin samples.
+- **Thin-sample ladder (n=200, n=50):** engine completes cleanly at both sizes;
+  harsh empty holds; **admission shrinks and flips with n** (`m_age_pref` drops
+  out at n=50; the longitude proxy is admitted at both thin sizes but rejected
+  at full n). Range narrows as survivors shrink.
+- **z-score policy probe:** `zscore_measures` leaves `M*` and `[L,U]` identical
+  to the `none` run (within 1e-9) — normalization is identification-invariant
+  on this matrix.
+- **Raw heavy-skew variant (no log transforms):** clean run, valid range, but
+  **admission changes** — `m_afford_raw` drops out because raw outliers
+  (AveOccup) dominate the aux composite. Transform choice is an upstream
+  researcher decision with real consequences.
 - **Fail-loud missingness:** `run_score` rejects a NaN in a measure column with
   `ScoreError` — the engine does **not** impute; upstream cleaning is the
   researcher's job.
@@ -59,8 +68,11 @@ Network (incidental, agent-authored): `corr_min(v_aux, 0.15)` +
 - Composite measures here are hand-weighted labels, **not** real AI/LLM scores.
 - Wide `[L,U]` is measurement fragility, not a product failure.
 - **Small-n admission can flip:** `m_geo_dict` is rejected at n=20640 but
-  admitted at n=200. Admission is a sample-dependent statement; pre-register
-  sample-size posture before using real evidence.
+  admitted at n=200 and n=50. Admission is a sample-dependent statement;
+  pre-register sample-size posture before using real evidence.
+- **Transform choice can flip admission:** log-transformed measures retain the
+  full valid set; raw heavy-tailed constructions drop `m_afford`. Pre-register
+  upstream feature engineering, not just the network.
 - This audit is package confidence only: **not** H5, **not** external validity,
   **not** a paper result. Do not promote it.
 

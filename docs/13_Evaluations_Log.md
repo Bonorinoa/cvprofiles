@@ -354,6 +354,26 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ---
 
+## 2026-08-04 — calhousing probe supplements (thin samples, z-score, raw skew)
+
+Same branch and audit; `verify_audit.py` extended pre-merge with three probes
+(exit **0**; all gates true).
+
+- **Thin-sample ladder (n=200, n=50):** clean runs; harsh empty holds at both;
+  admission shrinks and flips with n. n=200 admits `m_geo_dict` (longitude
+  proxy) and n=50 additionally drops `m_age_pref`; both are rejected at full n.
+  Range narrows with fewer survivors (n=50 → [0.768, 0.973]).
+- **z-score policy:** `M*` and `[L,U]` identical to the `none` run within 1e-9.
+  Normalization is identification-invariant on this matrix.
+- **Raw heavy-skew variant (no log):** clean run, valid range, but `m_afford_raw`
+  is rejected (corr_aux 0.057 vs θ=0.15) because raw AveOccup outliers dominate
+  the aux composite. Transform choice changes admission.
+- **Interpretation:** admission depends on sample size AND upstream feature
+  transformation, not only on the network. Pre-register both for real evidence.
+  These are capability boundaries, not engine failures.
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |
