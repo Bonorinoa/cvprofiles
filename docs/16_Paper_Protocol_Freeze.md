@@ -123,6 +123,16 @@ Gate B has been authorized as **`LOCKED AS PROVISIONAL SYNTHETIC-ONLY PROTOCOL`*
 
 Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, engine change, tag, PyPI publication, or push is authorized by this lock.
 
+## 8. Amendment 2026-08-04 — H5 Trust design lock (dated amendment)
+
+**Status update:** for the H5 Trust evaluation only, the researcher-owned fields in §3 are **LOCKED as design** per `docs/17_H5_Trust_Design.md`, approved by Augusto on 2026-08-04 (decision-log entry same date):
+
+- Construct paragraph (approved verbatim), unit/universe (country `iso3`, WVS7 ∩ GPS, n≈40, floor ≥ 200), menu/roles (4 valid WVS facets + 2 designed-invalid), network `R` (gps_trust 0.3 / rule_of_law 0.3 / gini −0.1), θ anchors (pre-data, literature), δ=0, β=`corr_y` on `log_gdp_pc` (outcome not in network), claims boundary (admissibility + range + fragility only).
+
+**What this opens:** the empirical box for this **designated evaluation**. `SCORE`/`RESTRICT`/`IDENTIFY`/`REPORT` runs for the trust design may proceed once (1) frozen scores + manifest built from raw public files, (2) pinned seed + package version, (3) independent audit exit 0, (4) Augusto's run decision.
+
+**What it does NOT authorize:** any other H5/empirical run, engine change, tag, PyPI publication, push, or a `docs/13` evidence claim by implication. The provisional synthetic-only protocol and the MC50 table (§4) are unchanged. All other §3 fields remain **AWAITING AUGUSTO** for any future design.
+
 ## Provenance rule
 
 `reports/summaries/v1_1_package_synth_summary.json` remains the shipped package-evidence artifact. A future protocol table must use a distinct summary path, record the protocol ID, package version, parent SHA, exact settings, and seed list, and be audited independently before any `docs/13` claim is written.

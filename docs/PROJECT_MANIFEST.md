@@ -4,7 +4,7 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v1_1_verified_dev_protocol_provisional_synthetic_locked_empirical_open
+status: v1_1_verified_dev_protocol_provisional_synthetic_locked_h5_trust_design_locked_run_gated
 version: "0.1.0"          # last tagged symbolization
 dev_version: "1.1.0a1"    # current dev package version (no tag)
 target_version: "1.1.0"   # v1.1 inference layer (not yet tagged)
@@ -43,6 +43,17 @@ v1_1:
   protocol_evidence_summary: reports/summaries/v1_1_protocol_synth_mc50_summary.json
   protocol_evidence_parent_sha: 5bfea25
 
+h5_trust:
+  design: docs/17_H5_Trust_Design.md
+  status: design_locked_run_gated
+  owner: Augusto
+  approved: 2026-08-04
+  construct: country_level_generalized_trust
+  data: wvs_wave7_gps_country_ab_2country_probe
+  network: corr_min(gps_trust,0.3)+corr_min(rule_of_law,0.3)+corr_sign(gini,-1,0.1)
+  beta: corr_y_on_log_gdp_pc
+  delta: 0.0
+
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
   thesis_core: [RESTRICT, IDENTIFY, REPORT]
@@ -65,6 +76,7 @@ docs:
     - docs/13_Evaluations_Log.md
     - docs/14_Researcher_Input_Guide.md
     - docs/16_Paper_Protocol_Freeze.md
+    - docs/17_H5_Trust_Design.md
   live:
     - docs/12_Decision_Engineering_Log.md
     - docs/13_Evaluations_Log.md
@@ -93,4 +105,5 @@ locks:
   - v1_0_no_bootstrap
   - v1_1_diagnostics_additive
   - v1_1_grid_excluded_from_freeze_preimage
+  - h5_trust_design_locked_run_gated
 ```

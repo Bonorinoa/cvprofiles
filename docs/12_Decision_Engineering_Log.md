@@ -597,3 +597,38 @@ documented as a capability boundary; NaN in a measure column fails loud with
 
 **Boundary:** intermediate only; not H5; no paper claim; no CI changes (sklearn
 remains an evals-only dependency, not in core package CI).
+
+---
+
+## 2026-08-04 — H5 Trust design approved (country-level generalized trust)
+
+**Decision (LOCKED as H5 design; run gated):**
+- Augusto directed an H5 evaluation design **independent of the SCA2 validity
+  precedent**, targeting country-level generalized trust using WVS Wave 7 +
+  GPS (behavioral anchor) + AmericasBarometer (2-country probe only), with
+  public economic auxiliaries (WDI/WGI).
+- The construct paragraph was drafted by the agent at Augusto's **explicit
+  one-off delegation** and **approved verbatim** by Augusto. Final wording is
+  Augusto's; the delegation does not generalize.
+- The nomological network was proposed by the agent with literature anchors and
+  **pinned by Augusto**: `corr_min(gps_trust, 0.3)` +
+  `corr_min(rule_of_law, 0.3)` + `corr_sign(gini, -1, 0.1)`; δ=0; β=`corr_y`
+  with `y = log_gdp_pc` (outcome **not** in the network).
+- SCORE input approved: menu = 4 designed-valid WVS facets + 2 designed-invalid
+  (`m_noise`, `m_share_agriculture`); aux = gps_trust, rule_of_law, gini;
+  unweighted country means default, weighted as diagnostic; per-item respondent
+  floor ≥ 200.
+- Claims boundary: admissibility + construct-identified range + measurement
+  fragility only; no causality, no interchangeability, no country rankings.
+
+**Why independent of SCA2:** the SCA2 folder's `scores_trust.csv` / pilot
+network / minimal engine are a separate lab lane (pkg 0.1.0, USA/MEX-adjacent).
+H5 numbers must come from a fresh cvprofiles build from raw files with freeze
+hashing; SCA2 appears only as data provenance.
+
+**Full spec:** `docs/17_H5_Trust_Design.md`.
+
+**Boundary:** design lock only. Empirical run requires frozen scores + pinned
+seed + package version + independent audit + Augusto's run decision. No engine
+change, tag, push, or PyPI by this approval. `docs/16` amended 2026-08-04;
+synthetic-only MC50 protocol unaffected.
