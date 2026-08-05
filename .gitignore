@@ -47,6 +47,7 @@ reports/summaries/*
 !reports/summaries/v0_1_poc_summary.json
 !reports/summaries/v1_0_package_synth_summary.json
 !reports/summaries/v1_1_package_synth_summary.json
+!reports/summaries/v1_1_protocol_synth_mc50_summary.json
 !reports/.gitkeep
 
 # Large local data (fixtures small enough to commit are OK under data/fixtures)

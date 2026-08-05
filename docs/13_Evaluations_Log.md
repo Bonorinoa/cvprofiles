@@ -275,6 +275,44 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ---
 
+## 2026-08-04 — Provisional synthetic-only MC50 evidence table
+
+- **protocol:** `protocol-v1-synth-provisional-mc50`; `docs/16_Paper_Protocol_Freeze.md`
+- **proof:** `reports/summaries/v1_1_protocol_synth_mc50_summary.json`
+- **tool:** `uv run python tools/v11_protocol_synth_mc50.py`
+- **package / generation parent:** `cvprofiles==1.1.0a1`; generated against parent SHA `5bfea25` (Gate B lock); the evidence commit is separate
+- **path:** package-native `run_battery` → `run_score` → `run_restrict` → `run_identify`, with real `run_profile` inference probes; museum PoC present and unimported
+- **battery:** `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`; \(n=1000\), \(J=10\), seeds `0..49`, \(\delta=0\), SCORE policy `none`, β=`corr_y`, cold check on
+- **network:** eval-only oracle \(R\), with the harsh-threshold empty contrast; no USER empirical network
+- **scope:** provisional synthetic-only evidence; not H5, not a paper result, and not a full paper protocol lock. The shipped `v1_1_package_synth_summary.json` with seeds `0..4` remains separate package smoke evidence.
+- **H2:** folded into the H1a false-admission component for this protocol; not reported as a separate gate.
+
+| Scenario | FA | anchor in \(M^*\) | H1b | H1_latent (diag) | empty | cold | mean \(\lvert M^*\rvert\) | mean width | invalid ever | near-miss ever |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
+| `oracle_easy` | **0.000** | **1.000** | **1.000** | 0.020 | 0.000 | **1.000** | 4.12 | 0.070732 | none | `m_floor` |
+| `oracle_with_slop` | **0.000** | **1.000** | **1.000** | 0.020 | 0.000 | **1.000** | 4.12 | 0.070732 | none | `m_floor` |
+| `harsh_theta` | 0.000 | 0.000 | n/a | n/a | **1.000** | **1.000** | 0.00 | n/a | none | none |
+| `all_invalid` | 0.000 | 0.000 | n/a | n/a | **1.000** | **1.000** | 0.00 | n/a | none | none |
+
+**Load-bearing gates:** H1a false-admission and anchor retention, H1b, H3 empty-set honesty, and H4 cold reproducibility are all green. H1_latent is diagnostic only.
+
+**Inference diagnostics:**
+- Oracle probe (fixture DGP seed 0, inference seed 7, `n_boot=80`): headline \([L,U]\) = `[0.419477, 0.469777]`; bootstrap percentile band = `[0.364486, 0.506321]`; 80 non-empty, 0 empty, 0 degenerate replicates.
+- Harsh contrast: headline \(M^*=\varnothing\), \(L=U=\) `null`; all 80 bootstrap replicates empty, 0 degenerate; band is null with the explanatory all-empty note.
+- θ-grid \(\lambda\in\{0.5,1.0,2.0\}\): λ=1.0 equals the headline; no auto-selection or threshold loosening.
+
+**Interpretation:**
+1. All declared load-bearing gates pass across 200 scenario-seed cells; empty \(M^*\) is handled as a clean scientific output.
+2. Under the broader seed list, the near-miss `m_floor` is admitted in the oracle scenarios at least once, and mean \(\lvert M^*\rvert\) is 4.12 rather than 4.00. This is not an H1a failure because designed invalids were never admitted; it is a useful reminder that near-miss behavior is not invariant across seeds.
+3. H1b=1.0 remains partly construction-invariant once the anchor survives and the headline range is defined as min/max over survivors; it should not be oversold.
+4. Bootstrap and θ-grid results are additive diagnostics only; they do not replace the headline range or establish a sharp partial-identification result.
+
+**Follow-ups:**
+- Keep this synthetic-only table separate from the package smoke artifact.
+- Do not promote it to H5 or a paper claim without Augusto-owned empirical inputs and a dated protocol amendment.
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |
