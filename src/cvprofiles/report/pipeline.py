@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from cvprofiles.identify.pipeline import IdentifyResult
@@ -49,7 +50,8 @@ def build_report_payload(
     slacks_dict: dict[str, dict[str, float]] = {}
     for m in identify.measures:
         slacks_dict[m] = {
-            rid: float(identify.slacks.at[m, rid]) for rid in identify.restriction_ids
+            rid: float(pd.to_numeric(identify.slacks.at[m, rid], errors="raise"))
+            for rid in identify.restriction_ids
         }
 
     return {

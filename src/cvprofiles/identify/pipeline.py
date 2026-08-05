@@ -80,11 +80,11 @@ def run_identify(
     admissible: list[str] = []
     rejected: dict[str, list[str]] = {}
     for m in measures:
-        failing = [
-            rid
-            for rid in slacks.columns
-            if float(slacks.at[m, rid]) < -delta
-        ]
+        failing: list[str] = []
+        for rid in slacks.columns:
+            slack = pd.to_numeric(slacks.at[m, rid], errors="raise")
+            if float(slack) < -delta:
+                failing.append(str(rid))
         if failing:
             rejected[m] = failing
         else:

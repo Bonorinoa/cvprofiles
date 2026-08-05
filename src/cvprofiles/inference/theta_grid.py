@@ -71,7 +71,7 @@ class ThetaGridResult:
 def _validate_lambdas(lambdas: Any) -> list[float]:
     """Validate λ declarations: finite, strictly positive, unique."""
     try:
-        seq = list(lambdas)  # type: ignore[arg-type]
+        seq = list(lambdas)
     except TypeError as exc:
         raise ThetaGridError("theta grid lambdas must be a sequence") from exc
     if not seq:
