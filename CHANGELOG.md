@@ -16,6 +16,7 @@ Format: keep newest first.
 - PyPI name availability checked (HTTP 404); publication decision remains open and is **not** part of v1.1
 - Independent MC50 proof audit: `tools/verify_v11_protocol_synth_mc50.py` + `tests/test_v11_protocol_synth_mc50_audit.py` validate the provisional synthetic-only protocol table in a read-only pass
 - Strict typing enforcement: `uv run mypy src` is green and enforced in CI; `ruff` now also lints `tools/` in CI
+- Protocol/release documentation reconciliation: README/manifest/open-questions now reflect the provisional synthetic-only lock (`docs/16`), the MC50 proof table, and the new `AGENTS.md`; release posture unchanged
 
 ## [1.0.0a1] — 2026-08-01 (spine shipped on `main`)
 

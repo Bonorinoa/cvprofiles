@@ -475,7 +475,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
-- Tag/release live at `fb62b48`; **`main` @ `9ece618`** (M1–M9 + intermediate spam audit + v1.1 inference layer and evidence merged).
+- Tag/release live at `fb62b48`; **`main`** carries M1–M9 + intermediate spam audit + v1.1 inference layer and evidence, plus the close-out commits (protocol lock, MC50 audit tool, strict typing enforcement).
 - **v1.0 spine shipped** on main; **v1.1 shipped and locally verified; CI green per Augusto’s GitHub UI confirmation:** bootstrap + θ-grid (M6) + MVP evidence; tag/PyPI remain pending.
 - **run_id / freeze hash algorithm LOCKED at M1**; version bumps move run_id (golden refresh in same commit).
 - **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.

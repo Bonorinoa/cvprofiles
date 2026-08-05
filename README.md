@@ -7,7 +7,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 | | |
 |---|---|
 | **Version** | **v0.1.0** tagged (methods KB + museum PoC); dev package `1.1.0a1` (v1.1 inference layer shipped on `main`; release review pending) |
-| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 + v1.1 inference layer merged; handoff pending release review |
+| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 + v1.1 inference layer merged; protocol draft locked **provisional synthetic-only**; empirical/paper fields remain open |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
 | **License** | MIT |
@@ -16,7 +16,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 | **Hermes profile** | `cvprofiles` |
 | **Path** | `~/Hermes/Projects/cvprofiles` |
 | **PoC** | `evals/synthetic/v0_poc.py` (`v0_1_poc`) — **museum monolith**, not package |
-| **Proof summary** | `reports/summaries/v0_1_poc_summary.json`, `v1_0_package_synth_summary.json`, `v1_1_package_synth_summary.json` |
+| **Proof summary** | `reports/summaries/v0_1_poc_summary.json`, `v1_0_package_synth_summary.json`, `v1_1_package_synth_summary.json`, `v1_1_protocol_synth_mc50_summary.json` (provisional synthetic-only protocol table; not H5 / not a paper result) |
 
 ## Thesis spine (one paragraph)
 
@@ -55,16 +55,17 @@ Start here, then read in order:
 4. **Synth harness re-impl** under package/tests (H1a / H2 / H3 / H4; H1_latent diagnostic)  
 5. **Installable package + minimal CI**
 
-### v1.1 (shipped on `main` — verified dev artifact)
+### v1.1 (shipped on `main` — verified dev artifact; protocol evidence drafted)
 
 - Units-only bootstrap with conservative, additive percentile diagnostics
 - Deterministic \(\theta\)-grid sensitivity surface; headline remains \([L,U]=\min/\max B^*\)
 - Pipeline, CLI, JSON/HTML audit panels, package-native evidence, and minimal CI
 - Version `1.1.0a1`; tag and PyPI publication remain open release decisions
+- Provisional synthetic-only protocol lock (`docs/16`) with an audited MC50 proof table (seeds `0..49`); empirical/paper inputs remain Augusto-owned
 
 ### Remaining backlog
 
-- **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored \(R\), \(\theta\), \(\delta\), \(\beta\), and evidence posture
+- **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored \\(R\\), \\(\\theta\\), \\(\\delta\\), \\(\\beta\\), and evidence posture (synthetic-only portion currently locked provisional)
 - **M10 / H5:** one public baseline — boring, heavily documented association study (USER-authored network only; choice deferred)
 - **v1.2 candidates:** \(\delta\)-grid, `mean_order`/`rank_agree` evaluators, `ols_coef`, and LaTeX report
 

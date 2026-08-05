@@ -313,6 +313,16 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ---
 
+## 2026-08-04 — MC50 proof independently audited (read-only verifier)
+
+- **tool:** `uv run python tools/verify_v11_protocol_synth_mc50.py`
+- **artifact:** `reports/summaries/v1_1_protocol_synth_mc50_summary.json`
+- **result:** exit 0; `{"errors": [], "passed": true, "protocol_id": "protocol-v1-synth-provisional-mc50", "scenario_seed_cells": 200}`
+- **scope:** provenance/identity fields, locked settings (scenarios, seeds `0..49`, `n=1000`, `delta=0`, `beta=corr_y`), per-seed structural invariants, recomputed aggregates, gate agreement, strict JSON non-finite rejection, bootstrap count/band semantics, harsh-empty contrast, and museum hygiene.
+- **note:** This is an internal consistency audit of the committed table, not empirical validation and not paper acceptance. Gate C acceptance remains an owner decision.
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |

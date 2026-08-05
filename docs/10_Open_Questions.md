@@ -20,7 +20,7 @@
 |---|---|---|---|
 | Q8 | Headline CI metric thresholds | \(f_{\max}=0.05\) working; PoC FA=0. Paper threshold and any bootstrap reporting bar remain open. | Soft; paper protocol |
 | Q9 | Paraphrase label | **closed:** valid | Soft reopen |
-| Q10 | Seed count for metric MC | 50 vs 200 | Soft |
+| Q10 | Seed count for metric MC | `0..49` locked for the provisional synthetic-only MC50 table; a future different paper protocol needs an amendment, not post-hoc expansion | Soft; paper protocol |
 | Q11 | Mini fixture generation now vs M1 | Path reserved; content at M1 (v1.0 spine sprint) | In progress at M1 |
 
 ## Empirical H5
@@ -40,7 +40,7 @@
 | Q17 | CLI name | `cvprofiles` / `cvp` | Soft |
 | Q18 | License | **MIT locked** (2026-08-01) | — |
 | Q19 | PyPI publication | Package name availability check returned HTTP 404; publication decision remains open. | Before publish |
-| Q20 | `AGENTS.md` timing | After M1 vs with first code | Soft |
+| Q20 | `AGENTS.md` timing | **present** (2026-08-04) — root handoff contract created; future agents should read it | Resolved |
 | Q21 | Parallel bootstrap | Serial MVP vs joblib later | No |
 
 ## Scope police (reopen only via decision log)
