@@ -1,6 +1,6 @@
 # 16 — Paper Protocol Freeze
 
-**Status:** `protocol-v1-draft` — Gate B open; not locked for paper claims
+**Status:** `protocol-v1-synth-provisional` — provisional synthetic-only lock; empirical/paper fields remain open
 
 **Package baseline:** `cvprofiles==1.1.0a1`
 
@@ -66,18 +66,20 @@ No values are supplied here by the agent.
 
 The existing v1.1 summary is **package evidence**, not automatically the paper Monte Carlo table. It uses the package battery at \(n=1000\), seeds `0..4`, four scenarios, \(\delta=0\), SCORE policy `none`, and β=`corr_y`. A future protocol table must have its own artifact name, exact settings, parent SHA, and protocol identifier.
 
-| Item | Status | Decision required |
-|---|---|---|
-| Evidence scope | **AWAITING AUGUSTO** | Approve a provisional synthetic-only protocol, or specify the broader paper evidence posture. |
-| Scenario set | **AWAITING AUGUSTO** | Keep the four implemented scenarios or add `loose_theta`, `wrong_network`, `n_small`, or `point_id`. |
-| Sample size | **AWAITING AUGUSTO** | Keep \(n=1000\) or specify finite-sample stress values. |
-| Seed list | **AWAITING AUGUSTO** | Keep `0..4` and label it package-level, or approve a broader predeclared list such as `0..49`. |
-| Gate bars | **AWAITING AUGUSTO** | Confirm H1a/H1b/H3/H4 bars and whether H2 remains a separately named false-admission gate or is reported as the H1a/H2 false-admission component. |
-| Synthetic β | **AWAITING AUGUSTO** | Keep `corr_y` for this table or specify another target. |
-| Bootstrap `n_boot` | **AWAITING AUGUSTO** | Specify the replicate count and interpretation; do not choose it after seeing results. |
-| θ-grid | **AWAITING AUGUSTO** | Specify whether the existing diagnostic grid is included in the table and which λ values are declared. |
+| Item | Status | Protocol statement | Source |
+|---|---|---|---|
+| Evidence scope | **LOCKED PROVISIONAL** | Synthetic-only protocol; H5, empirical construct, empirical score matrix/menu, and empirical \(R\) are deferred. | Gate B delegation |
+| Scenario set | **LOCKED PROVISIONAL** | `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`. | Existing package battery |
+| Sample size | **LOCKED PROVISIONAL** | \(n=1000\); SCORE policy `none`. | Existing package battery |
+| Seed list | **LOCKED PROVISIONAL** | Battery seeds `0..49`; the shipped `0..4` result remains package smoke evidence, not this protocol table. | Gate B delegation |
+| Gate bars | **LOCKED PROVISIONAL** | H1a false-admission and anchor retention, H1b, H3, and H4. H2 is not separate: false admission is the H1a/H2 component. | Existing package gate implementation |
+| Synthetic β | **LOCKED PROVISIONAL** | `corr_y`. | Existing package battery |
+| Slack tolerance \(\delta\) | **LOCKED PROVISIONAL** | \(\delta=0\). | Existing package battery |
+| Bootstrap posture | **LOCKED PROVISIONAL** | Appendix diagnostic only; not the headline range, sharp PI, or a stronger uncertainty claim. | Claims boundary |
+| Bootstrap `n_boot` | **LOCKED PROVISIONAL** | `80` for the fixed inference probe with seed `7`; predeclared and not tuned after results. | Existing v1.1 probe |
+| θ-grid | **LOCKED PROVISIONAL** | \(\lambda \in \{0.5,1.0,2.0\}\); λ=1.0 is the headline; no auto-selection. | Existing v1.1 probe |
 
-**Current recommendation, not a lock:** provisional synthetic-only protocol with the existing four scenarios, \(n=1000\), \(\delta=0\), β=`corr_y`, H1a/H1b/H3/H4 as gates, H2 reported as the false-admission component unless Augusto keeps it separate, H1_latent/bootstrap/θ-grid as diagnostics, and a seed list explicitly chosen before execution. If `0..4` is retained, call the result package-level evidence rather than a broad Monte Carlo claim. A broader seed list such as `0..49` is preferable only if Augusto accepts the additional scope and runtime.
+**Provisional synthetic lock:** synthetic-only protocol with the existing four scenarios, \(n=1000\), \(\delta=0\), SCORE policy `none`, β=`corr_y`, battery seeds `0..49`, H1a/H1b/H3/H4 as gates, H2 folded into the H1a false-admission component, and H1_latent/bootstrap/θ-grid as additive diagnostics. The fixed inference probe uses seed `7`, `n_boot=80`, and λ grid \(\{0.5,1.0,2.0\}\). The shipped `0..4` result remains package-level evidence and will not be overwritten.
 
 ## 5. Reporting boundary
 
@@ -117,12 +119,9 @@ Please answer the fields below, or approve the bundled provisional option. Answe
 
 ## Gate B response
 
-To authorize the next phase, reply with either:
+Gate B has been authorized as **`LOCKED AS PROVISIONAL SYNTHETIC-ONLY PROTOCOL`** under delegated synthetic-scope authority. This is not a full paper lock. The empirical construct, unit/universe, score matrix/menu, empirical \(R\), paper θ anchors, paper δ interpretation, paper β choice, paper claims, and reporting placement remain **AWAITING AUGUSTO** or **DEFERRED** as marked above.
 
-- **`LOCKED`**, after filling the researcher-owned fields; or
-- **`LOCKED AS PROVISIONAL SYNTHETIC-ONLY PROTOCOL`**, with the desired synthetic settings stated or the recommendation above explicitly accepted.
-
-No Monte Carlo table will be run before that response.
+Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, engine change, tag, PyPI publication, or push is authorized by this lock.
 
 ## Provenance rule
 

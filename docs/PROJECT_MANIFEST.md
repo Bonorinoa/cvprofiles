@@ -39,7 +39,7 @@ v1_1:
   evidence_parent_sha: 098e2fa
   handoff: no_tag_no_pypi_release_review_owns_release
   protocol: docs/16_Paper_Protocol_Freeze.md
-  protocol_status: gate_b_open
+  protocol_status: provisional_synthetic_locked
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]

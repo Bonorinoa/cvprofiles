@@ -504,6 +504,26 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-04 — Gate B: provisional synthetic-only protocol locked by delegation
+
+**Decision:**
+- Augusto delegated the synthetic protocol decision to the agent. This delegation is recorded as **`LOCKED AS PROVISIONAL SYNTHETIC-ONLY PROTOCOL`**, not as a full paper lock.
+- Locked synthetic box: scenarios `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`; \(n=1000\); SCORE policy `none`; \(\delta=0\); β=`corr_y`; battery seeds `0..49`.
+- Load-bearing gates: H1a false-admission and anchor retention, H1b, H3, and H4. H2 is not separate; false admission is the H1a/H2 component.
+- Additive diagnostics: H1_latent; bootstrap with fixed probe seed `7` and `n_boot=80`; θ-grid with \(\lambda\in\{0.5,1.0,2.0\}\). Bootstrap/θ-grid are appendix diagnostics only, not the headline range or sharp-PI claims.
+- The shipped `reports/summaries/v1_1_package_synth_summary.json` with seeds `0..4` remains untouched package smoke evidence. The protocol table will use a distinct summary path.
+- Empirical construct, unit/universe, score matrix/menu, empirical \(R\), paper θ anchors, paper δ interpretation, paper β choice, paper claims, and reporting placement remain Augusto-owned and unresolved.
+- No engine change, push, tag, PyPI publication, or empirical/H5 run is authorized by this lock.
+
+**Rationale:**
+- A broader predeclared seed list produces a more useful synthetic protocol table than relabeling the five-seed package smoke battery, while keeping the scientific claims boundary explicit.
+
+**Follow-ups:**
+- Run one distinct MC50 evidence tool through the existing public package path.
+- Independently audit the summary JSON, then append the result to `docs/13` and stop at Gate C.
+
+---
+
 ## Reversal policy
 
 To reopen a LOCKED item: new dated entry here stating what changes and why. Chat agreement alone is not enough for future agents.
