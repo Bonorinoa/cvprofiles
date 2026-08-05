@@ -488,6 +488,22 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-04 — Gate A: retain verified development posture
+
+**Decision:**
+- Augusto chose to keep `1.1.0a1` as a verified development artifact while the paper-facing protocol freeze and synthetic evidence work proceed.
+- No v1.1 tag or PyPI publication is authorized by this decision.
+- Phase 2 is authorized as a documentation-only protocol draft; Phase 3 remains blocked until Gate B receives an explicit `LOCKED` or `LOCKED AS PROVISIONAL SYNTHETIC-ONLY PROTOCOL` response.
+
+**Rationale:**
+- The package is locally verified and CI-green by owner confirmation, but a public release is not the scientific bottleneck. Protocol discipline should precede paper-facing evidence.
+
+**Follow-ups:**
+- Draft `docs/16_Paper_Protocol_Freeze.md` with locked, awaiting, and deferred fields.
+- Do not invent a construct, score matrix, empirical network, θ, δ, or β choice.
+
+---
+
 ## Reversal policy
 
 To reopen a LOCKED item: new dated entry here stating what changes and why. Chat agreement alone is not enough for future agents.

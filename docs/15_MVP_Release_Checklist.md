@@ -37,7 +37,7 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 ## Handoff evidence (2026-08-04)
 
 - **Implementation/evidence tree at handoff start:** `784c1be` (`main`, pushed and clean before this close-out)
-- **Package:** `1.1.0a1`; final verification must be recaptured after the close-out commit
+- **Package:** `1.1.0a1`; final verification recaptured below after the close-out documentation commit
 - **Automated evidence:** 121 tests passed; ruff clean; CLI version smoke passed
 - **2026-08-04 verification recapture:** 121 tests passed; ruff clean; `cvprofiles 1.1.0a1`; `v0.1` intact; import hygiene passed; museum present; CI green confirmed by Augusto via GitHub UI at `9ece618`.
 - **Synthetic evidence:** `reports/summaries/v1_1_package_synth_summary.json`

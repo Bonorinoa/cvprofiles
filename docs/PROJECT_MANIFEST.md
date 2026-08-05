@@ -4,7 +4,7 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v1_1_handoff_ready
+status: v1_1_verified_dev_protocol_draft_open
 version: "0.1.0"          # last tagged symbolization
 dev_version: "1.1.0a1"    # current dev package version (no tag)
 target_version: "1.1.0"   # v1.1 inference layer (not yet tagged)
@@ -38,6 +38,8 @@ v1_1:
   evidence_summary: reports/summaries/v1_1_package_synth_summary.json
   evidence_parent_sha: 098e2fa
   handoff: no_tag_no_pypi_release_review_owns_release
+  protocol: docs/16_Paper_Protocol_Freeze.md
+  protocol_status: gate_b_open
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
@@ -60,6 +62,7 @@ docs:
     - docs/12_Decision_Engineering_Log.md
     - docs/13_Evaluations_Log.md
     - docs/14_Researcher_Input_Guide.md
+    - docs/16_Paper_Protocol_Freeze.md
   live:
     - docs/12_Decision_Engineering_Log.md
     - docs/13_Evaluations_Log.md

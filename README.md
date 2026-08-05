@@ -64,7 +64,7 @@ Start here, then read in order:
 
 ### Remaining backlog
 
-- **Paper-facing protocol freeze:** construct, score matrix, menu, researcher-authored \(R\), \(\theta\), \(\delta\), \(\beta\), and evidence posture
+- **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored \(R\), \(\theta\), \(\delta\), \(\beta\), and evidence posture
 - **M10 / H5:** one public baseline — boring, heavily documented association study (USER-authored network only; choice deferred)
 - **v1.2 candidates:** \(\delta\)-grid, `mean_order`/`rank_agree` evaluators, `ols_coef`, and LaTeX report
 
