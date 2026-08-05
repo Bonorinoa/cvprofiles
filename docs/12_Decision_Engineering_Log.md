@@ -700,3 +700,18 @@ summary `reports/summaries/h5_trust_evidence_summary.json`; frozen inputs
 
 **Boundary:** tag `v1.1.0` and PyPI publication remain Augusto + release-review
 decisions; nothing tagged or published.
+
+---
+
+## 2026-08-04 — v1.1.0 tagged (MVP release symbolization)
+
+**Decision (dated, Augusto explicit):** "let's tag this baby" — create and push
+the annotated `v1.1.0` tag symbolizing the MVP: v1.0 thin spine + v1.1
+bootstrap/θ-grid inference layer + H5 Trust preliminary paper-facing evidence
++ packaging/CI fixes.
+
+**Convention:** tag-as-symbolization (v0.1 precedent). The wheel on the tag
+remains dev `1.1.0a1`; PyPI publication is a separate decision with version
+alignment at publish time.
+
+**Boundary:** `v0.1` untouched; no PyPI publish; no further tag moves.

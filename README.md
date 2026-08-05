@@ -6,8 +6,8 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **v0.1.0** tagged (methods KB + museum PoC); dev package `1.1.0a1` (v1.1 inference layer shipped on `main`; release review pending) |
-| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 + v1.1 inference layer merged; protocol draft locked **provisional synthetic-only**; H5 Trust design locked (`docs/17`), **first frozen run accepted as preliminary paper-facing evidence** (n=35, [L,U]=[0.371,0.624]); release still gated |
+| **Version** | **v0.1** tagged (methods KB + museum PoC); **v1.1.0 tagged** (MVP: spine + inference layer + H5 Trust evidence); dev package `1.1.0a1`; PyPI publication pending |
+| **Status** | Public repo live; tags `v0.1` @ `fb62b48` and **`v1.1.0`** (MVP, 2026-08-04) frozen; protocol draft locked **provisional synthetic-only**; H5 Trust design locked (`docs/17`), first frozen run accepted as **preliminary paper-facing evidence** (n=35, [L,U]=[0.371,0.624]); PyPI publication pending |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
 | **License** | MIT |

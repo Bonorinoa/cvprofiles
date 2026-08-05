@@ -4,9 +4,9 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
-## [Unreleased]
+## [1.1.0] — 2026-08-04 (MVP tag `v1.1.0`; PyPI publication separate)
 
-### Shipped on `main` (v1.1 dev package `1.1.0a1`; release review pending)
+### Engine — v1.1 inference layer (shipped on `main` as dev `1.1.0a1`)
 
 - Bootstrap over observational units (percentile band over non-empty replicates; empty/degenerate counts reported) — **M6 inference layer**
 - Deterministic θ-grid sensitivity surface (diagnostic; λ scales threshold magnitudes only; headline stays λ=1.0; grid excluded from freeze preimage)
@@ -32,6 +32,18 @@ Format: keep newest first.
 - **Packaging fix:** removed duplicate hatchling force-include that broke `uv build` (report.html.j2 added twice); wheel now builds cleanly
 - **Wheel verified from a fresh venv:** template packaged, console script works, H5 run reproduces bit-identical M\* and [L,U]
 - Release checklist recaptured: 157 tests passed, ruff/mypy clean, `v0.1` intact; tag `v1.1.0` and PyPI publication remain Augusto + release-review decisions
+
+### Tag `v1.1.0` (2026-08-04)
+
+- Annotated tag `v1.1.0` created and pushed (Augusto's explicit decision) — symbolizes the MVP: v1.0 spine + v1.1 inference layer + H5 Trust preliminary evidence + packaging/CI fixes
+- Tag-as-symbolization convention (v0.1 precedent): wheel remains dev `1.1.0a1`; PyPI publication is a separate decision with version alignment at publish time
+
+## [Unreleased]
+
+### Planned
+
+- Measure discipline: δ-grid, evaluator registry growth (`mean_order`/`rank_agree`/`ols_coef`), θ-anchor documentation discipline
+- H5 robustness checks + extensions (v2.0 roadmap)
 
 ## [1.0.0a1] — 2026-08-01 (spine shipped on `main`)
 

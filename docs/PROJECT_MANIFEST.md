@@ -4,16 +4,18 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v1_1_verified_dev_h5_trust_preliminary_evidence_approved_release_gated
-version: "0.1.0"          # last tagged symbolization
-dev_version: "1.1.0a1"    # current dev package version (no tag)
-target_version: "1.1.0"   # v1.1 inference layer (not yet tagged)
+status: v1_1_tagged_mvp_release_posture_complete_pypi_pending
+version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
+dev_version: "1.1.0a1"    # current dev package version (wheel on the tag)
+target_version: "1.1.0"   # v1.1 MVP tag (2026-08-04); PyPI publish is separate
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
 github: https://github.com/Bonorinoa/cvprofiles
 tag_v0_1: v0.1            # frozen forever at fb62b48 — do not move/retag
 tag_v0_1_sha: fb62b48
+tag_v1_1: v1.1.0           # MVP tag 2026-08-04 — do not move/retag
+tag_v1_1_sha: 97509a9
 
 poc:
   script: evals/synthetic/v0_poc.py
