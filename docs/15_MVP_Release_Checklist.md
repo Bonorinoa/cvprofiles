@@ -31,7 +31,7 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 - [x] Local CI-equivalent re-verified: **157 passed**; ruff clean; mypy clean (28 files); `cvprofiles 1.1.0a1`; `v0.1` intact
 - [x] H5 Trust first frozen run (n=35) accepted as **preliminary paper-facing evidence** (docs/16 §8 run decision; docs/12; `reports/summaries/h5_trust_evidence_summary.json`)
 - [x] **Packaging:** `uv build` wheel + sdist build cleanly (removed duplicate force-include); wheel installed in a fresh venv → CLI version smoke, template packaged, H5 run reproduces bit-identical M\* / [L,U]
-- [ ] Push `main` (5 commits) + CI green on the new head — **in progress / Augusto-directed release posture**
+- [x] Push `main` + CI green on the new head — `fc426fe` **success** (py3.11 + py3.12; mypy fix for numpy 2.5.1 PEP 695 stubs)
 - [ ] Tag `v1.1.0` decision — **Augusto + release-review only**
 - [ ] PyPI publication decision — **Augusto only**
 

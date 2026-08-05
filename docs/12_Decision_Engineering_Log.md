@@ -683,3 +683,20 @@ this is the `docs/16` §8 run decision for this designated evaluation.
 **Artifacts:** proof `evals/h5_trust/proof_summary.json` (auditor exit 0);
 summary `reports/summaries/h5_trust_evidence_summary.json`; frozen inputs
 `evals/h5_trust/data/scores.csv` + `score_manifest.json`.
+
+---
+
+## 2026-08-04 — Release posture: push + CI fix (mypy target 3.12)
+
+**Decision (recorded):**
+- Pushed `main` to origin (`1e8f4a1..fc426fe`) as part of the Augusto-directed
+  release posture; tree synced, CI green on the new head.
+- **CI root cause found:** uv.lock resolves numpy 2.5.1 for Python >=3.12; its
+  stubs use PEP 695 `type` statements, which mypy rejects when
+  `python_version="3.11"`. Fix: `[tool.mypy] python_version = "3.12"`
+  (superset target; source is 3.11-compatible). Verified locally against the
+  exact failing combination and confirmed by CI (`fc426fe` success, both jobs).
+  The red runs on `50d5fb2`/`1e8f4a1`/`1e06f3c` were this same issue.
+
+**Boundary:** tag `v1.1.0` and PyPI publication remain Augusto + release-review
+decisions; nothing tagged or published.
