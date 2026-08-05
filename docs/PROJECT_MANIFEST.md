@@ -15,7 +15,7 @@ github: https://github.com/Bonorinoa/cvprofiles
 tag_v0_1: v0.1            # frozen forever at fb62b48 — do not move/retag
 tag_v0_1_sha: fb62b48
 tag_v1_1: v1.1.0           # MVP tag 2026-08-04 — do not move/retag
-tag_v1_1_sha: f1cc04e
+tag_v1_1_sha: fce31c8
 
 poc:
   script: evals/synthetic/v0_poc.py
