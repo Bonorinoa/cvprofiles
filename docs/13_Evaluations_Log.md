@@ -415,4 +415,6 @@ Same branch and audit; `verify_audit.py` extended pre-merge with three probes
 - Institutional confidence is *negatively* correlated with rule of law (−0.125): the network discriminates a distinct construct, as designed.
 - Bootstrap: 1 in ~6 country resamples yields an empty admissible set — honest measurement uncertainty.
 
-**Boundary:** first-run evidence only. **Not a paper claim.** Paper-facing use requires Augusto's run decision (docs/16 §8) — freeze inputs, package version, and audit all verified; the empirical box is now exercised.
+**Status (2026-08-04):** **preliminary paper-facing evidence** — owner-approved
+checkpoint per docs/12 + docs/16 §8. `reports/summaries/h5_trust_evidence_summary.json`
+is the tracked summary. Final paper lock and submission claims remain Augusto's.

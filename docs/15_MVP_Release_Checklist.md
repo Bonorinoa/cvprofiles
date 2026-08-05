@@ -26,6 +26,13 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 - [x] Museum present and unimported; no LLM in package import graph
 - [x] `docs/12` + `docs/13` updated for the candidate
 
+## Recapture (2026-08-04, post-H5-trust)
+
+- [x] Local CI-equivalent re-verified: **157 passed**; ruff clean; mypy clean (28 files); `cvprofiles 1.1.0a1`; `v0.1` intact
+- [x] H5 Trust first frozen run (n=35) accepted as **preliminary paper-facing evidence** (docs/16 §8 run decision; docs/12; `reports/summaries/h5_trust_evidence_summary.json`)
+- [ ] Tag `v1.1.0` decision — **Augusto + release-review only**
+- [ ] PyPI publication decision — **Augusto only**
+
 ## Scope / narrative checks
 
 - [x] Bootstrap/θ-grid framed as **diagnostic / conservative**, not sharp-PI claims

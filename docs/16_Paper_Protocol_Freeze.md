@@ -131,6 +131,8 @@ Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, e
 
 **What this opens:** the empirical box for this **designated evaluation**. `SCORE`/`RESTRICT`/`IDENTIFY`/`REPORT` runs for the trust design may proceed once (1) frozen scores + manifest built from raw public files, (2) pinned seed + package version, (3) independent audit exit 0, (4) Augusto's run decision.
 
+**Run decision (2026-08-04):** Augusto granted **preliminary paper-facing evidence** approval for the first frozen build (n=35). Headline checkpoint: M\*={m_trust_general, m_trust_in_group}, [L,U]=[0.371,0.624], FA=0, cold H4; diagnostics: θ-grid empties at λ≥1.5, bootstrap band [0.174,0.752] with 17.5% empty replicates. Tracked summary: `reports/summaries/h5_trust_evidence_summary.json`. This is a checkpoint, not a release: final paper lock, tag, PyPI, and push remain Augusto's.
+
 **What it does NOT authorize:** any other H5/empirical run, engine change, tag, PyPI publication, push, or a `docs/13` evidence claim by implication. The provisional synthetic-only protocol and the MC50 table (§4) are unchanged. All other §3 fields remain **AWAITING AUGUSTO** for any future design.
 
 ## Provenance rule

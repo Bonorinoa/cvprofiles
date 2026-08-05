@@ -7,7 +7,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 | | |
 |---|---|
 | **Version** | **v0.1.0** tagged (methods KB + museum PoC); dev package `1.1.0a1` (v1.1 inference layer shipped on `main`; release review pending) |
-| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 + v1.1 inference layer merged; protocol draft locked **provisional synthetic-only**; H5 Trust design **locked** (`docs/17`), empirical run gated |
+| **Status** | Public repo live; tag `v0.1` @ `fb62b48` frozen; M1–M9 + v1.1 inference layer merged; protocol draft locked **provisional synthetic-only**; H5 Trust design locked (`docs/17`), **first frozen run accepted as preliminary paper-facing evidence** (n=35, [L,U]=[0.371,0.624]); release still gated |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
 | **License** | MIT |
@@ -68,7 +68,7 @@ Start here, then read in order:
 ### Remaining backlog
 
 - **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored \(R\), \(\theta\), \(\delta\), \(\beta\), and evidence posture (synthetic-only portion currently locked provisional)
-- **M10 / H5:** country-level generalized trust baseline — design **LOCKED** (`docs/17`); build/run gated on frozen inputs + independent audit + Augusto's run decision
+- **M10 / H5:** country-level generalized trust baseline — design **LOCKED** (`docs/17`); first frozen run (n=35) accepted as **preliminary paper-facing evidence** (`reports/summaries/h5_trust_evidence_summary.json`); final paper lock + release remain Augusto's
 - **v1.2 candidates:** \(\delta\)-grid, `mean_order`/`rank_agree` evaluators, `ols_coef`, and LaTeX report
 
 See [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) for the locked v1.0 scope box and [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) for the v1.1 handoff checklist.

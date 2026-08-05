@@ -1,0 +1,139 @@
+{
+  "artifact": "h5_trust_evidence_summary",
+  "schema_version": "1",
+  "status": "preliminary_paper_facing_evidence",
+  "approved_by": "Augusto",
+  "approved_at": "2026-08-04",
+  "boundary": "Preliminary paper-facing evidence per docs/16 amendment 2026-08-04 and docs/12 entry. Final paper lock and submission claims remain Augusto's; this is a checkpoint, not a release.",
+  "design": "docs/17_H5_Trust_Design.md",
+  "package_version": "1.1.0a1",
+  "parent_sha": "cd6455d6e174d347b2f4298d379d2a12b930cef6",
+  "scores_hash": "5e8d1afcfef8dd2be4f23dde0f4f7b41f9372acbe2ec66bd01c712c94fb3ffdf",
+  "network_hash": "0dab2afaedd40dc295efe04b4faf4d606b2f5089cf0a83c38b1daaf9aa9c0646",
+  "beta_hash": "1959ede5aaf9dd4a1866f642577f7d5c50d61676de50d6ff58c1671447c1555d",
+  "universe": {
+    "wvs_countries": 66,
+    "with_gps": 42,
+    "with_aux": 42,
+    "after_floor": 42,
+    "dropped_missing_coverage": [
+      "GTM",
+      "IND",
+      "IRQ",
+      "JOR",
+      "MAR",
+      "NIC",
+      "VEN"
+    ]
+  },
+  "settings": {
+    "seed": 20260804,
+    "floor": 200,
+    "policy": "none",
+    "delta": 0.0,
+    "weights": "unweighted",
+    "aux_years": [
+      2015,
+      2019
+    ]
+  },
+  "n_countries": 35,
+  "gates": {
+    "FA_zero": true,
+    "cold_H4": true,
+    "artifacts_present": true,
+    "empty_honesty": false
+  },
+  "designed_valid": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_institution",
+    "m_trust_out_group"
+  ],
+  "designed_invalid": [
+    "m_noise",
+    "m_share_agriculture"
+  ],
+  "M_star": [
+    "m_trust_general",
+    "m_trust_in_group"
+  ],
+  "L": 0.37075446228800285,
+  "U": 0.62389053803067,
+  "empty": false,
+  "rejected": {
+    "m_trust_out_group": [
+      "r_corr_min_gps_trust"
+    ],
+    "m_trust_institution": [
+      "r_corr_min_rule_of_law"
+    ],
+    "m_noise": [
+      "r_corr_min_gps_trust",
+      "r_corr_min_rule_of_law",
+      "r_corr_sign_gini_neg"
+    ],
+    "m_share_agriculture": [
+      "r_corr_min_gps_trust",
+      "r_corr_min_rule_of_law",
+      "r_corr_sign_gini_neg"
+    ]
+  },
+  "cold_match": true,
+  "failures": [],
+  "theta_grid": {
+    "headline_lambda": 1.0,
+    "rows": [
+      {
+        "lambda": 0.5,
+        "n_admissible": 3,
+        "admissible": [
+          "m_trust_general",
+          "m_trust_in_group",
+          "m_trust_out_group"
+        ],
+        "empty": false,
+        "L": 0.37075446228800285,
+        "U": 0.62389053803067
+      },
+      {
+        "lambda": 1.0,
+        "n_admissible": 2,
+        "admissible": [
+          "m_trust_general",
+          "m_trust_in_group"
+        ],
+        "empty": false,
+        "L": 0.37075446228800285,
+        "U": 0.62389053803067
+      },
+      {
+        "lambda": 1.5,
+        "n_admissible": 0,
+        "admissible": [],
+        "empty": true,
+        "L": null,
+        "U": null
+      },
+      {
+        "lambda": 2.0,
+        "n_admissible": 0,
+        "admissible": [],
+        "empty": true,
+        "L": null,
+        "U": null
+      }
+    ]
+  },
+  "bootstrap": {
+    "method": "efron_units_only",
+    "n_boot": 80,
+    "band_L": 0.17384221580118536,
+    "band_U": 0.7524807939140523,
+    "empty_replicate_rate": 0.175,
+    "degenerate_replicate_rate": 0.0
+  },
+  "proof_artifact": "evals/h5_trust/proof_summary.json",
+  "run_artifacts": "evals/h5_trust/runs_verify/default",
+  "diagnostic_run": "reports/runs/h5_trust_diag"
+}

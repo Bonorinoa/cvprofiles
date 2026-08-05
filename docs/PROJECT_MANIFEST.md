@@ -4,7 +4,7 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v1_1_verified_dev_protocol_provisional_synthetic_locked_h5_trust_design_locked_run_gated
+status: v1_1_verified_dev_h5_trust_preliminary_evidence_approved_release_gated
 version: "0.1.0"          # last tagged symbolization
 dev_version: "1.1.0a1"    # current dev package version (no tag)
 target_version: "1.1.0"   # v1.1 inference layer (not yet tagged)
@@ -45,14 +45,19 @@ v1_1:
 
 h5_trust:
   design: docs/17_H5_Trust_Design.md
-  status: design_locked_run_gated
-  owner: Augusto
+  status: preliminary_paper_facing_evidence
+  evidence_summary: reports/summaries/h5_trust_evidence_summary.json
+  evidence_generator: tools/make_h5_trust_summary.py
   approved: 2026-08-04
+  owner: Augusto
   construct: country_level_generalized_trust
   data: wvs_wave7_gps_country_ab_2country_probe
   network: corr_min(gps_trust,0.3)+corr_min(rule_of_law,0.3)+corr_sign(gini,-1,0.1)
   beta: corr_y_on_log_gdp_pc
   delta: 0.0
+  n_countries: 35
+  M_star: [m_trust_general, m_trust_in_group]
+  range: [0.37075446228800285, 0.62389053803067]
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
