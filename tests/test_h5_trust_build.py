@@ -162,7 +162,16 @@ def test_parse_wgi_sheet_maps_legacy_codes() -> None:
     header = pd.DataFrame(
         [
             [np.nan, np.nan, 2015, 2015, 2015, 2016, 2016, 2016],
-            ["Country/Territory", "Code", "Estimate", "StdErr", "NumSrc", "Estimate", "StdErr", "NumSrc"],
+            [
+                "Country/Territory",
+                "Code",
+                "Estimate",
+                "StdErr",
+                "NumSrc",
+                "Estimate",
+                "StdErr",
+                "NumSrc",
+            ],
         ]
     )
     data = pd.DataFrame(
