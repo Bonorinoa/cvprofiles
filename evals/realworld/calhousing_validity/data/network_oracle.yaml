@@ -1,0 +1,15 @@
+schema_version: '1'
+name: calhousing_oracle_incidental
+delta: 0.0
+restrictions:
+- id: r_corr_min_aux
+  type: corr_min
+  theta: 0.15
+  params:
+    variable: v_aux
+- id: r_corr_sign_aux
+  type: corr_sign
+  theta: 0.05
+  params:
+    variable: v_aux
+    sign: 1

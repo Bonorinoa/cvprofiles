@@ -323,6 +323,57 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 
 ---
 
+## 2026-08-04 — Intermediate real-world audit: calhousing_validity (tabular)
+
+- **branch:** `feat/intermediate-calhousing` (review pending; not merged)
+- **proof:** `evals/realworld/calhousing_validity/proof_summary.json` (from `verify_audit.py`, exit **0**)
+- **package / git:** `cvprofiles==1.1.0a1`
+- **data:** sklearn `fetch_california_housing` (n=20640, tabular; offline-cached after one fetch)
+- **construct:** incidental "housing quality / desirability" (agent-authored; **NOT** paper H5)
+- **network:** incidental oracle `corr_min(v_aux,0.15)` + `corr_sign(v_aux,+,0.05)`; harsh `corr_min` θ=0.9999 (above max sample corr ≈0.9985)
+- **β:** `corr_y`; bootstrap/θ-grid off
+- **menu:** 6 designed valid measures + 2 designed invalid (`m_noise`, `m_geo_dict` longitude proxy)
+
+| Check | Result |
+|---|---|
+| FA (`m_noise`, `m_geo_dict` in M*) | **0** |
+| Oracle M* | all 6 designed valids |
+| Oracle [L,U] | **[0.1658, 0.9514]** (min/max B* only) |
+| Harsh empty | **True** (exit 0; HTML empty callout) |
+| Cold H4 freeze core | **True** |
+| Same scores_hash oracle/harsh | **True** |
+| Small-n (n=200) clean run | **True** (oracle nonempty; harsh empty) |
+| NaN fail-loud | **True** (`ScoreError`: non-finite measure column) |
+
+**Interpretation:**
+1. The spine works on a non-text, skewed-feature matrix with a larger menu — domain-agnostic claim supported at package level.
+2. `[L,U]` width ≈0.79 is measurement fragility, a feature not a failure.
+3. **Small-n admission flips:** `m_geo_dict` (longitude proxy) is admitted at n=200 but rejected at n=20640. Sampling variation changes admission; near-miss behavior is not sample-size-invariant. Not an engine failure; pre-register sample-size posture before real evidence.
+4. Missingness fails loud at SCORE — the engine does not impute; upstream cleaning is researcher-owned.
+5. **Not H5 / not a paper result.** Composite measures are hand-weighted, not LLM outputs.
+
+---
+
+## 2026-08-04 — calhousing probe supplements (thin samples, z-score, raw skew)
+
+Same branch and audit; `verify_audit.py` extended pre-merge with three probes
+(exit **0**; all gates true).
+
+- **Thin-sample ladder (n=200, n=50):** clean runs; harsh empty holds at both;
+  admission shrinks and flips with n. n=200 admits `m_geo_dict` (longitude
+  proxy) and n=50 additionally drops `m_age_pref`; both are rejected at full n.
+  Range narrows with fewer survivors (n=50 → [0.768, 0.973]).
+- **z-score policy:** `M*` and `[L,U]` identical to the `none` run within 1e-9.
+  Normalization is identification-invariant on this matrix.
+- **Raw heavy-skew variant (no log):** clean run, valid range, but `m_afford_raw`
+  is rejected (corr_aux 0.057 vs θ=0.15) because raw AveOccup outliers dominate
+  the aux composite. Transform choice changes admission.
+- **Interpretation:** admission depends on sample size AND upstream feature
+  transformation, not only on the network. Pre-register both for real evidence.
+  These are capability boundaries, not engine failures.
+
+---
+
 ## Index of scenarios (planned)
 
 | Scenario | First expected log era |

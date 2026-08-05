@@ -564,3 +564,36 @@ the tool command, not remembered numbers.
 
 **Follow-ups:** documentation reconciliation (README/manifest/open questions) and
 the human-only release/protocol decisions remain open.
+
+---
+
+## 2026-08-04 — Intermediate tabular audit authorized: calhousing_validity
+
+**Decision (LOCKED):**
+- Augusto authorized an intermediate (non-H5) real-world stress on California
+  housing (sklearn `fetch_california_housing`, n=20640, tabular), following the
+  spam-audit pattern but testing the engine's domain-agnosticism on non-text,
+  skewed features with a larger menu (J=8).
+- Agent-authored incidental construct "housing quality / desirability" and
+  incidental oracle R: `corr_min(v_aux, 0.15)` + `corr_sign(v_aux, +, 0.05)`;
+  harsh contrast `corr_min(v_aux, 0.9999)`.
+- Lives on branch `feat/intermediate-calhousing`; no merge to `main` until
+  Augusto reviews.
+- Capability boundaries recorded in the audit README and a pointer in
+  `AGENTS.md` so future agents do not cite this lane as paper evidence.
+
+**Calibration note (harsh θ):** the first harsh θ=0.99 did not empty because
+`m_spacious_uncrowded` correlates ≈0.9985 with `v_aux` (both are log-composites
+of the same signals). Per the harsh-fixture rule, θ was set above the max sample
+statistic (0.9999). This is tightening a designed empty contrast, not loosening
+or chasing a gate; the oracle θ (0.15/0.05) was unchanged.
+
+**Findings (verify_audit.py exit 0):** FA=0; all 6 designed valids admitted;
+`[L,U]=[0.1658, 0.9514]`; harsh empty with first-class callout; cold H4; same
+scores_hash; small-n (n=200) clean but **admission flips** (`m_geo_dict`
+longitude proxy admitted at n=200, rejected at n=20640) — sampling variation,
+documented as a capability boundary; NaN in a measure column fails loud with
+`ScoreError` (engine does not impute).
+
+**Boundary:** intermediate only; not H5; no paper claim; no CI changes (sklearn
+remains an evals-only dependency, not in core package CI).

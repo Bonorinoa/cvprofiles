@@ -1,0 +1,9 @@
+schema_version: '1'
+name: calhousing_harsh_empty
+delta: 0.0
+restrictions:
+- id: r_corr_min_aux
+  type: corr_min
+  theta: 0.9999
+  params:
+    variable: v_aux
