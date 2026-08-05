@@ -15,7 +15,7 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 
 ## Must be green before promotion
 
-- [ ] GitHub Actions `ci` green on `main` (py3.11 + py3.12) — **remote status not observed here; release review must confirm**
+- [x] GitHub Actions `ci` green on `main` (py3.11 + py3.12) — **confirmed by Augusto via GitHub UI** at `9ece618` (not fetched by agent; release review may re-confirm)
 - [x] Local CI-equivalent: `uv run ruff check src tests tools` and `uv run pytest -q` — **121 passed**
 - [x] Package version smoke: `uv run cvprofiles --version` → `1.1.0a1`
 - [x] Mini fixture freeze golden matches current package version; `n_boot` is JSON `null` when bootstrap is off
@@ -39,6 +39,7 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 - **Implementation/evidence tree at handoff start:** `784c1be` (`main`, pushed and clean before this close-out)
 - **Package:** `1.1.0a1`; final verification must be recaptured after the close-out commit
 - **Automated evidence:** 121 tests passed; ruff clean; CLI version smoke passed
+- **2026-08-04 verification recapture:** 121 tests passed; ruff clean; `cvprofiles 1.1.0a1`; `v0.1` intact; import hygiene passed; museum present; CI green confirmed by Augusto via GitHub UI at `9ece618`.
 - **Synthetic evidence:** `reports/summaries/v1_1_package_synth_summary.json`
 - **Evidence generator:** `tools/v11_synth_summary.py`; summary generated against parent SHA `098e2fa`
 - **Evaluation log:** `docs/13_Evaluations_Log.md` v1.1 row

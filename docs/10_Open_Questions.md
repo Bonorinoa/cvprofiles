@@ -7,7 +7,7 @@
 | ID | Question | Options / notes | Blocking? |
 |---|---|---|---|
 | Q1 | Default slack tolerance \(\delta\) | `0` vs small positive; always grid-report | Soft for code; hard for H2 claims |
-| Q2 | Bootstrap endpoint procedure | Percentile on \(L,U\); projection; other conservative | **v1.1** (bootstrap deferred; not blocking v1.0) |
+| Q2 | Paper interpretation of the bootstrap band | Package semantics are locked in v1.1: pointwise percentile endpoints over non-empty replicates; all-empty ⇒ null band; degenerate replicates counted and excluded. Paper interpretation remains open. | Soft; paper protocol |
 | Q3 | First \(\beta\) in demos | **closed default:** `corr_y` | Soft reopen |
 | Q4 | Spearman / rank restrictions in MVP | Include vs defer | Soft |
 | Q5 | Reference-measure restrictions | Risk of dictionary privilege | Design taste |
@@ -18,7 +18,7 @@
 
 | ID | Question | Notes | Blocking? |
 |---|---|---|---|
-| Q8 | Headline CI metric thresholds | \(f_{\max}=0.05\) working; PoC FA=0. Bootstrap \(c_{\min}\) later | Soft; bootstrap layer is **v1.1** |
+| Q8 | Headline CI metric thresholds | \(f_{\max}=0.05\) working; PoC FA=0. Paper threshold and any bootstrap reporting bar remain open. | Soft; paper protocol |
 | Q9 | Paraphrase label | **closed:** valid | Soft reopen |
 | Q10 | Seed count for metric MC | 50 vs 200 | Soft |
 | Q11 | Mini fixture generation now vs M1 | Path reserved; content at M1 (v1.0 spine sprint) | In progress at M1 |
@@ -39,7 +39,7 @@
 | Q16 | Parquet required vs CSV OK | Both; parquet preferred | No |
 | Q17 | CLI name | `cvprofiles` / `cvp` | Soft |
 | Q18 | License | **MIT locked** (2026-08-01) | — |
-| Q19 | Package name on PyPI | `cvprofiles` availability unknown | Before publish |
+| Q19 | PyPI publication | Package name availability check returned HTTP 404; publication decision remains open. | Before publish |
 | Q20 | `AGENTS.md` timing | After M1 vs with first code | Soft |
 | Q21 | Parallel bootstrap | Serial MVP vs joblib later | No |
 
@@ -64,3 +64,5 @@
 | Q24 v0.1 before M1/git | Hygiene first; v0.1 exit 0 → local git OK | 2026-08-01 |
 | Git remote / public repo | **LIVE:** https://github.com/Bonorinoa/cvprofiles ; tag `v0.1` @ `fb62b48` | 2026-08-01 |
 | v1.0 scope / M6 | Thin spine; bootstrap/θ-grid deferred to v1.1; no M10 this sprint | 2026-08-01 |
+| v1.1 inference semantics | Units-only bootstrap and diagnostic θ-grid are shipped and locked; headline range remains \([L,U]=\min/\max B^*\) | 2026-08-04 |
+| Q19 name availability | `https://pypi.org/pypi/cvprofiles/json` returned HTTP 404; no publication attempted | 2026-08-04 |

@@ -12,7 +12,8 @@ Format: keep newest first.
 - Additive pipeline, CLI (`--n-boot`, `--theta-grid`), JSON/HTML audit panels, and stale-layer cleanup
 - Package-native battery and inference evidence: `reports/summaries/v1_1_package_synth_summary.json`
 - MVP release checklist: `docs/15_MVP_Release_Checklist.md` (feeds release-review chat)
-- PyPI name availability note (Q19) remains a handoff gate; publishing decision **not** in v1.1
+- Verification close-out: local ruff clean, 121 tests passed, version smoke and tag checks passed; GitHub Actions green confirmed by Augusto; no tag or PyPI publication attempted
+- PyPI name availability checked (HTTP 404); publication decision remains open and is **not** part of v1.1
 
 ## [1.0.0a1] — 2026-08-01 (spine shipped on `main`)
 

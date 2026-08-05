@@ -455,11 +455,28 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-04 — v1.1 verification close-out (local-only)
+
+**Decision:**
+- Augusto confirmed GitHub Actions `ci` green on `main` via the GitHub UI at `9ece618`; this is recorded as owner confirmation, not agent-fetched evidence.
+- Local verification was recaptured: ruff clean, **121 tests passed**, CLI version `1.1.0a1`, `v0.1` remains immutable, import hygiene passed, and the museum PoC remains present and unimported.
+- This close-out is documentation-only; no package code, tests, tools, version, goldens, or inference semantics changed.
+- v1.1 is treated as a shipped and verified development artifact on `main`. No v1.1 tag or PyPI publication has been made; release posture remains Augusto/release-review owned.
+
+**Rationale:**
+- The implementation and local gates were already complete. Owner-confirmed remote CI closes the verification gap without silently converting a development artifact into a public release.
+
+**Follow-ups:**
+- Gate A: decide whether to keep `1.1.0a1` as the dev artifact while protocol/evidence work proceeds, prepare a release-review handoff, or defer release posture.
+- Do not begin the paper-facing protocol freeze until the release posture is acknowledged.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.
-- Tag/release live at `fb62b48`; **`main` @ `3be6367`** (M1–M9 + intermediate spam audit merged).
-- **v1.0 spine shipped** on main; **v1.1 in progress:** bootstrap + θ-grid (M6) + MVP evidence.
+- Tag/release live at `fb62b48`; **`main` @ `9ece618`** (M1–M9 + intermediate spam audit + v1.1 inference layer and evidence merged).
+- **v1.0 spine shipped** on main; **v1.1 shipped and locally verified; CI green per Augusto’s GitHub UI confirmation:** bootstrap + θ-grid (M6) + MVP evidence; tag/PyPI remain pending.
 - **run_id / freeze hash algorithm LOCKED at M1**; version bumps move run_id (golden refresh in same commit).
 - **SCORE normalization LOCKED:** default `none`; optional `zscore_measures` on measures only.
 - **RESTRICT/IDENTIFY thin spine live:** corr_min/corr_sign + corr_y.

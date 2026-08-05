@@ -55,10 +55,18 @@ Start here, then read in order:
 4. **Synth harness re-impl** under package/tests (H1a / H2 / H3 / H4; H1_latent diagnostic)  
 5. **Installable package + minimal CI**
 
-### Later
+### v1.1 (shipped on `main` — verified dev artifact)
 
-- **v1.1:** bootstrap + \(\theta\)-grid  
+- Units-only bootstrap with conservative, additive percentile diagnostics
+- Deterministic \(\theta\)-grid sensitivity surface; headline remains \([L,U]=\min/\max B^*\)
+- Pipeline, CLI, JSON/HTML audit panels, package-native evidence, and minimal CI
+- Version `1.1.0a1`; tag and PyPI publication remain open release decisions
+
+### Remaining backlog
+
+- **Paper-facing protocol freeze:** construct, score matrix, menu, researcher-authored \(R\), \(\theta\), \(\delta\), \(\beta\), and evidence posture
 - **M10 / H5:** one public baseline — boring, heavily documented association study (USER-authored network only; choice deferred)
+- **v1.2 candidates:** \(\delta\)-grid, `mean_order`/`rank_agree` evaluators, `ols_coef`, and LaTeX report
 
 See [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) for the locked v1.0 scope box and [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) for the v1.1 handoff checklist.
 
