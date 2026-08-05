@@ -48,11 +48,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build]
-# hatchling auto-discovers src/cvprofiles (src-layout)
-
-[tool.hatch.build.targets.wheel.force-include]
-"src/cvprofiles/report/templates" = "cvprofiles/report/templates"
-
+# hatchling auto-discovers src/cvprofiles (src-layout) and includes all files
+# under the package dir (including report/templates/*.j2) in the wheel. No
+# force-include: it duplicated report.html.j2 and broke `uv build`.
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]

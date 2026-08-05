@@ -7,6 +7,7 @@ Format: keep newest first.
 ## [Unreleased]
 
 ### Shipped on `main` (v1.1 dev package `1.1.0a1`; release review pending)
+
 - Bootstrap over observational units (percentile band over non-empty replicates; empty/degenerate counts reported) — **M6 inference layer**
 - Deterministic θ-grid sensitivity surface (diagnostic; λ scales threshold magnitudes only; headline stays λ=1.0; grid excluded from freeze preimage)
 - Additive pipeline, CLI (`--n-boot`, `--theta-grid`), JSON/HTML audit panels, and stale-layer cleanup
@@ -17,6 +18,20 @@ Format: keep newest first.
 - Independent MC50 proof audit: `tools/verify_v11_protocol_synth_mc50.py` + `tests/test_v11_protocol_synth_mc50_audit.py` validate the provisional synthetic-only protocol table in a read-only pass
 - Strict typing enforcement: `uv run mypy src` is green and enforced in CI; `ruff` now also lints `tools/` in CI
 - Protocol/release documentation reconciliation: README/manifest/open-questions now reflect the provisional synthetic-only lock (`docs/16`), the MC50 proof table, and the new `AGENTS.md`; release posture unchanged
+
+### H5 Trust — first paper-facing evaluation (2026-08-04)
+
+- **Design lock:** `docs/17_H5_Trust_Design.md` — country-level generalized trust; WVS7 × GPS × WDI/WGI; pinned network (gps_trust 0.3 / rule_of_law 0.3 / gini −0.1); δ=0; β=corr_y on log GDP pc; claims boundary
+- **First frozen build:** n=35 countries; `evals/h5_trust/build_dataset.py` (masking, aggregation, coverage rule, canonical hashes); reproducible `--fetch-wdi`/`--fetch-wgi`
+- **Preliminary paper-facing evidence (owner-approved 2026-08-04):** M\*={m_trust_general, m_trust_in_group}, [L,U]=[0.371, 0.624], FA=0, cold H4; θ-grid empties at λ≥1.5; bootstrap band [0.174, 0.752] with 17.5% empty replicates
+- Tracked summary: `reports/summaries/h5_trust_evidence_summary.json`; auditors `tools/verify_h5_trust.py` + `tools/verify_v11_protocol_synth_mc50.py`
+- **Boundary:** preliminary checkpoint; final paper lock, tag, PyPI, and push remain Augusto's
+
+### Release posture (2026-08-04)
+
+- **Packaging fix:** removed duplicate hatchling force-include that broke `uv build` (report.html.j2 added twice); wheel now builds cleanly
+- **Wheel verified from a fresh venv:** template packaged, console script works, H5 run reproduces bit-identical M\* and [L,U]
+- Release checklist recaptured: 157 tests passed, ruff/mypy clean, `v0.1` intact; tag `v1.1.0` and PyPI publication remain Augusto + release-review decisions
 
 ## [1.0.0a1] — 2026-08-01 (spine shipped on `main`)
 
