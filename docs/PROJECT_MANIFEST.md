@@ -79,7 +79,7 @@ directories:
   - docs/
 
 agents:
-  AGENTS.md: deferred  # create before handing repo to coding agents
+  AGENTS.md: present  # created 2026-08-04; read before handing repo to coding agents
   soul_authority: ~/.hermes/profiles/cvprofiles/SOUL.md
 
 locks:
