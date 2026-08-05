@@ -445,6 +445,16 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 ---
 
+## 2026-08-04 — v1.1 implementation/evidence close-out; release review pending
+
+- **A–F implementation/evidence:** `cfee00e` → `d35e657` → `dddc681` → `283ef27` → `098e2fa` → `784c1be`; `main` pushed and clean at `784c1be` before this documentation close-out.
+- **Package:** `1.1.0a1`; local final pre-close verification was ruff clean, **121 passed**, CLI version smoke passed, `v0.1` remained immutable at `fb62b48bcb704f60eee7d6641ed0a344eb72bfda`.
+- **Evidence:** `reports/summaries/v1_1_package_synth_summary.json`; generated against parent `098e2fa`, with package-native battery and inference probes audited in `docs/13`.
+- **Q19:** PyPI JSON endpoint returned HTTP 404 (name appears available); no publication attempted.
+- **Boundary:** no v1.1 tag, no PyPI release, no USER empirical network, no H5, no sharp-PI claim, and no δ-grid. Release-review chat + Augusto own promotion/tag decisions. GitHub Actions status was not observed locally and remains for release review to confirm.
+
+---
+
 ## Open Engineering Notes
 
 - Stack/license/package name confirmed; Q22/Q23/Q24 closed; v0.1 green and **public**.

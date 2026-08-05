@@ -4,7 +4,7 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v1_1_in_progress
+status: v1_1_handoff_ready
 version: "0.1.0"          # last tagged symbolization
 dev_version: "1.1.0a1"    # current dev package version (no tag)
 target_version: "1.1.0"   # v1.1 inference layer (not yet tagged)
@@ -29,11 +29,15 @@ v1_0:
   range: min_max_B_star   # no bootstrap / θ-grid in v1.0
 
 v1_1:
-  scope: deferred_M6_inference_layer
+  scope: M6_inference_layer_shipped_handoff_ready
   bootstrap: units_only_percentile_nonempty_replicates
   theta_grid: diagnostic_scale_multipliers
   headline_range: min_max_B_star_unchanged
   build_order: [version_bump_atomic, bootstrap, theta_grid, wiring, evidence, handoff]
+  implementation_sha: 784c1be
+  evidence_summary: reports/summaries/v1_1_package_synth_summary.json
+  evidence_parent_sha: 098e2fa
+  handoff: no_tag_no_pypi_release_review_owns_release
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
@@ -82,4 +86,6 @@ locks:
   - v0_1_tag_immovable
   - museum_poc_unimported
   - v1_0_no_bootstrap
+  - v1_1_diagnostics_additive
+  - v1_1_grid_excluded_from_freeze_preimage
 ```

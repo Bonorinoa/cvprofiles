@@ -80,7 +80,7 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
-- **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit, merged.
+- **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit + v1.1 inference layer, merged.
 - **v1.1 shipped on `main` as dev package `1.1.0a1`:** units-only bootstrap + θ-grid sensitivity (diagnostic; headline \([L,U]=\min/\max B^*\) unchanged); release-review handoff pending.
 - **Not yet:** PyPI release; any tag (release-review chat + Augusto decide).
 

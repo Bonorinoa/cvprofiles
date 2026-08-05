@@ -15,23 +15,38 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 
 ## Must be green before promotion
 
-- [ ] GitHub Actions `ci` green on `main` (py3.11 + py3.12)
-- [ ] `uv sync --extra dev && uv run ruff check src tests && uv run pytest -q` green
-- [ ] Mini fixture SCORE→REPORT smoke green; golden hashes match **current** `package_version`
-- [ ] Synth battery green (H1a FA=0, H1b=1, H3 empty honesty, H4 cold)
-- [ ] v1.1: bootstrap band computed; empty-replicate policy honored; headline `[L,U]` unchanged
-- [ ] v1.1: θ-grid diagnostic surface present; **no** auto-loosening of θ
-- [ ] Tag `v0.1` still `fb62b48`
-- [ ] Museum present and unimported; no LLM in package import graph
-- [ ] `docs/12` + `docs/13` updated for the candidate
+- [ ] GitHub Actions `ci` green on `main` (py3.11 + py3.12) — **remote status not observed here; release review must confirm**
+- [x] Local CI-equivalent: `uv run ruff check src tests tools` and `uv run pytest -q` — **121 passed**
+- [x] Package version smoke: `uv run cvprofiles --version` → `1.1.0a1`
+- [x] Mini fixture freeze golden matches current package version; `n_boot` is JSON `null` when bootstrap is off
+- [x] Synth battery green (H1a FA=0, H1b=1, H3 empty honesty, H4 cold); proof summary audited
+- [x] v1.1 bootstrap band computed; empty/degenerate policy honored; headline `[L,U]` unchanged
+- [x] v1.1 θ-grid diagnostic surface present; λ=1.0 equals headline; no auto-loosening; grid excluded from freeze preimage
+- [x] Tag `v0.1` still resolves to `fb62b48bcb704f60eee7d6641ed0a344eb72bfda`
+- [x] Museum present and unimported; no LLM in package import graph
+- [x] `docs/12` + `docs/13` updated for the candidate
 
 ## Scope / narrative checks
 
-- [ ] Bootstrap/θ-grid framed as **diagnostic / conservative**, not sharp-PI claims
-- [ ] Headline range still `min/max B*`; inference layers are additive metadata
-- [ ] Spam audit framed **intermediate only** (not H5); agent-authored R labeled as such
-- [ ] No force-push / no rewrite of `v0.1`
-- [ ] PyPI name availability checked (Q19) before any publish intent
+- [x] Bootstrap/θ-grid framed as **diagnostic / conservative**, not sharp-PI claims
+- [x] Headline range still `min/max B*`; inference layers are additive metadata
+- [x] Spam audit framed **intermediate only** (not H5); agent-authored R labeled as such
+- [x] No force-push / no rewrite of `v0.1`
+- [x] PyPI name availability checked (Q19): `https://pypi.org/pypi/cvprofiles/json` returned HTTP **404**; no publish attempted
+
+## Handoff evidence (2026-08-04)
+
+- **Implementation/evidence tree at handoff start:** `784c1be` (`main`, pushed and clean before this close-out)
+- **Package:** `1.1.0a1`; final verification must be recaptured after the close-out commit
+- **Automated evidence:** 121 tests passed; ruff clean; CLI version smoke passed
+- **Synthetic evidence:** `reports/summaries/v1_1_package_synth_summary.json`
+- **Evidence generator:** `tools/v11_synth_summary.py`; summary generated against parent SHA `098e2fa`
+- **Evaluation log:** `docs/13_Evaluations_Log.md` v1.1 row
+- **Frozen fixture:** `data/fixtures/mini_v1/expected_freeze.json`
+- **Inference run artifacts (ignored, reproducible):** `reports/runs/v1_1_package_synth/`
+- **Immutable tag:** `v0.1` → `fb62b48bcb704f60eee7d6641ed0a344eb72bfda`
+- **No tag / no PyPI publish:** release-review chat and Augusto own those decisions
+- **Explicit exclusions:** no H5, no USER empirical network, no sharp-PI claim, no δ-grid, no measure generation, no museum import
 
 ## Explicit non-blockers
 
