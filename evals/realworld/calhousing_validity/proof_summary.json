@@ -1,0 +1,124 @@
+{
+  "audit": "calhousing_validity_tabular",
+  "capability_notes": {
+    "composite_measures_are_hand_weighted_not_llm_scores": true,
+    "correlations_are_descriptive_only": true,
+    "engine_does_not_call_llms": true,
+    "engine_does_not_impute_missing_values": true,
+    "no_causal_claim": true
+  },
+  "cold_match": true,
+  "designed_invalid": [
+    "m_geo_dict",
+    "m_noise"
+  ],
+  "designed_valid": [
+    "m_afford",
+    "m_age_pref",
+    "m_composite_quality",
+    "m_space",
+    "m_spacious_uncrowded",
+    "m_uncrowded"
+  ],
+  "failures": [],
+  "false_admissions": [],
+  "gates": {
+    "FA_zero": true,
+    "cold_H4": true,
+    "harsh_empty": true,
+    "harsh_html_empty_callout": true,
+    "nan_fail_loud": true,
+    "oracle_nonempty": true,
+    "same_scores_hash": true,
+    "small_n_clean": true
+  },
+  "harsh": {
+    "L": null,
+    "M_star": [],
+    "U": null,
+    "beta_hash": "d94474e81d48e07d8fc686abf56204315c27f3f4628e736653224ed490f3c648",
+    "empty": true,
+    "network_hash": "84a4b8e22c31ec3c045d25caed4d1b9b5f0c13d5f41b26758f4baa0cb9af42e9",
+    "point_id": false,
+    "rejected": {
+      "m_afford": [
+        "r_corr_min_aux"
+      ],
+      "m_age_pref": [
+        "r_corr_min_aux"
+      ],
+      "m_composite_quality": [
+        "r_corr_min_aux"
+      ],
+      "m_geo_dict": [
+        "r_corr_min_aux"
+      ],
+      "m_noise": [
+        "r_corr_min_aux"
+      ],
+      "m_space": [
+        "r_corr_min_aux"
+      ],
+      "m_spacious_uncrowded": [
+        "r_corr_min_aux"
+      ],
+      "m_uncrowded": [
+        "r_corr_min_aux"
+      ]
+    },
+    "scores_hash": "3fd22e31175a3fb40ee6cb3982e350af3cac96df3bee59c4bd72d1b6fb5cf224"
+  },
+  "n_units": 20640,
+  "nan_fail_loud_probe": {
+    "message": "column 'm_afford' has non-finite values (NaN/Inf)",
+    "passed": true
+  },
+  "oracle": {
+    "L": 0.1658044308648355,
+    "M_star": [
+      "m_afford",
+      "m_space",
+      "m_uncrowded",
+      "m_spacious_uncrowded",
+      "m_age_pref",
+      "m_composite_quality"
+    ],
+    "U": 0.9514033957148045,
+    "beta_hash": "d94474e81d48e07d8fc686abf56204315c27f3f4628e736653224ed490f3c648",
+    "empty": false,
+    "network_hash": "04e86cbbc9c7a93077c08271c6e0ea4ccdcc9cc6c86495559d1c3a37a6b1ca36",
+    "point_id": false,
+    "rejected": {
+      "m_geo_dict": [
+        "r_corr_min_aux",
+        "r_corr_sign_aux"
+      ],
+      "m_noise": [
+        "r_corr_min_aux",
+        "r_corr_sign_aux"
+      ]
+    },
+    "scores_hash": "3fd22e31175a3fb40ee6cb3982e350af3cac96df3bee59c4bd72d1b6fb5cf224"
+  },
+  "package": "cvprofiles",
+  "passed": true,
+  "path": "intermediate_not_main_path",
+  "small_n_probe": {
+    "clean_exit": true,
+    "harsh_empty": true,
+    "n": 200,
+    "oracle_M_star": [
+      "m_afford",
+      "m_space",
+      "m_uncrowded",
+      "m_spacious_uncrowded",
+      "m_composite_quality",
+      "m_geo_dict"
+    ],
+    "oracle_nonempty": true,
+    "oracle_range": [
+      0.1935668981396403,
+      0.9752862061316966
+    ]
+  }
+}

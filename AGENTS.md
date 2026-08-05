@@ -45,6 +45,7 @@ The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS P
 - `reports/summaries/v1_1_package_synth_summary.json` is package smoke evidence (seeds `0..4`).
 - `reports/summaries/v1_1_protocol_synth_mc50_summary.json` is a distinct provisional synthetic-only MC50 proof artifact (seeds `0..49`). It is not H5 or a full empirical paper lock.
 - `reports/runs/` contains reproducible bulk outputs and is ignored. Allow-listed proof summaries under `reports/summaries/` are tracked.
+- Intermediate real-world audits live under `evals/realworld/` (`spam_validity` text; `calhousing_validity` tabular). Both are **intermediate / not H5**; their READMEs record capability boundaries (no LLM calls in the engine, no missingness imputation, descriptive correlations only). Do not cite them as paper evidence.
 
 ## Where truth lives
 
