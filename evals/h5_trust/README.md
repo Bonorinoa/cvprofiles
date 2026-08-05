@@ -1,11 +1,13 @@
 # H5 Trust evaluation — country-level generalized trust (docs/17)
 
-**STATUS: DESIGN LOCKED / SCAFFOLD READY / NOT YET RUN.** The construct,
-unit/universe, menu, network, θ, δ, β, and claims boundary are locked in
-`docs/17_H5_Trust_Design.md`. This folder is the executable scaffold. No
-paper claim exists until: frozen scores built from raw public files → dev
-gate (`verify_audit.py`) exit 0 → independent audit
-(`tools/verify_h5_trust.py`) exit 0 → Augusto's run decision.
+**STATUS: FIRST FROZEN BUILD COMPLETE (2026-08-04) — dev gate + auditor exit 0.
+NOT YET A PAPER CLAIM.** The construct, unit/universe, menu, network, θ, δ, β,
+and claims boundary are locked in `docs/17_H5_Trust_Design.md`. Frozen inputs
+(`data/scores.csv`, `score_manifest.json`, `proof_summary.json`) are committed.
+First run: n=35 countries, M\* = {m_trust_general, m_trust_in_group},
+[L,U] = [0.371, 0.624]; FA=0; θ-grid empties at λ≥1.5; bootstrap band
+[0.174, 0.752] with 17.5% empty replicates (see `docs/13`). Paper-facing use
+still requires Augusto's run decision (docs/16 §8).
 
 ## What this is
 
@@ -37,8 +39,8 @@ files + public economic data, with its own freeze hashing.
 #    - wdi.csv: World Bank WDI (NY.GDP.PCAP.PP.KD, SI.POV.GINI, SL.AGR.EMPL.ZS),
 #      columns iso3,year,gdp_pc_ppp,gini,agri_empl — fetch with:
 #        uv run python evals/h5_trust/build_dataset.py --fetch-wdi --aux-dir data/h5_trust_aux
-#    - wgi.csv: World Bank WGI rule_of_law (rq), columns iso3,year,rule_of_law
-#      (manual download: WGI is not an API; see worldbank.org governance indicators)
+#    - wgi.csv: World Bank WGI rule_of_law (`rl`), columns iso3,year,rule_of_law
+#      (fetch with --fetch-wgi; WGI is a workbook download, not an API)
 # 3. Build + gate + audit:
 uv run python evals/h5_trust/build_dataset.py --raw-root <raw> --aux-dir data/h5_trust_aux
 uv run python evals/h5_trust/verify_audit.py            # exit 0 required

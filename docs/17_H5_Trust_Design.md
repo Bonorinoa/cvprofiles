@@ -97,7 +97,7 @@ Diagnostics (appendix only): units-only bootstrap (pinned seed), θ-grid λ ∈ 
 | Auxiliary | Source | Access |
 |---|---|---|
 | `log_gdp_pc` | World Bank WDI `NY.GDP.PCAP.PP.KD` | API, free, no key |
-| `rule_of_law` | WGI (World Bank) `rq` | free download |
+| `rule_of_law` | WGI (World Bank) `rl` (Rule of Law estimate) | free download |
 | `gini` | WDI `SI.POV.GINI` | API |
 | `m_share_agriculture` | WDI `SL.AGR.EMPL.ZS` | API |
 

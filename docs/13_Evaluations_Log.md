@@ -387,3 +387,32 @@ Same branch and audit; `verify_audit.py` extended pre-merge with three probes
 | `point_id` | M5+ |
 | `all_invalid` | M5–M8 |
 | real baseline (H5) | M10 only, USER network |
+
+---
+
+## 2026-08-04 — H5 Trust: first frozen build + dev gate (country-level generalized trust)
+
+- **run:** `evals/h5_trust/` (docs/17 design lock); dev gate `verify_audit.py` exit 0; auditor `tools/verify_h5_trust.py` exit 0, 0 errors.
+- **package / git:** `1.1.0a1`; frozen inputs built from raw WVS7 + GPS country + WDI/WGI (public); generation parent SHA `cd6455d`.
+- **universe:** WVS7 ∩ GPS ∩ aux coverage, floor ≥ 200 → n=35 (from 66 WVS; 7 dropped for missing Gini/GDP coverage: GTM, IND, IRQ, JOR, MAR, NIC, VEN).
+- **network (pinned):** corr_min(gps_trust, 0.3) + corr_min(rule_of_law, 0.3) + corr_sign(gini, −1, 0.1); δ=0; β=corr_y on log_gdp_pc. Network hash `0dab2afa…`.
+- **θ anchors:** literature-grounded (OECD 0.29 country-level survey↔behavioral; trust–institutions ≥0.4; Bjørnskov negative inequality).
+
+| Metric | Value |
+|---|---|
+| FA (designed-invalids admitted) | 0 — `m_noise`, `m_share_agriculture` rejected on all three bars |
+| M\* | `{m_trust_general, m_trust_in_group}` |
+| Rejected (binding bars) | `m_trust_out_group` (GPS corr 0.2987 < 0.3, knife-edge), `m_trust_institution` (rule-of-law corr −0.125) |
+| β on survivors | general 0.624, in_group 0.371 |
+| **[L,U]** | **[0.371, 0.624]** (min/max B\* on survivors only) |
+| Cold H4 | identical freeze core across two runs |
+| θ-grid (λ 0.5/1.0/1.5/2.0) | 3 measures at 0.5; 2 at 1.0 (headline); **∅ at 1.5 and 2.0** |
+| Bootstrap (n_boot=80, seed 0) | band [0.174, 0.752]; **17.5% empty replicates**; 0 degenerate |
+
+**Interpretation:**
+- The classic WVS generalized-trust item (Q57) is admitted and carries the largest trust–development correlation (0.624) — the SCA2 pilot's rejection (0.278 vs GPS) does **not** replicate on this frozen sample; admission flipped with sample/construction (documented fragility, cf. calhousing thin-sample lesson).
+- Out-group trust is a knife-edge survivor: 0.2987 vs the 0.3 GPS bar; it enters at λ=0.5 and the headline set empties entirely at λ=1.5 — the construct-identified range is fragile to the stated threshold.
+- Institutional confidence is *negatively* correlated with rule of law (−0.125): the network discriminates a distinct construct, as designed.
+- Bootstrap: 1 in ~6 country resamples yields an empty admissible set — honest measurement uncertainty.
+
+**Boundary:** first-run evidence only. **Not a paper claim.** Paper-facing use requires Augusto's run decision (docs/16 §8) — freeze inputs, package version, and audit all verified; the empirical box is now exercised.

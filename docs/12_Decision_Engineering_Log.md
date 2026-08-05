@@ -632,3 +632,28 @@ hashing; SCA2 appears only as data provenance.
 seed + package version + independent audit + Augusto's run decision. No engine
 change, tag, push, or PyPI by this approval. `docs/16` amended 2026-08-04;
 synthetic-only MC50 protocol unaffected.
+
+---
+
+## 2026-08-04 — H5 Trust: first frozen build + dev gate (n=35), run gated for paper
+
+**Decision (recorded):**
+- Augusto authorized direct read of the SCA2 raw-data folder for the H5 Trust
+  build. Builder fixes from real-schema discovery: `convert_categoricals=False`
+  for the WVS `.dta` (non-unique value labels), GPS country code column
+  `isocode`, WGI legacy-code map (`ROM→ROU`, `ADO→AND`, `ZAR→COD`, `KSV→XKX`,
+  `TMP→TLS`), and WDI ISO-3 mapping via `/v2/country` + `countryiso3code`.
+- **Transcription fix:** docs/17 listed the WGI Rule-of-Law indicator as `rq`;
+  `rq` is Regulatory Quality. Corrected to `rl`. Design intent unchanged
+  (rule of law); no network/θ change.
+- **Coverage rule clarified:** aux/outcome NaN = no coverage → country excluded
+  per the universe rule (never imputed), recorded in the manifest
+  (`dropped_missing_coverage`). Measure-column NaN stays fail-loud (aggregation
+  bug guard). Empty resulting sample is a BuildError, not an empty frozen file.
+- First build + dev gate + independent auditor all exit 0. Numbers in docs/13.
+
+**Boundary:** this is a run of the *design-locked* evaluation, which docs/16 §8
+authorizes once frozen inputs + audit exist. It is **not** paper acceptance:
+no `docs/13` claim beyond first-run evidence, no tag, no push, no PyPI.
+Augusto's explicit run decision is still required before any paper-facing use
+or further evidence claims.

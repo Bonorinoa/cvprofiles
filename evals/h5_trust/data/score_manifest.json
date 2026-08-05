@@ -1,0 +1,40 @@
+{
+  "schema_version": "1",
+  "unit_id": "iso3",
+  "n_countries": 35,
+  "universe": {
+    "wvs_countries": 66,
+    "with_gps": 42,
+    "with_aux": 42,
+    "after_floor": 42,
+    "dropped_missing_coverage": [
+      "GTM",
+      "IND",
+      "IRQ",
+      "JOR",
+      "MAR",
+      "NIC",
+      "VEN"
+    ]
+  },
+  "settings": {
+    "seed": 20260804,
+    "floor": 200,
+    "policy": "none",
+    "delta": 0.0,
+    "weights": "unweighted",
+    "aux_years": [
+      2015,
+      2019
+    ]
+  },
+  "sources": {
+    "wvs": "/Users/bonorinoa/Desktop/Github_Repositories/SCA2_PofW/data/WVS/WVS_wave7.dta",
+    "gps": "/Users/bonorinoa/Desktop/Github_Repositories/SCA2_PofW/data/GPS/GPS_dataset_country_level/country_gps.dta",
+    "wdi": "World Bank WDI (NY.GDP.PCAP.PP.KD, SI.POV.GINI, SL.AGR.EMPL.ZS)",
+    "wgi": "World Bank WGI rule_of_law (rl)"
+  },
+  "scores_hash": "3ec0b41cc08b2f7ceb13997db741192ee0bf369f70453486cc7bf96fd12c597b",
+  "parent_sha": "cd6455d6e174d347b2f4298d379d2a12b930cef6",
+  "generated_at": "2026-08-05T06:34:38+00:00"
+}

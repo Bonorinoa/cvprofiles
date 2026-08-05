@@ -156,6 +156,36 @@ def test_canonical_csv_hash_is_stable_and_sensitive() -> None:
     assert h5.canonical_csv_hash(df2) != h1
 
 
+def test_parse_wgi_sheet_maps_legacy_codes() -> None:
+    """Header=None WGI-style frame: year row + sub row + data rows."""
+    filler = pd.DataFrame([[np.nan] * 8] * 12, dtype=float)
+    header = pd.DataFrame(
+        [
+            [np.nan, np.nan, 2015, 2015, 2015, 2016, 2016, 2016],
+            ["Country/Territory", "Code", "Estimate", "StdErr", "NumSrc", "Estimate", "StdErr", "NumSrc"],
+        ]
+    )
+    data = pd.DataFrame(
+        [
+            ["Andorra", "ADO", 1.5, 0.2, 3, 1.6, 0.2, 3],
+            ["Romania", "ROM", 0.5, 0.1, 4, 0.6, 0.1, 4],
+            ["Brazil", "BRA", -0.2, 0.1, 5, -0.1, 0.1, 5],
+        ]
+    )
+    df = pd.concat([filler, header, data], ignore_index=True)
+    out = h5.parse_wgi_sheet(df)
+    iso_by_year = {iso: sorted(g["year"].tolist()) for iso, g in out.groupby("iso3")}
+    assert "AND" in iso_by_year  # ADO -> AND
+    assert "ROU" in iso_by_year  # ROM -> ROU
+    assert "BRA" in iso_by_year
+    assert out.loc[out["iso3"] == "AND", "rule_of_law"].iloc[0] == pytest.approx(1.5)
+
+
+def test_parse_wgi_sheet_raises_without_header() -> None:
+    with pytest.raises(h5.BuildError, match="Country/Territory"):
+        h5.parse_wgi_sheet(pd.DataFrame({"a": [1, 2, 3]}))
+
+
 # --- build orchestration (end-to-end on synthetic raw files) ------------
 
 def _gps_frame() -> pd.DataFrame:
@@ -223,9 +253,8 @@ def test_build_drops_countries_below_floor(tmp_path: Path) -> None:
         }
     ).to_csv(aux_dir / "wgi.csv", index=False)
 
-    h5.build(raw_root=raw, aux_dir=aux_dir, out_dir=out, seed=20260804, floor=4)
-    scores = pd.read_csv(out / "scores.csv")
-    assert list(scores["iso3"]) == []  # all countries below floor -> empty frame
+    with pytest.raises(h5.BuildError, match="no countries"):
+        h5.build(raw_root=raw, aux_dir=aux_dir, out_dir=out, seed=20260804, floor=4)
 
 
 def test_build_drops_country_without_aux_coverage(tmp_path: Path) -> None:
@@ -256,7 +285,7 @@ def test_build_drops_country_without_aux_coverage(tmp_path: Path) -> None:
     assert manifest["universe"]["with_aux"] == 1
 
 
-def test_build_fails_loud_on_nan_aux(tmp_path: Path) -> None:
+def test_build_drops_country_with_nan_aux(tmp_path: Path) -> None:
     raw = tmp_path / "raw"
     aux_dir = tmp_path / "aux"
     out = tmp_path / "out"
@@ -266,6 +295,7 @@ def test_build_fails_loud_on_nan_aux(tmp_path: Path) -> None:
     _wvs_frame().to_csv(raw / "wvs.csv", index=False)
     _gps_frame().to_csv(raw / "gps.csv", index=False)
     # BBB is present in aux but its GDP series is NaN within the window
+    # -> no coverage, excluded per universe rule (never imputed), recorded.
     wdi = pd.DataFrame(
         {
             "iso3": ["AAA", "AAA", "AAA", "BBB", "BBB", "BBB"],
@@ -284,5 +314,35 @@ def test_build_fails_loud_on_nan_aux(tmp_path: Path) -> None:
         }
     ).to_csv(aux_dir / "wgi.csv", index=False)
 
-    with pytest.raises(h5.BuildError, match="NaN"):
-        h5.build(raw_root=raw, aux_dir=aux_dir, out_dir=out, seed=20260804, floor=1)
+    h5.build(raw_root=raw, aux_dir=aux_dir, out_dir=out, seed=20260804, floor=1)
+    scores = pd.read_csv(out / "scores.csv")
+    assert list(scores["iso3"]) == ["AAA"]
+    manifest = json.loads((out / "score_manifest.json").read_text())
+    assert manifest["universe"]["dropped_missing_coverage"] == ["BBB"]
+
+
+def test_build_fails_loud_on_nan_measure(tmp_path: Path) -> None:
+    raw = tmp_path / "raw"
+    aux_dir = tmp_path / "aux"
+    out = tmp_path / "out"
+    raw.mkdir()
+    aux_dir.mkdir()
+
+    wvs = _wvs_frame()
+    # All respondents missing q58/q60 -> in-group measure is NaN; with floor=0
+    # the country survives the floor and the measure guard must fail loud.
+    wvs["q58"] = -1
+    wvs["q60"] = -1
+    wvs.to_csv(raw / "wvs.csv", index=False)
+    _gps_frame().to_csv(raw / "gps.csv", index=False)
+    _aux_long().to_csv(aux_dir / "wdi.csv", index=False)
+    pd.DataFrame(
+        {
+            "iso3": ["AAA", "AAA", "AAA", "BBB", "BBB", "BBB"],
+            "year": [2015, 2016, 2017] * 2,
+            "rule_of_law": [1.5] * 3 + [-0.8] * 3,
+        }
+    ).to_csv(aux_dir / "wgi.csv", index=False)
+
+    with pytest.raises(h5.BuildError, match="NaN in measure columns"):
+        h5.build(raw_root=raw, aux_dir=aux_dir, out_dir=out, seed=20260804, floor=0)

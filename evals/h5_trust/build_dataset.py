@@ -92,8 +92,9 @@ def aggregate_wvs_country(
             raise BuildError(f"missing item column(s) {missing} for {measure}")
 
     rows: dict[str, pd.Series] = {}
+    general_col = groups["m_trust_general"][0]
     for country, g in df.groupby("country", sort=True):
-        general = mask_missing(g["q57"], missing_codes).dropna().astype(float)
+        general = mask_missing(g[general_col], missing_codes).dropna().astype(float)
         share = float((general == 1.0).mean()) if len(general) else np.nan
         n_general = int(len(general))
 
@@ -170,7 +171,7 @@ def canonical_csv_hash(df: pd.DataFrame) -> str:
 def load_gps(gps_df: pd.DataFrame) -> pd.Series:
     """Extract gps_trust indexed by iso3, tolerating name variants."""
     trust_col = next((c for c in ["trust", "TRUST", "trust_mean"] if c in gps_df.columns), None)
-    country_col = next((c for c in ["iso3", "ISO3", "ccode", "country"] if c in gps_df.columns), None)
+    country_col = next((c for c in ["isocode", "iso3", "ISO3", "ccode"] if c in gps_df.columns), None)
     if trust_col is None or country_col is None:
         raise BuildError(f"GPS frame lacks trust/country columns; got {list(gps_df.columns)}")
     s = gps_df.set_index(country_col)[trust_col].rename("gps_trust")
@@ -178,15 +179,34 @@ def load_gps(gps_df: pd.DataFrame) -> pd.Series:
     return s
 
 
-# --- optional WDI fetch (opt-in; tests never call) -----------------------
+# --- optional WDI/WGI fetch (opt-in; tests never call network) -------------
+
+# WGI uses a few legacy codes that differ from ISO-3; map to standard codes.
+WGI_CODE_MAP = {"ADO": "AND", "ROM": "ROU", "ZAR": "COD", "KSV": "XKX", "TMP": "TLS"}
+
 
 def fetch_wdi_aux(aux_dir: Path) -> None:
     """Fetch the three WDI indicators (2015-2019) and write aux_dir/wdi.csv.
 
-    Public World Bank API, no key. Requires network; deterministic once cached.
+    Public World Bank API, no key. Maps World Bank country codes to ISO-3 via
+    the /v2/country metadata so the merge with WVS/GPS (ISO-3) works.
+    Requires network; deterministic once cached.
     """
     import json as _json
     import urllib.request
+
+    # Country metadata: the /v2/country endpoint id IS the ISO-3 code for real
+    # countries (aggregates have non-alpha ids like "1A"/"ZH"). Indicator rows
+    # expose countryiso3code; keep rows whose code is a real country.
+    with urllib.request.urlopen(
+        "https://api.worldbank.org/v2/country?per_page=400&format=json", timeout=60
+    ) as resp:  # noqa: S310
+        country_body = _json.loads(resp.read().decode("utf-8"))
+    iso3_set = {
+        rec["id"]
+        for rec in country_body[1]
+        if len(rec["id"]) == 3 and rec["id"].isalpha()
+    }
 
     indicators = {
         "gdp_pc_ppp": "NY.GDP.PCAP.PP.KD",
@@ -205,14 +225,83 @@ def fetch_wdi_aux(aux_dir: Path) -> None:
         for rec in body[1]:
             if rec.get("value") is None:
                 continue
+            iso3 = rec.get("countryiso3code", "")
+            if iso3 not in iso3_set:
+                continue
             rows.append(
-                {"iso3": rec["country"]["id"], "year": int(rec["date"]), key: float(rec["value"])}
+                {"iso3": iso3, "year": int(rec["date"]), key: float(rec["value"])}
             )
         frames.append(pd.DataFrame(rows))
     merged = frames[0]
     for f in frames[1:]:
         merged = merged.merge(f, on=["iso3", "year"], how="outer")
     merged.to_csv(aux_dir / "wdi.csv", index=False)
+
+
+def parse_wgi_sheet(df: pd.DataFrame) -> pd.DataFrame:
+    """Parse a WGI indicator sheet (header=None read) into iso3/year/value.
+
+    WGI workbook layout: one sheet per indicator; a header block where one row
+    carries year groups and the row below carries sub-indicators (Estimate,
+    StdErr, NumSrc, Rank, Lower, Upper); data rows have country name at col 0
+    and country code at col 1. Returns a long frame with ISO-3 codes mapped
+    from legacy WGI codes.
+    """
+    sub_row = None
+    for i in range(df.shape[0]):
+        if any(str(df.iloc[i, c]).strip() == "Country/Territory" for c in range(min(3, df.shape[1]))):
+            sub_row = i
+            break
+    if sub_row is None:
+        raise BuildError("WGI sheet lacks a Country/Territory header row")
+    year_row = sub_row - 1
+
+    est_cols: dict[int, int] = {}
+    for col in range(2, df.shape[1]):
+        year = df.iloc[year_row, col]
+        sub = str(df.iloc[sub_row, col]).strip()
+        if pd.notna(year) and sub == "Estimate":
+            est_cols[col] = int(pd.to_numeric(year))
+
+    rows = []
+    for _, r in df.iloc[sub_row + 1 :].iterrows():
+        code = r.iloc[1]
+        if pd.isna(code):
+            continue
+        iso3 = WGI_CODE_MAP.get(str(code), str(code))
+        for col, year in est_cols.items():
+            if AUX_YEARS[0] <= year <= AUX_YEARS[1] and pd.notna(r.iloc[col]):
+                rows.append({"iso3": iso3, "year": year, "rule_of_law": float(r.iloc[col])})
+    out = pd.DataFrame(rows)
+    if out.empty:
+        raise BuildError("WGI sheet parsed to zero rows")
+    return out
+
+
+def fetch_wgi_aux(aux_dir: Path) -> None:
+    """Download the WGI workbook and write aux_dir/wgi.csv (rule of law, rl).
+
+    Requires network and openpyxl; deterministic once cached. The World Bank
+    endpoint blocks plain urllib, so a browser User-Agent is sent.
+    """
+    import urllib.request
+
+    url = "https://www.worldbank.org/content/dam/sites/govindicators/doc/wgidataset.xlsx"
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+            )
+        },
+    )
+    with urllib.request.urlopen(req, timeout=90) as resp:  # noqa: S310
+        raw = resp.read()
+    source = aux_dir / "wgi_source.xlsx"
+    source.write_bytes(raw)
+    df = pd.read_excel(source, sheet_name="RuleofLaw", header=None)
+    parse_wgi_sheet(df).to_csv(aux_dir / "wgi.csv", index=False)
 
 
 # --- orchestration -------------------------------------------------------
@@ -232,7 +321,14 @@ def build(
     """Assemble and write the frozen scores + manifest (docs/17 SCORE spec)."""
     print("[1/5] Loading WVS Wave 7 items...")
     wvs_path = raw_root / wvs_file
-    wvs = pd.read_stata(wvs_path) if wvs_path.suffix == ".dta" else pd.read_csv(wvs_path)
+    # convert_categoricals=False: the WVS .dta has non-unique value labels
+    # (town names repeat across countries) that pandas cannot turn into
+    # categoricals; we keep raw integer codes and mask missing ourselves.
+    wvs = (
+        pd.read_stata(wvs_path, convert_categoricals=False)
+        if wvs_path.suffix == ".dta"
+        else pd.read_csv(wvs_path)
+    )
     if country_col != "country":
         wvs = wvs.rename(columns={country_col: "country"})
     groups = item_groups if item_groups is not None else DEFAULT_ITEM_GROUPS
@@ -241,7 +337,11 @@ def build(
 
     print("[2/5] Loading GPS country-level trust...")
     gps_path = raw_root / gps_file
-    gps_df = pd.read_stata(gps_path) if gps_path.suffix == ".dta" else pd.read_csv(gps_path)
+    gps_df = (
+        pd.read_stata(gps_path, convert_categoricals=False)
+        if gps_path.suffix == ".dta"
+        else pd.read_csv(gps_path)
+    )
     gps = load_gps(gps_df)
     print(f"      {gps.notna().sum()} countries with GPS trust")
 
@@ -266,10 +366,21 @@ def build(
     )
     merged["m_noise"] = np.random.default_rng(seed).standard_normal(len(merged))
 
-    required = MEASURE_COLUMNS + ["m_noise", "m_share_agriculture"] + ["gps_trust", "rule_of_law", "gini"] + ["log_gdp_pc"]
-    bad = [c for c in required if merged[c].isna().any()]
-    if bad:
-        raise BuildError(f"NaN in required columns after merge: {bad}")
+    # Measures must be complete: NaN here means an aggregation bug -> fail loud.
+    measure_nan = [c for c in MEASURE_COLUMNS + ["m_noise"] if merged[c].isna().any()]
+    if measure_nan:
+        raise BuildError(f"NaN in measure columns after merge: {measure_nan}")
+
+    # Aux/outcome/designed-invalid-with-aux NaN = no coverage -> exclude per the
+    # universe rule (never impute), recorded in the manifest for observability.
+    coverage_cols = ["gps_trust", "rule_of_law", "gini", "log_gdp_pc", "m_share_agriculture"]
+    drop_mask = merged[coverage_cols].notna().all(axis=1)
+    dropped_coverage = sorted(merged.index[~drop_mask])
+    merged = merged[drop_mask]
+    if merged.empty:
+        raise BuildError("no countries with complete aux/outcome coverage")
+    if dropped_coverage:
+        print(f"      dropped {len(dropped_coverage)} countries (missing aux/outcome): {dropped_coverage}")
 
     print("[5/5] Writing frozen scores + manifest...")
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -291,7 +402,8 @@ def build(
             "wvs_countries": n_wvs,
             "with_gps": n_gps,
             "with_aux": n_aux,
-            "after_floor": len(merged),
+            "after_floor": len(merged) + len(dropped_coverage),
+            "dropped_missing_coverage": dropped_coverage,
         },
         "settings": {
             "seed": seed,
@@ -305,7 +417,7 @@ def build(
             "wvs": str(wvs_path),
             "gps": str(gps_path),
             "wdi": "World Bank WDI (NY.GDP.PCAP.PP.KD, SI.POV.GINI, SL.AGR.EMPL.ZS)",
-            "wgi": "World Bank WGI rule_of_law (rq)",
+            "wgi": "World Bank WGI rule_of_law (rl)",
         },
         "scores_hash": canonical_csv_hash(scores),
         "parent_sha": parent_sha,
@@ -328,8 +440,16 @@ def main() -> None:
     parser.add_argument("--wvs-file", default="WVS_wave7.dta")
     parser.add_argument("--gps-file", default="country_gps.dta")
     parser.add_argument("--country-col", default="B_COUNTRY_ALPHA")
-    parser.add_argument("--fetch-wdi", action="store_true", help="fetch WDI indicators into the aux cache")
+    parser.add_argument("--fetch-wdi", action="store_true", help="fetch WDI indicators into the aux cache and exit")
+    parser.add_argument("--fetch-wgi", action="store_true", help="fetch WGI rule-of-law workbook into the aux cache and exit")
     args = parser.parse_args()
+
+    if args.fetch_wdi:
+        fetch_wdi_aux(args.aux_dir)
+        return
+    if args.fetch_wgi:
+        fetch_wgi_aux(args.aux_dir)
+        return
 
     real_items = {
         k: [WVS_REAL_ITEM_COLUMNS[c] for c in v] for k, v in DEFAULT_ITEM_GROUPS.items()
@@ -344,7 +464,6 @@ def main() -> None:
         gps_file=args.gps_file,
         item_groups=real_items,
         country_col=args.country_col,
-        fetch_wdi=args.fetch_wdi,
     )
 
 
