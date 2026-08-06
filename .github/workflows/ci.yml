@@ -38,8 +38,8 @@ jobs:
       - name: Mypy (strict package check)
         run: uv run mypy src
 
-      - name: Pytest
-        run: uv run pytest -q --tb=short
+      - name: Pytest (+ coverage report, no gate)
+        run: uv run pytest -q --tb=short --cov=cvprofiles --cov-report=term
 
       - name: CLI version smoke
         run: |
@@ -94,6 +94,49 @@ jobs:
           assert "m_slop" not in a["M_star"]
           assert set(a["M_star"]) == {"m_good", "m_weak"}
           print("mini fixture smoke ok", a["M_star"], r["L"], r["U"])
+          PY
+
+  # Wheel packaging smoke (R1, 2026-08-06 audit): build + install the wheel in a
+  # fresh venv and run a profile from the INSTALLED package. Catches packaging
+  # regressions (missing templates, duplicate force-includes) that the editable
+  # install smoke cannot see.
+  wheel-smoke:
+    name: wheel build + fresh-venv install smoke
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          python-version: "3.11"
+
+      - name: Build wheel + sdist
+        run: uv build
+
+      - name: Fresh-venv install from wheel + profile run
+        run: |
+          uv venv /tmp/wheel_venv --python 3.11
+          uv pip install --python /tmp/wheel_venv/bin/python dist/*.whl
+          /tmp/wheel_venv/bin/cvprofiles --version
+          /tmp/wheel_venv/bin/cvprofiles run \
+            --scores data/fixtures/mini_v1/scores.csv \
+            --roles data/fixtures/mini_v1/roles.json \
+            --network data/fixtures/mini_v1/network.yaml \
+            --beta data/fixtures/mini_v1/beta.yaml \
+            --out /tmp/wheel_mini --seed 0
+          test -f /tmp/wheel_mini/report.html
+          test -f /tmp/wheel_mini/range.json
+          /tmp/wheel_venv/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path("/tmp/wheel_mini/range.json").read_text())
+          a = json.loads(Path("/tmp/wheel_mini/admissible.json").read_text())
+          assert r["empty"] is False
+          assert set(a["M_star"]) == {"m_good", "m_weak"}
+          print("wheel smoke ok", a["M_star"], r["L"], r["U"])
           PY
 
   # Optional: only runs if sklearn available path wanted later; keep default CI lean.
