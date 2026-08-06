@@ -14,8 +14,8 @@
 ## Why "independent"
 
 The verification installs the **published wheel** (not the source tree) into a fresh
-virtual environment, then executes the notebook. Run it from the repository root so the
-H5 data paths resolve:
+virtual environment, then executes the notebook. The kernel starts in the notebook's
+folder, so point Part 2 at the checkout via `CVPROFILES_REPO` (or run from the repo root):
 
 ```bash
 # fresh venv, wheel-only install (PYTHONPATH unset so the src tree cannot leak in)
@@ -23,9 +23,11 @@ uv venv /tmp/cvp_tutorial_venv --python 3.11
 uv pip install --python /tmp/cvp_tutorial_venv/bin/python \
     dist/cvprofiles-2.0.0a1-py3-none-any.whl jupyter nbconvert ipykernel
 
-# execute a copy of the notebook
+# execute a copy of the notebook (kernel starts in the notebook's folder,
+# so point Part 2 at the checkout via CVPROFILES_REPO)
 cp tutorials/cvprofiles_tutorial.ipynb /tmp/cvp_tutorial_exec.ipynb
-env -u PYTHONPATH /tmp/cvp_tutorial_venv/bin/python -m jupyter nbconvert \
+env -u PYTHONPATH CVPROFILES_REPO=/Users/bonorinoa/Hermes/Projects/cvprofiles \
+    /tmp/cvp_tutorial_venv/bin/python -m jupyter nbconvert \
     --to notebook --execute /tmp/cvp_tutorial_exec.ipynb \
     --output /tmp/cvp_tutorial_exec_out.ipynb
 ```
