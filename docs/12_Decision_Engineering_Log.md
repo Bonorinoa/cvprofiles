@@ -735,3 +735,16 @@ alignment at publish time.
 **Rationale:** closes the 2026-08-01 provisional default "always also report a small δ-grid as sensitivity" as a v2.0 feature; keeps the engine thin (manual OLS, no new dependency); makes threshold discipline auditable.
 
 **Follow-ups:** commit milestone 0 (doc hygiene + `docs/18`); then thread (a) M-a1 with a RED test. Per-thread checkpoints.
+
+---
+
+## 2026-08-05 — v2.0 thread (a) δ-grid complete (close-out)
+
+**Decision (recorded):** δ-grid tolerance layer shipped and verified:
+- M-a1 `11e5179` — `delta_override` on `run_identify` (default None bit-identical; finite/≥0 enforced)
+- M-a2 `a44e65f` — `cvprofiles.inference.delta_grid` engine (absolute-δ validation, rows, payload)
+- M-a3 `ab30d18` — wiring: `run_profile(delta_grid_deltas=...)`, CLI `--delta-grid`, `delta_grid.json`, stale-layer cleanup, HTML/JSON panels, preimage witness (same bundle + different grid ⇒ same `run_id`)
+- M-a4 — evidence: H5 Trust δ-grid run on frozen inputs (seed 0). Headline bit-identical ([0.370754, 0.623891]); out_group admits at δ≥0.005; designed-invalid `m_noise` admits at δ=0.5 with L collapsing to −0.319 — logged in `docs/13` as the tolerance-discipline object lesson.
+- Full suite **178 passed**; ruff/mypy clean; tags `v0.1` / `v1.1.0` intact.
+
+**Boundary:** diagnostic only; headline range unchanged; no version bump (per D5); H5 δ-grid numbers are not paper evidence beyond the existing preliminary checkpoint. Thread (b) evaluator registry next, pending Augusto's go.

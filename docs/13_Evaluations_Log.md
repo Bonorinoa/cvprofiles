@@ -418,3 +418,25 @@ Same branch and audit; `verify_audit.py` extended pre-merge with three probes
 **Status (2026-08-04):** **preliminary paper-facing evidence** — owner-approved
 checkpoint per docs/12 + docs/16 §8. `reports/summaries/h5_trust_evidence_summary.json`
 is the tracked summary. Final paper lock and submission claims remain Augusto's.
+
+---
+
+## 2026-08-05 — v2.0 thread (a): δ-grid tolerance surface (H5 Trust run)
+
+- **package / git:** `cvprofiles==1.1.0a1`; commits `11e5179`, `a44e65f`, `ab30d18` (M-a1..M-a3)
+- **run:** frozen H5 inputs (`evals/h5_trust/data/*`), seed 0, δ-grid `[0, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5]`; artifacts `reports/runs/h5_trust_delta_grid/` (gitignored, reproducible); run_id equals the original frozen build (grid excluded from the preimage by design); network/beta hashes `0dab2afa…` / `1959ede5…` unchanged
+- **headline (declared δ=0):** M\*={m_trust_general, m_trust_in_group}, [L,U]=[0.370754, 0.623891] — **bit-identical to the first frozen build**
+
+| δ | M\* | [L,U] |
+|---|---:|---|
+| 0.0 (headline) | {general, in_group} | [0.371, 0.624] |
+| 0.005 | + out_group | [0.371, 0.624] |
+| 0.01 / 0.05 / 0.1 / 0.25 | same 3 measures | [0.371, 0.624] |
+| 0.5 | + institution, **+ m_noise** | **[−0.319, 0.624]** |
+
+**Interpretation:**
+1. **Out-group trust is knife-edge at δ=0:** its GPS slack is −0.0013 (corr 0.2987 vs the 0.3 bar); δ ≥ 0.005 admits it. The range endpoints do not move because its β sits inside the headline interval — range robustness ≠ admissible-set robustness.
+2. **Tolerance discipline is load-bearing:** at δ=0.5 the designed-invalid `m_noise` is admitted and L collapses to −0.319. The construct-identified range has its stated meaning only at the declared δ; this is the engine demonstrating why "never auto-loosen δ" is a hard rule.
+3. **FA stays 0 at the headline** (δ=0 unchanged); the δ-grid is a diagnostic viewport, never an alternative admission rule.
+
+**Status:** thread (a) of v2.0 measure discipline complete (M-a1..M-a4). Diagnostic only; headline range unchanged; no paper claim added.

@@ -1,6 +1,6 @@
 # 18 — Measure Discipline Plan (v2.0)
 
-**Status:** OPEN — plan approved 2026-08-05 (Augusto). Milestone 0 (doc hygiene) is the first committed step; engine work is per-thread with checkpoints (see `docs/12`, 2026-08-05).
+**Status:** OPEN — plan approved 2026-08-05 (Augusto). **Thread (a) δ-grid COMPLETE** (M-a1..M-a4, 2026-08-05); threads (b) and (c) pending per-thread checkpoints. See `docs/12`, 2026-08-05.
 
 **Purpose:** the standing scope box for the v2.0 measure-discipline sprint. Three threads, strict TDD, one commit per milestone, a dated `docs/12` entry before each new code family. The four-state spine does not grow a fifth state; all work is IDENTIFY-internal or REPORT-adjacent.
 
@@ -31,6 +31,8 @@
 ## Thread (a) — δ-grid tolerance layer
 
 Semantics: absolute δ values; per row re-run IDENTIFY with a δ override; headline = declared δ (computed outside the surface). Grid settings excluded from the freeze preimage (same bundle + different grid ⇒ same `run_id`, different `delta_grid.json`), mirroring the θ-grid contract including stale-layer cleanup. δ never touches `network_hash` — the override lives in `run_identify`, not in a network copy.
+
+**Status: DONE** (2026-08-05; commits `11e5179`, `a44e65f`, `ab30d18`). H5 Trust δ-grid run on frozen inputs (seed 0): headline bit-identical; out_group admits at δ ≥ 0.005; designed-invalid `m_noise` admits at δ=0.5 (L → −0.319). Numbers in `docs/13` 2026-08-05. Diagnostic only.
 
 | Milestone | TDD shape | Fixture that demands it | Gate bars |
 |---|---|---|---|
