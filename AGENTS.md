@@ -40,7 +40,7 @@ The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS P
 
 ## Current posture
 
-- Package version: `2.0.0` — **published on PyPI 2026-08-06** (tag `v2.0.0` @ `6abb6e4`).
+- Package version: `2.0.1a1` — dev cycle resumed after **2.0.0 published on PyPI 2026-08-06** (tag `v2.0.0` @ `6abb6e4`).
 - v1.1 inference layer shipped and **tagged `v1.1.0`** (2026-08-04, `fce31c8`); superseded by the 2.0.0 release.
 - **v2.0 measure discipline DONE** (`docs/18_Measure_Discipline_Plan.md`): δ-grid, evaluator growth (`mean_order`/`rank_agree`/`ols_coef`), θ-anchor artifacts shipped 2026-08-05; tutorial verified against the PyPI package; released as `2.0.0`.
 - `reports/summaries/v1_1_package_synth_summary.json` is package smoke evidence (seeds `0..4`).

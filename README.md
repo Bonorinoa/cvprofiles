@@ -6,7 +6,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **v0.1** tagged (methods KB + museum PoC); **v1.1.0 tagged** (MVP: spine + inference layer + H5 Trust evidence); **v2.0.0 published on PyPI (2026-08-06)** |
+| **Version** | **v0.1** tagged (methods KB + museum PoC); **v1.1.0 tagged** (MVP: spine + inference layer + H5 Trust evidence); **v2.0.0 published on PyPI (2026-08-06)**; dev cycle resumed at **`2.0.1a1`** |
 | **Status** | Public repo live; tags `v0.1` @ `fb62b48`, `v1.1.0` @ `fce31c8`, **`v2.0.0` @ `6abb6e4`** frozen; **cvprofiles 2.0.0 published on PyPI (2026-08-06)**; protocol draft locked **provisional synthetic-only**; H5 Trust design locked (`docs/17`), first frozen run accepted as **preliminary paper-facing evidence** (n=35, [L,U]=[0.371,0.624]) |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
@@ -95,7 +95,7 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
 - **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit + v1.1 inference layer, merged.
 - **v1.1.0 tagged (2026-08-04):** MVP — v1.0 spine + v1.1 inference layer (units bootstrap + θ-grid) + H5 Trust preliminary evidence. Release version `2.0.0`; PyPI publication in progress.
-- **Not yet:** paper protocol final lock. **cvprofiles 2.0.0 published on PyPI (2026-08-06)**; v2.0 measure discipline ENTRY complete (`docs/18`); H5-replication tutorial verified.
+- **Not yet:** paper protocol final lock. **cvprofiles 2.0.0 published on PyPI (2026-08-06)**; dev cycle resumed at `2.0.1a1`; v2.0 measure discipline ENTRY complete (`docs/18`); H5-replication tutorial verified.
 
 ### Install (dev)
 
