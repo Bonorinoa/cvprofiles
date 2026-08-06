@@ -44,7 +44,7 @@ jobs:
       - name: CLI version smoke
         run: |
           uv run cvprofiles --version
-          uv run python -c "import cvprofiles; assert cvprofiles.__version__ == '1.1.0a1'"
+          uv run python -c "import cvprofiles; assert cvprofiles.__version__ == '2.0.0'"
 
       - name: Editable install graph hygiene (no LLM / no museum import)
         run: |
