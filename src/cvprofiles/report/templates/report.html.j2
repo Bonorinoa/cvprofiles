@@ -245,6 +245,30 @@
     </section>
     {% endif %}
 
+    {% if delta_grid %}
+    <section class="card" style="margin-top:1rem">
+      <h2>δ-grid tolerance · diagnostic viewport</h2>
+      <p class="muted" style="margin-top:0">
+        Absolute tolerance values; δ is never auto-selected. The headline is always the declared δ
+        ({{ delta_grid.headline_delta }}). This grid is not part of the freeze preimage.
+      </p>
+      <table>
+        <thead><tr><th>δ</th><th>|M*|</th><th>empty</th><th>L</th><th>U</th></tr></thead>
+        <tbody>
+          {% for row in delta_grid.rows %}
+          <tr>
+            <td>{{ row["delta"] }}</td>
+            <td>{{ row.n_admissible }}</td>
+            <td>{{ "yes" if row.empty else "no" }}</td>
+            <td>{% if row.L is not none %}{{ "%.6f"|format(row.L) }}{% else %}—{% endif %}</td>
+            <td>{% if row.U is not none %}{{ "%.6f"|format(row.U) }}{% else %}—{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    {% endif %}
+
     <section class="card" style="margin-top:1rem">
       <h2>Menu admission</h2>
       <p class="muted" style="margin-top:0">
@@ -330,7 +354,7 @@
     <footer>
       cvprofiles {{ package_version }}
       · four-state spine SCORE → RESTRICT → IDENTIFY → REPORT
-      · v1.1 inference: bootstrap over units + θ-grid (diagnostic)
+      · v1.1/v2.0 inference: bootstrap + θ-grid + δ-grid (diagnostic)
       · generated {{ created_at or "—" }}
     </footer>
   </div>

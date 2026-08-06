@@ -26,6 +26,7 @@ from cvprofiles import __version__
 from cvprofiles.freeze import build_freeze_bundle, compute_run_id, normalize_n_boot
 from cvprofiles.identify.pipeline import IdentifyResult, run_identify, write_identify_artifacts
 from cvprofiles.inference.bootstrap import BootstrapResult, bootstrap_payload, run_bootstrap
+from cvprofiles.inference.delta_grid import DeltaGridResult, delta_grid_payload, run_delta_grid
 from cvprofiles.inference.theta_grid import ThetaGridResult, run_theta_grid, theta_grid_payload
 from cvprofiles.report.pipeline import ReportResult, write_report
 from cvprofiles.restrict.pipeline import RestrictBundle, run_restrict, write_restrict_artifacts
@@ -54,6 +55,7 @@ class FullRunResult:
     artifact_paths: dict[str, str]
     bootstrap: BootstrapResult | None = None
     theta_grid: ThetaGridResult | None = None
+    delta_grid: DeltaGridResult | None = None
 
 
 def run_profile(
@@ -69,19 +71,23 @@ def run_profile(
     write_parquet: bool = True,
     n_boot: int | None = None,
     theta_grid_lambdas: Sequence[float] | None = None,
+    delta_grid_deltas: Sequence[float] | None = None,
 ) -> FullRunResult:
-    """Compose four states (+ v1.1 inference layers) and write a frozen run dir.
+    """Compose four states (+ v1.1/v2.0 inference layers) and write a frozen run dir.
 
     Empty M* is a clean success path (report explains; no exception).
     Fail loud only on schema / IO / binding / evaluator errors.
 
-    Inference layers (both off unless requested):
-      n_boot >= 1  → bootstrap over units (seed = the run's seed).
-      theta_grid_lambdas non-empty → θ-sensitivity surface (diagnostic;
-      excluded from the freeze preimage by design).
+    Inference layers (off unless requested):
+      n_boot >= 1           → bootstrap over units (seed = the run's seed).
+      theta_grid_lambdas    → θ-sensitivity surface (diagnostic; excluded
+                              from the freeze preimage by design).
+      delta_grid_deltas     → δ-tolerance surface (diagnostic; absolute δ
+                              values; excluded from the freeze preimage).
     """
     n_boot_norm = normalize_n_boot(n_boot)
     grid = list(theta_grid_lambdas) if theta_grid_lambdas else None
+    grid_deltas = list(delta_grid_deltas) if delta_grid_deltas else None
 
     roles_m = load_roles(roles)
     df = load_table(scores)
@@ -125,6 +131,8 @@ def run_profile(
         (dest / "bootstrap.json").unlink()
     if grid is None and (dest / "theta_grid.json").exists():
         (dest / "theta_grid.json").unlink()
+    if grid_deltas is None and (dest / "delta_grid.json").exists():
+        (dest / "delta_grid.json").unlink()
 
     identify = run_identify(score.frame, score.roles, restrict)
 
@@ -138,6 +146,12 @@ def run_profile(
     grid_result: ThetaGridResult | None = None
     if grid is not None:
         grid_result = run_theta_grid(score.frame, score.roles, restrict, grid)
+
+    delta_grid_result: DeltaGridResult | None = None
+    if grid_deltas is not None:
+        delta_grid_result = run_delta_grid(
+            score.frame, score.roles, restrict, grid_deltas
+        )
 
     paths: dict[str, Path] = {}
     paths.update(write_score_artifacts(score, dest, parquet=write_parquet))
@@ -153,6 +167,13 @@ def run_profile(
             json.dumps(theta_grid_payload(grid_result), indent=2, sort_keys=True) + "\n"
         )
         paths["theta_grid.json"] = grid_path
+    if delta_grid_result is not None:
+        dgrid_path = dest / "delta_grid.json"
+        dgrid_path.write_text(
+            json.dumps(delta_grid_payload(delta_grid_result), indent=2, sort_keys=True)
+            + "\n"
+        )
+        paths["delta_grid.json"] = dgrid_path
 
     created_at = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     artifact_paths = {k: str(v.name) for k, v in paths.items()}
@@ -162,7 +183,10 @@ def run_profile(
         freeze=freeze,
         created_at=created_at,
         artifact_paths=artifact_paths,
-        notes="v1.1 spine; inference layer: bootstrap over units + theta-grid (diagnostic)",
+        notes=(
+            "v1.1 spine + v2.0 delta-grid; inference: "
+            "bootstrap + theta-grid + delta-grid (diagnostic)"
+        ),
     )
     man_path = dest / "run_manifest.json"
     man_path.write_text(run_manifest.model_dump_json(indent=2) + "\n")
@@ -176,6 +200,11 @@ def run_profile(
         title=title,
         bootstrap=bootstrap_payload(boot) if boot is not None else None,
         theta_grid=theta_grid_payload(grid_result) if grid_result is not None else None,
+        delta_grid=(
+            delta_grid_payload(delta_grid_result)
+            if delta_grid_result is not None
+            else None
+        ),
     )
     artifact_paths["report.html"] = report.html_path.name
     artifact_paths["report.json"] = report.json_path.name
@@ -201,6 +230,7 @@ def run_profile(
         artifact_paths=artifact_paths,
         bootstrap=boot,
         theta_grid=grid_result,
+        delta_grid=delta_grid_result,
     )
 
 
@@ -232,6 +262,15 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
             "headline_lambda": 1.0,
             "artifact": "theta_grid.json",
         }
+    grid2_summary: dict[str, Any] | None = None
+    if result.delta_grid is not None:
+        g2 = result.delta_grid
+        grid2_summary = {
+            "deltas": list(g2.deltas),
+            "rows": len(g2.rows),
+            "headline_delta": g2.headline_delta,
+            "artifact": "delta_grid.json",
+        }
     return {
         "run_id": result.run_id,
         "out_dir": str(result.out_dir),
@@ -247,6 +286,7 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
         "n_boot": result.run_manifest.freeze.n_boot,
         "bootstrap": boot_summary,
         "theta_grid": grid_summary,
+        "delta_grid": grid2_summary,
         "report_html": str(result.report.html_path),
         "report_json": str(result.report.json_path),
     }

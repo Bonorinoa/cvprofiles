@@ -84,7 +84,7 @@ def test_report_oracle_html_json(
     assert "admissible" in html
     assert "Empty admissible set" not in html
     assert "min/max" in html or "min/max B*" in html or "B*" in html
-    assert "v1.1 inference" in html
+    assert "v1.1/v2.0 inference" in html
 
 
 def test_report_empty_is_beautiful(

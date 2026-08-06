@@ -40,6 +40,27 @@ def _parse_theta_grid(raw: str | None) -> list[float] | None:
     return values
 
 
+def _parse_delta_grid(raw: str | None) -> list[float] | None:
+    """Parse a comma-separated non-negative finite δ grid, fail-loudly."""
+    if raw is None:
+        return None
+    tokens = raw.split(",")
+    if not raw.strip() or any(not token.strip() for token in tokens):
+        raise ValueError("must be a non-empty comma-separated list of non-negative numbers")
+    values: list[float] = []
+    for token in tokens:
+        try:
+            value = float(token.strip())
+        except ValueError as exc:
+            raise ValueError(f"invalid delta {token.strip()!r}") from exc
+        if not math.isfinite(value) or value < 0.0:
+            raise ValueError(f"delta {token.strip()!r} must be finite and >= 0")
+        if value in values:
+            raise ValueError(f"duplicate delta {token.strip()!r}")
+        values.append(value)
+    return values
+
+
 def _version_callback(value: bool) -> None:
     if value:
         typer.echo(f"cvprofiles {__version__}")
@@ -102,6 +123,13 @@ def run_cmd(
             help="Comma-separated positive threshold scale multipliers.",
         ),
     ] = None,
+    delta_grid: Annotated[
+        str | None,
+        typer.Option(
+            "--delta-grid",
+            help="Comma-separated non-negative tolerance values (absolute δ).",
+        ),
+    ] = None,
     title: Annotated[
         str,
         typer.Option("--title"),
@@ -129,6 +157,12 @@ def run_cmd(
         raise typer.Exit(code=2) from exc
 
     try:
+        delta_grid_deltas = _parse_delta_grid(delta_grid)
+    except ValueError as exc:
+        typer.secho(f"error: delta-grid: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=2) from exc
+
+    try:
         result = run_profile(
             scores=scores,
             roles=roles,
@@ -140,6 +174,7 @@ def run_cmd(
             title=title,
             n_boot=n_boot,
             theta_grid_lambdas=theta_grid_lambdas,
+            delta_grid_deltas=delta_grid_deltas,
         )
     except (ScoreError, RestrictError, IdentifyError, ReportError, ValueError) as exc:
         typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)
