@@ -1,0 +1,9 @@
+schema_version: "1"
+name: rank_agree_v1
+delta: 0.0
+restrictions:
+  - id: r_rank_agree_ref
+    type: rank_agree
+    theta: 0.8
+    params:
+      ref_measure: ref_measure

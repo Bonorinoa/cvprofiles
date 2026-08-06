@@ -1,7 +1,7 @@
-"""Slack evaluators for the v1.0 restriction subset used by mini_v1.
+"""Slack evaluators for the restriction registry.
 
-Only ``corr_min`` and ``corr_sign`` are implemented for the thin spine.
-Other registered types fail loud until a fixture demands them.
+Implemented (v2.0): ``corr_min``, ``corr_sign``, ``mean_order``, ``rank_agree``.
+Other registered types (``stability``) fail loud until a fixture demands them.
 """
 
 from __future__ import annotations
@@ -31,6 +31,19 @@ def pearson_corr(x: np.ndarray, y: np.ndarray) -> float:
     if not math.isfinite(float(c)):
         raise SlackError("corr produced non-finite result (zero variance?)")
     return float(c)
+
+
+def spearman_corr(x: np.ndarray, y: np.ndarray) -> float:
+    """Spearman rank correlation (ties get average ranks); fail loud.
+
+    Ranking via pandas Series.rank(method='average') — pandas is a core dep
+    with type stubs (scipy.stats has none under strict mypy).
+    """
+    if not np.isfinite(x).all() or not np.isfinite(y).all():
+        raise SlackError("spearman inputs must be finite")
+    rx = pd.Series(x).rank(method="average").to_numpy(dtype=float)
+    ry = pd.Series(y).rank(method="average").to_numpy(dtype=float)
+    return pearson_corr(rx, ry)
 
 
 def evaluate_slack(
@@ -86,8 +99,16 @@ def evaluate_slack(
         mean_out = float(np.mean(measure[~in_group]))
         return sign_f * (mean_in - mean_out) - theta
 
+    if t == "rank_agree":
+        # v2.0 thread b (docs/12 2026-08-05 D4): Spearman ρ vs ref_measure.
+        ref = str(p["ref_measure"])
+        if ref not in frame.columns:
+            raise SlackError(f"missing ref_measure column {ref!r}")
+        rho = spearman_corr(measure, frame[ref].to_numpy(dtype=float))
+        return rho - theta
+
     raise SlackError(
-        f"restriction type {t!r} has no evaluator in v1.0 thin spine "
+        f"restriction type {t!r} has no evaluator in the v2.0 registry "
         f"(schema-only until a fixture demands it)"
     )
 

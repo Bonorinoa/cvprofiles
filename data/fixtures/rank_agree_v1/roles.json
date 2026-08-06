@@ -1,0 +1,7 @@
+{
+  "unit_id": "unit_id",
+  "measures": ["m_rank_ok", "m_rank_ok2", "m_rank_mid", "m_rank_bad"],
+  "aux": ["ref_measure"],
+  "outcome": "y",
+  "diagnostic": []
+}
