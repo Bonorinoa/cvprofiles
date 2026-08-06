@@ -4,6 +4,28 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [Unreleased] — dev 2.0.1a1 (post-release audit follow-up, 2026-08-06)
+
+### Hardening
+- **CI wheel smoke** — new `wheel-smoke` job: `uv build` → fresh-venv install of the wheel → mini-fixture profile run from the installed package (R1; catches packaging regressions the editable smoke cannot)
+- **Coverage measured** — `pytest-cov` in dev extras; CI pytest step reports coverage (no gate); local 88% of `cvprofiles` (1563 stmts, 185 missed) (R2)
+- **Observable parquet fallback** — `slacks.parquet` write failures now warn on stderr instead of being swallowed; CSV remains authoritative (M4)
+- **Deprecation warnings un-suppressed** — blanket `ignore::DeprecationWarning` removed; suite green with none surfacing (M5)
+- **SPDX license metadata** — `license = "MIT"` (PEP 639); `uv build` verified (`License-Expression: MIT`, templates packaged) (R5)
+
+### Docs / contract fixes
+- docs/03 `corr_min` row corrected: **signed lower bound** `Corr(m,V) ≥ θ` (slack `Corr − θ`), not absolute correlation (M1; engine semantics canonical)
+- docs/17 pinned-network example uses `sign: -1` (engine schema), not `direction:` (M2; pinned input already correct)
+- `docs/PROJECT_MANIFEST.md` `dev_version` refreshed to `2.0.1a1` (R4)
+- `tools/verify_h5_trust.py` docstring documents the exact invocation and its two traps (`--proof` = proof artifact; `--out-root` = run-artifacts dir)
+
+### Tutorial
+- **`tutorials/cvprofiles_diagnostics_tour.ipynb`** — v2.0 measure-discipline tour: all four restriction evaluators, `ols_coef` with controls, bootstrap + θ-grid + δ-grid + anchors in one run, CLI, self-checking assertions; executed against `pip install cvprofiles==2.0.0` in a fresh venv — ALL ASSERTIONS PASSED, deterministic run_id
+
+### Boundary
+- PyPI landing description staleness (R3) deferred to the next release (same-version re-upload forbidden); OIDC publish automation (R6) deferred — the user-owned token flow stays the deliberate posture
+- B4 methodology statement remains open (Augusto-owned wording; options proposed 2026-08-06)
+
 ## [2.0.0] — 2026-08-06 (published on PyPI; tag `v2.0.0`)
 
 ### Measure discipline (v2.0, ENTRY complete 2026-08-05)

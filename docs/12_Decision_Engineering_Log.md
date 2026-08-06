@@ -839,3 +839,23 @@ alignment at publish time.
 ## 2026-08-06 — dev cycle resumed at 2.0.1a1
 
 **Decision (recorded):** after the 2.0.0 publication, the repo resumes a dev version: atomic bump `2.0.0 → 2.0.1a1` (delegated subagent, verified by the main agent): pyproject + `__init__` + uv.lock + mini golden refresh (run_id `52d4baab…`, content hashes stable) + version-literal tests + CI CLI-smoke literal + README/AGENTS posture. Commit `821c737`; **217 passed**, ruff/mypy clean; no push/tag by the subagent. `v2.0.0` published artifact and all historical proofs untouched. Next engine work proceeds from `2.0.1a1`.
+
+---
+
+## 2026-08-06 — post-release audit follow-up: findings closed (docs + hardening)
+
+**Decision (recorded):** independent post-release audit (methodology + software + CI/packaging) found no load-bearing defects; the release claims re-verified (217 tests, ruff, mypy strict, both proof verifiers exit 0, wheel sha256 == PyPI digest, CI green on HEAD). This entry closes the actionable findings:
+
+- **M1 — docs/03 `corr_min` semantics corrected.** The DRAFT catalog sketched `corr_min` as absolute correlation (`|Corr| − θ`); the engine (and docs/17, and the frozen H5 network) implement a **signed lower bound** `Corr(m,V) ≥ θ` (slack `Corr − θ`). Engine semantics are canonical; docs/03 row corrected 2026-08-06. Code unchanged.
+- **M2 — docs/17 example uses `sign:`.** The pinned-network block in `docs/17` §5 showed `corr_sign(... direction: -1 ...)`; the engine schema validates `params.sign ∈ {+1,−1}` and the frozen input already used `sign: -1`. Example line corrected; pinned network untouched.
+- **M4 — slacks.parquet write failure is now observable.** `write_identify_artifacts` previously swallowed `to_parquet` exceptions (`except: pass`). It now prints a warning to stderr; CSV remains authoritative. TDD: RED (silent) → GREEN (`tests/test_audit_fixes.py`).
+- **M5 — blanket DeprecationWarning suppression removed.** `pyproject.toml` no longer ignores all DeprecationWarnings; full suite green with none surfacing.
+- **R1 — CI wheel smoke.** New `wheel-smoke` job: `uv build` → fresh-venv install of the wheel → run the mini fixture profile from the installed package → assert report.html/range.json/M* (catches packaging regressions the editable smoke cannot).
+- **R2 — coverage measured.** `pytest-cov` in dev extras; CI pytest step reports coverage (no gate). Local: **88%** line coverage of `cvprofiles` (1563 stmts, 185 missed).
+- **R4 — manifest `dev_version` refreshed** to `2.0.1a1` (stale `2.0.0` was a current-state literal; audit rule: the atomic version-bump checklist includes `docs/PROJECT_MANIFEST.md`).
+- **R5 — SPDX license metadata.** `license = {text = "MIT"}` → `license = "MIT"` (PEP 639); `uv build` verified (`License-Expression: MIT`, template packaged).
+- **R3 (PyPI landing README staleness) and R6 (OIDC publish automation)** — **deferred, no action:** R3 refreshes at the next release (PyPI forbids same-version re-upload); R6 stays out of scope while the user-owned token flow is the deliberate posture.
+- **Tutorial #2 shipped** — `tutorials/cvprofiles_diagnostics_tour.ipynb` (v2.0 measure-discipline tour; all four evaluators, ols_coef, bootstrap + θ-grid + δ-grid + anchors in one run, CLI, self-checking assertions). Executed against `pip install cvprofiles==2.0.0` in a fresh venv: ALL ASSERTIONS PASSED. Cell ids added (nbformat warning cleared); deterministic run_id `890f95c2…`.
+- **Verifier invocation documented** — `tools/verify_h5_trust.py` docstring now carries the exact command and the two traps (`--proof` = proof artifact, `--out-root` = run-artifacts dir).
+
+**Still open:** B4 methodology statement (Augusto-owned wording; options proposed 2026-08-06). Everything else closed.

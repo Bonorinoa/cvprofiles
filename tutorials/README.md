@@ -1,6 +1,11 @@
-# cvprofiles tutorial
+# cvprofiles tutorials
 
-**`cvprofiles_tutorial.ipynb`** — the independent, two-part walk-through:
+Two independent notebooks. Both run against the **installed package only** (`pip install cvprofiles`)
+and need no repository files — every input is generated inline.
+
+## 1. `cvprofiles_tutorial.ipynb` — the core walk-through
+
+Two parts:
 
 1. **Part 1 (synthetic):** builds a scores matrix inline, writes the SCORE/RESTRICT
    inputs to disk, runs a full profile, and shows the empty-set contrast. Needs no
@@ -11,29 +16,43 @@
    file. The final cell asserts `M* = {m_trust_general, m_trust_in_group}` and
    `[L,U] = [0.370754, 0.623891]` bit-identically.
 
+## 2. `cvprofiles_diagnostics_tour.ipynb` — the v2.0 measure-discipline tour
+
+A single synthetic construct with a designed menu of five measures exercises the full
+**v2.0 diagnostic stack**:
+
+- all four restriction evaluators in one network (`corr_min`, `corr_sign`, `mean_order`,
+  `rank_agree`);
+- a regression target functional (`ols_coef` with a control);
+- all four additive diagnostics in one run: **bootstrap** over units, the **θ-grid**
+  sensitivity surface, the **δ-grid** tolerance surface, and the **θ-anchor** pre-data audit;
+- the wide-range-as-finding story (`m_good` and `m_weak` both admissible, β ≈ 0.45 vs 0.23);
+- the CLI (`cvprofiles run …`, stdout is pure JSON);
+- self-checking assertions on the package's core contracts (survivors-only range, anchors
+  excluded from the run_id, monotone δ-grid, θ-grid empty under tightening, fail-loud anchors).
+
 ## Why "independent"
 
 The verification installs the **published wheel** (not the source tree) into a fresh
-virtual environment, then executes the notebook. The kernel starts in the notebook's
-folder, so point Part 2 at the checkout via `CVPROFILES_REPO` (or run from the repo root):
+virtual environment, then executes the notebook. Part 2 of the core tutorial needs the
+checkout for the frozen H5 inputs, so point it at the repo via `CVPROFILES_REPO`:
 
 ```bash
 # fresh venv, wheel-only install (PYTHONPATH unset so the src tree cannot leak in)
 uv venv /tmp/cvp_tutorial_venv --python 3.11
 uv pip install --python /tmp/cvp_tutorial_venv/bin/python \
-    dist/cvprofiles-2.0.0a1-py3-none-any.whl jupyter nbconvert ipykernel
+    cvprofiles==2.0.0 jupyter nbconvert ipykernel
 
-# execute a copy of the notebook (kernel starts in the notebook's folder,
-# so point Part 2 at the checkout via CVPROFILES_REPO)
-cp tutorials/cvprofiles_tutorial.ipynb /tmp/cvp_tutorial_exec.ipynb
-env -u PYTHONPATH CVPROFILES_REPO=/Users/bonorinoa/Hermes/Projects/cvprofiles \
-    /tmp/cvp_tutorial_venv/bin/python -m jupyter nbconvert \
-    --to notebook --execute /tmp/cvp_tutorial_exec.ipynb \
-    --output /tmp/cvp_tutorial_exec_out.ipynb
+# execute a copy of a notebook (the committed notebook stays clean)
+cp tutorials/cvprofiles_diagnostics_tour.ipynb /tmp/cvp_tour_exec.ipynb
+env -u PYTHONPATH /tmp/cvp_tutorial_venv/bin/python -m jupyter nbconvert \
+    --to notebook --execute /tmp/cvp_tour_exec.ipynb \
+    --output /tmp/cvp_tour_exec_out.ipynb
 ```
 
-After publishing, the same flow works with `pip install cvprofiles` in place of the
-wheel path.
+For the core tutorial's H5 part, add `CVPROFILES_REPO=/path/to/cvprofiles` to the nbconvert
+command (nbconvert kernels start in the notebook's folder, so relative data paths fail
+outside the checkout).
 
 ## Notes
 
