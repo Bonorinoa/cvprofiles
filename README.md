@@ -46,6 +46,7 @@ Start here, then read in order:
 | [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) | Paper-facing locks, open fields, provenance rule |
 | [`docs/17_H5_Trust_Design.md`](docs/17_H5_Trust_Design.md) | H5 Trust design (LOCKED as design; run gated) |
 | [`docs/18_Measure_Discipline_Plan.md`](docs/18_Measure_Discipline_Plan.md) | v2.0 scope box: δ-grid, evaluator growth, θ-anchor discipline |
+| [`tutorials/cvprofiles_tutorial.ipynb`](tutorials/cvprofiles_tutorial.ipynb) | Independent tutorial: synthetic walk-through + H5 replication |
 | [`docs/PROJECT_MANIFEST.md`](docs/PROJECT_MANIFEST.md) | Machine-readable index |
 
 ## Roadmap
