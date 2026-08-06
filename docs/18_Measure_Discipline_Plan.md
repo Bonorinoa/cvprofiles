@@ -1,6 +1,6 @@
 # 18 — Measure Discipline Plan (v2.0)
 
-**Status:** OPEN — plan approved 2026-08-05 (Augusto). **Thread (a) δ-grid COMPLETE** (M-a1..M-a4, 2026-08-05). **Thread (b) evaluator registry COMPLETE** (M-b1..M-b4, 2026-08-05). Thread (c) pending per-thread checkpoint. See `docs/12`, 2026-08-05.
+**Status:** OPEN — plan approved 2026-08-05 (Augusto). **Threads (a) δ-grid, (b) evaluator registry, (c) θ-anchor discipline ALL COMPLETE** (2026-08-05). **ENTRY COMPLETE** — v2.0 DONE criteria pending (version bump to `2.0.0a1` + battery re-run, methodology statement, evidence re-audit, H5-replication tutorial). See `docs/12`, 2026-08-05.
 
 **Purpose:** the standing scope box for the v2.0 measure-discipline sprint. Three threads, strict TDD, one commit per milestone, a dated `docs/12` entry before each new code family. The four-state spine does not grow a fifth state; all work is IDENTIFY-internal or REPORT-adjacent.
 
@@ -66,6 +66,8 @@ Registry reality: schema lists 5 restriction types, evaluators implement 2; β s
 | M-c2 REPORT integration + manifest | RED: report test asserts anchors panel → impl → GREEN | mini_v1 with anchors | `anchors.json` in run dir; manifest records `anchors_hash`; None-safe template guard |
 | M-c3 H5 retrofit + verifier extension | RED: `tools/verify_h5_trust.py` asserts completeness → extend → GREEN | H5 pinned network | auditor exit 0; anchors file under `evals/h5_trust/data/` |
 | M-c4 workflow guidance + close-out | — | — | `docs/14` DRAFT section; `docs/13` row |
+
+**Status: DONE** (2026-08-05; commits `0a33554`, `4e8d15e`, `213548c`). H5 transcription audited (exit 0, 0 errors); docs/14 §13 practice guidance. **ENTRY (threads a/b/c) COMPLETE.**
 
 ## v2.0 criteria (ENTRY = measure discipline delivers first; DONE = release)
 

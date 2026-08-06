@@ -776,3 +776,16 @@ alignment at publish time.
 - `stability` / `diff_means` stay schema-only fail-loud (no fixture demands them).
 
 **Boundary:** feature layer; headline semantics unchanged; no version bump. Thread (c) θ-anchor discipline next, pending Augusto's go.
+
+---
+
+## 2026-08-05 — v2.0 thread (c) θ-anchor discipline complete; ENTRY COMPLETE (close-out)
+
+**Decision (recorded):** θ-anchor documentation discipline shipped and verified:
+- M-c1 `0a33554` — `cvprofiles.anchors` schema (restriction_id / citation_key / source_phrase / anchor_kind / pre_data) + completeness validation + `anchors_hash` (canonical JSON, **excluded from the freeze preimage**); `RunManifest.anchors_hash` (additive)
+- M-c2 `4e8d15e` — `run_profile(anchors=...)`, CLI `--anchors`, `anchors.json` artifact, HTML "θ-anchors · pre-data audit" panel, summary key; witness: ± anchors ⇒ same `run_id`
+- M-c3 `213548c` — H5 anchors transcription (`evals/h5_trust/data/anchors_h5_trust.yaml`, docs/17 §6; **Augusto review point**) + `tools/verify_h5_trust.py` completeness/pre-data pass (audit exit 0, 0 errors)
+- M-c4 — `docs/14` §13 anchor practice guidance (process, not engine defaults); `docs/13` row; `docs/18` status
+- Full suite **215 passed**; ruff/mypy clean; tags `v0.1` / `v1.1.0` intact.
+
+**Measure-discipline ENTRY complete** (threads a/b/c). Remaining v2.0 DONE criteria: methodology statement (B4), battery re-run under `2.0.0a1` with atomic golden refresh (B5/D3), evidence re-audit (C3), H5-replication tutorial (C5). No version bump yet (D5).

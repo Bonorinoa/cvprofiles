@@ -461,3 +461,24 @@ is the tracked summary. Final paper lock and submission claims remain Augusto's.
 3. `mean_order` is the "known-valid subgroup" anchor: a measure must separate the validated group from the rest by at least θ, with direction.
 
 **Status:** thread (b) of v2.0 measure discipline complete (M-b1..M-b4). Feature layer; headline semantics unchanged; no paper claim added.
+
+---
+
+## 2026-08-05 — v2.0 thread (c): θ-anchor documentation discipline
+
+- **package / git:** `cvprofiles==1.1.0a1`; commits `0a33554`, `4e8d15e`, `213548c` (M-c1..M-c3)
+- **path:** `cvprofiles.anchors` schema/hash; pipeline + CLI `--anchors`; report panel; H5 transcription `evals/h5_trust/data/anchors_h5_trust.yaml`; verifier extended; full suite **215 passed**
+- **preimage witness:** same bundle ± anchors ⇒ same `run_id`, different `anchors.json` (anchors are documentation provenance, not engine inputs)
+
+| Check | Result |
+|---|---|
+| Completeness enforced (every restriction id, exactly one) | 2/2 mini · 3/3 H5 |
+| Unknown anchor id | fails loud |
+| `anchors_hash` | SHA-256 canonical JSON, excluded from the freeze preimage |
+| H5 transcription vs pinned network (docs/17 §6) | `tools/verify_h5_trust.py --anchors --network` exit 0, 0 errors |
+
+**Interpretation:**
+1. Threshold discipline is now machine-checkable: the "literature-grounded, not data-mined" claim (docs/17 §6) is an auditable artifact, not prose.
+2. Anchors never move the freeze — same run_id with or without them — so retrofitting documentation does not invalidate existing runs.
+
+**Status:** thread (c) of v2.0 measure discipline complete (M-c1..M-c4). **ENTRY (three threads) COMPLETE.** DONE criteria pending: methodology statement, battery re-run under `2.0.0a1`, evidence re-audit, H5-replication tutorial.

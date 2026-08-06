@@ -339,6 +339,29 @@ P1 criterion recovery of GPS trust
 ## 12. Open taste items (not locked)
 
 - Default composite aggregator (mean vs PCA-1 vs IRT) — domain-specific; document choice.  
-- Whether institutional and interpersonal trust ever share a profile as *facets of one C* vs always separate \(C\)s — USER theory call.  
-- Minimum country \(n\) for country-level profiles — statistical taste; bootstrap honesty matters more than a magic \(n\).  
+- Whether institutional and interpersonal trust ever share a profile as *facets of one C* vs always separate Cs — USER theory call.
+- Minimum country n for country-level profiles — statistical taste; bootstrap honesty matters more than a magic n.
 - Exact YAML schema — deferred to M1.
+
+---
+
+## 13. θ-anchor discipline (v2.0, process guidance)
+
+Thresholds \\(\\theta\\) are where "literature-grounded, not data-mined" is won or lost. The package now has a schema'd **pre-data anchor artifact** (`anchors.yaml`, v2.0 thread c) so that discipline is machine-checkable, not prose:
+
+**What to write, per restriction:**
+- `restriction_id` — must match the network exactly (the engine checks).
+- `citation_key` — stable reference key (e.g. `oecd2017`); full citation lives in the design doc.
+- `source_phrase` — the published/derived number or bound the θ sits at or below (e.g. "country-level survey↔behavioral r≈0.29" for θ=0.3).
+- `anchor_kind` — `literature` (published estimate/bound), `derived` (computed from a stated rule), or `author` (explicit judgment).
+- `pre_data: true` — your record that the anchor was declared before the frozen run. The engine **cannot verify timing**; this flag is the researcher's commitment, and the verifier requires it for the H5 lane.
+
+**Practice rules:**
+1. **One anchor per restriction**, written before the frozen run, committed with the design inputs. The engine refuses incomplete anchor sets.
+2. **Anchor at or below published bounds** (conservative direction), and say so in the source phrase — this is what makes "not data-mined" auditable.
+3. Anchors are **documentation, not engine inputs**: they are hashed for provenance (`anchors_hash` in the manifest, `anchors.json` in the run dir, report panel) but **excluded from `run_id`** — adding anchors never changes the freeze.
+4. When a restriction has no clean published number, say so explicitly (`anchor_kind: author`, source phrase = the judgment and its reasoning). Silence is a red flag, not a default.
+
+---
+
+## 14. Relation to other docs (v2.0 pointer)
