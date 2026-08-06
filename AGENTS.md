@@ -40,7 +40,7 @@ The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS P
 
 ## Current posture
 
-- Package development version: `2.0.0a1` (v2.0 measure discipline; publication in progress).
+- Package version: `2.0.0` (v2.0 release; PyPI publication in progress).
 - v1.1 inference layer shipped and **tagged `v1.1.0`** (2026-08-04, `fce31c8`); PyPI release pending.
 - **v2.0 measure discipline ENTRY COMPLETE** (`docs/18_Measure_Discipline_Plan.md`): δ-grid, evaluator growth (`mean_order`/`rank_agree`/`ols_coef`), θ-anchor artifacts all shipped (2026-08-05); DONE phase in progress (publication authorized, tutorial pending).
 - `reports/summaries/v1_1_package_synth_summary.json` is package smoke evidence (seeds `0..4`).

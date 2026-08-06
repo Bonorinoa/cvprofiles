@@ -27,7 +27,7 @@ def _proof(*, m_star: list[str], lower: float | None, upper: float | None) -> di
             "seed": 20260804,
             "policy": "none",
             "delta": 0.0,
-            "package_version": "2.0.0a1",
+            "package_version": "2.0.0",
             "parent_sha": "a" * 40,
             "scores_hash": "b" * 64,
             "network_hash": "c" * 64,

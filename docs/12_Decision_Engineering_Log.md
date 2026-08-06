@@ -801,3 +801,9 @@ alignment at publish time.
 - First PyPI deployment for Augusto: a walk-through accompanies the close-out.
 
 **Follow-ups:** atomic version bump `1.1.0a1 → 2.0.0a1` (+ golden refresh) → battery re-run → tutorial (synthetic + H5) → build/publish → tag/push → reconciliation.
+
+---
+
+## 2026-08-05 — v2.0.0 release preparation (version alignment)
+
+**Decision (recorded):** aligning the package version to `2.0.0` for the first PyPI publication (convention: version alignment at publish; docs/12 2026-08-01). Atomic with golden refresh and all version literals. The wheel built from this commit is the published artifact; the repo may return to a dev version (`2.0.1a1`) in a later dev cycle. Tags `v0.1` / `v1.1.0` unchanged. PyPI upload is executed by Augusto in his own terminal (token never enters the agent session).
