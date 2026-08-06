@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -43,6 +44,7 @@ def run_identify(
     restrict: RestrictBundle | NetworkConfig,
     *,
     beta_bundle: RestrictBundle | None = None,
+    delta_override: float | None = None,
 ) -> IdentifyResult:
     """Compute slacks, M*, β image, and min/max range.
 
@@ -56,6 +58,11 @@ def run_identify(
         Either a RestrictBundle (preferred) or NetworkConfig.
     beta_bundle:
         Required if ``restrict`` is only a NetworkConfig; otherwise taken from bundle.
+    delta_override:
+        v2.0 δ-grid tolerance override (docs/12, 2026-08-05). When not None,
+        replaces the bundle/network δ for this call only — an IDENTIFY-side
+        admission rule that never touches network_hash/beta_hash. Must be
+        finite and >= 0. Default None keeps the declared δ (bit-identical).
     """
     if isinstance(restrict, RestrictBundle):
         network = restrict.network
@@ -67,6 +74,12 @@ def run_identify(
         network = restrict
         beta = beta_bundle.beta
         delta = float(network.delta)
+
+    if delta_override is not None:
+        override = float(delta_override)
+        if not math.isfinite(override) or override < 0.0:
+            raise IdentifyError("delta_override must be finite and >= 0")
+        delta = override
 
     measures = list(roles.measures)
     if not measures:

@@ -139,3 +139,54 @@ def test_write_empty_artifacts(scored_mini, restrict_harsh, tmp_path: Path) -> N
     rng = json.loads(paths["range.json"].read_text())
     assert rng["empty"] is True
     assert rng["L"] is None and rng["U"] is None
+
+
+# --- v2.0 δ-grid API: delta_override on run_identify (docs/12, 2026-08-05) ---
+
+
+def test_delta_override_none_matches_default(scored_mini, restrict_mini) -> None:
+    """Default path stays bit-identical when no override is passed."""
+    default = run_identify(scored_mini.frame, scored_mini.roles, restrict_mini)
+    explicit = run_identify(
+        scored_mini.frame, scored_mini.roles, restrict_mini, delta_override=None
+    )
+    assert explicit.admissible == default.admissible
+    assert explicit.range_L == default.range_L and explicit.range_U == default.range_U
+    assert explicit.delta == default.delta == 0.0
+
+
+def test_delta_override_changes_harsh_admission(scored_mini, restrict_harsh) -> None:
+    """Tolerance override is an IDENTIFY-side admission rule, not a network change.
+
+    Measured slacks on mini_v1 harsh (hand-verified): m_good corr_min slack
+    -0.001311, m_weak -0.005854; m_slop fails both bars (corr_min -1.974692,
+    corr_sign -1.075692). δ=0.01 admits both designed valids, never m_slop.
+    """
+    empty = run_identify(scored_mini.frame, scored_mini.roles, restrict_harsh)
+    assert empty.empty is True
+
+    result = run_identify(
+        scored_mini.frame, scored_mini.roles, restrict_harsh, delta_override=0.01
+    )
+    assert result.empty is False
+    assert set(result.admissible) == {"m_good", "m_weak"}
+    assert "m_slop" not in result.admissible
+    assert result.delta == pytest.approx(0.01, abs=1e-12)
+    assert result.range_L is not None and result.range_U is not None
+
+
+def test_delta_override_negative_fails_loud(scored_mini, restrict_mini) -> None:
+    with pytest.raises(IdentifyError, match="delta_override"):
+        run_identify(
+            scored_mini.frame, scored_mini.roles, restrict_mini, delta_override=-0.1
+        )
+
+
+def test_delta_override_nonfinite_fails_loud(scored_mini, restrict_mini) -> None:
+    with pytest.raises(IdentifyError, match="delta_override"):
+        run_identify(
+            scored_mini.frame,
+            scored_mini.roles,
+            restrict_mini,
+            delta_override=float("nan"),
+        )
