@@ -40,9 +40,9 @@ The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS P
 
 ## Current posture
 
-- Package development version: `1.1.0a1`.
+- Package development version: `2.0.0a1` (v2.0 measure discipline; publication in progress).
 - v1.1 inference layer shipped and **tagged `v1.1.0`** (2026-08-04, `fce31c8`); PyPI release pending.
-- **v2.0 measure discipline OPEN** (`docs/18_Measure_Discipline_Plan.md`): δ-grid, evaluator registry growth (`mean_order`/`rank_agree`/`ols_coef`), θ-anchor artifacts, H5-replication tutorial; per-thread checkpoints; no engine code until the doc-hygiene milestone (2026-08-05) is committed.
+- **v2.0 measure discipline ENTRY COMPLETE** (`docs/18_Measure_Discipline_Plan.md`): δ-grid, evaluator growth (`mean_order`/`rank_agree`/`ols_coef`), θ-anchor artifacts all shipped (2026-08-05); DONE phase in progress (publication authorized, tutorial pending).
 - `reports/summaries/v1_1_package_synth_summary.json` is package smoke evidence (seeds `0..4`).
 - `reports/summaries/v1_1_protocol_synth_mc50_summary.json` is a distinct provisional synthetic-only MC50 proof artifact (seeds `0..49`). It is not H5 or a full empirical paper lock.
 - `reports/runs/` contains reproducible bulk outputs and is ignored. Allow-listed proof summaries under `reports/summaries/` are tracked.

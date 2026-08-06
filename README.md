@@ -6,7 +6,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **v0.1** tagged (methods KB + museum PoC); **v1.1.0 tagged** (MVP: spine + inference layer + H5 Trust evidence); dev package `1.1.0a1`; PyPI publication pending |
+| **Version** | **v0.1** tagged (methods KB + museum PoC); **v1.1.0 tagged** (MVP: spine + inference layer + H5 Trust evidence); **v2.0 measure discipline (dev `2.0.0a1`, publication in progress)**; PyPI publication pending |
 | **Status** | Public repo live; tags `v0.1` @ `fb62b48` and **`v1.1.0`** (MVP, 2026-08-04) frozen; protocol draft locked **provisional synthetic-only**; H5 Trust design locked (`docs/17`), first frozen run accepted as **preliminary paper-facing evidence** (n=35, [L,U]=[0.371,0.624]); PyPI publication pending |
 | **Type** | Academic methods tool (Python package + paper) |
 | **Owner** | Augusto Gonzalez Bonorino |
@@ -63,7 +63,7 @@ Start here, then read in order:
 - Units-only bootstrap with conservative, additive percentile diagnostics
 - Deterministic θ-grid sensitivity surface; headline remains [L,U]=min/max B*
 - Pipeline, CLI, JSON/HTML audit panels, package-native evidence, and minimal CI
-- Version `1.1.0a1`; tag `v1.1.0` live; PyPI publication remains an open release decision
+- Version `2.0.0a1`; tag `v1.1.0` live; v2.0 measure discipline ENTRY complete; PyPI publication in progress
 - Provisional synthetic-only protocol lock (`docs/16`) with an audited MC50 proof table (seeds `0..49`); H5 Trust design locked (`docs/17`), first frozen run (n=35) accepted as **preliminary paper-facing evidence**; empirical/paper inputs remain Augusto-owned
 
 ### Remaining backlog
@@ -93,7 +93,7 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
 - **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit + v1.1 inference layer, merged.
-- **v1.1.0 tagged (2026-08-04):** MVP — v1.0 spine + v1.1 inference layer (units bootstrap + θ-grid) + H5 Trust preliminary evidence. Dev package `1.1.0a1`; PyPI publication pending.
+- **v1.1.0 tagged (2026-08-04):** MVP — v1.0 spine + v1.1 inference layer (units bootstrap + θ-grid) + H5 Trust preliminary evidence. Dev package `2.0.0a1`; PyPI publication in progress.
 - **Not yet:** PyPI release. **v2.0 measure discipline in progress** (`docs/18`): δ-grid, evaluator growth, θ-anchor artifacts, H5-replication tutorial.
 
 ### Install (dev)

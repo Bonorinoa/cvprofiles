@@ -225,4 +225,4 @@ def test_summary_is_additive_and_reports_package_version(
     assert summary["bootstrap"]["n_boot"] == 5
     assert summary["theta_grid"]["headline_lambda"] == 1.0
     assert result.report.payload["package_version"] == __version__
-    assert __version__ == "1.1.0a1"
+    assert __version__ == "2.0.0a1"

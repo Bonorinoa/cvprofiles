@@ -789,3 +789,15 @@ alignment at publish time.
 - Full suite **215 passed**; ruff/mypy clean; tags `v0.1` / `v1.1.0` intact.
 
 **Measure-discipline ENTRY complete** (threads a/b/c). Remaining v2.0 DONE criteria: methodology statement (B4), battery re-run under `2.0.0a1` with atomic golden refresh (B5/D3), evidence re-audit (C3), H5-replication tutorial (C5). No version bump yet (D5).
+
+---
+
+## 2026-08-05 — Anchors confirmed; v2.0 DONE phase + PyPI publication authorized
+
+**Decision (dated, Augusto explicit):**
+- The H5 θ-anchor transcription (`evals/h5_trust/data/anchors_h5_trust.yaml`) is **confirmed as written** (D6/D7 review point closed).
+- Approved: proceed through the v2.0 DONE criteria in the recommended order and **publish the package to PyPI**, verified by an independent notebook tutorial (synthetic data first, then the H5 replication).
+- This is the explicit publication authorization previously held open (AGENTS.md convention 6). It authorizes: version alignment for publication, `uv build`, the PyPI upload of the release version, the `v2.0.0` symbolization tag, and the branch/tag push. It does **not** change the four-state spine or any scientific lock.
+- First PyPI deployment for Augusto: a walk-through accompanies the close-out.
+
+**Follow-ups:** atomic version bump `1.1.0a1 → 2.0.0a1` (+ golden refresh) → battery re-run → tutorial (synthetic + H5) → build/publish → tag/push → reconciliation.
