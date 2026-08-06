@@ -47,11 +47,12 @@ Start here, then read in order:
 | [`docs/17_H5_Trust_Design.md`](docs/17_H5_Trust_Design.md) | H5 Trust design (LOCKED as design; run gated) |
 | [`docs/18_Measure_Discipline_Plan.md`](docs/18_Measure_Discipline_Plan.md) | v2.0 scope box: δ-grid, evaluator growth, θ-anchor discipline |
 | [`tutorials/cvprofiles_tutorial.ipynb`](tutorials/cvprofiles_tutorial.ipynb) | Independent tutorial: synthetic walk-through + H5 replication |
+| [`tutorials/cvprofiles_diagnostics_tour.ipynb`](tutorials/cvprofiles_diagnostics_tour.ipynb) | v2.0 measure-discipline tour: all evaluators + all diagnostic layers |
 | [`docs/PROJECT_MANIFEST.md`](docs/PROJECT_MANIFEST.md) | Machine-readable index |
 
 ## Roadmap
 
-### v1.0 (this sprint — thin first-principles spine)
+### v1.0 (shipped 2026-08-01 — thin first-principles spine)
 
 1. **Schemas + freeze contract** — typed score matrix, network, \(\beta\), run manifest  
 2. **SCORE → RESTRICT → IDENTIFY** — slacks, \(M^*\), \([L,U]=\min/\max B^*\) (no bootstrap)  
@@ -59,19 +60,24 @@ Start here, then read in order:
 4. **Synth harness re-impl** under package/tests (H1a / H2 / H3 / H4; H1_latent diagnostic)  
 5. **Installable package + minimal CI**
 
-### v1.1 (tagged `v1.1.0` 2026-08-04 — MVP; PyPI publication pending)
+### v1.1 (tagged `v1.1.0` 2026-08-04 — MVP; superseded by v2.0.0)
 
 - Units-only bootstrap with conservative, additive percentile diagnostics
 - Deterministic θ-grid sensitivity surface; headline remains [L,U]=min/max B*
 - Pipeline, CLI, JSON/HTML audit panels, package-native evidence, and minimal CI
-- Version `2.0.0`; tag `v1.1.0` live; v2.0 measure discipline released on PyPI 2026-08-06
 - Provisional synthetic-only protocol lock (`docs/16`) with an audited MC50 proof table (seeds `0..49`); H5 Trust design locked (`docs/17`), first frozen run (n=35) accepted as **preliminary paper-facing evidence**; empirical/paper inputs remain Augusto-owned
+
+### v2.0 (published on PyPI 2026-08-06 — tag `v2.0.0`)
+
+- Measure discipline: absolute δ-grid, evaluator growth (`mean_order` / `rank_agree` / `ols_coef`), θ-anchor pre-data audit
+- Independent tutorials verified against the PyPI package: synthetic walk-through + H5 replication, and the v2.0 diagnostics tour
+- **All v2.0-DONE criteria complete (2026-08-06)** — B4 methodology statement locked (`docs/03`); dev cycle at `2.0.1a1`
 
 ### Remaining backlog
 
 - **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored \(R\), \(\theta\), \(\delta\), \(\beta\), and evidence posture (synthetic-only portion currently locked provisional)
 - **M10 / H5:** country-level generalized trust baseline — design **LOCKED** (`docs/17`); first frozen run (n=35) accepted as **preliminary paper-facing evidence** (`reports/summaries/h5_trust_evidence_summary.json`); final paper lock + release remain Augusto's
-- **v2.0 measure discipline (in progress):** see [`docs/18_Measure_Discipline_Plan.md`](docs/18_Measure_Discipline_Plan.md) — δ-grid tolerance layer, `mean_order`/`rank_agree`/`ols_coef` evaluators, θ-anchor artifacts, and an H5-replication tutorial. LaTeX report remains later backlog.
+- **v2.0 measure discipline DONE (2026-08-06):** δ-grid, evaluator growth, θ-anchor artifacts, both tutorials verified against the PyPI package; B4 methodology statement locked — all v2.0-DONE criteria complete. Next-sprint scope box to be drafted; LaTeX report remains later backlog.
 
 See [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) for the locked v1.0 scope box and [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) for the v1.1 handoff checklist.
 
@@ -93,9 +99,9 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
-- **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit + v1.1 inference layer, merged.
+- **`main`:** v1.0 spine through M9 (`1.0.0a1`) + intermediate spam audit + v1.1 inference layer + v2.0 measure discipline, all merged.
 - **v1.1.0 tagged (2026-08-04):** MVP — v1.0 spine + v1.1 inference layer (units bootstrap + θ-grid) + H5 Trust preliminary evidence. Superseded by **v2.0.0, published on PyPI (2026-08-06)**; dev cycle at `2.0.1a1`.
-- **Not yet:** paper protocol final lock. **cvprofiles 2.0.0 published on PyPI (2026-08-06)**; dev cycle resumed at `2.0.1a1`; v2.0 measure discipline ENTRY complete (`docs/18`); H5-replication tutorial verified.
+- **Not yet:** paper protocol final lock (Augusto-owned). **cvprofiles 2.0.0 published on PyPI (2026-08-06)**; dev cycle at `2.0.1a1`; **v2.0 measure discipline fully DONE** — B4 methodology statement locked (`docs/03`); both tutorials verified against the PyPI package; next-sprint design pending.
 
 ### Install (dev)
 

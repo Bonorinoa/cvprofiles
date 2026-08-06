@@ -865,3 +865,20 @@ alignment at publish time.
 **Decision (dated, Augusto-approved):** Augusto selected **Option B** (framework + inference stance, docs/03 only) from three proposed drafts. Locked into `docs/03` as the "Statement of methodology (v2.0 — B4, LOCKED 2026-08-06)" section: partial identification over a finite menu of measurement functions; `M*` under researcher-authored R with thresholds θ; `[L,U] = [min β(M*), max β(M*)]`; empty/wide ranges as findings; bootstrap/θ-grid/δ-grid additive; Leamer-ancestor positioning; conservative inference stance. This closes the **last v2.0-DONE criterion** (docs/18 status map now all ✅). No version bump implied — package stays `2.0.1a1` dev unless Augusto decides otherwise.
 
 **Status update (same day):** the B4 lock entry above closes the audit's last open item — **all v2.0-DONE criteria are now complete**.
+
+---
+
+## 2026-08-06 — pre-sprint hygiene sweep (v2 → v3)
+
+**Decision (recorded):** final hygiene sweep before the next sprint's design session. Fixed current-posture drift only; historical dated entries and proof artifacts intentionally untouched (per the drift-sweep rule: historical lines stay, current-state lines move):
+
+- **README.md:** roadmap now shows v1.0 shipped / v1.1 superseded / **v2.0 published + all DONE criteria complete**; "PyPI publication pending" and "v2.0 (in progress)" removed; diagnostics-tour notebook added to the doc map; repo-status bullets reconciled.
+- **docs/15:** release checklist posture → `v2.0.0` published; v2.0 DONE.
+- **docs/10:** Q19 (PyPI publication) moved to Resolved with a breadcrumb row; other open rows stay.
+- **docs/13:** appended the audit + v2.0-DONE closure row.
+- **Source docstrings:** `schemas/network.py` ("v1.0 schema registry" → v2.0), `schemas/beta.py` ("corr_y only (M5)" → v2.0 evaluators), `cli.py` ("thin v1.0 spine" → thin spine v2.0), `report/pipeline.py` range note "(v1.1)" → "(v2.0)" (notes not in the freeze preimage).
+- **Wiring:** `audits/` added to the manifest `directories:` list and the AGENTS.md truth table; AGENTS.md posture notes B4 locked.
+- **Local junk:** root `.DS_Store` removed (gitignored, untracked).
+- **Left as-is (deliberate):** museum `evals/synthetic/v0_poc.py` (unimported), historical `1.0.0a1`/`1.1.0a1` literals in dated log rows and CHANGELOG release entries, `dist/` published artifacts (provenance), protocol-freeze `AWAITING AUGUSTO` rows (open by design), `stability`/`diff_means` schema-only fail-loud types.
+
+No engine behavior changed; full battery green; next-sprint scope box (docs/19) to be drafted in the new session with the manifest/doc-map/AGENTS wiring done in the same commit.

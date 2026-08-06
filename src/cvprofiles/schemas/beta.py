@@ -10,7 +10,11 @@ BetaType = Literal["corr_y", "ols_coef", "diff_means"]
 
 
 class BetaSpec(BaseModel):
-    """Named target functional. v1.0 evaluator implements ``corr_y`` only (M5)."""
+    """Named target functional.
+
+    v2.0 evaluators: ``corr_y``, ``ols_coef``; ``diff_means`` stays
+    schema-only fail-loud.
+    """
 
     model_config = ConfigDict(extra="forbid")
 

@@ -1,7 +1,7 @@
 # 09 — MVP Plan
 
-**Status:** v1.0 spine sprint live (2026-08-01)  
-**Authority:** thin cut of this document governs the current sprint; full MVP backlog remains context only.
+**Status:** v1.0 spine sprint shipped (2026-08-01); historical context for later sprints
+**Authority:** governed the v1.0 sprint; full MVP backlog remains context only.
 
 ---
 

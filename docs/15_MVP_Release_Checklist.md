@@ -67,6 +67,6 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 
 ## After promotion
 
-- Tag decisions are Augusto + release-review owned (`v1.1.0` tagged 2026-08-04; PyPI publication pending)
+- Tag decisions are Augusto + release-review owned (`v1.1.0` tagged 2026-08-04; `v2.0.0` published on PyPI 2026-08-06)
 - CHANGELOG promotion entry
-- v2.0 measure discipline (in progress): δ-grid, `mean_order`/`rank_agree`/`ols_coef` evaluators, θ-anchor artifacts, H5-replication tutorial — see `docs/18_Measure_Discipline_Plan.md`. LaTeX report remains later backlog.
+- v2.0 measure discipline DONE (2026-08-06): δ-grid, `mean_order`/`rank_agree`/`ols_coef` evaluators, θ-anchor artifacts, H5-replication tutorial + diagnostics tour, B4 methodology statement locked — see `docs/18_Measure_Discipline_Plan.md`. LaTeX report remains later backlog.

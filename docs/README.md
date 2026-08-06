@@ -11,7 +11,9 @@ Human prep for real score matrices and networks: [`14_Researcher_Input_Guide.md`
 
 Paper-facing protocol home: [`16_Paper_Protocol_Freeze.md`](16_Paper_Protocol_Freeze.md) — draft until Gate B; researcher-owned fields remain explicit.
 
-v2.0 measure-discipline scope box: [`18_Measure_Discipline_Plan.md`](18_Measure_Discipline_Plan.md) — δ-grid, evaluator growth, θ-anchor discipline, H5-replication tutorial.
+v2.0 measure-discipline scope box: [`18_Measure_Discipline_Plan.md`](18_Measure_Discipline_Plan.md) — δ-grid, evaluator growth, θ-anchor discipline, H5-replication tutorial. **All v2.0-DONE criteria complete (2026-08-06, B4 locked).**
+
+Post-release audit reports: `../audits/`.
 
 Machine index: [`PROJECT_MANIFEST.md`](PROJECT_MANIFEST.md).
 

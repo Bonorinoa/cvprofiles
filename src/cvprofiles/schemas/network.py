@@ -6,8 +6,8 @@ from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, field_validator, model_validator
 
-# Known restriction type ids for v1.0 schema registry.
-# Evaluators land in M4; unknown types fail loud at parse time.
+# Known restriction type ids for the v2.0 schema registry.
+# Evaluators land in the v2.0 registry; unknown types fail loud at parse time.
 RestrictionType = Literal[
     "corr_sign",
     "corr_min",

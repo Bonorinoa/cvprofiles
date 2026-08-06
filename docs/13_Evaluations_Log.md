@@ -482,3 +482,15 @@ is the tracked summary. Final paper lock and submission claims remain Augusto's.
 2. Anchors never move the freeze — same run_id with or without them — so retrofitting documentation does not invalidate existing runs.
 
 **Status:** thread (c) of v2.0 measure discipline complete (M-c1..M-c4). **ENTRY (three threads) COMPLETE.** DONE criteria pending: methodology statement, battery re-run under `2.0.0a1`, evidence re-audit, H5-replication tutorial.
+
+---
+
+## 2026-08-06 — post-release audit + v2.0 DONE closure (hygiene sweep)
+
+**Evidence interpretation (recorded):** independent post-release audit (methodology + software + CI/packaging) re-verified the release claims and closed every actionable finding; the last v2.0-DONE criterion (B4 methodology statement) was locked by Augusto (Option B). Status:
+
+- **Release re-verified:** 218 tests, ruff clean, mypy strict clean (31 files), H5 + MC50 verifiers exit 0, wheel sha256 == PyPI digest, CI green on the pushed head (incl. new `wheel-smoke` job).
+- **Coverage now measured:** 88% of `cvprofiles` (1563 stmts, 185 missed) via `pytest-cov` (report only, no gate).
+- **Tutorial #2:** `tutorials/cvprofiles_diagnostics_tour.ipynb` executed against the PyPI wheel — ALL ASSERTIONS PASSED, deterministic run_id `890f95c2…`.
+- **B4 locked (2026-08-06, Option B):** docs/03 §Statement of methodology; **all v2.0-DONE criteria complete** (docs/18 status map all ✅).
+- **Not paper evidence:** the H5 n=35 numbers remain *preliminary paper-facing evidence*; final paper lock and release remain Augusto's.

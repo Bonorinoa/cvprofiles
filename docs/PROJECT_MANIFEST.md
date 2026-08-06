@@ -106,6 +106,7 @@ directories:
   - data/synthetic/
   - data/fixtures/
   - reports/
+  - audits/
   - docs/
 
 agents:

@@ -102,7 +102,7 @@ def build_report_payload(
             ),
             "note": (
                 "range is min/max of beta on M*; bootstrap band is additive "
-                "metadata (v1.1) and never replaces the headline"
+                "metadata (v2.0) and never replaces the headline"
             ),
         },
         "bootstrap": bootstrap,

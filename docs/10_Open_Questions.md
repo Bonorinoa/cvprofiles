@@ -39,7 +39,7 @@
 | Q16 | Parquet required vs CSV OK | Both; parquet preferred | No |
 | Q17 | CLI name | `cvprofiles` / `cvp` | Soft |
 | Q18 | License | **MIT locked** (2026-08-01) | — |
-| Q19 | PyPI publication | Package name availability check returned HTTP 404; publication decision remains open. | Before publish |
+| Q19 | PyPI publication | **published 2026-08-06 (`2.0.0`)**; name live; future releases via the user-owned token flow | Resolved |
 | Q20 | `AGENTS.md` timing | **present** (2026-08-04) — root handoff contract created; future agents should read it | Resolved |
 | Q21 | Parallel bootstrap | Serial MVP vs joblib later | No |
 
@@ -66,4 +66,5 @@
 | v1.0 scope / M6 | Thin spine; bootstrap/θ-grid deferred to v1.1; no M10 this sprint | 2026-08-01 |
 | v1.1 inference semantics | Units-only bootstrap and diagnostic θ-grid are shipped and locked; headline range remains \([L,U]=\min/\max B^*\) | 2026-08-04 |
 | Q19 name availability | `https://pypi.org/pypi/cvprofiles/json` returned HTTP 404; no publication attempted | 2026-08-04 |
+| Q19 PyPI publication | cvprofiles `2.0.0` published on PyPI (2026-08-06); user-owned token flow; independent verification chain (JSON API + sha256 + fresh-venv notebook) | 2026-08-06 |
 | δ-grid semantics | **Absolute δ grid** — thread (a) of v2.0 measure discipline; grid excluded from freeze preimage; headline = declared δ | 2026-08-05 |
