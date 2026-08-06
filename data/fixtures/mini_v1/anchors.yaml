@@ -1,0 +1,12 @@
+schema_version: "1"
+anchors:
+  - restriction_id: r_corr_min_aux
+    citation_key: "oracle_v1"
+    source_phrase: "synthetic oracle: corr(m, v_aux) >= 0.35"
+    anchor_kind: derived
+    pre_data: true
+  - restriction_id: r_corr_sign_aux
+    citation_key: "oracle_v1"
+    source_phrase: "synthetic oracle: corr(m, v_aux) positive, magnitude >= 0.10"
+    anchor_kind: derived
+    pre_data: true

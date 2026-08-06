@@ -48,3 +48,9 @@ class RunManifest(BaseModel):
     )
     artifact_paths: dict[str, str] = Field(default_factory=dict)
     notes: str | None = None
+    # v2.0 thread c: θ-anchor provenance. Excluded from the freeze preimage
+    # (docs/12 D4): anchors are documentation, not engine inputs.
+    anchors_hash: str | None = Field(
+        default=None,
+        description="SHA-256 of the validated anchors.yaml (if supplied).",
+    )
