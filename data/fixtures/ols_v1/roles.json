@@ -1,0 +1,7 @@
+{
+  "unit_id": "unit_id",
+  "measures": ["m_conf", "m_slop"],
+  "aux": ["c"],
+  "outcome": "y",
+  "diagnostic": []
+}

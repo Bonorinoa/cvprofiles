@@ -1,0 +1,10 @@
+schema_version: "1"
+name: ols_v1
+delta: 0.0
+restrictions:
+  - id: r_corr_sign_c
+    type: corr_sign
+    theta: 0.5
+    params:
+      variable: c
+      sign: 1
