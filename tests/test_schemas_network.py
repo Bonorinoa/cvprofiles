@@ -63,6 +63,13 @@ def test_mean_order_requires_group() -> None:
         RestrictionSpec(id="r1", type="mean_order", theta=0.1, params={})
 
 
+def test_mean_order_bad_sign_fails() -> None:
+    with pytest.raises(ValidationError, match="sign"):
+        RestrictionSpec(
+            id="r1", type="mean_order", theta=0.1, params={"group": "g", "sign": 0}
+        )
+
+
 def test_rank_agree_requires_ref_measure() -> None:
     with pytest.raises(ValidationError, match="ref_measure"):
         RestrictionSpec(id="r1", type="rank_agree", theta=0.5, params={})

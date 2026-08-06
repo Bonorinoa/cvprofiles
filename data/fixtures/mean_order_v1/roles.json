@@ -1,0 +1,7 @@
+{
+  "unit_id": "unit_id",
+  "measures": ["m_high", "m_low", "m_slop"],
+  "aux": ["group"],
+  "outcome": "y",
+  "diagnostic": []
+}

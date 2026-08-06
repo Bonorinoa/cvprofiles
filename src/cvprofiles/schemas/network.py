@@ -54,8 +54,12 @@ class RestrictionSpec(BaseModel):
                 sign = p.get("sign")
                 if sign not in (-1, 1, -1.0, 1.0):
                     raise ValueError("corr_sign requires params.sign in {+1, -1}")
-        if t == "mean_order" and "group" not in p:
-            raise ValueError("mean_order requires params.group")
+        if t == "mean_order":
+            if "group" not in p:
+                raise ValueError("mean_order requires params.group")
+            sign = p.get("sign", 1)
+            if sign not in (-1, 1, -1.0, 1.0):
+                raise ValueError("mean_order requires params.sign in {+1,-1}")
         if t == "rank_agree" and "ref_measure" not in p:
             raise ValueError("rank_agree requires params.ref_measure")
         return self

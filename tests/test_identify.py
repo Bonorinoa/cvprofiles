@@ -95,16 +95,17 @@ def test_identify_cold_double_run(scored_mini, restrict_mini) -> None:
 def test_identify_unimplemented_restriction_fails_loud(
     scored_mini, mini_roles: ScoreColumnRoles, mini_dir: Path
 ) -> None:
-    # mean_order is schema-valid but has no v1.0 evaluator
+    # stability is schema-valid but has no evaluator (v2.0 thread b: mean_order
+    # and rank_agree are implemented; stability stays schema-only fail-loud)
     raw_net = {
         "schema_version": "1",
         "delta": 0.0,
         "restrictions": [
             {
-                "id": "r_mean",
-                "type": "mean_order",
-                "theta": 0.1,
-                "params": {"group": "v_aux"},  # bindable column; evaluator missing
+                "id": "r_stability",
+                "type": "stability",
+                "theta": 0.5,
+                "params": {},
             }
         ],
     }

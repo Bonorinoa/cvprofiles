@@ -61,6 +61,31 @@ def evaluate_slack(
         c = pearson_corr(measure, frame[var].to_numpy(dtype=float))
         return sign_f * c - theta
 
+    if t == "mean_order":
+        # v2.0 thread b (docs/12 2026-08-05 D3): binary 0/1 indicator group;
+        # slack = sign*(mean(m|g=1) - mean(m|g=0)) - theta.
+        group = str(p["group"])
+        if group not in frame.columns:
+            raise SlackError(f"missing group column {group!r}")
+        sign_f = float(p.get("sign", 1))
+        if sign_f not in (1.0, -1.0):
+            raise SlackError("mean_order requires params.sign in {+1,-1}")
+        if not np.isfinite(measure).all():
+            raise SlackError("mean_order measure must be finite")
+        g = frame[group].to_numpy(dtype=float)
+        if not np.isfinite(g).all():
+            raise SlackError(f"group column {group!r} must be finite")
+        vals = np.unique(g)
+        if not (vals.size == 2 and set(vals) == {0.0, 1.0}):
+            raise SlackError(
+                f"group column {group!r} must be a binary 0/1 indicator "
+                f"(got unique values {list(vals)})"
+            )
+        in_group = g == 1.0
+        mean_in = float(np.mean(measure[in_group]))
+        mean_out = float(np.mean(measure[~in_group]))
+        return sign_f * (mean_in - mean_out) - theta
+
     raise SlackError(
         f"restriction type {t!r} has no evaluator in v1.0 thin spine "
         f"(schema-only until a fixture demands it)"

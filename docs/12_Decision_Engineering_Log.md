@@ -748,3 +748,18 @@ alignment at publish time.
 - Full suite **178 passed**; ruff/mypy clean; tags `v0.1` / `v1.1.0` intact.
 
 **Boundary:** diagnostic only; headline range unchanged; no version bump (per D5); H5 δ-grid numbers are not paper evidence beyond the existing preliminary checkpoint. Thread (b) evaluator registry next, pending Augusto's go.
+
+---
+
+## 2026-08-05 — v2.0 thread (b): evaluator semantics locked (D3/D4/D5)
+
+**Decision (LOCKED):** Augusto approved the thread (b) semantics recommended in the docs/18 plan (proceed with M-b*):
+
+- **D3 — mean_order** (`docs/18` thread b, M-b1): params `{group, sign}`, `sign ∈ {+1,−1}` default `+1` (schema-validated); `group` must be a **binary 0/1 indicator** column (fail loud on non-binary, non-finite, or missing column at bind/evaluate). Slack = `sign·(mean(m | g=1) − mean(m | g=0)) − θ`. Fixture `data/fixtures/mean_order_v1/` (hand-computed goldens: m_high 0.30, m_low −0.26, m_slop −1.10).
+- **D4 — rank_agree** (M-b2): Spearman ρ between m and `ref_measure` (ties via average ranks), slack = `ρ − θ`; non-finite / missing ref fails loud. Fixture `data/fixtures/rank_agree_v1/` with θ=0.8.
+- **D5 — ols_coef** (M-b3): β = **standardized OLS coefficient** on m with `params.controls`; all columns (outcome, controls, measure) z-scored ddof=0 (matching SCORE's zscore convention); numpy closed form; singular design / non-finite → fail loud. No statsmodels core dependency (decision 3). Fixture `data/fixtures/ols_v1/` with exact-recovery golden.
+- Registry discipline unchanged: `stability` and `diff_means` stay schema-only fail-loud until a fixture demands them.
+
+**Rationale:** locked semantics precede code so each evaluator is auditable and fixtures are hand-computable.
+
+**Follow-ups:** M-b1 mean_order → M-b2 rank_agree → M-b3 ols_coef → M-b4 evidence. One commit per milestone.

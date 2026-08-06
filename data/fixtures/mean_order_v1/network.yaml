@@ -1,0 +1,10 @@
+schema_version: "1"
+name: mean_order_v1
+delta: 0.0
+restrictions:
+  - id: r_mean_order_group
+    type: mean_order
+    theta: 0.3
+    params:
+      group: group
+      sign: 1
