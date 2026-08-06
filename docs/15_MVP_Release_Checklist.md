@@ -67,6 +67,6 @@ Tag / release decision is owned by the sibling release-review chat + Augusto —
 
 ## After promotion
 
-- Tag (e.g. `v1.1.0`) **only** via release-review chat + Augusto
+- Tag decisions are Augusto + release-review owned (`v1.1.0` tagged 2026-08-04; PyPI publication pending)
 - CHANGELOG promotion entry
-- Open v1.2 backlog: δ-grid, `mean_order`/`rank_agree` evaluators, `ols_coef`, LaTeX report
+- v2.0 measure discipline (in progress): δ-grid, `mean_order`/`rank_agree`/`ols_coef` evaluators, θ-anchor artifacts, H5-replication tutorial — see `docs/18_Measure_Discipline_Plan.md`. LaTeX report remains later backlog.

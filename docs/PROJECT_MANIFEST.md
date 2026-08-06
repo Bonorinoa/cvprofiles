@@ -61,6 +61,14 @@ h5_trust:
   M_star: [m_trust_general, m_trust_in_group]
   range: [0.37075446228800285, 0.62389053803067]
 
+v2_0:
+  status: measure_discipline_open
+  plan: docs/18_Measure_Discipline_Plan.md
+  threads: [delta_grid, evaluator_registry, theta_anchor_discipline]
+  version: 1.1.0a1  # keep through ENTRY; bump 2.0.0a1 atomically with golden refresh at the DONE transition
+  checkpoint: per_thread
+  h5_delta_grid_run: authorized_post_thread_a
+
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
   thesis_core: [RESTRICT, IDENTIFY, REPORT]
@@ -84,6 +92,7 @@ docs:
     - docs/14_Researcher_Input_Guide.md
     - docs/16_Paper_Protocol_Freeze.md
     - docs/17_H5_Trust_Design.md
+    - docs/18_Measure_Discipline_Plan.md
   live:
     - docs/12_Decision_Engineering_Log.md
     - docs/13_Evaluations_Log.md
@@ -113,4 +122,5 @@ locks:
   - v1_1_diagnostics_additive
   - v1_1_grid_excluded_from_freeze_preimage
   - h5_trust_design_locked_run_gated
+  - v2_0_measure_discipline_scope_box
 ```

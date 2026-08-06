@@ -715,3 +715,23 @@ remains dev `1.1.0a1`; PyPI publication is a separate decision with version
 alignment at publish time.
 
 **Boundary:** `v0.1` untouched; no PyPI publish; no further tag moves.
+
+---
+
+## 2026-08-05 — v2.0 measure discipline opened: nine decisions pinned (LOCKED)
+
+**Decision (LOCKED):** Augusto approved the measure-discipline plan (`docs/18_Measure_Discipline_Plan.md`) and pinned the nine open decisions:
+
+1. **δ-grid semantics — absolute grid.** Finite, unique, sorted ascending, δ ≥ 0, duplicates fail loud. Headline remains the *declared* δ run (computed outside the surface; no implicit injection). Grid settings are **excluded from the freeze preimage** (same bundle + different grid ⇒ same `run_id`, different `delta_grid.json`), mirroring the θ-grid contract including stale-layer cleanup. `run_identify` gains `delta_override: float | None = None` (default None ⇒ bundle δ; bit-identical default path). Multiplier semantics rejected (degenerate at δ=0).
+2. **Evaluator order confirmed:** `mean_order` → `rank_agree` → `ols_coef`, each with a semantics lock before code; `stability` / `diff_means` remain schema-only fail-loud until a fixture demands them.
+3. **ols_coef — manual implementation.** numpy closed-form point coefficient; **no statsmodels core dependency**. β is a point functional feeding `[L,U]`; bootstrap already carries uncertainty, so standard errors are not needed for the range. statsmodels may be added later only via a dated decision if robust SEs become a report requirement.
+4. **θ-anchor artifact — schema'd `anchors.yaml`.** Fields: `restriction_id`, `citation_key`, `source_phrase`, `anchor_kind` ({literature, derived, author}), `pre_data`. Engine enforces completeness (every restriction id, exactly one) and records `anchors_hash` in the run manifest + `anchors.json` in the run dir + a report panel. Excluded from the freeze preimage (witness: ± anchors ⇒ same `run_id`). **"Pre-data" is a process commitment** — the engine cannot verify file timing; the artifact makes the "literature-grounded θ" claim machine-checkable rather than prose. Purpose: preregistration for thresholds (see `docs/18`).
+5. **Version discipline:** keep `1.1.0a1` through ENTRY; bump `2.0.0a1` atomically with golden refresh at the ENTRY→DONE transition.
+6. **v2.0 DONE = all four dimensions green** (functional, measurement-methodological, evidence/paper/observability, engineering/release) **plus a new deliverable:** the end output of v2.0 is an **importable `cvprofiles` package with an H5-replication tutorial** (tutorial reproduces M\*={m_trust_general, m_trust_in_group}, [L,U]=[0.371,0.624] from frozen inputs via the installed wheel).
+7. **Documentation drift sweep first:** milestone 0 fixes AGENTS.md posture, README roadmap/repo-status, `docs/16` §6 pointer, `docs/15` backlog wording, `docs/10` breadcrumbs, manifest, and `docs/README.md` — before any engine code.
+8. **Sprint style:** per-thread checkpoints (stop after each thread for go/no-go).
+9. **H5 δ-grid run authorized** (gated on thread (a) shipping): run the δ-grid on the frozen H5 Trust inputs; use a distinct `--out` directory so stale-layer cleanup does not remove the original `bootstrap.json`/`theta_grid.json` from the default run-id dir; append a `docs/13` row.
+
+**Rationale:** closes the 2026-08-01 provisional default "always also report a small δ-grid as sensitivity" as a v2.0 feature; keeps the engine thin (manual OLS, no new dependency); makes threshold discipline auditable.
+
+**Follow-ups:** commit milestone 0 (doc hygiene + `docs/18`); then thread (a) M-a1 with a RED test. Per-thread checkpoints.

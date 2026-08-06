@@ -20,7 +20,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 ## Thesis spine (one paragraph)
 
-Researcher supplies unit×measure scores (SCORE). Researcher authors a nomological network \(R\) with thresholds \(\theta\) and a target \(\beta(\cdot)\) (RESTRICT). Engine computes sample slacks, keeps admissible measures \(M^*\), maps survivors through \(\beta\), and reports \(B^* / [L,U]\) (IDENTIFY). **v1.0:** \([L,U]=\min/\max B^*\) only. Bootstrap and \(\theta\)-sensitivity are **v1.1**. Audit trail in HTML/JSON (LaTeX later) a non-coder can steer (REPORT). Engine is **score-agnostic and model-free**. No LLM lives inside the engine.
+Researcher supplies unit×measure scores (SCORE). Researcher authors a nomological network \(R\) with thresholds \(\theta\) and a target \(\beta(\cdot)\) (RESTRICT). Engine computes sample slacks, keeps admissible measures \(M^*\), maps survivors through \(\beta\), and reports \(B^* / [L,U]\) (IDENTIFY). **v1.0:** \([L,U]=\min/\max B^*\) only. Bootstrap and \(\theta\)-sensitivity are **v1.1**. Measure discipline (δ-grid, evaluator growth, θ-anchor artifacts) is **v2.0**. Audit trail in HTML/JSON (LaTeX later) a non-coder can steer (REPORT). Engine is **score-agnostic and model-free**. No LLM lives inside the engine.
 
 ## Document map
 
@@ -45,6 +45,7 @@ Start here, then read in order:
 | [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) | MVP release checklist (feeds release-review chat) |
 | [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) | Paper-facing locks, open fields, provenance rule |
 | [`docs/17_H5_Trust_Design.md`](docs/17_H5_Trust_Design.md) | H5 Trust design (LOCKED as design; run gated) |
+| [`docs/18_Measure_Discipline_Plan.md`](docs/18_Measure_Discipline_Plan.md) | v2.0 scope box: δ-grid, evaluator growth, θ-anchor discipline |
 | [`docs/PROJECT_MANIFEST.md`](docs/PROJECT_MANIFEST.md) | Machine-readable index |
 
 ## Roadmap
@@ -57,19 +58,19 @@ Start here, then read in order:
 4. **Synth harness re-impl** under package/tests (H1a / H2 / H3 / H4; H1_latent diagnostic)  
 5. **Installable package + minimal CI**
 
-### v1.1 (shipped on `main` — verified dev artifact; protocol evidence drafted)
+### v1.1 (tagged `v1.1.0` 2026-08-04 — MVP; PyPI publication pending)
 
 - Units-only bootstrap with conservative, additive percentile diagnostics
-- Deterministic \(\theta\)-grid sensitivity surface; headline remains \([L,U]=\min/\max B^*\)
+- Deterministic θ-grid sensitivity surface; headline remains [L,U]=min/max B*
 - Pipeline, CLI, JSON/HTML audit panels, package-native evidence, and minimal CI
-- Version `1.1.0a1`; tag and PyPI publication remain open release decisions
-- Provisional synthetic-only protocol lock (`docs/16`) with an audited MC50 proof table (seeds `0..49`); empirical/paper inputs remain Augusto-owned
+- Version `1.1.0a1`; tag `v1.1.0` live; PyPI publication remains an open release decision
+- Provisional synthetic-only protocol lock (`docs/16`) with an audited MC50 proof table (seeds `0..49`); H5 Trust design locked (`docs/17`), first frozen run (n=35) accepted as **preliminary paper-facing evidence**; empirical/paper inputs remain Augusto-owned
 
 ### Remaining backlog
 
 - **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored \(R\), \(\theta\), \(\delta\), \(\beta\), and evidence posture (synthetic-only portion currently locked provisional)
 - **M10 / H5:** country-level generalized trust baseline — design **LOCKED** (`docs/17`); first frozen run (n=35) accepted as **preliminary paper-facing evidence** (`reports/summaries/h5_trust_evidence_summary.json`); final paper lock + release remain Augusto's
-- **v1.2 candidates:** \(\delta\)-grid, `mean_order`/`rank_agree` evaluators, `ols_coef`, and LaTeX report
+- **v2.0 measure discipline (in progress):** see [`docs/18_Measure_Discipline_Plan.md`](docs/18_Measure_Discipline_Plan.md) — δ-grid tolerance layer, `mean_order`/`rank_agree`/`ols_coef` evaluators, θ-anchor artifacts, and an H5-replication tutorial. LaTeX report remains later backlog.
 
 See [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) for the locked v1.0 scope box and [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) for the v1.1 handoff checklist.
 
@@ -92,8 +93,8 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
 - **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit + v1.1 inference layer, merged.
-- **v1.1 shipped on `main` as dev package `1.1.0a1`:** units-only bootstrap + θ-grid sensitivity (diagnostic; headline \([L,U]=\min/\max B^*\) unchanged); release-review handoff pending.
-- **Not yet:** PyPI release; any tag (release-review chat + Augusto decide).
+- **v1.1.0 tagged (2026-08-04):** MVP — v1.0 spine + v1.1 inference layer (units bootstrap + θ-grid) + H5 Trust preliminary evidence. Dev package `1.1.0a1`; PyPI publication pending.
+- **Not yet:** PyPI release. **v2.0 measure discipline in progress** (`docs/18`): δ-grid, evaluator growth, θ-anchor artifacts, H5-replication tutorial.
 
 ### Install (dev)
 

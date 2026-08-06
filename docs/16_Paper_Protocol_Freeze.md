@@ -97,7 +97,7 @@ The existing v1.1 summary is **package evidence**, not automatically the paper M
 | H5 empirical baseline | **DEFERRED** | Blocked until Augusto chooses the construct, score matrix, baseline, empirical network, θ, δ, and β. | `docs/05`, `docs/09` |
 | Empirical network authorship | **DEFERRED** | Agent may author oracle networks for synthetic debugging only. | `docs/01`, `docs/03`, `docs/14` |
 | Sharp partial-identification theory | **DEFERRED** | Optional garnish, not load-bearing for the package claim. | `docs/03` |
-| δ-grid implementation | **DEFERRED** | Separate engineering decision; current v1.1 θ-grid does not scale δ. | `docs/10`, `docs/12` |
+| δ-grid implementation | **DEFERRED → v2.0** | Separate engineering decision; current v1.1 θ-grid does not scale δ. Planned as thread (a) of measure discipline (absolute-δ grid, `docs/18`). | `docs/18`, `docs/12` |
 | Measure generation / prompt search | **DEFERRED** | Upstream researcher workflow; outside the engine and thesis core. | `docs/01`, `docs/03` |
 | New annotation campaign | **DEFERRED** | Hard non-goal unless explicitly reopened. | README / profile scope |
 | Tag and PyPI publication | **DEFERRED** | Release-review and Augusto-owned; this protocol draft does not publish. | `docs/15`, `docs/12` |

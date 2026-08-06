@@ -6,11 +6,11 @@
 
 | ID | Question | Options / notes | Blocking? |
 |---|---|---|---|
-| Q1 | Default slack tolerance \(\delta\) | `0` vs small positive; always grid-report | Soft for code; hard for H2 claims |
+| Q1 | Default slack tolerance δ | `0` vs small positive; always grid-report → **v2.0: absolute δ-grid decided** (`docs/18`, `docs/12` 2026-08-05) | Soft for code; hard for H2 claims |
 | Q2 | Paper interpretation of the bootstrap band | Package semantics are locked in v1.1: pointwise percentile endpoints over non-empty replicates; all-empty ⇒ null band; degenerate replicates counted and excluded. Paper interpretation remains open. | Soft; paper protocol |
 | Q3 | First \(\beta\) in demos | **closed default:** `corr_y` | Soft reopen |
-| Q4 | Spearman / rank restrictions in MVP | Include vs defer | Soft |
-| Q5 | Reference-measure restrictions | Risk of dictionary privilege | Design taste |
+| Q4 | Spearman / rank restrictions in MVP | Include vs defer → **v2.0: `rank_agree` evaluator** (`docs/18`) | Soft |
+| Q5 | Reference-measure restrictions | Risk of dictionary privilege | Design taste → v2.0 `rank_agree` ref_measure semantics (`docs/18`) |
 | Q6 | Sharp PI theory | Garnish vs postpone entirely | Soft |
 | Q7 | Multiple testing across menu | Ignore (menu fixed, descriptive) vs adjust | Soft |
 
@@ -66,3 +66,4 @@
 | v1.0 scope / M6 | Thin spine; bootstrap/θ-grid deferred to v1.1; no M10 this sprint | 2026-08-01 |
 | v1.1 inference semantics | Units-only bootstrap and diagnostic θ-grid are shipped and locked; headline range remains \([L,U]=\min/\max B^*\) | 2026-08-04 |
 | Q19 name availability | `https://pypi.org/pypi/cvprofiles/json` returned HTTP 404; no publication attempted | 2026-08-04 |
+| δ-grid semantics | **Absolute δ grid** — thread (a) of v2.0 measure discipline; grid excluded from freeze preimage; headline = declared δ | 2026-08-05 |

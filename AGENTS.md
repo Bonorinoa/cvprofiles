@@ -36,12 +36,13 @@ Augusto owns all main-path empirical/paper choices:
 
 Agents may author oracle networks only for synthetic DGPs. Do not invent an empirical network to make H5 or a paper table move. The existing spam audit is intermediate stress evidence, **not H5**.
 
-The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS PROVISIONAL SYNTHETIC-ONLY**. It does not authorize empirical/H5 work, engine changes, pushes, tags, PyPI publication, or a release claim by implication.
+The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS PROVISIONAL SYNTHETIC-ONLY**. It does not authorize empirical/H5 work, engine changes, pushes, tags, PyPI publication, or a release claim by implication. A dated amendment (`docs/16` §8, 2026-08-04) opens the empirical box **for the designated H5 Trust evaluation only**; its first frozen run (n=35) is **preliminary paper-facing evidence** (`reports/summaries/h5_trust_evidence_summary.json`) — a checkpoint, not a release. Final paper lock, tag, and PyPI remain Augusto's.
 
 ## Current posture
 
 - Package development version: `1.1.0a1`.
-- v1.1 inference layer is a verified development artifact on `main`; no v1.1 tag or PyPI release exists.
+- v1.1 inference layer shipped and **tagged `v1.1.0`** (2026-08-04, `fce31c8`); PyPI release pending.
+- **v2.0 measure discipline OPEN** (`docs/18_Measure_Discipline_Plan.md`): δ-grid, evaluator registry growth (`mean_order`/`rank_agree`/`ols_coef`), θ-anchor artifacts, H5-replication tutorial; per-thread checkpoints; no engine code until the doc-hygiene milestone (2026-08-05) is committed.
 - `reports/summaries/v1_1_package_synth_summary.json` is package smoke evidence (seeds `0..4`).
 - `reports/summaries/v1_1_protocol_synth_mc50_summary.json` is a distinct provisional synthetic-only MC50 proof artifact (seeds `0..49`). It is not H5 or a full empirical paper lock.
 - `reports/runs/` contains reproducible bulk outputs and is ignored. Allow-listed proof summaries under `reports/summaries/` are tracked.
@@ -57,6 +58,8 @@ The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS P
 | `docs/13_Evaluations_Log.md` | Evidence interpretations and artifact pointers |
 | `docs/15_MVP_Release_Checklist.md` | Release-review input; not release authority |
 | `docs/16_Paper_Protocol_Freeze.md` | Paper-facing locks, open fields, and provenance rule |
+| `docs/17_H5_Trust_Design.md` | H5 Trust design lock (run gated) |
+| `docs/18_Measure_Discipline_Plan.md` | v2.0 scope box: δ-grid, evaluator growth, θ-anchor discipline |
 | `pyproject.toml` | Package version, dependencies, lint/type/test configuration |
 | `.github/workflows/ci.yml` | CI contract |
 | `.gitignore` | Tracked proofs versus ignored run output |
