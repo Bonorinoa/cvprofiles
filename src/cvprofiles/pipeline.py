@@ -1,16 +1,20 @@
-"""Full SCORE → RESTRICT → IDENTIFY → REPORT composition (v1.1 spine).
+"""Full SCORE → RESTRICT → IDENTIFY → REPORT composition (v2.0 spine).
 
-v1.1 adds the inference layer on top of the v1.0 four-state spine:
-- bootstrap over units (additive percentile band; headline never replaced)
-- θ-grid sensitivity surface (diagnostic; NOT part of the freeze preimage)
+Inference layers on top of the four-state spine (all additive diagnostics;
+headline [L,U] = min/max B* is never replaced):
+- bootstrap over units (percentile band over non-empty replicates)
+- θ-grid sensitivity surface (λ scales thresholds; NOT in the freeze preimage)
+- δ-grid tolerance surface (absolute δ; NOT in the freeze preimage)
+- θ-anchor audit (schema'd anchors.yaml; documentation, NOT in the preimage)
 
 Freeze rule (docs/12): ``n_boot`` is normalized with
 ``freeze.normalize_n_boot`` (< 1 ⇒ JSON null) before the preimage is built,
-so bootstrap-off runs keep their run_ids bit-stable. The θ-grid is a
-diagnostic viewport: same bundle + different grid ⇒ same run_id, different
-``theta_grid.json``. Run directories must reflect exactly the layers this run
-produced, so stale ``bootstrap.json`` / ``theta_grid.json`` from a previous
-run into the same directory are removed when the layer is off.
+so bootstrap-off runs keep their run_ids bit-stable. Grids and anchors are
+diagnostic viewports: same bundle + different grid/± anchors ⇒ same run_id,
+different artifacts. Run directories must reflect exactly the layers this run
+produced, so stale ``bootstrap.json`` / ``theta_grid.json`` /
+``delta_grid.json`` / ``anchors.json`` from a previous run into the same
+directory are removed when the layer is off.
 """
 
 from __future__ import annotations
@@ -151,10 +155,12 @@ def run_profile(
         (dest / "theta_grid.json").unlink()
     if grid_deltas is None and (dest / "delta_grid.json").exists():
         (dest / "delta_grid.json").unlink()
+    if anchors is None and (dest / "anchors.json").exists():
+        (dest / "anchors.json").unlink()
 
     identify = run_identify(score.frame, score.roles, restrict)
 
-    # --- v1.1 inference layers (additive; headline [L,U] untouched) ---
+    # --- v1.1/v2.0 inference layers (additive; headline [L,U] untouched) ---
     boot: BootstrapResult | None = None
     if n_boot_norm is not None:
         boot = run_bootstrap(
@@ -208,8 +214,8 @@ def run_profile(
         created_at=created_at,
         artifact_paths=artifact_paths,
         notes=(
-            "v1.1 spine + v2.0 delta-grid; inference: "
-            "bootstrap + theta-grid + delta-grid (diagnostic)"
+            "v2.0 spine; inference: bootstrap + theta-grid + delta-grid "
+            "+ anchors (diagnostic)"
         ),
         anchors_hash=anchors_hash_value,
     )

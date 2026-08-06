@@ -305,3 +305,47 @@ def test_cli_bad_anchors_path_fails(mini_dir: Path, tmp_path: Path) -> None:
     assert "anchors" in proc.stderr.lower()
     assert "No such option" not in proc.stderr  # option exists; validation path
     assert proc.stdout.strip() == ""
+
+
+# --- post-release reliability audit (2026-08-06) ---
+
+
+def test_stale_anchors_artifact_removed_when_off(
+    mini_dir: Path, tmp_path: Path
+) -> None:
+    """Run dirs must mirror exactly the layers this run produced (anchors too)."""
+    out = tmp_path / "reuse"
+    run_profile(
+        **_run_kwargs(mini_dir), out_dir=out, anchors=mini_dir / "anchors.yaml"
+    )
+    assert (out / "anchors.json").is_file()
+
+    result = run_profile(**_run_kwargs(mini_dir), out_dir=out)
+    assert result.anchors_hash is None
+    assert not (out / "anchors.json").exists()
+    assert result.run_manifest.artifact_paths.get("anchors.json") is None
+
+
+def test_all_diagnostic_layers_compose(mini_dir: Path, tmp_path: Path) -> None:
+    """bootstrap + θ-grid + δ-grid + anchors together; headline unchanged."""
+    result = run_profile(
+        **_run_kwargs(mini_dir),
+        out_dir=tmp_path / "all",
+        n_boot=12,
+        theta_grid_lambdas=[0.5, 1.0, 2.0],
+        delta_grid_deltas=[0.0, 0.1],
+        anchors=mini_dir / "anchors.yaml",
+    )
+    assert result.bootstrap is not None
+    assert result.theta_grid is not None
+    assert result.delta_grid is not None
+    assert result.anchors_hash is not None
+    for name in ("bootstrap.json", "theta_grid.json", "delta_grid.json", "anchors.json"):
+        assert (result.out_dir / name).is_file()
+        assert result.run_manifest.artifact_paths.get(name) == name
+    html = (result.out_dir / "report.html").read_text()
+    assert "Bootstrap inference" in html
+    assert "θ-grid sensitivity" in html
+    assert "δ-grid tolerance" in html
+    assert "θ-anchors" in html
+    assert result.identify.range_L is not None and result.identify.range_U is not None

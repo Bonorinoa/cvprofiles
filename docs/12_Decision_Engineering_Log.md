@@ -822,3 +822,14 @@ alignment at publish time.
 - The PyPI project description is the pre-publication README (says "publication in progress"); it refreshes on the next release. Cosmetic only.
 - Paper protocol fields remain Augusto-owned; H5 numbers remain preliminary paper-facing evidence.
 - Dev cycle may resume at `2.0.1a1` when new work starts (atomic bump + golden refresh).
+
+---
+
+## 2026-08-06 — post-release reliability audit (instrument hardening)
+
+**Decision (recorded):** post-2.0.0 audit of the shipped instrument with a measurement-validation lens:
+- **Fixed (contract bug):** run-directory stale-artifact cleanup did not cover `anchors.json` (bootstrap/theta/delta were covered). Re-running a directory without anchors left a stale `anchors.json`, violating "run dirs mirror exactly the layers this run produced". Added the cleanup line + witness test.
+- **Added (regression):** all-diagnostic-layers composition test — bootstrap + θ-grid + δ-grid + anchors together; headline unchanged; all HTML panels render; artifact inventory matches disk.
+- **Docs surface:** module docstring/comment/run-manifest notes refreshed from v1.1-spine language to v2.0 (no behavior change; notes not in the freeze preimage).
+- **Audited and left as-is (reliable by design):** evaluator edge cases (zero-variance → `SlackError`; non-binary mean_order group → fail; singular ols_coef design → fail; Spearman ties averaged), NaN fail-loud in SCORE/freeze, empty-M\* exit-0, survivors-only range, preimage exclusions (grids + anchors), verifiers exit 0, provenance/hash checks.
+- Full suite **217 passed**; ruff/mypy clean; H5 + MC50 verifiers exit 0.
