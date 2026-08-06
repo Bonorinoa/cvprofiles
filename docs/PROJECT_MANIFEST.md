@@ -6,7 +6,7 @@ display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
 status: v2_0_0_published_pypi
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "2.0.0"      # current package version (published release)
+dev_version: "2.0.1a1"      # current package version (dev cycle after 2.0.0; refreshed 2026-08-06 audit)
 target_version: "2.0.0"   # v2.0 measure discipline release (PyPI 2026-08-06)
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles

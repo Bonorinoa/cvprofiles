@@ -9,8 +9,15 @@ artifact presence, and provenance hash shapes.
 This is NOT a second engine: it never reruns the pipeline, never writes run
 artifacts, and a passing structural audit is not paper acceptance.
 
-CLI contract: stdout is one compact JSON result; failures also go to stderr
+CLI contract: stdout is one compact JSON audit result; failures also go to stderr
 with a nonzero exit.
+
+Exact invocation (2026-08-06 audit; traps: ``--proof`` is the *proof artifact*
+``evals/h5_trust/proof_summary.json`` — NOT the compact evidence summary under
+``reports/summaries/`` — and ``--out-root`` is the *run artifacts* directory
+``evals/h5_trust/runs_verify/default``, not ``evals/h5_trust/data``)::
+
+    uv run python tools/verify_h5_trust.py --proof evals/h5_trust/proof_summary.json --roles evals/h5_trust/data/roles_h5_trust.json --out-root evals/h5_trust/runs_verify/default --anchors evals/h5_trust/data/anchors_h5_trust.yaml --network evals/h5_trust/data/network_h5_trust.yaml
 """
 
 from __future__ import annotations

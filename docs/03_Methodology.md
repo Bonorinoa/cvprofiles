@@ -60,7 +60,7 @@ MVP restriction types (implement as a small registry, not an open expression lan
 | Type id | Meaning (sketch) | Typical \(g_r\) |
 |---|---|---|
 | `corr_sign` | \(\mathrm{Corr}(m, V_k)\) has stated sign | \(\mathrm{sign}\cdot\mathrm{Corr} - \theta\) |
-| `corr_min` | \(|\mathrm{Corr}(m, V_k)| \ge \theta\) | \(|\mathrm{Corr}| - \theta\) |
+| `corr_min` | Corr(m, V_k) ≥ θ — signed lower bound (NOT absolute; corrected 2026-08-06, docs/12) | Corr − θ |
 | `mean_order` | \(\mathbb{E}[m \mid G=1] \ge \mathbb{E}[m \mid G=0] + \theta\) | group mean gap \(-\theta\) |
 | `rank_agree` | Spearman\((m, m_{\mathrm{ref}}) \ge \theta\) | Spearman \(-\theta\) |
 | `stability` | Agreement across split halves \(\ge \theta\) | agreement \(-\theta\) |

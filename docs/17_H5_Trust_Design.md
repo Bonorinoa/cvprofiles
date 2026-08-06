@@ -58,7 +58,7 @@ delta: 0.0
 restrictions:
 - {id: r_corr_min_gps_trust,   type: corr_min,   variable: gps_trust,     theta: 0.3}
 - {id: r_corr_min_rule_of_law, type: corr_min,   variable: rule_of_law,   theta: 0.3}
-- {id: r_corr_sign_gini_neg,   type: corr_sign,  variable: gini, direction: -1, theta: 0.1}
+- {id: r_corr_sign_gini_neg,   type: corr_sign,  variable: gini, sign: -1, theta: 0.1}   # engine schema uses params.sign (corrected 2026-08-06, docs/12)
 ```
 
 Admission rule (package canonical): admit `m` when `s_r(m) >= -delta` for all `r`, with `delta = 0`.
