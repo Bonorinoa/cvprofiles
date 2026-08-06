@@ -833,3 +833,9 @@ alignment at publish time.
 - **Docs surface:** module docstring/comment/run-manifest notes refreshed from v1.1-spine language to v2.0 (no behavior change; notes not in the freeze preimage).
 - **Audited and left as-is (reliable by design):** evaluator edge cases (zero-variance → `SlackError`; non-binary mean_order group → fail; singular ols_coef design → fail; Spearman ties averaged), NaN fail-loud in SCORE/freeze, empty-M\* exit-0, survivors-only range, preimage exclusions (grids + anchors), verifiers exit 0, provenance/hash checks.
 - Full suite **217 passed**; ruff/mypy clean; H5 + MC50 verifiers exit 0.
+
+---
+
+## 2026-08-06 — dev cycle resumed at 2.0.1a1
+
+**Decision (recorded):** after the 2.0.0 publication, the repo resumes a dev version: atomic bump `2.0.0 → 2.0.1a1` (delegated subagent, verified by the main agent): pyproject + `__init__` + uv.lock + mini golden refresh (run_id `52d4baab…`, content hashes stable) + version-literal tests + CI CLI-smoke literal + README/AGENTS posture. Commit `821c737`; **217 passed**, ruff/mypy clean; no push/tag by the subagent. `v2.0.0` published artifact and all historical proofs untouched. Next engine work proceeds from `2.0.1a1`.
