@@ -1,0 +1,19 @@
+schema_version: "1"
+# Transcription of docs/17 §6 θ anchors (pinned by Augusto 2026-08-04).
+# This is documentation of already-pinned anchors — not new theory.
+anchors:
+  - restriction_id: r_corr_min_gps_trust
+    citation_key: "oecd2017"
+    source_phrase: "OECD (2017) Guidelines on Measuring Trust: country-level survey↔behavioral trust r ≈ 0.29; SCA2 pilot corr 0.28–0.35 (provenance only)"
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: r_corr_min_rule_of_law
+    citation_key: "aac2010_martinangeli2024"
+    source_phrase: "Trust–institutions correlations typically ≥ 0.4 (Aghion–Algan–Cahuc–Shleifer 2010; Martinangeli et al. 2024)"
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: r_corr_sign_gini_neg
+    citation_key: "bjornskov2008"
+    source_phrase: "Bjørnskov (2008): negative trust–inequality relationship"
+    anchor_kind: literature
+    pre_data: true

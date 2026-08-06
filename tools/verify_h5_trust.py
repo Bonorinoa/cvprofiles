@@ -22,6 +22,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 EXPECTED_ARTIFACTS = (
     "report.html",
     "report.json",
@@ -70,8 +72,19 @@ def _walk_finite(obj: Any, path: str, errors: list[str]) -> None:
         _check_finite(obj, path, errors)
 
 
-def audit(proof_path: Path, roles_path: Path, out_root: Path) -> dict:
-    """Run all structural checks; return {"passed": bool, "errors": [...]}."""
+def audit(
+    proof_path: Path,
+    roles_path: Path,
+    out_root: Path,
+    anchors_path: Path | None = None,
+    network_path: Path | None = None,
+) -> dict:
+    """Run all structural checks; return {"passed": bool, "errors": [...]}.
+
+    ``anchors_path`` + ``network_path`` (optional, M-c3): assert the θ-anchor
+    transcription is complete against the pinned network and all anchors
+    declare ``pre_data=True`` (docs/17 §6 transcription).
+    """
     errors: list[str] = []
 
     try:
@@ -137,6 +150,25 @@ def audit(proof_path: Path, roles_path: Path, out_root: Path) -> dict:
     if missing:
         errors.append(f"missing artifacts under {out_root}: {missing}")
 
+    if anchors_path is not None:
+        try:
+            from cvprofiles.anchors.pipeline import parse_anchors, validate_completeness
+            from cvprofiles.schemas.network import parse_network
+        except ImportError as exc:
+            errors.append(f"anchors check requires cvprofiles importable: {exc}")
+        else:
+            if network_path is None:
+                errors.append("--network required when --anchors is provided")
+            else:
+                try:
+                    config = parse_anchors(anchors_path)
+                    network = parse_network(yaml.safe_load(network_path.read_text()))
+                    validate_completeness(config, network)
+                    if not all(a.pre_data for a in config.anchors):
+                        errors.append("all anchors must declare pre_data=True")
+                except Exception as exc:  # AnchorError / ValidationError / OSError
+                    errors.append(f"anchors audit failed: {exc}")
+
     return {"passed": not errors, "errors": errors, "n_errors": len(errors)}
 
 
@@ -145,9 +177,27 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--proof", type=Path, required=True, help="proof_summary.json path")
     parser.add_argument("--roles", type=Path, required=True, help="roles_h5_trust.json path")
     parser.add_argument("--out-root", type=Path, required=True, help="run output directory")
+    parser.add_argument(
+        "--anchors",
+        type=Path,
+        required=False,
+        help="θ-anchor YAML (docs/17 §6 transcription); completeness audited when provided",
+    )
+    parser.add_argument(
+        "--network",
+        type=Path,
+        required=False,
+        help="pinned network YAML (required with --anchors)",
+    )
     args = parser.parse_args(argv)
 
-    result = audit(args.proof, args.roles, args.out_root)
+    result = audit(
+        args.proof,
+        args.roles,
+        args.out_root,
+        anchors_path=args.anchors,
+        network_path=args.network,
+    )
     print(json.dumps(result, sort_keys=True))
     if not result["passed"]:
         for e in result["errors"]:
