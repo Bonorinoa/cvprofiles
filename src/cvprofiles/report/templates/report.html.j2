@@ -269,6 +269,29 @@
     </section>
     {% endif %}
 
+    {% if anchors %}
+    <section class="card" style="margin-top:1rem">
+      <h2>θ-anchors · pre-data audit</h2>
+      <p class="muted" style="margin-top:0">
+        One pre-data anchor per restriction (hash <span class="mono">{{ anchors.anchors_hash[:12] }}…</span>).
+        The engine enforces completeness + hash; "pre-data" is a process commitment, not a temporal claim.
+      </p>
+      <table>
+        <thead><tr><th>restriction</th><th>kind</th><th>pre-data</th><th>anchor</th></tr></thead>
+        <tbody>
+          {% for a in anchors.anchors %}
+          <tr>
+            <td class="mono">{{ a.restriction_id }}</td>
+            <td>{{ a.anchor_kind }}</td>
+            <td>{{ "yes" if a.pre_data else "no" }}</td>
+            <td>{{ a.citation_key }} — {{ a.source_phrase }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    {% endif %}
+
     <section class="card" style="margin-top:1rem">
       <h2>Menu admission</h2>
       <p class="muted" style="margin-top:0">

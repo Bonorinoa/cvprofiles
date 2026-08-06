@@ -23,6 +23,7 @@ from pathlib import Path
 from typing import Any
 
 from cvprofiles import __version__
+from cvprofiles.anchors.pipeline import anchors_payload, parse_anchors, validate_completeness
 from cvprofiles.freeze import build_freeze_bundle, compute_run_id, normalize_n_boot
 from cvprofiles.identify.pipeline import IdentifyResult, run_identify, write_identify_artifacts
 from cvprofiles.inference.bootstrap import BootstrapResult, bootstrap_payload, run_bootstrap
@@ -56,6 +57,7 @@ class FullRunResult:
     bootstrap: BootstrapResult | None = None
     theta_grid: ThetaGridResult | None = None
     delta_grid: DeltaGridResult | None = None
+    anchors_hash: str | None = None
 
 
 def run_profile(
@@ -72,6 +74,7 @@ def run_profile(
     n_boot: int | None = None,
     theta_grid_lambdas: Sequence[float] | None = None,
     delta_grid_deltas: Sequence[float] | None = None,
+    anchors: Path | str | None = None,
 ) -> FullRunResult:
     """Compose four states (+ v1.1/v2.0 inference layers) and write a frozen run dir.
 
@@ -84,15 +87,30 @@ def run_profile(
                               from the freeze preimage by design).
       delta_grid_deltas     → δ-tolerance surface (diagnostic; absolute δ
                               values; excluded from the freeze preimage).
+      anchors               → pre-data θ-anchor file (documentation; parsed,
+                              completeness-checked, hashed; EXCLUDED from the
+                              freeze preimage — same bundle ± anchors ⇒ same
+                              run_id, different anchors.json).
     """
     n_boot_norm = normalize_n_boot(n_boot)
     grid = list(theta_grid_lambdas) if theta_grid_lambdas else None
     grid_deltas = list(delta_grid_deltas) if delta_grid_deltas else None
 
+    anchors_config = None
+    anchors_payload_dict: dict[str, Any] | None = None
+    if anchors is not None:
+        anchors_config = parse_anchors(anchors)  # completeness checked after RESTRICT
+
     roles_m = load_roles(roles)
     df = load_table(scores)
     score = run_score(df, roles_m, policy=policy)
     restrict = run_restrict(score.roles, network, beta)
+
+    anchors_hash_value: str | None = None
+    if anchors_config is not None:
+        validate_completeness(anchors_config, restrict.network)
+        anchors_payload_dict = anchors_payload(anchors_config)
+        anchors_hash_value = anchors_payload_dict["anchors_hash"]
 
     if score.manifest.scores_hash is None:
         raise RuntimeError("SCORE did not set scores_hash")
@@ -174,6 +192,12 @@ def run_profile(
             + "\n"
         )
         paths["delta_grid.json"] = dgrid_path
+    if anchors_payload_dict is not None and anchors_hash_value is not None:
+        anchors_path = dest / "anchors.json"
+        anchors_path.write_text(
+            json.dumps(anchors_payload_dict, indent=2, sort_keys=True) + "\n"
+        )
+        paths["anchors.json"] = anchors_path
 
     created_at = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     artifact_paths = {k: str(v.name) for k, v in paths.items()}
@@ -187,6 +211,7 @@ def run_profile(
             "v1.1 spine + v2.0 delta-grid; inference: "
             "bootstrap + theta-grid + delta-grid (diagnostic)"
         ),
+        anchors_hash=anchors_hash_value,
     )
     man_path = dest / "run_manifest.json"
     man_path.write_text(run_manifest.model_dump_json(indent=2) + "\n")
@@ -205,6 +230,7 @@ def run_profile(
             if delta_grid_result is not None
             else None
         ),
+        anchors=anchors_payload_dict,
     )
     artifact_paths["report.html"] = report.html_path.name
     artifact_paths["report.json"] = report.json_path.name
@@ -216,6 +242,7 @@ def run_profile(
         created_at=created_at,
         artifact_paths=artifact_paths,
         notes=run_manifest.notes,
+        anchors_hash=anchors_hash_value,
     )
     man_path.write_text(run_manifest.model_dump_json(indent=2) + "\n")
 
@@ -231,6 +258,7 @@ def run_profile(
         bootstrap=boot,
         theta_grid=grid_result,
         delta_grid=delta_grid_result,
+        anchors_hash=anchors_hash_value,
     )
 
 
@@ -287,6 +315,7 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
         "bootstrap": boot_summary,
         "theta_grid": grid_summary,
         "delta_grid": grid2_summary,
+        "anchors_hash": result.anchors_hash,
         "report_html": str(result.report.html_path),
         "report_json": str(result.report.json_path),
     }

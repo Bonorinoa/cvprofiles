@@ -1,7 +1,9 @@
-"""v2.0 measure discipline wiring gates (M-a3: δ-grid in pipeline/CLI/report).
+"""v2.0 measure discipline wiring gates (M-a3: δ-grid in pipeline/CLI/report;
+M-c2: θ-anchors in pipeline/CLI/report).
 
-Preimage witness: the δ-grid is a diagnostic viewport — same bundle +
-different grid ⇒ same run_id, different delta_grid.json (docs/12 2026-08-05).
+Preimage witnesses (docs/12 2026-08-05): the δ-grid and θ-anchors are
+diagnostic/documentation — same bundle + different grid or ± anchors ⇒ same
+run_id, different artifact.
 """
 
 from __future__ import annotations
@@ -12,6 +14,10 @@ import sys
 from pathlib import Path
 from typing import TypedDict
 
+import pytest
+import yaml
+
+from cvprofiles.anchors.pipeline import AnchorError
 from cvprofiles.pipeline import run_profile, summary_dict
 
 
@@ -177,3 +183,125 @@ def test_summary_is_additive_with_delta_grid(
     assert summary["delta_grid"]["headline_delta"] == 0.0
     off = run_profile(**_run_kwargs(mini_dir), out_dir=tmp_path / "off")
     assert summary_dict(off)["delta_grid"] is None  # key present, layer off (v1.1 convention)
+
+
+# --- M-c2: θ-anchors wiring (docs/12 D4/D6) ---
+
+
+def test_anchors_are_diagnostic_not_freeze_input(
+    mini_dir: Path, tmp_path: Path
+) -> None:
+    no_anchors = run_profile(**_run_kwargs(mini_dir), out_dir=tmp_path / "no")
+    with_anchors = run_profile(
+        **_run_kwargs(mini_dir),
+        out_dir=tmp_path / "with",
+        anchors=mini_dir / "anchors.yaml",
+    )
+    # anchors excluded from the freeze preimage: same run_id
+    assert no_anchors.run_id == with_anchors.run_id
+    assert no_anchors.anchors_hash is None
+    assert with_anchors.anchors_hash is not None
+    assert len(with_anchors.anchors_hash) == 64
+    assert not (no_anchors.out_dir / "anchors.json").exists()
+    assert (with_anchors.out_dir / "anchors.json").is_file()
+    assert with_anchors.run_manifest.anchors_hash == with_anchors.anchors_hash
+    assert with_anchors.report.payload["anchors"] is not None
+    assert no_anchors.report.payload["anchors"] is None
+    assert summary_dict(no_anchors)["anchors_hash"] is None
+    assert summary_dict(with_anchors)["anchors_hash"] == with_anchors.anchors_hash
+
+
+def test_anchors_incomplete_fails_loud(
+    mini_dir: Path, mini_network, tmp_path: Path
+) -> None:
+    raw = {
+        "schema_version": "1",
+        "anchors": [
+            {
+                "restriction_id": mini_network.restrictions[0].id,
+                "citation_key": "a",
+                "source_phrase": "p",
+                "anchor_kind": "derived",
+                "pre_data": True,
+            }
+        ],
+    }
+    bad = tmp_path / "bad_anchors.yaml"
+    bad.write_text(yaml.safe_dump(raw))
+    with pytest.raises(AnchorError, match="missing"):
+        run_profile(**_run_kwargs(mini_dir), out_dir=tmp_path / "x", anchors=bad)
+
+
+def test_html_renders_anchors_panel(mini_dir: Path, tmp_path: Path) -> None:
+    result = run_profile(
+        **_run_kwargs(mini_dir),
+        out_dir=tmp_path / "panels",
+        anchors=mini_dir / "anchors.yaml",
+    )
+    html = (result.out_dir / "report.html").read_text()
+    assert "θ-anchors" in html
+    assert "pre-data" in html
+
+
+def test_cli_anchors_flag_keeps_stdout_machine_json(
+    mini_dir: Path, tmp_path: Path
+) -> None:
+    out = tmp_path / "cli"
+    proc = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "cvprofiles",
+            "run",
+            "--scores",
+            str(mini_dir / "scores.csv"),
+            "--roles",
+            str(mini_dir / "roles.json"),
+            "--network",
+            str(mini_dir / "network.yaml"),
+            "--beta",
+            str(mini_dir / "beta.yaml"),
+            "--out",
+            str(out),
+            "--anchors",
+            str(mini_dir / "anchors.yaml"),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode == 0, proc.stderr
+    summary = json.loads(proc.stdout)
+    assert len(summary["anchors_hash"]) == 64
+    assert (out / "anchors.json").is_file()
+    assert "M*=" in proc.stderr
+
+
+def test_cli_bad_anchors_path_fails(mini_dir: Path, tmp_path: Path) -> None:
+    proc = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "cvprofiles",
+            "run",
+            "--scores",
+            str(mini_dir / "scores.csv"),
+            "--roles",
+            str(mini_dir / "roles.json"),
+            "--network",
+            str(mini_dir / "network.yaml"),
+            "--beta",
+            str(mini_dir / "beta.yaml"),
+            "--out",
+            str(tmp_path / "bad"),
+            "--anchors",
+            str(tmp_path / "does_not_exist.yaml"),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode != 0
+    assert "anchors" in proc.stderr.lower()
+    assert "No such option" not in proc.stderr  # option exists; validation path
+    assert proc.stdout.strip() == ""

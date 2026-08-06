@@ -130,6 +130,15 @@ def run_cmd(
             help="Comma-separated non-negative tolerance values (absolute δ).",
         ),
     ] = None,
+    anchors: Annotated[
+        Path | None,
+        typer.Option(
+            "--anchors",
+            exists=True,
+            dir_okay=False,
+            help="Pre-data θ-anchor YAML (documentation; excluded from run_id).",
+        ),
+    ] = None,
     title: Annotated[
         str,
         typer.Option("--title"),
@@ -175,6 +184,7 @@ def run_cmd(
             n_boot=n_boot,
             theta_grid_lambdas=theta_grid_lambdas,
             delta_grid_deltas=delta_grid_deltas,
+            anchors=anchors,
         )
     except (ScoreError, RestrictError, IdentifyError, ReportError, ValueError) as exc:
         typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)
