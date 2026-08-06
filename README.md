@@ -64,7 +64,7 @@ Start here, then read in order:
 - Units-only bootstrap with conservative, additive percentile diagnostics
 - Deterministic θ-grid sensitivity surface; headline remains [L,U]=min/max B*
 - Pipeline, CLI, JSON/HTML audit panels, package-native evidence, and minimal CI
-- Version `2.0.0`; tag `v1.1.0` live; v2.0 measure discipline ENTRY complete; PyPI publication in progress
+- Version `2.0.0`; tag `v1.1.0` live; v2.0 measure discipline released on PyPI 2026-08-06
 - Provisional synthetic-only protocol lock (`docs/16`) with an audited MC50 proof table (seeds `0..49`); H5 Trust design locked (`docs/17`), first frozen run (n=35) accepted as **preliminary paper-facing evidence**; empirical/paper inputs remain Augusto-owned
 
 ### Remaining backlog
@@ -94,7 +94,7 @@ Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.ht
 - **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
   Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
 - **`main`:** v1.0 spine through M9 (shipped as `1.0.0a1`) + intermediate spam audit + v1.1 inference layer, merged.
-- **v1.1.0 tagged (2026-08-04):** MVP — v1.0 spine + v1.1 inference layer (units bootstrap + θ-grid) + H5 Trust preliminary evidence. Release version `2.0.0`; PyPI publication in progress.
+- **v1.1.0 tagged (2026-08-04):** MVP — v1.0 spine + v1.1 inference layer (units bootstrap + θ-grid) + H5 Trust preliminary evidence. Superseded by **v2.0.0, published on PyPI (2026-08-06)**; dev cycle at `2.0.1a1`.
 - **Not yet:** paper protocol final lock. **cvprofiles 2.0.0 published on PyPI (2026-08-06)**; dev cycle resumed at `2.0.1a1`; v2.0 measure discipline ENTRY complete (`docs/18`); H5-replication tutorial verified.
 
 ### Install (dev)
