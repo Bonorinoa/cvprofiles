@@ -763,3 +763,16 @@ alignment at publish time.
 **Rationale:** locked semantics precede code so each evaluator is auditable and fixtures are hand-computable.
 
 **Follow-ups:** M-b1 mean_order → M-b2 rank_agree → M-b3 ols_coef → M-b4 evidence. One commit per milestone.
+
+---
+
+## 2026-08-05 — v2.0 thread (b) evaluator registry complete (close-out)
+
+**Decision (recorded):** evaluator registry growth shipped and verified:
+- M-b1 `910ee0d` — `mean_order` (schema `sign` param + evaluator; fixture `mean_order_v1`, hand goldens 0.30 / −0.26 / −1.10)
+- M-b2 `83cd1a7` — `rank_agree` (Spearman via pandas average ranks — scipy.stats has no stubs under strict mypy; fixture `rank_agree_v1`, ρ goldens 1.0 / −0.7576 / −1.0 + ties convention)
+- M-b3 `15720c1` — `ols_coef` (standardized numpy closed form, **no statsmodels**; fixture `ols_v1`, exact-recovery golden β≈0.85227, confound-adjustment + singular/zero-variance fail-loud)
+- M-b4 — evidence: full suite **196 passed**; three fixtures exercised through the real spine; `docs/13` row.
+- `stability` / `diff_means` stay schema-only fail-loud (no fixture demands them).
+
+**Boundary:** feature layer; headline semantics unchanged; no version bump. Thread (c) θ-anchor discipline next, pending Augusto's go.

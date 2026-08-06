@@ -440,3 +440,24 @@ is the tracked summary. Final paper lock and submission claims remain Augusto's.
 3. **FA stays 0 at the headline** (δ=0 unchanged); the δ-grid is a diagnostic viewport, never an alternative admission rule.
 
 **Status:** thread (a) of v2.0 measure discipline complete (M-a1..M-a4). Diagnostic only; headline range unchanged; no paper claim added.
+
+---
+
+## 2026-08-05 — v2.0 thread (b): evaluator registry growth (mean_order / rank_agree / ols_coef)
+
+- **package / git:** `cvprofiles==1.1.0a1`; commits `910ee0d`, `83cd1a7`, `15720c1` (M-b1..M-b3)
+- **path:** package-native `run_identify` through the real spine; new fixtures `data/fixtures/{mean_order_v1, rank_agree_v1, ols_v1}/`; full suite **196 passed**
+- **registry now implemented:** `corr_min`, `corr_sign`, `mean_order`, `rank_agree` (restrictions) + `corr_y`, `ols_coef` (β). `stability` and `diff_means` remain schema-only fail-loud (no fixture demands them).
+
+| Evaluator | Semantics (docs/12 D3/D4/D5) | Fixture golden | Discriminator |
+|---|---|---|---|
+| mean_order | sign·(mean(m\|g=1) − mean(m\|g=0)) − θ; binary 0/1 group | m_high 0.30 admitted; m_low −0.26, m_slop −1.10 rejected | sign=−1 flips admission (m_slop 0.50) |
+| rank_agree | Spearman ρ(m, ref) − θ; ties averaged | ok/ok2 ρ=1.0 admitted (θ=0.8); mid ρ=−0.7576, bad ρ=−1.0 rejected | ties convention pinned (ρ 0.5643) |
+| ols_coef | standardized OLS β on m with controls (z ddof=0; numpy closed form) | m_conf β≈0.85227 (exact-recovery DGP); point-ID | confound adjustment: marginal corr 0.9994 > β; singular / zero-variance fail loud |
+
+**Interpretation:**
+1. The registry grows only under fixture demand; each evaluator has a hand-computed golden and a locked semantics entry before code.
+2. `ols_coef` gives a unit-free, confound-adjusted β comparable across measures — the natural secondary target for the construct-identified range when `corr_y` is too coarse.
+3. `mean_order` is the "known-valid subgroup" anchor: a measure must separate the validated group from the rest by at least θ, with direction.
+
+**Status:** thread (b) of v2.0 measure discipline complete (M-b1..M-b4). Feature layer; headline semantics unchanged; no paper claim added.

@@ -1,6 +1,6 @@
 # 18 — Measure Discipline Plan (v2.0)
 
-**Status:** OPEN — plan approved 2026-08-05 (Augusto). **Thread (a) δ-grid COMPLETE** (M-a1..M-a4, 2026-08-05); threads (b) and (c) pending per-thread checkpoints. See `docs/12`, 2026-08-05.
+**Status:** OPEN — plan approved 2026-08-05 (Augusto). **Thread (a) δ-grid COMPLETE** (M-a1..M-a4, 2026-08-05). **Thread (b) evaluator registry COMPLETE** (M-b1..M-b4, 2026-08-05). Thread (c) pending per-thread checkpoint. See `docs/12`, 2026-08-05.
 
 **Purpose:** the standing scope box for the v2.0 measure-discipline sprint. Three threads, strict TDD, one commit per milestone, a dated `docs/12` entry before each new code family. The four-state spine does not grow a fifth state; all work is IDENTIFY-internal or REPORT-adjacent.
 
@@ -51,6 +51,8 @@ Registry reality: schema lists 5 restriction types, evaluators implement 2; β s
 | M-b2 `rank_agree` in `slacks.py` | RED→GREEN same shape | New `data/fixtures/rank_agree_v1/` (ref_measure column) | Spearman ρ − θ golden; ref column binding; non-finite ρ → `SlackError` |
 | M-b3 `ols_coef` in `beta_fn.py` | RED: "not implemented" → impl → GREEN | New fixture (outcome + control columns) | hand-computed β (1e-9); `params.controls` required; headline default remains `corr_y` |
 | M-b4 evidence + report | report panel shows β method label | e2e across fixtures | full suite; `docs/13` row; goldens untouched |
+
+**Status: DONE** (2026-08-05; commits `910ee0d`, `83cd1a7`, `15720c1`). mean_order / rank_agree / ols_coef implemented with hand-golden fixtures; full suite 196 passed; `docs/13` 2026-08-05. Feature layer; headline semantics unchanged.
 
 ## Thread (c) — θ-anchor documentation discipline
 
