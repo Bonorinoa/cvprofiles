@@ -3,7 +3,7 @@ name = "cvprofiles"
 version = "2.0.1a1"
 description = "Construct-validity profiles: admissible measurement sets and construct-identified ranges"
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
 requires-python = ">=3.11"
 authors = [{ name = "Augusto Gonzalez Bonorino" }]
 keywords = ["econometrics", "measurement", "construct-validity", "partial-identification"]
@@ -30,6 +30,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "pytest>=8.0",
+  "pytest-cov>=5.0",
   "ruff>=0.4",
   "mypy>=1.8",
   "pandas-stubs>=2.0",
@@ -54,7 +55,6 @@ build-backend = "hatchling.build"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-filterwarnings = ["ignore::DeprecationWarning"]
 markers = [
   "slow: full synthetic battery (seeds 0-4, n=1000)",
 ]
@@ -66,6 +66,12 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# The verify_h5_trust.py docstring carries the long canonical invocation as a
+# single copy-paste line (E501 inside a docstring is string content, so noqa
+# cannot suppress it).
+"tools/verify_h5_trust.py" = ["E501"]
 
 [tool.mypy]
 # Target the newest supported runtime: numpy>=2.5 stubs use PEP 695 `type`

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import math
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -151,8 +152,11 @@ def write_identify_artifacts(
         # reset index for parquet friendliness
         result.slacks.reset_index(names="measure").to_parquet(slacks_pq, index=False)
         paths["slacks.parquet"] = slacks_pq
-    except Exception:
-        pass  # CSV is enough if parquet backend quirks
+    except Exception as exc:  # parquet backend quirks: CSV remains authoritative
+        print(
+            f"warning: slacks.parquet not written ({exc}); slacks.csv is authoritative",
+            file=sys.stderr,
+        )
 
     admissible_payload = {
         "M_star": result.admissible,
