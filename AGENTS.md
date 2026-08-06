@@ -40,9 +40,9 @@ The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS P
 
 ## Current posture
 
-- Package version: `2.0.0` (v2.0 release; PyPI publication in progress).
-- v1.1 inference layer shipped and **tagged `v1.1.0`** (2026-08-04, `fce31c8`); PyPI release pending.
-- **v2.0 measure discipline ENTRY COMPLETE** (`docs/18_Measure_Discipline_Plan.md`): δ-grid, evaluator growth (`mean_order`/`rank_agree`/`ols_coef`), θ-anchor artifacts all shipped (2026-08-05); DONE phase in progress (publication authorized, tutorial pending).
+- Package version: `2.0.0` — **published on PyPI 2026-08-06** (tag `v2.0.0` @ `6abb6e4`).
+- v1.1 inference layer shipped and **tagged `v1.1.0`** (2026-08-04, `fce31c8`); superseded by the 2.0.0 release.
+- **v2.0 measure discipline DONE** (`docs/18_Measure_Discipline_Plan.md`): δ-grid, evaluator growth (`mean_order`/`rank_agree`/`ols_coef`), θ-anchor artifacts shipped 2026-08-05; tutorial verified against the PyPI package; released as `2.0.0`.
 - `reports/summaries/v1_1_package_synth_summary.json` is package smoke evidence (seeds `0..4`).
 - `reports/summaries/v1_1_protocol_synth_mc50_summary.json` is a distinct provisional synthetic-only MC50 proof artifact (seeds `0..49`). It is not H5 or a full empirical paper lock.
 - `reports/runs/` contains reproducible bulk outputs and is ignored. Allow-listed proof summaries under `reports/summaries/` are tracked.

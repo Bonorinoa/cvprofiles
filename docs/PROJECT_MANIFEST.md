@@ -4,10 +4,10 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v1_1_tagged_mvp_release_posture_complete_pypi_pending
+status: v2_0_0_published_pypi
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "1.1.0a1"    # current dev package version (wheel on the tag)
-target_version: "1.1.0"   # v1.1 MVP tag (2026-08-04); PyPI publish is separate
+dev_version: "2.0.0"      # current package version (published release)
+target_version: "2.0.0"   # v2.0 measure discipline release (PyPI 2026-08-06)
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
@@ -16,6 +16,8 @@ tag_v0_1: v0.1            # frozen forever at fb62b48 — do not move/retag
 tag_v0_1_sha: fb62b48
 tag_v1_1: v1.1.0           # MVP tag 2026-08-04 — do not move/retag
 tag_v1_1_sha: fce31c8
+tag_v2_0: v2.0.0           # measure discipline release 2026-08-06 — do not move/retag
+tag_v2_0_sha: 6abb6e4
 
 poc:
   script: evals/synthetic/v0_poc.py
@@ -62,12 +64,12 @@ h5_trust:
   range: [0.37075446228800285, 0.62389053803067]
 
 v2_0:
-  status: measure_discipline_open
+  status: measure_discipline_published
   plan: docs/18_Measure_Discipline_Plan.md
   threads: [delta_grid, evaluator_registry, theta_anchor_discipline]
-  version: 1.1.0a1  # keep through ENTRY; bump 2.0.0a1 atomically with golden refresh at the DONE transition
+  version: 2.0.0  # published on PyPI 2026-08-06 (tag v2.0.0 @ 6abb6e4)
   checkpoint: per_thread
-  h5_delta_grid_run: authorized_post_thread_a
+  h5_delta_grid_run: done
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
@@ -123,4 +125,5 @@ locks:
   - v1_1_grid_excluded_from_freeze_preimage
   - h5_trust_design_locked_run_gated
   - v2_0_measure_discipline_scope_box
+  - v2_0_0_published_pypi
 ```

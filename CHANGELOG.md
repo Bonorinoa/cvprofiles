@@ -4,6 +4,21 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [2.0.0] — 2026-08-06 (published on PyPI; tag `v2.0.0`)
+
+### Measure discipline (v2.0, ENTRY complete 2026-08-05)
+
+- **δ-grid tolerance layer** — absolute-δ sensitivity surface (`--delta-grid`, `delta_grid.json`, HTML/JSON panels); `delta_override` on `run_identify`; grid excluded from the freeze preimage (same bundle + different grid ⇒ same `run_id`)
+- **Evaluator registry growth** — `mean_order` (binary 0/1 group, signed gap), `rank_agree` (Spearman, ties averaged), `ols_coef` (standardized numpy closed form, no statsmodels); `stability`/`diff_means` stay schema-only fail-loud
+- **θ-anchor documentation discipline** — schema'd `anchors.yaml` (`cvprofiles.anchors`), completeness vs the pinned network, `anchors_hash` in manifest (excluded from the freeze preimage), HTML audit panel, CLI `--anchors`; H5 Trust transcription `evals/h5_trust/data/anchors_h5_trust.yaml` audited exit 0
+- **Independent notebook tutorial** — `tutorials/cvprofiles_tutorial.ipynb`: synthetic walk-through first, then H5 replication; verified against the PyPI package (`pip install cvprofiles==2.0.0`): M\*={m_trust_general, m_trust_in_group}, [L,U] bit-identical
+- **First PyPI publication** — version aligned `2.0.0` (2026-08-06); wheel + sdist uploaded; provenance verified (local wheel sha256 == PyPI sha256 `a125ae1d…`)
+- Version spine: `2.0.0` on the release commit; dev cycle may resume at `2.0.1a1` later
+
+### Boundary
+- v1.1-era proof artifacts and the MC50 verifier's expected version remain at `1.1.0a1` (historical evidence)
+- Paper protocol fields remain Augusto-owned; H5 numbers remain preliminary paper-facing evidence
+
 ## [1.1.0] — 2026-08-04 (MVP tag `v1.1.0`; PyPI publication separate)
 
 ### Engine — v1.1 inference layer (shipped on `main` as dev `1.1.0a1`)

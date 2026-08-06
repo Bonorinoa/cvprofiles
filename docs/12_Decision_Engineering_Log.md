@@ -807,3 +807,18 @@ alignment at publish time.
 ## 2026-08-05 — v2.0.0 release preparation (version alignment)
 
 **Decision (recorded):** aligning the package version to `2.0.0` for the first PyPI publication (convention: version alignment at publish; docs/12 2026-08-01). Atomic with golden refresh and all version literals. The wheel built from this commit is the published artifact; the repo may return to a dev version (`2.0.1a1`) in a later dev cycle. Tags `v0.1` / `v1.1.0` unchanged. PyPI upload is executed by Augusto in his own terminal (token never enters the agent session).
+
+---
+
+## 2026-08-06 — cvprofiles 2.0.0 published to PyPI (release close-out)
+
+**Decision (recorded):** Augusto ran `uv publish` in his own terminal (the API token never entered the agent session); both artifacts uploaded. Independent verification (not self-report):
+- **PyPI JSON API:** cvprofiles 2.0.0 live (wheel + sdist, owner Bonorinoa, `requires-python >=3.11`); local wheel sha256 `a125ae1d…` == PyPI's recorded sha256 (provenance: the artifact on PyPI is the one built from `6abb6e4`).
+- **Tutorial verification against the PyPI package:** clean venv, `pip install cvprofiles==2.0.0` from PyPI, notebook executed via nbconvert. Part 1 (synthetic) green with the empty-set contrast; Part 2 H5 replication bit-identical — M\*={m_trust_general, m_trust_in_group}, [L,U]=[0.37075446228800285, 0.62389053803067]; assertion cell passed.
+- **Tag:** annotated `v2.0.0` @ `6abb6e4` (release-prep commit whose wheel was published); branch + tag pushed.
+- Full suite **215 passed**; ruff/mypy clean; tags `v0.1` / `v1.1.0` intact.
+
+**Open / honest notes:**
+- The PyPI project description is the pre-publication README (says "publication in progress"); it refreshes on the next release. Cosmetic only.
+- Paper protocol fields remain Augusto-owned; H5 numbers remain preliminary paper-facing evidence.
+- Dev cycle may resume at `2.0.1a1` when new work starts (atomic bump + golden refresh).
