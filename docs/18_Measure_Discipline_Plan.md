@@ -1,6 +1,6 @@
 # 18 — Measure Discipline Plan (v2.0)
 
-**Status:** COMPLETE — plan approved 2026-08-05 (Augusto). **Threads (a) δ-grid, (b) evaluator registry, (c) θ-anchor discipline ALL COMPLETE** (2026-08-05). **Released as `2.0.0` on PyPI 2026-08-06** (tag `v2.0.0` @ `6abb6e4`), tutorial verified against the PyPI package. Dev cycle resumed at `2.0.1a1` (2026-08-06). **One v2.0-DONE criterion remains: B4 methodology statement.** See `docs/12`, 2026-08-05/06.
+**Status:** COMPLETE — plan approved 2026-08-05 (Augusto). **Threads (a) δ-grid, (b) evaluator registry, (c) θ-anchor discipline ALL COMPLETE** (2026-08-05). **Released as `2.0.0` on PyPI 2026-08-06** (tag `v2.0.0` @ `6abb6e4`), tutorial verified against the PyPI package. Dev cycle resumed at `2.0.1a1` (2026-08-06). **B4 methodology statement LOCKED 2026-08-06 (Option B, Augusto-approved) — all v2.0-DONE criteria complete.** See `docs/12`, 2026-08-05/06.
 
 **Purpose:** the standing scope box for the v2.0 measure-discipline sprint. Three threads, strict TDD, one commit per milestone, a dated `docs/12` entry before each new code family. The four-state spine does not grow a fifth state; all work is IDENTIFY-internal or REPORT-adjacent.
 
@@ -76,11 +76,11 @@ Registry reality: schema lists 5 restriction types, evaluators implement 2; β s
 | Dimension | ENTRY | DONE |
 |---|---|---|
 | A. Functional / feature | ✅ A1–A5 | ✅ shipped + release-verified |
-| B. Measurement-methodological | ✅ B1–B3 | ⬜ **B4 methodology statement remains**; ✅ B5 |
+| B. Measurement-methodological | ✅ B1–B3 | ✅ **B4 methodology statement (2026-08-06, Option B)**; ✅ B5 |
 | C. Evidence / paper / observability | ✅ C1–C2 | ✅ C3–C5 (tutorial verified against the PyPI package) |
 | D. Engineering / release | ✅ D1–D2 | ✅ D3–D5 (`2.0.0` published; dev `2.0.1a1`) |
 
-**Only remaining v2.0-DONE item: B4 — methodology statement** (docs/03 amendment, paper-protocol step, Augusto-approved wording).
+**B4 — methodology statement LOCKED** (docs/03 §Statement of methodology, 2026-08-06, Option B; Augusto-approved wording). **All v2.0-DONE criteria complete.**
 
 ### A. Functional / feature
 - A1 (ENTRY) δ-grid ships — `test_delta_grid.py`: grid validation; per-row payload; headline equality; monotone superset; preimage exclusion witness.

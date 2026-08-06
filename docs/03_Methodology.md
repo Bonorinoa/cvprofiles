@@ -20,6 +20,14 @@ Primary question:
 
 > Which operationalizations are admissible under a stated nomological network, and what set of downstream estimates follows?
 
+## Statement of methodology (v2.0 — B4, LOCKED 2026-08-06)
+
+**Statement.** cvprofiles treats construct validity as **partial identification over a finite menu of measurement functions**. The researcher supplies unit×measure scores and a nomological network R with thresholds θ; the engine computes sample slacks s_r(m), retains the admissible set M*, and reports the construct-identified range [L,U] = [min β(M*), max β(M*)] for a researcher-chosen target functional β. Empty M* and wide ranges are findings under the stated theory, not failures. Bootstrap, θ-grid, and δ-grid are additive diagnostics that never replace the headline range.
+
+**Positioning.** The closest methodological ancestor is Leamer-style specification uncertainty, moved from regression specifications to measurement functions and disciplined by a stated nomological network rather than a kitchen-sink search. The engine is score-agnostic and model-free: it does not generate measures, does not search prompt space, and contains no learned model. Sharp new partial-identification theory is optional garnish; transparent slacks plus the reported image of β is the load-bearing claim.
+
+**Inference stance.** Deliberately conservative. The bootstrap band is over units (menu fixed), conditional on admission, and additive; empty and degenerate replicates are counted and reported. Threshold sensitivity (θ-grid) and tolerance sensitivity (δ-grid) are diagnostic viewports, excluded from the freeze preimage.
+
 ## Compact formalization (LOCKED — single source of truth)
 
 \[

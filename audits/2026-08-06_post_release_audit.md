@@ -259,5 +259,5 @@ All actionable findings from this audit were closed on 2026-08-06 (see `docs/12`
 | R6 (OIDC publish) | deferred — user-owned token flow stays deliberate posture |
 | New tutorial | `tutorials/cvprofiles_diagnostics_tour.ipynb` shipped + executed vs PyPI wheel |
 
-**Still open: B4** — the v2.0 methodology statement (docs/03 amendment, Augusto-owned wording;
-three options proposed in the 2026-08-06 session). Everything else in this audit is closed.
+**B4 LOCKED** — v2.0 methodology statement (docs/03 §Statement of methodology, Option B,
+Augusto-approved 2026-08-06). **All findings closed.**

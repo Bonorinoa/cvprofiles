@@ -24,7 +24,7 @@ Format: keep newest first.
 
 ### Boundary
 - PyPI landing description staleness (R3) deferred to the next release (same-version re-upload forbidden); OIDC publish automation (R6) deferred — the user-owned token flow stays the deliberate posture
-- B4 methodology statement remains open (Augusto-owned wording; options proposed 2026-08-06)
+- **B4 methodology statement LOCKED** (2026-08-06, Option B — framework + inference stance in docs/03; Augusto-approved) — **all v2.0-DONE criteria now complete**
 
 ## [2.0.0] — 2026-08-06 (published on PyPI; tag `v2.0.0`)
 

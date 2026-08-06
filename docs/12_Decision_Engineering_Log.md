@@ -858,4 +858,10 @@ alignment at publish time.
 - **Tutorial #2 shipped** — `tutorials/cvprofiles_diagnostics_tour.ipynb` (v2.0 measure-discipline tour; all four evaluators, ols_coef, bootstrap + θ-grid + δ-grid + anchors in one run, CLI, self-checking assertions). Executed against `pip install cvprofiles==2.0.0` in a fresh venv: ALL ASSERTIONS PASSED. Cell ids added (nbformat warning cleared); deterministic run_id `890f95c2…`.
 - **Verifier invocation documented** — `tools/verify_h5_trust.py` docstring now carries the exact command and the two traps (`--proof` = proof artifact, `--out-root` = run-artifacts dir).
 
-**Still open:** B4 methodology statement (Augusto-owned wording; options proposed 2026-08-06). Everything else closed.
+---
+
+## 2026-08-06 — B4 methodology statement LOCKED (v2.0 DONE complete)
+
+**Decision (dated, Augusto-approved):** Augusto selected **Option B** (framework + inference stance, docs/03 only) from three proposed drafts. Locked into `docs/03` as the "Statement of methodology (v2.0 — B4, LOCKED 2026-08-06)" section: partial identification over a finite menu of measurement functions; `M*` under researcher-authored R with thresholds θ; `[L,U] = [min β(M*), max β(M*)]`; empty/wide ranges as findings; bootstrap/θ-grid/δ-grid additive; Leamer-ancestor positioning; conservative inference stance. This closes the **last v2.0-DONE criterion** (docs/18 status map now all ✅). No version bump implied — package stays `2.0.1a1` dev unless Augusto decides otherwise.
+
+**Status update (same day):** the B4 lock entry above closes the audit's last open item — **all v2.0-DONE criteria are now complete**.
