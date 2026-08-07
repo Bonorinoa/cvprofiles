@@ -926,3 +926,19 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 **Left as-is (deliberate):** tutorial notebooks (unchanged), `tools/` verifiers' `docs/16`/`docs/17` string references (both files stay live), archived docs' internal cross-links (historical; archive README says so).
 
 **Phase 2 remaining:** thin `tools/run_many.py` batch utility (TDD) + USER_GUIDE batch-pattern pointer, when it lands.
+
+---
+
+## 2026-08-06 — batch orchestrator shipped (Phase 2)
+
+**Decision (recorded, Augusto-directed):** shipped the thin batch utility answering the multi-construct workflow question ("six GPS dimensions on different networks"). Orchestration only — the engine remains single-construct per run; no engine code changed.
+
+**Shipped (TDD, RED → GREEN; 222-test battery green):**
+
+- **`tools/run_many.py`** — batch orchestrator: one shared SCORE input + roles, N (network, beta) profiles from a YAML manifest, each run via `run_profile` into `<out_root>/<id>/`. Relative network/beta paths resolve against the manifest directory. Writes a machine-readable `batch_summary.json`; stdout is one JSON summary (same contract as `cvprofiles run`); empty M* per profile is exit-0 success. Fail-loud `BatchError` on manifest schema problems or missing profile files.
+- **`tests/test_run_many.py`** — 4 tests: two-profile batch (non-empty + empty contrast using the mini fixture's `network.yaml`/`network_harsh.yaml`), relative-path resolution, missing profile file fails loud, missing `profiles` key fails loud. RED observed (ModuleNotFoundError), GREEN after implementation.
+- **Determinism witness:** the `good` profile's run_id in the batch equals the single-run mini-fixture run_id (`52d4baab…`) — batch composition does not perturb the freeze.
+- **`docs/USER_GUIDE.md` §4.6** — "Single construct per run, batch many": manifest shape, CLI invocation, artifact contract.
+- **Scratch cleanup:** one-shot debug tools from the Phase 0 math sweep (`inspect_backslashes.py`, `repr_line350.py`, `verify_conversion.py`, `strip_trailing_ws.py`) removed with Augusto's consent.
+
+**Not done:** engine-level multi-construct joint admissibility remains out of scope (docs/01 archived lock); IRT/sensemakr tutorials deferred to Phase 3 (checkpoint decision).

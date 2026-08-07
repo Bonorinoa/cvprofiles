@@ -203,9 +203,31 @@ Thresholds are where "literature-grounded, not data-mined" is won or lost. Ship 
 
 Anchors are documentation: hashed for provenance but **excluded from run_id**.
 
-### 4.6 Single construct per run
+### 4.6 Single construct per run, batch many
 
-One construct per profile. Six GPS dimensions ⇒ six networks / six runs (a shared score file is fine if columns are a superset). Multi-construct joint networks are out of scope. See the [Roadmap](ROADMAP.md) for batch orchestration plans.
+One construct per profile. Six GPS dimensions ⇒ six networks / six runs. The engine itself stays single-construct; the thin batch orchestrator (`tools/run_many.py`) makes the six-run workflow mechanical against one shared score matrix.
+
+Batch manifest (`batch.yaml`):
+
+```yaml
+profiles:
+  - id: trust
+    network: networks/trust.yaml
+    beta: betas/trust.yaml
+  - id: patience
+    network: networks/patience.yaml
+    beta: betas/patience.yaml
+```
+
+Relative `network`/`beta` paths resolve against the manifest file's directory. All profiles share the same scores/roles/seed and any additive diagnostic flags you pass.
+
+```bash
+python tools/run_many.py \
+  --scores scores.csv --roles roles.json \
+  --manifest batch.yaml --out profiles/ --seed 0
+```
+
+Each profile gets its own frozen run directory (`profiles/<id>/`) with the usual artifacts, plus a machine-readable `batch_summary.json`. stdout is one JSON summary (same contract as `cvprofiles run`); empty M\* in any profile is a clean success. Multi-construct joint networks remain out of scope (see Roadmap).
 
 ## 5. Worked pattern: criterion recovery first (LLM vs GPS)
 
