@@ -65,7 +65,7 @@ h5_trust:
 
 v2_0:
   status: measure_discipline_published
-  plan: docs/18_Measure_Discipline_Plan.md
+  plan: docs/archive/18_Measure_Discipline_Plan.md
   threads: [delta_grid, evaluator_registry, theta_anchor_discipline]
   version: 2.0.0  # published on PyPI 2026-08-06 (tag v2.0.0 @ 6abb6e4)
   checkpoint: per_thread
@@ -78,26 +78,19 @@ spine:
 
 docs:
   required_reading_order:
-    - docs/01_Project_Overview.md
-    - docs/02_System_Architecture.md
-    - docs/03_Methodology.md
-    - docs/04_Synthetic_DGPs.md
-    - docs/05_Pre_Registration.md
-    - docs/06_Tech_Stack.md
-    - docs/07_Software_Development_Strategy.md
-    - docs/08_Observability_and_Evaluations.md
-    - docs/09_MVP_Plan.md
-    - docs/10_Open_Questions.md
-    - docs/11_Glossary.md
+    - docs/METHODOLOGY.md
+    - docs/USER_GUIDE.md
+    - docs/ARCHITECTURE.md
+    - docs/ROADMAP.md
     - docs/12_Decision_Engineering_Log.md
     - docs/13_Evaluations_Log.md
-    - docs/14_Researcher_Input_Guide.md
     - docs/16_Paper_Protocol_Freeze.md
     - docs/17_H5_Trust_Design.md
-    - docs/18_Measure_Discipline_Plan.md
+    - docs/archive/README.md
   live:
     - docs/12_Decision_Engineering_Log.md
     - docs/13_Evaluations_Log.md
+    - docs/ROADMAP.md
 
 directories:
   - src/

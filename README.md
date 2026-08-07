@@ -2,121 +2,123 @@
 
 **Construct-validity profiles for cheap multi-measure AI operationalizations.**
 
-Open, high-observability research tooling that treats construct validity as **partial identification over a menu of measurement functions**, disciplined by a researcher-authored nomological network. The engine returns an admissible measurement set \(M^*\) and a construct-identified range \([L,U]\) for a target functional \(\beta(\cdot)\). Empty sets and wide ranges are scientific features, not product failures.
+Open, high-observability research tooling that treats construct validity as **partial identification over a menu of measurement functions**, disciplined by a researcher-authored nomological network. The engine returns an admissible measurement set M\* and a construct-identified range [L,U] for a target functional β(·). Empty sets and wide ranges are scientific features, not product failures.
 
 | | |
 |---|---|
-| **Version** | **v0.1** tagged (methods KB + museum PoC); **v1.1.0 tagged** (MVP: spine + inference layer + H5 Trust evidence); **v2.0.0 published on PyPI (2026-08-06)**; dev cycle resumed at **`2.0.1a1`** |
-| **Status** | Public repo live; tags `v0.1` @ `fb62b48`, `v1.1.0` @ `fce31c8`, **`v2.0.0` @ `6abb6e4`** frozen; **cvprofiles 2.0.0 published on PyPI (2026-08-06)**; protocol draft locked **provisional synthetic-only**; H5 Trust design locked (`docs/17`), first frozen run accepted as **preliminary paper-facing evidence** (n=35, [L,U]=[0.371,0.624]) |
-| **Type** | Academic methods tool (Python package + paper) |
-| **Owner** | Augusto Gonzalez Bonorino |
+| **Version** | **2.0.0 published on PyPI (2026-08-06)**; dev cycle at `2.0.1a1` |
+| **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0` frozen; protocol provisional synthetic-only; H5 Trust evidence preliminary (n=35) |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
 | **CI** | [![ci](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml) |
-| **Hermes profile** | `cvprofiles` |
-| **Path** | `~/Hermes/Projects/cvprofiles` |
-| **PoC** | `evals/synthetic/v0_poc.py` (`v0_1_poc`) — **museum monolith**, not package |
-| **Proof summary** | `reports/summaries/v0_1_poc_summary.json`, `v1_0_package_synth_summary.json`, `v1_1_package_synth_summary.json`, `v1_1_protocol_synth_mc50_summary.json` (provisional synthetic-only protocol table; not H5 / not a paper result) |
+| **Proof summary** | `reports/summaries/v1_1_package_synth_summary.json`, `v1_1_protocol_synth_mc50_summary.json` (provisional synthetic-only protocol table; not a paper result) |
 
-## Thesis spine (one paragraph)
+## Install
 
-Researcher supplies unit×measure scores (SCORE). Researcher authors a nomological network \(R\) with thresholds \(\theta\) and a target \(\beta(\cdot)\) (RESTRICT). Engine computes sample slacks, keeps admissible measures \(M^*\), maps survivors through \(\beta\), and reports \(B^* / [L,U]\) (IDENTIFY). **v1.0:** \([L,U]=\min/\max B^*\) only. Bootstrap and \(\theta\)-sensitivity are **v1.1**. Measure discipline (δ-grid, evaluator growth, θ-anchor artifacts) is **v2.0**. Audit trail in HTML/JSON (LaTeX later) a non-coder can steer (REPORT). Engine is **score-agnostic and model-free**. No LLM lives inside the engine.
+```bash
+pip install cvprofiles
+```
 
-## Document map
+Requires Python ≥ 3.11. No GPU, no model weights, no API keys — the engine is a pure Python/numpy/pandas computation over the score columns you supply.
 
-Start here, then read in order:
+## Quickstart
+
+A profile needs exactly four input files, all plain text:
+
+| File | Contents |
+|---|---|
+| `scores.csv` (or `.parquet`) | One row per unit; one column per candidate measure, plus optional auxiliary/outcome columns |
+| `roles.json` | Which columns are measures, auxiliaries, outcome, unit id |
+| `network.yaml` | Your nomological network: restrictions with thresholds θ |
+| `beta.yaml` | The target functional β(·) you want a range for |
+
+Minimal example (from the repo's `data/fixtures/mini_v1/`):
+
+```bash
+cvprofiles run \
+  --scores data/fixtures/mini_v1/scores.csv \
+  --roles data/fixtures/mini_v1/roles.json \
+  --network data/fixtures/mini_v1/network.yaml \
+  --beta data/fixtures/mini_v1/beta.yaml \
+  --out my_first_profile --seed 0
+```
+
+The CLI prints one JSON summary to stdout (machine-clean) and writes `report.html` plus machine-readable artifacts into `my_first_profile/`:
+
+```json
+{
+  "empty": false,
+  "M_star": ["m_good", "m_weak"],
+  "L": 0.9908,
+  "U": 0.9930,
+  "scores_hash": "c20f0e67...",
+  "network_hash": "3540790e...",
+  "beta_hash": "d94474e8..."
+}
+```
+
+For a fully self-contained walkthrough that builds its inputs inline, see the tutorials (below).
+
+## What this package does
+
+Researcher supplies unit×measure scores (**SCORE**). Researcher authors a nomological network R with thresholds θ and a target β(·) (**RESTRICT**). Engine computes sample slacks, keeps admissible measures M\*, maps survivors through β, and reports the image B\* as the range [L,U] = [min B\*, max B\*] (**IDENTIFY**). Bootstrap, θ-grid, and δ-grid are additive diagnostics that never replace the headline range (**REPORT**).
+
+The engine is **score-agnostic and model-free**: it does not generate measures, does not search prompt space, and contains no learned model. LLM-based or dictionary-based scoring happens upstream, when you decide how to fill score columns.
+
+## When to use cvprofiles (and when not to)
+
+| You want… | Use |
+|---|---|
+| Which operationalizations are admissible under a stated theory, and what range of downstream estimates follows | **cvprofiles** |
+| How much conclusions move across regression specifications (Leamer extreme bounds) | Closest ancestor; cvprofiles moves the discipline to the *measurement* layer |
+| Whether unobserved confounding could kill β for a *fixed* regressor (OVB) | OVB sensitivity packages (e.g. sensemakr) — orthogonal, downstream of measurement choice |
+| Which inputs drive output variance (variance-based GSA) | Display cousin; different question |
+
+Full positioning in the methodology doc (`docs/METHODOLOGY.md`).
+
+## Reproducibility contracts
+
+- **Frozen runs.** A run_id is derived from the frozen score matrix, pinned network, and β spec — same inputs ⇒ same id, bit-stable within the documented float policy.
+- **Hashes everywhere.** `scores_hash`, `network_hash`, `beta_hash` travel with every report; paper numbers require frozen scores + pinned network + fixed seed + package version.
+- **Survivors-only range.** The headline [L,U] is the image of β on admissible measures only. Rejected measures are reported diagnostically but never enter the range.
+- **Empty M\* is success.** If theory + data reject every candidate measure, that is a finding — exit 0, clean report.
+- **Diagnostics are additive.** Bootstrap bands, θ-grid and δ-grid sensitivity surfaces never replace the headline range and are excluded from the freeze preimage.
+
+## What it is not
+
+- Not a scorer product: no measure generation, no prompt search, no LLM inside the engine.
+- Not an automated theory-authoring system: the nomological network is researcher-authored.
+- Not a generic causal-sensitivity package: it disciplines *measurement* given a stated β.
+- Not “automate all of empirical economics”: it answers one question well.
+
+## Documentation
+
+Start here, then follow in order:
 
 | Doc | Purpose |
 |---|---|
-| [`docs/01_Project_Overview.md`](docs/01_Project_Overview.md) | Goals, users, scope, hard non-goals |
-| [`docs/02_System_Architecture.md`](docs/02_System_Architecture.md) | 4-state machine, IO contracts, determinism |
-| [`docs/03_Methodology.md`](docs/03_Methodology.md) | Menu, slacks, \(M^*\), \(B^*\), inference stance |
-| [`docs/04_Synthetic_DGPs.md`](docs/04_Synthetic_DGPs.md) | Calibrated DGPs + four debug metrics |
-| [`docs/05_Pre_Registration.md`](docs/05_Pre_Registration.md) | Draft H1–H5 (user owns theory) |
-| [`docs/06_Tech_Stack.md`](docs/06_Tech_Stack.md) | Language, numeric stack, packaging |
-| [`docs/07_Software_Development_Strategy.md`](docs/07_Software_Development_Strategy.md) | TDD, gates, agent workflow |
-| [`docs/08_Observability_and_Evaluations.md`](docs/08_Observability_and_Evaluations.md) | Artifacts, metrics, report contract |
-| [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) | Milestones and build order |
-| [`docs/10_Open_Questions.md`](docs/10_Open_Questions.md) | Explicit deferrals |
-| [`docs/11_Glossary.md`](docs/11_Glossary.md) | Notation |
-| [`docs/12_Decision_Engineering_Log.md`](docs/12_Decision_Engineering_Log.md) | **LIVE** engineering decisions |
-| [`docs/13_Evaluations_Log.md`](docs/13_Evaluations_Log.md) | **LIVE** eval runs and learnings |
-| [`docs/14_Researcher_Input_Guide.md`](docs/14_Researcher_Input_Guide.md) | Composites, anchors, SCORE/RESTRICT prep |
-| [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) | MVP release checklist (feeds release-review chat) |
-| [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) | Paper-facing locks, open fields, provenance rule |
-| [`docs/17_H5_Trust_Design.md`](docs/17_H5_Trust_Design.md) | H5 Trust design (LOCKED as design; run gated) |
-| [`docs/18_Measure_Discipline_Plan.md`](docs/18_Measure_Discipline_Plan.md) | v2.0 scope box: δ-grid, evaluator growth, θ-anchor discipline |
-| [`tutorials/cvprofiles_tutorial.ipynb`](tutorials/cvprofiles_tutorial.ipynb) | Independent tutorial: synthetic walk-through + H5 replication |
-| [`tutorials/cvprofiles_diagnostics_tour.ipynb`](tutorials/cvprofiles_diagnostics_tour.ipynb) | v2.0 measure-discipline tour: all evaluators + all diagnostic layers |
-| [`docs/PROJECT_MANIFEST.md`](docs/PROJECT_MANIFEST.md) | Machine-readable index |
+| `docs/METHODOLOGY.md` | The method: menu, slacks, M\*, B\*, inference stance |
+| `docs/USER_GUIDE.md` | How to prepare inputs, run a profile, read the report |
+| `docs/ARCHITECTURE.md` | Four-state machine, IO contracts, determinism |
+| `docs/16_Paper_Protocol_Freeze.md` | Paper-facing locks and open fields |
+| `tutorials/cvprofiles_tutorial.ipynb` | Synthetic walk-through + H5 replication |
+| `tutorials/cvprofiles_diagnostics_tour.ipynb` | v2.0 measure-discipline tour: all evaluators + diagnostics |
+| `docs/PROJECT_MANIFEST.md` | Machine-readable project state |
+
+Live internal logs (append-only): `docs/12_Decision_Engineering_Log.md`, `docs/13_Evaluations_Log.md`. Pre-consolidation scaffold docs live in `docs/archive/` (historical reference only).
 
 ## Roadmap
 
-### v1.0 (shipped 2026-08-01 — thin first-principles spine)
+See [`docs/ROADMAP.md`](docs/ROADMAP.md) — maintained as a live document alongside the engineering log.
 
-1. **Schemas + freeze contract** — typed score matrix, network, \(\beta\), run manifest  
-2. **SCORE → RESTRICT → IDENTIFY** — slacks, \(M^*\), \([L,U]=\min/\max B^*\) (no bootstrap)  
-3. **Thin REPORT** — HTML/JSON; empty \(M^*\) is a clean success  
-4. **Synth harness re-impl** under package/tests (H1a / H2 / H3 / H4; H1_latent diagnostic)  
-5. **Installable package + minimal CI**
+## Museum PoC
 
-### v1.1 (tagged `v1.1.0` 2026-08-04 — MVP; superseded by v2.0.0)
+`evals/synthetic/v0_poc.py` is a historical monolith kept for reference. It is not part of the package and must not be imported from `src/`.
 
-- Units-only bootstrap with conservative, additive percentile diagnostics
-- Deterministic θ-grid sensitivity surface; headline remains [L,U]=min/max B*
-- Pipeline, CLI, JSON/HTML audit panels, package-native evidence, and minimal CI
-- Provisional synthetic-only protocol lock (`docs/16`) with an audited MC50 proof table (seeds `0..49`); H5 Trust design locked (`docs/17`), first frozen run (n=35) accepted as **preliminary paper-facing evidence**; empirical/paper inputs remain Augusto-owned
+## Acknowledgments
 
-### v2.0 (published on PyPI 2026-08-06 — tag `v2.0.0`)
+Development of cvprofiles is assisted by **Hermes Agent (Nous Research)** as an engineering and research collaboration tool — scaffolding, tests, packaging, and documentation review. Hermes is a development aid only; running cvprofiles requires nothing beyond Python and a personal computer.
 
-- Measure discipline: absolute δ-grid, evaluator growth (`mean_order` / `rank_agree` / `ols_coef`), θ-anchor pre-data audit
-- Independent tutorials verified against the PyPI package: synthetic walk-through + H5 replication, and the v2.0 diagnostics tour
-- **All v2.0-DONE criteria complete (2026-08-06)** — B4 methodology statement locked (`docs/03`); dev cycle at `2.0.1a1`
+## License
 
-### Remaining backlog
-
-- **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](docs/16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored \(R\), \(\theta\), \(\delta\), \(\beta\), and evidence posture (synthetic-only portion currently locked provisional)
-- **M10 / H5:** country-level generalized trust baseline — design **LOCKED** (`docs/17`); first frozen run (n=35) accepted as **preliminary paper-facing evidence** (`reports/summaries/h5_trust_evidence_summary.json`); final paper lock + release remain Augusto's
-- **v2.0 measure discipline DONE (2026-08-06):** δ-grid, evaluator growth, θ-anchor artifacts, both tutorials verified against the PyPI package; B4 methodology statement locked — all v2.0-DONE criteria complete. Next-sprint scope box to be drafted; LaTeX report remains later backlog.
-
-See [`docs/09_MVP_Plan.md`](docs/09_MVP_Plan.md) for the locked v1.0 scope box and [`docs/15_MVP_Release_Checklist.md`](docs/15_MVP_Release_Checklist.md) for the v1.1 handoff checklist.
-
-## Hard non-goals (unless reopened in the decision log)
-
-- Foundation-model training  
-- New human annotation campaigns as the main path  
-- Hypothesis-generation / SAE pipelines as thesis core  
-- Full PPI/MARS reimplementation as co-equal deliverable  
-- LLM-agent ABMs / SCA product work as this spine  
-- Proprietary API dependence for paper-reproducible results  
-- “Automate all of empirical economics” platforms  
-
-## Working convention
-
-Progress is read from **on-disk artifacts** (slacks, \(M^*\), ranges, `report.html`) and the two live logs — not from git archaeology alone. Paper numbers come only from **frozen score matrices + pinned network + fixed seed**.
-
-## Repo status
-
-- **Tag `v0.1` @ `fb62b48` (live, immovable):** documentation suite + museum synthetic PoC with green gates.  
-  Release: https://github.com/Bonorinoa/cvprofiles/releases/tag/v0.1
-- **`main`:** v1.0 spine through M9 (`1.0.0a1`) + intermediate spam audit + v1.1 inference layer + v2.0 measure discipline, all merged.
-- **v1.1.0 tagged (2026-08-04):** MVP — v1.0 spine + v1.1 inference layer (units bootstrap + θ-grid) + H5 Trust preliminary evidence. Superseded by **v2.0.0, published on PyPI (2026-08-06)**; dev cycle at `2.0.1a1`.
-- **Not yet:** paper protocol final lock (Augusto-owned). **cvprofiles 2.0.0 published on PyPI (2026-08-06)**; dev cycle at `2.0.1a1`; **v2.0 measure discipline fully DONE** — B4 methodology statement locked (`docs/03`); both tutorials verified against the PyPI package; next-sprint design pending.
-
-### Install (dev)
-
-```bash
-uv sync --extra dev
-uv run pytest -q
-uv run cvprofiles --version
-```
-
-### Museum PoC (expects exit 0; do not import into `src/`)
-
-```bash
-uv venv --python 3.11 .venv
-uv pip install --python .venv/bin/python numpy pandas
-.venv/bin/python evals/synthetic/v0_poc.py
-```
-
-- Progress is read from on-disk artifacts + `docs/12` / `docs/13`, not git archaeology alone.
+MIT. See `LICENSE` (or the project metadata on PyPI).

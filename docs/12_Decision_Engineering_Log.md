@@ -27,11 +27,11 @@ Coding agents: read this before inventing architecture.
 - Four states: SCORE → RESTRICT → IDENTIFY → REPORT.
 - Thesis core = states 1–3; SCORE is ingest/schema only.
 - Engine is **score-agnostic and model-free**; no LLM inside the engine.
-- Finite researcher-supplied menu \(M\); no prompt-space search in engine.
-- Construct validity = partial ID over measurement menu under researcher nomological network \(R,\theta\).
+- Finite researcher-supplied menu $M$; no prompt-space search in engine.
+- Construct validity = partial ID over measurement menu under researcher nomological network $R,\theta$.
 - Closest ancestor: Leamer → measurement functions; formal home: partial identification.
-- Network \(R\) answers validity-of-\(C\); \(\beta\) answers downstream conclusion — **not hard-coded as derivatives of each other**.
-- **USER OWNS** construct definition, every nomological restriction and \(\theta\) anchor, go/no-go, paper narrative (main path).
+- Network $R$ answers validity-of-$C$; $\beta$ answers downstream conclusion — **not hard-coded as derivatives of each other**.
+- **USER OWNS** construct definition, every nomological restriction and $\theta$ anchor, go/no-go, paper narrative (main path).
 - Agent may author **oracle-compatible networks for synthetic DGPs only**; must not silently author main-path empirical networks.
 - H5 (real baseline) is a **template only** until Augusto fills it; agent authorship of H5 main-path network is rejected.
 - Synthetic DGP suite + four debug metrics **before** real baselines.
@@ -62,10 +62,10 @@ User confirmed:
 - **Baseline criterion:** boring, heavily documented public association study (dataset still unchosen; H5 network still USER-OWNED template).
 
 Agent-judgement defaults (user: “sensible defaults, use your judgement”):
-- Slack sign: \(s_r(m)\ge 0\) satisfied; default \(\delta=0\); always also report a small \(\delta\)-grid as sensitivity, not headline.
-- First \(\beta\): `corr_y` primary; `ols_coef` secondary check in PoC.
-- Bootstrap (when implemented at M6): over **units** only; menu fixed; `numpy.random.Generator`; \(B=999\); percentile on \((L,U)\); conservative tone; sharp PI optional garnish.
-- Prereg bars (working): \(c_{\min}=0.90\), \(f_{\max}=0.05\) at \(\delta=0\) — freeze later with eval evidence.
+- Slack sign: $s_r(m)\ge 0$ satisfied; default $\delta=0$; always also report a small $\delta$-grid as sensitivity, not headline.
+- First $\beta$: `corr_y` primary; `ols_coef` secondary check in PoC.
+- Bootstrap (when implemented at M6): over **units** only; menu fixed; `numpy.random.Generator`; $B=999$; percentile on $(L,U)$; conservative tone; sharp PI optional garnish.
+- Prereg bars (working): $c_{\min}=0.90$, $f_{\max}=0.05$ at $\delta=0$ — freeze later with eval evidence.
 - MVP restriction registry start: `corr_sign`, `corr_min`, `mean_order`, `rank_agree`, `stability` (PoC uses a subset).
 - Paraphrase measure label default: **`valid`** (Q9 closed unless reopened); H2 false-admission does not count paraphrase as invalid.
 - First vertical slice for package path remains M4–M5 core; **bootstrap not required in v0 PoC**.
@@ -112,7 +112,7 @@ Process locks:
 **Decision:**
 - First synthetic battery ran successfully via `evals/synthetic/v0_poc.py` + project `.venv` (Python 3.11, numpy, pandas).
 - Artifacts: `reports/runs/v0_poc_*.json`, summary JSON; narrative in `13_Evaluations_Log.md`.
-- **PoC gate (mechanical):** SCORE→RESTRICT→IDENTIFY→REPORT path works; FA=0 on invalids; empty \(M^*\) handled; user condition “code for synthetic evals before git” is satisfied **mechanically**.
+- **PoC gate (mechanical):** SCORE→RESTRICT→IDENTIFY→REPORT path works; FA=0 on invalids; empty $M^*$ handled; user condition “code for synthetic evals before git” is satisfied **mechanically**.
 - **PoC gate (scientific honesty):** not clean enough to freeze H1–H4 or declare synthetic evals “done.” Three DGP/harness bugs + coverage-metric attenuation issue logged (see eval log).
 - **Git:** still **no remote**. Local `git init` is now *eligible* per user rule, but deferred one beat so Augusto can choose: init on v0 as historical snapshot vs wait for v0.1 bugfixes. Agent will not init until user picks.
 - **No silent θ-loosening** to manufacture coverage.
@@ -126,7 +126,7 @@ Process locks:
 **Decision (OPEN at time of writing — superseded by next entry):**
 See following entry. Original A/B/C/D menu preserved as historical context only.
 
-Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systematically exceeds \(\mathrm{Corr}(m,y)\) for noisy admissible \(m\) (classical attenuation / EIV).
+Under $\beta=\mathrm{corr}_y$, oracle $\beta^*=\mathrm{Corr}(V^*,y)$ systematically exceeds $\mathrm{Corr}(m,y)$ for noisy admissible $m$ (classical attenuation / EIV).
 
 ---
 
@@ -135,14 +135,14 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 **Decision (LOCKED):**
 
 **Q22 — H1 metrics (hybrid A+B; reject C for reported range):**
-- **H1a** (gate): false-admission of `invalid_*`/`wrong_construct` + anchor (`m_dict`) retained in \(M^*\) under oracle \(R\).
-- **H1b** (gate / construction invariant): when anchor \(\in M^*\), \(\beta(m_{\mathrm{anchor}})\in[L,U]\) because \([L,U]=\min/\max B^*\). Primary scientific bite is H1a + H3 + H4, not celebrating H1b=1.0.
-- **H1_latent** (diagnostic only): fraction of seeds with \(\mathrm{Corr}(V^*,y)\in[L,U]\). Expected low under attenuation. Never a CI/package gate.
-- **Reject C:** no attenuation band painted onto reported \([L,U]\).
-- **Reject** silent \(\theta\)-loosening or swapping latent target into the scientific range.
+- **H1a** (gate): false-admission of `invalid_*`/`wrong_construct` + anchor (`m_dict`) retained in $M^*$ under oracle $R$.
+- **H1b** (gate / construction invariant): when anchor $\in M^*$, $\beta(m_{\mathrm{anchor}})\in[L,U]$ because $[L,U]=\min/\max B^*$. Primary scientific bite is H1a + H3 + H4, not celebrating H1b=1.0.
+- **H1_latent** (diagnostic only): fraction of seeds with $\mathrm{Corr}(V^*,y)\in[L,U]$. Expected low under attenuation. Never a CI/package gate.
+- **Reject C:** no attenuation band painted onto reported $[L,U]$.
+- **Reject** silent $\theta$-loosening or swapping latent target into the scientific range.
 
-**Q23 — near_miss under oracle \(R\):**
-- Near-misses (`m_near`, `m_floor`) must **fail ≥1 restriction by DGP design** under standard oracle \(R\).
+**Q23 — near_miss under oracle $R$:**
+- Near-misses (`m_near`, `m_floor`) must **fail ≥1 restriction by DGP design** under standard oracle $R$.
 - Do not relabel to `valid` to clear the metric.
 - Near-miss admission is logged separately; not FA.
 
@@ -153,11 +153,11 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 **PoC gates (v0.1 exit criteria):**
 | Scenario | Must hold |
 |---|---|
-| `oracle_easy`, `oracle_with_slop` | FA=0; anchor in \(M^*\) all seeds; H1b=1 when nonempty; near_miss not all admitted |
+| `oracle_easy`, `oracle_with_slop` | FA=0; anchor in $M^*$ all seeds; H1b=1 when nonempty; near_miss not all admitted |
 | `harsh_theta`, `all_invalid` | empty_set_rate=1.0; FA=0 |
 | all | cold determinism True; H1_latent reported but not gated |
 
-**Rationale:** Load-bearing claim is admissible set + image of \(\beta\), not recovery of latent Corr(V*,y). Reliable PoC is user-stated prerequisite for repo.
+**Rationale:** Load-bearing claim is admissible set + image of $\beta$, not recovery of latent Corr(V*,y). Reliable PoC is user-stated prerequisite for repo.
 
 ---
 
@@ -171,7 +171,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - H1b=1.0 recorded as construction invariant, not oversold.
 
 **Gate snapshot (5 seeds):**
-| Scenario | empty | FA | anchor_in | H1b | H1_latent | cold | slop \(\bar\beta\) |
+| Scenario | empty | FA | anchor_in | H1b | H1_latent | cold | slop $\bar\beta$ |
 |---|---:|---:|---:|---:|---:|---|---:|
 | oracle_easy | 0 | 0 | 1 | 1 | 0 | yes | 0.481 |
 | oracle_with_slop | 0 | 0 | 1 | 1 | 0 | yes | 0.547 |
@@ -206,9 +206,9 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
   - Distinguish anchor roles: **P1 criterion**, **P2 peer**, **synthetic eval anchor**, optional **rank-ref**.
   - Recommended empirical sequence when a system was trained to a standard (e.g. LLM→GPS): **criterion recovery first**, peer/external network second.
   - Common unit required; no row-merge of distinct survey microdata; join at moments when needed.
-  - One construct per run; small \(J\); freeze recipes in `scoring_notes.md` beside runs.
+  - One construct per run; small $J$; freeze recipes in `scoring_notes.md` beside runs.
 - Indexed from root README, `docs/README.md`, `PROJECT_MANIFEST.md`; glossary terms added.
-- Does **not** author SCA2/H5 empirical \(R\); SCA-style worked pattern is illustrative posture only.
+- Does **not** author SCA2/H5 empirical $R$; SCA-style worked pattern is illustrative posture only.
 - Lands on **`main` after tag `v0.1`** — does **not** move the freeze.
 
 **Rationale:** User correctly noted scoring is a non-trivial researcher decision; docs needed durable guidelines (when to break composites, what to anchor on) without collapsing USER-owned theory into package defaults.
@@ -236,14 +236,14 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 **Decision (LOCKED this sprint):**
 
 - **v1.0 goal:** validate core first principles of the system we ship — not full MVP in historical `09` backlog, not paper-complete, not fully tested polish.
-- **In v1.0:** installable thin package `src/cvprofiles` + CLI; SCORE → RESTRICT → IDENTIFY → thin REPORT (HTML/JSON); finite menu; sample slacks → \(M^*\) → \([L,U]=\min/\max B^*\); freeze hash + bit-stable rerun; synthetic harness re-implemented under package/tests (H1a / H2 / H3 / H4); empty \(M^*\) clean success; no LLM in engine or installable import graph.
+- **In v1.0:** installable thin package `src/cvprofiles` + CLI; SCORE → RESTRICT → IDENTIFY → thin REPORT (HTML/JSON); finite menu; sample slacks → $M^*$ → $[L,U]=\min/\max B^*$; freeze hash + bit-stable rerun; synthetic harness re-implemented under package/tests (H1a / H2 / H3 / H4); empty $M^*$ clean success; no LLM in engine or installable import graph.
 - **Out of v1.0:** **M6 bootstrap / θ-grid → v1.1**; M10 / H5 / real baseline / USER empirical network content; sharp PI; prompt search / measure generation; GUI/SaaS; importing museum monolith into `src/`; moving tag `v0.1`; “fully tested MVP” polish.
 - **Build order (strict):** M1 → M2 → M3 → M4 → M5 → M7(thin) → M8 → M9. **No M6. No M10 this sprint.**
 - **Gate path:** G1 → G2 → G3 → G4 → G5 → G7-thin → G8-mini → package install/CI. G7/G8 re-enter from G5 (not G6) for this sprint. G6 deferred to v1.1.
 - **Hypothesis wording (unchanged):** H1a / H1b gates; H1_latent diagnostic only (attenuation). See `03`, `05`.
 - **Tag `v0.1` @ `fb62b48`:** immovable. Methods KB + museum PoC only. Do not move, delete, or retag.
 - **Museum:** `evals/synthetic/v0_poc.py` stays present and **unimported**. Package path must earn its own gates; museum was directional only.
-- **Authority split unchanged:** USER owns construct / every \(R,\theta\) / go-no-go / paper narrative. Agent may author oracle networks for synthetic DGPs only. Doc-14 remains DRAFT process guidance — not package defaults that author constructs.
+- **Authority split unchanged:** USER owns construct / every $R,\theta$ / go-no-go / paper narrative. Agent may author oracle networks for synthetic DGPs only. Doc-14 remains DRAFT process guidance — not package defaults that author constructs.
 - **Sibling chat:** version-control evaluation / release review owns tag/release candidates. This sprint implements; propose `v1.0.0` only when acceptance list green and Augusto asks; do not tag from this chat by default.
 - **Phase 0 (this entry’s commit):** docs hygiene only — past-tense public repo + tag live; v1.0 scope box in `09` + manifest; G6/bootstrap wording deferred; H1a/H1b/H1_latent pointers. No methodology expansion; no hard non-goal reopening.
 
@@ -319,7 +319,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 **G3 proof:** `tests/test_restrict.py` green.
 
-**Follow-ups:** M4 slacks + \(M^*\); M5 \(\beta\) + min/max range.
+**Follow-ups:** M4 slacks + $M^*$; M5 $\beta$ + min/max range.
 
 ---
 
@@ -327,13 +327,13 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 **Decision:**
 - Evaluators in v1.0 thin spine: **`corr_min`**, **`corr_sign`** only. Other schema types fail loud until a fixture demands them.
-- \(s_r \ge -\delta\); \(\delta=0\) default. Full slack matrix + `rejected` reasons.
-- \(M^*\) from survivors; empty \(M^*\) is **success** (not exception).
-- \(\beta\): **`corr_y` only**. \([L,U]=\min/\max B^*\) on survivors; non-survivors still get \(\beta(m)\) marked rejected.
-- Never loosen \(\theta\); never include rejected \(\beta\) in range; no bootstrap (v1.1).
-- Harsh fixture: `data/fixtures/mini_v1/network_harsh.yaml` with `corr_min` \(\theta=0.999\) (above max sample corr on mini) → true empty \(M^*\).
+- $s_r \ge -\delta$; $\delta=0$ default. Full slack matrix + `rejected` reasons.
+- $M^*$ from survivors; empty $M^*$ is **success** (not exception).
+- $\beta$: **`corr_y` only**. $[L,U]=\min/\max B^*$ on survivors; non-survivors still get $\beta(m)$ marked rejected.
+- Never loosen $\theta$; never include rejected $\beta$ in range; no bootstrap (v1.1).
+- Harsh fixture: `data/fixtures/mini_v1/network_harsh.yaml` with `corr_min` $\theta=0.999$ (above max sample corr on mini) → true empty $M^*$.
 
-**G4/G5 proof:** `tests/test_identify.py` — FA=0 on `m_slop`; empty harsh; cold double-run; range is image of \(B^*\) only.
+**G4/G5 proof:** `tests/test_identify.py` — FA=0 on `m_slop`; empty harsh; cold double-run; range is image of $B^*$ only.
 
 **Follow-ups:** M7 thin REPORT + `run` composition. No M6.
 
@@ -347,10 +347,10 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - CLI: `cvprofiles run --scores --roles --network --beta [--out] [--policy] [--seed] [--title]`.
   - **stdout = pure JSON summary** (machine-parseable).
   - Human status crumbs → **stderr only**.
-- Empty \(M^*\) is exit code **0**; HTML shows first-class “Empty admissible set — success, not a crash” callout; never auto-loosen \(\theta\).
+- Empty $M^*$ is exit code **0**; HTML shows first-class “Empty admissible set — success, not a crash” callout; never auto-loosen $\theta$.
 - G7 enters from **G5** (not G6) for v1.0 thin spine. Bootstrap remains v1.1.
 - Jinja template packaged via hatch `force-include` of `report/templates/`.
-- mini_v1 e2e: oracle \(M^*=\{m\_good,m\_weak\}\), FA=0 on `m_slop`; harsh empty clean; cold double-run same `run_id` / \(M^*\) / \([L,U]\); golden freeze hashes unchanged under `1.0.0a1`.
+- mini_v1 e2e: oracle $M^*=\{m\_good,m\_weak\}$, FA=0 on `m_slop`; harsh empty clean; cold double-run same `run_id` / $M^*$ / $[L,U]$; golden freeze hashes unchanged under `1.0.0a1`.
 
 **G7 proof:** `tests/test_report.py` + `tests/test_pipeline_e2e.py`; full suite green; live demos under `reports/runs/demo_mini_v1_*` (gitignored).
 
@@ -361,21 +361,21 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 ## 2026-08-01 — M8 package synth harness (LOCKED)
 
 **Decision:**
-- Re-implement synthetic DGP + oracle \(R\) + metrics + battery under `src/cvprofiles/synth/`.
+- Re-implement synthetic DGP + oracle $R$ + metrics + battery under `src/cvprofiles/synth/`.
 - **Museum** `evals/synthetic/v0_poc.py` remains historical only — **never import**.
 - Battery drives the **real package path**: `run_score` → `run_restrict` → `run_identify` (not a parallel identify).
 - Scenarios (v1.0 mini battery): `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`.
-- Seeds: `0..4`; \(n=1000\); \(\delta=0\); \(\beta=\mathrm{corr}_y\); SCORE policy `none` (DGP emits analysis-ready columns; optional internal centering is DGP-side only if needed).
-- Oracle \(R\) (eval-only, agent-OK): `corr_min(v_aux)` + `corr_sign(v_aux,+)` — uses existing evaluators only. Harsh raises `corr_min` \(\theta\). No bootstrap/θ-grid (M6 = v1.1).
+- Seeds: `0..4`; $n=1000$; $\delta=0$; $\beta=\mathrm{corr}_y$; SCORE policy `none` (DGP emits analysis-ready columns; optional internal centering is DGP-side only if needed).
+- Oracle $R$ (eval-only, agent-OK): `corr_min(v_aux)` + `corr_sign(v_aux,+)` — uses existing evaluators only. Harsh raises `corr_min` $\theta$. No bootstrap/θ-grid (M6 = v1.1).
 - Gates:
-  - **H1a:** FA of labels in `{invalid_confounded, invalid_noise, wrong_construct}` = 0 on oracle scenarios; anchor `m_dict` ∈ \(M^*\) on all oracle seeds.
-  - **H1b:** \(\beta(m_{\mathrm{dict}})\in[L,U]\) when nonempty (construction invariant).
-  - **H1_latent:** \(\mathrm{Corr}(V^*,y)\in[L,U]\) — **diagnostic only**; attenuation → often 0 is OK.
+  - **H1a:** FA of labels in `{invalid_confounded, invalid_noise, wrong_construct}` = 0 on oracle scenarios; anchor `m_dict` ∈ $M^*$ on all oracle seeds.
+  - **H1b:** $\beta(m_{\mathrm{dict}})\in[L,U]$ when nonempty (construction invariant).
+  - **H1_latent:** $\mathrm{Corr}(V^*,y)\in[L,U]$ — **diagnostic only**; attenuation → often 0 is OK.
   - **H3:** empty rate = 1.0 on `harsh_theta` and `all_invalid`.
-  - **H4:** cold independent double-run equality of slacks / \(M^*\) / \(L,U\).
+  - **H4:** cold independent double-run equality of slacks / $M^*$ / $L,U$.
 - Near-miss admissions logged separately; not FA. Near-miss must fail ≥1 oracle restriction by DGP design.
 - Artifacts: `reports/summaries/v1_0_package_synth_summary.json` (committed proof); per-seed dumps optional/gitignored.
-- Do **not** loosen \(\theta\) to chase H1_latent. Do **not** bump package version (`1.0.0a1`).
+- Do **not** loosen $\theta$ to chase H1_latent. Do **not** bump package version (`1.0.0a1`).
 
 **Rationale:** Package path must earn its own gates before M9 packaging confidence.
 
@@ -388,7 +388,7 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 **Decision:**
 - User authorized **push of main** (`29bdea1`) **without M9 CI**. Known gap: no GitHub Actions yet; accepted deliberately.
 - User authorized agent to **author an intermediate (non-main-path) real-world audit** to stress the package on free public data — **not** H5 / paper empirical network.
-- Intermediate audit lives on branch **`feat/realworld-spam`**: spamminess construct over 20newsgroups-derived multi-measure matrix (sklearn, free, offline-cached). Agent-authored incidental \(R\) OK **only** here.
+- Intermediate audit lives on branch **`feat/realworld-spam`**: spamminess construct over 20newsgroups-derived multi-measure matrix (sklearn, free, offline-cached). Agent-authored incidental $R$ OK **only** here.
 - **Still locked:** no silent main-path H5 network; no museum import; no `v0.1` move; M6 bootstrap still v1.1.
 
 **Rationale:** Packaging confidence needs more than synthetic DGPs; intermediate domain-agnostic stress is allowed when user explicitly reopens that lane without collapsing H5 ownership.
@@ -423,17 +423,17 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 - **Bootstrap (LOCKED semantics):**
   - Units-only resampling with replacement; **menu fixed** (never resample measures).
   - Single `numpy.random.default_rng(seed)` stream per run; no global RNG.
-  - Per replicate: slacks → \(M^*_b\) → \(\beta\) on survivors → \((L_b,U_b)\); percentile band \((2.5\%,97.5\%)\) over **non-empty** replicates only.
+  - Per replicate: slacks → $M^*_b$ → $\beta$ on survivors → $(L_b,U_b)$; percentile band $(2.5\%,97.5\%)$ over **non-empty** replicates only.
   - `empty_replicate_rate` always reported; all-empty ⇒ band null + note.
-  - **Headline \([L,U]\) stays \(\min/\max B^*\)** on the full sample; bootstrap band is additive metadata and never replaces the headline.
+  - **Headline $[L,U]$ stays $\min/\max B^*$** on the full sample; bootstrap band is additive metadata and never replaces the headline.
   - `bootstrap.json` written only when `n_boot ≥ 1`; default `n_boot=0` preserves v1.0 bit-stability of existing runs. `n_boot` in the freeze preimage: `< 1` ⇒ JSON `null` (v1.0 bit-stability), `≥ 1` ⇒ int.
   - Bootstrap uses the run's existing `seed` (already in the preimage); **no** new preimage key.
   - Degenerate replicates (NaN β, e.g. zero-variance resamples) counted as `degenerate_replicate_rate`, excluded from the band, never silently dropped.
-  - Band is **pointwise**: 2.5% of the \(L_b\) distribution, 97.5% of the \(U_b\) distribution — not the joint hull. Reflects sampling variation *conditional on admission*; \(M^*\) membership flips across replicates are real, not bugs.
+  - Band is **pointwise**: 2.5% of the $L_b$ distribution, 97.5% of the $U_b$ distribution — not the joint hull. Reflects sampling variation *conditional on admission*; $M^*$ membership flips across replicates are real, not bugs.
 - **θ-grid (LOCKED semantics):**
-  - Declared scale multipliers \(\lambda\) applied to **all** \(\theta_r\) (\(\lambda=1.0\) = declared network).
-  - Diagnostic sensitivity surface only: per \(\lambda\) → \(M^*\), \([L,U]\), empty flag → `theta_grid.json`.
-  - **Never** auto-select \(\lambda\) (no coverage-chasing, no auto-loosening). Headline is always \(\lambda=1.0\).
+  - Declared scale multipliers $\lambda$ applied to **all** $\theta_r$ ($\lambda=1.0$ = declared network).
+  - Diagnostic sensitivity surface only: per $\lambda$ → $M^*$, $[L,U]$, empty flag → `theta_grid.json`.
+  - **Never** auto-select $\lambda$ (no coverage-chasing, no auto-loosening). Headline is always $\lambda=1.0$.
   - λ scales **threshold magnitudes only**; sign/direction constraints are never scaled. λ ∈ positive reals; grid config is **not** part of the freeze preimage (diagnostic viewport; same bundle + different grid ⇒ same run_id, different `theta_grid.json`). Off unless explicitly requested.
 - **Evidence:** battery re-run under `1.1.0a1` → `reports/summaries/v1_1_package_synth_summary.json`; `docs/13` row; spam audit proof is version-agnostic and remains v1.0-era evidence (optional re-verify under 1.1.0a1).
 - **Q19:** PyPI name availability check recorded as a note; publishing is **not** in v1.1.
@@ -508,11 +508,11 @@ Under \(\beta=\mathrm{corr}_y\), oracle \(\beta^*=\mathrm{Corr}(V^*,y)\) systema
 
 **Decision:**
 - Augusto delegated the synthetic protocol decision to the agent. This delegation is recorded as **`LOCKED AS PROVISIONAL SYNTHETIC-ONLY PROTOCOL`**, not as a full paper lock.
-- Locked synthetic box: scenarios `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`; \(n=1000\); SCORE policy `none`; \(\delta=0\); β=`corr_y`; battery seeds `0..49`.
+- Locked synthetic box: scenarios `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`; $n=1000$; SCORE policy `none`; $\delta=0$; β=`corr_y`; battery seeds `0..49`.
 - Load-bearing gates: H1a false-admission and anchor retention, H1b, H3, and H4. H2 is not separate; false admission is the H1a/H2 component.
-- Additive diagnostics: H1_latent; bootstrap with fixed probe seed `7` and `n_boot=80`; θ-grid with \(\lambda\in\{0.5,1.0,2.0\}\). Bootstrap/θ-grid are appendix diagnostics only, not the headline range or sharp-PI claims.
+- Additive diagnostics: H1_latent; bootstrap with fixed probe seed `7` and `n_boot=80`; θ-grid with $\lambda\in\{0.5,1.0,2.0\}$. Bootstrap/θ-grid are appendix diagnostics only, not the headline range or sharp-PI claims.
 - The shipped `reports/summaries/v1_1_package_synth_summary.json` with seeds `0..4` remains untouched package smoke evidence. The protocol table will use a distinct summary path.
-- Empirical construct, unit/universe, score matrix/menu, empirical \(R\), paper θ anchors, paper δ interpretation, paper β choice, paper claims, and reporting placement remain Augusto-owned and unresolved.
+- Empirical construct, unit/universe, score matrix/menu, empirical $R$, paper θ anchors, paper δ interpretation, paper β choice, paper claims, and reporting placement remain Augusto-owned and unresolved.
 - No engine change, push, tag, PyPI publication, or empirical/H5 run is authorized by this lock.
 
 **Rationale:**
@@ -882,3 +882,47 @@ alignment at publish time.
 - **Left as-is (deliberate):** museum `evals/synthetic/v0_poc.py` (unimported), historical `1.0.0a1`/`1.1.0a1` literals in dated log rows and CHANGELOG release entries, `dist/` published artifacts (provenance), protocol-freeze `AWAITING AUGUSTO` rows (open by design), `stability`/`diff_means` schema-only fail-loud types.
 
 No engine behavior changed; full battery green; next-sprint scope box (docs/19) to be drafted in the new session with the manifest/doc-map/AGENTS wiring done in the same commit.
+
+---
+
+## 2026-08-06 — docs strategy: public-docs rewrite phase (Augusto feedback; Phase 0 shipped)
+
+**Decision (recorded, Augusto-directed):** Augusto reviewed the public-facing documentation and directed a docs-first strategy change. Adopted: **markdown-only for human docs** (no LaTeX doc pipeline; LaTeX stays reserved for the paper and the backlog LaTeX report), consolidated public doc set, and a thin batch-orchestration utility as a later phase. This entry records Phase 0 (shipped); Phase 1 (consolidation) and Phase 2 (method statements + batch utility) get their own dated entries when they land.
+
+**Phase 0 shipped (docs-only, no engine behavior change; 218-test battery green):**
+
+- **README.md rewritten from scratch** for a public/PyPI audience:
+  - Removed local-path and Hermes-profile rows (`Hermes profile`, `Path`); removed the Augusto-as-primary-user framing (owner row kept as authorship only, consistent with `pyproject.toml`).
+  - Added an **Acknowledgments** section crediting Hermes Agent (Nous Research) as a development tool — explicitly noting that running the package requires only Python and a personal computer.
+  - **Install + Quickstart moved near the top** (`pip install cvprofiles` + a real CLI invocation against `data/fixtures/mini_v1/` with measured JSON output; verified live).
+  - **Reproducibility contracts promoted to a first-class section** (frozen runs, hashes, survivors-only range, empty-M*-as-success, additive diagnostics).
+  - Added a **"When to use cvprofiles (and when not to)"** positioning table (vs Leamer / OVB / variance GSA).
+  - Removed all math from the README (PyPI does not render LaTeX); document map trimmed; roadmap moved out.
+- **Roadmap extracted to `docs/ROADMAP.md`** — live document, maintained alongside `docs/12`; README keeps only current posture.
+- **Math delimiter sweep across all markdown docs**: `\(...\)` → `$...$`, `\[...\]` → `$$...$$` (GitHub-compatible KaTeX), display environments `align*` → `aligned`, and a double-escaped `\\(\\theta\\)` anomaly fixed in docs/14. Verified 0 remaining occurrences outside code fences/inline code. Tutorial notebooks intentionally untouched (Jupyter renders `\(...\)` natively). Tooling: `tools/convert_math_delims.py` (one-shot migration) + `tools/scan_math_delims.py --check` (CI gate).
+- **CI**: new "Docs math delimiters use GitHub-compatible $ syntax" step runs the scanner in `--check` mode.
+- **docs/01**: users table now leads with empirical researchers (not Augusto); removed the "matches Hermes profile" name note.
+- **Left as-is (deliberate):** append-only logs `docs/12`/`docs/13`, governance locks `docs/16`/`docs/17`, and `PROJECT_MANIFEST.md` keep their internal Hermes/local-path references (they are not user-facing package docs; the manifest is machine-readable internal state).
+
+**Phase 1 (next):** consolidate to a public doc set (`METHODOLOGY`, `USER_GUIDE`, `ARCHITECTURE`) written from shipped state in researcher voice; archive pre-ship scaffold docs; update AGENTS.md truth-table + PROJECT_MANIFEST. **Phase 2 (next):** registry rationale + monotonicity gap statement, scalar-entry rationale, report anatomy, when-to-use positioning, and a thin `tools/run_many.py` batch utility (TDD).
+
+---
+
+## 2026-08-06 — docs consolidation shipped (Phase 1)
+
+**Decision (recorded, Augusto-directed):** consolidated the 18-file numbered scaffold into a small public doc set written from shipped state, per the Phase 0 plan. History is preserved: every pre-ship doc moved (not deleted) into `docs/archive/` with a mapping README.
+
+**Shipped (docs-only, no engine behavior change):**
+
+- **New public docs** (researcher voice, markdown, math in `$` delimiters):
+  - `docs/METHODOLOGY.md` — canonical method statement (B4 content carried over from archived `docs/03`), restriction registry **with rationale and the monotone-in-continuous-covariate gap**, target registry, inference stance, empty-set aesthetics, when-to-use positioning, notation. Supersedes `docs/03`, `docs/11`.
+  - `docs/USER_GUIDE.md` — the four input files with real shapes, CLI + Python API, output artifacts, **report anatomy**, composites/splits, anchors, units, θ-anchor discipline, worked GPS pattern, checklists. Supersedes `docs/14`, CLI/IO parts of `docs/02`.
+  - `docs/ARCHITECTURE.md` — four-state machine, **actual shipped module map**, IO contracts, determinism/freeze contract, evaluator registries, report construction, observability, tech stack, failure aesthetics. Supersedes `docs/02`, `docs/06`, `docs/08`.
+- **Archived** (git mv, history preserved): `docs/archive/` now holds 01–11, 14, 15, 18 with `README.md` mapping each to its replacement. Kept live: 12, 13, 16, 17, PROJECT_MANIFEST, ROADMAP.
+- **Rewired references:** root README doc map + positioning pointer; `docs/README.md` index; AGENTS.md truth table (incl. `docs/18` → archive pointer); PROJECT_MANIFEST reading order + v2_0 plan pointer; `docs/16` source columns and References section now cite METHODOLOGY/USER_GUIDE/ARCHITECTURE or archive paths. Historical log rows in `docs/12`/`docs/13` intentionally untouched (append-only).
+- **Shipped-state corrections baked in:** consolidated docs describe the package as it is — numpy closed-form `ols_coef` (no statsmodels; the old `docs/06` said statsmodels), actual `identify/`/`inference/`/`anchors/` module layout, actual artifact set, real CLI flags.
+- **Registry rationale + monotonicity gap** (Phase 2 content, folded in early since the docs were being written): narrow registry justified; learned judges/ML slacks explicitly positioned as upstream scoring or downstream robustness, not engine features; `monotone_in_continuous_covariate` named as the known gap with an extension path.
+
+**Left as-is (deliberate):** tutorial notebooks (unchanged), `tools/` verifiers' `docs/16`/`docs/17` string references (both files stay live), archived docs' internal cross-links (historical; archive README says so).
+
+**Phase 2 remaining:** thin `tools/run_many.py` batch utility (TDD) + USER_GUIDE batch-pattern pointer, when it lands.

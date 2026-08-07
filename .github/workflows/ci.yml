@@ -35,6 +35,9 @@ jobs:
       - name: Ruff (src + tests + tools)
         run: uv run ruff check src tests tools
 
+      - name: Docs math delimiters use GitHub-compatible $ syntax
+        run: uv run python tools/scan_math_delims.py --check
+
       - name: Mypy (strict package check)
         run: uv run mypy src
 

@@ -1,6 +1,6 @@
 # 02 — System Architecture
 
-**Status:** scaffold v0 (2026-08-01) — LOCKED spine; IO details DRAFT until first schema PR  
+**Status:** scaffold v0 (2026-08-01) — LOCKED spine; IO details DRAFT until first schema PR
 **Principle:** state machine first. Observability beats cleverness. No LLM inside the engine.
 
 ## Four-state machine
@@ -74,8 +74,8 @@ Each state is a **pure-ish transform** with explicit inputs/outputs on disk. Pre
 | Artifact | Role |
 |---|---|
 | `scores.parquet` / `.csv` | Units × measures; columns are `m_j` ids |
-| `aux.parquet` (optional) | Auxiliaries \(V\) used in restrictions |
-| `outcome.parquet` (optional) | Outcome / other inputs to \(\beta\) |
+| `aux.parquet` (optional) | Auxiliaries $V$ used in restrictions |
+| `outcome.parquet` (optional) | Outcome / other inputs to $\beta$ |
 | `units.json` | Unit id column name, sample weights (optional) |
 
 ### SCORE out
@@ -87,7 +87,7 @@ Each state is a **pure-ish transform** with explicit inputs/outputs on disk. Pre
 ### RESTRICT in
 | Artifact | Role |
 |---|---|
-| `network.yaml` | Restrictions \(r \in R\), each with type, fields, \(\theta_r\) |
+| `network.yaml` | Restrictions $r \in R$, each with type, fields, $\theta_r$ |
 | `beta.yaml` | Target functional declaration + args |
 | `S_frozen` + manifest | From SCORE |
 
@@ -99,10 +99,10 @@ Each state is a **pure-ish transform** with explicit inputs/outputs on disk. Pre
 ### IDENTIFY out
 | Artifact | Role |
 |---|---|
-| `slacks.parquet` | \(s_r(m_j)\) matrix (measures × restrictions) |
-| `admissible.json` | \(M^*\) member list + failure reasons for non-members |
-| `beta_values.json` | \(\beta(m)\) for each \(m \in M\) (flag survivors) |
-| `range.json` | \([L,U]=\min/\max B^*\) (v1.0); point-ID flag; empty-set flag |
+| `slacks.parquet` | $s_r(m_j)$ matrix (measures × restrictions) |
+| `admissible.json` | $M^*$ member list + failure reasons for non-members |
+| `beta_values.json` | $\beta(m)$ for each $m \in M$ (flag survivors) |
+| `range.json` | $[L,U]=\min/\max B^*$ (v1.0); point-ID flag; empty-set flag |
 | `bootstrap.json` | Replicates summary (not raw draws by default) — **v1.1** |
 | `theta_grid.json` | Sensitivity surface summary — **v1.1** |
 | `identify_manifest.json` | seed, float policy, package version; `n_boot` when M6 lands |
@@ -116,19 +116,19 @@ Each state is a **pure-ish transform** with explicit inputs/outputs on disk. Pre
 
 ## Determinism & freeze contract
 
-1. Every full run writes a **run directory** under `reports/runs/<run_id>/`.  
-2. `run_id` = content hash of `(S_frozen hash, network hash, beta hash, seed, package_version, config)`.  
-3. Paper path: only artifacts from a run directory with pinned hashes are citable.  
-4. Bootstrap RNG is seeded; stream is documented (NumPy Generator, not global `np.random`).  
-5. Float comparisons for slacks use an explicit tolerance \(\delta\) (default TBD; see open questions) — never raw `== 0` without policy.
+1. Every full run writes a **run directory** under `reports/runs/<run_id>/`.
+2. `run_id` = content hash of `(S_frozen hash, network hash, beta hash, seed, package_version, config)`.
+3. Paper path: only artifacts from a run directory with pinned hashes are citable.
+4. Bootstrap RNG is seeded; stream is documented (NumPy Generator, not global `np.random`).
+5. Float comparisons for slacks use an explicit tolerance $\delta$ (default TBD; see open questions) — never raw `== 0` without policy.
 
 ## What is deliberately not in the architecture
 
-- Vector DB / RAG  
-- Agent loop inside IDENTIFY  
-- Measure generation (prompt library, annotation UI) as engine stages  
-- Causal DAG editor  
-- Multi-tenant service layer  
+- Vector DB / RAG
+- Agent loop inside IDENTIFY
+- Measure generation (prompt library, annotation UI) as engine stages
+- Causal DAG editor
+- Multi-tenant service layer
 
 Upstream scorers (LLM APIs, dictionaries, PCA) are **user workflows** that produce columns for SCORE. They are documented as recipes, not engine modules.
 
@@ -144,13 +144,13 @@ Upstream scorers (LLM APIs, dictionaries, PCA) are **user workflows** that produ
 
 | Condition | Engine behavior |
 |---|---|
-| Empty \(M^*\) | Success exit; `range.json` marks empty; report explains binding restrictions |
-| Singleton \(M^*\) | Point-ID flag true; still emit range; bootstrap/θ diagnostics at v1.1 |
-| All measures fail one \(r\) | Surface that \(r\) as dominant; do not auto-loosen \(\theta\) |
+| Empty $M^*$ | Success exit; `range.json` marks empty; report explains binding restrictions |
+| Singleton $M^*$ | Point-ID flag true; still emit range; bootstrap/θ diagnostics at v1.1 |
+| All measures fail one $r$ | Surface that $r$ as dominant; do not auto-loosen $\theta$ |
 | Schema invalid | Fail loud at SCORE/RESTRICT; never partial-identify on garbage |
 
 ## Cross-cutting
 
-- **Logging:** structured JSON lines per state; no chatty progress bars as the only record.  
-- **Config:** YAML/TOML for humans; JSON manifests for machines.  
+- **Logging:** structured JSON lines per state; no chatty progress bars as the only record.
+- **Config:** YAML/TOML for humans; JSON manifests for machines.
 - **Tests:** each state has contract tests; IDENTIFY has synthetic oracle tests (see `04`, `08`).

@@ -6,11 +6,11 @@
 
 Observability beats cleverness. Progress is read from **artifacts**, not vibes:
 
-- slack matrices  
-- admissible sets  
-- ranges  
-- `report.html`  
-- eval log rows  
+- slack matrices
+- admissible sets
+- ranges
+- `report.html`
+- eval log rows
 
 Traces of chat sessions are secondary.
 
@@ -41,21 +41,21 @@ reports/runs/<run_id>/
 
 ## Structured logs
 
-- JSON lines; one event per step with `state`, `event`, `ts`, `run_id`.  
-- Errors include schema path and restriction id when relevant.  
+- JSON lines; one event per step with `state`, `event`, `ts`, `run_id`.
+- Errors include schema path and restriction id when relevant.
 - No emoji progress as the only record.
 
 ## Human primary surface
 
 `report.html` must let a non-coder answer:
 
-1. What was the construct menu?  
-2. Which restrictions bit?  
-3. Who is in \(M^*\) and who failed which \(r\)?  
-4. What is \([L,U]\) and is the set empty?  
-5. How does the range move on the \(\theta\)-grid?  
+1. What was the construct menu?
+2. Which restrictions bit?
+3. Who is in $M^*$ and who failed which $r$?
+4. What is $[L,U]$ and is the set empty?
+5. How does the range move on the $\theta$-grid?
 
-Failure aesthetics: empty \(M^*\) gets a clear panel, not a stack trace.
+Failure aesthetics: empty $M^*$ gets a clear panel, not a stack trace.
 
 ## Evaluation system
 
@@ -71,26 +71,26 @@ Defined in `04_Synthetic_DGPs.md`; every synthetic summary row includes them.
 
 ### CI bar (proposal, not frozen)
 
-On PR: unit + contract + mini oracle (`n` small, 1–2 seeds).  
-Nightly/full: broader seed grid (when CI exists).  
+On PR: unit + contract + mini oracle (`n` small, 1–2 seeds).
+Nightly/full: broader seed grid (when CI exists).
 Do not gate CI on H5.
 
 ## Evaluations log discipline
 
 `13_Evaluations_Log.md` is the **narrative** source of truth for what we learned. Each entry:
 
-- date, run_id(s), scenario, git/package version (when available)  
-- metrics table  
-- interpretation (1–3 bullets)  
-- follow-ups  
+- date, run_id(s), scenario, git/package version (when available)
+- metrics table
+- interpretation (1–3 bullets)
+- follow-ups
 
 Do not dump raw bootstrap draws into the markdown log.
 
 ## What we do not build for MVP
 
-- LangSmith / hosted trace products (optional later; not core)  
-- Real-time multi-user dashboards  
-- Automatic “significance stars” that overclaim set identification  
+- LangSmith / hosted trace products (optional later; not core)
+- Real-time multi-user dashboards
+- Automatic “significance stars” that overclaim set identification
 
 ## Link to prereg
 

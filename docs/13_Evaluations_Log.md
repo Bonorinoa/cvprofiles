@@ -51,8 +51,8 @@ See `04_Synthetic_DGPs.md` and `05_Pre_Registration.md` (H1–H4). Do not redefi
 
 ## 2026-08-01 — Log initialized (no runs yet)
 
-- **run_id(s):** none  
-- **status:** scaffold v0; engine not implemented  
+- **run_id(s):** none
+- **status:** scaffold v0; engine not implemented
 - **note:** H5 real-data evaluations are blocked until (1) synthetic H1–H4 gates pass directionally and (2) Augusto authors the empirical network. Agent must not fill H5 network content “to get a row.”
 
 **Interpretation:**
@@ -69,10 +69,10 @@ See `04_Synthetic_DGPs.md` and `05_Pre_Registration.md` (H1–H4). Do not redefi
 - **script:** `evals/synthetic/v0_poc.py` (monolith; not package)
 - **package / git:** none (no git yet); env `.venv` Python 3.11 + numpy/pandas
 - **scenario(s):** `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`
-- **n, J, seed(s), δ, θ notes:** \(n=1000\), \(J=10\), seeds `0..4`, \(\delta=0\); oracle \(R\): `corr_min(v_aux,0.35)`, `corr_sign(v_aux,+1,0.10)`, `mean_order(g,0.10)`; harsh: \(\theta\in\{0.85,0.50,0.80\}\)
+- **n, J, seed(s), δ, θ notes:** $n=1000$, $J=10$, seeds `0..4`, $\delta=0$; oracle $R$: `corr_min(v_aux,0.35)`, `corr_sign(v_aux,+1,0.10)`, `mean_order(g,0.10)`; harsh: $\theta\in\{0.85,0.50,0.80\}$
 - **network hash / label:** oracle synthetic (agent-authored OK); not user empirical network
-- **β:** `corr_y` headline; `ols_coef` stored secondary; **no bootstrap** — \([L,U]=\) min/max over \(M^*\) only
-- **determinism:** re-run `oracle_with_slop` seed0 reported identical \(M^*/L/U\) (see caveats below)
+- **β:** `corr_y` headline; `ols_coef` stored secondary; **no bootstrap** — $[L,U]=$ min/max over $M^*$ only
+- **determinism:** re-run `oracle_with_slop` seed0 reported identical $M^*/L/U$ (see caveats below)
 
 | Scenario | empty-set rate | mean FA | coverage (nonempty) | point-ID rate | mean width | invalid ever admitted |
 |---|---:|---:|---:|---:|---:|---|
@@ -81,21 +81,21 @@ See `04_Synthetic_DGPs.md` and `05_Pre_Registration.md` (H1–H4). Do not redefi
 | `harsh_theta` | **1.00** | 0.000 | n/a | 0.00 | n/a | none |
 | `all_invalid` | 0.00 | 0.000 | 0.00 | **1.00** | 0.000 | none |
 
-Typical oracle nonempty cell (seed0): \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tail,m\_floor\}\), \([L,U]\approx[+0.41,+0.46]\), \(\beta^*=\mathrm{Corr}(V^*,y)\approx +0.47\); `m_slop` / noise / wrong rejected on `r_corr_aux`.
+Typical oracle nonempty cell (seed0): $M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tail,m\_floor\}$, $[L,U]\approx[+0.41,+0.46]$, $\beta^*=\mathrm{Corr}(V^*,y)\approx +0.47$; `m_slop` / noise / wrong rejected on `r_corr_aux`.
 
 **Interpretation:**
-1. **Engine path works.** Slacks → \(M^*\) → range → JSON/report; empty \(M^*\) on `harsh_theta` is clean (feature, not crash); invalid confounded measures never entered \(M^*\) (FA=0).
-2. **Coverage=0 is mostly attenuation, not a broken admissible set.** Under \(\beta=\mathrm{corr}_y\), any noisy \(m=V^*+\varepsilon\) has \(\mathrm{Corr}(m,y)<\mathrm{Corr}(V^*,y)\) in this DGP. Survivors cluster below \(\beta^*\); min/max range therefore misses \(\beta^*\). Do **not** “fix” by loosening \(\theta\). H1 metric needs bias-aware definition before prereg freeze.
-3. **`m_floor` (near_miss) is admitted** under oracle \(R\) — floor/censor still clears `corr_min`/`mean_order`. Either strengthen \(R\), re-label, or treat near_miss admission as expected under weak networks.
+1. **Engine path works.** Slacks → $M^*$ → range → JSON/report; empty $M^*$ on `harsh_theta` is clean (feature, not crash); invalid confounded measures never entered $M^*$ (FA=0).
+2. **Coverage=0 is mostly attenuation, not a broken admissible set.** Under $\beta=\mathrm{corr}_y$, any noisy $m=V^*+\varepsilon$ has $\mathrm{Corr}(m,y)<\mathrm{Corr}(V^*,y)$ in this DGP. Survivors cluster below $\beta^*$; min/max range therefore misses $\beta^*$. Do **not** “fix” by loosening $\theta$. H1 metric needs bias-aware definition before prereg freeze.
+3. **`m_floor` (near_miss) is admitted** under oracle $R$ — floor/censor still clears `corr_min`/`mean_order`. Either strengthen $R$, re-label, or treat near_miss admission as expected under weak networks.
 4. **PoC DGP bugs (not engine bugs):**
    - `oracle_with_slop` ≡ `oracle_easy` (same generator path; no extra slop stress).
-   - `all_invalid` does **not** destroy `m_floor`/`m_near` → singleton \(M^*=\{m\_floor\}\), point-ID rate 1.0; scenario name overclaims.
+   - `all_invalid` does **not** destroy `m_floor`/`m_near` → singleton $M^*=\{m\_floor\}$, point-ID rate 1.0; scenario name overclaims.
    - Determinism check re-reads the JSON it just wrote (weak smoke); needs cold second process or in-memory double call without overwrite confusion.
 
 **Follow-ups:**
 - Decision on H1 coverage operator (attenuation-aware) — see decision log + Q22.
 - v0.1 PoC: differentiate `oracle_with_slop`; fully kill valid trackers in `all_invalid`; honest determinism check.
-- Optional: reclassify or redesign `m_floor` near_miss under oracle \(R\).
+- Optional: reclassify or redesign `m_floor` near_miss under oracle $R$.
 - Do not freeze H1–H4 on this battery alone.
 
 ---
@@ -106,27 +106,27 @@ Typical oracle nonempty cell (seed0): \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_he
 - **script:** `evals/synthetic/v0_poc.py` (`POC_VERSION=v0_1_poc`; monolith museum piece)
 - **package / git:** none at run time; local git authorized after this green exit
 - **scenario(s):** `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`
-- **n, J, seed(s), δ:** \(n=1000\), \(J=10\), seeds `0..4`, \(\delta=0\); standard \(R\): `corr_min(v_aux,0.35)`, `corr_sign(v_aux,+1,0.10)`, `mean_order(g,0.10)`; harsh \(\theta\in\{0.85,0.50,0.80\}\)
+- **n, J, seed(s), δ:** $n=1000$, $J=10$, seeds `0..4`, $\delta=0$; standard $R$: `corr_min(v_aux,0.35)`, `corr_sign(v_aux,+1,0.10)`, `mean_order(g,0.10)`; harsh $\theta\in\{0.85,0.50,0.80\}$
 - **network:** oracle synthetic only
-- **β:** `corr_y` headline; `ols_coef` secondary; **no bootstrap** — \([L,U]=\min/\max B^*\)
+- **β:** `corr_y` headline; `ols_coef` secondary; **no bootstrap** — $[L,U]=\min/\max B^*$
 - **exit code:** `0` — `evaluate_gates` ALL PASSED
 - **labels note:** static LABELS are **design roles** (valid / near_miss / invalid_*), not post-hoc truth after `all_invalid` knobs destroy columns. FA uses design-role invalids only.
 
-| Scenario | empty | FA | anchor in \(M^*\) | H1b | H1_latent | mean width | mean \(\beta(m_{\mathrm{slop}})\) | cold | invalid | near_miss |
+| Scenario | empty | FA | anchor in $M^*$ | H1b | H1_latent | mean width | mean $\beta(m_{\mathrm{slop}})$ | cold | invalid | near_miss |
 |---|---:|---:|---:|---:|---:|---:|---:|---|---|---|
 | `oracle_easy` | 0.00 | 0.000 | **1.00** | **1.00** | 0.00 | 0.048 | +0.481 | True | none | none |
 | `oracle_with_slop` | 0.00 | 0.000 | **1.00** | **1.00** | 0.00 | 0.048 | **+0.547** | True | none | none |
 | `harsh_theta` | **1.00** | 0.000 | 0.00 | n/a | n/a | n/a | +0.481 | True | none | none |
 | `all_invalid` | **1.00** | 0.000 | 0.00 | n/a | n/a | n/a | +0.517 | True | none | none |
 
-Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tail\}\); near_miss and invalids fail `r_corr_aux` (or more).
+Typical oracle nonempty cell: $M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tail\}$; near_miss and invalids fail `r_corr_aux` (or more).
 
 **Interpretation:**
-1. **v0 bugs closed.** `oracle_with_slop` distinct (\(\bar\beta(m_{\mathrm{slop}})\): 0.481 → 0.547); `all_invalid` true empty; cold independent double-run equality holds.
-2. **H1a / H3 / H4 green.** FA=0; anchor always retained under oracle \(R\); empty honesty on harsh + all_invalid; cold determinism True.
-3. **H1b=1.0 is a construction invariant** once anchor \(\in M^*\) and \([L,U]=\min/\max B^*\) — do not oversell as deep empirical discovery. Primary scientific bite is H1a + H3 + H4.
-4. **H1_latent=0 expected** (attenuation). Not a gate. No \(\theta\)-loosening.
-5. **Near-miss by design (Q23):** `m_near` / `m_floor` never enter \(M^*\) under standard oracle \(R\).
+1. **v0 bugs closed.** `oracle_with_slop` distinct ($\bar\beta(m_{\mathrm{slop}})$: 0.481 → 0.547); `all_invalid` true empty; cold independent double-run equality holds.
+2. **H1a / H3 / H4 green.** FA=0; anchor always retained under oracle $R$; empty honesty on harsh + all_invalid; cold determinism True.
+3. **H1b=1.0 is a construction invariant** once anchor $\in M^*$ and $[L,U]=\min/\max B^*$ — do not oversell as deep empirical discovery. Primary scientific bite is H1a + H3 + H4.
+4. **H1_latent=0 expected** (attenuation). Not a gate. No $\theta$-loosening.
+5. **Near-miss by design (Q23):** `m_near` / `m_floor` never enter $M^*$ under standard oracle $R$.
 
 **Follow-ups:**
 - Local git init (no remote) authorized by green exit + user prerequisite.
@@ -179,25 +179,25 @@ Typical oracle cell: M*={m_good, m_weak}; m_slop fails `r_corr_min_aux` + `r_cor
 - **package / git:** `cvprofiles==1.0.0a1`; battery drives real spine `run_score` → `run_restrict` → `run_identify` (not a parallel identify)
 - **museum:** `evals/synthetic/v0_poc.py` present, **unimported** (AST import-graph checks)
 - **scenario(s):** `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`
-- **n, J, seed(s), δ:** \(n=1000\), \(J=10\), seeds `0..4`, \(\delta=0\); SCORE policy `none`
-- **network:** eval-only oracle \(R\): `corr_min(v_aux,0.35)` + `corr_sign(v_aux,+,0.10)`; harsh: `corr_min` \(\theta=0.95\), `corr_sign` \(\theta=0.50`
-- **β:** `corr_y`; **no bootstrap** — \([L,U]=\min/\max B^*\)
+- **n, J, seed(s), δ:** $n=1000$, $J=10$, seeds `0..4`, $\delta=0$; SCORE policy `none`
+- **network:** eval-only oracle $R$: `corr_min(v_aux,0.35)` + `corr_sign(v_aux,+,0.10)`; harsh: `corr_min` $\theta=0.95$, `corr_sign` $\theta=0.50`
+- **β:** `corr_y`; **no bootstrap** — $[L,U]=\min/\max B^*$
 - **passed:** `True` — all named gates green
 
-| Scenario | FA | anchor in \(M^*\) | empty | H1b | H1_latent (diag) | cold | mean \(\|M^*\|\) | mean width |
+| Scenario | FA | anchor in $M^*$ | empty | H1b | H1_latent (diag) | cold | mean $\|M^*\|$ | mean width |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | `oracle_easy` | **0.000** | **1.000** | 0.000 | **1.0** | **0.0** | **1.000** | 4.00 | ≈0.048 |
 | `oracle_with_slop` | **0.000** | **1.000** | 0.000 | **1.0** | **0.0** | **1.000** | 4.00 | ≈0.048 |
 | `harsh_theta` | 0.000 | 0.000 | **1.000** | n/a | n/a | **1.000** | 0.00 | n/a |
 | `all_invalid` | 0.000 | 0.000 | **1.000** | n/a | n/a | **1.000** | 0.00 | n/a |
 
-Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tail\}\); near_miss + invalids fail `r_corr_min_aux` (and/or sign); slop \(\beta\) does not enter \([L,U]\).
+Typical oracle nonempty cell: $M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tail\}$; near_miss + invalids fail `r_corr_min_aux` (and/or sign); slop $\beta$ does not enter $[L,U]$.
 
 **Interpretation:**
 1. **Package path earns H1a / H1b / H3 / H4** on the real engine — not museum numbers.
 2. **FA=0** on designed invalids; **anchor retained**; **empty honesty** on harsh + all_invalid; **cold double-run** True.
-3. **H1_latent=0** expected under attenuation (\(\beta=\mathrm{corr}_y\)); diagnostic only — **not** a gate; no \(\theta\)-loosening.
-4. `oracle_with_slop` is a distinct DGP path (higher \(\beta(m_{\mathrm{slop}})\)); FA still 0.
+3. **H1_latent=0** expected under attenuation ($\beta=\mathrm{corr}_y$); diagnostic only — **not** a gate; no $\theta$-loosening.
+4. `oracle_with_slop` is a distinct DGP path (higher $\beta(m_{\mathrm{slop}})$); FA still 0.
 5. Mini battery (5 seeds × 4 scenarios) is **sufficient for v1.0 first-principles confidence**, not a paper Monte Carlo freeze.
 
 **Follow-ups:**
@@ -251,7 +251,7 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 - **network:** eval-only oracle `R`: `corr_min(v_aux,0.35)` + `corr_sign(v_aux,+,0.10)`; harsh empty contrast; no USER empirical network
 - **scope:** bootstrap and θ-grid are additive diagnostics, not sharp-PI claims; headline remains full-sample `[L,U]=min/max B*`; spam audit remains intermediate and **not H5**
 
-| Scenario | FA | anchor in \(M^*\) | empty | H1b | H1_latent (diag) | cold | mean \(\|M^*\|\) | mean width |
+| Scenario | FA | anchor in $M^*$ | empty | H1b | H1_latent (diag) | cold | mean $\|M^*\|$ | mean width |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | `oracle_easy` | **0.000** | **1.000** | 0.000 | **1.0** | **0.0** | **1.000** | 4.00 | 0.048374 |
 | `oracle_with_slop` | **0.000** | **1.000** | 0.000 | **1.0** | **0.0** | **1.000** | 4.00 | 0.048374 |
@@ -282,12 +282,12 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 - **tool:** `uv run python tools/v11_protocol_synth_mc50.py`
 - **package / generation parent:** `cvprofiles==1.1.0a1`; generated against parent SHA `5bfea25` (Gate B lock); the evidence commit is separate
 - **path:** package-native `run_battery` → `run_score` → `run_restrict` → `run_identify`, with real `run_profile` inference probes; museum PoC present and unimported
-- **battery:** `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`; \(n=1000\), \(J=10\), seeds `0..49`, \(\delta=0\), SCORE policy `none`, β=`corr_y`, cold check on
-- **network:** eval-only oracle \(R\), with the harsh-threshold empty contrast; no USER empirical network
+- **battery:** `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`; $n=1000$, $J=10$, seeds `0..49`, $\delta=0$, SCORE policy `none`, β=`corr_y`, cold check on
+- **network:** eval-only oracle $R$, with the harsh-threshold empty contrast; no USER empirical network
 - **scope:** provisional synthetic-only evidence; not H5, not a paper result, and not a full paper protocol lock. The shipped `v1_1_package_synth_summary.json` with seeds `0..4` remains separate package smoke evidence.
 - **H2:** folded into the H1a false-admission component for this protocol; not reported as a separate gate.
 
-| Scenario | FA | anchor in \(M^*\) | H1b | H1_latent (diag) | empty | cold | mean \(\lvert M^*\rvert\) | mean width | invalid ever | near-miss ever |
+| Scenario | FA | anchor in $M^*$ | H1b | H1_latent (diag) | empty | cold | mean $\lvert M^*\rvert$ | mean width | invalid ever | near-miss ever |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
 | `oracle_easy` | **0.000** | **1.000** | **1.000** | 0.020 | 0.000 | **1.000** | 4.12 | 0.070732 | none | `m_floor` |
 | `oracle_with_slop` | **0.000** | **1.000** | **1.000** | 0.020 | 0.000 | **1.000** | 4.12 | 0.070732 | none | `m_floor` |
@@ -297,13 +297,13 @@ Typical oracle nonempty cell: \(M^*=\{m\_dict,m\_llm\_good,m\_para,m\_heavy\_tai
 **Load-bearing gates:** H1a false-admission and anchor retention, H1b, H3 empty-set honesty, and H4 cold reproducibility are all green. H1_latent is diagnostic only.
 
 **Inference diagnostics:**
-- Oracle probe (fixture DGP seed 0, inference seed 7, `n_boot=80`): headline \([L,U]\) = `[0.419477, 0.469777]`; bootstrap percentile band = `[0.364486, 0.506321]`; 80 non-empty, 0 empty, 0 degenerate replicates.
-- Harsh contrast: headline \(M^*=\varnothing\), \(L=U=\) `null`; all 80 bootstrap replicates empty, 0 degenerate; band is null with the explanatory all-empty note.
-- θ-grid \(\lambda\in\{0.5,1.0,2.0\}\): λ=1.0 equals the headline; no auto-selection or threshold loosening.
+- Oracle probe (fixture DGP seed 0, inference seed 7, `n_boot=80`): headline $[L,U]$ = `[0.419477, 0.469777]`; bootstrap percentile band = `[0.364486, 0.506321]`; 80 non-empty, 0 empty, 0 degenerate replicates.
+- Harsh contrast: headline $M^*=\varnothing$, $L=U=$ `null`; all 80 bootstrap replicates empty, 0 degenerate; band is null with the explanatory all-empty note.
+- θ-grid $\lambda\in\{0.5,1.0,2.0\}$: λ=1.0 equals the headline; no auto-selection or threshold loosening.
 
 **Interpretation:**
-1. All declared load-bearing gates pass across 200 scenario-seed cells; empty \(M^*\) is handled as a clean scientific output.
-2. Under the broader seed list, the near-miss `m_floor` is admitted in the oracle scenarios at least once, and mean \(\lvert M^*\rvert\) is 4.12 rather than 4.00. This is not an H1a failure because designed invalids were never admitted; it is a useful reminder that near-miss behavior is not invariant across seeds.
+1. All declared load-bearing gates pass across 200 scenario-seed cells; empty $M^*$ is handled as a clean scientific output.
+2. Under the broader seed list, the near-miss `m_floor` is admitted in the oracle scenarios at least once, and mean $\lvert M^*\rvert$ is 4.12 rather than 4.00. This is not an H1a failure because designed invalids were never admitted; it is a useful reminder that near-miss behavior is not invariant across seeds.
 3. H1b=1.0 remains partly construction-invariant once the anchor survives and the headline range is defined as min/max over survivors; it should not be oversold.
 4. Bootstrap and θ-grid results are additive diagnostics only; they do not replace the headline range or establish a sharp partial-identification result.
 

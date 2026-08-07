@@ -1,6 +1,6 @@
 # 06 — Tech Stack
 
-**Status:** scaffold v0 (2026-08-01) — **PROPOSED defaults** for a Python methods package  
+**Status:** scaffold v0 (2026-08-01) — **PROPOSED defaults** for a Python methods package
 **Constraint:** paper-reproducible; no proprietary API required for engine runs.
 
 ## Non-negotiables
@@ -18,8 +18,8 @@
 
 | Layer | Allowed | Forbidden in MVP |
 |---|---|---|
-| **Restriction slacks** \(s_r(m)\) | Sample means, correlations, simple group gaps, Spearman | Kernels, trained ML nuisances, LLM judges |
-| **Target \(\beta(m)\)** | `corr`, OLS via **statsmodels** (or thin numpy lstsq) | Deep models as \(\beta\) without explicit reopen |
+| **Restriction slacks** $s_r(m)$ | Sample means, correlations, simple group gaps, Spearman | Kernels, trained ML nuisances, LLM judges |
+| **Target $\beta(m)$** | `corr`, OLS via **statsmodels** (or thin numpy lstsq) | Deep models as $\beta$ without explicit reopen |
 
 This is not “numpy only forever.” It is “no learned nuisances in the validity layer.”
 
@@ -43,10 +43,10 @@ This is not “numpy only forever.” It is “no learned nuisances in the valid
 
 ## Explicitly rejected for engine core
 
-- Cloud LLM SDKs as dependencies of the installable package  
-- Heavy orchestration (Airflow, Prefect)  
-- GUI frameworks  
-- DuckDB/Polars *as requirement* (may revisit for large \(n\); pandas first)
+- Cloud LLM SDKs as dependencies of the installable package
+- Heavy orchestration (Airflow, Prefect)
+- GUI frameworks
+- DuckDB/Polars *as requirement* (may revisit for large $n$; pandas first)
 
 ## Repo layout (target)
 
@@ -72,10 +72,10 @@ cvprofiles/
 
 ## Determinism policy
 
-- Pass `seed: int` into IDENTIFY; construct `np.random.default_rng(seed)`.  
-- Bootstrap uses that generator only.  
-- Parallelism: either serial MVP or worker-local RNG with explicit spawn policy (document before enabling).  
-- Float tolerance \(\delta\) is config, not ambient epsilon soup.
+- Pass `seed: int` into IDENTIFY; construct `np.random.default_rng(seed)`.
+- Bootstrap uses that generator only.
+- Parallelism: either serial MVP or worker-local RNG with explicit spawn policy (document before enabling).
+- Float tolerance $\delta$ is config, not ambient epsilon soup.
 
 ## Dependencies philosophy
 

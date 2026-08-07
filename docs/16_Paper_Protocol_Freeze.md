@@ -24,15 +24,15 @@ This document is the single paper-facing protocol home. It organizes existing lo
 
 | Item | Status | Current protocol statement | Source |
 |---|---|---|---|
-| State machine | **LOCKED** | SCORE → RESTRICT → IDENTIFY → REPORT. | `docs/01`, `docs/02`, `docs/03` |
-| Engine posture | **LOCKED** | Score-agnostic and model-free; no LLM in the engine or installable import graph. | `docs/01`, `docs/03`, `docs/12` |
-| Measurement menu | **LOCKED** | Finite, researcher-supplied menu of score columns; no prompt-space search in the engine. | `docs/03`, `docs/14` |
-| Restrictions | **LOCKED** | Researcher-stated nomological restrictions with sample slacks; admit when all restrictions satisfy the declared tolerance. | `docs/03`, `docs/12` |
-| Admissible set | **LOCKED** | Canonically, \(M^* = \{m \in M: s_r(m) \ge 0 \ \forall r\}\); with the package tolerance policy, admit when \(s_r(m) \ge -\delta\), which coincides with the canonical rule at \(\delta=0\). | `docs/03`, `src/cvprofiles/identify/pipeline.py` |
-| Downstream object | **LOCKED** | \(B^* = \{\beta(m):m\in M^*\}\); headline range is \([L,U]=[\min B^*,\max B^*]\) for nonempty \(M^*\). | `docs/03`, `docs/12` |
-| Rejected measures | **LOCKED** | β values may be reported diagnostically for rejected measures, but rejected measures never enter the headline range. | `docs/03`, `docs/12` |
-| Empty set | **LOCKED** | Empty \(M^*\) is a valid scientific output: the data and stated theory admit no candidate measure. No automatic θ loosening. | `docs/03`, `docs/12` |
-| Freeze identity | **LOCKED** | Paper numbers require frozen scores, pinned network/β, fixed seed, package version, and the documented freeze/run-id contract. | `docs/03`, `docs/12`, freeze contract |
+| State machine | **LOCKED** | SCORE → RESTRICT → IDENTIFY → REPORT. | `docs/ARCHITECTURE.md`, `docs/METHODOLOGY.md` |
+| Engine posture | **LOCKED** | Score-agnostic and model-free; no LLM in the engine or installable import graph. | `docs/METHODOLOGY.md`, `docs/12` |
+| Measurement menu | **LOCKED** | Finite, researcher-supplied menu of score columns; no prompt-space search in the engine. | `docs/METHODOLOGY.md`, `docs/USER_GUIDE.md` |
+| Restrictions | **LOCKED** | Researcher-stated nomological restrictions with sample slacks; admit when all restrictions satisfy the declared tolerance. | `docs/METHODOLOGY.md`, `docs/12` |
+| Admissible set | **LOCKED** | Canonically, $M^* = \{m \in M: s_r(m) \ge 0 \ \forall r\}$; with the package tolerance policy, admit when $s_r(m) \ge -\delta$, which coincides with the canonical rule at $\delta=0$. | `docs/METHODOLOGY.md`, `src/cvprofiles/identify/pipeline.py` |
+| Downstream object | **LOCKED** | $B^* = \{\beta(m):m\in M^*\}$; headline range is $[L,U]=[\min B^*,\max B^*]$ for nonempty $M^*$. | `docs/METHODOLOGY.md`, `docs/12` |
+| Rejected measures | **LOCKED** | β values may be reported diagnostically for rejected measures, but rejected measures never enter the headline range. | `docs/METHODOLOGY.md`, `docs/12` |
+| Empty set | **LOCKED** | Empty $M^*$ is a valid scientific output: the data and stated theory admit no candidate measure. No automatic θ loosening. | `docs/METHODOLOGY.md`, `docs/12` |
+| Freeze identity | **LOCKED** | Paper numbers require frozen scores, pinned network/β, fixed seed, package version, and the documented freeze/run-id contract. | `docs/METHODOLOGY.md`, `docs/12`, freeze contract |
 
 ## 2. Shipped inference semantics
 
@@ -40,7 +40,7 @@ These are package semantics, not yet a complete paper interpretation.
 
 | Item | Status | Current package contract | Source |
 |---|---|---|---|
-| Bootstrap | **LOCKED** | Units-only resampling with replacement; menu fixed; one seeded RNG stream; headline \([L,U]\) unchanged. | `docs/12`, `docs/13` |
+| Bootstrap | **LOCKED** | Units-only resampling with replacement; menu fixed; one seeded RNG stream; headline $[L,U]$ unchanged. | `docs/12`, `docs/13` |
 | Bootstrap band | **LOCKED** | Pointwise percentile endpoints over non-empty replicates; all-empty gives a null band with an explanatory note; degenerate replicates are counted and excluded. | `docs/12`, `docs/13` |
 | θ-grid | **LOCKED** | Diagnostic viewport over declared positive λ values; λ scales threshold magnitudes only; direction/sign and δ are not scaled. | `docs/12`, `docs/13` |
 | θ-grid headline | **LOCKED** | No λ is auto-selected; λ=1.0 is the declared headline; the grid is excluded from `run_id`. | `docs/12`, `docs/13` |
@@ -52,34 +52,34 @@ No values are supplied here by the agent.
 
 | Input | Status | Required decision |
 |---|---|---|
-| Construct \(C\) | **AWAITING AUGUSTO** | One-paragraph construct definition, including the target population and unit of analysis. |
+| Construct $C$ | **AWAITING AUGUSTO** | One-paragraph construct definition, including the target population and unit of analysis. |
 | Unit and universe | **AWAITING AUGUSTO** | Unit index, inclusion/overlap rule, and sample universe. |
 | Score matrix | **AWAITING AUGUSTO** | Frozen score file and scoring protocol; source, recipe, polarity, missingness, and leakage checks for every column. |
-| Menu \(M\) | **AWAITING AUGUSTO** | Candidate measure IDs and the reason each represents a distinct measurement hypothesis. |
-| Network \(R\) | **AWAITING AUGUSTO** | Restrictions, auxiliaries/anchors, direction, and substantive justification. The empirical network is not agent-authored. |
-| Thresholds \(\theta\) | **AWAITING AUGUSTO** | Threshold for each restriction and its pre-data substantive anchor. |
-| Slack tolerance \(\delta\) | **AWAITING AUGUSTO** | Keep \(\delta=0\) or choose another value and its sensitivity/reporting policy. |
-| Target functional \(\beta\) | **AWAITING AUGUSTO** | Keep `corr_y`, add a secondary functional, or reopen the target choice. |
+| Menu $M$ | **AWAITING AUGUSTO** | Candidate measure IDs and the reason each represents a distinct measurement hypothesis. |
+| Network $R$ | **AWAITING AUGUSTO** | Restrictions, auxiliaries/anchors, direction, and substantive justification. The empirical network is not agent-authored. |
+| Thresholds $\theta$ | **AWAITING AUGUSTO** | Threshold for each restriction and its pre-data substantive anchor. |
+| Slack tolerance $\delta$ | **AWAITING AUGUSTO** | Keep $\delta=0$ or choose another value and its sensitivity/reporting policy. |
+| Target functional $\beta$ | **AWAITING AUGUSTO** | Keep `corr_y`, add a secondary functional, or reopen the target choice. |
 | Paper claims | **AWAITING AUGUSTO** | What the paper will claim about admissibility, ranges, fragility, and downstream estimates. |
 
 ## 4. Synthetic evidence protocol — Gate B choices
 
-The existing v1.1 summary is **package evidence**, not automatically the paper Monte Carlo table. It uses the package battery at \(n=1000\), seeds `0..4`, four scenarios, \(\delta=0\), SCORE policy `none`, and β=`corr_y`. A future protocol table must have its own artifact name, exact settings, parent SHA, and protocol identifier.
+The existing v1.1 summary is **package evidence**, not automatically the paper Monte Carlo table. It uses the package battery at $n=1000$, seeds `0..4`, four scenarios, $\delta=0$, SCORE policy `none`, and β=`corr_y`. A future protocol table must have its own artifact name, exact settings, parent SHA, and protocol identifier.
 
 | Item | Status | Protocol statement | Source |
 |---|---|---|---|
-| Evidence scope | **LOCKED PROVISIONAL** | Synthetic-only protocol; H5, empirical construct, empirical score matrix/menu, and empirical \(R\) are deferred. | Gate B delegation |
+| Evidence scope | **LOCKED PROVISIONAL** | Synthetic-only protocol; H5, empirical construct, empirical score matrix/menu, and empirical $R$ are deferred. | Gate B delegation |
 | Scenario set | **LOCKED PROVISIONAL** | `oracle_easy`, `oracle_with_slop`, `harsh_theta`, `all_invalid`. | Existing package battery |
-| Sample size | **LOCKED PROVISIONAL** | \(n=1000\); SCORE policy `none`. | Existing package battery |
+| Sample size | **LOCKED PROVISIONAL** | $n=1000$; SCORE policy `none`. | Existing package battery |
 | Seed list | **LOCKED PROVISIONAL** | Battery seeds `0..49`; the shipped `0..4` result remains package smoke evidence, not this protocol table. | Gate B delegation |
 | Gate bars | **LOCKED PROVISIONAL** | H1a false-admission and anchor retention, H1b, H3, and H4. H2 is not separate: false admission is the H1a/H2 component. | Existing package gate implementation |
 | Synthetic β | **LOCKED PROVISIONAL** | `corr_y`. | Existing package battery |
-| Slack tolerance \(\delta\) | **LOCKED PROVISIONAL** | \(\delta=0\). | Existing package battery |
+| Slack tolerance $\delta$ | **LOCKED PROVISIONAL** | $\delta=0$. | Existing package battery |
 | Bootstrap posture | **LOCKED PROVISIONAL** | Appendix diagnostic only; not the headline range, sharp PI, or a stronger uncertainty claim. | Claims boundary |
 | Bootstrap `n_boot` | **LOCKED PROVISIONAL** | `80` for the fixed inference probe with seed `7`; predeclared and not tuned after results. | Existing v1.1 probe |
-| θ-grid | **LOCKED PROVISIONAL** | \(\lambda \in \{0.5,1.0,2.0\}\); λ=1.0 is the headline; no auto-selection. | Existing v1.1 probe |
+| θ-grid | **LOCKED PROVISIONAL** | $\lambda \in \{0.5,1.0,2.0\}$; λ=1.0 is the headline; no auto-selection. | Existing v1.1 probe |
 
-**Provisional synthetic lock:** synthetic-only protocol with the existing four scenarios, \(n=1000\), \(\delta=0\), SCORE policy `none`, β=`corr_y`, battery seeds `0..49`, H1a/H1b/H3/H4 as gates, H2 folded into the H1a false-admission component, and H1_latent/bootstrap/θ-grid as additive diagnostics. The fixed inference probe uses seed `7`, `n_boot=80`, and λ grid \(\{0.5,1.0,2.0\}\). The shipped `0..4` result remains package-level evidence and will not be overwritten.
+**Provisional synthetic lock:** synthetic-only protocol with the existing four scenarios, $n=1000$, $\delta=0$, SCORE policy `none`, β=`corr_y`, battery seeds `0..49`, H1a/H1b/H3/H4 as gates, H2 folded into the H1a false-admission component, and H1_latent/bootstrap/θ-grid as additive diagnostics. The fixed inference probe uses seed `7`, `n_boot=80`, and λ grid $\{0.5,1.0,2.0\}$. The shipped `0..4` result remains package-level evidence and will not be overwritten.
 
 ## 5. Reporting boundary
 
@@ -108,18 +108,18 @@ The existing v1.1 summary is **package evidence**, not automatically the paper M
 Please answer the fields below, or approve the bundled provisional option. Answers can be concise; “same as package default” is acceptable where explicitly intended.
 
 1. **Construct / unit / universe:** What construct, unit, population, and overlap rule should the paper-facing protocol use?
-2. **Scores / menu:** Which frozen score matrix and menu \(M\) are in scope? If empirical inputs are not yet ready, should this remain explicitly synthetic-only?
-3. **Empirical network:** Is H5 blocked for now, with no empirical \(R\) in this protocol? If not, supply the restrictions and anchors; the agent will not author them.
-4. **θ and δ:** What thresholds and tolerance are intended? The package default is \(\delta=0\), but that is not a paper lock.
+2. **Scores / menu:** Which frozen score matrix and menu $M$ are in scope? If empirical inputs are not yet ready, should this remain explicitly synthetic-only?
+3. **Empirical network:** Is H5 blocked for now, with no empirical $R$ in this protocol? If not, supply the restrictions and anchors; the agent will not author them.
+4. **θ and δ:** What thresholds and tolerance are intended? The package default is $\delta=0$, but that is not a paper lock.
 5. **β:** Keep `corr_y`, add a secondary functional, or reopen the target?
 6. **Bootstrap interpretation and count:** Appendix diagnostic or stronger uncertainty summary? What predeclared `n_boot` should the evidence table use?
-7. **Synthetic battery:** Four current scenarios or an expanded set? Keep \(n=1000\)? Use seeds `0..4` (package-level) or approve `0..49` (broader table)? Confirm H1a/H1b/H3/H4 gate bars and whether H2 remains separate from H1a.
+7. **Synthetic battery:** Four current scenarios or an expanded set? Keep $n=1000$? Use seeds `0..4` (package-level) or approve `0..49` (broader table)? Confirm H1a/H1b/H3/H4 gate bars and whether H2 remains separate from H1a.
 8. **Reporting boundary:** Main text vs appendix vs machine artifacts.
 9. **H5 timing:** Keep the empirical baseline blocked until the construct and network are authored?
 
 ## Gate B response
 
-Gate B has been authorized as **`LOCKED AS PROVISIONAL SYNTHETIC-ONLY PROTOCOL`** under delegated synthetic-scope authority. This is not a full paper lock. The empirical construct, unit/universe, score matrix/menu, empirical \(R\), paper θ anchors, paper δ interpretation, paper β choice, paper claims, and reporting placement remain **AWAITING AUGUSTO** or **DEFERRED** as marked above.
+Gate B has been authorized as **`LOCKED AS PROVISIONAL SYNTHETIC-ONLY PROTOCOL`** under delegated synthetic-scope authority. This is not a full paper lock. The empirical construct, unit/universe, score matrix/menu, empirical $R$, paper θ anchors, paper δ interpretation, paper β choice, paper claims, and reporting placement remain **AWAITING AUGUSTO** or **DEFERRED** as marked above.
 
 Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, engine change, tag, PyPI publication, or push is authorized by this lock.
 
@@ -141,17 +141,15 @@ Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, e
 
 ## References
 
-- `docs/01_Project_Overview.md`
-- `docs/02_System_Architecture.md`
-- `docs/03_Methodology.md`
-- `docs/04_Synthetic_DGPs.md`
-- `docs/05_Pre_Registration.md`
-- `docs/08_Observability_and_Evaluations.md`
-- `docs/09_MVP_Plan.md`
-- `docs/10_Open_Questions.md`
+- `docs/METHODOLOGY.md`
+- `docs/USER_GUIDE.md`
+- `docs/ARCHITECTURE.md`
 - `docs/12_Decision_Engineering_Log.md`
 - `docs/13_Evaluations_Log.md`
-- `docs/14_Researcher_Input_Guide.md`
-- `docs/15_MVP_Release_Checklist.md`
+- `docs/archive/04_Synthetic_DGPs.md`
+- `docs/archive/05_Pre_Registration.md`
+- `docs/archive/08_Observability_and_Evaluations.md`
+- `docs/archive/10_Open_Questions.md`
+- `docs/archive/14_Researcher_Input_Guide.md`
 - `docs/PROJECT_MANIFEST.md`
 - Freeze/run-id contract in the research-methods-package-spine skill
