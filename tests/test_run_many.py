@@ -138,3 +138,28 @@ def test_run_many_manifest_missing_profiles_key_fails_loud(tmp_path: Path, mini_
             out_root=tmp_path / "batch",
             seed=0,
         )
+
+
+def test_run_many_bad_policy_fails_loud(tmp_path: Path, mini_dir: Path) -> None:
+    """Unknown SCORE policy must raise through the batch, never be swallowed."""
+    manifest = _write_manifest(
+        tmp_path,
+        {
+            "profiles": [
+                {
+                    "id": "good",
+                    "network": str(mini_dir / "network.yaml"),
+                    "beta": str(mini_dir / "beta.yaml"),
+                }
+            ]
+        },
+    )
+    with pytest.raises(ValueError):
+        rm.run_many(
+            scores=mini_dir / "scores.csv",
+            roles=mini_dir / "roles.json",
+            manifest=manifest,
+            out_root=tmp_path / "batch",
+            seed=0,
+            policy="bogus",
+        )

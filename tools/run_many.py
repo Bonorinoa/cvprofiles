@@ -34,7 +34,11 @@ from typing import Annotated, Any
 import typer
 import yaml
 
+from cvprofiles.identify.pipeline import IdentifyError
 from cvprofiles.pipeline import FullRunResult, run_profile, summary_dict
+from cvprofiles.report.pipeline import ReportError
+from cvprofiles.restrict.pipeline import RestrictError
+from cvprofiles.score.pipeline import ScoreError
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -179,7 +183,7 @@ def run_many(
     return BatchResult(out_root=root, profiles=profiles)
 
 
-@app.command("run")
+@app.command()
 def run_cmd(
     scores: Annotated[
         Path,
@@ -243,6 +247,11 @@ def run_cmd(
             anchors=anchors,
         )
     except BatchError as exc:
+        typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1) from exc
+    except (ScoreError, RestrictError, IdentifyError, ReportError, ValueError) as exc:
+        # Engine errors on any profile fail the batch loudly, matching
+        # `cvprofiles run`'s error contract (clean message, exit 1).
         typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)
         raise typer.Exit(code=1) from exc
 

@@ -44,7 +44,7 @@ These are package semantics, not yet a complete paper interpretation.
 | Bootstrap band | **LOCKED** | Pointwise percentile endpoints over non-empty replicates; all-empty gives a null band with an explanatory note; degenerate replicates are counted and excluded. | `docs/12`, `docs/13` |
 | θ-grid | **LOCKED** | Diagnostic viewport over declared positive λ values; λ scales threshold magnitudes only; direction/sign and δ are not scaled. | `docs/12`, `docs/13` |
 | θ-grid headline | **LOCKED** | No λ is auto-selected; λ=1.0 is the declared headline; the grid is excluded from `run_id`. | `docs/12`, `docs/13` |
-| Paper interpretation of inference | **AWAITING AUGUSTO** | Decide whether bootstrap output is appendix-only diagnostics, a conservative uncertainty summary, or another explicitly bounded interpretation. | Q2 in `docs/10` |
+| Paper interpretation of inference | **AWAITING AUGUSTO** | Decide whether bootstrap output is appendix-only diagnostics, a conservative uncertainty summary, or another explicitly bounded interpretation. | Q2 in `docs/archive/10_Open_Questions.md` |
 
 ## 3. Researcher-owned paper inputs
 
@@ -87,21 +87,20 @@ The existing v1.1 summary is **package evidence**, not automatically the paper M
 |---|---|---|
 | Main text | **AWAITING AUGUSTO** | Decide which identification objects and evidence summaries belong in the main paper. |
 | Appendix | **AWAITING AUGUSTO** | Decide whether full slacks, rejected-measure reasons, θ surfaces, and bootstrap diagnostics live here. |
-| Machine artifacts | **LOCKED** | Preserve JSON/HTML audit artifacts with hashes, run ID, settings, and provenance. | `docs/08`, `docs/12` |
+| Machine artifacts | **LOCKED** | Preserve JSON/HTML audit artifacts with hashes, run ID, settings, and provenance. | `docs/ARCHITECTURE.md`, `docs/12` |
 | LaTeX report | **DEFERRED** | Candidate later polish; not required for the protocol or next evidence table. |
 
 ## 6. Explicit deferrals and exclusions
 
 | Item | Status | Boundary |
 |---|---|---|
-| H5 empirical baseline | **DEFERRED** | Blocked until Augusto chooses the construct, score matrix, baseline, empirical network, θ, δ, and β. | `docs/05`, `docs/09` |
-| Empirical network authorship | **DEFERRED** | Agent may author oracle networks for synthetic debugging only. | `docs/01`, `docs/03`, `docs/14` |
-| Sharp partial-identification theory | **DEFERRED** | Optional garnish, not load-bearing for the package claim. | `docs/03` |
-| δ-grid implementation | **DEFERRED → v2.0** | Separate engineering decision; current v1.1 θ-grid does not scale δ. Planned as thread (a) of measure discipline (absolute-δ grid, `docs/18`). | `docs/18`, `docs/12` |
-| Measure generation / prompt search | **DEFERRED** | Upstream researcher workflow; outside the engine and thesis core. | `docs/01`, `docs/03` |
-| New annotation campaign | **DEFERRED** | Hard non-goal unless explicitly reopened. | README / profile scope |
-| Tag and PyPI publication | **DEFERRED** | Release-review and Augusto-owned; this protocol draft does not publish. | `docs/15`, `docs/12` |
-| GUI, SaaS, and heavy infrastructure | **DEFERRED** | Low-ROI until paper protocol and evidence are complete. | `docs/01`, `docs/09` |
+| H5 empirical baseline | **DEFERRED** | Blocked until Augusto chooses the construct, score matrix, baseline, empirical network, θ, δ, and β. | `docs/archive/05_Pre_Registration.md`, `docs/archive/09_MVP_Plan.md` |
+| Empirical network authorship | **DEFERRED** | Agent may author oracle networks for synthetic debugging only. | `docs/METHODOLOGY.md`, `docs/USER_GUIDE.md` |
+| Sharp partial-identification theory | **DEFERRED** | Optional garnish, not load-bearing for the package claim. | `docs/METHODOLOGY.md` |
+| δ-grid implementation | **DEFERRED → v2.0** | Separate engineering decision; current v1.1 θ-grid does not scale δ. Planned as thread (a) of measure discipline (absolute-δ grid, `docs/archive/18`). | `docs/archive/18_Measure_Discipline_Plan.md`, `docs/12` |
+| Measure generation / prompt search | **DEFERRED** | Upstream researcher workflow; outside the engine and thesis core. | `docs/METHODOLOGY.md` |
+| Tag and PyPI publication | **DEFERRED** | Release-review and Augusto-owned; this protocol draft does not publish. | `docs/archive/15_MVP_Release_Checklist.md`, `docs/12` |
+| GUI, SaaS, and heavy infrastructure | **DEFERRED** | Low-ROI until paper protocol and evidence are complete. | `docs/README.md`, `docs/archive/09_MVP_Plan.md` |
 
 ## 7. Gate B questionnaire
 
