@@ -61,7 +61,7 @@ Legend: **Governance** — A = agent-executable, O = Augusto decision/sign-off. 
 | T33 | P5b | **WP4b IVS independent auditor.** `tools/verify_ivs_cultural.py` (read-only verifier, pattern: `verify_h5_trust.py`): strict JSON (reject NaN/Infinity; null only for structurally empty range); FA=0; freeze-core equality across two cold runs; provenance incl. frozen loadings + model-family policy; positive-control gate (known-valid items admissible); item-code dictionary verification (the 10 IW codes vs the actual Joint file). Structural audit ≠ paper acceptance; Gate B run decision remains Augusto's | tools/verify_ivs_cultural.py + tests | A (agent-authored verifier; exit is Augusto's Gate B decision) | verifier exit 0 on a dummy IVS-shaped proof; strict-loader tests (reject NaN/Inf); battery | Auditor green; exit 0 is a hard Gate B entry condition |
 | T28 | P2 | **WP1b additive: p̂_m = per-measure admission probability** = fraction of bootstrap replicates where m ∈ M*. Descriptive selection probability, not a coverage statement (inherits WP1 selection coupling) | inference/coverage.py (or bootstrap.py), tests | A (post-Gate A) | TDD: fixture with boundary measure → RED → compute → GREEN; empty replicates handled (denominator = non-empty, matching band; null band ⇒ p̂_m null + note) | p̂_m green; semantics in math_spec note §2c.4 |
 | T29 | P2 | **WP1c additive: MTMM trait×method panel.** trait = construct axis (self-expression, secular-rational), method = model adapter/prompt baseline; Campbell–Fiske-style correlation panel as additive report diagnostic — NOT a new core module | tools/mtmm.py, report/pipeline.py, templates, tests | A (after T26; MTMM is a reporting diagnostic, no engine state change) | fixture 2 traits × 2 methods, TDD RED→GREEN; empty M* ⇒ "no admissible measures" string, exit 0 | Panel green; fail-loud evaluator registry intact |
-| T30 | P5a | **WP4b upstream score-generation harness scaffold** (model calls, prompt templates, projection on frozen loadings; DPO adapter stub ONLY if T27 reopens). Lives in `evals/ivs_cultural/`; **no LLM client in src/ import graph** | evals/ivs_cultural/{project,score,harness}.py | O (after T27 decision) | schema smoke on dummy projected scores; `src/` import-graph still LLM-free (AST test) | Harness scaffold green; import-graph lock intact |
+| T30 | P5a | **WP4b upstream score-generation harness scaffold** (model calls, prompt templates, projection on frozen loadings; DPO adapter stub ONLY if T27 reopens). Lives in `evals/ivs_cultural/`; **no LLM client in src/ import graph** (AST-tested). **Default posture: open-weight prompt-based baselines are already AGENTS.md-permitted; only adapters (T27) and proprietary APIs (T31) need dated reopens** | evals/ivs_cultural/{project,score,harness}.py | A (scaffold after Gate A's T05d; DPO adapter stub gated on T27) | schema smoke on dummy projected scores; `src/` import-graph still LLM-free (AST test); leakage audit + snapshot pinning | Harness scaffold green; import-graph lock intact |
 | T17 | P6 | Docs close-out: METHODOLOGY inference stance (§5), ARCHITECTURE module map, ROADMAP, MANIFEST, docs/13 rows (authorized only) | docs/* | A | doc/code agreement; battery | All docs current; no stale version labels |
 | T18 | P6 | v3.0.0 gate battery: ruff, mypy strict, pytest ≥222, both proof verifiers exit 0, `git diff --check`, `v0.1` peel, import-graph, wheel-smoke | CI + local | A | full battery | All green |
 | T19 | P6 | Atomic bump `2.0.1a1 → 3.0.0` + golden refresh + all literals (pyproject, `__init__`, uv.lock, tests, CI CLI-smoke, README/AGENTS posture, manifest dev_version) | pyproject, src, tests, .github, docs | A (mechanical) | bump checklist; golden refreshed in same commit; battery | Version consistent; golden run_id reported |
@@ -71,18 +71,19 @@ Legend: **Governance** — A = agent-executable, O = Augusto decision/sign-off. 
 
 ```
 P0 (T01-T03) ──► P1 locks + math + policy (T04-T05, T26, T27, T31, T24 sign-off) ── GATE A (Augusto, 6 decisions)
-   P1 ──► P2 (T06-T08, T28, T29)    [coverage + p̂_m + MTMM panel; parallel-safe with P3/P4]
-   P1 ──► P3 (T09-T11)              [holdout workflow — critical path]
-   P3 ──► P4 (T12-T14)              [evaluators — monotone_rank + corr_zero (dual-purpose: discriminant + IW axis separation)]
+   P1 ──► P2 (T06-T08, T28, T29)    [coverage + p̂_m + MTMM panel; fully parallel, merge before P6]
+   P1 ──► P3 (T09-T11)              [holdout workflow]
+   P1 ──► P4 (T12-T14)              [evaluators — monotone_rank + corr_zero (dual-purpose: discriminant + IW axis separation)]
+   P3 ∥ P4                          [parallel branches given Gate A; both feed P5a; neither blocks the other]
    P2, P3, P4 ──► P5a (T21 design, T22 teaching walkthrough, T30 harness)
    IVS data acquisition (T32, Joint EVS/WVS v5.0) starts in parallel at P1 (long-lead)
-   P5a ──► P5b (T23 holdout-applied + T25 run + audit + paper lock) ── GATE B (Augusto)
+   P5a ──► P5b (T23 holdout-applied + T33 auditor + T25 run + audit + paper lock) ── GATE B (Augusto)
    P5b ──► P6 (T17-T20, T24 H5 close-out) ── GATE C (Augusto)
 ```
 
 **Ordering constraint:** T22 (teaching walkthrough) runs **before** the final network authorship (T21) — the walkthrough informs the design; it uses synthetic IVS-shaped scores (no real-data dependency), and the published tutorial is re-run under the v3 wheel on the frozen lane after T25.
 
-**Critical path to the paper's headline evidence:** P0 → P1 (Gate A) → P3 (holdout) → P4 (evaluators) → P5a (design + teaching + harness) → P5b (run + audit + paper lock) → P6 (release). WP1 (P2) is the long pole for the *methods paper's* inference claim and must land before P6, but does not block the empirical run. No engine task starts before its semantics lock (T04/T05/T26).
+**Critical path to the paper's headline evidence:** P0 → P1 (Gate A) → max(P3 holdout, P4 evaluators) → P5a (design + teaching + harness) → P5b (run + audit + paper lock) → P6 (release). P3 and P4 are **parallel** branches given Gate A — serializing them is a scheduling choice, not a dependency. WP1 (P2) is fully parallel (merge before P6): it's the long pole for the *methods paper's* inference claim but does not block the empirical run. No engine task starts before its semantics lock (T04/T05/T26).
 
 ## D. Explicit non-goals for this plan
 

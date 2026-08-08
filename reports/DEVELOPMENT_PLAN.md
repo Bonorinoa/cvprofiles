@@ -173,19 +173,19 @@ P0 baseline hygiene ──────────────► P1 semantics l
 The paper's headline evidence = the IVS run's admissible set, holdout verdict, construct-identified range, and cultural-map placement **with the inference claim attached** (abstract: "inference that remains valid despite the data-dependent screening step"; falsifiable core: "selection guided by construct validity predicts held-out validity evidence").
 
 ```
-BLOCKING (longest chain):   P0 → P1 (Gate A: 6 decisions + T24 sign-off) → P3 (holdout) → P4 (evaluators) → P5a (T22 teaching → T21 design → T30 harness) → P5b (T23 holdout + T25 run + audit + Gate B) → P6 (Gate C)
-PARALLEL (merge before P6): P2 (coverage + p̂_m + MTMM) — needed for the inference claim and the worked-example numbers the methods paper reports
+BLOCKING (longest chain):   P0 → P1 (Gate A: 6 decisions + T24 sign-off) → max(P3 holdout, P4 evaluators) → P5a (T22 teaching → T21 design → T30 harness) → P5b (T23 holdout + T33 auditor + T25 run + Gate B) → P6 (Gate C)
+PARALLEL (merge before P6): P2 (coverage + p̂_m + MTMM) — needed for the inference claim and the worked-example numbers the methods paper reports; P3 and P4 are also parallel to each other given Gate A (both feed P5a)
 LONG-LEAD (start at P1):     T32 IVS data acquisition (Joint EVS/WVS v5.0) — runs in parallel, must complete before T25
 ```
 
 - **P1 is the first blocker:** no engine task starts before the amendment bundle is signed (T04/T05/T26/T27/T31). This is deliberate — the docs/16 contract (docs/16:21 "Silence is not consent") makes any headline-path change without the dated amendment a governance break (Risk 5).
 - **The Gate A policy decisions (T27/T31) are the schedule's largest human-latency risk:** the default posture is already permissive — open-weight prompt-based baselines are AGENTS.md-permitted, so **silence on T27/T31 ⇒ no DPO adapters, no proprietary APIs, harness runs open-weight local models**. The reopen decisions are needed only for the stronger experimental arms (adapters; specific frontier-model families). They are *decisions*, not assumptions.
-- **P4 (evaluators) and P3 (holdout) are the second blocker:** the IVS network uses `monotone_rank` (income gradients) and `corr_zero` (discriminant/MTMM), and the paper's falsifiable core *is* the holdout verdict. Both must land before P5.
+- **P4 (evaluators) and P3 (holdout) are the second blocker, and they run in parallel:** the IVS network uses `monotone_rank` (income gradients) and `corr_zero` (discriminant/MTMM), and the paper's falsifiable core *is* the holdout verdict. Both must land before P5a; neither blocks the other given Gate A. Serializing them (as Rev 1 did) is a scheduling choice, not a dependency — the plan schedules them in parallel.
 - **P5a is the third blocker and now includes the harness:** the model-run chain is load-bearing for the headline run — T30's leakage audit + snapshot pinning are its real exit, not just scaffold green.
 - **P5b (Gate B) is the dominant human-latency item:** Augusto must author/pin the network, loadings provenance, and positive-control item selection, then grant the run decision after audit. The n=35 precedent (2026-08-04) is the template: design lock → frozen inputs → dev gate → independent audit → run decision → paper-lock checkpoint.
 - **P2 (coverage) does not block the empirical run** but is load-bearing for the paper's §2 framework and the methods-paper claim; it must land before P6.
 
-**Estimated critical path:** ~12–16 engineer-days of work across P1→P6 (revised upward from 10–13 after the T30 harness, T33 auditor, and MTMM panel were added; an estimate, not a commitment), plus **three Augusto decision points** (Gate A: 6 decisions; Gate B: network + run; Gate C: release). Human latency dominates: Gate A is the decision cluster (approve quickly and the rest unblocks), Gate B is the long-lead item (network authorship + loadings provenance + run decision), Gate C is the release call. P2 runs in parallel and adds ~2–3 engineer-days if scheduled alongside P3/P4.
+**Estimated critical path:** ~10–14 engineer-days of work across P1→P6 (P3/P4 in parallel compresses the chain vs Rev 1's serialized 12–16; an estimate, not a commitment), plus **three Augusto decision points** (Gate A: 6 decisions; Gate B: network + run; Gate C: release). Human latency dominates: Gate A is the decision cluster (approve quickly and the rest unblocks), Gate B is the long-lead item (network authorship + loadings provenance + run decision), Gate C is the release call. P2 runs fully parallel and adds ~2–3 engineer-days of total work without lengthening the wall-clock chain.
 
 ---
 
