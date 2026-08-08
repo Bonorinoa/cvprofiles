@@ -989,3 +989,19 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 **Docs created/updated in this bundle:** `docs/16` §9 (amendment), `docs/18_IVS_Cultural_Map.md` (design skeleton, authorship Augusto-owned), `docs/17` + `docs/13` (H5 re-grade), `docs/ROADMAP.md`, `docs/PROJECT_MANIFEST.md` (v3_0 block), `docs/README.md` (doc map rows), `README.md`, `AGENTS.md` (truth table row for docs/18).
 
 **Date provenance (2026-08-08, append-only):** the Gate A entry and `docs/16` §9 are stamped 2026-08-07 per the plan's date convention (DEVELOPMENT_PLAN Rev 2 header, 2026-08-07; bundle drafted with the plan). Git-verified execution and commit occurred **2026-08-08** (`b971708`). Execution date governs; no stamp was rewritten.
+
+---
+
+## 2026-08-08 — Rev 3 sprint accepted: P1–P5 engine go (synthetic-first)
+
+**Decision (recorded, Augusto-directed):** Augusto accepted all recommendations in `reports/DEVELOPMENT_PLAN_v3_REV3.md` and authorized engine work for **P1–P5 only**:
+
+1. **Execution authority:** Rev 3 supersedes Rev 2 for sprint execution. Rev 2 remains historical Gate A planning context.
+2. **Scope:** P1 synth gate freeze → P2 evaluators (`corr_zero`, `monotone_rank`) → P3 betas (`diff_means`, `map_distance`) → P4 holdout (stage + units-split) → P5 coverage uncertainty band → docs pass at end of P5.
+3. **Decision-card defaults locked:** tag = infra + synth (empirical post-tag); holdout headline on \(M^*_{\mathrm{robust}}=M^*_{\mathrm{select}}\cap M^*_{\mathrm{holdout}}\); holdout split in freeze `config`; `stability` deferred; coverage = uncertainty band (no CI language); open-weight only; ship `diff_means`; MTMM panel optional/not blocking.
+4. **Synthetic-first:** every WP merges only with oracle DGP/fixture goldens, FA/empty honesty, cold freeze core, named gate ids. No real-world/empirical examples in this go.
+5. **Explicitly NOT authorized by this entry:** P6 (benchmark kit / IVS harness), P7 (version bump / RC), Gate B empirical run, tag `v3.0.0`, push, PyPI, empirical network authorship, Joint microdata work.
+
+**Baseline at acceptance:** `2.0.1a1`, 223 tests green, ruff/mypy clean, HEAD `64a9eb2`, `v0.1` peel intact.
+
+**Next:** P1 gate spec (`reports/synth_v3_gate_spec.md`) then TDD implementation of P2–P5.

@@ -1,5 +1,7 @@
 # DEVELOPMENT_PLAN — cvprofiles v3.0.0 (paper-driven, phase-gated) — REV 2
 
+> **Superseded for sprint execution by Rev 3** (`reports/DEVELOPMENT_PLAN_v3_REV3.md`), accepted 2026-08-08. Rev 2 remains historical Gate A planning context; do not treat T06+ rows as implemented.
+
 **Date:** 2026-08-07 (Rev 2: Augusto redirect absorbed) · **Author:** cvprofiles lead engineer · **Checkpoint target:** Nature/PNAS position paper (valid estimation of latent constructs, cultural applications / SCA2)
 **Status:** Gate A **signed 2026-08-07** — amendment bundle executed (docs/16 §9, docs/12 entry, math_spec §7); P2–P5a semantics locks committed; engine implementation remains a separate task-specific go (AGENTS.md rule 6).
 **Inputs:** `reports/VERIFIED_TASK_INVENTORY.md` (T01–T33), `reports/FINAL_ENGINEERING_REPORT.md`, `reports/math_spec.md`, `AGENTS.md`, `docs/16`, `docs/17`
