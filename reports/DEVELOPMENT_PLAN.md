@@ -207,6 +207,8 @@ LONG-LEAD (start at P1):     T32 IVS data acquisition (Joint EVS/WVS v5.0) — r
 | 8 | **Country-blind leakage** — "country never mentioned" is a process claim the engine cannot verify | Prompt-template audit (T30) + protocol flag; engine enforces flag, never timing/leakage |
 | 9 | **Model deprecation / API drift** — proprietary models change; numbers not reproducible | Snapshot pinning (T30); open-weight local models preferred (T31a) |
 | 10 | **β-functional preimage discipline** — `map_distance` extends the beta registry; `beta_hash` is in the run_id preimage | T26 amendment text says the registry extension is in-scope for v3 and governed by the freeze rule; no silent preimage change |
+| 11 | **Evaluator-fit mismatch (math-first)** — IW axes are PCA axes; `monotone_rank` fits only if the network restricts on a continuous covariate (e.g. self-expression ↑ with GDP pc). Authoring a PCA-axis restriction into `monotone_rank` would be a category error | T26 math note records the fit decision at Gate A; the IVS network (T21) is authored after that note; `corr_zero` covers the discriminant/axis-separation logic the map actually needs |
+| 12 | **Adapter-comparison overclaim** — "adapters beat cultural prompting while hiding country" is a falsifiable hypothesis, not a designed result; Tao et al. shows cultural prompting improves most but worsens some countries | Plan frames it as "we measure whether it holds" (T23 holdout on unseen countries); the claim never enters the paper without the run + audit + Gate B paper-lock flow |
 
 ---
 
