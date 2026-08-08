@@ -78,6 +78,11 @@ def build_report_payload(
         ],
         "admissible": identify.admissible,
         "rejected": identify.rejected,
+        "holdout": (
+            {"units": None, "verdict": identify.holdout_verdict}
+            if identify.holdout_verdict is not None
+            else None
+        ),
         "beta_values": identify.beta_values,
         "slacks": slacks_dict,
         "L": identify.range_L,

@@ -147,11 +147,21 @@ def hash_scores_frame(
 
 
 def hash_network(network: NetworkConfig | Mapping[str, Any]) -> str:
-    """SHA-256 of canonical JSON for a validated network (or raw mapping)."""
+    """SHA-256 of canonical JSON for a validated network (or raw mapping).
+
+    P4 (docs/12 2026-08-08): restriction-level ``stage`` is omitted from the
+    dump when ``None`` (select-by-omission) so pre-P4 networks keep their
+    hashes bit-stable. This is a surgical pop on ``restrictions[*].stage``
+    only — never blanket ``exclude_none`` (that would also drop
+    ``NetworkConfig.name=None`` and move nameless-network hashes).
+    """
     if isinstance(network, NetworkConfig):
         payload = network.model_dump(mode="json")
     else:
         payload = NetworkConfig.model_validate(dict(network)).model_dump(mode="json")
+    for r in payload.get("restrictions", []):
+        if r.get("stage") is None:
+            r.pop("stage", None)
     return hash_canonical_json(payload)
 
 

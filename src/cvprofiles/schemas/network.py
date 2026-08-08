@@ -38,6 +38,16 @@ class RestrictionSpec(BaseModel):
     type: RestrictionType
     theta: float
     params: dict[str, Any] = Field(default_factory=dict)
+    # P4 (docs/12 2026-08-08): None/omitted = select (admission filter).
+    # Explicit "holdout" = compliance finding only (slacks computed, never
+    # rejects from M*).
+    stage: Literal["select", "holdout"] | None = Field(
+        default=None,
+        description=(
+            "Admission stage: None/'select' gates M*; 'holdout' marks a "
+            "finding restriction that never rejects from M*."
+        ),
+    )
 
     @field_validator("id")
     @classmethod
@@ -94,6 +104,26 @@ class NetworkConfig(BaseModel):
         ids = [r.id for r in self.restrictions]
         if len(ids) != len(set(ids)):
             raise ValueError("restriction ids must be unique")
+        return self
+
+    @model_validator(mode="after")
+    def _stage_mix_valid(self) -> NetworkConfig:
+        """P4 (docs/12 2026-08-08): reject degenerate holdout-only networks.
+
+        A network with >=1 holdout-stage restriction and zero select-stage
+        restrictions would admit everything vacuously — not a valid profile.
+        Schema-level so every construction path (YAML, dict, API) enforces it.
+        """
+        has_holdout = any(r.stage == "holdout" for r in self.restrictions)
+        has_select = any(
+            r.stage is None or r.stage == "select" for r in self.restrictions
+        )
+        if has_holdout and not has_select:
+            raise ValueError(
+                "degenerate network: >=1 holdout-stage restriction and zero "
+                "select-stage restrictions (vacuous admit-all is not a valid "
+                "profile)"
+            )
         return self
 
 

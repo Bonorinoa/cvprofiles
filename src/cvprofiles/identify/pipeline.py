@@ -37,6 +37,10 @@ class IdentifyResult:
     delta: float
     measures: list[str]
     restriction_ids: list[str]
+    # P4 (docs/12 2026-08-08): per-measure failing holdout-stage restriction
+    # ids. None when the network has no holdout-stage restrictions (legacy
+    # runs unchanged); dict mapping measure -> failing holdout ids otherwise.
+    holdout_verdict: dict[str, list[str]] | None = None
 
 
 def run_identify(
@@ -91,11 +95,19 @@ def run_identify(
     except SlackError as exc:
         raise IdentifyError(str(exc)) from exc
 
+    # P4 (docs/12 2026-08-08): slacks are computed for ALL restrictions, but
+    # M* admission uses select-stage restrictions only (None or "select").
+    # Holdout-stage failures are findings, never selection rejections.
+    select_ids = [
+        r.id for r in network.restrictions if r.stage is None or r.stage == "select"
+    ]
+    holdout_ids = [r.id for r in network.restrictions if r.stage == "holdout"]
+
     admissible: list[str] = []
     rejected: dict[str, list[str]] = {}
     for m in measures:
         failing: list[str] = []
-        for rid in slacks.columns:
+        for rid in select_ids:
             slack = pd.to_numeric(slacks.at[m, rid], errors="raise")
             if float(slack) < -delta:
                 failing.append(str(rid))
@@ -103,6 +115,18 @@ def run_identify(
             rejected[m] = failing
         else:
             admissible.append(m)
+
+    holdout_verdict: dict[str, list[str]] | None = None
+    if holdout_ids:
+        holdout_verdict = {}
+        for m in measures:
+            failing_h: list[str] = []
+            for rid in holdout_ids:
+                slack = pd.to_numeric(slacks.at[m, rid], errors="raise")
+                if float(slack) < -delta:
+                    failing_h.append(str(rid))
+            if failing_h:
+                holdout_verdict[m] = failing_h
 
     beta_values: dict[str, float] = {}
     try:
@@ -132,6 +156,7 @@ def run_identify(
         delta=delta,
         measures=measures,
         restriction_ids=[r.id for r in network.restrictions],
+        holdout_verdict=holdout_verdict,
     )
 
 
@@ -158,6 +183,12 @@ def write_identify_artifacts(
             file=sys.stderr,
         )
 
+    holdout_block: dict[str, Any] | None = None
+    if result.holdout_verdict is not None:
+        holdout_block = {
+            "units": None,  # units-split lands in P4b (config.holdout_units)
+            "verdict": result.holdout_verdict,
+        }
     admissible_payload = {
         "M_star": result.admissible,
         "rejected": result.rejected,
@@ -166,6 +197,7 @@ def write_identify_artifacts(
         "delta": result.delta,
         "n_menu": len(result.measures),
         "n_admissible": len(result.admissible),
+        "holdout": holdout_block,
     }
     adm_path = out / "admissible.json"
     adm_path.write_text(json.dumps(admissible_payload, indent=2, sort_keys=True) + "\n")
