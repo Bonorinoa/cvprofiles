@@ -1110,3 +1110,30 @@ where \(x_i(m)\) is the length-\(K\) **item vector for measure \(m\)** at unit \
 - No P5 coverage theorem; no P6/IVS empirical; no version bump.
 
 **Next:** RED tests (mini hash stable + stage admission) → GREEN P4a → P4b units-split → P5 → docs.
+
+---
+
+## 2026-08-08 — P4a implementation record + P4b units-split decisions (before code)
+
+**Authorization basis:** Rev 3 P1–P5 engine go accepted (`fbd9277`, 2026-08-08); P4 semantics lock (`d502a19`). P4a commit `a3ba3a2`.
+
+### P4a shipped (`a3ba3a2`)
+
+- `RestrictionSpec.stage: Literal["select","holdout"] | None` (select-by-omission).
+- `hash_network` surgical pop of `stage=None` (never blanket `exclude_none`); mini golden bit-stable, no refresh.
+- `NetworkConfig._stage_mix_valid` schema validator rejects degenerate holdout-only networks on every construction path.
+- `run_identify`: slacks for all restrictions; M* admission select-stage only; `holdout_verdict` additive.
+- Report/admissible payloads: additive `holdout` key (`units: None` until P4b).
+- Verified: 8/8 holdout tests; full suite 260 passed (2 pre-existing CLI PATH-shadow environmental failures — `~/.local/bin/cvprofiles` is the Hermes launcher, not the package CLI; CI installs the real wheel and passes).
+
+### P4b decisions (LOCKED, before code)
+
+1. **β frame (referee-visible):** headline β image is computed on the **full pooled frame** over `M*_robust = M*_select ∩ M*_compliant`. The units-split protects **admissibility decisions only**; it does not re-estimate β on a subset. Rationale: holdout is a selection-robustness device, not a second estimator; re-estimating β on a subset would conflate sampling noise with measurement admissibility. Additive panels: select-only range (full-frame β over `M*_select`); holdout compliance findings. The strict alternative (β on holdout/train frames only) was considered and rejected — it would change the paper's headline claim.
+2. **`holdout_units` normalization:** user-supplied list of unit_id strings. `None` and `[]` both mean **no split** (lock §2: "Absent / empty ⇒ no units-split; `config={}` bit-stable"). A non-empty list activates the split and must satisfy — all ids present in the scores frame, train non-empty, holdout non-empty — else fail loud. **Sorted-unique list normalized inside the engine before entering freeze `config`** so list order cannot move `run_id`. Witness test: `["u03","u01","u02"]` and `["u01","u02","u03"]` ⇒ same run_id.
+3. **Bootstrap interplay (lock §3 literal):** `run_identify` gains `include_holdout_verdict: bool = True`; `run_bootstrap` passes `False` (units-only full-frame resample, select-stage admission only; holdout verdict is a full-sample point finding outside the band, never per-replicate).
+4. **θ/δ grids:** remain select-only diagnostics on the full frame (same posture as bootstrap option (b)). The units-split headline is the only split object in P4; grids are viewports, not claims.
+5. **Explicit `stage:"select"` canonical form:** per P4 lock (`d502a19`), explicit select enters the hash when authored. Authors should omit `stage` for select (canonical form). Canonicalizing select→omitted in `hash_network` was considered and **deferred** — it would deviate from the locked freeze semantics; revisit only via dated amendment.
+6. **Report payload (split active):** additive `M_star_select`, `M_star_robust`, and `holdout.units`; `holdout` block states `select_frame: train`, `holdout_frame: holdout`; slacks.csv remains all-restriction (select-stage columns from the train frame, holdout-stage columns from the holdout frame). In split mode `holdout_verdict` = failing restriction ids (**any stage**) per measure on the **hold frame** (compliance per lock §2); in legacy (no-split) mode it remains failing holdout-stage ids on the full frame. `admissible`/`M_star`/`empty`/range = robust semantics.
+7. Empty robust set = clean success (range null, exit 0). No CLI `--holdout-units` in P4; pipeline API + tests sufficient (lock §6).
+
+**Next:** P4b RED (`tests/test_holdout_units_split.py`, goldens from the real fixture) → GREEN (normalize helper, `run_identify` split path, `run_profile` config wiring, bootstrap flag) → P5 coverage band → docs.
