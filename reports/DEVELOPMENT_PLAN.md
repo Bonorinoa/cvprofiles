@@ -37,7 +37,7 @@
 ## 1. Structure at a glance
 
 ```
-P0 baseline hygiene ──────────────► P1 semantics locks + math + policy ── GATE A (Augusto, 6 decisions + T24 sign-off)
+P0 baseline hygiene ──────────────► P1 semantics locks + math + policy ── GATE A (Augusto, 7 decisions + T24 sign-off)
                                         │
                 ┌───────────────────────┼───────────────────────┐
                 ▼                       ▼                       ▼
@@ -54,7 +54,7 @@ P0 baseline hygiene ──────────────► P1 semantics l
                                  P6 v3.0.0 release ── GATE C (Augusto)
 ```
 
-7 phases (P0–P6, P5 split into P5a/P5b). Three Augusto gates: **Gate A** (6 decisions, end P1), **Gate B** (IVS design + run decision, end P5b), **Gate C** (release decision, end P6).
+7 phases (P0–P6, P5 split into P5a/P5b). Three Augusto gates: **Gate A** (7 decisions, end P1), **Gate B** (IVS design + run decision, end P5b), **Gate C** (release decision, end P6).
 
 ---
 
@@ -69,14 +69,14 @@ P0 baseline hygiene ──────────────► P1 semantics l
 
 ---
 
-## 3. Phase P1 — Semantics locks, math, policy ⛔ GATE A (6 decisions + T24 sign-off)
+## 3. Phase P1 — Semantics locks, math, policy ⛔ GATE A (7 decisions + T24 sign-off)
 
-**Scope (inventory):** T04 (dated docs/12 D1 lock: coverage = additive-but-mandatory; α default 0.10, κ=2; honest "uncertainty band" language; no preimage change), T05 (docs/16 amendment bundle: coverage mandate; holdout stage split; `monotone_rank`/`corr_zero` registry positions; **IVS empirical-box clause superseding H5 as v3 headline; H5 close-out clause; leakage claim boundary — "country not provided in the evaluation protocol" is a process claim the engine flags but never proves (parallel to `pre_data` anchors)**; explicit non-authorizations), T26 (β-functional choice: `map_distance` vs per-axis corr — **frozen loadings provenance also Augusto's call**: reuse Tao's published loadings incl. PC2′ = 1.61·PC2 − 0.01 rescaling verbatim, or fresh fit; a fresh empirical fit is an empirical modeling claim), T27 (adapter-training non-goal reopen), T31 (proprietary-API non-goal reopen, joint with T27), T24 (H5 re-grade sign-off — approve at Gate A; **docs/13 re-grade executed immediately after Gate A; full mechanical reversal in P6**).
+**Scope (inventory):** T04 (dated docs/12 D1 lock: coverage = additive-but-mandatory; α default 0.10, κ=2; honest "uncertainty band" language; no preimage change), T05 (docs/16 amendment bundle: coverage mandate; holdout stage split; `monotone_rank`/`corr_zero` registry positions; **IVS empirical-box clause superseding H5 as v3 headline; H5 close-out clause; leakage claim boundary — "country not provided in the evaluation protocol" is a process claim the engine flags but never proves (parallel to `pre_data` anchors)**; explicit non-authorizations), T26 (β-functional choice: `map_distance` vs per-axis corr — **frozen loadings provenance also Augusto's call**: reuse Tao's published loadings incl. PC2′ = 1.61·PC2 − 0.01 rescaling verbatim, or fresh fit; a fresh empirical fit is an empirical modeling claim; **plus holdout semantics: restriction-level `stage` split vs country-level units-split as the paper's falsifiable core — dated math note before P3 TDD**), T27 (adapter-training non-goal reopen), T31 (proprietary-API non-goal reopen, joint with T27), T24 (H5 re-grade sign-off — approve at Gate A; **docs/13 re-grade executed immediately after Gate A; full mechanical reversal in P6**).
 **Order:** draft all texts in one docs commit → **stop for Augusto**.
 **TDD steps:** n/a (governance text). Quality gate: every amendment claim traceable to math_spec §2c/§3/§4; "silence is not consent" vocabulary; non-authorizations listed.
-**Governance gates:** **Gate A — Augusto approves the amendment bundle + dated docs/12 entries.** The 6 decisions are: (1) coverage mandate text, (2) IVS empirical-box + H5 close-out clause, (3) `map_distance` β-functional + loadings provenance, (4) `monotone_rank`/`corr_zero` registry positions, (5) adapter-training reopen, (6) proprietary-API policy. **Default posture — open-weight prompt-based baselines are already permitted under AGENTS.md; only DPO adapters (5) and proprietary APIs (6) need dated reopens. Silence on (5)/(6) ⇒ no adapters, no proprietary APIs — the harness runs open-weight local models.** (docs/16 "silence is not consent" rule working correctly: non-goals persist by default under AGENTS.md.)
+**Governance gates:** **Gate A — Augusto approves the amendment bundle + dated docs/12 entries.** The 7 decisions are: (1) coverage mandate text (D1), (2) IVS empirical-box + H5 close-out clause, (3) `map_distance` β-functional + loadings provenance, (4) `monotone_rank`/`corr_zero` registry positions, (5) adapter-training reopen (T27), (6) proprietary-API policy (T31), (7) **holdout semantics (T26b: restriction-level `stage` split vs country-level units-split as the paper's falsifiable core — dated math note before P3 TDD)**. **Default posture — open-weight prompt-based baselines are already permitted under AGENTS.md; only DPO adapters (5) and proprietary APIs (6) need dated reopens. Silence on (5)/(6) ⇒ no adapters, no proprietary APIs — the harness runs open-weight local models.** (docs/16 "silence is not consent" rule working correctly: non-goals persist by default under AGENTS.md.)
 
-**Gate A split proposal (recommended to cut human latency):** the 6 decisions are not equal in blocking power. **A1-blocking** (approve first): (1) coverage text, (2) IVS/H5 clause, (4) registry positions — these unblock P2–P4 engine work. **A2-parallel** (can follow): (3) loadings provenance, (5) adapter reopen, (6) API policy — needed only by P5a/P5b. **Implementation as two dated amendments (§8-pattern), not a partial bundle:** amendment #1 carries A1; amendment #2 carries A2. Two self-contained dated entries preserve the "silence is not consent" pattern — a single partially-approved bundle creates exactly the ambiguity docs/16 exists to kill. This is a proposal, not a lock — the plan's default remains a single Gate A bundle unless Augusto picks the split.
+**Gate A split proposal (recommended to cut human latency):** the 7 decisions are not equal in blocking power. **A1-blocking** (approve first): (1) coverage text, (2) IVS/H5 clause, (4) registry positions, (7) holdout semantics — these unblock P2–P4 engine work (holdout semantics rides with A1 because it shapes P3's TDD). **A2-parallel** (can follow): (3) loadings provenance, (5) adapter reopen, (6) API policy — needed only by P5a/P5b. **Implementation as two dated amendments (§8-pattern), not a partial bundle:** amendment #1 carries A1; amendment #2 carries A2. Two self-contained dated entries preserve the "silence is not consent" pattern — a single partially-approved bundle creates exactly the ambiguity docs/16 exists to kill. This is a proposal, not a lock — the plan's default remains a single Gate A bundle unless Augusto picks the split.
 **Verification:** amendment dated; docs/16 status consistent; `git diff --check`; battery.
 **Exit criterion:** Gate A signed. **No engine code starts before this.** Long-lead data acquisition (T32) may start in parallel — it needs no lock.
 
@@ -104,6 +104,7 @@ P0 baseline hygiene ──────────────► P1 semantics l
 
 **Scope (inventory):** T09 (schema `stage: select|holdout`), T10 (pipeline: admit on R_select; three-block REPORT; holdout verdict as named findings), T11 (METHODOLOGY/USER_GUIDE/docs-12).
 **Order:** T09 → T10 → T11.
+**Semantics note:** the restriction-level `stage` split is **WP2 machinery** (same units; R_select predicts R_holdout compliance). The paper's falsifiable core as currently phrased — "selection guided by construct validity predicts held-out validity evidence" — is a **country-level units-split** (select on train countries, verdict on held-out countries). These are different claims with different TDD; **T26 (Gate A math note) decides which is the paper's core before P3 begins.**
 **TDD steps:**
 1. RED: network schema rejects/ignores `stage` today — write a parse test asserting `stage` field with enum `select|holdout`, default `select`; observe failure.
 2. Schema GREEN (backward compatible: existing networks all-select behave identically; `network_hash` changes by design inside the v3 major bump — documented in docs/12).
@@ -152,7 +153,7 @@ P0 baseline hygiene ──────────────► P1 semantics l
 **Order:** T23 → T33 → T25.
 **TDD steps:** n/a for run. Engine-side: schema smoke; verifier re-run; freeze-core equality across two cold runs.
 **Governance gates:** **Gate B — Augusto authors/pins the IVS network, anchors, θ, δ, loadings, stage split, and holdout countries** (AGENTS.md:37; one-off delegation possible but never silent authorship). Dated docs/16 amendment opening the box **for this designated IVS evaluation only** + docs/18 status `LOCKED AS IVS DESIGN; run gated`. Augusto's explicit run/go decision after audit exit 0.
-**Verification:** `tools/verify_ivs_cultural.py` (T33) exit 0 (strict JSON; FA=0; freeze core; provenance incl. loadings + model-family policy; positive-control gate: known-valid items admissible; loadings/item-code dictionary verification: the 10 IW codes vs the actual Joint file — hard Gate B exit item); battery; both proof verifiers exit 0; `git diff --check`; `v0.1` peel.
+**Verification:** `tools/verify_ivs_cultural.py` (T33) exit 0 (strict JSON; FA=0; freeze core; provenance incl. loadings + model-family policy; positive-control gate: known-valid items admissible; loadings/item-code dictionary verification: the 10 IW codes vs the actual Joint file — hard Gate B exit item); battery; all proof verifiers (3) exit 0; `git diff --check`; `v0.1` peel.
 **Exit criterion:** audit exit 0 + **Augusto's run decision**; evidence summary allow-listed; docs/13 row written **only after** audit (mirroring the n=35 → paper-lock flow, docs/16:133).
 
 ---
@@ -163,7 +164,7 @@ P0 baseline hygiene ──────────────► P1 semantics l
 **Order:** T24 (mechanical) → T17 → T18 → T19 → **stop for Augusto** → T20 (tag/PyPI by Augusto).
 **TDD steps:** T19 is mechanical — bump checklist (pyproject, `__init__`, uv.lock, test literals incl. bad-input `package_version=`, CI CLI-smoke literal, README/AGENTS current-posture lines, manifest `dev_version`); golden refresh in the **same commit**; report the new golden `run_id`. Historical proof artifacts and their verifiers keep the generation version.
 **Governance gates:** **Gate C — Augusto's explicit release decision; Augusto executes the PyPI upload** (token never enters the agent session; `uv publish --dry-run` first). Tag/push are separate explicit decisions.
-**Verification:** full v3 gate battery — ruff, mypy strict, pytest (≥222 + new), both proof verifiers exit 0, `git diff --check`, `v0.1` peel, import-graph, wheel build + fresh-venv wheel smoke (`env -u PYTHONPATH`), tutorial/replication notebook re-run under the installed wheel. Post-publish: PyPI JSON API + local-vs-PyPI sha256 + fresh-venv `pip install cvprofiles==3.0.0` reproduction.
+**Verification:** full v3 gate battery — ruff, mypy strict, pytest (≥223 — measured 223 @ 2026-08-07 — plus new coverage/holdout/evaluator tests), all proof verifiers (3) exit 0, `git diff --check`, `v0.1` peel, import-graph, wheel build + fresh-venv wheel smoke (`env -u PYTHONPATH`), tutorial/replication notebook re-run under the installed wheel. Post-publish: PyPI JSON API + local-vs-PyPI sha256 + fresh-venv `pip install cvprofiles==3.0.0` reproduction.
 **Exit criterion:** v3.0.0 published and independently verified; docs/12 + docs/13 + CHANGELOG current.
 
 ---
@@ -173,7 +174,7 @@ P0 baseline hygiene ──────────────► P1 semantics l
 The paper's headline evidence = the IVS run's admissible set, holdout verdict, construct-identified range, and cultural-map placement **with the inference claim attached** (abstract: "inference that remains valid despite the data-dependent screening step"; falsifiable core: "selection guided by construct validity predicts held-out validity evidence").
 
 ```
-BLOCKING (longest chain):   P0 → P1 (Gate A: 6 decisions + T24 sign-off) → max(P3 holdout, P4 evaluators) → P5a (T22 teaching → T21 design → T30 harness) → P5b (T23 holdout + T33 auditor + T25 run + Gate B) → P6 (Gate C)
+BLOCKING (longest chain):   P0 → P1 (Gate A: 7 decisions + T24 sign-off) → max(P3 holdout, P4 evaluators) → P5a (T22 teaching → T21 design → T30 harness) → P5b (T23 holdout + T33 auditor + T25 run + Gate B) → P6 (Gate C)
 PARALLEL (merge before P6): P2 (coverage + p̂_m + MTMM) — needed for the inference claim and the worked-example numbers the methods paper reports; P3 and P4 are also parallel to each other given Gate A (both feed P5a)
 LONG-LEAD (start at P1):     T32 IVS data acquisition (Joint EVS/WVS v5.0) — runs in parallel, must complete before T25
 ```
@@ -185,7 +186,7 @@ LONG-LEAD (start at P1):     T32 IVS data acquisition (Joint EVS/WVS v5.0) — r
 - **P5b (Gate B) is the dominant human-latency item:** Augusto must author/pin the network, loadings provenance, and positive-control item selection, then grant the run decision after audit. The n=35 precedent (2026-08-04) is the template: design lock → frozen inputs → dev gate → independent audit → run decision → paper-lock checkpoint.
 - **P2 (coverage) does not block the empirical run** but is load-bearing for the paper's §2 framework and the methods-paper claim; it must land before P6.
 
-**Estimated critical path:** ~10–14 engineer-days of work across P1→P6 (P3/P4 in parallel compresses the chain vs Rev 1's serialized 12–16; an estimate, not a commitment), plus **three Augusto decision points** (Gate A: 6 decisions; Gate B: network + run; Gate C: release). Human latency dominates: Gate A is the decision cluster (approve quickly and the rest unblocks), Gate B is the long-lead item (network authorship + loadings provenance + run decision), Gate C is the release call. P2 runs fully parallel and adds ~2–3 engineer-days of total work without lengthening the wall-clock chain.
+**Estimated critical path:** ~10–14 engineer-days of work across P1→P6 (P3/P4 in parallel compresses the chain vs Rev 1's serialized 12–16; an estimate, not a commitment), plus **three Augusto decision points** (Gate A: 7 decisions; Gate B: network + run; Gate C: release). Human latency dominates: Gate A is the decision cluster (approve quickly and the rest unblocks), Gate B is the long-lead item (network authorship + loadings provenance + run decision), Gate C is the release call. P2 runs fully parallel and adds ~2–3 engineer-days of total work without lengthening the wall-clock chain.
 
 ---
 
@@ -197,7 +198,7 @@ LONG-LEAD (start at P1):     T32 IVS data acquisition (Joint EVS/WVS v5.0) — r
 | 2 | **Empty M\*** — H5 had 17.5% empty replicates; coverage conditional on non-empty | P2/P5b | Empty-rate is a headline finding, not noise; all-empty ⇒ null band + note; exit 0; P5b reports empty rate + boundary set as primary. IVS pivot: larger menu (10 items × model families) lowers empty-M\* probability but makes the empty-set refutation framing (paper narrative) a real possibility |
 | 3 | **Small-n bootstrap** — H5 n≈35; IVS n≈92 improves | P2/P5b | Band secondary; empty rate + boundary set primary; m-out-of-n documented as future work, not shipped. IVS pivot: per-country model-response error (prompt variance, model stochasticity) replaces some of the small-n concern — mitigate with pinned seeds, frozen loadings, snapshot pinning |
 | 4 | **Multiple testing across evaluators** — per-restriction pass/fail ≠ hypothesis tests; now multiplied by MTMM + map_distance | P5b/paper | Restrictions are descriptive screens; no family-wise control; docs/16 claims boundary + paper language must say so. MTMM panel is diagnostic, never a gate |
-| 5 | **Governance** — headline-path change without dated amendment breaks the docs/16 contract; now 6 decisions at Gate A | All | Amendments first (Gate A, as two dated amendments if split); every semantics change gets a dated docs/12 entry before code; Gate B/C explicit run + release decisions; no tag/PyPI by implication. T27/T31 default: open-weight prompt-based baselines permitted; silence ⇒ no adapters, no proprietary APIs |
+| 5 | **Governance** — headline-path change without dated amendment breaks the docs/16 contract; now 7 decisions at Gate A | All | Amendments first (Gate A, as two dated amendments if split); every semantics change gets a dated docs/12 entry before code; Gate B/C explicit run + release decisions; no tag/PyPI by implication. T27/T31 default: open-weight prompt-based baselines permitted; silence ⇒ no adapters, no proprietary APIs |
 
 **Pivot-specific risks (new in Rev 2):**
 | # | Risk | Mitigation |
@@ -209,6 +210,7 @@ LONG-LEAD (start at P1):     T32 IVS data acquisition (Joint EVS/WVS v5.0) — r
 | 10 | **β-functional preimage discipline** — `map_distance` extends the beta registry; `beta_hash` is in the run_id preimage | T26 amendment text says the registry extension is in-scope for v3 and governed by the freeze rule; no silent preimage change |
 | 11 | **Evaluator-fit mismatch (math-first)** — IW axes are PCA axes; `monotone_rank` fits only if the network restricts on a continuous covariate (e.g. self-expression ↑ with GDP pc). Authoring a PCA-axis restriction into `monotone_rank` would be a category error | T26 math note records the fit decision at Gate A; the IVS network (T21) is authored after that note; `corr_zero` covers the discriminant/axis-separation logic the map actually needs |
 | 12 | **Adapter-comparison overclaim** — "adapters beat cultural prompting while hiding country" is a falsifiable hypothesis, not a designed result; Tao et al. shows cultural prompting improves most but worsens some countries | Plan frames it as "we measure whether it holds" (T23 holdout on unseen countries); the claim never enters the paper without the run + audit + Gate B paper-lock flow |
+| 13 | **Holdout conflation (math-first)** — restriction-level `stage` split (T09/T10 machinery) vs country-level units-split (paper's falsifiable core as phrased) are different claims with different TDD; signing the amendment believing the engine ships the country-level core while it ships restriction-level would surface at paper time | T26 dated math note decides which is the paper's core before P3 TDD; T23 specifies the units-split composition if (b) is core; the other is optional |
 
 ---
 
@@ -216,7 +218,7 @@ LONG-LEAD (start at P1):     T32 IVS data acquisition (Joint EVS/WVS v5.0) — r
 
 | Gate | When | What Augusto decides | Blocks |
 |---|---|---|---|
-| **Gate A** | End of P1 | **6 decisions + the T24 H5 re-grade sign-off:** (1) coverage mandate text (D1), (2) IVS empirical-box + H5 close-out clause, (3) `map_distance` β-functional + loadings provenance, (4) `monotone_rank`/`corr_zero` registry positions, (5) adapter-training reopen (T27), (6) proprietary-API policy (T31). T24 re-grade is a separate sign-off (re-grading docs/13 evidence claims is Augusto's), executed immediately after Gate A; full mechanical reversal in P6. **Split proposal: A1 = decisions (1)(2)(4) → dated amendment #1 (unblocks P2–P4); A2 = (3)(5)(6) → dated amendment #2 (needed by P5a/P5b). Default posture: open-weight prompt-based baselines permitted; silence on (5)/(6) ⇒ no adapters, no proprietary APIs** | All engine work (P2–P4), P5a design/harness |
+| **Gate A** | End of P1 | **7 decisions + the T24 H5 re-grade sign-off:** (1) coverage mandate text (D1), (2) IVS empirical-box + H5 close-out clause, (3) `map_distance` β-functional + loadings provenance, (4) `monotone_rank`/`corr_zero` registry positions, (5) adapter-training reopen (T27), (6) proprietary-API policy (T31), (7) **holdout semantics (T26b: restriction-level `stage` split vs country-level units-split as the paper's falsifiable core)**. T24 re-grade is a separate sign-off (re-grading docs/13 evidence claims is Augusto's), executed immediately after Gate A; full mechanical reversal in P6. **Split proposal: A1 = decisions (1)(2)(4)(7) → dated amendment #1 (unblocks P2–P4); A2 = (3)(5)(6) → dated amendment #2 (needed by P5a/P5b). Default posture: open-weight prompt-based baselines permitted; silence on (5)/(6) ⇒ no adapters, no proprietary APIs** | All engine work (P2–P4), P5a design/harness |
 | **Gate B** | End of P5b | Author/pin the IVS network, anchors, θ, δ, loadings, stage split, holdout countries; grant the run/go decision after independent audit; paper-lock checkpoint | The paper's headline evidence |
 | **Gate C** | End of P6 | Release decision: tag v3.0.0 + PyPI upload (Augusto executes; token never in agent session) | Publication |
 
