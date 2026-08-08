@@ -1,0 +1,7 @@
+{
+  "unit_id": "unit_id",
+  "measures": ["m_close", "m_far"],
+  "aux": ["m_close__A", "m_close__B", "m_far__A", "m_far__B"],
+  "outcome": "y",
+  "diagnostic": []
+}

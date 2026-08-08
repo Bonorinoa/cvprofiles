@@ -1017,3 +1017,41 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 3. **`stability`** remains schema-only fail-loud (decision card #4).
 
 **Not done in P2:** P3 betas, P4 holdout, P5 coverage, docs pass, version bump.
+
+---
+
+## 2026-08-08 — P3 map_distance semantics lock (before implementation)
+
+**Decision (LOCKED for P3 H_beta_map; amended same day — see below):** thin `map_distance` β evaluator, no PCA fit.
+
+### Amended definition (measure-dependent — supersedes draft constant-β wording)
+
+A constant-across-menu distance (shared item columns, measure unused) would collapse \([L,U]\) to a point and nullify the package question. **Rejected.** Implement measure-dependent projection:
+
+\[
+\beta(m)=\bigl\|\overline{z}(m)-z^{\mathrm{target}}\bigr\|_2,
+\quad
+\overline{z}(m)=\frac{1}{n}\sum_{i=1}^{n} x_i(m)\,L
+\]
+
+where \(x_i(m)\) is the length-\(K\) **item vector for measure \(m\)** at unit \(i\), and \(L\) is the pinned \(K\times 2\) loadings matrix.
+
+**Column resolution:** for measure id `m` and each item id `j` in `params.items`, the SCORE column is **`{m}__{j}`** (double underscore). Example: measure `m_base`, items `["A008","A165"]` → columns `m_base__A008`, `m_base__A165`.
+
+**Params (all in `BetaSpec.params`, enter `beta_hash` via `model_dump`):**
+- `items`: `list[str]`, length \(K\ge 1\) — item ids (suffixes), not full column names
+- `loadings`: `list[list[float]]`, shape \((K, 2)\) — pinned loadings (no fit)
+- `target`: `list[float]`, length 2 — target point on the map
+
+**Binding / fail-loud:**
+- For every menu measure `m` and every item `j`, column `{m}__{j}` must exist in SCORE available columns
+- `len(loadings) == len(items)`; each row length exactly 2; all finite
+- `target` length exactly 2; all finite
+- Non-finite item cells fail loud at evaluate
+- Measure column `m` itself must still exist (roles/IDENTIFY contract) but is **not** used in the distance arithmetic
+
+**Explicit non-claims:** no SVD/PCA fit; no PC2′ rescaling inside the engine; Tao loadings are Gate B transcription, not engine logic.
+
+**Preimage:** items/loadings/target in beta params ⇒ `beta_hash` moves when they change (Gate A D3). Mini fixture stays `corr_y` — mini golden untouched.
+
+**Next:** RED fixture `map_distance_v1` + tests → GREEN → commit; then P4.

@@ -1,0 +1,3 @@
+unit_id,m_close,m_far,m_close__A,m_close__B,m_far__A,m_far__B,y
+u01,0.1,0.9,0.0,0.0,3.0,4.0,0.5
+u02,0.2,0.8,0.0,0.0,3.0,4.0,0.6

@@ -1,0 +1,9 @@
+schema_version: "1"
+type: map_distance
+outcome: y
+params:
+  items: ["A", "B"]
+  loadings:
+    - [1.0, 0.0]
+    - [0.0, 1.0]
+  target: [0.0, 0.0]

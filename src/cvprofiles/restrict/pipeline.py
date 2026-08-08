@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -164,6 +165,58 @@ def _bind_beta_columns(beta: BetaSpec, roles: ScoreColumnRoles) -> None:
         sign = beta.params.get("sign", 1)
         if sign not in (-1, 1, -1.0, 1.0):
             raise RestrictError("diff_means requires params.sign in {+1,-1}")
+    if beta.type == "map_distance":
+        items = beta.params.get("items")
+        if not isinstance(items, list) or not items:
+            raise RestrictError("map_distance requires params.items (non-empty list)")
+        if not all(isinstance(j, str) and j for j in items):
+            raise RestrictError("map_distance params.items must be non-empty strings")
+        loadings = beta.params.get("loadings")
+        if not isinstance(loadings, list):
+            raise RestrictError("map_distance requires params.loadings (list)")
+        if len(loadings) != len(items):
+            raise RestrictError(
+                f"map_distance loadings length {len(loadings)} != "
+                f"items length {len(items)} (shape mismatch)"
+            )
+        for i, row in enumerate(loadings):
+            if not isinstance(row, list) or len(row) != 2:
+                raise RestrictError(
+                    f"map_distance loadings[{i}] must be length-2 "
+                    f"(got {row!r})"
+                )
+            for v in row:
+                try:
+                    fv = float(v)
+                except (TypeError, ValueError) as exc:
+                    raise RestrictError(
+                        f"map_distance loadings[{i}] must be finite floats"
+                    ) from exc
+                if not math.isfinite(fv):
+                    raise RestrictError(
+                        f"map_distance loadings[{i}] must be finite floats"
+                    )
+        target = beta.params.get("target")
+        if not isinstance(target, list) or len(target) != 2:
+            raise RestrictError("map_distance requires params.target of length 2")
+        for v in target:
+            try:
+                fv = float(v)
+            except (TypeError, ValueError) as exc:
+                raise RestrictError(
+                    "map_distance target must be finite floats"
+                ) from exc
+            if not math.isfinite(fv):
+                raise RestrictError("map_distance target must be finite floats")
+        # Measure-dependent item columns: {measure}__{item} for every menu measure.
+        for m in roles.measures:
+            for j in items:
+                col = f"{m}__{j}"
+                if col not in available:
+                    raise RestrictError(
+                        f"map_distance item column {col!r} not found in SCORE columns "
+                        f"(measure={m!r}, item={j!r})"
+                    )
 
 
 def run_restrict(

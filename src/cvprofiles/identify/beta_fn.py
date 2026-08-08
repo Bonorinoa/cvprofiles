@@ -1,4 +1,4 @@
-"""Target functional evaluators (v3: corr_y, ols_coef, diff_means)."""
+"""Target functional evaluators (v3: corr_y, ols_coef, diff_means, map_distance)."""
 
 from __future__ import annotations
 
@@ -76,6 +76,51 @@ def _diff_means(frame: pd.DataFrame, measure: str, group: str, sign: float) -> f
     return out
 
 
+def _map_distance(
+    frame: pd.DataFrame,
+    measure: str,
+    items: list[str],
+    loadings: list[list[float]],
+    target: list[float],
+) -> float:
+    """Measure-dependent 2D Euclidean map distance (docs/12 2026-08-08).
+
+    β(m) = ||z̄(m) − z_target||₂ where z̄(m) = mean_i (x_i(m) @ L).
+    Item columns resolve as ``{measure}__{item_id}``. The measure column must
+    exist (IDENTIFY contract) but is not used in the arithmetic.
+    """
+    if measure not in frame.columns:
+        raise SlackError(f"missing measure column {measure!r}")
+    if not items:
+        raise SlackError("map_distance requires non-empty items")
+    if len(loadings) != len(items):
+        raise SlackError(
+            f"map_distance loadings length {len(loadings)} != items length {len(items)}"
+        )
+    if len(target) != 2:
+        raise SlackError("map_distance target must have length 2")
+    cols: list[str] = []
+    for j in items:
+        col = f"{measure}__{j}"
+        if col not in frame.columns:
+            raise SlackError(f"missing map_distance item column {col!r}")
+        cols.append(col)
+    x = frame[cols].to_numpy(dtype=float)
+    if not np.isfinite(x).all():
+        raise SlackError("map_distance item columns must be finite")
+    l_mat = np.asarray(loadings, dtype=float)
+    if l_mat.shape != (len(items), 2) or not np.isfinite(l_mat).all():
+        raise SlackError("map_distance loadings must be finite shape (K, 2)")
+    t_vec = np.asarray(target, dtype=float)
+    if t_vec.shape != (2,) or not np.isfinite(t_vec).all():
+        raise SlackError("map_distance target must be finite length-2")
+    zbar = x.mean(axis=0) @ l_mat
+    dist = float(np.linalg.norm(zbar - t_vec))
+    if not math.isfinite(dist):
+        raise SlackError("map_distance produced non-finite distance")
+    return dist
+
+
 def evaluate_beta(
     frame: pd.DataFrame,
     measure: str,
@@ -110,7 +155,23 @@ def evaluate_beta(
             raise SlackError("diff_means requires params.group (column name)")
         sign_f = float(beta.params.get("sign", 1))
         return _diff_means(frame, measure, group, sign_f)
+    if beta.type == "map_distance":
+        # v3 P3 (docs/12 2026-08-08): measure-dependent 2D map distance.
+        items_raw = beta.params.get("items")
+        if not isinstance(items_raw, list) or not items_raw:
+            raise SlackError("map_distance requires params.items (non-empty list)")
+        items = [str(j) for j in items_raw]
+        loadings_raw = beta.params.get("loadings")
+        if not isinstance(loadings_raw, list):
+            raise SlackError("map_distance requires params.loadings")
+        loadings = [[float(v) for v in row] for row in loadings_raw]
+        target_raw = beta.params.get("target")
+        if not isinstance(target_raw, list):
+            raise SlackError("map_distance requires params.target")
+        target = [float(v) for v in target_raw]
+        return _map_distance(frame, measure, items, loadings, target)
     raise SlackError(
         f"beta type {beta.type!r} not implemented in the v3 registry "
-        f"(schema allows declaration; evaluators: corr_y, ols_coef, diff_means)"
+        f"(schema allows declaration; evaluators: corr_y, ols_coef, "
+        f"diff_means, map_distance)"
     )

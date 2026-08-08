@@ -6,15 +6,14 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-BetaType = Literal["corr_y", "ols_coef", "diff_means"]
+BetaType = Literal["corr_y", "ols_coef", "diff_means", "map_distance"]
 
 
 class BetaSpec(BaseModel):
     """Named target functional.
 
-    v3 evaluators: ``corr_y``, ``ols_coef``, ``diff_means``.
-    ``map_distance`` may be added as a separate registry extension (P3).
-    Group/controls binding is enforced at RESTRICT, not schema parse time.
+    v3 evaluators: ``corr_y``, ``ols_coef``, ``diff_means``, ``map_distance``.
+    Group/controls/items binding is enforced at RESTRICT, not schema parse time.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -26,6 +25,6 @@ class BetaSpec(BaseModel):
         default_factory=dict,
         description=(
             "Type-specific args (e.g. controls for ols_coef, "
-            "group/sign for diff_means)."
+            "group/sign for diff_means, items/loadings/target for map_distance)."
         ),
     )
