@@ -1,0 +1,10 @@
+schema_version: "1"
+name: monotone_rank_v1
+delta: 0.0
+restrictions:
+  - id: r_mono_up
+    type: monotone_rank
+    theta: 0.5
+    params:
+      variable: v_cont
+      sign: 1

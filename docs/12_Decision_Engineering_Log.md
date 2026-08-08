@@ -1005,3 +1005,15 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 **Baseline at acceptance:** `2.0.1a1`, 223 tests green, ruff/mypy clean, HEAD `64a9eb2`, `v0.1` peel intact.
 
 **Next:** P1 gate spec (`reports/synth_v3_gate_spec.md`) then TDD implementation of P2–P5.
+
+---
+
+## 2026-08-08 — P2 evaluators: corr_zero shipped; monotone_rank fixture pins co-landed evaluator
+
+**Decision / engineering note (P2):**
+
+1. **`corr_zero` (H_disc)** — shipped with TDD fixture `data/fixtures/corr_zero_v1/` and `tests/test_corr_zero.py`. Slack \(= \theta - |\mathrm{Corr}(m,V)|\). Commit `6721cb7`.
+2. **`monotone_rank` (H_mono)** — schema + evaluator co-landed in the same `corr_zero` commit (shared `RestrictionType` / bind / slacks branch). **TDD deviation:** production evaluator path existed before the dedicated fixture tests. Behavior is now pinned by `data/fixtures/monotone_rank_v1/` + `tests/test_monotone_rank.py` (including `sign=-1` path). Fixture tests were written against measured goldens and are green before this log entry's accompanying commit.
+3. **`stability`** remains schema-only fail-loud (decision card #4).
+
+**Not done in P2:** P3 betas, P4 holdout, P5 coverage, docs pass, version bump.

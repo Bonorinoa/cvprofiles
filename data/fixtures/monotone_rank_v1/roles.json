@@ -1,0 +1,7 @@
+{
+  "unit_id": "unit_id",
+  "measures": ["m_up", "m_down", "m_noise"],
+  "aux": ["v_cont"],
+  "outcome": "y",
+  "diagnostic": []
+}
