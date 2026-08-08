@@ -36,3 +36,4 @@
 | Date | Change |
 |---|---|
 | 2026-08-06 | Extracted from README into a live doc (docs/12, docs strategy decision) |
+| 2026-08-07 | Phase 3 tutorials shipped (IRT-as-scoring + sensemakr-on-survivors); batch orchestrator (`tools/run_many.py`) documented; tag `v2.0.1a1` dev checkpoint |

@@ -4,9 +4,9 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v2_0_0_published_pypi
+status: v2_0_0_published_pypi_dev_2_0_1a1
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "2.0.1a1"      # current package version (dev cycle after 2.0.0; refreshed 2026-08-06 audit)
+dev_version: "2.0.1a1"      # current package version (docs/tooling/tutorials sprint; dev checkpoint tag 2026-08-07)
 target_version: "2.0.0"   # v2.0 measure discipline release (PyPI 2026-08-06)
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
@@ -18,6 +18,7 @@ tag_v1_1: v1.1.0           # MVP tag 2026-08-04 — do not move/retag
 tag_v1_1_sha: fce31c8
 tag_v2_0: v2.0.0           # measure discipline release 2026-08-06 — do not move/retag
 tag_v2_0_sha: 6abb6e4
+tag_v2_0_1a1: v2.0.1a1     # dev checkpoint 2026-08-07 — docs/tooling/tutorials sprint
 
 poc:
   script: evals/synthetic/v0_poc.py
@@ -86,6 +87,8 @@ docs:
     - docs/13_Evaluations_Log.md
     - docs/16_Paper_Protocol_Freeze.md
     - docs/17_H5_Trust_Design.md
+    - tutorials/cvprofiles_irt_scoring_tutorial.ipynb
+    - tutorials/cvprofiles_sensemakr_tutorial.ipynb
     - docs/archive/README.md
   live:
     - docs/12_Decision_Engineering_Log.md

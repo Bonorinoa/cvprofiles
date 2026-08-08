@@ -4,6 +4,21 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [Unreleased] — dev 2.0.1a1 (docs consolidation + tooling + tutorials, 2026-08-07; tag `v2.0.1a1` dev checkpoint)
+
+### Tutorials (Phase 3)
+- **`tutorials/cvprofiles_irt_scoring_tutorial.ipynb`** — IRT as a SCORE-upstream scoring technology: hand-rolled 1PL (Rasch) fit (numpy + scipy, auditable), person scores → measure columns → profile; IRT and sum score both admitted, noisy measure rejected. Executed against the wheel in a fresh venv: all assertions pass.
+- **`tutorials/cvprofiles_sensemakr_tutorial.ipynb`** — OVB sensitivity on a survivor: hand-rolled Cinelli–Hazlett (2020) implementation (partial R², exact OVB identity, robustness value RV_q); confirms the identity recovers the full-model coefficient. Executed against the wheel in a fresh venv: all assertions pass.
+- Both regenerable from `tools/build_tutorials.py`.
+
+### Tooling / docs (Phases 0–2, 2026-08-06/07)
+- **Public doc consolidation** — `docs/METHODOLOGY.md`, `docs/USER_GUIDE.md`, `docs/ARCHITECTURE.md`, `docs/ROADMAP.md` written from shipped state in researcher voice; pre-ship scaffold archived (`docs/archive/`, mapping README); README rewritten (install+quickstart early, contracts first-class, positioning, Hermes acknowledgment); governance locks 12/13/16/17 kept live.
+- **Batch orchestrator** — `tools/run_many.py`: one shared score matrix, N (network, beta) profiles from a YAML manifest, per-profile frozen run dirs + `batch_summary.json`; machine-JSON stdout; empty M* exit-0; fail-loud `BatchError`. 5 tests.
+- **Math delimiter sweep** — all markdown docs converted to GitHub-KaTeX `$...$`/`$$...$$`; `tools/scan_math_delims.py --check` wired into CI.
+
+### Boundary
+- Tag `v2.0.1a1` marks a dev checkpoint, not a release; paper protocol and PyPI publication remain Augusto's.
+
 ## [Unreleased] — dev 2.0.1a1 (post-release audit follow-up, 2026-08-06)
 
 ### Hardening

@@ -72,6 +72,9 @@ select = ["E", "F", "I", "UP", "B"]
 # single copy-paste line (E501 inside a docstring is string content, so noqa
 # cannot suppress it).
 "tools/verify_h5_trust.py" = ["E501"]
+# build_tutorials.py embeds LaTeX display lines inside notebook markdown cell
+# strings; splitting them would change the emitted notebook cells.
+"tools/build_tutorials.py" = ["E501"]
 
 [tool.mypy]
 # Target the newest supported runtime: numpy>=2.5 stubs use PEP 695 `type`

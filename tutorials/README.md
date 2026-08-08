@@ -1,6 +1,6 @@
 # cvprofiles tutorials
 
-Two independent notebooks. Both run against the **installed package only** (`pip install cvprofiles`)
+Four independent notebooks. All run against the **installed package only** (`pip install cvprofiles`)
 and need no repository files — every input is generated inline.
 
 ## 1. `cvprofiles_tutorial.ipynb` — the core walk-through
@@ -31,6 +31,31 @@ A single synthetic construct with a designed menu of five measures exercises the
 - self-checking assertions on the package's core contracts (survivors-only range, anchors
   excluded from the run_id, monotone δ-grid, θ-grid empty under tightening, fail-loud anchors).
 
+## 3. `cvprofiles_irt_scoring_tutorial.ipynb` — IRT as a SCORE-upstream scorer
+
+The engine is score-agnostic: any scalar column per unit can be a candidate measure,
+however it was built. This notebook shows item response theory as one principled upstream
+scoring technology:
+
+- simulate a latent trait and 1PL item responses;
+- fit a **hand-rolled 1PL (Rasch)** model (numpy + scipy only, auditable) to recover
+  person scores θ̂;
+- feed θ̂, a naive sum score, and a noisy measure into a cvprofiles profile;
+- see IRT and sum scores both survive the network while the noisy measure is rejected.
+
+## 4. `cvprofiles_sensemakr_tutorial.ipynb` — OVB sensitivity on a survivor
+
+cvprofiles answers *which measures are admissible and what range follows*; a different,
+downstream question is *how much unobserved confounding would overturn one fixed
+coefficient*. This notebook applies the **Cinelli–Hazlett (2020)** omitted-variable-bias
+framework (the `sensemakr` method) to a survivor's standardized OLS coefficient:
+
+- a DGP with an unobserved confounder affecting both the measure and the outcome;
+- a hand-rolled CH implementation: partial R², the exact OVB identity (impact × imbalance),
+  and the robustness value RV_q — numpy only;
+- confirms the exact identity recovers the full-model coefficient, and the partial-R²
+  reparameterization matches it.
+
 ## Why "independent"
 
 The verification installs the **published wheel** (not the source tree) into a fresh
@@ -54,9 +79,18 @@ For the core tutorial's H5 part, add `CVPROFILES_REPO=/path/to/cvprofiles` to th
 command (nbconvert kernels start in the notebook's folder, so relative data paths fail
 outside the checkout).
 
+The Phase-3 notebooks (IRT scoring, sensemakr) are regenerated from
+`tools/build_tutorials.py`:
+
+```bash
+python tools/build_tutorials.py   # emits both notebooks into tutorials/
+```
+
 ## Notes
 
 - Empty `M*` and wide `[L,U]` are scientific features, not crashes.
 - The engine is score-agnostic and model-free; the menu and network are researcher-owned.
+- IRT and OVB-sensitivity code is intentionally hand-rolled and self-contained — the point
+  is auditable upstream/downstream patterns, not new dependencies.
 - The H5 replication is *preliminary paper-facing evidence* (owner-approved 2026-08-04);
   it is not a final paper lock.

@@ -103,6 +103,8 @@ Start here, then follow in order:
 | `docs/16_Paper_Protocol_Freeze.md` | Paper-facing locks and open fields |
 | `tutorials/cvprofiles_tutorial.ipynb` | Synthetic walk-through + H5 replication |
 | `tutorials/cvprofiles_diagnostics_tour.ipynb` | v2.0 measure-discipline tour: all evaluators + diagnostics |
+| `tutorials/cvprofiles_irt_scoring_tutorial.ipynb` | IRT as a SCORE-upstream scoring technology |
+| `tutorials/cvprofiles_sensemakr_tutorial.ipynb` | OVB sensitivity (Cinelli–Hazlett) on a survivor |
 | `docs/PROJECT_MANIFEST.md` | Machine-readable project state |
 
 Live internal logs (append-only): `docs/12_Decision_Engineering_Log.md`, `docs/13_Evaluations_Log.md`. Pre-consolidation scaffold docs live in `docs/archive/` (historical reference only).

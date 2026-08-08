@@ -942,3 +942,23 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 - **Scratch cleanup:** one-shot debug tools from the Phase 0 math sweep (`inspect_backslashes.py`, `repr_line350.py`, `verify_conversion.py`, `strip_trailing_ws.py`) removed with Augusto's consent.
 
 **Not done:** engine-level multi-construct joint admissibility remains out of scope (docs/01 archived lock); IRT/sensemakr tutorials deferred to Phase 3 (checkpoint decision).
+
+---
+
+## 2026-08-07 — Phase 3 tutorials shipped + dev checkpoint tag
+
+**Decision (recorded, Augusto-directed):** shipped the two planned Phase-3 tutorials and closed the docs/tooling sprint with a dev checkpoint tag `v2.0.1a1` (a checkpoint, not a release — paper protocol and PyPI publication remain Augusto's).
+
+**Shipped:**
+
+- **`tutorials/cvprofiles_irt_scoring_tutorial.ipynb`** — IRT as a SCORE-upstream scorer. Hand-rolled 1PL (Rasch) fit via scipy (empirical-difficulty init, L-BFGS-B); n=300, J=30; IRT θ recovery ≈ sum score (0.907 vs 0.906); both admitted, noisy measure rejected. Deliberate lesson: the engine is score-agnostic; IRT is one auditable scoring technology upstream of the menu.
+- **`tutorials/cvprofiles_sensemakr_tutorial.ipynb`** — OVB sensitivity on a survivor. Hand-rolled Cinelli–Hazlett (2020): partial R², exact OVB identity (impact × imbalance, `u ~ m + w` regression), CH partial-R² reparameterization, robustness value RV_q. All on z-scored variables so numbers line up with the profile's standardized β (0.694 = 0.694). Exact identity recovers full-model τ to <1e-8; CH reparameterization matches.
+- **`tools/build_tutorials.py`** — committed, reproducible notebook builder (stdlib-only, nbformat 4.5, empty outputs). E501 per-file ignore added (same precedent as `verify_h5_trust.py`).
+- **Verification:** both notebooks executed against the freshly built wheel (`cvprofiles-2.0.1a1`) in a fresh venv via nbconvert — zero errors, all assertions pass. This doubles as the wheel smoke for the tag.
+- **Docs:** tutorials/README (four notebooks + regeneration instructions), README doc map, ROADMAP change-log row, CHANGELOG entry.
+- **Scratch cleanup:** `experiment_irt_fit.py`, `debug_ch.py`, `inspect_executed_nb.py` removed with Augusto's consent (mass-deletion gate approved).
+
+**Engineering lessons recorded:**
+- The first 1PL fit attempt (BFGS, J=10, naive init) failed to converge and recovered θ worse than the naive sum score (0.546 vs 0.816) — a misleading tutorial. Fix: L-BFGS-B, J=30, empirical-difficulty init. Lesson: hand-rolled JMLE needs good initialization and enough items; tutorials must teach the honest comparison, not a false "IRT wins" claim.
+- The CH partial-R² formula recovers |bias| *approximately* (sample analogue); the exact OVB identity γ̂δ̂ is exact to machine precision. The tutorial now teaches both, asserting exactness on the identity and a tight tolerance on the reparameterization.
+- The wrong imbalance regression (`D ~ X + Z` coefficient on Z) breaks the identity; the correct one is `Z ~ D + X` coefficient on D (impact × imbalance form).
