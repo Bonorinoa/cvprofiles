@@ -9,7 +9,7 @@
 - Opened by `docs/16` §9 (dated amendment 2026-08-07) — the **IVS designated-evaluation box**.
 - Supersedes H5 Trust as the v3 headline (H5 stays a historical design, `docs/17`).
 - **Open-weight policy:** all evidence-generating computation uses open-weight local models and fully interpretable artifacts; no proprietary APIs, no DPO adapters (T27/T31 NOT reopened).
-- **Loadings provenance:** Tao et al. published human PCA loadings reused verbatim (incl. PC2′ = 1.61·PC2 − 0.01); fresh empirical PCA fit NOT authorized (D3).
+- **Loadings provenance:** Tao et al. published human PCA loadings reused verbatim (incl. PC2′ = 1.61·PC2 − 0.01, **PROVISIONAL — verify at T21 transcription audit, hard Gate B item**); fresh empirical PCA fit NOT authorized (D3).
 - **Preimage carve-out:** `map_distance` β-registry extension changes `beta_hash` by design inside the v3 major bump (D3).
 
 ## Data

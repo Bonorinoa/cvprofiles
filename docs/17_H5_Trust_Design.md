@@ -44,6 +44,8 @@ Frozen wide table `S_frozen.csv`, columns:
 | `log_gdp_pc` | **outcome** | WDI `NY.GDP.PCAP.PP.KD`, avg 2015–2019 | β target; **not** in network |
 | `n_*` counts | diagnostic | per item | merged into frame; declared in roles |
 
+> **2026-08-07 (dated note, append-only):** the WGI indicator literal was corrected from `rq` to `rl` in the `rule_of_law` row above. Historical H5 runs used the `rl` (rule of law) series (`evals/h5_trust/build_dataset.py` downloads `rl`); the `rq` literal was a documentation typo, not a data change.
+
 Missingness: mask WVS negative codes and AB 88/98 in the builder; any residual NaN → fail loud (engine does not impute). Country means **unweighted** by default; weighted means are a diagnostic contrast.
 
 ## 4. Menu and design roles

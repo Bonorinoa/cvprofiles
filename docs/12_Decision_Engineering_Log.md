@@ -982,6 +982,10 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 
 **What Gate A unblocks:** P2 (coverage core + wiring + worked example), P3 (holdout workflow), P4 (evaluators), P5a (IVS design + teaching walkthrough + harness) — all may start once the amendment bundle is committed. Long-lead T32 (Joint EVS/WVS data acquisition) may start in parallel.
 
-**Not authorized by this entry:** any engine code change, empirical run, tag, PyPI publication, or push. Those remain separately gated (Gate B run decision, Gate C release decision; push requires a task-specific go).
+**Scope sequencing (clarification, same date):** "unblocks" above means the **semantics locks** for P2–P5a are now committed — the phases are authorized to be *prepared* (planning, fixtures, TDD scaffolding per phase). Actual **implementation** of each phase is a separate work package requiring an explicit task-specific go (AGENTS.md rule 6), as is any push. This entry records the Gate A decisions; it does not by itself start P2 code.
 
-**Docs created/updated in this bundle:** `docs/16` §9 (amendment), `docs/18_IVS_Cultural_Map.md` (design skeleton, authorship Augusto-owned), `docs/17` + `docs/13` (H5 re-grade), `docs/ROADMAP.md`, `docs/PROJECT_MANIFEST.md` (v3_0 block), `README.md`, `AGENTS.md` (truth table row for docs/18).
+**Not authorized by this entry:** any engine code change, empirical run, tag, PyPI publication, or push. Those remain separately gated (Gate B run decision, Gate C release decision; push requires a task-specific go). Implementation of P2–P5a is a separate work package requiring its own go, as clarified above.
+
+**Docs created/updated in this bundle:** `docs/16` §9 (amendment), `docs/18_IVS_Cultural_Map.md` (design skeleton, authorship Augusto-owned), `docs/17` + `docs/13` (H5 re-grade), `docs/ROADMAP.md`, `docs/PROJECT_MANIFEST.md` (v3_0 block), `docs/README.md` (doc map rows), `README.md`, `AGENTS.md` (truth table row for docs/18).
+
+**Date provenance (2026-08-08, append-only):** the Gate A entry and `docs/16` §9 are stamped 2026-08-07 per the plan's date convention (DEVELOPMENT_PLAN Rev 2 header, 2026-08-07; bundle drafted with the plan). Git-verified execution and commit occurred **2026-08-08** (`b971708`). Execution date governs; no stamp was rewritten.

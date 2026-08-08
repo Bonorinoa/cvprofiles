@@ -1,6 +1,7 @@
 # DEVELOPMENT_PLAN — cvprofiles v3.0.0 (paper-driven, phase-gated) — REV 2
 
 **Date:** 2026-08-07 (Rev 2: Augusto redirect absorbed) · **Author:** cvprofiles lead engineer · **Checkpoint target:** Nature/PNAS position paper (valid estimation of latent constructs, cultural applications / SCA2)
+**Status:** Gate A **signed 2026-08-07** — amendment bundle executed (docs/16 §9, docs/12 entry, math_spec §7); P2–P5a semantics locks committed; engine implementation remains a separate task-specific go (AGENTS.md rule 6).
 **Inputs:** `reports/VERIFIED_TASK_INVENTORY.md` (T01–T33), `reports/FINAL_ENGINEERING_REPORT.md`, `reports/math_spec.md`, `AGENTS.md`, `docs/16`, `docs/17`
 **Supersedes:** Rev 1 (2026-08-07) — H5 Trust is no longer the v3 headline; the IVS/Tao cultural-values lane replaces it (T21–T33). This supersession is a record of the user's redirect, not a silent scope change.
 
@@ -104,7 +105,7 @@ P0 baseline hygiene ──────────────► P1 semantics l
 
 **Scope (inventory):** T09 (schema `stage: select|holdout`), T10 (pipeline: admit on R_select; three-block REPORT; holdout verdict as named findings), T11 (METHODOLOGY/USER_GUIDE/docs-12).
 **Order:** T09 → T10 → T11.
-**Semantics note:** the restriction-level `stage` split is **WP2 machinery** (same units; R_select predicts R_holdout compliance). The paper's falsifiable core as currently phrased — "selection guided by construct validity predicts held-out validity evidence" — is a **country-level units-split** (select on train countries, verdict on held-out countries). These are different claims with different TDD; **T26 (Gate A math note) decides which is the paper's core before P3 begins.**
+**Semantics note:** the restriction-level `stage` split is **WP2 machinery** (same units; R_select predicts R_holdout compliance). **D7 DECIDED 2026-08-07 (docs/16 §9, math_spec §7): the country-level units-split is the paper's falsifiable core** (select on train countries, verdict on held-out countries); the restriction-level `stage` split ships as WP2 machinery. Different claims, different TDD; the units-split composition is specified at T23.
 **TDD steps:**
 1. RED: network schema rejects/ignores `stage` today — write a parse test asserting `stage` field with enum `select|holdout`, default `select`; observe failure.
 2. Schema GREEN (backward compatible: existing networks all-select behave identically; `network_hash` changes by design inside the v3 major bump — documented in docs/12).
