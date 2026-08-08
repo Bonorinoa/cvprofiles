@@ -72,6 +72,18 @@ v2_0:
   checkpoint: per_thread
   h5_delta_grid_run: done
 
+v3_0:
+  status: gate_a_signed_2026_08_07
+  plan: reports/DEVELOPMENT_PLAN.md
+  inventory: reports/VERIFIED_TASK_INVENTORY.md
+  amendment: docs/16_Paper_Protocol_Freeze.md  # §9 dated amendment 2026-08-07
+  design_doc: docs/18_IVS_Cultural_Map.md
+  target_version: "3.0.0"
+  headline: ivs_cultural_values_lane
+  h5_status: historical_regression_witness
+  open_weight_policy: true  # no adapters, no proprietary APIs (D5/D6)
+  run_gate: gate_b_augusto_run_decision
+
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
   thesis_core: [RESTRICT, IDENTIFY, REPORT]
@@ -123,4 +135,8 @@ locks:
   - h5_trust_design_locked_run_gated
   - v2_0_measure_discipline_scope_box
   - v2_0_0_published_pypi
+  - gate_a_signed_2026_08_07
+  - ivs_design_reserved_run_gated  # design RESERVED/AWAITING AUGUSTO; locked only at Gate B
+  - h5_re_grade_historical_2026_08_07
+  - open_weight_v3
 ```

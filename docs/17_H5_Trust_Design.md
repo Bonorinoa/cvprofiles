@@ -2,7 +2,9 @@
 
 **Status:** `LOCKED AS H5 DESIGN` (2026-08-04) — construct, unit/universe, menu/roles, network, θ, δ, β, and claims boundary are fixed as design. **Empirical run gated:** no run, no paper number, no `docs/13` claim until frozen scores + pinned seed + package version exist and an independent audit passes.
 
-**Package baseline:** `cvprofiles==1.1.0a1`
+**Status re-grade (2026-08-07, Gate A D3 / docs/16 §9):** historical design lock — H5 Trust is **no longer the v3 headline**, superseded by the IVS cultural-values lane (`docs/18_IVS_Cultural_Map.md`; `docs/16` §9). This document remains a valid record of the H5 design; its n=35 evidence is re-graded to a **historical/regression witness**, not the v3 evidence base.
+
+**Package baseline:** `cvprofiles==1.1.0a1` *(historical baseline of the 2026-08-04 design lock; do not edit — this doc is a historical design record)*
 
 **Owner:** Augusto owns the final wording of every researcher-authored field. The construct paragraph below was drafted by the agent at Augusto's explicit one-off delegation (2026-08-04) and **approved verbatim** by Augusto; the network was proposed by the agent with literature anchors and **pinned by Augusto** the same day.
 
@@ -37,7 +39,7 @@ Frozen wide table `S_frozen.csv`, columns:
 | `m_noise` | measure (**invalid_noise**) | seeded RNG (seed pinned) | Gaussian — must fail all bars |
 | `m_share_agriculture` | measure (**invalid_confounded**) | WDI `SL.AGR.EMPL.ZS` | plausible "traditional society" proxy — theory says wrong signs vs institutions/inequality |
 | `gps_trust` | aux | GPS country-level | standardized country mean (behavioral anchor) |
-| `rule_of_law` | aux | WGI `rq`, avg 2015–2019 | institutional quality |
+| `rule_of_law` | aux | WGI `rl`, avg 2015–2019 | institutional quality |
 | `gini` | aux | WDI `SI.POV.GINI`, avg 2015–2019 | income inequality (negative bar) |
 | `log_gdp_pc` | **outcome** | WDI `NY.GDP.PCAP.PP.KD`, avg 2015–2019 | β target; **not** in network |
 | `n_*` counts | diagnostic | per item | merged into frame; declared in roles |

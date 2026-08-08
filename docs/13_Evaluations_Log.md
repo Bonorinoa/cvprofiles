@@ -419,6 +419,12 @@ Same branch and audit; `verify_audit.py` extended pre-merge with three probes
 checkpoint per docs/12 + docs/16 §8. `reports/summaries/h5_trust_evidence_summary.json`
 is the tracked summary. Final paper lock and submission claims remain Augusto's.
 
+**Re-grade (2026-08-07, Gate A D3 / docs/16 §9):** H5 Trust is **no longer the v3
+headline**; this run is re-graded from preliminary paper-facing evidence to
+**historical/regression witness**. The numbers remain reproducible and auditable
+(`tools/verify_h5_trust.py` exit 0); they are not the v3 evidence base. The v3
+empirical lane is the IVS cultural-values evaluation (`docs/18`, `docs/16` §9).
+
 ---
 
 ## 2026-08-05 — v2.0 thread (a): δ-grid tolerance surface (H5 Trust run)
@@ -493,4 +499,4 @@ is the tracked summary. Final paper lock and submission claims remain Augusto's.
 - **Coverage now measured:** 88% of `cvprofiles` (1563 stmts, 185 missed) via `pytest-cov` (report only, no gate).
 - **Tutorial #2:** `tutorials/cvprofiles_diagnostics_tour.ipynb` executed against the PyPI wheel — ALL ASSERTIONS PASSED, deterministic run_id `890f95c2…`.
 - **B4 locked (2026-08-06, Option B):** docs/03 §Statement of methodology; **all v2.0-DONE criteria complete** (docs/18 status map all ✅).
-- **Not paper evidence:** the H5 n=35 numbers remain *preliminary paper-facing evidence*; final paper lock and release remain Augusto's.
+- **Not paper evidence:** the H5 n=35 numbers remain *preliminary paper-facing evidence*; final paper lock and release remain Augusto's. *[re-graded 2026-08-07 to historical/regression witness — docs/16 §9; this line is a historical record of the v2.0 audit]*

@@ -36,7 +36,7 @@ Augusto owns all main-path empirical/paper choices:
 
 Agents may author oracle networks only for synthetic DGPs. Do not invent an empirical network to make H5 or a paper table move. The existing spam audit is intermediate stress evidence, **not H5**.
 
-The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS PROVISIONAL SYNTHETIC-ONLY**. It does not authorize empirical/H5 work, engine changes, pushes, tags, PyPI publication, or a release claim by implication. A dated amendment (`docs/16` §8, 2026-08-04) opens the empirical box **for the designated H5 Trust evaluation only**; its first frozen run (n=35) is **preliminary paper-facing evidence** (`reports/summaries/h5_trust_evidence_summary.json`) — a checkpoint, not a release. Final paper lock, tag, and PyPI remain Augusto's.
+The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS PROVISIONAL SYNTHETIC-ONLY**. It does not authorize empirical/H5 work, engine changes, pushes, tags, PyPI publication, or a release claim by implication. A dated amendment (`docs/16` §8, 2026-08-04) opens the empirical box **for the designated H5 Trust evaluation only**; its first frozen run (n=35) is **preliminary paper-facing evidence** (`reports/summaries/h5_trust_evidence_summary.json`) — a checkpoint, not a release. **Re-graded 2026-08-07 (Gate A, `docs/16` §9):** H5 Trust is **historical/regression witness**, not the v3 headline; the v3 empirical lane is the **IVS cultural-values evaluation** (`docs/18_IVS_Cultural_Map.md`), opened by the §9 amendment and **run-gated** (Gate B: frozen scores + pinned network/β + frozen loadings + fixed seed + package version + independent audit exit 0 + Augusto's run decision). Open-weight policy for v3: open-weight local models and interpretable artifacts only; no DPO adapters, no proprietary APIs (D5/D6, `docs/16` §9). Final paper lock, tag, and PyPI remain Augusto's.
 
 ## Current posture
 
@@ -61,7 +61,8 @@ The current paper protocol (`docs/16_Paper_Protocol_Freeze.md`) is **LOCKED AS P
 | `docs/12_Decision_Engineering_Log.md` | Append-only engineering/scope decisions |
 | `docs/13_Evaluations_Log.md` | Evidence interpretations and artifact pointers |
 | `docs/16_Paper_Protocol_Freeze.md` | Paper-facing locks, open fields, and provenance rule |
-| `docs/17_H5_Trust_Design.md` | H5 Trust design lock (run gated) |
+| `docs/17_H5_Trust_Design.md` | H5 Trust design lock (run gated) — **historical** (re-graded 2026-08-07) |
+| `docs/18_IVS_Cultural_Map.md` | v3 IVS cultural-values lane design container (Augusto-authored; run gated) |
 | `docs/archive/` | Pre-consolidation scaffold (historical reference only) |
 | `audits/` | Post-release audit reports (findings + closure status) |
 | `pyproject.toml` | Package version, dependencies, lint/type/test configuration |

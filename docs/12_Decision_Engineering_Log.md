@@ -962,3 +962,26 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 - The first 1PL fit attempt (BFGS, J=10, naive init) failed to converge and recovered θ worse than the naive sum score (0.546 vs 0.816) — a misleading tutorial. Fix: L-BFGS-B, J=30, empirical-difficulty init. Lesson: hand-rolled JMLE needs good initialization and enough items; tutorials must teach the honest comparison, not a false "IRT wins" claim.
 - The CH partial-R² formula recovers |bias| *approximately* (sample analogue); the exact OVB identity γ̂δ̂ is exact to machine precision. The tutorial now teaches both, asserting exactness on the identity and a tight tolerance on the reparameterization.
 - The wrong imbalance regression (`D ~ X + Z` coefficient on Z) breaks the identity; the correct one is `Z ~ D + X` coefficient on D (impact × imbalance form).
+
+---
+
+## 2026-08-07 — Gate A signed: v3 amendment bundle (IVS lane, coverage, holdout, evaluators, open-weight policy)
+
+**Decision (recorded, Augusto-directed):** Augusto authorized the full Gate A bundle ("address all the tasks in Gate A as you proposed, everything should stay open-weight or easily interpretable"). All seven decisions + the T24 H5 re-grade are **DECIDED 2026-08-07** and recorded in `docs/16` §9 (dated amendment):
+
+1. **D1 coverage mandate** — additive-but-mandatory; α=0.10, κ=2; honest "uncertainty band" language; no freeze-preimage change.
+2. **D2 IVS cultural-values lane is THE v3 direction** — H5 Trust superseded as headline; Joint EVS/WVS 2017–2022 v5.0, Inglehart–Welzel axes, frozen human PCA loadings.
+3. **D3 `map_distance` + loadings provenance** — `map_distance` approved as β-registry extension; **Tao et al. published loadings reused verbatim** (incl. PC2′ = 1.61·PC2 − 0.01); fresh PCA fit **not authorized**; `beta_hash` carve-out signed.
+4. **D4 evaluator registry** — `monotone_rank` + `corr_zero` (two-sided) approved; fit note: `monotone_rank` only if a continuous-covariate restriction exists (IW axes are PCA axes).
+5. **D5 adapters NOT reopened** — no DPO adapters; open-weight prompt-based baselines only.
+6. **D6 proprietary APIs NOT reopened** — open-weight local models only for paper-reproducible scoring.
+7. **D7 holdout semantics** — country-level units-split is the paper's falsifiable core; restriction-level `stage` split ships as WP2 machinery.
+8. **D8/T24 H5 re-grade signed** — n=35 run re-graded to historical/regression witness (docs/13 + docs/17 executed).
+
+**Open-weight policy (affirmative):** all v3 evidence-generating computation uses open-weight local models and fully interpretable artifacts; the engine stays model-free; the harness lives in `evals/`, never `src/` (AST-enforced).
+
+**What Gate A unblocks:** P2 (coverage core + wiring + worked example), P3 (holdout workflow), P4 (evaluators), P5a (IVS design + teaching walkthrough + harness) — all may start once the amendment bundle is committed. Long-lead T32 (Joint EVS/WVS data acquisition) may start in parallel.
+
+**Not authorized by this entry:** any engine code change, empirical run, tag, PyPI publication, or push. Those remain separately gated (Gate B run decision, Gate C release decision; push requires a task-specific go).
+
+**Docs created/updated in this bundle:** `docs/16` §9 (amendment), `docs/18_IVS_Cultural_Map.md` (design skeleton, authorship Augusto-owned), `docs/17` + `docs/13` (H5 re-grade), `docs/ROADMAP.md`, `docs/PROJECT_MANIFEST.md` (v3_0 block), `README.md`, `AGENTS.md` (truth table row for docs/18).

@@ -7,7 +7,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 | | |
 |---|---|
 | **Version** | **2.0.0 published on PyPI (2026-08-06)**; dev cycle at `2.0.1a1` |
-| **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0` frozen; protocol provisional synthetic-only; H5 Trust evidence preliminary (n=35) |
+| **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0` frozen; protocol provisional synthetic-only; H5 Trust evidence **re-graded to historical/regression witness** (2026-08-07, Gate A); v3 IVS cultural-values lane opened (`docs/18`), run gated |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
 | **CI** | [![ci](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml) |
@@ -101,6 +101,8 @@ Start here, then follow in order:
 | `docs/USER_GUIDE.md` | How to prepare inputs, run a profile, read the report |
 | `docs/ARCHITECTURE.md` | Four-state machine, IO contracts, determinism |
 | `docs/16_Paper_Protocol_Freeze.md` | Paper-facing locks and open fields |
+| `docs/18_IVS_Cultural_Map.md` | v3 IVS cultural-values lane design container (Augusto-authored; run gated) |
+| `docs/17_H5_Trust_Design.md` | H5 Trust design lock — **historical** (re-graded 2026-08-07) |
 | `tutorials/cvprofiles_tutorial.ipynb` | Synthetic walk-through + H5 replication |
 | `tutorials/cvprofiles_diagnostics_tour.ipynb` | v2.0 measure-discipline tour: all evaluators + diagnostics |
 | `tutorials/cvprofiles_irt_scoring_tutorial.ipynb` | IRT as a SCORE-upstream scoring technology |

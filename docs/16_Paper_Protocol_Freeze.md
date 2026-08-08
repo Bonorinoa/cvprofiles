@@ -1,10 +1,10 @@
 # 16 — Paper Protocol Freeze
 
-**Status:** `protocol-v1-synth-provisional` — provisional synthetic-only lock; empirical/paper fields remain open
+**Status:** `protocol-v1-synth-provisional` — provisional synthetic-only lock; empirical/paper fields remain open. **§9 amendment (2026-08-07) opens the IVS designated-evaluation box** (run gated at Gate B); H5 Trust re-graded to historical.
 
-**Package baseline:** `cvprofiles==1.1.0a1`
+**Package baseline:** `cvprofiles==2.0.1a1`
 
-**Release posture:** verified development artifact on `main`; no v1.1 tag or PyPI publication
+**Release posture:** `2.0.0` published on PyPI 2026-08-06; dev cycle at `2.0.1a1`; v3.0.0 plan in progress (Gate A amendment bundle 2026-08-07, §9).
 
 **Owner:** Augusto owns all researcher-authored scientific choices in this document.
 
@@ -133,6 +133,34 @@ Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, e
 **Run decision (2026-08-04):** Augusto granted **preliminary paper-facing evidence** approval for the first frozen build (n=35). Headline checkpoint: M\*={m_trust_general, m_trust_in_group}, [L,U]=[0.371,0.624], FA=0, cold H4; diagnostics: θ-grid empties at λ≥1.5, bootstrap band [0.174,0.752] with 17.5% empty replicates. Tracked summary: `reports/summaries/h5_trust_evidence_summary.json`. This is a checkpoint, not a release: final paper lock, tag, PyPI, and push remain Augusto's.
 
 **What it does NOT authorize:** any other H5/empirical run, engine change, tag, PyPI publication, push, or a `docs/13` evidence claim by implication. The provisional synthetic-only protocol and the MC50 table (§4) are unchanged. All other §3 fields remain **AWAITING AUGUSTO** for any future design.
+
+## 9. Amendment 2026-08-07 — v3 Gate A bundle: IVS cultural-values lane, coverage mandate, holdout semantics, evaluator registry, open-weight policy (dated amendment)
+
+**Authority:** Augusto confirmed all seven Gate A decisions plus the T24 H5 re-grade on 2026-08-07 ("address all the tasks in Gate A as you proposed, everything should stay open-weight or easily interpretable"; decision-log entry same date). This amendment opens the empirical box **for the designated IVS cultural-values evaluation** and records the v3 scope locks.
+
+**D1 — Coverage mandate (additive-but-mandatory).** v3 headline reporting includes the coupled-inference coverage layer: per-side α/2 quantiles over non-empty bootstrap replicates (α default 0.10), Bonferroni-joint labeling, empty-replicate rate as a headline finding, boundary attribution (margin ≤ κ·SE, κ=2), conservative-projection cross-check. **Additive:** headline `[L,U] = min/max B*` unchanged; coverage settings excluded from the freeze preimage; reports use honest "uncertainty band" language. The dated docs/12 entry (2026-08-07) is the remaining lock work, executed with this amendment.
+
+**D2 — IVS cultural-values evaluation is THE v3 empirical direction.** H5 Trust is superseded as the v3 headline. Lane: Tao et al. (2024)-style evaluation on the Joint EVS/WVS 2017–2022 v5.0 (92 countries = 36 EVS + 66 WVS), Inglehart–Welzel axes as target, model-generated scores from the upstream harness projected on **frozen human PCA loadings**. H5 Trust remains a valid historical design (docs/17, status re-graded); its n=35 run is re-graded to **historical/regression witness** (docs/13), not the v3 evidence base. The §3 row "H5 empirical baseline — DEFERRED" is **superseded for the IVS lane** by this amendment.
+
+**D3 — β-functional and loadings provenance.** `map_distance` (2D Euclidean distance on the IW cultural map) is approved as a v3 β-registry extension. Loadings provenance: **reuse Tao et al.'s published loadings verbatim**, including the PC2′ = 1.61·PC2 − 0.01 rescaling (deterministic given their correlation matrix). **A fresh empirical PCA fit is NOT authorized** (an empirical modeling claim; robustness appendix only if later reopened). **Preimage carve-out (explicit):** the β-registry extension changes `beta_hash` by design inside the v3 major bump; governed by this amendment, never silent.
+
+**D4 — Evaluator registry positions.** `monotone_rank` (slack = sign·Spearman(m, V_cont) − θ) and `corr_zero` (slack = θ − |Corr(m, V)|, two-sided) are approved as v3 registry positions (measurement-theory additions). **Fit note:** the IW axes themselves are PCA axes, not monotone-in-covariate restrictions; `monotone_rank` is used by the IVS lane only if the network restricts on a continuous covariate (e.g. self-expression ↑ with GDP per capita).
+
+**D5 — Adapter training NOT reopened for v3.** The AGENTS.md non-goal (foundation-model training) stands. v3 harness runs **open-weight prompt-based baselines only**; no DPO adapters.
+
+**D6 — Proprietary APIs NOT reopened for v3.** The AGENTS.md non-goal (proprietary APIs for paper-reproducible work) stands. Paper-reproducible scoring uses **open-weight local models only**; no GPT-4o/Claude-class scoring for paper numbers. "Same evaluation setup, model families chosen under this policy" framing; never claims to reproduce their exact numbers with different models.
+
+**D7 — Holdout semantics.** The paper's falsifiable core is the **country-level units-split**: select/admit on train-country scores, verdict on held-out-country scores (same frozen network + same β). The restriction-level `stage: select|holdout` split ships as WP2 machinery (same units; R_select predicts R_holdout compliance). Both are implementable; D7 fixes the core.
+
+**D8 / T24 — H5 re-grade signed.** The n=35 run is re-graded from preliminary paper-facing evidence to **historical/regression witness**; executed in docs/13 (2026-08-07) and docs/17 (status re-grade). §8's run-decision paragraph remains a valid historical record.
+
+**Open-weight policy (affirmative).** All v3 evidence-generating computation uses **open-weight local models and fully interpretable artifacts**. The engine remains score-agnostic and model-free; the model harness lives in `evals/`, never in `src/` (import graph enforced by AST test).
+
+**Leakage claim boundary.** "Country not provided in the evaluation protocol" is a **process claim the engine flags, never proves** (parallel to `pre_data` anchors); enforced by the T30 prompt-template + score-level audit. The 10 Inglehart–Welzel item codes (A008, A165, E018, E025, F063, F118, F120, G006, Y002, Y003) remain **PROVISIONAL** pending dictionary verification against the actual Joint EVS/WVS file at T32/T21.
+
+**What this opens:** the **IVS designated-evaluation box** under Gate B conditions — frozen scores + pinned network/beta (incl. frozen loadings) + fixed seed + package version, independent audit exit 0, Augusto's run decision.
+
+**What it does NOT authorize:** any other empirical run; fresh PCA fit; proprietary-API scoring; adapter training; engine change; tag; PyPI publication; or push by implication. All §3 fields not listed here remain **AWAITING AUGUSTO** for any future design.
 
 ## Provenance rule
 
