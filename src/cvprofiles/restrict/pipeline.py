@@ -153,6 +153,17 @@ def _bind_beta_columns(beta: BetaSpec, roles: ScoreColumnRoles) -> None:
                 raise RestrictError(
                     f"ols_coef control {c!r} not found in SCORE columns"
                 )
+    if beta.type == "diff_means":
+        group = beta.params.get("group")
+        if not isinstance(group, str) or not group:
+            raise RestrictError("diff_means requires params.group")
+        if group not in available:
+            raise RestrictError(
+                f"diff_means group column {group!r} not found in SCORE columns"
+            )
+        sign = beta.params.get("sign", 1)
+        if sign not in (-1, 1, -1.0, 1.0):
+            raise RestrictError("diff_means requires params.sign in {+1,-1}")
 
 
 def run_restrict(

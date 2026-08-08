@@ -1,0 +1,10 @@
+schema_version: "1"
+name: diff_means_v1
+delta: 0.0
+restrictions:
+  # Weak bar so all three measures admit; the test target is β, not admission.
+  - id: r_corr_min_y
+    type: corr_min
+    theta: -1.0
+    params:
+      variable: y

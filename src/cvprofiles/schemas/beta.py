@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field
 
 BetaType = Literal["corr_y", "ols_coef", "diff_means"]
 
@@ -12,8 +12,9 @@ BetaType = Literal["corr_y", "ols_coef", "diff_means"]
 class BetaSpec(BaseModel):
     """Named target functional.
 
-    v2.0 evaluators: ``corr_y``, ``ols_coef``; ``diff_means`` stays
-    schema-only fail-loud.
+    v3 evaluators: ``corr_y``, ``ols_coef``, ``diff_means``.
+    ``map_distance`` may be added as a separate registry extension (P3).
+    Group/controls binding is enforced at RESTRICT, not schema parse time.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -23,13 +24,8 @@ class BetaSpec(BaseModel):
     outcome: str = Field(default="y", min_length=1)
     params: dict[str, Any] = Field(
         default_factory=dict,
-        description="Type-specific args (e.g. controls for ols_coef, threshold for diff_means).",
+        description=(
+            "Type-specific args (e.g. controls for ols_coef, "
+            "group/sign for diff_means)."
+        ),
     )
-
-    @model_validator(mode="after")
-    def _type_params(self) -> BetaSpec:
-        if self.type == "diff_means" and "threshold" not in self.params:
-            # Allow declaration without threshold at schema time only if omitted;
-            # M5 evaluator will fail loud if missing when evaluating.
-            pass
-        return self

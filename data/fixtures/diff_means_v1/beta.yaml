@@ -1,0 +1,6 @@
+schema_version: "1"
+type: diff_means
+outcome: y
+params:
+  group: group
+  sign: 1

@@ -1,4 +1,4 @@
-"""Target functional evaluators (v2.0: corr_y, ols_coef)."""
+"""Target functional evaluators (v3: corr_y, ols_coef, diff_means)."""
 
 from __future__ import annotations
 
@@ -44,6 +44,38 @@ def _ols_coef(
     return coef
 
 
+def _diff_means(frame: pd.DataFrame, measure: str, group: str, sign: float) -> float:
+    """Group mean gap: sign * (mean(m|G=1) - mean(m|G=0)).
+
+    Group must be a binary 0/1 indicator (same fail-loud pattern as mean_order).
+    Outcome is unused — the contrast is on the measure itself.
+    """
+    if measure not in frame.columns:
+        raise SlackError(f"missing measure column {measure!r}")
+    if group not in frame.columns:
+        raise SlackError(f"missing group column {group!r}")
+    if sign not in (1.0, -1.0):
+        raise SlackError("diff_means requires params.sign in {+1,-1}")
+    m = frame[measure].to_numpy(dtype=float)
+    if not np.isfinite(m).all():
+        raise SlackError("diff_means measure must be finite")
+    g = frame[group].to_numpy(dtype=float)
+    if not np.isfinite(g).all():
+        raise SlackError(f"group column {group!r} must be finite")
+    vals = np.unique(g)
+    if not (vals.size == 2 and set(vals) == {0.0, 1.0}):
+        raise SlackError(
+            f"group column {group!r} must be a binary 0/1 indicator "
+            f"(got unique values {list(vals)})"
+        )
+    in_group = g == 1.0
+    gap = float(np.mean(m[in_group]) - np.mean(m[~in_group]))
+    out = sign * gap
+    if not math.isfinite(out):
+        raise SlackError("diff_means produced non-finite coefficient")
+    return out
+
+
 def evaluate_beta(
     frame: pd.DataFrame,
     measure: str,
@@ -71,7 +103,14 @@ def evaluate_beta(
             )
         cols = [str(c) for c in controls]
         return _ols_coef(frame, measure, beta.outcome, cols)
+    if beta.type == "diff_means":
+        # v3 P3 (docs/12 2026-08-08): group mean gap on the measure.
+        group = beta.params.get("group")
+        if not isinstance(group, str) or not group:
+            raise SlackError("diff_means requires params.group (column name)")
+        sign_f = float(beta.params.get("sign", 1))
+        return _diff_means(frame, measure, group, sign_f)
     raise SlackError(
-        f"beta type {beta.type!r} not implemented in the v2.0 registry "
-        f"(schema allows declaration; evaluators: corr_y, ols_coef)"
+        f"beta type {beta.type!r} not implemented in the v3 registry "
+        f"(schema allows declaration; evaluators: corr_y, ols_coef, diff_means)"
     )
