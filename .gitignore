@@ -72,3 +72,4 @@ evals/realworld/**/*.parquet
 data/h5_trust_raw/
 data/h5_trust_aux/
 evals/h5_trust/runs_verify/
+.hermes/
