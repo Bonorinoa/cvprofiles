@@ -1055,3 +1055,58 @@ where \(x_i(m)\) is the length-\(K\) **item vector for measure \(m\)** at unit \
 **Preimage:** items/loadings/target in beta params ⇒ `beta_hash` moves when they change (Gate A D3). Mini fixture stays `corr_y` — mini golden untouched.
 
 **Next:** RED fixture `map_distance_v1` + tests → GREEN → commit; then P4.
+
+---
+
+## 2026-08-08 — P4 holdout semantics lock (before implementation)
+
+**Decision (LOCKED for P4; Rev 3 decision card #2/#3):** holdout is the paper's falsifiable core (D7). Two layers ship under synthetic gates only.
+
+### 1. Restriction-level `stage` (WP machinery)
+
+- `RestrictionSpec.stage: Literal["select","holdout"] | None = None`.
+- **None / omitted = select** (admission filter). Explicit `"holdout"` marks a restriction that does **not** gate sample admission; its slacks are still computed and reported as findings.
+- **Freeze dump rule (critical):** `hash_network` must **omit only the `stage` key when it is `None`**. Do **not** use blanket `exclude_none=True` on the whole network dump — that would also drop `NetworkConfig.name is None` and move hashes for nameless networks. Implementation: `model_dump(mode="json")` then `pop("stage")` from each restriction when value is `None`. Explicit `stage: "holdout"` (and explicit `"select"` if authored) enter the hash.
+- **Regression:** after the schema change, `hash_network(mini_network)` must still equal `mini_expected_freeze["network_hash"]` with **no golden refresh**.
+- IDENTIFY: admit on \(R_{\mathrm{select}}\) only (`stage is None` or `stage == "select"`). Compute slacks for **all** restrictions. Holdout-stage failures never raise; they populate a holdout verdict payload (exit 0).
+- **Degenerate network:** RESTRICT fails loud if the network has ≥1 holdout-stage restriction and **zero** select-stage restrictions (vacuous admit-all is not a valid profile).
+
+### 2. Units-split (D7 paper core)
+
+- Holdout unit list lives in freeze **`config.holdout_units`**: sorted unique list of `unit_id` strings. Absent / empty ⇒ no units-split (legacy path; `config={}` bit-stable).
+- Composition when `holdout_units` nonempty:
+  1. Train frame = units **not** in the holdout list → slacks + select-only admission → `M_star_select`
+  2. Holdout frame = units **in** the list → slacks for all restrictions → per-measure holdout compliance (select-stage + holdout-stage on holdout units)
+  3. `M_star_robust = M_star_select ∩ {m : holdout-compliant}`
+  4. Headline \([L,U]\) = min/max \(\beta\) on **`M_star_robust`**; empty robust = success (null range)
+  5. Additive panels: select-only range; holdout findings (not errors)
+- Fail loud: unknown unit ids in the list; empty train set; empty holdout set after filter.
+- Same scores/network/beta + different `holdout_units` ⇒ different `run_id` (config already in preimage).
+
+### 3. Bootstrap interplay — option (b) LOCKED
+
+- **Headline path** uses units-split + robust set when `holdout_units` is set.
+- **Bootstrap band** remains units-only full-frame resample → `run_identify` with **select-stage admission only** (no per-replicate units-split re-composition). Holdout verdict is a **full-sample point finding** outside the band.
+- Band label/docs: **"selection uncertainty on the pooled sample; not a holdout-robustness band."**
+- Rationale: keeps bootstrap call path thin; avoids degenerate empty-train/empty-holdout replicates; honest non-claim. Option (a) (train-resample + fixed holdout compliance per replicate) is deferred post-P5 if the paper needs it.
+- Holdout unit list is never re-drawn inside bootstrap.
+
+### 4. Report payload keys (stable names)
+
+- `M_star` / `admissible` = **headline survivors** (= robust when units-split active, else select/legacy).
+- Additive: `M_star_select`, `M_star_robust`, `holdout` block (`units`, `verdict` / failing restriction ids).
+- No renamed fields; empty paths exit-0 and template-safe.
+
+### 5. Architecture
+
+- `run_identify` becomes stage-aware (select-only admission + optional holdout-stage findings on the same frame).
+- Units-split composition may live in `run_identify` (optional `holdout_units` + `unit_id_col`) **or** a thin helper called from `pipeline.run_profile`; prefer one path so bootstrap and pipeline do not diverge on stage filtering.
+- `run_profile` passes `holdout_units` into freeze `config` (today hardcodes `config={}`).
+
+### 6. Explicit non-goals
+
+- No CLI `--holdout-units` required in P4 (pipeline API + tests sufficient).
+- No boolean holdout column on the scores frame.
+- No P5 coverage theorem; no P6/IVS empirical; no version bump.
+
+**Next:** RED tests (mini hash stable + stage admission) → GREEN P4a → P4b units-split → P5 → docs.
