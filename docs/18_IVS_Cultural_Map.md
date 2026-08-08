@@ -14,9 +14,30 @@
 
 ## Data
 
-- **Joint EVS/WVS 2017–2022 v5.0** (92 countries = 36 EVS + 66 WVS; free, no registration). Raw files stay out of git (gitignored + sha256 manifest); only derived scores enter the repo; publication license for derived scores checked at Gate B (T32).
-- WVS7 (SCA2 read-authorized) is the upstream analog; standalone EVS ZA7500 is GESIS-registration-gated — use the Joint file.
-- The 10 Inglehart–Welzel item codes (A008, A165, E018, E025, F063, F118, F120, G006, Y002, Y003) are **PROVISIONAL** (from Tao et al. §4.1); dictionary verification against the actual Joint file is a hard Gate B exit item (T32/T33).
+- **Joint EVS/WVS 2017–2022 v5.0** (ZA7505; 92 countries / 102 surveys = 36 EVS + 66 WVS with 10 dual-wave countries; 156,658 cases; 231 variables; GESIS doi:10.4232/1.14320; WVSA doi:10.14281/18241.26). Raw files stay out of git (gitignored + sha256 manifest); only derived scores enter the repo; publication license for derived scores checked at Gate B (T32).
+- WVS7 (SCA2 read-authorized) is the upstream analog and uses **Q\*** item codes, **not** the Joint Common Dictionary `A/E/F/G/Y*` codes — standalone WVS7 cannot verify Tao item codes. Standalone EVS ZA7500 is GESIS-registration-gated — use the Joint file.
+- **Access note (2026-08-08):** WVSA page claims free / no registration; GESIS mirror requires login. Automated download of the full microdata was **not completed** this session (JS/form download endpoint). Full-file sha256 + derived-score publication license remain open at T32.
+
+### T32 item-code verification (2026-08-08) — dictionary only
+
+**Source:** Joint EVS/WVS v5.0 Variable Report / Codebook (public GESIS access PDF, 382 pp; labels extracted 2026-08-08). **Not** the full microdata file.
+
+| Code | Joint Variable Report label | Status |
+|---|---|---|
+| A008 | Feeling of happiness | **VERIFIED** |
+| A165 | Most people can be trusted | **VERIFIED** |
+| E018 | Future changes: Greater respect for authority | **VERIFIED** |
+| E025 | Political action: signing a petition | **VERIFIED** |
+| F063 | How important is God in your life | **VERIFIED** |
+| F118 | Justifiable: Homosexuality | **VERIFIED** |
+| F120 | Justifiable: Abortion | **VERIFIED** |
+| G006 | How proud of nationality | **VERIFIED** |
+| Y002 | Post-Materialist index 4-item (constructed from E003, E004) | **VERIFIED** |
+| Y003 | — | **NOT IN JOINT DICTIONARY** |
+
+**Y003 finding:** In standalone WVS7 codebook, Y003 is the **Autonomy Index** (constructed from Q8/Q14/Q15/Q17). The Joint Common Dictionary lists **only Y002** among `Y###` codes — Y003 does not appear. Treat the Tao et al. §4.1 list of "10 items including Y003" as **provisionally discrepant** until Augusto's T21 transcription audit decides whether Y003 was (a) a paper-side slip, (b) a WVS-only construct not carried into the Joint file, or (c) replaced by another Common Core item.
+
+**Stance:** 9/10 codes dictionary-verified; the set is **no longer "all 10 unexamined"**. Full T32 exit (raw file presence + sha256 + license note + T22 mirror on verified codes) remains **open** until microdata lands. Y003 + loadings PC2′ stay **hard Gate B** items.
 
 ## Fields Augusto will author (AWAITING AUGUSTO)
 
@@ -47,3 +68,4 @@ No run, no paper number, no `docs/13` claim until: frozen scores + pinned networ
 | Date | Change |
 |---|---|
 | 2026-08-07 | Created as skeleton (Gate A bundle, `docs/16` §9); design fields reserved for Augusto |
+| 2026-08-08 | T32 dictionary verification (Variable Report only): 9/10 IW codes verified; Y003 absent from Joint Common Dictionary (WVS7-only Autonomy Index); full microdata download deferred; access-path note recorded |

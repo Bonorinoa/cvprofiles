@@ -158,7 +158,7 @@ Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, e
 
 **Open-weight policy (affirmative).** All v3 evidence-generating computation uses **open-weight local models and fully interpretable artifacts**. The engine remains score-agnostic and model-free; the model harness lives in `evals/`, never in `src/` (import graph enforced by AST test).
 
-**Leakage claim boundary.** "Country not provided in the evaluation protocol" is a **process claim the engine flags, never proves** (parallel to `pre_data` anchors); enforced by the T30 prompt-template + score-level audit. The 10 Inglehart–Welzel item codes (A008, A165, E018, E025, F063, F118, F120, G006, Y002, Y003) remain **PROVISIONAL** pending dictionary verification against the actual Joint EVS/WVS file at T32/T21.
+**Leakage claim boundary.** "Country not provided in the evaluation protocol" is a **process claim the engine flags, never proves** (parallel to `pre_data` anchors); enforced by the T30 prompt-template + score-level audit. The 10 Inglehart–Welzel item codes (A008, A165, E018, E025, F063, F118, F120, G006, Y002, Y003) were **PROVISIONAL** pending dictionary verification. **2026-08-08 (T32 dict step, append-only):** Joint Variable Report verifies 9/10; **Y003 is absent from the Joint Common Dictionary** (WVS7-only Autonomy Index). Full microdata still open. Detail and disposition options in `docs/18`. Y003 + PC2′ remain hard Gate B (T21/T33).
 
 **What this opens:** the **IVS designated-evaluation box** under Gate B conditions — frozen scores + pinned network/beta (incl. frozen loadings) + fixed seed + package version, independent audit exit 0, Augusto's run decision.
 
