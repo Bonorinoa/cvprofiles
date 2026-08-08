@@ -1,7 +1,8 @@
 """Slack evaluators for the restriction registry.
 
-Implemented (v2.0): ``corr_min``, ``corr_sign``, ``mean_order``, ``rank_agree``.
-Other registered types (``stability``) fail loud until a fixture demands them.
+Implemented: ``corr_min``, ``corr_sign``, ``mean_order``, ``rank_agree``,
+``corr_zero``, ``monotone_rank``. Schema-only (``stability``) fails loud until
+a fixture demands it.
 """
 
 from __future__ import annotations
@@ -107,8 +108,29 @@ def evaluate_slack(
         rho = spearman_corr(measure, frame[ref].to_numpy(dtype=float))
         return rho - theta
 
+    if t == "corr_zero":
+        # v3 P2 (docs/12 2026-08-08): two-sided discriminant.
+        # slack = theta - |Corr(m, V)|; admit when |corr| is small enough.
+        var = str(p["variable"])
+        if var not in frame.columns:
+            raise SlackError(f"missing variable column {var!r}")
+        c = pearson_corr(measure, frame[var].to_numpy(dtype=float))
+        return theta - abs(c)
+
+    if t == "monotone_rank":
+        # v3 P2: monotone-in-continuous-covariate via Spearman.
+        # slack = sign * Spearman(m, V_cont) - theta.
+        var = str(p["variable"])
+        if var not in frame.columns:
+            raise SlackError(f"missing variable column {var!r}")
+        sign_f = float(p.get("sign", 1))
+        if sign_f not in (1.0, -1.0):
+            raise SlackError("monotone_rank requires params.sign in {+1,-1}")
+        rho = spearman_corr(measure, frame[var].to_numpy(dtype=float))
+        return sign_f * rho - theta
+
     raise SlackError(
-        f"restriction type {t!r} has no evaluator in the v2.0 registry "
+        f"restriction type {t!r} has no evaluator in the v3 registry "
         f"(schema-only until a fixture demands it)"
     )
 

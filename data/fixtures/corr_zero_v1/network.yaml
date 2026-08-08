@@ -1,0 +1,14 @@
+schema_version: "1"
+name: corr_zero_v1
+delta: 0.0
+restrictions:
+  - id: r_corr_min_conv
+    type: corr_min
+    theta: 0.5
+    params:
+      variable: v_conv
+  - id: r_corr_zero_disc
+    type: corr_zero
+    theta: 0.3
+    params:
+      variable: v_disc

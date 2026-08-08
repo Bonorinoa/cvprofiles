@@ -103,7 +103,7 @@ def _bind_network_columns(network: NetworkConfig, roles: ScoreColumnRoles) -> No
     for r in network.restrictions:
         t = r.type
         p = r.params
-        if t in ("corr_min", "corr_sign"):
+        if t in ("corr_min", "corr_sign", "corr_zero", "monotone_rank"):
             var = p.get("variable")
             if not isinstance(var, str) or not var:
                 raise RestrictError(f"{r.id}: {t} requires params.variable")

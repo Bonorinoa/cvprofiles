@@ -6,13 +6,15 @@ from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, field_validator, model_validator
 
-# Known restriction type ids for the v2.0 schema registry.
-# Evaluators land in the v2.0 registry; unknown types fail loud at parse time.
+# Known restriction type ids for the v3 registry.
+# Evaluators land when fixtures demand them; unknown types fail loud at parse time.
 RestrictionType = Literal[
     "corr_sign",
     "corr_min",
     "mean_order",
     "rank_agree",
+    "corr_zero",
+    "monotone_rank",
     "stability",
 ]
 
@@ -20,12 +22,14 @@ RestrictionType = Literal[
 class RestrictionSpec(BaseModel):
     """One restriction r ∈ R with threshold θ_r.
 
-    Type-specific fields live in ``params``. Common keys by type (docs/03):
-      corr_sign  — variable, sign (+1|-1)
-      corr_min   — variable
-      mean_order — group
-      rank_agree — ref_measure
-      stability  — split policy (later)
+    Type-specific fields live in ``params``. Common keys by type:
+      corr_sign      — variable, sign (+1|-1)
+      corr_min       — variable
+      mean_order     — group, sign (+1|-1, default +1)
+      rank_agree     — ref_measure
+      corr_zero      — variable  (two-sided discriminant: θ − |Corr|)
+      monotone_rank  — variable, sign (+1|-1, default +1)
+      stability      — split policy (schema-only)
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -47,7 +51,7 @@ class RestrictionSpec(BaseModel):
     def _type_params(self) -> RestrictionSpec:
         t = self.type
         p = self.params
-        if t in ("corr_sign", "corr_min"):
+        if t in ("corr_sign", "corr_min", "corr_zero"):
             if "variable" not in p:
                 raise ValueError(f"{t} requires params.variable")
             if t == "corr_sign":
@@ -62,6 +66,12 @@ class RestrictionSpec(BaseModel):
                 raise ValueError("mean_order requires params.sign in {+1,-1}")
         if t == "rank_agree" and "ref_measure" not in p:
             raise ValueError("rank_agree requires params.ref_measure")
+        if t == "monotone_rank":
+            if "variable" not in p:
+                raise ValueError("monotone_rank requires params.variable")
+            sign = p.get("sign", 1)
+            if sign not in (-1, 1, -1.0, 1.0):
+                raise ValueError("monotone_rank requires params.sign in {+1,-1}")
         return self
 
 
