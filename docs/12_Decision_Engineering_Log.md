@@ -1139,3 +1139,43 @@ where \(x_i(m)\) is the length-\(K\) **item vector for measure \(m\)** at unit \
 9. **summary_dict / artifacts additive keys (legacy):** `M_star_select` and `M_star_robust` are ALWAYS present — in legacy (no-split) they equal `admissible`; `holdout.units` is None in legacy. No renamed fields; empty paths remain template-safe.
 
 **Next:** P4b RED (`tests/test_holdout_units_split.py`, goldens from the real fixture) → GREEN (normalize helper, `run_identify` split path, `run_profile` config wiring, bootstrap flag) → P5 coverage band → docs.
+
+---
+
+## 2026-08-08 — P5 coverage uncertainty band: semantics lock (before code)
+
+**Decision (LOCKED for P5; Rev 3 decision card #5/#6):** the D1 coverage layer ships as an additive **uncertainty band** over the existing units-only bootstrap replicates. Diagnostic viewport, never a replacement for the headline $[L,U] = \min/\max B^\*$.
+
+### 1. Object and label
+- When bootstrap is enabled (`n_boot >= 1`), the run additionally produces a **coverage block** (`coverage.json`) computed from the SAME per-replicate $(L_b, U_b)$ samples as `bootstrap.json` — one resampling loop, no second RNG stream, no RNG-state divergence.
+- Honest label: **"uncertainty band"**. Never "confidence interval", "coverage guarantee", or "CI". A formal coverage theorem under arbitrary selection coupling is deferred (Rev 3 non-goal).
+- The band is **selection uncertainty on the pooled sample** (P4 bootstrap lock §3: replicates admit on select-stage restrictions only; the holdout verdict is a full-sample point finding OUTSIDE the band). Explicitly **NOT a holdout-robustness band**.
+
+### 2. Quantile default (resolves v1.1 vs Rev 3)
+- v1.1 `bootstrap.json` keeps its locked percentile band $(0.025, 0.975)$ — no golden refresh, existing tests/artifacts unchanged. That pair is the $\alpha = 0.05$ case of the coverage rule.
+- The coverage block generalizes: per-side $\alpha/2$ quantiles over non-empty replicates, **default $\alpha = 0.10$** (band $(0.05, 0.95)$). `alpha` is a `run_profile` parameter (default 0.10), validated $0 < \alpha < 1$.
+- Both bands are reported and clearly labeled: the range box keeps the v1.1 "bootstrap percentile band" line; the coverage panel is the primary "uncertainty band" block.
+
+### 3. Boundary attribution (margin $\le \kappa \cdot \mathrm{SE}$)
+- $\mathrm{margin}_m = \min_r s_r(m)$ over restriction columns of the **pooled full-frame slacks** (all restrictions, select + holdout-stage; same object the bootstrap replicates compute — P4 lock §3 replicates use `slack_matrix(frame, measures, all restrictions)`).
+- $\mathrm{SE}_m$ = sample SD (ddof=1) of per-replicate $\min_r s_r(m; X_b)$ across **non-empty** replicates (collected inside the existing loop).
+- boundary iff $\mathrm{margin}_m \le \kappa \cdot \mathrm{SE}_m$, **default $\kappa = 2.0$**.
+- Requires non-empty replicates $\ge 2$; otherwise SE = null and the boundary set is empty with a note. Rejected measures can be boundary (rejected by a hair is fragile).
+
+### 4. $\hat p_m$ (admission frequency)
+- $\hat p_m$ = (# non-empty replicates where $m \in M^\*_b$) / (# non-empty replicates). Denominator matches the band; degenerate replicates excluded. Descriptive, not a coverage statement.
+
+### 5. Payload and wiring
+- `coverage.json` keys: `schema_version`, `purpose`, `alpha`, `quantiles`, `band_L`, `band_U`, replicate counts (total/nonempty/empty/degenerate + rates), `boundary: [{measure, margin, se, kappa, boundary}]`, `p_hat_m: {measure: float}`, `note` (honest label + "not a holdout-robustness band").
+- Present iff `n_boot >= 1`; structured nulls when all replicates empty (band null + note, exit 0).
+- Stale `coverage.json` removed when bootstrap off (same pattern as `bootstrap.json`).
+- `BootstrapResult` gains additive fields (`min_slack_samples`, `admission_counts`) with defaults — `bootstrap_payload` v1.1 shape unchanged.
+
+### 6. Freeze preimage
+- `alpha` and `kappa` are EXCLUDED from the freeze preimage. No new `FreezeBundle.config` keys. Witness: same bundle + different alpha ⇒ same `run_id`, different `coverage.json`.
+- No CLI flag in P5 (pipeline API + tests sufficient — P4 lock §6 pattern).
+
+### 7. Explicit non-goals (deferred)
+Formal coverage theorem; m-out-of-n bootstrap as primary; replacing the headline band; train-resample + fixed-holdout per-replicate design (P4 lock §3 option (a)); conservative projection cross-check; MTMM full panel (T29).
+
+**Next:** RED (`tests/test_coverage.py`) → GREEN (`inference/coverage.py` + bootstrap loop extensions + wiring) → docs pass.
