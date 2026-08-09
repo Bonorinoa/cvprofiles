@@ -998,7 +998,7 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 
 1. **Execution authority:** Rev 3 supersedes Rev 2 for sprint execution. Rev 2 remains historical Gate A planning context.
 2. **Scope:** P1 synth gate freeze → P2 evaluators (`corr_zero`, `monotone_rank`) → P3 betas (`diff_means`, `map_distance`) → P4 holdout (stage + units-split) → P5 coverage uncertainty band → docs pass at end of P5.
-3. **Decision-card defaults locked:** tag = infra + synth (empirical post-tag); holdout headline on \(M^*_{\mathrm{robust}}=M^*_{\mathrm{select}}\cap M^*_{\mathrm{holdout}}\); holdout split in freeze `config`; `stability` deferred; coverage = uncertainty band (no CI language); open-weight only; ship `diff_means`; MTMM panel optional/not blocking.
+3. **Decision-card defaults locked:** tag = infra + synth (empirical post-tag); holdout headline on $M^*_{\mathrm{robust}}=M^*_{\mathrm{select}}\cap M^*_{\mathrm{holdout}}$; holdout split in freeze `config`; `stability` deferred; coverage = uncertainty band (no CI language); open-weight only; ship `diff_means`; MTMM panel optional/not blocking.
 4. **Synthetic-first:** every WP merges only with oracle DGP/fixture goldens, FA/empty honesty, cold freeze core, named gate ids. No real-world/empirical examples in this go.
 5. **Explicitly NOT authorized by this entry:** P6 (benchmark kit / IVS harness), P7 (version bump / RC), Gate B empirical run, tag `v3.0.0`, push, PyPI, empirical network authorship, Joint microdata work.
 
@@ -1012,7 +1012,7 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 
 **Decision / engineering note (P2):**
 
-1. **`corr_zero` (H_disc)** — shipped with TDD fixture `data/fixtures/corr_zero_v1/` and `tests/test_corr_zero.py`. Slack \(= \theta - |\mathrm{Corr}(m,V)|\). Commit `6721cb7`.
+1. **`corr_zero` (H_disc)** — shipped with TDD fixture `data/fixtures/corr_zero_v1/` and `tests/test_corr_zero.py`. Slack $=\theta - |\mathrm{Corr}(m,V)|$. Commit `6721cb7`.
 2. **`monotone_rank` (H_mono)** — schema + evaluator co-landed in the same `corr_zero` commit (shared `RestrictionType` / bind / slacks branch). **TDD deviation:** production evaluator path existed before the dedicated fixture tests. Behavior is now pinned by `data/fixtures/monotone_rank_v1/` + `tests/test_monotone_rank.py` (including `sign=-1` path). Fixture tests were written against measured goldens and are green before this log entry's accompanying commit.
 3. **`stability`** remains schema-only fail-loud (decision card #4).
 
@@ -1026,21 +1026,21 @@ No engine behavior changed; full battery green; next-sprint scope box (docs/19) 
 
 ### Amended definition (measure-dependent — supersedes draft constant-β wording)
 
-A constant-across-menu distance (shared item columns, measure unused) would collapse \([L,U]\) to a point and nullify the package question. **Rejected.** Implement measure-dependent projection:
+A constant-across-menu distance (shared item columns, measure unused) would collapse $[L,U]$ to a point and nullify the package question. **Rejected.** Implement measure-dependent projection:
 
-\[
+$$
 \beta(m)=\bigl\|\overline{z}(m)-z^{\mathrm{target}}\bigr\|_2,
 \quad
 \overline{z}(m)=\frac{1}{n}\sum_{i=1}^{n} x_i(m)\,L
-\]
+$$
 
-where \(x_i(m)\) is the length-\(K\) **item vector for measure \(m\)** at unit \(i\), and \(L\) is the pinned \(K\times 2\) loadings matrix.
+where $x_i(m)$ is the length-$K$ **item vector for measure $m$** at unit $i$, and $L$ is the pinned $K\times 2$ loadings matrix.
 
 **Column resolution:** for measure id `m` and each item id `j` in `params.items`, the SCORE column is **`{m}__{j}`** (double underscore). Example: measure `m_base`, items `["A008","A165"]` → columns `m_base__A008`, `m_base__A165`.
 
 **Params (all in `BetaSpec.params`, enter `beta_hash` via `model_dump`):**
-- `items`: `list[str]`, length \(K\ge 1\) — item ids (suffixes), not full column names
-- `loadings`: `list[list[float]]`, shape \((K, 2)\) — pinned loadings (no fit)
+- `items`: `list[str]`, length $K\ge 1$ — item ids (suffixes), not full column names
+- `loadings`: `list[list[float]]`, shape $(K, 2)$ — pinned loadings (no fit)
 - `target`: `list[float]`, length 2 — target point on the map
 
 **Binding / fail-loud:**
@@ -1068,7 +1068,7 @@ where \(x_i(m)\) is the length-\(K\) **item vector for measure \(m\)** at unit \
 - **None / omitted = select** (admission filter). Explicit `"holdout"` marks a restriction that does **not** gate sample admission; its slacks are still computed and reported as findings.
 - **Freeze dump rule (critical):** `hash_network` must **omit only the `stage` key when it is `None`**. Do **not** use blanket `exclude_none=True` on the whole network dump — that would also drop `NetworkConfig.name is None` and move hashes for nameless networks. Implementation: `model_dump(mode="json")` then `pop("stage")` from each restriction when value is `None`. Explicit `stage: "holdout"` (and explicit `"select"` if authored) enter the hash.
 - **Regression:** after the schema change, `hash_network(mini_network)` must still equal `mini_expected_freeze["network_hash"]` with **no golden refresh**.
-- IDENTIFY: admit on \(R_{\mathrm{select}}\) only (`stage is None` or `stage == "select"`). Compute slacks for **all** restrictions. Holdout-stage failures never raise; they populate a holdout verdict payload (exit 0).
+- IDENTIFY: admit on $R_{\mathrm{select}}$ only (`stage is None` or `stage == "select"`). Compute slacks for **all** restrictions. Holdout-stage failures never raise; they populate a holdout verdict payload (exit 0).
 - **Degenerate network:** RESTRICT fails loud if the network has ≥1 holdout-stage restriction and **zero** select-stage restrictions (vacuous admit-all is not a valid profile).
 
 ### 2. Units-split (D7 paper core)
@@ -1078,7 +1078,7 @@ where \(x_i(m)\) is the length-\(K\) **item vector for measure \(m\)** at unit \
   1. Train frame = units **not** in the holdout list → slacks + select-only admission → `M_star_select`
   2. Holdout frame = units **in** the list → slacks for all restrictions → per-measure holdout compliance (select-stage + holdout-stage on holdout units)
   3. `M_star_robust = M_star_select ∩ {m : holdout-compliant}`
-  4. Headline \([L,U]\) = min/max \(\beta\) on **`M_star_robust`**; empty robust = success (null range)
+  4. Headline $[L,U]$ = min/max $\beta$ on **`M_star_robust`**; empty robust = success (null range)
   5. Additive panels: select-only range; holdout findings (not errors)
 - Fail loud: unknown unit ids in the list; empty train set; empty holdout set after filter.
 - Same scores/network/beta + different `holdout_units` ⇒ different `run_id` (config already in preimage).
