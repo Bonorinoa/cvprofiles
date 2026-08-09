@@ -16,6 +16,7 @@ Contract under test:
 Goldens are computed IN-TEST from the real mini fixture via an independent
 numpy path — no hand-transcribed numbers.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -84,8 +85,18 @@ def test_run_identify_split_robust_survivors(scored, mini_path) -> None:
     """Network A (mini oracle, both select): train and hold agree → robust = select."""
     raw = _network(
         [
-            {"id": "r_corr_min_aux", "type": "corr_min", "theta": 0.35, "params": {"variable": "v_aux"}},
-            {"id": "r_corr_sign_aux", "type": "corr_sign", "theta": 0.10, "params": {"variable": "v_aux", "sign": 1}},
+            {
+                "id": "r_corr_min_aux",
+                "type": "corr_min",
+                "theta": 0.35,
+                "params": {"variable": "v_aux"},
+            },
+            {
+                "id": "r_corr_sign_aux",
+                "type": "corr_sign",
+                "theta": 0.10,
+                "params": {"variable": "v_aux", "sign": 1},
+            },
         ]
     )
     bundle = run_restrict(scored.roles, raw, mini_path / "beta.yaml")
@@ -114,8 +125,20 @@ def test_split_empty_robust_is_success(scored, mini_path) -> None:
     """Network B: holdout restriction impossible on hold frame → empty robust = success."""
     raw = _network(
         [
-            {"id": "r_select_weak", "type": "corr_min", "theta": -1.0, "params": {"variable": "v_aux"}, "stage": "select"},
-            {"id": "r_holdout_harsh", "type": "corr_min", "theta": 2.0, "params": {"variable": "v_aux"}, "stage": "holdout"},
+            {
+                "id": "r_select_weak",
+                "type": "corr_min",
+                "theta": -1.0,
+                "params": {"variable": "v_aux"},
+                "stage": "select",
+            },
+            {
+                "id": "r_holdout_harsh",
+                "type": "corr_min",
+                "theta": 2.0,
+                "params": {"variable": "v_aux"},
+                "stage": "holdout",
+            },
         ]
     )
     bundle = run_restrict(scored.roles, raw, mini_path / "beta.yaml")
@@ -142,7 +165,13 @@ def test_split_discriminating_verdict(scored, mini_path) -> None:
     raw = _network(
         [
             {"id": "r_select", "type": "corr_min", "theta": 0.35, "params": {"variable": "v_aux"}},
-            {"id": "r_holdout", "type": "corr_min", "theta": theta_hold, "params": {"variable": "v_aux"}, "stage": "holdout"},
+            {
+                "id": "r_holdout",
+                "type": "corr_min",
+                "theta": theta_hold,
+                "params": {"variable": "v_aux"},
+                "stage": "holdout",
+            },
         ]
     )
     bundle = run_restrict(scored.roles, raw, mini_path / "beta.yaml")
@@ -166,7 +195,13 @@ def test_slacks_use_stage_frames(scored, mini_path) -> None:
     raw = _network(
         [
             {"id": "r_select", "type": "corr_min", "theta": 0.35, "params": {"variable": "v_aux"}},
-            {"id": "r_holdout", "type": "corr_min", "theta": theta_hold, "params": {"variable": "v_aux"}, "stage": "holdout"},
+            {
+                "id": "r_holdout",
+                "type": "corr_min",
+                "theta": theta_hold,
+                "params": {"variable": "v_aux"},
+                "stage": "holdout",
+            },
         ]
     )
     bundle = run_restrict(scored.roles, raw, mini_path / "beta.yaml")
@@ -219,7 +254,13 @@ def test_holdout_units_validation(scored, mini_path) -> None:
     raw = _network(
         [
             {"id": "r_select", "type": "corr_min", "theta": 0.35, "params": {"variable": "v_aux"}},
-            {"id": "r_holdout", "type": "corr_min", "theta": 0.9974, "params": {"variable": "v_aux"}, "stage": "holdout"},
+            {
+                "id": "r_holdout",
+                "type": "corr_min",
+                "theta": 0.9974,
+                "params": {"variable": "v_aux"},
+                "stage": "holdout",
+            },
         ]
     )
     bundle = run_restrict(scored.roles, raw, mini_path / "beta.yaml")
@@ -240,8 +281,20 @@ def test_include_holdout_verdict_false(scored, mini_path) -> None:
     """Bootstrap path (lock §3): no per-replicate holdout verdicts."""
     raw = _network(
         [
-            {"id": "r_select_weak", "type": "corr_min", "theta": -1.0, "params": {"variable": "v_aux"}, "stage": "select"},
-            {"id": "r_holdout_harsh", "type": "corr_min", "theta": 2.0, "params": {"variable": "v_aux"}, "stage": "holdout"},
+            {
+                "id": "r_select_weak",
+                "type": "corr_min",
+                "theta": -1.0,
+                "params": {"variable": "v_aux"},
+                "stage": "select",
+            },
+            {
+                "id": "r_holdout_harsh",
+                "type": "corr_min",
+                "theta": 2.0,
+                "params": {"variable": "v_aux"},
+                "stage": "holdout",
+            },
         ]
     )
     bundle = run_restrict(scored.roles, raw, mini_path / "beta.yaml")

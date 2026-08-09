@@ -7,6 +7,9 @@ Contract:
   Generator streams are NEP 19 stable, so pinned seeds replay exactly.
 - Per replicate: ``run_identify`` (slacks → M* → β → (L_b, U_b)) — the exact
   same admission code path as the headline; no hand-rolled slack logic.
+- P4b (docs/12 2026-08-08): per-replicate ``run_identify`` passes
+  ``include_holdout_verdict=False`` (selection-only band; holdout verdict is
+  a full-sample point finding outside the band).
 - Percentile band over NON-EMPTY replicates only. All replicates empty ⇒
   band null + note. Degenerate replicates (resample-induced evaluation
   failure, e.g. zero-variance columns) are counted separately, excluded from
@@ -99,7 +102,9 @@ def run_bootstrap(
         row = rng.integers(0, n, size=n)
         frame_b = frame.iloc[row].reset_index(drop=True)
         try:
-            res = run_identify(frame_b, roles, restrict)
+            res = run_identify(
+                frame_b, roles, restrict, include_holdout_verdict=False
+            )
         except IdentifyError:
             n_degenerate += 1
             continue

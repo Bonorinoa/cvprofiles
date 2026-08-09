@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -41,6 +42,43 @@ class IdentifyResult:
     # ids. None when the network has no holdout-stage restrictions (legacy
     # runs unchanged); dict mapping measure -> failing holdout ids otherwise.
     holdout_verdict: dict[str, list[str]] | None = None
+    # P4b (docs/12 2026-08-08): units-split composition. Always present —
+    # legacy (no split) sets both to ``admissible`` (decision #9).
+    holdout_units_used: list[str] | None = None
+    M_star_select: list[str] | None = None
+    M_star_robust: list[str] | None = None
+
+
+def normalize_holdout_units(
+    units: Sequence[str] | None,
+    frame: pd.DataFrame,
+    unit_id_col: str,
+) -> list[str] | None:
+    """Normalize and validate a user-supplied holdout unit list.
+
+    ``None`` / empty ⇒ ``None`` (no units-split; legacy path, ``config={}``
+    bit-stable). A non-empty list is validated (every id present, train and
+    hold frames each >= 2 rows so registry evaluators can run) and returned
+    as a sorted-unique list so list order can never fork ``run_id``.
+    """
+    if units is None:
+        return None
+    seq = [str(u) for u in units]
+    if not seq:
+        return None
+    all_ids = set(frame[unit_id_col].astype(str))
+    unknown = [u for u in seq if u not in all_ids]
+    if unknown:
+        raise IdentifyError(f"holdout units not in scores frame: {unknown}")
+    norm = sorted(set(seq))
+    if len(norm) < 2:
+        raise IdentifyError(
+            "holdout frame must have at least 2 rows (evaluators require n >= 2)"
+        )
+    train_ids = all_ids - set(norm)
+    if len(train_ids) < 2:
+        raise IdentifyError("empty train frame after holdout split (need >= 2 rows)")
+    return norm
 
 
 def run_identify(
@@ -50,6 +88,8 @@ def run_identify(
     *,
     beta_bundle: RestrictBundle | None = None,
     delta_override: float | None = None,
+    holdout_units: Sequence[str] | None = None,
+    include_holdout_verdict: bool = True,
 ) -> IdentifyResult:
     """Compute slacks, M*, β image, and min/max range.
 
@@ -68,6 +108,13 @@ def run_identify(
         replaces the bundle/network δ for this call only — an IDENTIFY-side
         admission rule that never touches network_hash/beta_hash. Must be
         finite and >= 0. Default None keeps the declared δ (bit-identical).
+    holdout_units:
+        P4b units-split list. None/[] ⇒ legacy (no split). Non-empty ⇒
+        select-stage admission on the train frame, compliance on the hold
+        frame, headline = M*_robust (docs/12 2026-08-08).
+    include_holdout_verdict:
+        P4b lock §3: bootstrap passes False (selection-only band; holdout
+        verdict is a full-sample point finding outside the band).
     """
     if isinstance(restrict, RestrictBundle):
         network = restrict.network
@@ -90,43 +137,105 @@ def run_identify(
     if not measures:
         raise IdentifyError("no measures in roles")
 
-    try:
-        slacks = slack_matrix(frame, measures, list(network.restrictions))
-    except SlackError as exc:
-        raise IdentifyError(str(exc)) from exc
+    norm_units = normalize_holdout_units(holdout_units, frame, roles.unit_id)
 
     # P4 (docs/12 2026-08-08): slacks are computed for ALL restrictions, but
     # M* admission uses select-stage restrictions only (None or "select").
     # Holdout-stage failures are findings, never selection rejections.
-    select_ids = [
-        r.id for r in network.restrictions if r.stage is None or r.stage == "select"
+    select_restrs = [
+        r for r in network.restrictions if r.stage is None or r.stage == "select"
     ]
-    holdout_ids = [r.id for r in network.restrictions if r.stage == "holdout"]
+    holdout_restrs = [r for r in network.restrictions if r.stage == "holdout"]
+    select_ids = [r.id for r in select_restrs]
+    holdout_ids = [r.id for r in holdout_restrs]
 
-    admissible: list[str] = []
-    rejected: dict[str, list[str]] = {}
-    for m in measures:
-        failing: list[str] = []
-        for rid in select_ids:
-            slack = pd.to_numeric(slacks.at[m, rid], errors="raise")
-            if float(slack) < -delta:
-                failing.append(str(rid))
-        if failing:
-            rejected[m] = failing
-        else:
-            admissible.append(m)
+    if norm_units is None:
+        # ---- legacy path (P4a): single frame, select-only admission ----
+        try:
+            slacks = slack_matrix(frame, measures, list(network.restrictions))
+        except SlackError as exc:
+            raise IdentifyError(str(exc)) from exc
 
-    holdout_verdict: dict[str, list[str]] | None = None
-    if holdout_ids:
-        holdout_verdict = {}
+        admissible: list[str] = []
+        rejected: dict[str, list[str]] = {}
         for m in measures:
-            failing_h: list[str] = []
-            for rid in holdout_ids:
+            failing: list[str] = []
+            for rid in select_ids:
                 slack = pd.to_numeric(slacks.at[m, rid], errors="raise")
                 if float(slack) < -delta:
-                    failing_h.append(str(rid))
-            if failing_h:
-                holdout_verdict[m] = failing_h
+                    failing.append(str(rid))
+            if failing:
+                rejected[m] = failing
+            else:
+                admissible.append(m)
+
+        holdout_verdict: dict[str, list[str]] | None = None
+        if include_holdout_verdict and holdout_ids:
+            holdout_verdict = {}
+            for m in measures:
+                failing_h: list[str] = []
+                for rid in holdout_ids:
+                    slack = pd.to_numeric(slacks.at[m, rid], errors="raise")
+                    if float(slack) < -delta:
+                        failing_h.append(str(rid))
+                if failing_h:
+                    holdout_verdict[m] = failing_h
+
+        M_star_select = list(admissible)
+        M_star_robust = list(admissible)
+    else:
+        # ---- units-split path (P4b): select on train, compliance on hold ----
+        ids = frame[roles.unit_id].astype(str)
+        train = frame[~ids.isin(norm_units)].copy()
+        hold = frame[ids.isin(norm_units)].copy()
+        try:
+            slacks_train = slack_matrix(train, measures, select_restrs)
+            slacks_hold_all = slack_matrix(hold, measures, list(network.restrictions))
+        except SlackError as exc:
+            raise IdentifyError(str(exc)) from exc
+
+        # Composite slacks: select-stage columns from the train frame,
+        # holdout-stage columns from the hold frame (docs/12 P4b #6).
+        slacks = pd.DataFrame(index=list(measures))
+        for r in network.restrictions:
+            src = slacks_hold_all if r.stage == "holdout" else slacks_train
+            slacks[r.id] = src[r.id]
+
+        M_star_select = [
+            m
+            for m in measures
+            if all(
+                float(pd.to_numeric(slacks_train.at[m, rid], errors="raise"))
+                >= -delta
+                for rid in select_ids
+            )
+        ]
+        # Compliance on the hold frame: ALL restrictions (select + holdout).
+        holdout_verdict = {}
+        compliant: dict[str, bool] = {}
+        for m in measures:
+            failing_comp: list[str] = []
+            for rid in slacks_hold_all.columns:
+                slack = pd.to_numeric(slacks_hold_all.at[m, rid], errors="raise")
+                if float(slack) < -delta:
+                    failing_comp.append(str(rid))
+            if failing_comp:
+                holdout_verdict[m] = failing_comp
+            compliant[m] = not failing_comp
+        if not include_holdout_verdict:
+            holdout_verdict = None
+
+        M_star_robust = [m for m in M_star_select if compliant[m]]
+        admissible = list(M_star_robust)
+        rejected = {}
+        for m in measures:
+            if m not in M_star_select:
+                rejected[m] = [
+                    str(rid)
+                    for rid in select_ids
+                    if float(pd.to_numeric(slacks_train.at[m, rid], errors="raise"))
+                    < -delta
+                ]
 
     beta_values: dict[str, float] = {}
     try:
@@ -157,6 +266,9 @@ def run_identify(
         measures=measures,
         restriction_ids=[r.id for r in network.restrictions],
         holdout_verdict=holdout_verdict,
+        holdout_units_used=norm_units,
+        M_star_select=M_star_select,
+        M_star_robust=M_star_robust,
     )
 
 
@@ -184,13 +296,17 @@ def write_identify_artifacts(
         )
 
     holdout_block: dict[str, Any] | None = None
-    if result.holdout_verdict is not None:
+    if result.holdout_units_used is not None or result.holdout_verdict is not None:
         holdout_block = {
-            "units": None,  # units-split lands in P4b (config.holdout_units)
+            "units": result.holdout_units_used,
+            "select_frame": "train" if result.holdout_units_used is not None else None,
+            "holdout_frame": "holdout" if result.holdout_units_used is not None else None,
             "verdict": result.holdout_verdict,
         }
     admissible_payload = {
         "M_star": result.admissible,
+        "M_star_select": result.M_star_select,
+        "M_star_robust": result.M_star_robust,
         "rejected": result.rejected,
         "empty": result.empty,
         "point_id": result.point_id,

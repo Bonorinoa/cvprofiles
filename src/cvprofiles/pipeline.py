@@ -29,7 +29,12 @@ from typing import Any
 from cvprofiles import __version__
 from cvprofiles.anchors.pipeline import anchors_payload, parse_anchors, validate_completeness
 from cvprofiles.freeze import build_freeze_bundle, compute_run_id, normalize_n_boot
-from cvprofiles.identify.pipeline import IdentifyResult, run_identify, write_identify_artifacts
+from cvprofiles.identify.pipeline import (
+    IdentifyResult,
+    normalize_holdout_units,
+    run_identify,
+    write_identify_artifacts,
+)
 from cvprofiles.inference.bootstrap import BootstrapResult, bootstrap_payload, run_bootstrap
 from cvprofiles.inference.delta_grid import DeltaGridResult, delta_grid_payload, run_delta_grid
 from cvprofiles.inference.theta_grid import ThetaGridResult, run_theta_grid, theta_grid_payload
@@ -79,6 +84,7 @@ def run_profile(
     theta_grid_lambdas: Sequence[float] | None = None,
     delta_grid_deltas: Sequence[float] | None = None,
     anchors: Path | str | None = None,
+    holdout_units: Sequence[str] | None = None,
 ) -> FullRunResult:
     """Compose four states (+ v1.1/v2.0 inference layers) and write a frozen run dir.
 
@@ -95,6 +101,10 @@ def run_profile(
                               completeness-checked, hashed; EXCLUDED from the
                               freeze preimage — same bundle ± anchors ⇒ same
                               run_id, different anchors.json).
+      holdout_units         → P4b units-split (select on train, compliance on
+                              hold; headline = M*_robust; order-normalized
+                              sorted-unique list in freeze config.holdout_units
+                              so list order cannot fork run_id).
     """
     n_boot_norm = normalize_n_boot(n_boot)
     grid = list(theta_grid_lambdas) if theta_grid_lambdas else None
@@ -119,6 +129,13 @@ def run_profile(
     if score.manifest.scores_hash is None:
         raise RuntimeError("SCORE did not set scores_hash")
 
+    norm_units = normalize_holdout_units(
+        holdout_units, score.frame, score.roles.unit_id
+    )
+    config: dict[str, Any] = {}
+    if norm_units is not None:
+        config = {"holdout_units": norm_units}
+
     freeze = build_freeze_bundle(
         scores_hash=score.manifest.scores_hash,
         network_hash=restrict.network_hash,
@@ -127,7 +144,7 @@ def run_profile(
         seed=seed,
         delta=float(restrict.delta),
         n_boot=n_boot_norm,
-        config={},
+        config=config,
     )
     run_id = compute_run_id(
         scores_hash=freeze.scores_hash,
@@ -158,7 +175,9 @@ def run_profile(
     if anchors is None and (dest / "anchors.json").exists():
         (dest / "anchors.json").unlink()
 
-    identify = run_identify(score.frame, score.roles, restrict)
+    identify = run_identify(
+        score.frame, score.roles, restrict, holdout_units=norm_units
+    )
 
     # --- v1.1/v2.0 inference layers (additive; headline [L,U] untouched) ---
     boot: BootstrapResult | None = None
@@ -310,6 +329,8 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
         "out_dir": str(result.out_dir),
         "empty": ident.empty,
         "M_star": ident.admissible,
+        "M_star_select": ident.M_star_select,
+        "M_star_robust": ident.M_star_robust,
         "rejected": ident.rejected,
         "L": ident.range_L,
         "U": ident.range_U,
