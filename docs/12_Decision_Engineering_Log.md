@@ -1251,3 +1251,17 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 
 **AGENTS.md note:** protected-file edit timed out during the bump; posture line may lag until Augusto approves a follow-up edit. Durable records (CHANGELOG, docs/12, MANIFEST, README, pyproject) carry `2.5.0`.
 
+---
+
+## 2026-08-09 — P6 tag decision: own checkpoint tag (independent of P7)
+
+**Decision (Augusto-directed, 2026-08-09):** P6 (benchmark kit + IVS harness scaffold + synthetic verifier + teaching notebook) ships as **its own tag**, because its task set is independent of P7 (integration/RC/docs). P6 is a self-contained infrastructure deliverable; it should not be folded into the `v3.0.0` release cut.
+
+**Implications:**
+- Tag sequence: `v2.5.0` (P1–P5, 2026-08-08) → **P6 tag** → `v3.0.0` at P7/Gate C (still Augusto-gated).
+- P6 exit = its own gate: benchmark bundle + verifier exit 0 on synthetic IVS freeze + tutorial under wheel + AST import-graph lock + battery; then stop for the tag decision.
+- P6 does **not** open Gate B (no empirical network authorship, no Joint microdata run, no real IVS scoring).
+- Tag version for P6 to be confirmed by Augusto at P6 close (candidate: `v2.6.0` following the v2.x infrastructure-checkpoint convention).
+
+**Not authorized by this entry:** P6 implementation start (separate go), tag creation, PyPI, Gate B, empirical authorship.
+

@@ -4,6 +4,8 @@
 **Author:** Hermes (cvprofiles co-engineer)  
 **Status:** **ACCEPTED 2026-08-08** — Augusto accepted all decision-card defaults; engine go = **P1–P5 only** (synthetic-first); docs at end of P5; P6/P7/Gate B/C and empirical work deferred post-tag.  
 **Amendment (2026-08-08):** P1–P5 engine close-out shipped as tag **`v2.5.0`** (package `2.5.0`, not PyPI). This is an infrastructure checkpoint, **not** Gate C. Target tag for full Rev 3 + release remains **`v3.0.0`** at P7/Gate C. P6 starts only on a fresh explicit go.  
+**Amendment (2026-08-09):** P6 ships as **its own checkpoint tag** (independent of P7; tag candidate `v2.6.0`, confirmed by Augusto at P6 close). P6 exit includes benchmark bundle, verifier exit 0 on synthetic IVS freeze, tutorial under wheel, AST import-graph lock, and battery; then stop for the tag decision.
+
 **Supersedes for sprint execution:** `reports/DEVELOPMENT_PLAN.md` Rev 2 (2026-08-07). Rev 2 remains historical context; **this Rev 3 is the authority for the v3.0.0 implementation sprint.**  
 **Inputs:** position paper v5 audit (2026-08-08), `docs/16` §9 Gate A locks, `reports/math_spec.md`, `reports/VERIFIED_TASK_INVENTORY.md` (T-ids cross-walked, not blindly trusted as done), package HEAD at acceptance `64a9eb2` / `2.0.1a1`.
 

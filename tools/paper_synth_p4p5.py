@@ -277,7 +277,7 @@ def main() -> None:
             "Finite-sample engine verification only. "
             "Paper DGP tables remain population closed-form."
         ),
-        "package_version": "2.0.1a1",
+        "package_version": "2.5.0",
         "engine_commit": "e088b06",
         "n": n,
         "seed": 20260808,

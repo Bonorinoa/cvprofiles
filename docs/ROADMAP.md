@@ -40,7 +40,7 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 - **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored R, θ, δ, β, and evidence posture (synthetic-only portion locked provisional; **§9 Gate A amendment 2026-08-07** opens the IVS designated-evaluation box, run gated)
 - **M10 / H5:** country-level generalized trust — design **LOCKED as historical** (`docs/17`); n=35 run **re-graded to historical/regression witness** (2026-08-07); reproducible via `tools/verify_h5_trust.py`; not the v3 evidence base
 - **v3 IVS cultural-values lane (new headline):** [`docs/18_IVS_Cultural_Map.md`](18_IVS_Cultural_Map.md) — Tao et al. (2024)-style evaluation on Joint EVS/WVS 2017–2022 v5.0; design fields **Augusto-authored**, run **gated** (Gate B); open-weight policy (no adapters, no proprietary APIs)
-- **Next-sprint scope box:** Rev 3 P6 (benchmark kit + IVS harness scaffold + synthetic verifier + teaching notebook) then P7/Gate C → `v3.0.0`; empirical Gate B post-tag. Plan authority: `reports/DEVELOPMENT_PLAN_v3_REV3.md`
+- **Next-sprint scope box:** Rev 3 P6 (benchmark kit + IVS harness scaffold + synthetic verifier + teaching notebook) ships as **its own checkpoint tag** (decision 2026-08-09; tag candidate `v2.6.0`); then P7/Gate C → `v3.0.0`; empirical Gate B post-tag. Plan authority: `reports/DEVELOPMENT_PLAN_v3_REV3.md`
 
 ## Change log
 
@@ -50,3 +50,4 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 | 2026-08-07 | Phase 3 tutorials shipped (IRT-as-scoring + sensemakr-on-survivors); batch orchestrator (`tools/run_many.py`) documented; tag `v2.0.1a1` dev checkpoint |
 | 2026-08-07 | **Gate A signed** — `docs/16` §9 amendment (IVS lane, coverage, holdout semantics, evaluators, open-weight policy); H5 re-graded to historical; `docs/18` created; v3 plan/inventory committed |
 | 2026-08-08 | **Rev 3 P1–P5 engine closed** — tag `v2.5.0` infrastructure checkpoint (not PyPI); P6 deferred |
+| 2026-08-09 | **P6 tag decision** — P6 ships as its own checkpoint tag (independent of P7; candidate `v2.6.0`); stale-reference sweep (AGENTS.md, test literals) |

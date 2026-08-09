@@ -202,14 +202,14 @@ def test_bad_hex_rejected() -> None:
             scores_hash="nope",
             network_hash=good,
             beta_hash=good,
-            package_version="2.0.1a1",
+            package_version="2.5.0",
         )
     with pytest.raises(ValueError, match="lowercase hex"):
         compute_run_id(
             scores_hash="A" * 64,
             network_hash=good,
             beta_hash=good,
-            package_version="2.0.1a1",
+            package_version="2.5.0",
         )
 
 
