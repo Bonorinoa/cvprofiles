@@ -1199,3 +1199,34 @@ Lock §3 defined boundary as $\mathrm{margin}_m \le \kappa \cdot \mathrm{SE}_m$ 
 **Decision (LOCKED, corrects §3):** $\mathrm{boundary} \iff |\mathrm{margin}_m| \le \kappa \cdot \mathrm{SE}_m$. Distance from the threshold is the object: a strongly rejected measure (large negative margin) is **not** fragile; only measures within $\kappa \cdot \mathrm{SE}$ of the threshold in either direction are flagged. Preserves the intent — fragile admissions (margin just above 0) and near-miss rejections (margin just below 0) are boundary; far-rejected measures are not.
 
 **Pinned in RED tests by:** rule-equivalence on $|\mathrm{margin}|$ for every measure; a deterministic far-rejected case (single `corr_min` with $\theta$ = midpoint of the top-two measured correlations ⇒ the anti-correlated measure misses by ≈ the full distance to $\theta$, well beyond $\kappa \cdot \mathrm{SE}$) is NOT boundary; the near-threshold case is covered by the rule-equivalence itself.
+
+---
+
+## 2026-08-08 — P5 coverage: implementation record (after code)
+
+**Shipped at commit `e088b06`** (post-amendment `cb566c8`). GREEN under the corrected $|\mathrm{margin}| \le \kappa \cdot \mathrm{SE}$ rule. Initial pass: **283 passed**, ruff clean, mypy clean. Final pass after identity regression: **284 passed**.
+
+### Identity regression pin (Rev 3 P5 exit)
+`tests/test_coverage.py::test_headline_min_max_b_star_unchanged_by_inference_layers` — committed after `e088b06` as a regression pin on existing behavior (NOT a TDD-first feature). Asserts `run_profile(n_boot=20, alpha=0.10)` produces bit-identical `identify.range_L`, `range_U`, `admissible`, `M_star_select`, `M_star_robust` vs. `run_profile()` with no inference layers. If this ever fails, `run_profile` is mutating the headline — a real bug, not paperable.
+
+### Process disclosures (honest record)
+- The pre-`cb566c8` "GREEN" runs were against the old signed rule and are historically invalid as P5 evidence. The final battery under the amended $|\mathrm{margin}|$ rule is what counts.
+- The $|\mathrm{margin}|$ RED was observed on the rule tests but not committed as a standalone RED commit (covered by the existing RED suite at `b9920d5` re-run after the rule flip).
+- Amendment `cb566c8` is committed but pending user ratification (governance-correct vehicle, awaiting confirmation).
+
+### Scope honoured
+- **One resampling loop.** `run_bootstrap` collects per-measure min-slacks and admission counts across non-empty replicates in the SAME loop as `(L_b, U_b)`; `compute_coverage` consumes the `BootstrapResult` and does no RNG. Replay equivalence preserved: same bundle + same seed ⇒ identical `bootstrap.json` AND identical `coverage.json`. `bootstrap_payload` v1.1 shape unchanged (coverage is a separate artifact).
+- **Honest wording everywhere.** Module docstring, `note=` payload string, HTML template, JSON `headline_note`: "uncertainty band" — never "confidence interval" / "coverage guarantee" / "CI".
+- **Selection-only band.** Bootstrap replicates admit on select-stage restrictions only (P4 lock §3); the holdout verdict is a full-sample point finding OUTSIDE the band. Explicitly NOT a holdout-robustness band.
+- **$\alpha$/$\kappa$ excluded from freeze preimage.** New `run_profile` kwargs (`alpha=0.10`, `kappa=2.0`); no `FreezeBundle.config` keys. Witness: same bundle + different `alpha` ⇒ same `run_id`, different `coverage.json` (`tests/test_coverage.py::test_alpha_kappa_never_enter_freeze_preimage`).
+- **Stale-artifact cleanup.** `coverage.json` removed when bootstrap turns off (same pattern as `bootstrap.json`).
+- **No CLI flag** in P5 (pipeline API + tests sufficient — P4 lock §6 pattern).
+
+### Subtle correctness note
+Under a units-split active, coverage margins are computed on **pooled full-frame slacks** while bootstrap replicates are **selection-only on the full frame**. That matches the locked P4b semantics: the band is selection uncertainty, the holdout verdict is the robustness object (a point finding outside the band). A future reader should NOT "fix" the coverage frame by switching to train/hold splits — that would change the lock.
+
+### Boundary rule (governs §3)
+$|\mathrm{margin}_m| \le \kappa \cdot \mathrm{SE}_m$ (amendment `cb566c8`). Distance from the threshold is the object. Far-rejected measures are NOT boundary; near-threshold admissions and near-miss rejections ARE.
+
+### Deferred (explicit non-goals — restated for the record)
+Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap as primary; replacing the headline band; train-resample + fixed-holdout per-replicate design (P4 lock §3 option (a)); conservative projection cross-check; MTMM full panel (T29).

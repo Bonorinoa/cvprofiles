@@ -71,6 +71,7 @@ Deliberately conservative. The headline range is the image of $\beta$ on survivo
 - **θ-grid** (additive diagnostic): recompute $M^*$ and $[L,U]$ on a declared grid of threshold scale multipliers $\lambda$; $\lambda=1.0$ is the headline; no $\lambda$ is auto-selected.
 - **δ-grid** (additive diagnostic): recompute admission on a declared grid of absolute tolerances $\delta$.
 - **θ-anchor audit** (additive): pre-data, literature-grounded anchors for every threshold, machine-checked for completeness. Anchors are documentation and provenance, excluded from the freeze preimage.
+- **Uncertainty band** (additive diagnostic, v3): when bootstrap is on, per-side $\alpha/2$ quantiles over non-empty replicates (default $\alpha=0.10$), empty-replicate rate, boundary attribution $|\mathrm{margin}_m| \le \kappa\cdot\mathrm{SE}_m$ (default $\kappa=2$), and admission frequency $\hat p_m$. Honest label only — never a confidence interval or coverage guarantee. Selection uncertainty on the pooled sample; not a holdout-robustness band. Excluded from the freeze preimage ($\alpha$, $\kappa$ are diagnostic knobs).
 - Diagnostics never replace the headline range and are excluded from the run-id preimage.
 
 ## 6. Empty sets and wide ranges are findings
