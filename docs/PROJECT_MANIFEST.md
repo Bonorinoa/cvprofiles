@@ -20,7 +20,7 @@ tag_v2_0: v2.0.0           # measure discipline release 2026-08-06 — do not mo
 tag_v2_0_sha: 6abb6e4
 tag_v2_0_1a1: v2.0.1a1     # dev checkpoint 2026-08-07 — docs/tooling/tutorials sprint
 tag_v2_5: v2.5.0           # P1–P5 engine infrastructure checkpoint 2026-08-08 — not PyPI
-tag_v2_5_sha: TBD          # filled in follow-up commit after tag (commit cannot self-reference)
+tag_v2_5_sha: 62b99c7      # peel of annotated tag v2.5.0 (post-tag follow-up; tag itself stays at 62b99c7)
 
 poc:
   script: evals/synthetic/v0_poc.py
