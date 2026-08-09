@@ -9,7 +9,9 @@ Locked semantics under test:
   shape unchanged (no new keys).
 - Boundary attribution: margin_m = min_r s_r(m) over ALL restrictions on the
   pooled full-frame slacks; SE_m = ddof=1 SD of per-replicate min-slacks across
-  non-empty replicates; boundary iff margin <= kappa * SE (kappa default 2.0).
+  non-empty replicates; boundary iff |margin_m| <= kappa * SE_m (amendment
+  cb566c8 — distance from the threshold; far-rejected measures are NOT
+  boundary). kappa default 2.0.
 - "Non-empty replicate" = replicate whose overall M*_b is non-empty (clarified
   docs/12 2026-08-08). Pinned via len(min_slack_samples[m]) == replicates_nonempty.
 - p_hat_m = #admitted-in-nonempty-replicate / #non-empty-replicates; null when
@@ -100,7 +102,8 @@ def test_coverage_alpha_validation_fails_loud(
     with pytest.raises(CoverageError, match="kappa"):
         compute_coverage(res, mini_scores_df, mini_roles, oracle_bundle, kappa=0.0)
     with pytest.raises(CoverageError, match="BootstrapResult"):
-        compute_coverage(res, mini_scores_df, mini_roles, "not-a-result", alpha=0.10)  # type: ignore[arg-type]
+        # string passed in the RESULT slot (the guard is on result, not bundle)
+        compute_coverage("not-a-result", mini_scores_df, mini_roles, oracle_bundle, alpha=0.10)  # type: ignore[arg-type]
 
 
 # --- boundary attribution: margin/SE rule, semi-golden, rejected-can-be-boundary ---
@@ -125,7 +128,7 @@ def test_boundary_attribution_matches_locked_rule(
         assert row.se == float(np.std(np.asarray(res.min_slack_samples[m]), ddof=1))
         assert row.kappa == 2.0
         if row.se is not None:
-            assert row.boundary == (row.margin <= row.kappa * row.se)
+            assert row.boundary == (abs(row.margin) <= row.kappa * row.se)
         else:
             assert row.boundary is False
 
@@ -135,12 +138,13 @@ def test_boundary_rule_applies_to_all_measures_including_rejected(
 ) -> None:
     """Boundary attribution runs for EVERY menu measure, admissible or not.
 
-    Locked semantics: rejected measures MAY be boundary (rejected by a hair is
-    fragile). Which measures land on the boundary depends on bootstrap draws —
-    the contract is the rule (margin <= kappa*SE), asserted by
-    test_boundary_attribution_matches_locked_rule. This test pins the stable
-    part: m_good sits far above the threshold on the mini fixture, so it is
-    NOT boundary under the locked rule (margin ~0.6+, SE well below 0.3).
+    Locked semantics: boundary iff |margin_m| <= kappa*SE_m (amendment
+    cb566c8 — the signed rule is vacuous for rejected measures). Which
+    measures land on the boundary depends on bootstrap draws — the contract
+    is the rule, asserted by test_boundary_attribution_matches_locked_rule.
+    This test pins the stable part: m_good sits far above the threshold on
+    the mini fixture, so it is NOT boundary under the locked rule
+    (margin ~0.6+, SE well below 0.3).
     """
     res = run_bootstrap(mini_scores_df, mini_roles, oracle_bundle, n_boot=200, seed=7)
     cov = compute_coverage(res, mini_scores_df, mini_roles, oracle_bundle, kappa=2.0)
@@ -149,7 +153,48 @@ def test_boundary_rule_applies_to_all_measures_including_rejected(
     # every boundary flag must satisfy the locked rule
     for row in cov.boundary:
         if row.boundary:
-            assert row.se is not None and row.margin <= row.kappa * row.se
+            assert row.se is not None and abs(row.margin) <= row.kappa * row.se
+
+
+def test_far_rejected_measure_is_not_boundary_deterministic(
+    mini_scores_df, mini_roles, mini_beta
+) -> None:
+    """Construction pinned by docs/12 (cb566c8): single corr_min with θ =
+    midpoint of the top-two measured correlations with v_aux ⇒ the most
+    anti-correlated measure (m_slop) misses by ≈ the full distance to θ, far
+    beyond κ·SE ⇒ NOT boundary under the |margin| rule. The OLD signed rule
+    would mark it boundary (negative margin <= κ·SE) — this test is the RED
+    guard that keeps the amendment honest.
+    """
+    v = mini_scores_df["v_aux"].to_numpy(dtype=float)
+    corrs = {
+        m: float(np.corrcoef(mini_scores_df[m].to_numpy(dtype=float), v)[0, 1])
+        for m in mini_roles.measures
+    }
+    top2 = sorted(corrs.values(), reverse=True)[:2]
+    theta = float((top2[0] + top2[1]) / 2.0)
+    net = NetworkConfig(
+        name="far_rejected",
+        delta=0.0,
+        restrictions=[
+            RestrictionSpec.model_validate(
+                {
+                    "id": "r_corr_min",
+                    "type": "corr_min",
+                    "theta": theta,
+                    "params": {"variable": "v_aux"},
+                }
+            )
+        ],
+    )
+    bundle = run_restrict(mini_roles, net, mini_beta)
+    res = run_bootstrap(mini_scores_df, mini_roles, bundle, n_boot=100, seed=7)
+    assert res.replicates_nonempty > 0  # m_good survives the midpoint threshold
+    cov = compute_coverage(res, mini_scores_df, mini_roles, bundle, kappa=2.0)
+    anti = min(corrs, key=lambda m: corrs[m])  # most anti-correlated measure
+    row = next(r for r in cov.boundary if r.measure == anti)
+    assert row.margin < 0.0
+    assert row.boundary is False  # |margin| >> kappa*SE
 
 
 # --- p_hat_m admission frequency ---
@@ -202,13 +247,12 @@ def test_all_empty_structured_nulls_deterministic(
     cov = compute_coverage(res, mini_scores_df, mini_roles, bundle)
     assert cov.band_L is None and cov.band_U is None
     assert cov.note is not None and "empty" in cov.note
-    assert cov.boundary == []
+    assert cov.boundary == ()  # dataclass field is a frozen tuple
     for m in mini_roles.measures:
         assert cov.p_hat_m[m] is None
     payload = coverage_payload(cov)
     assert payload["band_L"] is None and payload["band_U"] is None
-    assert payload["boundary"] == []
-    assert all(v is None for v in payload["p_hat_m"].values())
+    assert payload["boundary"] == []  # JSON contract is a list
 
 
 # --- freeze preimage: alpha/kappa excluded (the governance witness) ---

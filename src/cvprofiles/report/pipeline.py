@@ -41,13 +41,15 @@ def build_report_payload(
     bootstrap: dict[str, Any] | None = None,
     theta_grid: dict[str, Any] | None = None,
     delta_grid: dict[str, Any] | None = None,
+    coverage: dict[str, Any] | None = None,
     anchors: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Machine-complete report dict (also drives HTML).
 
-    ``bootstrap`` / ``theta_grid`` / ``delta_grid`` are inference payloads
-    and ``anchors`` is the θ-anchor audit payload (None when absent). All are
-    additive: the headline range block is always the min/max B* image on M*.
+    ``bootstrap`` / ``theta_grid`` / ``delta_grid`` / ``coverage`` are
+    inference payloads and ``anchors`` is the θ-anchor audit payload (None
+    when absent). All are additive: the headline range block is always the
+    min/max B* image on M*.
     """
     slacks_dict: dict[str, dict[str, float]] = {}
     for m in identify.measures:
@@ -111,6 +113,7 @@ def build_report_payload(
         "bootstrap": bootstrap,
         "theta_grid": theta_grid,
         "delta_grid": delta_grid,
+        "coverage": coverage,
         "anchors": anchors,
         "artifact_paths": run_manifest.artifact_paths,
     }
@@ -136,6 +139,7 @@ def write_report(
     bootstrap: dict[str, Any] | None = None,
     theta_grid: dict[str, Any] | None = None,
     delta_grid: dict[str, Any] | None = None,
+    coverage: dict[str, Any] | None = None,
     anchors: dict[str, Any] | None = None,
 ) -> ReportResult:
     """Write report.html + report.json under out_dir."""
@@ -149,6 +153,7 @@ def write_report(
         bootstrap=bootstrap,
         theta_grid=theta_grid,
         delta_grid=delta_grid,
+        coverage=coverage,
         anchors=anchors,
     )
     json_path = out / "report.json"

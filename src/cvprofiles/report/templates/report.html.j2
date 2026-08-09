@@ -221,6 +221,54 @@
     </section>
     {% endif %}
 
+    {% if coverage %}
+    <section class="card" style="margin-top:1rem">
+      <h2>Uncertainty band · additive to headline range</h2>
+      <p class="muted" style="margin-top:0">
+        Per-side α/2 quantiles over non-empty bootstrap replicates (α = {{ coverage.alpha }}).
+        Heuristic band — <strong>not a confidence interval</strong>, not a holdout-robustness band.
+        The headline [L, U] above remains min/max β(M*) on the full sample.
+      </p>
+      <table>
+        <tr><th>α</th><td>{{ coverage.alpha }}</td></tr>
+        <tr><th>κ</th><td>{{ coverage.kappa }}</td></tr>
+        <tr><th>quantiles</th><td>{{ coverage.quantiles }}</td></tr>
+        <tr><th>band</th><td>{% if coverage.band_L is not none and coverage.band_U is not none %}[{{ "%.6f"|format(coverage.band_L) }}, {{ "%.6f"|format(coverage.band_U) }}]{% else %}∅{% endif %}</td></tr>
+        <tr><th>empty rate</th><td>{{ "%.3f"|format(coverage.empty_replicate_rate) }}</td></tr>
+        <tr><th>degenerate rate</th><td>{{ "%.3f"|format(coverage.degenerate_replicate_rate) }}</td></tr>
+      </table>
+      {% if coverage.boundary %}
+      <h3 style="margin:1rem 0 0.4rem">Boundary attribution · |margin| ≤ κ·SE</h3>
+      <table>
+        <thead><tr><th>measure</th><th>margin</th><th>SE</th><th>boundary</th></tr></thead>
+        <tbody>
+          {% for row in coverage.boundary %}
+          <tr>
+            <td class="mono">{{ row.measure }}</td>
+            <td>{{ "%.6f"|format(row.margin) }}</td>
+            <td>{% if row.se is not none %}{{ "%.6f"|format(row.se) }}{% else %}—{% endif %}</td>
+            <td>{{ "yes" if row.boundary else "no" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      <h3 style="margin:1rem 0 0.4rem">Admission frequency p̂<sub>m</sub></h3>
+      <table>
+        <thead><tr><th>measure</th><th>p̂<sub>m</sub></th></tr></thead>
+        <tbody>
+          {% for m in measures %}
+          <tr>
+            <td class="mono">{{ m }}</td>
+            <td>{% if coverage.p_hat_m[m] is not none %}{{ "%.3f"|format(coverage.p_hat_m[m]) }}{% else %}—{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% if coverage.note %}<p class="muted" style="margin-bottom:0">{{ coverage.note }}</p>{% endif %}
+    </section>
+    {% endif %}
+
     {% if theta_grid %}
     <section class="card" style="margin-top:1rem">
       <h2>θ-grid sensitivity · diagnostic viewport</h2>
@@ -377,7 +425,7 @@
     <footer>
       cvprofiles {{ package_version }}
       · four-state spine SCORE → RESTRICT → IDENTIFY → REPORT
-      · v1.1/v2.0 inference: bootstrap + θ-grid + δ-grid (diagnostic)
+      · v1.1/v2.0 inference: bootstrap + θ-grid + δ-grid + coverage (diagnostic)
       · generated {{ created_at or "—" }}
     </footer>
   </div>

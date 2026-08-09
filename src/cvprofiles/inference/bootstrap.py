@@ -10,6 +10,10 @@ Contract:
 - P4b (docs/12 2026-08-08): per-replicate ``run_identify`` passes
   ``include_holdout_verdict=False`` (selection-only band; holdout verdict is
   a full-sample point finding outside the band).
+- P5 (docs/12 2026-08-08): the SAME loop also collects per-measure min-slack
+  samples and admission counts across NON-EMPTY replicates, consumed by the
+  coverage uncertainty band (``inference/coverage.py``). No extra RNG draws;
+  ``bootstrap_payload`` shape is unchanged (coverage is a separate artifact).
 - Percentile band over NON-EMPTY replicates only. All replicates empty ⇒
   band null + note. Degenerate replicates (resample-induced evaluation
   failure, e.g. zero-variance columns) are counted separately, excluded from
@@ -57,6 +61,12 @@ class BootstrapResult:
     note: str | None
     L_samples: tuple[float, ...]
     U_samples: tuple[float, ...]
+    # P5 coverage layer (docs/12 2026-08-08): per-measure min-slack samples
+    # and admission counts across NON-EMPTY replicates, collected inside the
+    # SAME loop. Additive — never serialized into bootstrap_payload (the
+    # coverage band lives in coverage.json).
+    min_slack_samples: dict[str, list[float]] | None = None
+    admission_counts: dict[str, int] | None = None
 
 
 def run_bootstrap(
@@ -92,8 +102,11 @@ def run_bootstrap(
 
     rng = np.random.default_rng(seed_i)
 
+    measures = list(roles.measures)
     L_samples: list[float] = []
     U_samples: list[float] = []
+    min_slack_samples: dict[str, list[float]] = {m: [] for m in measures}
+    admission_counts: dict[str, int] = {m: 0 for m in measures}
     n_empty = 0
     n_degenerate = 0
     for _ in range(n_boot_i):
@@ -119,6 +132,12 @@ def run_bootstrap(
             continue
         L_samples.append(float(res.range_L))
         U_samples.append(float(res.range_U))
+        # P5 coverage collection (docs/12 2026-08-08): non-empty replicates only.
+        mins = res.slacks.min(axis=1)
+        for m in measures:
+            min_slack_samples[m].append(float(mins.loc[m]))
+        for m in res.admissible:
+            admission_counts[m] += 1
 
     nonempty = len(L_samples)
     if nonempty:
@@ -149,6 +168,8 @@ def run_bootstrap(
         note=note,
         L_samples=tuple(L_samples),
         U_samples=tuple(U_samples),
+        min_slack_samples=min_slack_samples,
+        admission_counts=admission_counts,
     )
 
 

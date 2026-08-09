@@ -36,6 +36,7 @@ from cvprofiles.identify.pipeline import (
     write_identify_artifacts,
 )
 from cvprofiles.inference.bootstrap import BootstrapResult, bootstrap_payload, run_bootstrap
+from cvprofiles.inference.coverage import CoverageResult, compute_coverage, coverage_payload
 from cvprofiles.inference.delta_grid import DeltaGridResult, delta_grid_payload, run_delta_grid
 from cvprofiles.inference.theta_grid import ThetaGridResult, run_theta_grid, theta_grid_payload
 from cvprofiles.report.pipeline import ReportResult, write_report
@@ -64,6 +65,7 @@ class FullRunResult:
     run_manifest: RunManifest
     artifact_paths: dict[str, str]
     bootstrap: BootstrapResult | None = None
+    coverage: CoverageResult | None = None
     theta_grid: ThetaGridResult | None = None
     delta_grid: DeltaGridResult | None = None
     anchors_hash: str | None = None
@@ -85,6 +87,8 @@ def run_profile(
     delta_grid_deltas: Sequence[float] | None = None,
     anchors: Path | str | None = None,
     holdout_units: Sequence[str] | None = None,
+    alpha: float = 0.10,
+    kappa: float = 2.0,
 ) -> FullRunResult:
     """Compose four states (+ v1.1/v2.0 inference layers) and write a frozen run dir.
 
@@ -92,7 +96,9 @@ def run_profile(
     Fail loud only on schema / IO / binding / evaluator errors.
 
     Inference layers (off unless requested):
-      n_boot >= 1           → bootstrap over units (seed = the run's seed).
+      n_boot >= 1           → bootstrap over units (seed = the run's seed) +
+                              coverage uncertainty band (alpha/kappa; additive;
+                              EXCLUDED from the freeze preimage by design).
       theta_grid_lambdas    → θ-sensitivity surface (diagnostic; excluded
                               from the freeze preimage by design).
       delta_grid_deltas     → δ-tolerance surface (diagnostic; absolute δ
@@ -168,6 +174,8 @@ def run_profile(
     # inference artifacts from any previous run into the same directory.
     if n_boot_norm is None and (dest / "bootstrap.json").exists():
         (dest / "bootstrap.json").unlink()
+    if n_boot_norm is None and (dest / "coverage.json").exists():
+        (dest / "coverage.json").unlink()
     if grid is None and (dest / "theta_grid.json").exists():
         (dest / "theta_grid.json").unlink()
     if grid_deltas is None and (dest / "delta_grid.json").exists():
@@ -184,6 +192,12 @@ def run_profile(
     if n_boot_norm is not None:
         boot = run_bootstrap(
             score.frame, score.roles, restrict, n_boot=n_boot_norm, seed=seed
+        )
+
+    cov: CoverageResult | None = None
+    if boot is not None:
+        cov = compute_coverage(
+            boot, score.frame, score.roles, restrict, alpha=alpha, kappa=kappa
         )
 
     grid_result: ThetaGridResult | None = None
@@ -204,6 +218,12 @@ def run_profile(
         boot_path = dest / "bootstrap.json"
         boot_path.write_text(json.dumps(bootstrap_payload(boot), indent=2, sort_keys=True) + "\n")
         paths["bootstrap.json"] = boot_path
+    if cov is not None:
+        cov_path = dest / "coverage.json"
+        cov_path.write_text(
+            json.dumps(coverage_payload(cov), indent=2, sort_keys=True) + "\n"
+        )
+        paths["coverage.json"] = cov_path
     if grid_result is not None:
         grid_path = dest / "theta_grid.json"
         grid_path.write_text(
@@ -255,6 +275,7 @@ def run_profile(
             if delta_grid_result is not None
             else None
         ),
+        coverage=coverage_payload(cov) if cov is not None else None,
         anchors=anchors_payload_dict,
     )
     artifact_paths["report.html"] = report.html_path.name
@@ -281,6 +302,7 @@ def run_profile(
         run_manifest=run_manifest,
         artifact_paths=artifact_paths,
         bootstrap=boot,
+        coverage=cov,
         theta_grid=grid_result,
         delta_grid=delta_grid_result,
         anchors_hash=anchors_hash_value,
@@ -324,6 +346,18 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
             "headline_delta": g2.headline_delta,
             "artifact": "delta_grid.json",
         }
+    coverage_summary: dict[str, Any] | None = None
+    if result.coverage is not None:
+        c = result.coverage
+        coverage_summary = {
+            "alpha": c.alpha,
+            "kappa": c.kappa,
+            "quantiles": [c.quantiles[0], c.quantiles[1]],
+            "band_L": c.band_L,
+            "band_U": c.band_U,
+            "n_boundary": len(c.boundary),
+            "artifact": "coverage.json",
+        }
     return {
         "run_id": result.run_id,
         "out_dir": str(result.out_dir),
@@ -340,6 +374,7 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
         "beta_hash": result.restrict.beta_hash,
         "n_boot": result.run_manifest.freeze.n_boot,
         "bootstrap": boot_summary,
+        "coverage": coverage_summary,
         "theta_grid": grid_summary,
         "delta_grid": grid2_summary,
         "anchors_hash": result.anchors_hash,
