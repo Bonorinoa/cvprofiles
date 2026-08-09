@@ -75,6 +75,9 @@ select = ["E", "F", "I", "UP", "B"]
 # build_tutorials.py embeds LaTeX display lines inside notebook markdown cell
 # strings; splitting them would change the emitted notebook cells.
 "tools/build_tutorials.py" = ["E501"]
+# build_wvs_gps_inputs_tutorial.py embeds markdown tables + LaTeX lines inside
+# notebook cell strings; splitting them would change the emitted notebook cells.
+"tools/build_wvs_gps_inputs_tutorial.py" = ["E501"]
 
 [tool.mypy]
 # Target the newest supported runtime: numpy>=2.5 stubs use PEP 695 `type`
