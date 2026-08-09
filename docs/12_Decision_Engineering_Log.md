@@ -1179,3 +1179,13 @@ where \(x_i(m)\) is the length-\(K\) **item vector for measure \(m\)** at unit \
 Formal coverage theorem; m-out-of-n bootstrap as primary; replacing the headline band; train-resample + fixed-holdout per-replicate design (P4 lock §3 option (a)); conservative projection cross-check; MTMM full panel (T29).
 
 **Next:** RED (`tests/test_coverage.py`) → GREEN (`inference/coverage.py` + bootstrap loop extensions + wiring) → docs pass.
+
+---
+
+## 2026-08-08 — P5 coverage: non-empty-replicate denominator clarification (before code)
+
+Lock §3/§4 say $SE_m$ and $\hat p_m$ run "across non-empty replicates." Ambiguity: does "non-empty" mean (a) replicate whose **overall** $M^\*_b$ is non-empty, or (b) replicate where the **individual measure** $m$ is admitted?
+
+**Decision (LOCKED): reading (a).** For both $SE_m$ and $\hat p_m$, the denominator is the set of replicates whose overall $M^\*_b$ is non-empty — the same replicates that produce the band (v1.1 convention "percentile band over NON-EMPTY replicates only", docs/12:426). Rationale: matches the band denominator; $\hat p_m$ then has a consistent, interpretable base; per-replicate min-slacks are well-defined even for never-admitted measures (usually negative), so $SE$ remains meaningful. **Rejected measures can therefore be boundary.** All-empty ⇒ denominator 0 ⇒ band null, $\hat p_m$ null per measure, boundary empty (structured nulls, exit 0).
+
+**Pinned in RED tests by:** `len(min_slack_samples[m]) == replicates_nonempty` for every measure $m$.
