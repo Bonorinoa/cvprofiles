@@ -1189,3 +1189,13 @@ Lock §3/§4 say $SE_m$ and $\hat p_m$ run "across non-empty replicates." Ambigu
 **Decision (LOCKED): reading (a).** For both $SE_m$ and $\hat p_m$, the denominator is the set of replicates whose overall $M^\*_b$ is non-empty — the same replicates that produce the band (v1.1 convention "percentile band over NON-EMPTY replicates only", docs/12:426). Rationale: matches the band denominator; $\hat p_m$ then has a consistent, interpretable base; per-replicate min-slacks are well-defined even for never-admitted measures (usually negative), so $SE$ remains meaningful. **Rejected measures can therefore be boundary.** All-empty ⇒ denominator 0 ⇒ band null, $\hat p_m$ null per measure, boundary empty (structured nulls, exit 0).
 
 **Pinned in RED tests by:** `len(min_slack_samples[m]) == replicates_nonempty` for every measure $m$.
+
+---
+
+## 2026-08-08 — P5 coverage: boundary rule corrected to $|\mathrm{margin}|$ (methodological amendment, before code)
+
+Lock §3 defined boundary as $\mathrm{margin}_m \le \kappa \cdot \mathrm{SE}_m$ with the intent "rejected by a hair is fragile." As written, the rule is **vacuous for rejected measures**: on the full frame a rejected measure has $\mathrm{margin}_m < 0$, and $\kappa \cdot \mathrm{SE}_m > 0$, so $\mathrm{margin}_m \le \kappa \cdot \mathrm{SE}_m$ holds trivially for EVERY rejected measure regardless of how far it missed the threshold. The boundary set would be the rejected set, adding no information beyond the admission verdict.
+
+**Decision (LOCKED, corrects §3):** $\mathrm{boundary} \iff |\mathrm{margin}_m| \le \kappa \cdot \mathrm{SE}_m$. Distance from the threshold is the object: a strongly rejected measure (large negative margin) is **not** fragile; only measures within $\kappa \cdot \mathrm{SE}$ of the threshold in either direction are flagged. Preserves the intent — fragile admissions (margin just above 0) and near-miss rejections (margin just below 0) are boundary; far-rejected measures are not.
+
+**Pinned in RED tests by:** rule-equivalence on $|\mathrm{margin}|$ for every measure; a deterministic far-rejected case (single `corr_min` with $\theta$ = midpoint of the top-two measured correlations ⇒ the anti-correlated measure misses by ≈ the full distance to $\theta$, well beyond $\kappa \cdot \mathrm{SE}$) is NOT boundary; the near-threshold case is covered by the rule-equivalence itself.
