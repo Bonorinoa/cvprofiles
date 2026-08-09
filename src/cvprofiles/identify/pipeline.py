@@ -272,6 +272,23 @@ def run_identify(
     )
 
 
+def holdout_block_payload(result: IdentifyResult) -> dict[str, Any] | None:
+    """Shared holdout audit block — admissible.json and report.json MUST agree.
+
+    None when neither a units-split nor a holdout-stage verdict is present
+    (legacy networks with no holdout-stage restrictions). ``units`` is None
+    in legacy stage-only runs; frame labels present only under a units-split.
+    """
+    if result.holdout_units_used is None and result.holdout_verdict is None:
+        return None
+    return {
+        "units": result.holdout_units_used,
+        "select_frame": "train" if result.holdout_units_used is not None else None,
+        "holdout_frame": "holdout" if result.holdout_units_used is not None else None,
+        "verdict": result.holdout_verdict,
+    }
+
+
 def write_identify_artifacts(
     result: IdentifyResult,
     out_dir: Path | str,
@@ -295,14 +312,6 @@ def write_identify_artifacts(
             file=sys.stderr,
         )
 
-    holdout_block: dict[str, Any] | None = None
-    if result.holdout_units_used is not None or result.holdout_verdict is not None:
-        holdout_block = {
-            "units": result.holdout_units_used,
-            "select_frame": "train" if result.holdout_units_used is not None else None,
-            "holdout_frame": "holdout" if result.holdout_units_used is not None else None,
-            "verdict": result.holdout_verdict,
-        }
     admissible_payload = {
         "M_star": result.admissible,
         "M_star_select": result.M_star_select,
@@ -313,7 +322,7 @@ def write_identify_artifacts(
         "delta": result.delta,
         "n_menu": len(result.measures),
         "n_admissible": len(result.admissible),
-        "holdout": holdout_block,
+        "holdout": holdout_block_payload(result),
     }
     adm_path = out / "admissible.json"
     adm_path.write_text(json.dumps(admissible_payload, indent=2, sort_keys=True) + "\n")

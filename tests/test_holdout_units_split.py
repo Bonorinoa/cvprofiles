@@ -248,6 +248,12 @@ def test_holdout_units_order_run_id_invariant(mini_path, tmp_path) -> None:
     summ_c = summary_dict(c)
     assert summ_c["M_star_select"] == summ_c["M_star"] == ["m_good", "m_weak"]
     assert summ_c["M_star_robust"] == summ_c["M_star"]
+    # referee-visible: report.json and admissible.json agree on holdout block
+    import json
+
+    c_report = json.loads((c.out_dir / "report.json").read_text())
+    c_adm = json.loads((c.out_dir / "admissible.json").read_text())
+    assert c_report["holdout"] == c_adm["holdout"]
 
 
 def test_holdout_units_validation(scored, mini_path) -> None:
@@ -337,6 +343,8 @@ def test_run_profile_split_artifacts(mini_path, tmp_path) -> None:
     report = json.loads((result.out_dir / "report.json").read_text())
     assert report["admissible"] == ["m_good", "m_weak"]
     assert report["M_star_robust"] == ["m_good", "m_weak"]
+    # referee-visible: report.json and admissible.json must agree on holdout
+    assert report["holdout"] == payload["holdout"]
 
     summ = summary_dict(result)
     assert summ["M_star"] == ["m_good", "m_weak"]

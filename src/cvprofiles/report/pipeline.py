@@ -10,7 +10,7 @@ from typing import Any
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from cvprofiles.identify.pipeline import IdentifyResult
+from cvprofiles.identify.pipeline import IdentifyResult, holdout_block_payload
 from cvprofiles.restrict.pipeline import RestrictBundle
 from cvprofiles.schemas.run import RunManifest
 
@@ -77,12 +77,10 @@ def build_report_payload(
             r.model_dump(mode="json") for r in restrict.network.restrictions
         ],
         "admissible": identify.admissible,
+        "M_star_select": identify.M_star_select,
+        "M_star_robust": identify.M_star_robust,
         "rejected": identify.rejected,
-        "holdout": (
-            {"units": None, "verdict": identify.holdout_verdict}
-            if identify.holdout_verdict is not None
-            else None
-        ),
+        "holdout": holdout_block_payload(identify),
         "beta_values": identify.beta_values,
         "slacks": slacks_dict,
         "L": identify.range_L,
