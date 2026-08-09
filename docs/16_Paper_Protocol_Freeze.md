@@ -164,6 +164,14 @@ Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, e
 
 **What it does NOT authorize:** any other empirical run; fresh PCA fit; proprietary-API scoring; adapter training; engine change; tag; PyPI publication; or push by implication. All §3 fields not listed here remain **AWAITING AUGUSTO** for any future design.
 
+## 10. Amendment 2026-08-09 — WVS/GPS preferences intermediate demo box
+
+**Authority:** Augusto directed the WVS/GPS preferences intermediate lane on 2026-08-09 (docs/12 entry same date).
+
+**What this opens:** a designated **INTERMEDIATE DEMO box** at `evals/wvs_gps_preferences/` for the WVS/GPS lane — patience and risk-taking on **local** GPS (Falk et al. 2018, country + individual level) + WVS Wave 7 codebook-verified items (Q13 thrift / patience proxy; Q14 determination-perseverance / persistence proxy; Q48 freedom of choice and control / agency proxy; Q49 life satisfaction / wellbeing outcome; Q275/Q275R education ISCED / convergent outcome + control; Q279 employment status incl. self-employed / revealed-preference risk proxy). Position-paper complement; evidence posture **intermediate / not paper**. WVS missing codes $-1..-5$ are masked, never imputed. WVS Wave 7 core has **no direct risk-taking item** — the risk menu leans on GPS `risktaking` + WVS self-employment + discriminant proxies.
+
+**What it does NOT authorize:** (a) this lane as v3 paper headline evidence — the IVS cultural-values evaluation (§9, Gate B) remains the v3 headline; (b) agent authorship of the empirical network / $R$ / $\theta$ / $\beta$; (c) real IVS microdata work; (d) tag or PyPI publication by implication; (e) extension to any other construct without a further dated amendment. All other §3 fields remain **AWAITING AUGUSTO**.
+
 ## Provenance rule
 
 `reports/summaries/v1_1_package_synth_summary.json` remains the shipped package-evidence artifact. A future protocol table must use a distinct summary path, record the protocol ID, package version, parent SHA, exact settings, and seed list, and be audited independently before any `docs/13` claim is written.

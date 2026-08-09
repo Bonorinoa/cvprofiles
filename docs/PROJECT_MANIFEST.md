@@ -94,6 +94,15 @@ v3_0:
   run_gate: gate_b_augusto_run_decision
   note: "v2.5.0 closed Rev 3 P1–P5 engine go; P6/P7/Gate B/C remain"
 
+wvs_gps_preferences:
+  status: intermediate_demo_opened
+  constructs: [patience, risk_taking]
+  data: local GPS Falk 2018 + WVS Wave 7  # country + individual level; WVS missing codes -1..-5 masked, never imputed
+  p6_scope: e2e_proof_teaching
+  tag_candidate: v2.6.0
+  owner: Augusto
+  paper_status: complement_not_headline  # intermediate demo; IVS cultural-values remains Gate B headline
+
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
   thesis_core: [RESTRICT, IDENTIFY, REPORT]
@@ -150,4 +159,5 @@ locks:
   - h5_re_grade_historical_2026_08_07
   - open_weight_v3
   - v2_5_0_tagged_engine_infra_checkpoint  # P1–P5 closed; not PyPI; 3.0.0 still Gate C
+  - wvs_gps_intermediate_demo_2026_08_09  # intermediate demo box; NOT paper evidence; IVS cultural-values remains Gate B headline
 ```

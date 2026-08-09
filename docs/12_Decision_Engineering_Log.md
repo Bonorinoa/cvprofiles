@@ -1265,3 +1265,16 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 
 **Not authorized by this entry:** P6 implementation start (separate go), tag creation, PyPI, Gate B, empirical authorship.
 
+---
+
+## 2026-08-09 — WVS/GPS preferences lane: intermediate demo opened (Augusto-directed)
+
+**Decision (Augusto-directed, 2026-08-09):**
+
+- **Lane opened** at `evals/wvs_gps_preferences/` for **patience** and **risk-taking** on local data: GPS (Falk et al. 2018; country level ~80 countries + individual level ~80k) and WVS Wave 7 (2017–2022) codebook-verified items — Q13 "thrift" (patience proxy), Q14 "determination, perseverance" (persistence proxy), Q48 freedom of choice/control 1–10 (agency proxy), Q49 life satisfaction (wellbeing outcome), Q275/Q275R education ISCED (convergent outcome/control), Q279 employment status incl. category 3 self-employed (risk revealed-preference proxy). **WVS Wave 7 core has NO direct risk-taking item** — the risk menu leans on GPS `risktaking` + WVS self-employment + discriminant proxies. WVS missing codes `-1..-5` are masked, never imputed.
+- **Framing:** INTERMEDIATE DEMO + POSITION-PAPER COMPLEMENT. NOT paper headline evidence, NOT Gate B, NOT the v3 evidence base. The IVS cultural-values lane (`docs/18`, Gate B) remains the v3 paper headline.
+- **v3.0 honest target (re-framed):** prove the concept on the patience/risk application with observable pipeline-consistency validation (cold rerun bit-identical, freeze core, empty paths) — a green-light test before spending resources on IVS data acquisition and the Tao et al. reproduction.
+- **GUI decision:** NO form-based GUI for the core. An interactive input-builder notebook ships instead: it walks through authoring the four inputs (`scores.csv`, `roles.json`, `network.yaml`, `beta.yaml`) with validation, generating frozen input files. Form-based GUI stays out of scope unless a future dated decision reopens it.
+- **P6 scope (supersedes the Rev 3 synthetic-only framing for this lane):** (1) input-builder notebook; (2) frozen data build (GPS + WVS proxies); (3) two profiles — patience (menu = GPS patience + Q13 + Q14) and risk (menu = GPS risktaking + self-employment); (4) network $R$ + $\beta$ authored by Augusto (agent scaffolds + oracle synthetic checks only); (5) units-split holdout by country (the D7 falsifiable core on real data); (6) `verify_wvs_gps.py` auditor (following the `verify_h5_trust.py` pattern); (7) E2E tutorial notebook. P6 ships as its own checkpoint tag (candidate v2.6.0, per the 2026-08-09 P6 decision above).
+
+**Not authorized by this entry:** agent authorship of the empirical network; PyPI; Gate B IVS run; real IVS data acquisition; tag; push; use of this lane as paper headline evidence.

@@ -41,6 +41,7 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 - **M10 / H5:** country-level generalized trust — design **LOCKED as historical** (`docs/17`); n=35 run **re-graded to historical/regression witness** (2026-08-07); reproducible via `tools/verify_h5_trust.py`; not the v3 evidence base
 - **v3 IVS cultural-values lane (new headline):** [`docs/18_IVS_Cultural_Map.md`](18_IVS_Cultural_Map.md) — Tao et al. (2024)-style evaluation on Joint EVS/WVS 2017–2022 v5.0; design fields **Augusto-authored**, run **gated** (Gate B); open-weight policy (no adapters, no proprietary APIs)
 - **Next-sprint scope box:** Rev 3 P6 (benchmark kit + IVS harness scaffold + synthetic verifier + teaching notebook) ships as **its own checkpoint tag** (decision 2026-08-09; tag candidate `v2.6.0`); then P7/Gate C → `v3.0.0`; empirical Gate B post-tag. Plan authority: `reports/DEVELOPMENT_PLAN_v3_REV3.md`
+- **WVS/GPS preferences intermediate lane:** `evals/wvs_gps_preferences/` — patience + risk-taking on **local** GPS (Falk et al. 2018, country + individual) + WVS Wave 7 (codebook-verified Q13/Q14/Q48/Q49/Q275/R/Q279; missing codes -1..-5 masked, never imputed); interactive input-builder notebook (no form GUI); P6 E2E proof + teaching scope (frozen data build, two profiles, units-split holdout, `verify_wvs_gps.py`, tutorial); own checkpoint tag candidate `v2.6.0`; **intermediate demo / position-paper complement — not paper headline, not Gate B** (docs/12 2026-08-09, docs/16 §10)
 
 ## Change log
 
@@ -51,3 +52,4 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 | 2026-08-07 | **Gate A signed** — `docs/16` §9 amendment (IVS lane, coverage, holdout semantics, evaluators, open-weight policy); H5 re-graded to historical; `docs/18` created; v3 plan/inventory committed |
 | 2026-08-08 | **Rev 3 P1–P5 engine closed** — tag `v2.5.0` infrastructure checkpoint (not PyPI); P6 deferred |
 | 2026-08-09 | **P6 tag decision** — P6 ships as its own checkpoint tag (independent of P7; candidate `v2.6.0`); stale-reference sweep (AGENTS.md, test literals) |
+| 2026-08-09 | WVS/GPS preferences intermediate lane opened (docs/12, docs/16 §10); GUI deferred, input-builder notebook chosen |
