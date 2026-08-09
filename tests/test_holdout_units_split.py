@@ -96,8 +96,10 @@ def test_run_identify_split_robust_survivors(scored, mini_path) -> None:
     assert res.M_star_robust == ["m_good", "m_weak"]
     assert res.admissible == ["m_good", "m_weak"]  # robust semantics headline
     assert not res.empty
-    # split mode, all compliant ⇒ verdict is {} (not None) — decision #6
-    assert res.holdout_verdict == {}
+    # split mode: verdict covers ALL measures on the hold frame (decision #6).
+    # m_slop is non-compliant on hold (corr -0.966 < 0.35) even though it was
+    # already select-rejected on train; m_good/m_weak are compliant.
+    assert res.holdout_verdict == {"m_slop": ["r_corr_min_aux", "r_corr_sign_aux"]}
 
     # β image on the FULL pooled frame (decision §1)
     _, _, b_good = _reference_split(scored.frame, HOLDOUT, "m_good", "v_aux")
