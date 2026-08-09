@@ -4,6 +4,21 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [2.5.0] — 2026-08-08 (tag `v2.5.0` — engine infrastructure checkpoint; **not** on PyPI)
+
+Rev 3 P1–P5 engine go closed (synthetic-first). Latest PyPI remains `2.0.0`. Target `v3.0.0` remains Gate C.
+
+### Engine (P2–P5)
+- **Evaluators:** `corr_zero` (two-sided discriminant), `monotone_rank` (signed Spearman vs continuous V)
+- **Betas:** `diff_means` (binary group mean gap), `map_distance` (2D Euclidean on pinned loadings; no PCA fit inside the engine)
+- **Holdout:** restriction-level `stage: select|holdout` (freeze-safe optional field) + **units-split** (select on train units, compliance on hold units; robust headline)
+- **Coverage uncertainty band (D1):** additive layer over units-only bootstrap — per-side α/2 quantiles (default α=0.10), empty-replicate rate, boundary attribution $|\mathrm{margin}_m| \le \kappa\cdot\mathrm{SE}_m$ (default κ=2), admission frequency $\hat p_m$. Honest label only (never CI / coverage guarantee). Headline $[L,U]=\min/\max B^*$ unchanged. α/κ excluded from freeze preimage.
+
+### Boundary
+- Tag only — **no PyPI upload** at 2.5.0
+- P6 (benchmark kit / IVS harness / synthetic verifier / teaching notebook), Gate B empirical run, and Gate C `v3.0.0` remain deferred
+- Paper protocol fields remain Augusto-owned
+
 ## [Unreleased] — dev 2.0.1a1 (docs consolidation + tooling + tutorials, 2026-08-07; tag `v2.0.1a1` dev checkpoint)
 
 ### Tutorials (Phase 3)

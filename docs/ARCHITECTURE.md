@@ -175,5 +175,5 @@ Upstream scorers (LLM APIs, dictionaries, PCA) are user workflows that produce c
 ## 11. Package posture
 
 - `v0.1` tag is immovable and peels to the museum PoC (`evals/synthetic/v0_poc.py`, unimported from src).
-- `v1.1.0` (MVP + inference layer) and `v2.0.0` (measure discipline, PyPI 2026-08-06) are tagged.
-- Dev cycle: `2.0.1a1`.
+- `v1.1.0` (MVP + inference layer), `v2.0.0` (measure discipline, PyPI 2026-08-06), and `v2.5.0` (P1–P5 engine infrastructure checkpoint, 2026-08-08) are tagged.
+- Current package version: `2.5.0` (not yet on PyPI; latest PyPI remains `2.0.0`).

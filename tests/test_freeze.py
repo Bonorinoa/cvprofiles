@@ -54,7 +54,7 @@ def test_golden_freeze_matches_expected(
     mini_freeze_columns: list[str],
     mini_expected_freeze: dict,
 ) -> None:
-    assert __version__ == mini_expected_freeze["package_version"] == "2.0.1a1"
+    assert __version__ == mini_expected_freeze["package_version"] == "2.5.0"
     sh, nh, bh, rid = _hashes(
         mini_scores_df, mini_roles, mini_network, mini_beta, mini_freeze_columns
     )

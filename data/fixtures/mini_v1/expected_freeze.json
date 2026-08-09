@@ -14,7 +14,7 @@
   "n_boot": null,
   "network_hash": "3540790e5f4394b08f2d995ea74d064ed5489228fd5c0d34c1d525b07131f921",
   "notes": "scores_hash excludes diagnostic columns (V_star). run_id pins package_version; bumps change run_id. Hashes are bare lowercase SHA-256 hex.",
-  "package_version": "2.0.1a1",
+  "package_version": "2.5.0",
   "preimage_keys": [
     "beta_hash",
     "config",
@@ -26,7 +26,7 @@
     "scores_hash",
     "seed"
   ],
-  "run_id": "52d4baabd5cdfd1d20f4b4209c58f452903467b10dd57a3dc041e7507a850942",
+  "run_id": "7db3b20f40d2444186ffaeddf770fe2e60364ce0f9e6643efb9645cd05a66ade",
   "schema_version": "1",
   "scores_hash": "c20f0e674cf89ea0c0cd4e6d050e872e5e2ec16801bd30e72b5f0f8aaf85e237",
   "seed": 0,

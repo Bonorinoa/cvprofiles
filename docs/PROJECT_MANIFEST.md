@@ -4,10 +4,10 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v2_0_0_published_pypi_dev_2_0_1a1
+status: v2_5_0_tagged_engine_infra_checkpoint
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "2.0.1a1"      # current package version (docs/tooling/tutorials sprint; dev checkpoint tag 2026-08-07)
-target_version: "2.0.0"   # v2.0 measure discipline release (PyPI 2026-08-06)
+dev_version: "2.5.0"        # current package version (P1–P5 engine infra checkpoint; tag v2.5.0 2026-08-08)
+target_version: "3.0.0"   # v3.0.0 remains Gate C target; 2.5.0 is mid-sprint infrastructure tag
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
@@ -19,6 +19,8 @@ tag_v1_1_sha: fce31c8
 tag_v2_0: v2.0.0           # measure discipline release 2026-08-06 — do not move/retag
 tag_v2_0_sha: 6abb6e4
 tag_v2_0_1a1: v2.0.1a1     # dev checkpoint 2026-08-07 — docs/tooling/tutorials sprint
+tag_v2_5: v2.5.0           # P1–P5 engine infrastructure checkpoint 2026-08-08 — not PyPI
+tag_v2_5_sha: TBD          # filled in follow-up commit after tag (commit cannot self-reference)
 
 poc:
   script: evals/synthetic/v0_poc.py
@@ -72,9 +74,16 @@ v2_0:
   checkpoint: per_thread
   h5_delta_grid_run: done
 
+v2_5:
+  status: tagged_engine_infra_checkpoint
+  version: 2.5.0  # tag v2.5.0 2026-08-08; NOT on PyPI (latest PyPI remains 2.0.0)
+  scope: rev3_p1_to_p5  # corr_zero/monotone_rank; diff_means/map_distance; stage+units-split holdout; coverage uncertainty band
+  pypi: false
+  next: p6_benchmark_kit_ivs_harness_deferred
+
 v3_0:
-  status: gate_a_signed_2026_08_07
-  plan: reports/DEVELOPMENT_PLAN.md
+  status: p1_p5_engine_closed_at_v2_5_0_p6_deferred
+  plan: reports/DEVELOPMENT_PLAN_v3_REV3.md  # Rev 3 authority; Rev 2 historical
   inventory: reports/VERIFIED_TASK_INVENTORY.md
   amendment: docs/16_Paper_Protocol_Freeze.md  # §9 dated amendment 2026-08-07
   design_doc: docs/18_IVS_Cultural_Map.md
@@ -83,6 +92,7 @@ v3_0:
   h5_status: historical_regression_witness
   open_weight_policy: true  # no adapters, no proprietary APIs (D5/D6)
   run_gate: gate_b_augusto_run_decision
+  note: "v2.5.0 closed Rev 3 P1–P5 engine go; P6/P7/Gate B/C remain"
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
@@ -139,4 +149,5 @@ locks:
   - ivs_design_reserved_run_gated  # design RESERVED/AWAITING AUGUSTO; locked only at Gate B
   - h5_re_grade_historical_2026_08_07
   - open_weight_v3
+  - v2_5_0_tagged_engine_infra_checkpoint  # P1–P5 closed; not PyPI; 3.0.0 still Gate C
 ```

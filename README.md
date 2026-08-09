@@ -6,8 +6,8 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **2.0.0 published on PyPI (2026-08-06)**; dev cycle at `2.0.1a1` |
-| **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0` frozen; protocol provisional synthetic-only; H5 Trust evidence **re-graded to historical/regression witness** (2026-08-07, Gate A); v3 IVS cultural-values lane opened (`docs/18`), run gated |
+| **Version** | **2.5.0** tagged (P1–P5 engine infrastructure checkpoint, 2026-08-08); **2.0.0** remains the latest PyPI release |
+| **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0`, `v2.5.0` frozen; protocol provisional synthetic-only; H5 Trust evidence **re-graded to historical/regression witness** (2026-08-07, Gate A); v3 IVS cultural-values lane opened (`docs/18`), run gated; P6+ deferred |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
 | **CI** | [![ci](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml) |

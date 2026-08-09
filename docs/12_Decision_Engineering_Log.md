@@ -1230,3 +1230,24 @@ $|\mathrm{margin}_m| \le \kappa \cdot \mathrm{SE}_m$ (amendment `cb566c8`). Dist
 
 ### Deferred (explicit non-goals — restated for the record)
 Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap as primary; replacing the headline band; train-resample + fixed-holdout per-replicate design (P4 lock §3 option (a)); conservative projection cross-check; MTMM full panel (T29).
+
+---
+
+## 2026-08-08 — P5 boundary amendment ratified + v2.5.0 infrastructure checkpoint
+
+**Decision (LOCKED, Augusto-directed):**
+
+1. **Boundary rule amendment `cb566c8` ratified.** $\mathrm{boundary} \iff |\mathrm{margin}_m| \le \kappa \cdot \mathrm{SE}_m$ is the governing P5 rule (corrects the pre-amendment signed-margin draft). Distance from the threshold is the object; far-rejected measures are not boundary.
+
+2. **Rev 3 P1–P5 engine go is closed.** Coverage green; honest "uncertainty band" wording; no freeze-key creep for α/κ; identity pin that headline $\min/\max B^*$ is unchanged by inference layers; docs pass landed (`e258dca`).
+
+3. **Tag `v2.5.0` authorized as an infrastructure checkpoint** (package version aligned `2.0.1a1 → 2.5.0` with golden refresh). Explicitly **not** a PyPI release — latest published package remains `2.0.0`. Explicitly **not** `v3.0.0` / Gate C.
+
+4. **P6 deferred** pending discussion after push. Gate B empirical IVS run, Gate C release, and PyPI upload remain Augusto-owned and separately gated.
+
+**Rationale:** mid-sprint engine capability is real and greened; calling it `2.5.0` keeps `3.0.0` reserved for the full Rev 3 + paper-infra close-out without overclaiming a major release.
+
+**Not authorized by this entry:** PyPI publish of 2.5.0; P6 start; empirical network authorship; Joint microdata run; tag move of `v0.1` / `v2.0.0`.
+
+**AGENTS.md note:** protected-file edit timed out during the bump; posture line may lag until Augusto approves a follow-up edit. Durable records (CHANGELOG, docs/12, MANIFEST, README, pyproject) carry `2.5.0`.
+
