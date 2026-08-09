@@ -364,3 +364,42 @@ def test_coverage_off_is_none_and_template_safe(mini_dir, tmp_path) -> None:
     assert not (off.out_dir / "coverage.json").exists()
     html = (off.out_dir / "report.html").read_text()
     assert "Uncertainty band" not in html  # panel absent when layer off
+
+
+# --- Rev 3 P5 exit: regression pin on headline min/max B* identity ---
+
+
+def test_headline_min_max_b_star_unchanged_by_inference_layers(
+    mini_dir, tmp_path
+) -> None:
+    """Rev 3 P5 exit: min/max B* identity holds when diagnostics attach.
+
+    Regression pin on existing behavior (NOT a TDD feature): the headline
+    range is computed on the full pooled frame and must be bit-identical
+    with and without bootstrap/coverage turned on. If this ever fails,
+    run_profile is mutating the headline — a real bug, not paperable.
+    """
+    base = run_profile(
+        scores=mini_dir / "scores.csv",
+        roles=mini_dir / "roles.json",
+        network=mini_dir / "network.yaml",
+        beta=mini_dir / "beta.yaml",
+        out_dir=tmp_path / "base",
+    )
+    layered = run_profile(
+        scores=mini_dir / "scores.csv",
+        roles=mini_dir / "roles.json",
+        network=mini_dir / "network.yaml",
+        beta=mini_dir / "beta.yaml",
+        out_dir=tmp_path / "layered",
+        n_boot=20,
+        seed=7,
+        alpha=0.10,
+    )
+    assert layered.bootstrap is not None
+    assert layered.coverage is not None
+    assert layered.identify.range_L == base.identify.range_L
+    assert layered.identify.range_U == base.identify.range_U
+    assert layered.identify.admissible == base.identify.admissible
+    assert layered.identify.M_star_select == base.identify.M_star_select
+    assert layered.identify.M_star_robust == base.identify.M_star_robust
