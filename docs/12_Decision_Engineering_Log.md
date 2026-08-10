@@ -1306,3 +1306,26 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 - **AGENTS.md posture lag:** the protected AGENTS.md write was blocked twice by the desktop approval gate timing out despite chat consent; the posture line remains at 2.5.1 in this commit. Durable records (CHANGELOG, manifest, README, docs16, pyproject) carry 2.5.2; AGENTS.md follows on owner edit/approval. CI's version-consistency step will flag the drift until then.
 
 **Not authorized by this entry:** v3.0.0 (Gate C); Gate B IVS run; empirical network authorship; any claim that 2.5.2 is on PyPI before the owner upload completes.
+
+## 2026-08-09 — 2.5.2 PyPI publish verified; repo stabilization to published state
+
+**Context:** Owner completed the 2.5.2 `uv publish`. This entry records the independent verification and the docs pass that flips the remaining "publish pending" posture to published.
+
+**Verification (independent, agent-run):**
+- PyPI JSON API (`pypi.org/pypi/cvprofiles/json`): `2.5.2` present, wheel uploaded 2026-08-10T05:48:24Z; `2.5.1` also present (the published first PyPI since 2.0.0).
+- Local wheel `dist/cvprofiles-2.5.2-py3-none-any.whl` sha256 `d2973dfd…` == PyPI recorded digest (byte-identical artifact, no rebuild drift).
+- Tag `v2.5.2` already on origin (annotated tag object `19b33b92`, peels to `8779174`); `main` in sync with `origin/main`. No tag push needed.
+- Battery: `git diff --check` clean; `v0.1^{}` still `fb62b48` (immovable tag intact). Version-consistency checker flags only AGENTS.md (below).
+
+**Stabilization commit (this pass):**
+- CHANGELOG [2.5.2] and [2.5.1] headers: "PyPI publish pending" → "PyPI release 2026-08-09".
+- `docs/PROJECT_MANIFEST.md`: `status: v2_5_2_tagged_publish_pending` → `v2_5_2_published`; `dev_version`/`target_version`/`tag_v2_5_2` comments flip to published.
+- README Status row: frozen tag list now includes `v2.5.2`.
+- **AGENTS.md posture lag persists:** the protected write was blocked again by the desktop approval gate timing out despite chat consent (third occurrence of this gate behavior; second in this release track). Durable records (CHANGELOG, manifest, README, docs16, pyproject) carry the published state; AGENTS.md line 43 still reads `2.5.1 … publish pending tutorial polish`. Owner lands the exact replacement line:
+
+  ```text
+  - Package version: `2.5.2` — **v2.5.2 PyPI release (2026-08-09)**; WVS/GPS tutorial milestone (input-builder + E2E notebook, GPS-only individual level, corrected placeholder networks); ships the CLI holdout exposure, docs sync to shipped state, and the version-consistency CI check. v2.5.1 was the first PyPI since 2.0.0 (CLI holdout exposure, docs sync, version-consistency CI; 2026-08-09); v2.5.0 was the Rev 3 P1–P5 infrastructure checkpoint tagged 2026-08-08 (`corr_zero`/`monotone_rank`, `diff_means`/`map_distance`, stage + units-split holdout, coverage uncertainty band). P6 ships as its own tag; `v3.0.0` remains Gate C.
+  ```
+- CI's version-consistency step stays red on AGENTS.md until that line lands.
+
+**Not authorized by this entry:** v3.0.0 (Gate C); Gate B IVS run; empirical network authorship; further tag/PyPI actions; any claim that the AGENTS.md posture is current while line 43 still reads 2.5.1.

@@ -4,7 +4,7 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
-## [2.5.2] — 2026-08-09 (tag `v2.5.2` — WVS/GPS tutorial milestone; PyPI publish pending owner uv publish)
+## [2.5.2] — 2026-08-09 (tag `v2.5.2` — WVS/GPS tutorial milestone; PyPI release 2026-08-09)
 
 Tutorial milestone: the WVS/GPS patience vs risk-taking example is now honest end-to-end.
 
@@ -18,7 +18,7 @@ Tutorial milestone: the WVS/GPS patience vs risk-taking example is now honest en
 - v3.0.0 remains Gate C; paper protocol fields remain Augusto-owned
 - Latest PyPI before this tag: `2.5.1` (2026-08-09)
 
-## [2.5.1] — 2026-08-09 (tagged; PyPI publish pending tutorial polish)
+## [2.5.1] — 2026-08-09 (tagged; PyPI release 2026-08-09)
 
 First PyPI release since 2.0.0: CLI exposure of the v2.5.0 engine features + docs synced to shipped state + version-consistency CI check.
 

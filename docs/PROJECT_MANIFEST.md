@@ -4,10 +4,10 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v2_5_2_tagged_publish_pending
+status: v2_5_2_published
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "2.5.2"        # current package version (tagged v2.5.2 2026-08-09; PyPI publish pending owner uv publish)
-target_version: "3.0.0"   # v3.0.0 remains Gate C target; 2.5.2 tagged 2026-08-09, PyPI publish pending
+dev_version: "2.5.2"        # current package version (PyPI release 2026-08-09)
+target_version: "3.0.0"   # v3.0.0 remains Gate C target; 2.5.2 tagged + published 2026-08-09
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
@@ -23,7 +23,7 @@ tag_v2_5: v2.5.0           # P1–P5 engine infrastructure checkpoint 2026-08-08
 tag_v2_5_sha: 62b99c7      # peel of annotated tag v2.5.0 (post-tag follow-up; tag itself stays at 62b99c7)
 tag_v2_5_1: v2.5.1           # tagged 2026-08-09 — PyPI release 2026-08-09 (published)
 tag_v2_5_1_sha: b4cf0bd      # annotated tag v2.5.1 peels to b4cf0bd (verified 2026-08-09)
-tag_v2_5_2: v2.5.2           # tagged 2026-08-09 — WVS/GPS tutorial milestone (PyPI publish pending)
+tag_v2_5_2: v2.5.2           # tagged 2026-08-09 — WVS/GPS tutorial milestone (PyPI release 2026-08-09)
 tag_v2_5_2_sha: 8779174      # annotated tag v2.5.2 peels to 8779174 (verified 2026-08-09)
 
 poc:
