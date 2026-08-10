@@ -76,6 +76,7 @@ def main() -> None:
         "Part 1 assertions PASSED",
         "Empty-set honesty PASSED",
         "cold re-run bit-identical on freeze core: PASSED",
+        "-> merge refused. WVS items enter only as country means (Part 2).",
     ]:
         if claim not in payload:
             raise SystemExit(f"MISSING claim in executed notebook: {claim!r}")
