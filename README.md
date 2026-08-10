@@ -75,6 +75,12 @@ Researcher supplies unit×measure scores (**SCORE**). Researcher authors a nomol
 
 The engine is **score-agnostic and model-free**: it does not generate measures, does not search prompt space, and contains no learned model. LLM-based or dictionary-based scoring happens upstream, when you decide how to fill score columns.
 
+**Model-free by design.** The engine never fits a model inside the validity layer: a p-value requires a null distribution, a Bayes factor requires priors, a likelihood ratio requires a model — all of which smuggle in distributional assumptions the engine refuses to own. It computes transparent sample moments against researcher-declared thresholds.
+
+**Diagnostic surfaces.** θ-grid and δ-grid show how $M^*$ and $[L,U]$ move with threshold and tolerance choices — the specification-curve (Simonsohn et al. 2020) / multiverse (Steegen et al. 2016) idea applied to measurement admissibility. Descriptive by design: they reveal *where* admissibility flips; they make no inferential claim about the surface.
+
+**Honest inference posture.** The range is a fragility audit over sample-admissible measures, not a confidence set — no coverage theorem is claimed. Bootstrap output is an uncertainty band, never a CI. The units-split holdout is the out-of-sample check: select on train units, verdict on held-out units.
+
 ## When to use cvprofiles (and when not to)
 
 | You want… | Use |
