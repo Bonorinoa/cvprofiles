@@ -1293,3 +1293,16 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 - **Trust-benchmark lane (D3):** recon plan written at `evals/trust_benchmark/PLAN.md`; SCA2-adapter-vs-persona comparison declared **out of scope** (SCA2 project work) by Augusto; plan retained untracked as recon reference only. The feasible empirical lane is the GPS-WVS patience/risk demo.
 
 **Not authorized by this entry:** PyPI upload (owner token step); any claim of published release before upload; empirical network authorship.
+
+## 2026-08-09 — 2.5.2 release track: WVS/GPS tutorial milestone tag
+
+**Context:** The WVS/GPS input-builder + E2E notebook (`tutorials/cvprofiles_wvs_gps_inputs.ipynb`) was polished and completed: the individual-level WVS join was a many-to-many cross-product on country code (78,821,249 rows vs ~80k — WVS and GPS are different surveys with disjoint respondents); Part 3 is now GPS-only (menu {GPS patience}, aux {risktaking, subj_math_skills}); WVS items enter only as country means (Part 2, `q275_mean` convergent aux). Placeholder networks corrected (`monotone_rank`/`corr_zero` take the AUX column as `params.variable`, not the measure itself — old placeholders were degenerate: Spearman(m,m)=1 / |Corr(m,m)|=1). Battery: 313 passed; notebook executes clean end-to-end (43 cells, all claims asserted, exit 0).
+
+**Decisions (2026-08-09, Augusto-directed):**
+
+- **2.5.1 is the published PyPI release** (owner `uv publish`, uploaded 2026-08-10T00:59:30Z; wheel sha256 `759b6fd5…` from tag `v2.5.1` @ `b4cf0bd`). The local manifest/AGENTS.md posture lines saying "publish pending" were stale and are corrected by this entry's docs pass.
+- **Version bump 2.5.1 → 2.5.2** (this commit): atomic literal move (pyproject, `__init__`, uv.lock, tests, CI workflow, tools/paper_synth_p4p5.py, README/USER_GUIDE/ARCHITECTURE/METHODOLOGY/ROADMAP/CHANGELOG/docs16/AGENTS posture) + golden refresh via `tools/refresh_mini_golden.py` (new mini run_id `e7e2c56d…`; content hashes static — no algorithm drift). Annotated tag `v2.5.2` pushed after battery green.
+- **PyPI publish for 2.5.2 stays owner-run** (`uv publish` with the project-scoped token; dry-run first). Independent verification chain after upload: PyPI JSON API version + digests, local-vs-PyPI sha256, fresh-venv `pip install cvprofiles==2.5.2`, notebook execution on the installed wheel.
+- **AGENTS.md posture lag:** the protected AGENTS.md write was blocked twice by the desktop approval gate timing out despite chat consent; the posture line remains at 2.5.1 in this commit. Durable records (CHANGELOG, manifest, README, docs16, pyproject) carry 2.5.2; AGENTS.md follows on owner edit/approval. CI's version-consistency step will flag the drift until then.
+
+**Not authorized by this entry:** v3.0.0 (Gate C); Gate B IVS run; empirical network authorship; any claim that 2.5.2 is on PyPI before the owner upload completes.

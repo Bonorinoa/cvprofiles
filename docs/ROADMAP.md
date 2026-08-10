@@ -35,6 +35,9 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 - **P5 coverage:** additive **uncertainty band** (D1; honest label; boundary $|\mathrm{margin}| \le \kappa\cdot\mathrm{SE}$; headline $[L,U]$ unchanged)
 - Latest PyPI is `2.5.1` (2026-08-09); `v3.0.0` remains Gate C target
 
+### v2.5.2 (tagged `v2.5.2` 2026-08-09 — WVS/GPS tutorial milestone; PyPI publish pending owner uv publish)
+- **WVS/GPS input-builder + E2E tutorial** (`tutorials/cvprofiles_wvs_gps_inputs.ipynb`): synthetic oracle walk-through → country-level profile (menu {GPS patience}, aux {risktaking, q275_mean}) → individual-level **GPS-only** profile; disjoint-survey cross-product lesson (78.8M rows refused); corrected placeholder networks (`params.variable` = aux column, not the measure)
+
 ### v2.5.1 (PyPI release 2026-08-09 — first PyPI since 2.0.0)
 
 - **CLI holdout exposure (audit B, P0):** `--holdout-units` (comma-separated unit ids; select on train, verdict on hold; headline = M\*_robust; order-normalized sorted-unique in freeze config; forks run_id), `--alpha` (coverage band tail probability, default 0.10) and `--kappa` (boundary attribution rule, default 2.0); validation mirrors inference/coverage.py; α/κ excluded from freeze preimage; stdout-JSON / stderr-notes contract preserved; empty M\* exits 0

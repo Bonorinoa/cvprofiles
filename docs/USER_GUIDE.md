@@ -1,6 +1,6 @@
 # User Guide
 
-How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v2.5.1 package (PyPI release 2026-08-09): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split), and the P5 coverage uncertainty band.
+How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v2.5.2 package (PyPI release 2026-08-09): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split), and the P5 coverage uncertainty band.
 
 ## 1. The four input files
 

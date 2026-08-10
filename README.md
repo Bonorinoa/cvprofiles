@@ -6,8 +6,8 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **2.5.1** — PyPI release 2026-08-09 (first since 2.0.0: CLI holdout exposure, docs synced to shipped state, version-consistency CI) |
-| **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0`, `v2.5.0` frozen; protocol provisional synthetic-only; H5 Trust evidence **re-graded to historical/regression witness** (2026-08-07, Gate A); v3 IVS cultural-values lane opened (`docs/18`), run gated; P6+ deferred |
+| **Version** | **2.5.2** — PyPI release 2026-08-09 (WVS/GPS tutorial milestone: input-builder + E2E notebook, GPS-only individual level, corrected placeholder networks) |
+| **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0`, `v2.5.0`, `v2.5.1` frozen; protocol provisional synthetic-only; H5 Trust evidence **re-graded to historical/regression witness** (2026-08-07, Gate A); v3 IVS cultural-values lane opened (`docs/18`), run gated; P6+ deferred |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
 | **CI** | [![ci](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml) |
@@ -26,7 +26,7 @@ Requires Python ≥ 3.11. No GPU, no model weights, no API keys — the engine i
 `main` is development; the version tags are the paper anchors. Clone the tag that matches your paper run:
 
 ```bash
-git clone -b v2.5.1 --depth 1 https://github.com/Bonorinoa/cvprofiles.git
+git clone -b v2.5.2 --depth 1 https://github.com/Bonorinoa/cvprofiles.git
 cd cvprofiles
 pip install -e .
 ```

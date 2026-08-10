@@ -54,7 +54,7 @@ def test_golden_freeze_matches_expected(
     mini_freeze_columns: list[str],
     mini_expected_freeze: dict,
 ) -> None:
-    assert __version__ == mini_expected_freeze["package_version"] == "2.5.1"
+    assert __version__ == mini_expected_freeze["package_version"] == "2.5.2"
     sh, nh, bh, rid = _hashes(
         mini_scores_df, mini_roles, mini_network, mini_beta, mini_freeze_columns
     )
@@ -202,14 +202,14 @@ def test_bad_hex_rejected() -> None:
             scores_hash="nope",
             network_hash=good,
             beta_hash=good,
-            package_version="2.5.1",
+            package_version="2.5.2",
         )
     with pytest.raises(ValueError, match="lowercase hex"):
         compute_run_id(
             scores_hash="A" * 64,
             network_hash=good,
             beta_hash=good,
-            package_version="2.5.1",
+            package_version="2.5.2",
         )
 
 

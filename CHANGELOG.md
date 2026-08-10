@@ -4,6 +4,20 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [2.5.2] — 2026-08-09 (tag `v2.5.2` — WVS/GPS tutorial milestone; PyPI publish pending owner uv publish)
+
+Tutorial milestone: the WVS/GPS patience vs risk-taking example is now honest end-to-end.
+
+### Tutorial (WVS/GPS input-builder + E2E)
+- **Disjoint-survey fix:** the individual-level WVS join was a many-to-many cross-product on country code (78,821,249 rows vs ~80k) — WVS and GPS are different surveys with disjoint respondents. Part 3 is now **GPS-only** (menu {GPS patience}, aux {risktaking, subj_math_skills}); WVS items enter only as country means (Part 2, `q275_mean` convergent aux)
+- Cell 35 demonstrates the cross-product live and refuses the merge; the execution runner asserts the refusal verbatim
+- **Corrected placeholder networks:** `monotone_rank` / `corr_zero` take the AUX column as `params.variable`, not the measure itself (old placeholders were degenerate: Spearman(m,m)=1 / |Corr(m,m)|=1)
+- Battery: 313 passed; notebook executes clean end-to-end (43 cells, all claims asserted, exit 0)
+
+### Boundary
+- v3.0.0 remains Gate C; paper protocol fields remain Augusto-owned
+- Latest PyPI before this tag: `2.5.1` (2026-08-09)
+
 ## [2.5.1] — 2026-08-09 (tagged; PyPI publish pending tutorial polish)
 
 First PyPI release since 2.0.0: CLI exposure of the v2.5.0 engine features + docs synced to shipped state + version-consistency CI check.
