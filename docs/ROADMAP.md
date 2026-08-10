@@ -33,7 +33,7 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 - **P3 betas:** `diff_means`, `map_distance` (pinned loadings IO; no PCA fit)
 - **P4 holdout:** restriction-level `stage` + country-level **units-split** (paper falsifiable core)
 - **P5 coverage:** additive **uncertainty band** (D1; honest label; boundary $|\mathrm{margin}| \le \kappa\cdot\mathrm{SE}$; headline $[L,U]$ unchanged)
-- Latest PyPI is `2.5.1` (2026-08-09); `v3.0.0` remains Gate C target
+- Latest PyPI is `3.0.0` (2026-08-10); Gate C release completed
 
 ### v2.5.2 (tagged `v2.5.2` 2026-08-09 — WVS/GPS tutorial milestone; PyPI publish pending owner uv publish)
 - **WVS/GPS input-builder + E2E tutorial** (`tutorials/cvprofiles_wvs_gps_inputs.ipynb`): synthetic oracle walk-through → country-level profile (menu {GPS patience}, aux {risktaking, q275_mean}) → individual-level **GPS-only** profile; disjoint-survey cross-product lesson (78.8M rows refused); corrected placeholder networks (`params.variable` = aux column, not the measure)
@@ -46,11 +46,11 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 
 ## Current backlog
 
-- **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored R, θ, δ, β, and evidence posture (synthetic-only portion locked provisional; **§9 Gate A amendment 2026-08-07** opens the IVS designated-evaluation box, run gated)
+- **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored R, θ, δ, β, and evidence posture (synthetic-only portion locked provisional; **§9 Gate A amendment 2026-08-07** opens the IVS designated-evaluation box, run gated; **§11 amendment 2026-08-10 promotes the WVS/GPS patience application to flagship empirical example and defers IVS**)
 - **M10 / H5:** country-level generalized trust — design **LOCKED as historical** (`docs/17`); n=35 run **re-graded to historical/regression witness** (2026-08-07); reproducible via `tools/verify_h5_trust.py`; not the v3 evidence base
-- **v3 IVS cultural-values lane (new headline):** [`docs/18_IVS_Cultural_Map.md`](18_IVS_Cultural_Map.md) — Tao et al. (2024)-style evaluation on Joint EVS/WVS 2017–2022 v5.0; design fields **Augusto-authored**, run **gated** (Gate B); open-weight policy (no adapters, no proprietary APIs)
-- **Next-sprint scope box:** Rev 3 P6 (benchmark kit + IVS harness scaffold + synthetic verifier + teaching notebook) ships as **its own checkpoint tag** (decision 2026-08-09; tag candidate `v2.6.0`); then P7/Gate C → `v3.0.0`; empirical Gate B post-tag. Plan authority: `reports/DEVELOPMENT_PLAN_v3_REV3.md`
-- **WVS/GPS preferences intermediate lane:** `evals/wvs_gps_preferences/` — patience + risk-taking on **local** GPS (Falk et al. 2018, country + individual) + WVS Wave 7 (codebook-verified Q13/Q14/Q48/Q49/Q275/R/Q279; missing codes -1..-5 masked, never imputed); interactive input-builder notebook (no form GUI); P6 E2E proof + teaching scope (frozen data build, two profiles, units-split holdout, `verify_wvs_gps.py`, tutorial); own checkpoint tag candidate `v2.6.0`; **intermediate demo / position-paper complement — not paper headline, not Gate B** (docs/12 2026-08-09, docs/16 §10)
+- **v3 IVS cultural-values lane:** [`docs/18_IVS_Cultural_Map.md`](18_IVS_Cultural_Map.md) — Tao et al. (2024)-style evaluation on Joint EVS/WVS 2017–2022 v5.0; design fields **Augusto-authored**, run **gated** (Gate B); **DEFERRED 2026-08-10 (`docs/16` §11)** — design container stays RESERVED; hard items Y003/PC2′ remain open; open-weight policy (no adapters, no proprietary APIs)
+- **Next-sprint scope box:** **P6 SUPERSEDED → v3.1** (decision 2026-08-10, docs/16 §12): the benchmark kit + IVS harness scaffold are deferred to v3.1; the v3.0.0 empirical evidence base is the WVS/GPS patience flagship application (§11, accepted frozen run). Then P7/Gate C → `v3.0.0` (in progress). Plan authority: `reports/DEVELOPMENT_PLAN_v3_REV3.md`; application authority: `reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md`
+- **WVS/GPS preferences intermediate lane:** `evals/wvs_gps_preferences/` — patience + risk-taking on **local** GPS (Falk et al. 2018, country + individual) + WVS Wave 7 (codebook-verified Q13/Q14/Q48/Q49/Q275/R/Q279; missing codes -1..-5 masked, never imputed); interactive input-builder notebook (no form GUI); **PROMOTED to flagship public-facing empirical example 2026-08-10 (`docs/16` §11)** — patience application, 7-measure menu (GPS positive control, WVS proxies, composite C=F(φ), two llama.cpp prompting measures, noise negative control), aux-only network, OLS β on log GDP pc, 80/20 country units-split vs random-selection baseline; monolith `run_application.py` + `verify_wvs_gps.py`; plan `reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md`; **frozen-run gated, not a paper headline result; IVS deferred**
 
 ## Change log
 
@@ -63,3 +63,5 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 | 2026-08-09 | **P6 tag decision** — P6 ships as its own checkpoint tag (independent of P7; candidate `v2.6.0`); stale-reference sweep (AGENTS.md, test literals) |
 | 2026-08-09 | WVS/GPS preferences intermediate lane opened (docs/12, docs/16 §10); GUI deferred, input-builder notebook chosen |
 | 2026-08-09 | **v2.5.1 PyPI release** — first PyPI since 2.0.0: CLI holdout exposure (`--holdout-units`/`--alpha`/`--kappa`), docs synced to shipped state, version-consistency CI check |
+| 2026-08-10 | **WVS/GPS patience application promoted to flagship empirical example** — `docs/16` §11 amendment (IVS deferred, RESERVED); decision card D1–D10 frozen (menu, aux-only network, OLS β, 80/20 units-split, random-selection baseline, Llama-3.1-8B + Phi-4-mini prompt arms); plan `reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md` |
+| 2026-08-10 | **Frozen run ACCEPTED; v3.0.0 release path opened** — docs/16 §12: v3.0.0 = infrastructure + flagship application; P6 superseded → v3.1; headline `M*_select = [gps, prompt_a]`, `[L,U] = [0.328, 0.402]`, random-null 100th percentile; verifier exit 0 |

@@ -6,8 +6,8 @@ display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
 status: v2_5_2_published
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "2.5.2"        # current package version (PyPI release 2026-08-09)
-target_version: "3.0.0"   # v3.0.0 remains Gate C target; 2.5.2 tagged + published 2026-08-09
+dev_version: "3.0.0"        # current package version (infrastructure + flagship application release 2026-08-10)
+target_version: "3.0.0"   # current release 2026-08-10 (was Gate C target; shipped)
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
@@ -86,26 +86,36 @@ v2_5:
   next: p6_benchmark_kit_ivs_harness_deferred
 
 v3_0:
-  status: p1_p5_engine_closed_at_v2_5_0_p6_deferred
+  status: release_in_progress  # docs/16 §12 2026-08-10: infra + flagship app; Gate C authorized
   plan: reports/DEVELOPMENT_PLAN_v3_REV3.md  # Rev 3 authority; Rev 2 historical
   inventory: reports/VERIFIED_TASK_INVENTORY.md
-  amendment: docs/16_Paper_Protocol_Freeze.md  # §9 dated amendment 2026-08-07
-  design_doc: docs/18_IVS_Cultural_Map.md
+  amendment: docs/16_Paper_Protocol_Freeze.md  # §9 2026-08-07; §11 2026-08-10 (flagship = WVS/GPS patience app; IVS deferred); §12 2026-08-10 (release; P6 → v3.1)
+  design_doc: docs/18_IVS_Cultural_Map.md  # RESERVED; DEFERRED 2026-08-10 (docs/16 §11)
   target_version: "3.0.0"
-  headline: ivs_cultural_values_lane
+  headline: wvs_gps_patience_application  # promoted 2026-08-10 (docs/16 §11); IVS deferred
+  application_plan: reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md
+  evidence_summary: reports/summaries/wvs_gps_application_summary.json  # accepted frozen run 2026-08-10
+  headline_result: "M*_select=[m_gps_patience,m_prompt_a]; [L,U]=[0.328,0.402]; random-null 100th pct"
+  p6: deferred_to_v3_1  # superseded by application milestone (docs/16 §12)
   h5_status: historical_regression_witness
   open_weight_policy: true  # no adapters, no proprietary APIs (D5/D6)
-  run_gate: gate_b_augusto_run_decision
-  note: "v2.5.0 closed Rev 3 P1–P5 engine go; P6/P7/Gate B/C remain"
+  run_gate: frozen_inputs_plus_verify_exit0_plus_augusto_run_decision  # SATISFIED 2026-08-10
+  note: "v2.5.0 closed Rev 3 P1–P5 engine go; P6 → v3.1; frozen flagship run accepted; v3.0.0 release in progress (Gate C authorized)"
 
 wvs_gps_preferences:
-  status: intermediate_demo_opened
-  constructs: [patience, risk_taking]
+  status: flagship_empirical_example  # promoted 2026-08-10 (docs/16 §11); run gated; NOT paper headline result
+  constructs: [patience, risk_taking]  # flagship = patience application; risk profile deferred companion
   data: local GPS Falk 2018 + WVS Wave 7  # country + individual level; WVS missing codes -1..-5 masked, never imputed
-  p6_scope: e2e_proof_teaching
-  tag_candidate: v2.6.0
+  plan: reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md
+  menu_7: [m_gps_patience, m_wvs_q13, m_wvs_q14, m_composite, m_prompt_a, m_prompt_b, m_noise]
+  controls: [gps_patience_positive, noise_negative]
+  network: aux_only_frozen  # conv_edu corr_min(q275_mean) 0.20; mono_edu monotone_rank 0.15; disc_risk corr_zero(risktaking) 0.30
+  beta: ols_coef_log_gdp_pc_controls_q275_mean
+  holdout: fixed_seed_random_80_20_country_units_split
+  baseline: random_selection_500_draws_k_grid_1_4
+  prompt_arms: [llama3.1-8b, phi4-mini-3.8b]  # Q8_0 preferred; pinned GGUF sha + temperature 0
   owner: Augusto
-  paper_status: complement_not_headline  # intermediate demo; IVS cultural-values remains Gate B headline
+  paper_status: flagship_demo_not_headline_result  # frozen-run gated; IVS remains separate RESERVED lane (deferred)
 
 spine:
   states: [SCORE, RESTRICT, IDENTIFY, REPORT]
@@ -164,4 +174,5 @@ locks:
   - open_weight_v3
   - v2_5_0_tagged_engine_infra_checkpoint  # P1–P5 closed; not PyPI; 3.0.0 still Gate C
   - wvs_gps_intermediate_demo_2026_08_09  # intermediate demo box; NOT paper evidence; IVS cultural-values remains Gate B headline
+  - wvs_gps_flagship_2026_08_10  # §11: flagship public-facing empirical example; IVS deferred (RESERVED); run gated; D6 open-weight stands
 ```

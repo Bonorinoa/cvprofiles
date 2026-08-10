@@ -4,6 +4,19 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [3.0.0] — 2026-08-10 (tag `v3.0.0` — infrastructure + flagship application release)
+
+The v3.0.0 release is the **infrastructure + flagship application** milestone (docs/16 §12; Gate C): the engine spine (SCORE → RESTRICT → IDENTIFY → REPORT, P1–P5 infrastructure from v2.5.0) plus an **accepted, verifier-gated empirical application** — the WVS/GPS patience flagship example.
+
+### Flagship application (WVS/GPS patience; `evals/wvs_gps_preferences/`)
+- **Frozen run accepted** (2026-08-10): headline `M*_select = [m_gps_patience, m_prompt_a]`, construct-identified range `[L,U] = [0.328, 0.402]` (standardized OLS of patience on log GDP pc, controls education); tool selection at the **100th percentile** of the random-selection null (k-grid 1–4, 500 draws); negative control rejected; holdout verdicts reported as power-limited diagnostics (posture a).
+- **Open-weight prompt measures** (D6-compliant): Meta-Llama-3.1-8B Q8_0 + Phi-4-mini 3.8B Q8_0 via llama.cpp, temperature 0, sha-pinned GGUFs; the Llama-3.1-8B arm survives selection alongside GPS patience — the Goodhart-inverted result.
+- **Monolith** `evals/wvs_gps_preferences/run_application.py` (stages 1–5: data build → prompt scoring → pooled K=5 engine → random-selection baselines → summary) + **verifier** `tools/verify_wvs_gps.py` (exit 0 on the frozen run).
+- **Governance:** θ re-anchor `disc_risk` 0.30 → 0.35 (literature-verified; Falk et al. 2018 ρ=0.230, Hanushek et al. 2022 ρ=0.358); holdout design changed to pooled K-fold (power-limited single-split diagnosis); P6 superseded → v3.1; IVS lane deferred (RESERVED).
+
+### Engine/infra
+- No engine changes in this release (P1–P5 infrastructure shipped at v2.5.0); package version moves `2.5.2 → 3.0.0` atomically with golden refresh.
+
 ## [2.5.2] — 2026-08-09 (tag `v2.5.2` — WVS/GPS tutorial milestone; PyPI release 2026-08-09)
 
 Tutorial milestone: the WVS/GPS patience vs risk-taking example is now honest end-to-end.

@@ -85,7 +85,7 @@ def test_consistent_tree_passes(tmp_path: Path) -> None:
     [
         ("docs/USER_GUIDE.md", f"shipped v{FAKE}", "shipped v0.0.0", "USER_GUIDE.md"),
         # Real current drift shape: USER_GUIDE says "shipped v2.0" (two-component
-        # old version) while the package is 2.5.2 - must be flagged as drift.
+        # old version) while the package is 3.0.0 - must be flagged as drift.
         ("docs/USER_GUIDE.md", f"shipped v{FAKE}", "shipped v2.0", "USER_GUIDE.md"),
         ("docs/ARCHITECTURE.md", f"shipped v{FAKE}", "shipped v0.0.0", "ARCHITECTURE.md"),
         ("AGENTS.md", f"`{FAKE}`", "`0.0.0`", "AGENTS.md"),

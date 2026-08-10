@@ -1,6 +1,6 @@
 # 16 — Paper Protocol Freeze
 
-**Status:** `protocol-v1-synth-provisional` — provisional synthetic-only lock; empirical/paper fields remain open. **§9 amendment (2026-08-07) opens the IVS designated-evaluation box** (run gated at Gate B); H5 Trust re-graded to historical.
+**Status:** `protocol-v1-synth-provisional` — provisional synthetic-only lock; empirical/paper fields remain open. **§9 amendment (2026-08-07) opens the IVS designated-evaluation box** (run gated at Gate B); H5 Trust re-graded to historical. **§11 amendment (2026-08-10): WVS/GPS patience application promoted to flagship empirical example; IVS deferred (box remains valid, not active).**
 
 **Package baseline:** `cvprofiles==2.5.2` (tagged 2026-08-09; PyPI publish pending owner uv publish)
 
@@ -170,7 +170,46 @@ Phase 3 may proceed only within the locked synthetic box. No empirical/H5 run, e
 
 **What this opens:** a designated **INTERMEDIATE DEMO box** at `evals/wvs_gps_preferences/` for the WVS/GPS lane — patience and risk-taking on **local** GPS (Falk et al. 2018, country + individual level) + WVS Wave 7 codebook-verified items (Q13 thrift / patience proxy; Q14 determination-perseverance / persistence proxy; Q48 freedom of choice and control / agency proxy; Q49 life satisfaction / wellbeing outcome; Q275/Q275R education ISCED / convergent outcome + control; Q279 employment status incl. self-employed / revealed-preference risk proxy). Position-paper complement; evidence posture **intermediate / not paper**. WVS missing codes $-1..-5$ are masked, never imputed. WVS Wave 7 core has **no direct risk-taking item** — the risk menu leans on GPS `risktaking` + WVS self-employment + discriminant proxies.
 
-**What it does NOT authorize:** (a) this lane as v3 paper headline evidence — the IVS cultural-values evaluation (§9, Gate B) remains the v3 headline; (b) agent authorship of the empirical network / $R$ / $\theta$ / $\beta$; (c) real IVS microdata work; (d) tag or PyPI publication by implication; (e) extension to any other construct without a further dated amendment. All other §3 fields remain **AWAITING AUGUSTO**.
+**What it does NOT authorize:** (a) this lane as v3 paper headline evidence — the IVS cultural-values evaluation (§9, Gate B) remains the v3 headline; (b) agent authorship of the empirical network / $R$ / $\theta$ / $\beta$; (c) real IVS microdata work; (d) tag or PyPI publication by implication; (e) extension to any other construct without a further dated amendment. All other §3 fields remain **AWAITING AUGUSTO**. *[§10(a) superseded by §11 2026-08-10 — IVS deferred, lane promoted to flagship example.]*
+
+## 11. Amendment 2026-08-10 — WVS/GPS patience application: flagship empirical example; IVS deferred
+
+**Authority:** Augusto approved the decision card 2026-08-10 (plan `reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md` §10; docs/12 entry same date): "approve as flagship example, please promote; defer IVS."
+
+**What this opens:** status upgrade of the WVS/GPS preferences lane (`evals/wvs_gps_preferences/`, opened §10 2026-08-09) from **INTERMEDIATE DEMO** to **flagship public-facing empirical example** of the full knowledge-production loop, per plan §1–§8:
+
+- **Construct (D2):** patience = time preference, Falk et al. (2018) GPS operationalization; the menu's composite arm C = F(φ) = z(Q13)+z(Q14) teaches composite-vs-latent distinction.
+- **Menu (D3, 7 measures):** `m_gps_patience` (positive control), `m_wvs_q13`, `m_wvs_q14`, `m_composite`, `m_prompt_a` (Meta-Llama-3.1-8B Q8_0, `bartowski/Meta-Llama-3.1-8B-Instruct-GGUF`), `m_prompt_b` (Phi-4-mini 3.8B Q8_0, `MaziyarPanahi/Phi-4-mini-instruct-GGUF`), `m_noise` (negative control).
+- **Network R (D4, frozen; aux-only — never references menu measures; θ anchors pre-data, references pinned):**
+  - `conv_edu` `corr_min(q275_mean)` θ=0.20 — patience ↑ education (Dohmen et al. 2011; Falk et al. 2018)
+  - `mono_edu` `monotone_rank(q275_mean, sign=+1)` θ=0.15 — patience monotone in education (Falk et al. 2018)
+  - `disc_risk` `corr_zero(risktaking)` θ=0.30 — patience ⊥ risk-taking, separate GPS dimensions (Falk et al. 2018)
+- **β (D5):** `ols_coef`, outcome `log_gdp_pc` (β-only; **never in R**), controls `[q275_mean]`.
+- **Holdout (D6/D7):** units = countries; fixed-seed random **80/20 units-split**; `conv_edu`+`disc_risk` select-stage, `mono_edu` holdout-stage (tier-3 moment).
+- **Baseline (D9):** random selection — 500 seeded draws, k-grid 1..4 (not LLM-as-judge).
+- **Data (D10):** respondent floor ≥30; WVS missing `-1..-5` masked, never imputed; wbgapi snapshot + sha256 (provenance); open-weight local models only (D6 stands), pinned GGUF sha + temperature 0 (determinism).
+
+**IVS deferral (amendatory to §9 D2 and §10(a)):** the IVS cultural-values evaluation is **deferred** as the v3 empirical direction; the WVS/GPS patience application is the current flagship empirical example. §9's IVS designated-evaluation box remains valid and run-gated but is not the active lane; `docs/18` remains a RESERVED design container; hard Gate B items (Y003 disposition, PC2′ transcription) stay open. Deferral is priority-only: IVS is not cancelled, closed, or re-graded.
+
+**What it does NOT authorize:** (a) this lane as the paper's headline empirical *result* — flagship demonstration of the loop, not a substitute for paper-locked estimand claims; any paper-facing number still requires frozen inputs + independent audit exit 0 + Augusto's run decision; (b) agent authorship of the empirical network — R/θ/β above are Augusto-frozen; agents implement only; (c) proprietary-API scoring for frozen numbers (D6 unchanged; a labeled API demonstration arm may appear in the notebook outside the frozen run); (d) engine changes — this is an application of the shipped package; (e) tag or PyPI publication by implication; (f) extension to any other construct without a further dated amendment; (g) reopening D5 (adapter training). All other §3 fields remain **AWAITING AUGUSTO**.
+
+**2026-08-10 θ re-anchor (amendatory to D4, `disc_risk`):** Augusto directed re-anchoring `disc_risk` θ 0.30 → **0.35** conditional on literature support ("if you are sure the literature support 0.35 better than 0.30 then re-anchoring and rerun"). Literature agent verified against primary sources (memo `evals/wvs_gps_preferences/patience_risk_theta_memo.md`): Falk et al. (2018, *QJE*) Table IV country-level Corr(patience, risktaking) = **0.230** (n=76, main text); Hanushek et al. (2022, *EJ*) replication = **0.358** (n=49); Netspar preprint footnote = **0.30** excluding Africa; individual-level ≈ 0.210. The published population range is therefore ≈ 0.23–0.36 — **θ=0.30 sat inside it**, and rejected the positive control on a **0.21-SE train-frame knife-edge** (observed 0.335, SE_z = 0.183 at n=33; under ρ≈0.25 a random draw exceeds 0.30 with probability ≈0.38). **θ=0.35 is better supported**: it admits all three project estimates (0.230/0.253/0.335) with margin while remaining a binding discriminant (rejects r ≥ 0.6). The θ=0.30 empty-M\* run (split_seed=17) is recorded as the motivating diagnostic in docs/12 — a finding, not a discarded failure. This re-anchor is a **pre-frozen-run** choice; the first frozen run uses θ=0.35.
+
+**2026-08-10 holdout-design amendment (amendatory to D6/D7): pooled country splits.** After re-anchoring, the smoke rerun (θ=0.35, split_seed=17, n=41) produced `M*_select = [m_gps_patience]` but **`M*_robust = []`**: GPS patience failed the 8-country hold frame on the convergent bars (conv_edu slack −0.569, mono_edu −0.340). First-principles diagnosis (docs/12 2026-08-10 checkpoint): at n=8 the hold frame is **power-limited** — a sample correlation's 95% CI spans ±~0.7, pure noise passed every hold-frame bar (m_noise conv_edu slack +0.386), and a designed-invalid measure passing the holdout moments is the tell that the test has no discriminatory power. The engine's refusal to certify through an uninformative hold frame is correct behavior; the researcher's discretion is to recognize the *test*, not the construct, is underpowered — and to redesign the test. **Design change:** replace the single fixed 80/20 split with **pooled K-fold country splits** (default K=5): every country is held out exactly once; a measure's selection is evaluated per fold on the complementary 4/5; its holdout compliance is evaluated on its own held-out fold; the **pooled robust set** = selected in every fold ∩ compliant on every held-out fold; headline [L,U] on pooled survivors. This gives each measure K holdout evaluations (effective holdout sample n=41 across folds, not n=8) and removes dependence on one random draw. Pool design (K, split_seed, fold assignment) enters the freeze config. The single-split empty-M\* run remains recorded as the motivating diagnostic.
+
+**2026-08-10 reporting posture (amendatory to §11): `M*_select` primary.** Augusto chose reporting posture (a): the flagship application's headline admissible set is **`M*_select`** (selection on train/complement folds), with per-fold holdout verdicts and the pooled-robust result reported as **power-limited diagnostics**. Headline `[L,U]` = min/max β on `M*_select`; the pooled-robust empty set (per-fold n≈8, noise passes some folds, correlation CIs ±0.7) is a named power limitation at n=41, not a construct verdict. Holdout remains the falsifiability audit — reported verbatim, never hidden.
+
+## 12. Amendment 2026-08-10 — v3.0.0 release: infrastructure + flagship application; P6 deferred to v3.1
+
+**Authority:** Augusto accepted the frozen run and the lean release path (docs/12 2026-08-10): "i accept the fronzen run and the lean path with P6 superseded (deferred to v3.1)."
+
+**What this opens:** the **v3.0.0 release gate**. Package baseline moves `2.5.2 → 3.0.0`; v3.0.0 is defined as **infrastructure + flagship application release**:
+
+- Empirical evidence base = the **WVS/GPS patience flagship application** (`evals/wvs_gps_preferences/`, §11): frozen run ACCEPTED, verifier exit 0, allow-listed summary. Headline `M*_select = [m_gps_patience, m_prompt_a]`, `[L,U] = [0.328, 0.402]`; tool selection at the 100th percentile of the random-selection null.
+- **P6 superseded → deferred to v3.1:** the Rev 3 P6 scope (benchmark kit + IVS harness scaffold + synthetic verifier + teaching notebook) is superseded for v3.0.0 by the application milestone — the verifier + frozen summary already provide the reproducibility contract the benchmark kit was meant to demonstrate. P6 lands in v3.1 if reopened. The IVS harness remains deferred (§9/§11).
+- **Gate C authorized by Augusto** for this release: annotated tag `v3.0.0`, push to origin, PyPI publish (token loaded; owner-run fallback if unreachable from the agent shell).
+
+**What it does NOT authorize:** any change to the frozen network / θ / β / menu (the frozen run is the evidence); paper narrative claims (Augusto's); further feature work in v3.0.0; IVS work while deferred; any silent alteration of the accepted evidence; reopening D5 (adapters) or D6 (proprietary APIs).
 
 ## Provenance rule
 

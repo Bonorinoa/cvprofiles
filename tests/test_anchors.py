@@ -174,7 +174,7 @@ def test_run_manifest_accepts_anchors_hash(mini_network: NetworkConfig) -> None:
             "scores_hash": "b" * 64,
             "network_hash": "c" * 64,
             "beta_hash": "d" * 64,
-            "package_version": "2.5.2",
+            "package_version": "3.0.0",
         },
         anchors_hash="e" * 64,
     )

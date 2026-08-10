@@ -34,7 +34,15 @@ evidence against the construct.
 ### D3 — Discriminant bar (risk-taking orthogonality)
 
 Patience must be **non-reducible to risk tolerance**: `corr_zero` on
-`risktaking` with a moderate θ (candidate ≈ 0.3; θ still to be anchored).
+`risktaking` with a moderate θ. **θ re-anchored to 0.35 on 2026-08-10**
+(docs/12; literature memo `patience_risk_theta_memo.md`): Falk et al. (2018)
+Table IV reports ρ=0.230 country-level (n=76, main text); Hanushek et al.
+(2022, *EJ*) replicate ρ=0.358 (n=49); Netspar preprint 0.30 excl. Africa.
+θ=0.30 sat **inside** the published population range and rejected GPS
+patience on a 0.21-SE train-frame knife-edge (slack −0.035 at n=33); 0.35
+admits all three project estimates (0.230 / 0.253 / 0.335) with margin while
+remaining a binding discriminant (rejects r ≥ 0.6). The θ=0.30 empty-M*
+finding is recorded as the motivating diagnostic in docs/12, not discarded.
 No discriminant bars on the other four GPS dimensions (altruism, trust,
 pos/neg reciprocity) unless theory demands them.
 

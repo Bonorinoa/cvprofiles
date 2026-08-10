@@ -49,6 +49,7 @@ reports/summaries/*
 !reports/summaries/v1_1_package_synth_summary.json
 !reports/summaries/v1_1_protocol_synth_mc50_summary.json
 !reports/summaries/h5_trust_evidence_summary.json
+!reports/summaries/wvs_gps_application_summary.json
 !reports/.gitkeep
 
 # Large local data (fixtures small enough to commit are OK under data/fixtures)
@@ -72,5 +73,13 @@ evals/realworld/**/*.parquet
 data/h5_trust_raw/
 data/h5_trust_aux/
 evals/h5_trust/runs_verify/
+
+# WVS/GPS patience application: model GGUFs (multi-GB, never commit), smoke
+# staging dirs, and API caches are regenerable. Frozen inputs under
+# data/inputs/ are committed only after real prompt columns land + freeze.
+evals/wvs_gps_preferences/models/
+evals/wvs_gps_preferences/data/smoke_stage2/
+evals/wvs_gps_preferences/data/aux/
+
 .hermes/
 data/tmp_runs/

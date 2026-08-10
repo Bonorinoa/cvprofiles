@@ -500,3 +500,20 @@ empirical lane is the IVS cultural-values evaluation (`docs/18`, `docs/16` §9).
 - **Tutorial #2:** `tutorials/cvprofiles_diagnostics_tour.ipynb` executed against the PyPI wheel — ALL ASSERTIONS PASSED, deterministic run_id `890f95c2…`.
 - **B4 locked (2026-08-06, Option B):** docs/03 §Statement of methodology; **all v2.0-DONE criteria complete** (docs/18 status map all ✅).
 - **Not paper evidence:** the H5 n=35 numbers remain *preliminary paper-facing evidence*; final paper lock and release remain Augusto's. *[re-graded 2026-08-07 to historical/regression witness — docs/16 §9; this line is a historical record of the v2.0 audit]*
+
+---
+
+## 2026-08-10 — WVS/GPS patience flagship application: frozen run ACCEPTED (evidence base for v3.0.0)
+
+**Evidence interpretation (recorded):** Augusto accepted the frozen run of the WVS/GPS patience flagship application (docs/12 2026-08-10; docs/16 §11/§12). This is the v3.0.0 empirical evidence base — the flagship demonstration of the full knowledge-production loop, **not** a paper-locked estimand claim.
+
+**Measured results (frozen; verifier exit 0):**
+- **Headline `M*_select = [m_gps_patience, m_prompt_a]`** — the field-validated GPS patience measure and the open-weight prompt measure (Meta-Llama-3.1-8B Q8_0) both survive selection in all 5 pooled folds under the human-owned network (θ=0.35; aux-only restrictions; never references menu measures).
+- **Construct-identified range `[L,U] = [0.328, 0.402]`** (standardized OLS of patience on log GDP pc, controlling for education) — narrow across the two admissible operationalizations.
+- **Negative control rejected** (`m_noise` never selected); Q13/Q14/composite rejected on the convergent bar (codebook lesson reproduced); Phi-4-mini prompt arm selected in 4/5 folds (borderline).
+- **Falsifiable core:** tool selection at the **100th percentile** of the random-selection null on held-out moments (k-grid 1–4, 500 draws each) — blind selection does not do as well.
+- **Holdout verdicts are power-limited diagnostics** (per-fold n≈8; pooled-robust empty is a test-power limitation at n=41, per posture (a)) — reported verbatim, not hidden.
+
+**Artifacts:** `reports/summaries/wvs_gps_application_summary.json` (allow-listed); frozen inputs `evals/wvs_gps_preferences/data/inputs/` (sha-pinned model provenance); pooled run `evals/wvs_gps_preferences/data/pool_runs/`; verifier `tools/verify_wvs_gps.py` (exit 0). Package version recorded: `2.5.2` at freeze time; stage-5 rerun under `3.0.0` refreshes run_ids by design (values must match).
+
+**Not paper evidence:** paper narrative, claims, and reporting placement remain Augusto's; IVS lane remains deferred (docs/16 §9/§11).

@@ -1329,3 +1329,82 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 - CI's version-consistency step stays red on AGENTS.md until that line lands.
 
 **Not authorized by this entry:** v3.0.0 (Gate C); Gate B IVS run; empirical network authorship; further tag/PyPI actions; any claim that the AGENTS.md posture is current while line 43 still reads 2.5.1.
+
+## 2026-08-10 — WVS/GPS patience application: flagship empirical example (status upgrade; IVS deferred)
+
+**Context:** Augusto approved the decision card for `reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md` ("approve as flagship example, please promote; defer IVS"). `docs/16` §11 amendment records the promotion; this entry logs the decisions and the exact frozen specifications.
+
+**Decisions (D1–D10, all accepted as drafted unless noted):**
+- **D1 — Status:** WVS/GPS patience application promoted from intermediate demo to **flagship public-facing empirical example**; **IVS cultural-values evaluation deferred** (design container `docs/18` stays RESERVED; hard Gate B items Y003/PC2′ remain open). IVS box not cancelled.
+- **D2 — Construct:** patience = time preference (Falk et al. 2018 GPS operationalization); composite arm C = F(φ) = z(Q13)+z(Q14) demonstrates composite-vs-latent distinction.
+- **D3 — Menu (7):** `m_gps_patience` (positive control), `m_wvs_q13`, `m_wvs_q14`, `m_composite`, `m_prompt_a`, `m_prompt_b`, `m_noise` (negative control).
+- **D4 — Network R (frozen, aux-only):** `conv_edu` corr_min(q275_mean) θ=0.20 (Dohmen et al. 2011; Falk et al. 2018); `mono_edu` monotone_rank(q275_mean, +1) θ=0.15 (Falk et al. 2018); `disc_risk` corr_zero(risktaking) θ=0.30 (Falk et al. 2018). **No restriction references a menu measure; outcome `log_gdp_pc` is β-only, never in R.**
+- **D5 — β:** `ols_coef`, outcome `log_gdp_pc`, controls `[q275_mean]`.
+- **D6/D7 — Holdout:** units = countries; fixed-seed random 80/20 units-split; `conv_edu`+`disc_risk` select-stage, `mono_edu` holdout-stage (tier-3 moment).
+- **D8 — Models (adjusted at build):** `m_prompt_a` = Llama-3.1-8B, `m_prompt_b` = **Phi-4-mini 3.8B** (Phi-4 itself is 14B, not the "smaller" arm — correction logged); Q8_0 preferred, pinned GGUF sha + temperature 0.
+- **D9 — Baseline:** random selection, 500 seeded draws, k-grid 1..4 (not LLM-as-judge).
+- **D10 — Data:** respondent floor ≥30; WVS missing `-1..-5` masked, never imputed; wbgapi snapshot + sha256.
+
+**Authorized by this entry:** docs/16 §11 amendment; docs/12 entry; ROADMAP/MANIFEST/AGENTS/lane-README posture flips to flagship; monolith implementation (`evals/wvs_gps_preferences/run_application.py`) and `tools/verify_wvs_gps.py` under the plan's TDD/gate discipline.
+
+**Not authorized by this entry:** any frozen run or paper-facing number before `verify_wvs_gps.py` exit 0 + Augusto's run decision; empirical network edits by agents (R/θ/β above are frozen by Augusto); proprietary-API scoring for frozen numbers (D6); engine changes; tag/PyPI/push by implication; IVS work while deferred; extension to other constructs without a further dated amendment.
+
+## 2026-08-10 — WVS/GPS patience: `disc_risk` θ re-anchor 0.30 → 0.35 (literature-conditional; D4 amendment)
+
+**Context:** the first engine run on the smoke inputs (41 countries, real prompt columns, split_seed=17) produced **empty M\*** under the frozen θ=0.30: GPS patience (positive control) passed conv_edu (+0.299) and mono_edu (+0.307) on the train frame but failed disc_risk by **slack −0.035** (|ρ|=0.335 vs θ=0.30). Full-sample |ρ| was 0.275 — a split-induced knife-edge. Augusto directed: "if you are sure the literature support 0.35 better than 0.30 then re-anchoring and rerun. Otherwise, we can keep as-is and use it as a finding." A literature agent was dispatched; its memo (`evals/wvs_gps_preferences/patience_risk_theta_memo.md`) was verified against primary sources.
+
+**Verified literature (agent, primary-source read):**
+- Falk et al. (2018, *QJE*) **Table IV** (main text): country-level Corr(patience, risktaking) = **0.230** (n=76) — matches our full sample to the decimal.
+- Hanushek, Kinne, Lergetporer & Woessmann (2022, *Economic Journal*), GPS 49-country sample: **0.358** (p=0.012).
+- Falk et al. (2016 Netspar DP051) footnote 14 (dropped from published version): **0.30** excluding Africa.
+- Individual level (GPS, ≈80k, Online Appendix C Table 12, partial with country FE): **0.210**.
+- Distinctness: Andreoni & Sprenger (2012, *AER*); GPS six-dimension design — separate constructs, modest positive cross-correlation expected (shared method variance).
+
+**Sampling-noise analysis (memo §3):** at n=33, SE_z = 0.183; observed 0.335 → z=0.348 vs ρ=0.25 → 0.51 SE (P≈0.61); vs ρ=0.23 → 0.63 SE (P≈0.53). Observed 0.335 sits **0.21 SE above θ=0.30** and **0.09 SE below θ=0.35**; under ρ≈0.25 a random 33-country draw exceeds 0.30 with probability ≈0.38.
+
+**Decision (D4 amendment):** `disc_risk` θ 0.30 → **0.35**, effective for the first frozen run. Rationale: θ=0.30 sat *inside* the published population range (0.23–0.36) and rejected the validated instrument on a 0.21-SE knife-edge; θ=0.35 admits all three project estimates (0.230/0.253/0.335) with margin while remaining binding (rejects r ≥ 0.6). The θ=0.30 empty-M\* run is **retained as the motivating diagnostic** (run_id `26e46dc…`, smoke inputs) — a finding, not a discarded failure. This is a **pre-frozen-run** choice, not post-hoc tuning to rescue GPS: the θ=0.30 failure was observed, diagnosed, and re-anchored on literature grounds before any frozen number existed.
+
+**Authorized by this entry:** θ re-anchor in `evals/wvs_gps_preferences/run_application.py` (NETWORK), DESIGN.md D3 update, docs/16 §11 amendatory note, tests updated to 0.35, stage-3/4 rerun on smoke inputs with θ=0.35.
+
+**Not authorized by this entry:** any frozen run or paper-facing number (still requires real model pair + `verify_wvs_gps.py` exit 0 + Augusto's run decision); further θ changes without literature basis; engine changes; tag/PyPI/push by implication; IVS work while deferred.
+
+## 2026-08-10 — Checkpoint: empty M*_robust under θ=0.35 explained from first principles; holdout design changed to pooled K-fold (D6/D7 amendment)
+
+**Context:** after the θ re-anchor, the smoke rerun (θ=0.35, split_seed=17, n=41, real prompt columns) produced `M*_select = [m_gps_patience]` (positive control now survives selection) but `M*_robust = []`. GPS patience failed holdout compliance on the 8 held-out countries (BGD, GTM, IND, JOR, KEN, MAR, MEX, ZWE — all developing): conv_edu slack **−0.569**, mono_edu **−0.340**, disc_risk +0.248. Augusto directed: options 1+2 are complementary — mark the checkpoint, explain from first principles, then implement the pooled holdout design.
+
+**First-principles explanation of the empty robust set:**
+
+1. **The units-split is a generalization test.** `M*_robust` = {measures selected on train that also comply on countries they never saw}. Empty robust set = "no measure's validity certifiably generalizes to the held-out countries under this network."
+2. **But the test was uninformative, and the tool said so.** The hold frame had **n=8** countries. At n=8, a sample correlation's 95% CI spans roughly ±0.7 — the point estimates (conv_edu −0.569) are inside the noise floor. The tell: **pure noise passed every hold-frame bar** (m_noise conv_edu +0.386, mono_edu +0.207, disc_risk +0.281). When a designed-invalid measure passes the holdout moments, the moments carry no discriminatory power.
+3. **The engine's refusal to certify is correct behavior.** Reporting M*_robust = {GPS} through an uninformative hold frame would be a false generalization claim. The engine is honest about what it cannot support.
+4. **The researcher's discretion is the scientific judgment.** The empty robust set is a *test-power* failure, not evidence against the construct: the patience–education relationship is documented at country level (Falk et al. 2018; education monotonicity in DESIGN.md), the failure flips with one random draw (θ=0.30 knife-edge; here the split put all 8 developing countries in hold), and noise passing is the signature of low n. The tool surfaces the failure; the researcher decides whether the failure is the construct or the test.
+5. **Design response:** pool the test. **K-fold country splits (K=5)** — every country is held out exactly once; selection per fold on the complementary 4/5; holdout compliance per measure on its own held-out fold; **pooled robust set** = selected in every fold ∩ compliant on every held-out fold. Effective holdout evidence n=41 (each country contributes one held-out evaluation), dependence on a single random draw removed.
+
+**Decision (D6/D7 amendment):** holdout design for the frozen run = **pooled K-fold country splits (K=5)**, replacing the single fixed 80/20 split. Pool design (K=5, split_seed=17, fold assignment) enters the freeze config; per-fold verdicts and the pooled robust set are both reported. The single-split empty-M\* run (run_id `d2ac5a0…` under θ=0.35; `26e46dc…` under θ=0.30) remains recorded as the motivating diagnostic.
+
+**Authorized by this entry:** pooled K-fold implementation in `evals/wvs_gps_preferences/run_application.py` (make_kfold_splits, pooled stage3/4), docs/16 §11 amendatory note, tests, smoke rerun with K=5.
+
+**Not authorized by this entry:** any frozen run or paper-facing number; further design changes without a dated decision; engine changes; tag/PyPI/push by implication; IVS work while deferred.
+
+## 2026-08-10 — Reporting posture (a): M*_select primary, holdout as power-limited diagnostic; frozen-run go
+
+**Decision:** for the flagship application, the paper reports **`M*_select` as the primary admissible set**, with per-fold holdout verdicts and the pooled-robust result as explicit **power-limited diagnostics**. Rationale (docs/12 2026-08-10 checkpoint): pooled K=5 on the smoke inputs showed GPS patience selected in 5/5 folds (selection robust) but no measure holdout-certified at per-fold n≈8 (noise passes some folds; correlation CIs span ±0.7). Reporting `M*_robust = []` as the headline would mislead readers into thinking no measure is valid when the true statement is *the holdout test is underpowered at n=41*. Posture: headline `[L,U]` = min/max β on `M*_select`; holdout verdicts reported verbatim as a fragility audit; empty pooled-robust is a named power limitation, not a construct verdict.
+
+**Frozen-run go (Augusto, 2026-08-10):** proceed with the real model pair — `m_prompt_a` = Llama-3.1-8B-Instruct Q8_0, `m_prompt_b` = Phi-4-mini-instruct Q8_0 — scoring all 41 countries, then pooled K=5 stage 3, stage 4 baselines, and `tools/verify_wvs_gps.py` exit 0, before any summary is allow-listed.
+
+**Authorized by this entry:** reporting-posture documentation; real-model downloads (open-weight GGUFs, D6-compliant); stage-2 full scoring of the frozen inputs; stage 3/4 pooled rerun; verifier invocation.
+
+**Not authorized by this entry:** paper-facing headline claims (Augusto writes those); tag/PyPI/push by implication; engine changes; further design changes without a dated decision; IVS work while deferred.
+
+## 2026-08-10 — v3.0.0 release path: frozen-run acceptance + P6 deferral to v3.1
+
+**Context:** the WVS/GPS patience flagship application reached a frozen, verifier-green run (374 tests; `tools/verify_wvs_gps.py` exit 0 on the pooled K=5 run; allow-listed `reports/summaries/wvs_gps_application_summary.json`). Headline: `M*_select = [m_gps_patience, m_prompt_a]`, `[L,U] = [0.328, 0.402]`; tool selection at the 100th percentile of the random-selection null. Augusto accepted the frozen run and the lean release path.
+
+**Decisions (2026-08-10, Augusto):**
+- **Frozen run ACCEPTED** as the flagship application's evidence base (docs/13 entry; the paper narrative and any claims remain Augusto's).
+- **P6 superseded → deferred to v3.1:** the Rev 3 P6 scope (benchmark kit + IVS harness scaffold + synthetic verifier + teaching notebook) is **superseded** for v3.0.0 by the application milestone — the verifier + frozen summary already provide the reproducibility contract the benchmark kit was meant to demonstrate; the IVS harness remains deferred (docs/16 §9/§11). P6 lands in v3.1 if reopened.
+- **v3.0.0 = infrastructure + flagship application release** (docs/16 §12 amendment). Gate C (tag, push, PyPI) authorized by Augusto for this release; publish attempted with the loaded token, owner-run fallback if the token is unreachable from the agent shell.
+
+**Authorized by this entry:** docs/16 §12 amendment; ROADMAP/MANIFEST/README posture to v3.0.0; atomic version bump 2.5.2 → 3.0.0 with golden refresh; stage-5 rerun under 3.0.0 (values must match; run_id refreshes by design); full battery; one commit; annotated tag `v3.0.0`; push to origin; PyPI publish attempt + independent verification.
+
+**Not authorized by this entry:** changes to the frozen network/θ/β/menu (the frozen run is the evidence); paper narrative claims; further feature work in v3.0.0; IVS work while deferred; any silent alteration of the accepted evidence.
