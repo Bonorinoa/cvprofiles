@@ -38,6 +38,17 @@ jobs:
       - name: Docs math delimiters use GitHub-compatible $ syntax
         run: uv run python tools/scan_math_delims.py --check
 
+      - name: Version consistency (docs posture vs sources of truth)
+        # Audit D4 (docs-version drift class): assert the two sources of truth
+        # (pyproject.toml `version`, src/cvprofiles/__init__.py `__version__`)
+        # agree, and that every CURRENT-posture version claim matches them:
+        # AGENTS.md "Package version" bullet, README.md "Version" table row,
+        # docs/USER_GUIDE.md "shipped vX.Y.Z", and the docs/METHODOLOGY.md
+        # "Package version" posture line. Contract table + regexes live in
+        # tools/check_version_consistency.py. Historical version mentions
+        # (CHANGELOG entries, tag lists) are deliberately not matched.
+        run: uv run python tools/check_version_consistency.py
+
       - name: Mypy (strict package check)
         run: uv run mypy src
 
