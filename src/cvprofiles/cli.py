@@ -113,7 +113,7 @@ def main(
         is_eager=True,
     ),
 ) -> None:
-    """cvprofiles CLI (thin spine, v2.5.0)."""
+    """cvprofiles CLI (thin spine, v2.5.1)."""
 
 
 @app.command("run")

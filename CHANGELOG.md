@@ -4,7 +4,7 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
-## [2.5.1] — 2026-08-09 (PyPI release)
+## [2.5.1] — 2026-08-09 (tagged; PyPI publish pending tutorial polish)
 
 First PyPI release since 2.0.0: CLI exposure of the v2.5.0 engine features + docs synced to shipped state + version-consistency CI check.
 

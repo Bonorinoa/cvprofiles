@@ -2,9 +2,9 @@
 
 **Status:** `protocol-v1-synth-provisional` — provisional synthetic-only lock; empirical/paper fields remain open. **§9 amendment (2026-08-07) opens the IVS designated-evaluation box** (run gated at Gate B); H5 Trust re-graded to historical.
 
-**Package baseline:** `cvprofiles==2.5.0`
+**Package baseline:** `cvprofiles==2.5.1` (tagged 2026-08-09; PyPI publish pending)
 
-**Release posture:** `2.0.0` published on PyPI 2026-08-06; `2.5.0` tagged 2026-08-08 as post-P5 infrastructure checkpoint (not PyPI); v3.0.0 plan in progress (Gate A amendment bundle 2026-08-07, §9; Rev 3 P1–P5 engine go closed at `v2.5.0`).
+**Release posture:** `2.0.0` published on PyPI 2026-08-06; `2.5.0` tagged 2026-08-08 as post-P5 infrastructure checkpoint (not PyPI); `2.5.1` tagged 2026-08-09 (CLI holdout exposure + docs sync + version-consistency CI; **PyPI publish pending** tutorial polish); v3.0.0 plan in progress (Gate A amendment bundle 2026-08-07, §9; Rev 3 P1–P5 engine go closed at `v2.5.0`).
 
 **Owner:** Augusto owns all researcher-authored scientific choices in this document.
 

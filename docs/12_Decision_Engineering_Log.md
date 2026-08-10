@@ -1278,3 +1278,18 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 - **P6 scope (supersedes the Rev 3 synthetic-only framing for this lane):** (1) input-builder notebook; (2) frozen data build (GPS + WVS proxies); (3) two profiles — patience (menu = GPS patience + Q13 + Q14) and risk (menu = GPS risktaking + self-employment); (4) network $R$ + $\beta$ authored by Augusto (agent scaffolds + oracle synthetic checks only); (5) units-split holdout by country (the D7 falsifiable core on real data); (6) `verify_wvs_gps.py` auditor (following the `verify_h5_trust.py` pattern); (7) E2E tutorial notebook. P6 ships as its own checkpoint tag (candidate v2.6.0, per the 2026-08-09 P6 decision above).
 
 **Not authorized by this entry:** agent authorship of the empirical network; PyPI; Gate B IVS run; real IVS data acquisition; tag; push; use of this lane as paper headline evidence.
+
+## 2026-08-09 — 2.5.1 release track: audit fix sprint + tag; PyPI publish deferred
+
+**Context:** Independent audit (2026-08-09) found the docs one major version behind shipped v2.5.0 (A1–A3), the units-split holdout Python-API-only with no CLI flags (B, P0), and PyPI still at 2.0.0 (D1). Four parallel agents closed the doc sync, CLI exposure, version-consistency CI, and the trust-lane recon.
+
+**Decisions (2026-08-09):**
+
+- **CLI holdout exposure (B):** `--holdout-units`, `--alpha`, `--kappa` added to `cvprofiles run`; stdout-JSON / stderr-notes contract preserved; run_id-stability verified live (default and α/κ-tuned runs keep the golden run_id `8f5d240d…`; holdout forks).
+- **Version-consistency CI (D4):** `tools/check_version_consistency.py` asserts AGENTS/README/USER_GUIDE/METHODOLOGY/ARCHITECTURE current-posture version lines match `__version__` on every bump; hermetic tests; wired into `ci.yml`. Kills the A1–A3 drift class permanently.
+- **Docs sync (A1–A3, D2, D5):** USER_GUIDE/METHODOLOGY/README/ARCHITECTURE moved to shipped v2.5.0 state (holdout stage + units-split, coverage band, `corr_zero`/`monotone_rank`, `diff_means`/`map_distance`, θ on raw sample-statistic scale); README install-from-source pins tags ("main is development; tags are the paper anchors"); WVS/GPS lane README records the cross-repo SCA2 data dependency and the WVS Wave 7 no-direct-risk-item disclosure.
+- **Version bump 2.5.0 → 2.5.1** (commit `b4cf0bd`): atomic literal move + golden refresh via `tools/refresh_mini_golden.py` (new mini run_id `8f5d240d…`; content hashes static — no algorithm drift); annotated tag `v2.5.1` pushed 2026-08-09; wheel built and contents verified (templates included, stale 2.0.0/2.0.1a1 artifacts removed from `dist/`).
+- **PyPI publish DEFERRED (Augusto-directed, 2026-08-09):** wait until the WVS/GPS tutorial iteration is polished; publish then, followed by the independent verification chain (PyPI JSON API, sha256, fresh-venv `pip install`, notebook execution on the wheel). Posture lines read "tagged; publish pending" until then.
+- **Trust-benchmark lane (D3):** recon plan written at `evals/trust_benchmark/PLAN.md`; SCA2-adapter-vs-persona comparison declared **out of scope** (SCA2 project work) by Augusto; plan retained untracked as recon reference only. The feasible empirical lane is the GPS-WVS patience/risk demo.
+
+**Not authorized by this entry:** PyPI upload (owner token step); any claim of published release before upload; empirical network authorship.
