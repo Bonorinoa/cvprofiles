@@ -21,6 +21,16 @@ pip install cvprofiles
 
 Requires Python ≥ 3.11. No GPU, no model weights, no API keys — the engine is a pure Python/numpy/pandas computation over the score columns you supply.
 
+### Install from source (pinned)
+
+`main` is development; the version tags are the paper anchors. Clone the tag that matches your paper run:
+
+```bash
+git clone -b v2.5.0 --depth 1 https://github.com/Bonorinoa/cvprofiles.git
+cd cvprofiles
+pip install -e .
+```
+
 ## Quickstart
 
 A profile needs exactly four input files, all plain text:
@@ -61,7 +71,7 @@ For a fully self-contained walkthrough that builds its inputs inline, see the tu
 
 ## What this package does
 
-Researcher supplies unit×measure scores (**SCORE**). Researcher authors a nomological network R with thresholds θ and a target β(·) (**RESTRICT**). Engine computes sample slacks, keeps admissible measures M\*, maps survivors through β, and reports the image B\* as the range [L,U] = [min B\*, max B\*] (**IDENTIFY**). Bootstrap, θ-grid, and δ-grid are additive diagnostics that never replace the headline range (**REPORT**).
+Researcher supplies unit×measure scores (**SCORE**). Researcher authors a nomological network R with thresholds θ and a target β(·) (**RESTRICT**). Engine computes sample slacks, keeps admissible measures M\*, maps survivors through β, and reports the image B\* as the range [L,U] = [min B\*, max B\*] (**IDENTIFY**). Bootstrap, the coverage uncertainty band, the θ-grid, and the δ-grid are additive diagnostics that never replace the headline range (**REPORT**). A P4b units-split holdout is not a diagnostic: when `holdout_units` is set, selection runs on train units, compliance on held-out units, and the headline becomes the robust set M\*_robust.
 
 The engine is **score-agnostic and model-free**: it does not generate measures, does not search prompt space, and contains no learned model. LLM-based or dictionary-based scoring happens upstream, when you decide how to fill score columns.
 
@@ -82,7 +92,9 @@ Full positioning in the methodology doc (`docs/METHODOLOGY.md`).
 - **Hashes everywhere.** `scores_hash`, `network_hash`, `beta_hash` travel with every report; paper numbers require frozen scores + pinned network + fixed seed + package version.
 - **Survivors-only range.** The headline [L,U] is the image of β on admissible measures only. Rejected measures are reported diagnostically but never enter the range.
 - **Empty M\* is success.** If theory + data reject every candidate measure, that is a finding — exit 0, clean report.
-- **Diagnostics are additive.** Bootstrap bands, θ-grid and δ-grid sensitivity surfaces never replace the headline range and are excluded from the freeze preimage.
+- **Diagnostics are additive.** Bootstrap bands, the coverage uncertainty band (α/κ), and θ-grid/δ-grid sensitivity surfaces never replace the headline range; band values and the α/κ knobs are excluded from the freeze preimage.
+- **Holdout is in the run_id.** `holdout_units` is normalized to an order-independent sorted-unique list, stored in the freeze `config`, and hashed into the freeze preimage — same bundle with a different holdout list ⇒ different run_id.
+- **Coverage knobs are not.** `alpha`/`kappa` shape the additive uncertainty band only and are excluded from the freeze preimage by design — same bundle ± α/κ ⇒ same run_id, different `coverage.json`.
 
 ## What it is not
 
@@ -107,6 +119,7 @@ Start here, then follow in order:
 | `tutorials/cvprofiles_diagnostics_tour.ipynb` | v2.0 measure-discipline tour: all evaluators + diagnostics |
 | `tutorials/cvprofiles_irt_scoring_tutorial.ipynb` | IRT as a SCORE-upstream scoring technology |
 | `tutorials/cvprofiles_sensemakr_tutorial.ipynb` | OVB sensitivity (Cinelli–Hazlett) on a survivor |
+| `tutorials/cvprofiles_wvs_gps_inputs.ipynb` | WVS/GPS input-builder + E2E (patience + risk-taking): synthetic oracle walk-through, then authoring the four frozen inputs for the WVS Wave 7 × GPS lane, incl. the country-level units-split holdout |
 | `docs/PROJECT_MANIFEST.md` | Machine-readable project state |
 
 Live internal logs (append-only): `docs/12_Decision_Engineering_Log.md`, `docs/13_Evaluations_Log.md`. Pre-consolidation scaffold docs live in `docs/archive/` (historical reference only).

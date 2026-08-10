@@ -13,6 +13,11 @@ An intermediate empirical lane demonstrating the pipeline on two constructs — 
 
 This lane is **not** paper headline evidence and **not** the v3 evidence base. The IVS cultural-values lane (`docs/18`, Gate B) remains the v3 paper headline.
 
+## Data provenance & the risk-taking gap (record these; reviewers will probe)
+
+- **Cross-repo data dependency.** The frozen-input build reads raw `.dta` files from inside the **SCA2_PofW** repository (paths in "What this is"; overridable via `CVPROFILES_WVS_GPS_DATA`, as in the input-builder notebook). Those files are not vendored in this lane. The frozen-input record must therefore carry provenance per source file — canonical path, content hash at freeze time, acquisition/export date, codebook version, and the exact WVS item list used — and `verify_wvs_gps.py` (the `tools/verify_h5_trust.py` pattern) must check the record against the raw files, failing loud on any drift.
+- **WVS Wave 7 core has no direct risk-taking item** (codebook-verified; see "What this is"). The risk menu leans on GPS `risktaking` + the WVS self-employment proxy (Q279, category 3) + discriminant controls. Defensible as revealed-preference + behavioral-anchor triangulation, but reviewers will probe it: record the item-level rationale next to the provenance in the frozen-input record.
+
 ## Planned artifacts (scaffold only — no data files committed yet)
 
 - Frozen data build (GPS + WVS proxies)

@@ -2,6 +2,8 @@
 
 **Canonical methodology statement (locked 2026-08-06, B4).** This document states what cvprofiles does, why, and what it deliberately does not claim. It supersedes the earlier `03_Methodology.md` scaffold (archived). Package semantics are canonical where this doc and code disagree.
 
+- Package version: `2.5.0` — the engine version this method statement describes; kept in sync by the version-consistency CI check.
+
 ## 1. The question
 
 Empirical research increasingly fills regressors, text scores, and outcome proxies with cheap multi-measure AI operationalizations of latent constructs: sentiment, uncertainty, ideology, "AI exposure," soft skills, generalized trust. Typical practice is to pick a favorite prompt or dictionary, run a point estimate, and gesture at "robustness." That collapses measurement uncertainty into a single column and invites overclaiming.
@@ -39,6 +41,8 @@ A restriction $r \in R$ is a stated testable implication of the construct defini
 | `corr_sign` | $\mathrm{sign} \cdot \mathrm{Corr}(m, V) - \theta$ | Directed association with an auxiliary |
 | `mean_order` | $\mathrm{sign}\cdot(\mathbb{E}[m\mid G{=}1] - \mathbb{E}[m\mid G{=}0]) - \theta$ | Monotone group ordering (binary 0/1 group) |
 | `rank_agree` | $\mathrm{Spearman}(m, m_{\mathrm{ref}}) - \theta$ | Candidate orders units like a reference measure |
+| `corr_zero` | $\theta - |\mathrm{Corr}(m, V)|$ | Two-sided discriminant: admit when the measure is (near-)uncorrelated with $V$ |
+| `monotone_rank` | $\mathrm{sign}\cdot\mathrm{Spearman}(m, V_{\mathrm{cont}}) - \theta$ | Monotone-in-continuous-covariate: signed rank association with a continuous $V$ |
 | `stability` | (schema-only; no evaluator yet) | Split-half agreement — fails loud until a fixture demands it |
 
 Slack sign convention: $s_r(m) \ge 0$ means restriction $r$ is satisfied by measure $m$; negative slack is the violation magnitude.
@@ -48,7 +52,7 @@ Slack sign convention: $s_r(m) \ge 0$ means restriction $r$ is satisfied by meas
 - **Each evaluator is a claim about what validity means.** Adding an evaluator is adding a position on measurement theory, not adding a convenience function. A small registry keeps those positions explicit and auditable.
 - **The target audience's economics is full of monotone structure.** Signed correlations (`corr_min`/`corr_sign`) capture "more of the construct ⇒ more of the correlate"; `mean_order` captures monotone group gaps; `rank_agree` captures ordinal agreement. Much of applied economic identification runs on exactly these.
 - **More sophisticated tests — learned judges, ML-based slacks, kernel nuisances — live outside the engine.** They embed a fitted model inside the admissibility decision, which is precisely the epistemic move this package exists to make transparent. They are legitimate upstream scoring (a learned judge is just another way to fill a score column) or downstream robustness checks, but they do not belong in the validity layer while the engine is score-agnostic and model-free.
-- **Known gap:** there is no evaluator for *monotone-in-continuous-covariate* (e.g. "trust is increasing in income"). Today that restriction must be binned into a `mean_order` group or approximated by `corr_sign`. Adding a `monotone_*` evaluator is a reasonable extension when a fixture demands it; it would follow the same registry pattern (schema type + evaluator + fail-loud default).
+- **Known gaps (as shipped):** `stability` (split-half) is schema-only — no evaluator yet, fails loud until a fixture demands it. Learned/ML-based slacks are deliberately outside the engine (a fitted model inside the admissibility decision is the epistemic move this package exists to make transparent). A formal coverage theorem for the uncertainty band under arbitrary selection coupling is deferred — the band is an honest heuristic label, never a CI. *Monotone-in-continuous-covariate* is **no longer a gap**: v2.5.0 ships `monotone_rank` (signed Spearman against a continuous $V$; see the registry table above).
 
 ## 4. Target functionals
 
@@ -58,6 +62,8 @@ $\beta(\cdot)$ is the downstream economic number the researcher wants a range fo
 |---|---|
 | `corr_y` | $\mathrm{Corr}(m, y)$ — association of the measure with the outcome |
 | `ols_coef` | Standardized OLS coefficient on $m$ in a regression of $y$ on $m$ plus declared controls (numpy closed form; no statsmodels dependency) |
+| `diff_means` | $\mathrm{sign}\cdot(\mathbb{E}[m\mid G{=}1] - \mathbb{E}[m\mid G{=}0])$ — group mean gap on a binary 0/1 group. **The contrast is on the measure itself: the declared $\beta$ outcome is ignored** |
+| `map_distance` | $\|\bar z(m) - z_{\mathrm{target}}\|_2$, where $\bar z(m) = \frac{1}{n}\sum_i x_i(m)^\top L$ — 2-D Euclidean distance of the measure's mean projected item location from a target point; item columns resolve as `{measure}__{item_id}` |
 
 More functionals can be added by extending the registry; the engine evaluates any declared, implemented functional over the menu.
 

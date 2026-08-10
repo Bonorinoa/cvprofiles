@@ -1,6 +1,6 @@
 # User Guide
 
-How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v2.0 package.
+How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v2.5.0 package (tagged 2026-08-08): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split), and the P5 coverage uncertainty band.
 
 ## 1. The four input files
 
@@ -60,9 +60,15 @@ restrictions:
     params:
       variable: v_aux
       sign: 1
+  - id: r_corr_min_hold
+    type: corr_min
+    stage: holdout
+    theta: 0.25
+    params:
+      variable: v_aux
 ```
 
-Restriction types and their params are documented in the [Methodology](METHODOLOGY.md). `delta` is the global slack tolerance (default 0).
+Restriction types and their params are documented in the [Methodology](METHODOLOGY.md). `delta` is the global slack tolerance (default 0). Each restriction may declare a `stage`: omit it (or write `select`) for an admission filter that gates M\*, or write `holdout` for a *finding* restriction — its slacks are computed and reported, but a holdout-stage failure never rejects a measure from M\* (P4). A network with holdout-stage restrictions and no select-stage restriction is rejected as degenerate (vacuous admit-all). Explicit `stage` values enter the network hash; an omitted `stage` hashes as absent, so pre-P4 networks keep bit-stable hashes.
 
 ### 1.4 beta.yaml
 
@@ -100,6 +106,9 @@ Options:
 | `--theta-grid` | Comma-separated positive λ scale multipliers | off |
 | `--delta-grid` | Comma-separated non-negative absolute δ values | off |
 | `--anchors` | Pre-data θ-anchor YAML (documentation; excluded from run_id) | off |
+| `--holdout-units` | Comma-separated unit ids to hold out (select on train units, verdict on held-out units; headline = M*_robust) | off (no units-split) |
+| `--alpha` | Coverage band tail probability: per-side α/2 quantiles over non-empty bootstrap replicates (requires `--n-boot` > 0) | `0.10` |
+| `--kappa` | Boundary-attribution rule: \|margin_m\| ≤ κ·SE_m (requires `--n-boot` > 0) | `2.0` |
 | `--title` | Report title | "Construct-validity profile" |
 
 **Contract:** stdout is always a single JSON summary (machine-clean). Human status messages go to stderr only. Empty `M*` exits 0 — it is a clean success.
@@ -118,6 +127,15 @@ result = run_profile(
     seed=0,
     n_boot=200,
     theta_grid_lambdas=[0.5, 1.0, 2.0],
+    # P4b units-split: select on train units, verdict on held-out units.
+    # Unit ids are raw values of the unit_id column (country iso codes here);
+    # at least two units must be held out (train and holdout frames each need
+    # >= 2 rows). List order is irrelevant — the engine sorts + dedupes.
+    holdout_units=["USA", "MEX"],
+    # P5 coverage band knobs (defaults shown). alpha/kappa never enter the
+    # run_id — same bundle ± these ⇒ same run_id, different coverage.json.
+    alpha=0.10,
+    kappa=2.0,
 )
 print(summary_dict(result))
 ```
@@ -131,22 +149,25 @@ Every run directory contains machine-readable artifacts plus the human report:
 | `report.html` | Primary human audit trail (see below) |
 | `report.json` | Machine-complete dump of the same payload |
 | `range.json` | `L`, `U`, `empty`, `point_id` |
-| `admissible.json` | `M*` members + rejection reasons for non-members |
+| `admissible.json` | `M*` members + rejection reasons; under a units-split also `M_star_select`, `M_star_robust`, and the `holdout` verdict block (units, frames, per-measure compliance) |
 | `beta_values.json` | β(m) for every measure, survivors flagged |
-| `slacks.csv` / `slacks.parquet` | Full slack matrix (measures × restrictions) |
+| `slacks.csv` / `slacks.parquet` | Full slack matrix (measures × restrictions, including holdout-stage columns) |
 | `S_frozen.csv` / `.parquet` | Frozen, validated score matrix |
-| `run_manifest.json` | Hashes, seed, versions, settings |
+| `run_manifest.json` | Hashes, seed, versions, settings (incl. the normalized `holdout_units` when a units-split is used) |
 | `bootstrap.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json` | Only when the corresponding layer is enabled |
+| `coverage.json` | Uncertainty band: α, κ, quantiles, band, empty-replicate rate, boundary attribution, admission frequency p̂_m (only when bootstrap is enabled) |
 
 ### Report anatomy
 
 `report.html` is a single-page, self-contained audit trail. It answers, for a non-coder:
 
 1. **What was the construct menu?** — title, roles, measure ids.
-2. **Which restrictions bit?** — slack matrix, color-coded by sign.
+2. **Which restrictions bit?** — slack matrix (satisfied vs violation magnitudes); failed restrictions named per measure.
 3. **Who is in M* and who failed which bar?** — survivors listed; non-survivors with binding restrictions named.
 4. **What is [L,U]?** — headline range block; empty-set panel when M* is empty (with an explanatory note, not a stack trace).
 5. **How does the range move on the θ-grid / δ-grid?** — sensitivity tables, when enabled.
+6. **What is the uncertainty band?** — when bootstrap is on, a coverage panel shows α, κ, the per-side α/2 quantiles, the band, the empty- and degenerate-replicate rates, **boundary attribution** (|margin_m| ≤ κ·SE_m, with margin/SE per measure), and admission frequency p̂_m.
+7. **Did survivors hold out of sample?** — under a units-split, the HTML M* is the robust set (M*_select ∩ holdout-compliant); the per-measure holdout verdict is machine-readable in the `admissible.json` `holdout` block and the stdout summary (there is no dedicated HTML holdout panel).
 
 The report is generated from the same machine payload as `report.json` (Jinja2 template), so the HTML and JSON can never disagree about numbers.
 
@@ -261,6 +282,7 @@ Each profile gets its own frozen run directory (`profiles/<id>/`) with the usual
 - [ ] C paragraph ≠ dimension marketing label alone
 - [ ] R not copied from the regression spec that defines β
 - [ ] θ prereg or explicitly exploratory
+- [ ] θ values are on the RAW sample-statistic scale (correlations or mean gaps, not t-stats); slacks are intentionally unstandardized, so θ is directly comparable to the reported slack numbers
 - [ ] Anchor roles named
 - [ ] One construct per run
 - [ ] Empty M* acceptable; no auto-loosen plan in default path
