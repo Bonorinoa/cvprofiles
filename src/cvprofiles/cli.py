@@ -61,6 +61,41 @@ def _parse_delta_grid(raw: str | None) -> list[float] | None:
     return values
 
 
+def _parse_holdout_units(raw: str | None) -> list[str] | None:
+    """Parse a comma-separated unit-id holdout list, fail-loudly.
+
+    Thin splitter: whitespace is stripped, and an empty string or any empty
+    token fails loud (mirrors ``_parse_theta_grid``). Duplicates and list
+    order are passed through unchanged — the pipeline's
+    ``normalize_holdout_units`` dedupes sorted-unique (identify/pipeline.py),
+    so dupes/order can never fork ``run_id``.
+    """
+    if raw is None:
+        return None
+    tokens = raw.split(",")
+    if not raw.strip() or any(not token.strip() for token in tokens):
+        raise ValueError("must be a non-empty comma-separated list of unit ids")
+    return [token.strip() for token in tokens]
+
+
+def _check_alpha(alpha: float) -> float:
+    """Validate the coverage band tail probability per coverage.py (0 < alpha
+    < 1, finite); fail-loudly. Rule mirrored from inference/coverage.py:103-105."""
+    a = float(alpha)
+    if not math.isfinite(a) or not (0.0 < a < 1.0):
+        raise ValueError("alpha must satisfy 0 < alpha < 1")
+    return a
+
+
+def _check_kappa(kappa: float) -> float:
+    """Validate the boundary multiplier per coverage.py (finite, > 0);
+    fail-loudly. Rule mirrored from inference/coverage.py:106-108."""
+    k = float(kappa)
+    if not math.isfinite(k) or k <= 0.0:
+        raise ValueError("kappa must be finite and > 0")
+    return k
+
+
 def _version_callback(value: bool) -> None:
     if value:
         typer.echo(f"cvprofiles {__version__}")
@@ -78,7 +113,7 @@ def main(
         is_eager=True,
     ),
 ) -> None:
-    """cvprofiles CLI (thin spine, v2.0)."""
+    """cvprofiles CLI (thin spine, v2.5.0)."""
 
 
 @app.command("run")
@@ -130,6 +165,30 @@ def run_cmd(
             help="Comma-separated non-negative tolerance values (absolute δ).",
         ),
     ] = None,
+    holdout_units: Annotated[
+        str | None,
+        typer.Option(
+            "--holdout-units",
+            help="Comma-separated unit ids held out for the P4b units-split "
+            "compliance check (select on train, verdict on hold).",
+        ),
+    ] = None,
+    alpha: Annotated[
+        float,
+        typer.Option(
+            "--alpha",
+            help="Coverage band tail probability; must satisfy 0 < alpha < 1 "
+            "(default 0.10 ⇒ band (0.05, 0.95)).",
+        ),
+    ] = 0.10,
+    kappa: Annotated[
+        float,
+        typer.Option(
+            "--kappa",
+            help="Boundary attribution multiplier |margin| <= kappa*SE; must "
+            "be finite and > 0 (default 2.0).",
+        ),
+    ] = 2.0,
     anchors: Annotated[
         Path | None,
         typer.Option(
@@ -172,6 +231,24 @@ def run_cmd(
         raise typer.Exit(code=2) from exc
 
     try:
+        holdout = _parse_holdout_units(holdout_units)
+    except ValueError as exc:
+        typer.secho(f"error: holdout-units: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=2) from exc
+
+    try:
+        alpha_ok = _check_alpha(alpha)
+    except ValueError as exc:
+        typer.secho(f"error: alpha: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=2) from exc
+
+    try:
+        kappa_ok = _check_kappa(kappa)
+    except ValueError as exc:
+        typer.secho(f"error: kappa: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=2) from exc
+
+    try:
         result = run_profile(
             scores=scores,
             roles=roles,
@@ -185,6 +262,9 @@ def run_cmd(
             theta_grid_lambdas=theta_grid_lambdas,
             delta_grid_deltas=delta_grid_deltas,
             anchors=anchors,
+            holdout_units=holdout,
+            alpha=alpha_ok,
+            kappa=kappa_ok,
         )
     except (ScoreError, RestrictError, IdentifyError, ReportError, ValueError) as exc:
         typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)
