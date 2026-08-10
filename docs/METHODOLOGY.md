@@ -2,7 +2,7 @@
 
 **Canonical methodology statement (locked 2026-08-06, B4).** This document states what cvprofiles does, why, and what it deliberately does not claim. It supersedes the earlier `03_Methodology.md` scaffold (archived). Package semantics are canonical where this doc and code disagree.
 
-- Package version: `2.5.0` — the engine version this method statement describes; kept in sync by the version-consistency CI check.
+- Package version: `2.5.1` — the engine version this method statement describes; kept in sync by the version-consistency CI check.
 
 ## 1. The question
 

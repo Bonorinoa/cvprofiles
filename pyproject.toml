@@ -1,6 +1,6 @@
 [project]
 name = "cvprofiles"
-version = "2.5.0"
+version = "2.5.1"
 description = "Construct-validity profiles: admissible measurement sets and construct-identified ranges"
 readme = "README.md"
 license = "MIT"

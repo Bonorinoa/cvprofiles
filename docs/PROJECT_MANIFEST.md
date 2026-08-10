@@ -4,10 +4,10 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v2_5_0_tagged_engine_infra_checkpoint
+status: v2_5_1_pypi_released
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "2.5.0"        # current package version (P1–P5 engine infra checkpoint; tag v2.5.0 2026-08-08)
-target_version: "3.0.0"   # v3.0.0 remains Gate C target; 2.5.0 is mid-sprint infrastructure tag
+dev_version: "2.5.1"        # current package version (PyPI release 2026-08-09; first PyPI since 2.0.0)
+target_version: "3.0.0"   # v3.0.0 remains Gate C target; 2.5.1 is the current PyPI release
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
@@ -21,6 +21,8 @@ tag_v2_0_sha: 6abb6e4
 tag_v2_0_1a1: v2.0.1a1     # dev checkpoint 2026-08-07 — docs/tooling/tutorials sprint
 tag_v2_5: v2.5.0           # P1–P5 engine infrastructure checkpoint 2026-08-08 — not PyPI
 tag_v2_5_sha: 62b99c7      # peel of annotated tag v2.5.0 (post-tag follow-up; tag itself stays at 62b99c7)
+tag_v2_5_1: v2.5.1           # PyPI release 2026-08-09 — first PyPI since 2.0.0
+tag_v2_5_1_sha: TBD          # owner fills after tagging v2.5.1
 
 poc:
   script: evals/synthetic/v0_poc.py

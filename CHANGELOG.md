@@ -4,6 +4,26 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [2.5.1] — 2026-08-09 (PyPI release)
+
+First PyPI release since 2.0.0: CLI exposure of the v2.5.0 engine features + docs synced to shipped state + version-consistency CI check.
+
+### CLI (audit B, P0)
+- `--holdout-units` (comma-separated unit ids; select on train, verdict on hold; headline = M\*_robust; order-normalized sorted-unique in freeze config; forks run_id)
+- `--alpha` (coverage band tail probability, default 0.10) and `--kappa` (boundary attribution rule, default 2.0); validation mirrors inference/coverage.py; excluded from freeze preimage
+- stdout-JSON / stderr-notes contract preserved; empty M\* exits 0
+
+### Docs (audit A1-A3, D2, D5)
+- USER_GUIDE / METHODOLOGY / README / ARCHITECTURE synced to shipped v2.5.0 engine (holdout stage + units-split, coverage band, corr_zero / monotone_rank, diff_means / map_distance; θ thresholds on raw sample-statistic scale)
+- README install-from-source pins v2.5.1; "main is development; tags are the paper anchors"
+- WVS/GPS lane README: cross-repo SCA2 data dependency + WVS Wave 7 no-direct-risk-item disclosure
+
+### CI (audit D4)
+- tools/check_version_consistency.py asserts posture docs (AGENTS / README / USER_GUIDE / METHODOLOGY / ARCHITECTURE) match __version__ on every bump; hermetic tests
+
+### Boundary
+- v3.0.0 remains Gate C; paper protocol fields remain Augusto-owned
+
 ## [2.5.0] — 2026-08-08 (tag `v2.5.0` — engine infrastructure checkpoint; **not** on PyPI)
 
 Rev 3 P1–P5 engine go closed (synthetic-first). Latest PyPI remains `2.0.0`. Target `v3.0.0` remains Gate C.

@@ -33,7 +33,13 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 - **P3 betas:** `diff_means`, `map_distance` (pinned loadings IO; no PCA fit)
 - **P4 holdout:** restriction-level `stage` + country-level **units-split** (paper falsifiable core)
 - **P5 coverage:** additive **uncertainty band** (D1; honest label; boundary $|\mathrm{margin}| \le \kappa\cdot\mathrm{SE}$; headline $[L,U]$ unchanged)
-- Latest PyPI remains `2.0.0`; `v3.0.0` remains Gate C target
+- Latest PyPI is `2.5.1` (2026-08-09); `v3.0.0` remains Gate C target
+
+### v2.5.1 (PyPI release 2026-08-09 — first PyPI since 2.0.0)
+
+- **CLI holdout exposure (audit B, P0):** `--holdout-units` (comma-separated unit ids; select on train, verdict on hold; headline = M\*_robust; order-normalized sorted-unique in freeze config; forks run_id), `--alpha` (coverage band tail probability, default 0.10) and `--kappa` (boundary attribution rule, default 2.0); validation mirrors inference/coverage.py; α/κ excluded from freeze preimage; stdout-JSON / stderr-notes contract preserved; empty M\* exits 0
+- **Docs synced to shipped state (audit A1-A3, D2, D5):** USER_GUIDE / METHODOLOGY / README / ARCHITECTURE carry the shipped v2.5.0 engine features (holdout stage + units-split, coverage band, `corr_zero` / `monotone_rank`, `diff_means` / `map_distance`); README install-from-source pins v2.5.1; WVS/GPS lane README cross-repo SCA2 data dependency + WVS Wave 7 no-direct-risk-item disclosure
+- **Version-consistency CI (audit D4):** `tools/check_version_consistency.py` asserts posture docs (AGENTS / README / USER_GUIDE / METHODOLOGY / ARCHITECTURE) match `__version__` on every bump; hermetic tests
 
 ## Current backlog
 
@@ -53,3 +59,4 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 | 2026-08-08 | **Rev 3 P1–P5 engine closed** — tag `v2.5.0` infrastructure checkpoint (not PyPI); P6 deferred |
 | 2026-08-09 | **P6 tag decision** — P6 ships as its own checkpoint tag (independent of P7; candidate `v2.6.0`); stale-reference sweep (AGENTS.md, test literals) |
 | 2026-08-09 | WVS/GPS preferences intermediate lane opened (docs/12, docs/16 §10); GUI deferred, input-builder notebook chosen |
+| 2026-08-09 | **v2.5.1 PyPI release** — first PyPI since 2.0.0: CLI holdout exposure (`--holdout-units`/`--alpha`/`--kappa`), docs synced to shipped state, version-consistency CI check |
