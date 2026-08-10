@@ -24,7 +24,7 @@ tag_v2_5_sha: 62b99c7      # peel of annotated tag v2.5.0 (post-tag follow-up; t
 tag_v2_5_1: v2.5.1           # tagged 2026-08-09 — PyPI release 2026-08-09 (published)
 tag_v2_5_1_sha: b4cf0bd      # annotated tag v2.5.1 peels to b4cf0bd (verified 2026-08-09)
 tag_v2_5_2: v2.5.2           # tagged 2026-08-09 — WVS/GPS tutorial milestone (PyPI publish pending)
-tag_v2_5_2_sha: TBD          # post-tag follow-up fills the peel sha
+tag_v2_5_2_sha: 8779174      # annotated tag v2.5.2 peels to 8779174 (verified 2026-08-09)
 
 poc:
   script: evals/synthetic/v0_poc.py
