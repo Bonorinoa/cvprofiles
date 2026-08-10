@@ -103,6 +103,14 @@ Full positioning in the methodology doc (`docs/METHODOLOGY.md`).
 - Not a generic causal-sensitivity package: it disciplines *measurement* given a stated β.
 - Not “automate all of empirical economics”: it answers one question well.
 
+## Positioning and inference stance
+
+**Model-free by design.** The engine never fits a model inside the validity layer: a p-value requires a null distribution, a Bayes factor requires priors, a likelihood ratio requires a model — all of which smuggle in distributional assumptions the engine refuses to own. It computes transparent sample moments against researcher-declared thresholds.
+
+**Diagnostic surfaces.** θ-grid and δ-grid show how $M^*$ and $[L,U]$ move with threshold and tolerance choices — the specification-curve (Simonsohn et al. 2020) / multiverse (Steegen et al. 2016) idea applied to measurement admissibility. Descriptive by design: they reveal *where* admissibility flips; they make no inferential claim about the surface.
+
+**Honest inference posture.** The range is a fragility audit over sample-admissible measures, not a confidence set — no coverage theorem is claimed. Bootstrap output is an uncertainty band, never a CI. The units-split holdout is the out-of-sample check: select on train units, verdict on held-out units.
+
 ## Documentation
 
 Start here, then follow in order:
