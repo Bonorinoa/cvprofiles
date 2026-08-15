@@ -1,0 +1,18 @@
+{
+  "unit_id": "unit_id",
+  "measures": [
+    "m_gps_trust",
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_institution",
+    "m_trust_composite",
+    "m_noise"
+  ],
+  "aux": [
+    "rule_of_law",
+    "gini",
+    "q275_mean"
+  ],
+  "outcome": "log_gdp_pc"
+}

@@ -1,0 +1,57 @@
+{
+  "M_star": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite"
+  ],
+  "M_star_robust": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite"
+  ],
+  "M_star_select": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite"
+  ],
+  "delta": 0.0,
+  "empty": false,
+  "empty_R": false,
+  "holdout": {
+    "holdout_frame": null,
+    "select_frame": null,
+    "units": null,
+    "verdict": {
+      "m_gps_trust": [
+        "conv_edu_hold"
+      ],
+      "m_noise": [
+        "conv_edu_hold"
+      ],
+      "m_trust_composite": [
+        "conv_edu_hold"
+      ],
+      "m_trust_institution": [
+        "conv_edu_hold"
+      ]
+    }
+  },
+  "n_admissible": 4,
+  "n_menu": 7,
+  "point_id": false,
+  "rejected": {
+    "m_gps_trust": [
+      "conv_rule_of_law"
+    ],
+    "m_noise": [
+      "conv_rule_of_law",
+      "disc_gini"
+    ],
+    "m_trust_institution": [
+      "conv_rule_of_law"
+    ]
+  }
+}

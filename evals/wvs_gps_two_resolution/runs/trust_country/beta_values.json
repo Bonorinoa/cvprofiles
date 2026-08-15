@@ -1,0 +1,20 @@
+{
+  "admissible_flag": {
+    "m_gps_trust": false,
+    "m_noise": false,
+    "m_trust_composite": true,
+    "m_trust_general": true,
+    "m_trust_in_group": true,
+    "m_trust_institution": false,
+    "m_trust_out_group": true
+  },
+  "beta_values": {
+    "m_gps_trust": 0.10902294590510236,
+    "m_noise": 0.02835077310905364,
+    "m_trust_composite": 0.10682921214895848,
+    "m_trust_general": 0.39059801989030046,
+    "m_trust_in_group": 0.19181229950916978,
+    "m_trust_institution": -0.09228547256256103,
+    "m_trust_out_group": 0.2664556374680704
+  }
+}

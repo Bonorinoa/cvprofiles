@@ -1,0 +1,64 @@
+{
+  "cells": {
+    "min_cell_n": 20,
+    "min_cells_per_country": 6,
+    "n_cells": 480,
+    "n_countries": 42
+  },
+  "compare_patience": {
+    "m_wvs_q13": {
+      "max_abs": 2.220446049250313e-16,
+      "n": 41
+    },
+    "m_wvs_q14": {
+      "max_abs": 2.220446049250313e-16,
+      "n": 41
+    },
+    "q275_mean": {
+      "max_abs": 0.0,
+      "n": 41
+    }
+  },
+  "compare_trust": {
+    "m_trust_general": {
+      "max_abs": 9.71445146547012e-17,
+      "n": 35
+    },
+    "m_trust_in_group": {
+      "max_abs": 1.1102230246251565e-16,
+      "n": 35
+    },
+    "m_trust_institution": {
+      "max_abs": 1.1102230246251565e-16,
+      "n": 35
+    },
+    "m_trust_out_group": {
+      "max_abs": 1.6653345369377348e-16,
+      "n": 35
+    }
+  },
+  "hashes": {
+    "patience_cells": "ffa0a6d167eeda1ea0fd96bf696c69a5b4c115748ff314e674c6d40e3b1dcd60",
+    "patience_country": "60212b249a77fe335677b0aef122da35ec7c150e056c0b9a99a501750f3bde66",
+    "trust_cells": "bb71c569d9978f3cf94ef9245cf05fe628d41073fff73181240703efa6406572",
+    "trust_country": "960d870c19f622d410f0435d1d24de63e3b6f36f559d30eb6b9fe5c7915e6adf"
+  },
+  "n_patience_cells": 480,
+  "n_patience_country": 41,
+  "n_trust_cells": 480,
+  "n_trust_country": 35,
+  "respondent_floor": 30,
+  "reuse_patience": true,
+  "reuse_trust": true,
+  "seed": 20260814,
+  "source_patience": "reused_frozen_patience_inputs",
+  "source_trust": "reused_h5_plus_q275",
+  "sources": {
+    "gps_country": "/Users/bonorinoa/Desktop/Github_Repositories/SCA2_PofW/data/GPS/GPS_dataset_country_level/country_gps.dta",
+    "gps_individual": "/Users/bonorinoa/Desktop/Github_Repositories/SCA2_PofW/data/GPS/GPS_dataset_individual_level/individual_new.dta",
+    "h5": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/h5_trust/data/scores.csv",
+    "patience_frozen": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_preferences/data/inputs/scores.csv",
+    "wdi": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_preferences/data/aux/wdi.csv",
+    "wvs": "/Users/bonorinoa/Desktop/Github_Repositories/SCA2_PofW/data/WVS/WVS_wave7.dta"
+  }
+}

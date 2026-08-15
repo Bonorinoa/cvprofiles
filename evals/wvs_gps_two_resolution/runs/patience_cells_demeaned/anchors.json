@@ -1,0 +1,21 @@
+{
+  "anchors": [
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_v",
+      "pre_data": true,
+      "restriction_id": "conv_edu_cell",
+      "source_phrase": "Same education implication applied within country (cell means). \u03b8=0.20."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_v",
+      "pre_data": true,
+      "restriction_id": "mono_edu_cell",
+      "source_phrase": "Leftover within-country rank-monotone education restriction. \u03b8=0.15."
+    }
+  ],
+  "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
+  "n_anchors": 2,
+  "schema_version": "1"
+}

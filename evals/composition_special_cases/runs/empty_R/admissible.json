@@ -1,0 +1,37 @@
+{
+  "M_star": [
+    "m_gps_patience",
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_prompt_a",
+    "m_prompt_b",
+    "m_noise"
+  ],
+  "M_star_robust": [
+    "m_gps_patience",
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_prompt_a",
+    "m_prompt_b",
+    "m_noise"
+  ],
+  "M_star_select": [
+    "m_gps_patience",
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_prompt_a",
+    "m_prompt_b",
+    "m_noise"
+  ],
+  "delta": 0.0,
+  "empty": false,
+  "empty_R": true,
+  "holdout": null,
+  "n_admissible": 7,
+  "n_menu": 7,
+  "point_id": false,
+  "rejected": {}
+}

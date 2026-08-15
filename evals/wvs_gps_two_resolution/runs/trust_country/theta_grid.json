@@ -1,0 +1,91 @@
+{
+  "headline_lambda": 1.0,
+  "lambda_scales": [
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "note": "Diagnostic theta-sensitivity surface only. Headline [L,U] is always lambda=1.0; lambda is never auto-selected.",
+  "purpose": "diagnostic_theta_sensitivity",
+  "rows": [
+    {
+      "L": 0.10682921214895848,
+      "U": 0.39059801989030046,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_composite"
+      ],
+      "empty": false,
+      "lambda": 0.5,
+      "n_admissible": 4,
+      "network_hash": "c783cc2ef139eb54de4157bc423922cd80a604d6058e8a809d88e72d723ed130",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_hold": 0.1,
+        "conv_rule_of_law": 0.15,
+        "disc_gini": 0.05
+      }
+    },
+    {
+      "L": 0.10682921214895848,
+      "U": 0.39059801989030046,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_composite"
+      ],
+      "empty": false,
+      "lambda": 1.0,
+      "n_admissible": 4,
+      "network_hash": "1eb3060a9f91564e6f6fecd71212b3d64fb6a717badd396512b25ce4ffddf6e2",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_hold": 0.2,
+        "conv_rule_of_law": 0.3,
+        "disc_gini": 0.1
+      }
+    },
+    {
+      "L": 0.19181229950916978,
+      "U": 0.39059801989030046,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group"
+      ],
+      "empty": false,
+      "lambda": 1.5,
+      "n_admissible": 3,
+      "network_hash": "dffde71ec128fdff896cbe5c727d0533c5e07b971fb28ac13d53247eb7d36033",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_hold": 0.30000000000000004,
+        "conv_rule_of_law": 0.44999999999999996,
+        "disc_gini": 0.15000000000000002
+      }
+    },
+    {
+      "L": 0.2664556374680704,
+      "U": 0.39059801989030046,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_out_group"
+      ],
+      "empty": false,
+      "lambda": 2.0,
+      "n_admissible": 2,
+      "network_hash": "add450a70c5e3bbc5c6b7ac374574f3141494e0265801eb72796b339ad8ebdee",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_hold": 0.4,
+        "conv_rule_of_law": 0.6,
+        "disc_gini": 0.2
+      }
+    }
+  ],
+  "schema_version": "1"
+}

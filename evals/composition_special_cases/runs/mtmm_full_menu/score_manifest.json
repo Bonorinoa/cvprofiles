@@ -1,0 +1,41 @@
+{
+  "schema_version": "1",
+  "roles": {
+    "unit_id": "unit_id",
+    "measures": [
+      "gps_patience",
+      "m_patience_child_qualities",
+      "gps_trust",
+      "m_trust_general"
+    ],
+    "aux": [
+      "q275_mean"
+    ],
+    "outcome": "log_gdp_pc",
+    "diagnostic": []
+  },
+  "n_rows": 41,
+  "n_measures": 4,
+  "measure_columns": [
+    "gps_patience",
+    "m_patience_child_qualities",
+    "gps_trust",
+    "m_trust_general"
+  ],
+  "normalization": {
+    "policy": "none",
+    "zscore_measures": false,
+    "ddof": null,
+    "columns_transformed": []
+  },
+  "scores_hash": "8e56d2b4c6f54cbabd9b296fe2b8d0827be74c2308bbc124185b147bd407766c",
+  "dtypes": {
+    "unit_id": "str",
+    "gps_patience": "float64",
+    "m_patience_child_qualities": "float64",
+    "gps_trust": "float64",
+    "m_trust_general": "float64",
+    "q275_mean": "float64",
+    "log_gdp_pc": "float64"
+  }
+}

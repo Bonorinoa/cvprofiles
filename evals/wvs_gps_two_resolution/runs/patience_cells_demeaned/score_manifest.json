@@ -1,0 +1,41 @@
+{
+  "schema_version": "1",
+  "roles": {
+    "unit_id": "unit_id",
+    "measures": [
+      "m_wvs_q13",
+      "m_wvs_q14",
+      "m_composite",
+      "m_noise"
+    ],
+    "aux": [
+      "q275_cell"
+    ],
+    "outcome": "gps_patience_cell",
+    "diagnostic": []
+  },
+  "n_rows": 480,
+  "n_measures": 4,
+  "measure_columns": [
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_noise"
+  ],
+  "normalization": {
+    "policy": "none",
+    "zscore_measures": false,
+    "ddof": null,
+    "columns_transformed": []
+  },
+  "scores_hash": "74c5a537ddc0b6e895b20e483d6c6315b043278411847eef5fdf1fe71c7edfa4",
+  "dtypes": {
+    "unit_id": "str",
+    "m_wvs_q13": "float64",
+    "m_wvs_q14": "float64",
+    "m_composite": "float64",
+    "m_noise": "float64",
+    "q275_cell": "float64",
+    "gps_patience_cell": "float64"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "admissible_flag": {
+    "m_composite": false,
+    "m_gps_patience": true,
+    "m_noise": false,
+    "m_wvs_q13": false,
+    "m_wvs_q14": false
+  },
+  "beta_values": {
+    "m_composite": -0.21874650645411,
+    "m_gps_patience": 0.40246334068031847,
+    "m_noise": 0.019901395118570066,
+    "m_wvs_q13": -0.16598846758352492,
+    "m_wvs_q14": -0.1948399555130896
+  }
+}

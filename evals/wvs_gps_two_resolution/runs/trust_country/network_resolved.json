@@ -1,0 +1,36 @@
+{
+  "schema_version": "1",
+  "name": "trust_country_two_resolution",
+  "delta": 0.0,
+  "empty_R": false,
+  "restrictions": [
+    {
+      "id": "conv_rule_of_law",
+      "type": "corr_min",
+      "theta": 0.3,
+      "params": {
+        "variable": "rule_of_law"
+      },
+      "stage": "select"
+    },
+    {
+      "id": "disc_gini",
+      "type": "corr_sign",
+      "theta": 0.1,
+      "params": {
+        "variable": "gini",
+        "sign": -1
+      },
+      "stage": "select"
+    },
+    {
+      "id": "conv_edu_hold",
+      "type": "corr_min",
+      "theta": 0.2,
+      "params": {
+        "variable": "q275_mean"
+      },
+      "stage": "holdout"
+    }
+  ]
+}

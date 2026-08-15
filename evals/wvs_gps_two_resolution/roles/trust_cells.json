@@ -1,0 +1,15 @@
+{
+  "unit_id": "unit_id",
+  "measures": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_institution",
+    "m_trust_composite",
+    "m_noise"
+  ],
+  "aux": [
+    "q275_cell"
+  ],
+  "outcome": "gps_trust_cell"
+}

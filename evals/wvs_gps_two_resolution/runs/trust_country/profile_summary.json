@@ -1,0 +1,158 @@
+{
+  "L": 0.10682921214895848,
+  "M_star": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite"
+  ],
+  "M_star_robust": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite"
+  ],
+  "M_star_select": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite"
+  ],
+  "U": 0.39059801989030046,
+  "anchors_hash": "68e155f6775d94313deb30856e689244b23690c9a6d2d1784bb26ebd310d3201",
+  "baselines": {
+    "best_abs_beta": "m_trust_general",
+    "best_abs_beta_holdout_pass_rate": 1.0,
+    "best_abs_beta_value": 0.39059801989030046,
+    "canonical": "m_trust_general",
+    "canonical_holdout_pass_rate": 1.0,
+    "canonical_in_menu": true,
+    "menu_without_noise": [
+      "m_gps_trust",
+      "m_trust_general",
+      "m_trust_in_group",
+      "m_trust_out_group",
+      "m_trust_institution",
+      "m_trust_composite"
+    ],
+    "n_draws": 500,
+    "per_measure_holdout": {
+      "m_gps_trust": 0.0,
+      "m_trust_composite": 0.0,
+      "m_trust_general": 1.0,
+      "m_trust_in_group": 1.0,
+      "m_trust_institution": 0.0,
+      "m_trust_out_group": 1.0
+    },
+    "random_k1": {
+      "pass_rate_mean": 0.52,
+      "pass_rate_p50": 1.0,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 0.48
+    },
+    "random_k2": {
+      "pass_rate_mean": 0.494,
+      "pass_rate_p50": 0.5,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 0.812
+    },
+    "random_k3": {
+      "pass_rate_mean": 0.5126666666666666,
+      "pass_rate_p50": 0.5,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 0.936
+    },
+    "tool_holdout_pass_rate": 0.75
+  },
+  "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+  "beta_values": {
+    "m_gps_trust": 0.10902294590510236,
+    "m_noise": 0.02835077310905364,
+    "m_trust_composite": 0.10682921214895848,
+    "m_trust_general": 0.39059801989030046,
+    "m_trust_in_group": 0.19181229950916978,
+    "m_trust_institution": -0.09228547256256103,
+    "m_trust_out_group": 0.2664556374680704
+  },
+  "bootstrap": {
+    "artifact": "bootstrap.json",
+    "band_L": -0.039166724340843846,
+    "band_U": 0.6798549743841862,
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 0.002,
+    "n_boot": 1000,
+    "note": null,
+    "replicates_degenerate": 0,
+    "replicates_empty": 2,
+    "replicates_nonempty": 998,
+    "seed": 20260814
+  },
+  "coverage": {
+    "alpha": 0.1,
+    "artifact": "coverage.json",
+    "band_L": -0.016173341685614434,
+    "band_U": 0.6388574757401789,
+    "kappa": 2.0,
+    "n_boundary": 7,
+    "quantiles": [
+      0.05,
+      0.95
+    ]
+  },
+  "coverage_band": [
+    -0.016173341685614434,
+    0.6388574757401789
+  ],
+  "delta_grid": null,
+  "empty": false,
+  "empty_replicate_rate": 0.002,
+  "headline_posture": "restriction_stage_split_M_star_select",
+  "holdout_verdict": {
+    "m_gps_trust": [
+      "conv_edu_hold"
+    ],
+    "m_noise": [
+      "conv_edu_hold"
+    ],
+    "m_trust_composite": [
+      "conv_edu_hold"
+    ],
+    "m_trust_institution": [
+      "conv_edu_hold"
+    ]
+  },
+  "id": "trust_country",
+  "n_boot": 1000,
+  "n_units": 35,
+  "network_hash": "1eb3060a9f91564e6f6fecd71212b3d64fb6a717badd396512b25ce4ffddf6e2",
+  "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country",
+  "package_version": "3.0.1",
+  "point_id": false,
+  "rejected": {
+    "m_gps_trust": [
+      "conv_rule_of_law"
+    ],
+    "m_noise": [
+      "conv_rule_of_law",
+      "disc_gini"
+    ],
+    "m_trust_institution": [
+      "conv_rule_of_law"
+    ]
+  },
+  "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country/report.html",
+  "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country/report.json",
+  "run_id": "533d3313bf76e08b79c2a9d0bcdf3f5648d96719fe4c2e0dca8d0ed87f24e35e",
+  "scores_hash": "4e5383842cc9a8b540961ccee4d0a2741537388dd1c803b48394f360ba58ed0b",
+  "theta_grid": {
+    "artifact": "theta_grid.json",
+    "headline_lambda": 1.0,
+    "lambdas": [
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "rows": 4
+  }
+}

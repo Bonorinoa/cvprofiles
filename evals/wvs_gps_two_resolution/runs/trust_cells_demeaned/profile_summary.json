@@ -1,0 +1,154 @@
+{
+  "L": null,
+  "M_star": [],
+  "M_star_robust": [],
+  "M_star_select": [],
+  "U": null,
+  "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
+  "baselines": {
+    "best_abs_beta": "m_trust_composite",
+    "best_abs_beta_holdout_pass_rate": 0.0,
+    "best_abs_beta_value": 0.3176110329997308,
+    "canonical": "m_trust_general",
+    "canonical_holdout_pass_rate": 0.0,
+    "canonical_in_menu": true,
+    "menu_without_noise": [
+      "m_trust_general",
+      "m_trust_in_group",
+      "m_trust_out_group",
+      "m_trust_institution",
+      "m_trust_composite"
+    ],
+    "n_draws": 500,
+    "per_measure_holdout": {
+      "m_trust_composite": 0.0,
+      "m_trust_general": 0.0,
+      "m_trust_in_group": 0.0,
+      "m_trust_institution": 0.0,
+      "m_trust_out_group": 0.0
+    },
+    "random_k1": {
+      "pass_rate_mean": 0.0,
+      "pass_rate_p50": 0.0,
+      "pass_rate_p95": 0.0,
+      "tool_percentile": null
+    },
+    "random_k2": {
+      "pass_rate_mean": 0.0,
+      "pass_rate_p50": 0.0,
+      "pass_rate_p95": 0.0,
+      "tool_percentile": null
+    },
+    "random_k3": {
+      "pass_rate_mean": 0.0,
+      "pass_rate_p50": 0.0,
+      "pass_rate_p95": 0.0,
+      "tool_percentile": null
+    },
+    "tool_holdout_pass_rate": 0.0
+  },
+  "beta_hash": "19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e",
+  "beta_values": {
+    "m_noise": 0.014662177714558534,
+    "m_trust_composite": 0.3176110329997308,
+    "m_trust_general": 0.05242762548062067,
+    "m_trust_in_group": 0.2239306766609153,
+    "m_trust_institution": 0.2847229755917614,
+    "m_trust_out_group": 0.21142295058171512
+  },
+  "bootstrap": {
+    "artifact": "bootstrap.json",
+    "band_L": null,
+    "band_U": null,
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 1.0,
+    "n_boot": 1000,
+    "note": "all replicates empty (or degenerate): band is null; headline [L,U] unchanged",
+    "replicates_degenerate": 0,
+    "replicates_empty": 1000,
+    "replicates_nonempty": 0,
+    "seed": 20260814
+  },
+  "coverage": {
+    "alpha": 0.1,
+    "artifact": "coverage.json",
+    "band_L": null,
+    "band_U": null,
+    "kappa": 2.0,
+    "n_boundary": 0,
+    "quantiles": [
+      0.05,
+      0.95
+    ]
+  },
+  "coverage_band": [
+    null,
+    null
+  ],
+  "delta_grid": null,
+  "empty": true,
+  "empty_replicate_rate": 1.0,
+  "headline_posture": "restriction_stage_split_M_star_select",
+  "holdout_verdict": {
+    "m_noise": [
+      "mono_edu_cell"
+    ],
+    "m_trust_composite": [
+      "mono_edu_cell"
+    ],
+    "m_trust_general": [
+      "mono_edu_cell"
+    ],
+    "m_trust_in_group": [
+      "mono_edu_cell"
+    ],
+    "m_trust_institution": [
+      "mono_edu_cell"
+    ],
+    "m_trust_out_group": [
+      "mono_edu_cell"
+    ]
+  },
+  "id": "trust_cells_demeaned",
+  "n_boot": 1000,
+  "n_units": 480,
+  "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
+  "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned",
+  "package_version": "3.0.1",
+  "point_id": false,
+  "rejected": {
+    "m_noise": [
+      "conv_edu_cell"
+    ],
+    "m_trust_composite": [
+      "conv_edu_cell"
+    ],
+    "m_trust_general": [
+      "conv_edu_cell"
+    ],
+    "m_trust_in_group": [
+      "conv_edu_cell"
+    ],
+    "m_trust_institution": [
+      "conv_edu_cell"
+    ],
+    "m_trust_out_group": [
+      "conv_edu_cell"
+    ]
+  },
+  "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned/report.html",
+  "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned/report.json",
+  "run_id": "ae52cba4148850918d60554189d714b152825401856a996f256d4491c382f75c",
+  "scores_hash": "e1a11178ef331502d1f88e3f1dfa2494b8cf1d2d7c27e06aa1026ad6538e62ac",
+  "theta_grid": {
+    "artifact": "theta_grid.json",
+    "headline_lambda": 1.0,
+    "lambdas": [
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "rows": 4
+  }
+}

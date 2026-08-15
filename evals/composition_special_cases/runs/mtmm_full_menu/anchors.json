@@ -1,0 +1,63 @@
+{
+  "anchors": [
+    {
+      "anchor_kind": "literature",
+      "citation_key": "oecd2017_falk2018_table_ii",
+      "pre_data": true,
+      "restriction_id": "conv_gps_patience_vs_wvs",
+      "source_phrase": "OECD 2017 survey\u2013behavioral trust r\u22480.29; Falk et al. 2018 Table II GPS\u2013WVS trust Spearman=0.49 (n=60). Convergent floor set at 0.30, at the published survey\u2013behavioral bound and below the GPS\u2013WVS trust correlation. Falk Table II GPS patience vs WVS long-term orientation = 0.09 (p=.52); a 0.30 bar is expected to reject WVS patience if that relationship holds."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "oecd2017_falk2018_table_ii",
+      "pre_data": true,
+      "restriction_id": "conv_wvs_patience_vs_gps",
+      "source_phrase": "Same convergent floor 0.30 as the directed partner cell (OECD 2017 r\u22480.29; Falk 2018 Table II trust r=0.49)."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_ii",
+      "pre_data": true,
+      "restriction_id": "conv_gps_trust_vs_wvs",
+      "source_phrase": "Falk et al. 2018 Table II: GPS trust vs WVS trust Spearman rho=0.49, p<.01, n=60. Floor 0.30 sits below that published correlation."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_ii",
+      "pre_data": true,
+      "restriction_id": "conv_wvs_trust_vs_gps",
+      "source_phrase": "Same convergent floor 0.30 as the directed partner cell (Falk 2018 Table II r=0.49)."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_iv",
+      "pre_data": true,
+      "restriction_id": "disc_gps_patience_vs_gps_trust",
+      "source_phrase": "Falk et al. 2018 Table IV country-level Corr(patience, trust)=0.190. Discriminant bar 0.35 admits that published association with margin and still rejects r\u22730.6."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_iv",
+      "pre_data": true,
+      "restriction_id": "disc_wvs_patience_vs_wvs_trust",
+      "source_phrase": "Same discriminant bar 0.35 as the GPS heterotrait\u2013monomethod cell (Falk 2018 Table IV r=0.190)."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_iv",
+      "pre_data": true,
+      "restriction_id": "disc_gps_patience_vs_wvs_trust",
+      "source_phrase": "Heterotrait\u2013heteromethod discriminant; same 0.35 bar (Falk 2018 Table IV patience\u2013trust r=0.190)."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_iv",
+      "pre_data": true,
+      "restriction_id": "disc_gps_trust_vs_wvs_patience",
+      "source_phrase": "Heterotrait\u2013heteromethod discriminant; same 0.35 bar (Falk 2018 Table IV patience\u2013trust r=0.190)."
+    }
+  ],
+  "anchors_hash": "7d23bb8d3b4ee594f4545bacd8e552e8427ceb7b792c8fd72d2711247c65e9e5",
+  "n_anchors": 8,
+  "schema_version": "1"
+}

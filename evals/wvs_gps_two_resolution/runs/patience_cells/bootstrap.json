@@ -1,0 +1,26 @@
+{
+  "band_L": null,
+  "band_U": null,
+  "band_method": "percentile_nonempty",
+  "degenerate_replicate_rate": 0.0,
+  "empty_replicate_rate": 1.0,
+  "headline_note": "Headline [L,U] remains min/max B* on the full sample; the bootstrap band is additive metadata.",
+  "method": "efron_units_only",
+  "n_boot": 1000,
+  "note": "all replicates empty (or degenerate): band is null; headline [L,U] unchanged",
+  "quantile_method": "linear",
+  "quantiles": [
+    0.025,
+    0.975
+  ],
+  "replicates_degenerate": 0,
+  "replicates_empty": 1000,
+  "replicates_nonempty": 0,
+  "replicates_total": 1000,
+  "samples": {
+    "L": [],
+    "U": []
+  },
+  "schema_version": "1",
+  "seed": 20260814
+}

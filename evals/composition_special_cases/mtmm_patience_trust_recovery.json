@@ -1,0 +1,111 @@
+{
+  "L": null,
+  "M_star_engine_global": [],
+  "U": null,
+  "beta_values": {
+    "gps_patience": 0.402463340625296,
+    "gps_trust": 0.12919755333265634,
+    "m_patience_child_qualities": -0.20274733819507956,
+    "m_trust_general": 0.4110022513414336
+  },
+  "bridge_matches_classical": true,
+  "classical_fail": {
+    "gps_patience": [
+      "conv_gps_patience_vs_wvs",
+      "disc_gps_patience_vs_wvs_trust"
+    ],
+    "gps_trust": [
+      "conv_gps_trust_vs_wvs"
+    ],
+    "m_patience_child_qualities": [
+      "conv_wvs_patience_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust"
+    ],
+    "m_trust_general": [
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust"
+    ]
+  },
+  "classical_retain": [],
+  "correlations": {
+    "gps_patience": {
+      "gps_trust": 0.1376612978897871,
+      "m_patience_child_qualities": -0.2518765868099758,
+      "m_trust_general": 0.8248565176350738
+    },
+    "gps_trust": {
+      "gps_patience": 0.1376612978897871,
+      "m_patience_child_qualities": 0.24130439474917928,
+      "m_trust_general": 0.2842632274086732
+    },
+    "m_patience_child_qualities": {
+      "gps_patience": -0.2518765868099758,
+      "gps_trust": 0.24130439474917928,
+      "m_trust_general": -0.4107651003936546
+    },
+    "m_trust_general": {
+      "gps_patience": 0.824856517635074,
+      "gps_trust": 0.2842632274086732,
+      "m_patience_child_qualities": -0.41076510039365466
+    }
+  },
+  "empty": true,
+  "n_units": 41,
+  "note": "Engine evaluates every restriction on every measure. This is stricter than classical per-instrument MTMM inspection.",
+  "package_version": "3.0.1",
+  "pair_slacks": {
+    "gps_patience": {
+      "conv_gps_patience_vs_wvs": -0.5518765868099758,
+      "disc_gps_patience_vs_gps_trust": 0.21233870211021288,
+      "disc_gps_patience_vs_wvs_trust": -0.47485651763507386
+    },
+    "gps_trust": {
+      "conv_gps_trust_vs_wvs": -0.015736772591326775,
+      "disc_gps_patience_vs_gps_trust": 0.21233870211021288,
+      "disc_gps_trust_vs_wvs_patience": 0.1086956052508207
+    },
+    "m_patience_child_qualities": {
+      "conv_wvs_patience_vs_gps": -0.5518765868099758,
+      "disc_gps_trust_vs_wvs_patience": 0.1086956052508207,
+      "disc_wvs_patience_vs_wvs_trust": -0.060765100393654625
+    },
+    "m_trust_general": {
+      "conv_wvs_trust_vs_gps": -0.015736772591326775,
+      "disc_gps_patience_vs_wvs_trust": -0.47485651763507397,
+      "disc_wvs_patience_vs_wvs_trust": -0.06076510039365468
+    }
+  },
+  "rejected": {
+    "gps_patience": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust"
+    ],
+    "gps_trust": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_patience_vs_gps",
+      "conv_gps_trust_vs_wvs",
+      "disc_gps_patience_vs_gps_trust"
+    ],
+    "m_patience_child_qualities": [
+      "conv_wvs_patience_vs_gps",
+      "conv_gps_trust_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust",
+      "disc_gps_trust_vs_wvs_patience"
+    ],
+    "m_trust_general": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust",
+      "disc_gps_trust_vs_wvs_patience"
+    ]
+  },
+  "run_id": "7e8622e46c20155e3e38cd523b2492aeda2636b82226a28baaac6bd17b3747f7",
+  "tau_conv": 0.3,
+  "tau_disc": 0.35
+}

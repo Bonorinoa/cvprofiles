@@ -1,0 +1,80 @@
+{
+  "headline_lambda": 1.0,
+  "lambda_scales": [
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "note": "Diagnostic theta-sensitivity surface only. Headline [L,U] is always lambda=1.0; lambda is never auto-selected.",
+  "purpose": "diagnostic_theta_sensitivity",
+  "rows": [
+    {
+      "L": null,
+      "U": null,
+      "admissible": [],
+      "empty": true,
+      "lambda": 0.5,
+      "n_admissible": 0,
+      "network_hash": "750c427e2c4b54a432b4e62e8b9804487cbfd9633f0f71aa428391a040bba1df",
+      "point_id": false,
+      "thetas": {
+        "conv_edu": 0.1,
+        "disc_risk": 0.175,
+        "mono_edu": 0.075
+      }
+    },
+    {
+      "L": 0.40246334068031847,
+      "U": 0.40246334068031847,
+      "admissible": [
+        "m_gps_patience"
+      ],
+      "empty": false,
+      "lambda": 1.0,
+      "n_admissible": 1,
+      "network_hash": "3cdf089fbb4a9a419d4a89ad707d68a0f6cae96438fe43fba503403f2642ea66",
+      "point_id": true,
+      "thetas": {
+        "conv_edu": 0.2,
+        "disc_risk": 0.35,
+        "mono_edu": 0.15
+      }
+    },
+    {
+      "L": 0.40246334068031847,
+      "U": 0.40246334068031847,
+      "admissible": [
+        "m_gps_patience"
+      ],
+      "empty": false,
+      "lambda": 1.5,
+      "n_admissible": 1,
+      "network_hash": "4a7b95ce532b2d795c1f9d502072661846ce51ddaecc2d4cdd6a47ae25c16dd1",
+      "point_id": true,
+      "thetas": {
+        "conv_edu": 0.30000000000000004,
+        "disc_risk": 0.5249999999999999,
+        "mono_edu": 0.22499999999999998
+      }
+    },
+    {
+      "L": 0.40246334068031847,
+      "U": 0.40246334068031847,
+      "admissible": [
+        "m_gps_patience"
+      ],
+      "empty": false,
+      "lambda": 2.0,
+      "n_admissible": 1,
+      "network_hash": "ce37997172867838c3dd71542b639e1d851f8a704e382b8e531edd57981eb69f",
+      "point_id": true,
+      "thetas": {
+        "conv_edu": 0.4,
+        "disc_risk": 0.7,
+        "mono_edu": 0.3
+      }
+    }
+  ],
+  "schema_version": "1"
+}

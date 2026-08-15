@@ -1,0 +1,17 @@
+schema_version: "1"
+anchors:
+  - restriction_id: conv_rule_of_law
+    citation_key: aghion2010_h5
+    source_phrase: "Trust–institutions correlations typically ≥0.4 (Aghion, Algan, Cahuc, Shleifer 2010). H5 historical floor 0.30."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: disc_gini
+    citation_key: bjornskov2008_h5
+    source_phrase: "Bjørnskov 2008: negative trust–inequality relationship. H5 historical θ=0.10 on corr_sign."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: conv_edu_hold
+    citation_key: falk2018_table_v
+    source_phrase: "Falk et al. 2018 Table V: trust increases with cognitive ability in almost all countries. Leftover country-level education bar θ=0.20."
+    anchor_kind: literature
+    pre_data: true
