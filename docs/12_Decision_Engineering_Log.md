@@ -1420,3 +1420,5 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 - CLI e2e tests must invoke `python -m cvprofiles` / the interpreter-adjacent console script; a shadowed `cvprofiles` on PATH is Hermes, not this package.
 
 **Authorized by this entry:** schema/identify/report/docs/tests for empty_R; version posture 3.0.1; feature-branch PR against Bonorinoa/cvprofiles. Not a PyPI publish, not a tag, not a paper rewrite.
+
+**2026-08-14 close-out (Augusto direct instruction):** branch evaluation green (382 tests, full battery); merged to `main`; annotated tag `v3.0.1` pushed; PyPI publish owner-run. The "not a tag / not a publish" line above is superseded for this release by that instruction.
