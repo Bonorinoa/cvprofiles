@@ -97,7 +97,15 @@ class NetworkConfig(BaseModel):
         ge=0.0,
         description="Slack tolerance; admit if s_r >= -delta.",
     )
-    restrictions: list[RestrictionSpec] = Field(..., min_length=1)
+    empty_R: bool = Field(
+        default=False,
+        description=(
+            "Named unrestricted-multiverse special case. True requires an "
+            "empty restriction list and admits every menu measure. Accidental "
+            "empty files without this flag still fail loud."
+        ),
+    )
+    restrictions: list[RestrictionSpec] = Field(default_factory=list, min_length=0)
 
     @model_validator(mode="after")
     def _unique_ids(self) -> NetworkConfig:
@@ -107,12 +115,26 @@ class NetworkConfig(BaseModel):
         return self
 
     @model_validator(mode="after")
+    def _empty_r_contract(self) -> NetworkConfig:
+        """empty_R is opt-in; an empty list without the flag is still illegal."""
+        if self.empty_R and self.restrictions:
+            raise ValueError("empty_R=true requires restrictions: []")
+        if not self.empty_R and not self.restrictions:
+            raise ValueError(
+                "empty restrictions require empty_R=true "
+                "(unrestricted multiverse is a named special case)"
+            )
+        return self
+
+    @model_validator(mode="after")
     def _stage_mix_valid(self) -> NetworkConfig:
         """P4 (docs/12 2026-08-08): reject degenerate holdout-only networks.
 
         A network with >=1 holdout-stage restriction and zero select-stage
         restrictions would admit everything vacuously — not a valid profile.
         Schema-level so every construction path (YAML, dict, API) enforces it.
+        empty_R is a different object (no restrictions at all) and is handled
+        by _empty_r_contract.
         """
         has_holdout = any(r.stage == "holdout" for r in self.restrictions)
         has_select = any(
@@ -135,4 +157,4 @@ def parse_network(data: dict[str, Any]) -> NetworkConfig:
 # Expose adapter for callers that want JSON-schema tooling later.
 NetworkAdapter: TypeAdapter[NetworkConfig] = TypeAdapter(NetworkConfig)
 
-RestrictionList = Annotated[list[RestrictionSpec], Field(min_length=1)]
+RestrictionList = Annotated[list[RestrictionSpec], Field(min_length=0)]

@@ -4,6 +4,17 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [3.0.1] — 2026-08-14 (patch: named empty_R unrestricted multiverse)
+
+Schema relaxation so the unrestricted-multiverse special case is a first-class, fail-loud contract rather than a hand calculation.
+
+- `NetworkConfig.empty_R`: `true` + `restrictions: []` admits every menu measure; `[L,U]` is min/max β on the full menu.
+- Accidental empty restriction lists without the flag still fail loud.
+- Holdout-only networks remain illegal.
+- Default `empty_R: false` is omitted from `hash_network` so pre-3.0.1 network hashes stay bit-stable; `empty_R: true` forks `run_id`.
+- HTML report banners the unrestricted-multiverse case.
+- Golden `run_id` refreshed for the version pin only (scores/network/beta hashes unchanged).
+
 ## [3.0.0] — 2026-08-10 (tag `v3.0.0` — infrastructure + flagship application release)
 
 The v3.0.0 release is the **infrastructure + flagship application** milestone (docs/16 §12; Gate C): the engine spine (SCORE → RESTRICT → IDENTIFY → REPORT, P1–P5 infrastructure from v2.5.0) plus an **accepted, verifier-gated empirical application** — the WVS/GPS patience flagship example.

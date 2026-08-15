@@ -142,6 +142,8 @@ def test_cli_run_harsh_empty_exit_zero(mini_dir: Path, tmp_path: Path) -> None:
     out = tmp_path / "cli_harsh"
     proc = subprocess.run(
         [
+            sys.executable,
+            "-m",
             "cvprofiles",
             "run",
             "--scores",
