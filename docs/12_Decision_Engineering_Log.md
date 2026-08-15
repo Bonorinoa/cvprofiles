@@ -1411,7 +1411,7 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 
 ## 2026-08-14 — v3.0.1 patch: named empty_R unrestricted-multiverse special case
 
-**Context:** the cvprofiles position-paper composition claim requires that \(\mathcal R=\emptyset\) recover the specification-curve range from the same objects. The engine previously rejected empty restriction lists (`min_length=1`), so the nesting was inexpressible.
+**Context:** the cvprofiles position-paper composition claim requires that $\mathcal R=\emptyset$ recover the specification-curve range from the same objects. The engine previously rejected empty restriction lists (`min_length=1`), so the nesting was inexpressible.
 
 **Decisions:**
 - Ship a patch `3.0.1` (not a 3.1.0 minor): `empty_R: true` + `restrictions: []` admits the full menu; accidental empty files without the flag still fail loud; holdout-only networks remain illegal.
