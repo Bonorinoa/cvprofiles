@@ -148,4 +148,7 @@ def slack_matrix(
         mvec = frame[m].to_numpy(dtype=float)
         for r in restrictions:
             data[r.id].append(evaluate_slack(mvec, frame, r))
+    if not restrictions:
+        # empty_R: admit-all path; keep a measures index with zero columns
+        return pd.DataFrame(index=list(measures))
     return pd.DataFrame(data, index=list(measures))

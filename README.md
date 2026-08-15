@@ -6,7 +6,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **3.0.0** — infrastructure + flagship application release 2026-08-10 (WVS/GPS patience flagship application: open-weight prompt measures selected alongside the validated instrument; verifier-gated frozen run) |
+| **Version** | **3.0.1** — patch: named `empty_R` unrestricted-multiverse special case (2026-08-14); 3.0.0 remains the flagship-application release |
 | **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0`, `v2.5.0`, `v2.5.1`, `v2.5.2` frozen; protocol provisional synthetic-only; H5 Trust evidence **re-graded to historical/regression witness** (2026-08-07, Gate A); **v3.0.0 release 2026-08-10** — flagship application = WVS/GPS patience (accepted frozen run); IVS cultural-values lane deferred (RESERVED); P6 deferred to v3.1 |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |

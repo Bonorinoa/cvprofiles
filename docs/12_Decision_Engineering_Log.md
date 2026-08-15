@@ -1408,3 +1408,15 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 **Authorized by this entry:** docs/16 §12 amendment; ROADMAP/MANIFEST/README posture to v3.0.0; atomic version bump 2.5.2 → 3.0.0 with golden refresh; stage-5 rerun under 3.0.0 (values must match; run_id refreshes by design); full battery; one commit; annotated tag `v3.0.0`; push to origin; PyPI publish attempt + independent verification.
 
 **Not authorized by this entry:** changes to the frozen network/θ/β/menu (the frozen run is the evidence); paper narrative claims; further feature work in v3.0.0; IVS work while deferred; any silent alteration of the accepted evidence.
+
+## 2026-08-14 — v3.0.1 patch: named empty_R unrestricted-multiverse special case
+
+**Context:** the cvprofiles position-paper composition claim requires that \(\mathcal R=\emptyset\) recover the specification-curve range from the same objects. The engine previously rejected empty restriction lists (`min_length=1`), so the nesting was inexpressible.
+
+**Decisions:**
+- Ship a patch `3.0.1` (not a 3.1.0 minor): `empty_R: true` + `restrictions: []` admits the full menu; accidental empty files without the flag still fail loud; holdout-only networks remain illegal.
+- Default `empty_R: false` is omitted from `hash_network` so pre-3.0.1 network hashes stay bit-stable. Explicit `true` forks `run_id`.
+- Golden `run_id` refresh is version-pin only (scores/network/beta hashes unchanged).
+- CLI e2e tests must invoke `python -m cvprofiles` / the interpreter-adjacent console script; a shadowed `cvprofiles` on PATH is Hermes, not this package.
+
+**Authorized by this entry:** schema/identify/report/docs/tests for empty_R; version posture 3.0.1; feature-branch PR against Bonorinoa/cvprofiles. Not a PyPI publish, not a tag, not a paper rewrite.

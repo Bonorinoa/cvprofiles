@@ -1,6 +1,6 @@
 # User Guide
 
-How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v3.0.0 package (infrastructure + flagship application release 2026-08-10): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split + pooled K-fold application), and the P5 coverage uncertainty band.
+How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v3.0.1 package (empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split + pooled K-fold application), and the P5 coverage uncertainty band.
 
 ## 1. The four input files
 
@@ -69,6 +69,8 @@ restrictions:
 ```
 
 Restriction types and their params are documented in the [Methodology](METHODOLOGY.md). `delta` is the global slack tolerance (default 0). Each restriction may declare a `stage`: omit it (or write `select`) for an admission filter that gates M\*, or write `holdout` for a *finding* restriction — its slacks are computed and reported, but a holdout-stage failure never rejects a measure from M\* (P4). A network with holdout-stage restrictions and no select-stage restriction is rejected as degenerate (vacuous admit-all). Explicit `stage` values enter the network hash; an omitted `stage` hashes as absent, so pre-P4 networks keep bit-stable hashes.
+
+`empty_R: true` with `restrictions: []` is a named special case: every menu measure is admitted and `[L,U]` is the unrestricted specification-curve range. An empty restriction list without the flag still fails loud. Default `empty_R: false` is omitted from the network hash so pre-3.0.1 networks stay bit-stable.
 
 ### 1.4 beta.yaml
 

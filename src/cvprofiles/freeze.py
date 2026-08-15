@@ -159,6 +159,10 @@ def hash_network(network: NetworkConfig | Mapping[str, Any]) -> str:
         payload = network.model_dump(mode="json")
     else:
         payload = NetworkConfig.model_validate(dict(network)).model_dump(mode="json")
+    # Default empty_R=False is omitted so pre-3.0.1 networks keep bit-stable
+    # hashes. Explicit True remains in the preimage and forks run_id.
+    if payload.get("empty_R") is False:
+        payload.pop("empty_R", None)
     for r in payload.get("restrictions", []):
         if r.get("stage") is None:
             r.pop("stage", None)

@@ -322,6 +322,7 @@ def write_identify_artifacts(
         "delta": result.delta,
         "n_menu": len(result.measures),
         "n_admissible": len(result.admissible),
+        "empty_R": bool(not result.restriction_ids),
         "holdout": holdout_block_payload(result),
     }
     adm_path = out / "admissible.json"

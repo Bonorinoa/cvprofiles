@@ -28,7 +28,7 @@ MUSEUM_MARKERS = (
 
 
 def test_version() -> None:
-    assert cvprofiles.__version__ == "3.0.0"
+    assert cvprofiles.__version__ == "3.0.1"
 
 
 def test_import_core_modules() -> None:
@@ -51,15 +51,19 @@ def test_cli_version() -> None:
         text=True,
     )
     out = (proc.stdout or "") + (proc.stderr or "")
-    assert "3.0.0" in out
-    # Console script path (editable install)
+    assert "3.0.1" in out
+    # Console script next to this interpreter (editable install), not PATH —
+    # a shadowed `cvprofiles` on PATH can be an unrelated CLI.
+    cli = Path(sys.executable).with_name("cvprofiles")
     proc2 = subprocess.run(
-        ["cvprofiles", "--version"],
+        [str(cli) if cli.is_file() else sys.executable, *(
+            [] if cli.is_file() else ["-m", "cvprofiles"]
+        ), "--version"],
         check=True,
         capture_output=True,
         text=True,
     )
-    assert "3.0.0" in ((proc2.stdout or "") + (proc2.stderr or ""))
+    assert "3.0.1" in ((proc2.stdout or "") + (proc2.stderr or ""))
 
 
 def test_no_forbidden_third_party_in_sys_modules_after_import() -> None:

@@ -2,7 +2,7 @@
 
 **Canonical methodology statement (locked 2026-08-06, B4).** This document states what cvprofiles does, why, and what it deliberately does not claim. It supersedes the earlier `03_Methodology.md` scaffold (archived). Package semantics are canonical where this doc and code disagree.
 
-- Package version: `3.0.0` — the engine version this method statement describes; kept in sync by the version-consistency CI check.
+- Package version: `3.0.1` — the engine version this method statement describes; kept in sync by the version-consistency CI check.
 
 ## 1. The question
 
@@ -28,6 +28,8 @@ Researcher supplies unit×measure scores (SCORE). Researcher authors a nomologic
 4. Writes a JSON/HTML audit trail a non-coder can inspect (REPORT).
 
 **Survivors only.** Rejected measures may appear diagnostically (which bars they failed, their $\beta$ values) but never enter the headline range.
+
+**Empty $\mathcal R$ is a named special case.** Set `empty_R: true` and `restrictions: []` to admit the full menu. Then $M^*=M$ and $[L,U]$ is the specification-curve range over every candidate. An accidental empty network without the flag still fails loud. This is how the unrestricted multiverse nests inside the same objects.
 
 **Score-agnostic and model-free.** The engine never generates measures, never searches prompt space, and contains no LLM client. Dictionary scores, LLM scores, PCA factors, human ratings — anything that lands as a scalar column per unit — is an admissible menu member. How columns are built is the researcher's upstream workflow, documented as a recipe next to the frozen inputs.
 

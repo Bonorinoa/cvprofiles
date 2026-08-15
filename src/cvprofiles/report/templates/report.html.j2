@@ -143,6 +143,17 @@
       </p>
     </header>
 
+    {% if empty_R %}
+    <section class="empty-callout" style="border-left-color:var(--accent);background:#f4eee6">
+      <h2>Unrestricted multiverse / empty validity argument</h2>
+      <p style="margin:0">
+        This run set <code>empty_R: true</code>. Every menu measure is admitted,
+        and <strong>[L, U]</strong> is the specification-curve range over the full menu.
+        This is a named special case, not a missing network.
+      </p>
+    </section>
+    {% endif %}
+
     {% if empty %}
     <section class="empty-callout">
       <h2>Empty admissible set — success, not a crash</h2>

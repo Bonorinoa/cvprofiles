@@ -68,6 +68,7 @@ def build_report_payload(
         "scores_hash": run_manifest.freeze.scores_hash,
         "network_hash": run_manifest.freeze.network_hash,
         "beta_hash": run_manifest.freeze.beta_hash,
+        "empty_R": bool(restrict.network.empty_R),
         "delta": identify.delta,
         "seed": run_manifest.freeze.seed,
         "network_name": restrict.network.name,

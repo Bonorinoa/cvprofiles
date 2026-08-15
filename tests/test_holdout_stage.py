@@ -91,6 +91,8 @@ def test_explicit_holdout_stage_moves_network_hash(
 def _network_freeze_payload(network: NetworkConfig) -> dict:
     """Mirror freeze.hash_network dump rule for assertion helpers."""
     payload = network.model_dump(mode="json")
+    if payload.get("empty_R") is False:
+        payload.pop("empty_R", None)
     for r in payload.get("restrictions", []):
         if r.get("stage") is None:
             r.pop("stage", None)
