@@ -15,11 +15,11 @@ Tutorials (run against the installed package, inputs generated inline):
 
 | Tutorial | What it covers |
 |---|---|
-| [`../tutorials/cvprofiles_tutorial.ipynb`](../tutorials/cvprofiles_tutorial.ipynb) | Synthetic walk-through + WVS/GPS patience flagship replication |
+| [`../tutorials/cvprofiles_tutorial.ipynb`](../tutorials/cvprofiles_tutorial.ipynb) | **Core.** Synthetic walk-through + empty-set contrast; Part 2 is a **historical** H5 Trust appendix (not the v3 flagship) |
 | [`../tutorials/cvprofiles_diagnostics_tour.ipynb`](../tutorials/cvprofiles_diagnostics_tour.ipynb) | v2.0 measure-discipline tour: all evaluators + diagnostics |
 | [`../tutorials/cvprofiles_irt_scoring_tutorial.ipynb`](../tutorials/cvprofiles_irt_scoring_tutorial.ipynb) | IRT as a SCORE-upstream scoring technology |
 | [`../tutorials/cvprofiles_sensemakr_tutorial.ipynb`](../tutorials/cvprofiles_sensemakr_tutorial.ipynb) | OVB sensitivity (Cinelli–Hazlett) on a survivor |
-| [`../tutorials/cvprofiles_wvs_gps_inputs.ipynb`](../tutorials/cvprofiles_wvs_gps_inputs.ipynb) | WVS/GPS input-builder + E2E (patience + risk-taking) — synthetic oracle walk-through, then authoring the four frozen inputs for the WVS Wave 7 × GPS lane |
+| [`../tutorials/cvprofiles_wvs_gps_inputs.ipynb`](../tutorials/cvprofiles_wvs_gps_inputs.ipynb) | **Flagship inputs.** WVS/GPS patience input-builder + E2E — synthetic oracle, then the four frozen inputs for the WVS Wave 7 × GPS lane |
 
 ## Governance and logs (append-only / locked)
 
