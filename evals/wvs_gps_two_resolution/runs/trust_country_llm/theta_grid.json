@@ -1,0 +1,95 @@
+{
+  "headline_lambda": 1.0,
+  "lambda_scales": [
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "note": "Diagnostic theta-sensitivity surface only. Headline [L,U] is always lambda=1.0; lambda is never auto-selected.",
+  "purpose": "diagnostic_theta_sensitivity",
+  "rows": [
+    {
+      "L": 0.10682921214895848,
+      "U": 0.4812536174997371,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_composite",
+        "m_llm_trust_llama"
+      ],
+      "empty": false,
+      "lambda": 0.5,
+      "n_admissible": 5,
+      "network_hash": "a3cab13156a7920813dee0e14cf6e3e73b5c42eefd0d3d9f45dc8e5f5bb9158b",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_hold": 0.1,
+        "conv_rule_of_law": 0.15,
+        "disc_gini": 0.05
+      }
+    },
+    {
+      "L": 0.10682921214895848,
+      "U": 0.4812536174997371,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_composite",
+        "m_llm_trust_llama"
+      ],
+      "empty": false,
+      "lambda": 1.0,
+      "n_admissible": 5,
+      "network_hash": "27490da9292c755027cb295162238dbfda45e5f032d037775bf1d10e21b951e4",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_hold": 0.2,
+        "conv_rule_of_law": 0.3,
+        "disc_gini": 0.1
+      }
+    },
+    {
+      "L": 0.19181229950916978,
+      "U": 0.4812536174997371,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_llm_trust_llama"
+      ],
+      "empty": false,
+      "lambda": 1.5,
+      "n_admissible": 4,
+      "network_hash": "ff7eb0ba7e1078f4bcb221348bdc52390f40c840cdaeec814ef2e16e8beaac1f",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_hold": 0.30000000000000004,
+        "conv_rule_of_law": 0.44999999999999996,
+        "disc_gini": 0.15000000000000002
+      }
+    },
+    {
+      "L": 0.2664556374680704,
+      "U": 0.4812536174997371,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_out_group",
+        "m_llm_trust_llama"
+      ],
+      "empty": false,
+      "lambda": 2.0,
+      "n_admissible": 3,
+      "network_hash": "198b6b2903ba388ddf535e23208af7baea25f7f4de8ef46248b7d79e0bc72f5f",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_hold": 0.4,
+        "conv_rule_of_law": 0.6,
+        "disc_gini": 0.2
+      }
+    }
+  ],
+  "schema_version": "1"
+}

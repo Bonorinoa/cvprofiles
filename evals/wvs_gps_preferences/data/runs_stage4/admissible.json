@@ -1,0 +1,73 @@
+{
+  "M_star": [
+    "m_prompt_a"
+  ],
+  "M_star_robust": [
+    "m_prompt_a"
+  ],
+  "M_star_select": [
+    "m_gps_patience",
+    "m_prompt_a"
+  ],
+  "delta": 0.0,
+  "empty": false,
+  "holdout": {
+    "holdout_frame": "holdout",
+    "select_frame": "train",
+    "units": [
+      "BGD",
+      "GTM",
+      "IND",
+      "JOR",
+      "KEN",
+      "MAR",
+      "MEX",
+      "ZWE"
+    ],
+    "verdict": {
+      "m_composite": [
+        "conv_edu",
+        "mono_edu",
+        "disc_risk"
+      ],
+      "m_gps_patience": [
+        "conv_edu",
+        "mono_edu"
+      ],
+      "m_prompt_b": [
+        "conv_edu",
+        "mono_edu",
+        "disc_risk"
+      ],
+      "m_wvs_q13": [
+        "conv_edu",
+        "mono_edu",
+        "disc_risk"
+      ],
+      "m_wvs_q14": [
+        "conv_edu",
+        "mono_edu"
+      ]
+    }
+  },
+  "n_admissible": 1,
+  "n_menu": 7,
+  "point_id": true,
+  "rejected": {
+    "m_composite": [
+      "conv_edu"
+    ],
+    "m_noise": [
+      "conv_edu"
+    ],
+    "m_prompt_b": [
+      "conv_edu"
+    ],
+    "m_wvs_q13": [
+      "conv_edu"
+    ],
+    "m_wvs_q14": [
+      "conv_edu"
+    ]
+  }
+}

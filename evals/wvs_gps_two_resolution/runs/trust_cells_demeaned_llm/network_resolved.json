@@ -1,0 +1,27 @@
+{
+  "schema_version": "1",
+  "name": "trust_cells_llm_extension",
+  "delta": 0.0,
+  "empty_R": false,
+  "restrictions": [
+    {
+      "id": "conv_edu_cell",
+      "type": "corr_min",
+      "theta": 0.2,
+      "params": {
+        "variable": "q275_cell"
+      },
+      "stage": "select"
+    },
+    {
+      "id": "mono_edu_cell",
+      "type": "monotone_rank",
+      "theta": 0.15,
+      "params": {
+        "variable": "q275_cell",
+        "sign": 1
+      },
+      "stage": "holdout"
+    }
+  ]
+}

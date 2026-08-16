@@ -1,0 +1,535 @@
+{
+  "L": 0.32750285347671965,
+  "M_star_robust": [
+    "m_prompt_a"
+  ],
+  "M_star_select": [
+    "m_gps_patience",
+    "m_prompt_a"
+  ],
+  "U": 0.32750285347671965,
+  "admissible": [
+    "m_prompt_a"
+  ],
+  "anchors": null,
+  "artifact_paths": {
+    "S_frozen.csv": "S_frozen.csv",
+    "S_frozen.parquet": "S_frozen.parquet",
+    "admissible.json": "admissible.json",
+    "beta_resolved.json": "beta_resolved.json",
+    "beta_values.json": "beta_values.json",
+    "bootstrap.json": "bootstrap.json",
+    "coverage.json": "coverage.json",
+    "network_resolved.json": "network_resolved.json",
+    "range.json": "range.json",
+    "restrict_bundle.json": "restrict_bundle.json",
+    "score_manifest.json": "score_manifest.json",
+    "slacks.csv": "slacks.csv",
+    "slacks.parquet": "slacks.parquet"
+  },
+  "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+  "beta_type": "ols_coef",
+  "beta_values": {
+    "m_composite": -0.21874650645411,
+    "m_gps_patience": 0.40246334068031847,
+    "m_noise": 0.019901395118570066,
+    "m_prompt_a": 0.32750285347671965,
+    "m_prompt_b": 0.3738785313917325,
+    "m_wvs_q13": -0.16598846758352492,
+    "m_wvs_q14": -0.1948399555130896
+  },
+  "bootstrap": {
+    "band_L": -0.12863428265949764,
+    "band_U": 0.6266805799195477,
+    "band_method": "percentile_nonempty",
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 0.01,
+    "headline_note": "Headline [L,U] remains min/max B* on the full sample; the bootstrap band is additive metadata.",
+    "method": "efron_units_only",
+    "n_boot": 100,
+    "note": null,
+    "quantile_method": "linear",
+    "quantiles": [
+      0.025,
+      0.975
+    ],
+    "replicates_degenerate": 0,
+    "replicates_empty": 1,
+    "replicates_nonempty": 99,
+    "replicates_total": 100,
+    "samples": {
+      "L": [
+        0.4718601534591777,
+        0.1847956020226343,
+        0.318811202896534,
+        0.39700216318397463,
+        0.2599547610689687,
+        0.44102849170499636,
+        0.3039034399302056,
+        0.26546243859773716,
+        0.1607455876080243,
+        0.1557980498235019,
+        0.39808882659323735,
+        0.17033399301116808,
+        0.2603467412277083,
+        0.1781627349342349,
+        0.3588221782255614,
+        0.2945677867378296,
+        0.30954632790831504,
+        0.3301067901260841,
+        0.4222806634088673,
+        0.21847353503434086,
+        0.3346852356153641,
+        0.3739760415007992,
+        0.2383076287352407,
+        0.40653508888187934,
+        0.3246711388737438,
+        0.32137684898101093,
+        0.2475218129683216,
+        0.3080653854579932,
+        0.19526912454527084,
+        0.34591098369579404,
+        0.328582483894615,
+        0.2068185681867111,
+        0.20083457859305934,
+        0.27003998332624374,
+        0.10457309887570916,
+        0.2559873802889531,
+        0.24844639727165055,
+        0.3067604262545663,
+        0.3718187049366144,
+        0.4004272126301078,
+        0.309556329050406,
+        0.43039943877365455,
+        0.34770880652635766,
+        0.2814528180644079,
+        0.29998646286339675,
+        0.38340995703984054,
+        0.41264059376675216,
+        0.44837720119182317,
+        -0.19267865303164114,
+        0.35686302681798987,
+        0.2415781458320289,
+        0.2818027104078773,
+        0.39570876802012656,
+        -0.3884353346932799,
+        0.2975387376278392,
+        0.3542231299756782,
+        0.06528963912588091,
+        0.4207655875702484,
+        0.5315508172371082,
+        0.47062793389712565,
+        0.3454645688435141,
+        0.4045162490172296,
+        0.2771159971458329,
+        0.2585235488514273,
+        0.29624843424826647,
+        0.15384155667468086,
+        0.3385545089660956,
+        0.5484432695769351,
+        0.27968540245569923,
+        0.3941454410089825,
+        0.3410283889831746,
+        0.5098998223814684,
+        0.5402318551971903,
+        0.34980718348409834,
+        0.26779295962871336,
+        0.37672291471098224,
+        -0.19405990540630574,
+        0.34408870932937574,
+        0.25420605973023547,
+        0.19624578234170206,
+        0.2604223792347559,
+        -0.05035782998243344,
+        0.21887693869101016,
+        0.37176300166822834,
+        0.46973681503527864,
+        0.4232224913187425,
+        0.3966541135691226,
+        0.13809305927753862,
+        0.41490797863640644,
+        0.43290317699802877,
+        0.23273174733281277,
+        0.41203973019375495,
+        0.3341467384574205,
+        0.5430766237960082,
+        0.35800539920761454,
+        0.13477505855982846,
+        0.28862276603315706,
+        0.12548764371102805,
+        0.16743803437586618
+      ],
+      "U": [
+        0.4718601534591777,
+        0.1847956020226343,
+        0.35360723017117923,
+        0.44969579317003955,
+        0.32099133441133715,
+        0.5567800979329254,
+        0.3517911834005244,
+        0.4953918884086999,
+        0.3359708611251575,
+        0.32019483567467183,
+        0.41762663944095413,
+        0.31187576748041096,
+        0.3585140923783396,
+        0.1781627349342349,
+        0.3588221782255614,
+        0.2945677867378296,
+        0.30954632790831504,
+        0.348998771708199,
+        0.45008484565827434,
+        0.5009339010299197,
+        0.49735363735592786,
+        0.38627744545217235,
+        0.36438874893271683,
+        0.469909343812346,
+        0.3775240900674658,
+        0.43072063574036384,
+        0.4666756619260573,
+        0.38143947253692023,
+        0.44444131966762024,
+        0.3641393879069987,
+        0.41296496730865995,
+        0.46934882223947777,
+        0.33674964123795625,
+        0.27003998332624374,
+        0.3601339722399057,
+        0.3410244383623363,
+        0.49165915352638073,
+        0.33825577041171784,
+        0.5593908606050516,
+        0.5832531065885536,
+        0.41020601670315565,
+        0.43039943877365455,
+        0.46819475744368727,
+        0.3957823944858766,
+        0.29998646286339675,
+        0.5371526432149711,
+        0.49966338602245713,
+        0.47664258582018976,
+        0.35593306181509604,
+        0.3943276012288589,
+        0.2515001369921272,
+        0.38882703453263867,
+        0.4760862614071764,
+        0.26169311220383257,
+        0.34665255582332394,
+        0.4753535729533219,
+        0.19731625303961137,
+        0.6622121490085433,
+        0.5315508172371082,
+        0.47062793389712565,
+        0.43491252353509235,
+        0.46527408275878596,
+        0.2771159971458329,
+        0.3829939267940559,
+        0.5261694476294122,
+        0.3747942671739579,
+        0.3385545089660956,
+        0.6849298025575679,
+        0.44952171509422617,
+        0.3941454410089825,
+        0.420313774331476,
+        0.5442433087018378,
+        0.5402318551971903,
+        0.39823679551975755,
+        0.34924936638608567,
+        0.4171370415534312,
+        0.15011888101942494,
+        0.5754168829162544,
+        0.38585332088310403,
+        0.418159780137106,
+        0.4044299080008589,
+        0.37008228935058946,
+        0.36664996626883123,
+        0.6840943062371724,
+        0.5103537225633981,
+        0.5388874699695779,
+        0.3966541135691226,
+        0.21523724877064013,
+        0.4218081108311546,
+        0.485526856119974,
+        0.43380464039438565,
+        0.45091631114654207,
+        0.4284709940306924,
+        0.5430766237960082,
+        0.4258677352499529,
+        0.4431480788231091,
+        0.3977944756011902,
+        0.28826551389537886,
+        0.4086894479139048
+      ]
+    },
+    "schema_version": "1",
+    "seed": 20260810
+  },
+  "coverage": {
+    "alpha": 0.1,
+    "band_L": 0.10064475290072634,
+    "band_U": 0.5609934628361718,
+    "boundary": [
+      {
+        "boundary": true,
+        "kappa": 2.0,
+        "margin": 0.0754271992033701,
+        "measure": "m_gps_patience",
+        "se": 0.10602257072126395
+      },
+      {
+        "boundary": false,
+        "kappa": 2.0,
+        "margin": -0.5331642993979104,
+        "measure": "m_wvs_q13",
+        "se": 0.1204503088726043
+      },
+      {
+        "boundary": false,
+        "kappa": 2.0,
+        "margin": -0.7767790765438531,
+        "measure": "m_wvs_q14",
+        "se": 0.09311876897123215
+      },
+      {
+        "boundary": false,
+        "kappa": 2.0,
+        "margin": -0.7218147055040101,
+        "measure": "m_composite",
+        "se": 0.09763792197141911
+      },
+      {
+        "boundary": true,
+        "kappa": 2.0,
+        "margin": 0.18495649617258575,
+        "measure": "m_prompt_a",
+        "se": 0.11552502772233543
+      },
+      {
+        "boundary": true,
+        "kappa": 2.0,
+        "margin": -0.011528130039640982,
+        "measure": "m_prompt_b",
+        "se": 0.11518924833856568
+      },
+      {
+        "boundary": true,
+        "kappa": 2.0,
+        "margin": -0.26549104807529866,
+        "measure": "m_noise",
+        "se": 0.1617082658131185
+      }
+    ],
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 0.01,
+    "headline_note": "Headline [L,U] remains min/max B* on the full sample; the uncertainty band is additive metadata and never replaces it.",
+    "kappa": 2.0,
+    "note": "Heuristic uncertainty band over non-empty bootstrap replicates (selection uncertainty on the pooled sample; holdout verdict is a full-sample point finding outside the band). Not a confidence interval; not a holdout-robustness band. Boundary attribution: |margin_m| <= kappa * SE_m.",
+    "p_hat_m": {
+      "m_composite": 0.0,
+      "m_gps_patience": 0.696969696969697,
+      "m_noise": 0.06060606060606061,
+      "m_prompt_a": 0.8888888888888888,
+      "m_prompt_b": 0.5151515151515151,
+      "m_wvs_q13": 0.0,
+      "m_wvs_q14": 0.0
+    },
+    "purpose": "coverage_uncertainty_band",
+    "quantiles": [
+      0.05,
+      0.95
+    ],
+    "replicates_degenerate": 0,
+    "replicates_empty": 1,
+    "replicates_nonempty": 99,
+    "replicates_total": 100,
+    "schema_version": "1"
+  },
+  "created_at": "2026-08-10T23:03:52Z",
+  "delta": 0.0,
+  "delta_grid": null,
+  "empty": false,
+  "freeze": {
+    "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+    "config": {
+      "holdout_units": [
+        "BGD",
+        "GTM",
+        "IND",
+        "JOR",
+        "KEN",
+        "MAR",
+        "MEX",
+        "ZWE"
+      ]
+    },
+    "delta": 0.0,
+    "n_boot": 100,
+    "network_hash": "d1003f68f6cda1c054b9772f78963697392f9cbaa1fbdca3a9a1350dc3cfc088",
+    "package_version": "3.0.0",
+    "schema_version": "1",
+    "scores_hash": "e3955779149057f1a019eea4972e38c8c7ca67c33ae331d01f4a7e7abc5e7ab4",
+    "seed": 20260810
+  },
+  "holdout": {
+    "holdout_frame": "holdout",
+    "select_frame": "train",
+    "units": [
+      "BGD",
+      "GTM",
+      "IND",
+      "JOR",
+      "KEN",
+      "MAR",
+      "MEX",
+      "ZWE"
+    ],
+    "verdict": {
+      "m_composite": [
+        "conv_edu",
+        "mono_edu",
+        "disc_risk"
+      ],
+      "m_gps_patience": [
+        "conv_edu",
+        "mono_edu"
+      ],
+      "m_prompt_b": [
+        "conv_edu",
+        "mono_edu",
+        "disc_risk"
+      ],
+      "m_wvs_q13": [
+        "conv_edu",
+        "mono_edu",
+        "disc_risk"
+      ],
+      "m_wvs_q14": [
+        "conv_edu",
+        "mono_edu"
+      ]
+    }
+  },
+  "measures": [
+    "m_gps_patience",
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_prompt_a",
+    "m_prompt_b",
+    "m_noise"
+  ],
+  "network_hash": "d1003f68f6cda1c054b9772f78963697392f9cbaa1fbdca3a9a1350dc3cfc088",
+  "network_name": "wvs_gps_patience_application",
+  "outcome": "log_gdp_pc",
+  "package_version": "3.0.0",
+  "point_id": true,
+  "range": {
+    "L": 0.32750285347671965,
+    "U": 0.32750285347671965,
+    "bootstrap": {
+      "band_L": -0.12863428265949764,
+      "band_U": 0.6266805799195477,
+      "n_boot": 100,
+      "see": "bootstrap.json"
+    },
+    "empty": false,
+    "method": "min_max_B_star",
+    "note": "range is min/max of beta on M*; bootstrap band is additive metadata (v2.0) and never replaces the headline",
+    "point_id": true
+  },
+  "rejected": {
+    "m_composite": [
+      "conv_edu"
+    ],
+    "m_noise": [
+      "conv_edu"
+    ],
+    "m_prompt_b": [
+      "conv_edu"
+    ],
+    "m_wvs_q13": [
+      "conv_edu"
+    ],
+    "m_wvs_q14": [
+      "conv_edu"
+    ]
+  },
+  "restriction_ids": [
+    "conv_edu",
+    "mono_edu",
+    "disc_risk"
+  ],
+  "restrictions": [
+    {
+      "id": "conv_edu",
+      "params": {
+        "variable": "q275_mean"
+      },
+      "stage": "select",
+      "theta": 0.2,
+      "type": "corr_min"
+    },
+    {
+      "id": "mono_edu",
+      "params": {
+        "sign": 1,
+        "variable": "q275_mean"
+      },
+      "stage": "holdout",
+      "theta": 0.15,
+      "type": "monotone_rank"
+    },
+    {
+      "id": "disc_risk",
+      "params": {
+        "variable": "risktaking"
+      },
+      "stage": "select",
+      "theta": 0.35,
+      "type": "corr_zero"
+    }
+  ],
+  "run_id": "5a7a6e580cad6b9add0134a89e0bf01fe97b06ed85d6eba03a58bad9fe0e046b",
+  "schema_version": "1",
+  "scores_hash": "e3955779149057f1a019eea4972e38c8c7ca67c33ae331d01f4a7e7abc5e7ab4",
+  "seed": 20260810,
+  "slacks": {
+    "m_composite": {
+      "conv_edu": -0.6727587563261677,
+      "disc_risk": 0.2590304130286796,
+      "mono_edu": -0.5547619047619048
+    },
+    "m_gps_patience": {
+      "conv_edu": 0.2989626855825849,
+      "disc_risk": 0.01493791705866343,
+      "mono_edu": -0.3404761904761905
+    },
+    "m_noise": {
+      "conv_edu": -0.33871280171475077,
+      "disc_risk": 0.22535350880140292,
+      "mono_edu": 0.2071428571428572
+    },
+    "m_prompt_a": {
+      "conv_edu": 0.14067480145470845,
+      "disc_risk": 0.31034237658399605,
+      "mono_edu": 0.39761904761904765
+    },
+    "m_prompt_b": {
+      "conv_edu": -0.06093205617922057,
+      "disc_risk": 0.23896166543864833,
+      "mono_edu": -0.10238095238095236
+    },
+    "m_wvs_q13": {
+      "conv_edu": -0.4581868699962285,
+      "disc_risk": 0.1634502969659105,
+      "mono_edu": -0.3642857142857143
+    },
+    "m_wvs_q14": {
+      "conv_edu": -0.7339780568787764,
+      "disc_risk": 0.32985817253565236,
+      "mono_edu": -0.6261904761904762
+    }
+  },
+  "theta_grid": null,
+  "title": "WVS/GPS patience application"
+}

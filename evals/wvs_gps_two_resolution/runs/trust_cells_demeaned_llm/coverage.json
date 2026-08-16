@@ -1,0 +1,88 @@
+{
+  "alpha": 0.1,
+  "band_L": -0.38241729147649134,
+  "band_U": -0.2397452851208833,
+  "boundary": [
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.17685380538233852,
+      "measure": "m_trust_general",
+      "se": 0.049025112370170806
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.26840722757035784,
+      "measure": "m_trust_in_group",
+      "se": 0.043041019750911125
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.2749894004417675,
+      "measure": "m_trust_out_group",
+      "se": 0.05122932194474146
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.6273687357208168,
+      "measure": "m_trust_institution",
+      "se": 0.039714001227303744
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.4737028482419085,
+      "measure": "m_trust_composite",
+      "se": 0.0455867406692259
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": -0.07726749679586951,
+      "measure": "m_llm_trust_llama",
+      "se": 0.04000270399112289
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": 0.13263768187572658,
+      "measure": "m_llm_trust_phi",
+      "se": 0.04331091637128301
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.17191154663712352,
+      "measure": "m_noise",
+      "se": 0.0482680511151822
+    }
+  ],
+  "degenerate_replicate_rate": 0.0,
+  "empty_replicate_rate": 0.0,
+  "headline_note": "Headline [L,U] remains min/max B* on the full sample; the uncertainty band is additive metadata and never replaces it.",
+  "kappa": 2.0,
+  "note": "Heuristic uncertainty band over non-empty bootstrap replicates (selection uncertainty on the pooled sample; holdout verdict is a full-sample point finding outside the band). Not a confidence interval; not a holdout-robustness band. Boundary attribution: |margin_m| <= kappa * SE_m.",
+  "p_hat_m": {
+    "m_llm_trust_llama": 0.022,
+    "m_llm_trust_phi": 1.0,
+    "m_noise": 0.0,
+    "m_trust_composite": 0.0,
+    "m_trust_general": 0.0,
+    "m_trust_in_group": 0.0,
+    "m_trust_institution": 0.0,
+    "m_trust_out_group": 0.0
+  },
+  "purpose": "coverage_uncertainty_band",
+  "quantiles": [
+    0.05,
+    0.95
+  ],
+  "replicates_degenerate": 0,
+  "replicates_empty": 0,
+  "replicates_nonempty": 1000,
+  "replicates_total": 1000,
+  "schema_version": "1"
+}

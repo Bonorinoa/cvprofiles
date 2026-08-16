@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "run_id": "9e4c75e3deb73b43d70c84a0bb59ea26d76e92501a20e773d484417e90010d1a",
+  "freeze": {
+    "scores_hash": "45639af3e4ec38a42cf3240b2fed2394a356e78f9faa73c3ebdacf9c05d72f1d",
+    "network_hash": "27490da9292c755027cb295162238dbfda45e5f032d037775bf1d10e21b951e4",
+    "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+    "package_version": "3.0.1",
+    "schema_version": "1",
+    "seed": 20260814,
+    "delta": 0.0,
+    "n_boot": 1000,
+    "config": {}
+  },
+  "created_at": "2026-08-15T19:43:28Z",
+  "artifact_paths": {
+    "S_frozen.parquet": "S_frozen.parquet",
+    "S_frozen.csv": "S_frozen.csv",
+    "score_manifest.json": "score_manifest.json",
+    "network_resolved.json": "network_resolved.json",
+    "beta_resolved.json": "beta_resolved.json",
+    "restrict_bundle.json": "restrict_bundle.json",
+    "slacks.csv": "slacks.csv",
+    "slacks.parquet": "slacks.parquet",
+    "admissible.json": "admissible.json",
+    "beta_values.json": "beta_values.json",
+    "range.json": "range.json",
+    "bootstrap.json": "bootstrap.json",
+    "coverage.json": "coverage.json",
+    "theta_grid.json": "theta_grid.json",
+    "anchors.json": "anchors.json",
+    "run_manifest.json": "run_manifest.json",
+    "report.html": "report.html",
+    "report.json": "report.json"
+  },
+  "notes": "v2.0 spine; inference: bootstrap + theta-grid + delta-grid + anchors (diagnostic)",
+  "anchors_hash": "68e155f6775d94313deb30856e689244b23690c9a6d2d1784bb26ebd310d3201"
+}

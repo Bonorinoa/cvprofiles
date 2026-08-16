@@ -1,0 +1,133 @@
+{
+  "schema_version": "1",
+  "construct": "patience",
+  "menu": [
+    "m_gps_patience",
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_prompt_a",
+    "m_prompt_b",
+    "m_noise"
+  ],
+  "n_rows": 41,
+  "scores_hash": "003d1170f74d541a9ac81290dd92a3e8d8ed23a3c2d7e133e57875c2cfa681d5",
+  "universe": {
+    "below_floor": [],
+    "missing_gps": [
+      "AND",
+      "ARM",
+      "CYP",
+      "ECU",
+      "ETH",
+      "HKG",
+      "KGZ",
+      "LBN",
+      "LBY",
+      "MAC",
+      "MDV",
+      "MMR",
+      "MNG",
+      "MYS",
+      "NIR",
+      "NZL",
+      "PRI",
+      "SGP",
+      "SVK",
+      "TJK",
+      "TUN",
+      "TWN",
+      "URY",
+      "UZB"
+    ],
+    "missing_wvs": [
+      "AFG",
+      "ARE",
+      "AUT",
+      "BIH",
+      "BWA",
+      "CHE",
+      "CMR",
+      "CRI",
+      "DZA",
+      "ESP",
+      "EST",
+      "FIN",
+      "FRA",
+      "GEO",
+      "GHA",
+      "HRV",
+      "HTI",
+      "HUN",
+      "ISR",
+      "ITA",
+      "KHM",
+      "LKA",
+      "LTU",
+      "MDA",
+      "MWI",
+      "POL",
+      "PRT",
+      "RWA",
+      "SAU",
+      "SUR",
+      "SWE",
+      "TZA",
+      "UGA",
+      "ZAF"
+    ],
+    "missing_wdi": [
+      "VEN"
+    ],
+    "missing_coverage": []
+  },
+  "seed": 20260810,
+  "prompt_source": {
+    "kind": "llama.cpp",
+    "model_a": {
+      "repo": "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF",
+      "file": "Meta-Llama-3.1-8B-Instruct-Q8_0.gguf",
+      "sha256": "9da71c45c90a821809821244d4971e5e5dfad7eb091f0b8ff0546392393b6283",
+      "quant": "Q8_0"
+    },
+    "model_b": {
+      "repo": "MaziyarPanahi/Phi-4-mini-instruct-GGUF",
+      "file": "Phi-4-mini-instruct.Q8_0.gguf",
+      "sha256": "56cccfeba1168a4fdd07197d8b5cdfb765eea720bdb4bad59211449687b82000",
+      "quant": "Q8_0"
+    },
+    "items": [
+      "p01",
+      "p02",
+      "p03",
+      "p04",
+      "p05"
+    ],
+    "patient_option": "B",
+    "temperature": 0.0,
+    "seed": 20260810
+  },
+  "respondent_floor": 30,
+  "wvs_items": [
+    "Q13",
+    "Q14",
+    "Q275"
+  ],
+  "aux_years": [
+    2015,
+    2019
+  ],
+  "generated_at": "2026-08-10T20:39:08Z",
+  "sources": {
+    "gps": "/Users/bonorinoa/Desktop/Github_Repositories/SCA2_PofW/data/GPS/GPS_dataset_country_level/country_gps.dta",
+    "wvs": "/Users/bonorinoa/Desktop/Github_Repositories/SCA2_PofW/data/WVS/WVS_wave7.dta",
+    "wdi": "evals/wvs_gps_preferences/data/aux/wdi.csv"
+  },
+  "prompt_items": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05"
+  ]
+}

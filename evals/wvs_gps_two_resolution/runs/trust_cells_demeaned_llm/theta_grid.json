@@ -1,0 +1,77 @@
+{
+  "headline_lambda": 1.0,
+  "lambda_scales": [
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "note": "Diagnostic theta-sensitivity surface only. Headline [L,U] is always lambda=1.0; lambda is never auto-selected.",
+  "purpose": "diagnostic_theta_sensitivity",
+  "rows": [
+    {
+      "L": -0.3174862117773897,
+      "U": 0.17929884606727964,
+      "admissible": [
+        "m_llm_trust_llama",
+        "m_llm_trust_phi"
+      ],
+      "empty": false,
+      "lambda": 0.5,
+      "n_admissible": 2,
+      "network_hash": "77c051c49fda857dfb36f590d148d5f342ec588fb07c22f40b4433ad811f61b9",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.1,
+        "mono_edu_cell": 0.075
+      }
+    },
+    {
+      "L": -0.3174862117773897,
+      "U": -0.3174862117773897,
+      "admissible": [
+        "m_llm_trust_phi"
+      ],
+      "empty": false,
+      "lambda": 1.0,
+      "n_admissible": 1,
+      "network_hash": "d0afa9002b03c34746a448be1fbb9affc2c0ca99f9b3f2dd5956160912e218d0",
+      "point_id": true,
+      "thetas": {
+        "conv_edu_cell": 0.2,
+        "mono_edu_cell": 0.15
+      }
+    },
+    {
+      "L": -0.3174862117773897,
+      "U": -0.3174862117773897,
+      "admissible": [
+        "m_llm_trust_phi"
+      ],
+      "empty": false,
+      "lambda": 1.5,
+      "n_admissible": 1,
+      "network_hash": "23f1ca24c71a4735896c6cf9b930491d3562df1a3a4e2d6c94a84578f96e9594",
+      "point_id": true,
+      "thetas": {
+        "conv_edu_cell": 0.30000000000000004,
+        "mono_edu_cell": 0.22499999999999998
+      }
+    },
+    {
+      "L": null,
+      "U": null,
+      "admissible": [],
+      "empty": true,
+      "lambda": 2.0,
+      "n_admissible": 0,
+      "network_hash": "f5a3328c2b6968e678b5fffad5635e0549adc3408a7097c324715e5fbf25593e",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.4,
+        "mono_edu_cell": 0.3
+      }
+    }
+  ],
+  "schema_version": "1"
+}
