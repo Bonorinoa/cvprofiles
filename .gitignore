@@ -80,6 +80,18 @@ evals/h5_trust/runs_verify/
 evals/wvs_gps_preferences/models/
 evals/wvs_gps_preferences/data/smoke_stage2/
 evals/wvs_gps_preferences/data/aux/
+evals/wvs_gps_preferences/data/pool_runs/
+
+# WVS/GPS two-resolution: raw LLM `.jsonl` outputs are regenerable from the
+# prompts + models/ (gitignored above). Frozen run artifacts under
+# evals/wvs_gps_two_resolution/runs/ ARE committed (audit trail).
+evals/wvs_gps_two_resolution/data/llm_raw/
 
 .hermes/
 data/tmp_runs/
+
+# Local GGUF / model weights cache (downloaded ad-hoc for the WVS/GPS LLM
+# extension). Top-level folder only — `evals/wvs_gps_preferences/models/`
+# is already ignored separately. Add more paths here if new model caches
+# appear outside `evals/`.
+models/

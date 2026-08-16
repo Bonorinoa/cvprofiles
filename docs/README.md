@@ -13,8 +13,13 @@ Documentation for the construct-validity profiles methods package. Three public 
 
 Tutorials (run against the installed package, inputs generated inline):
 
-- [`../tutorials/cvprofiles_tutorial.ipynb`](../tutorials/cvprofiles_tutorial.ipynb) — synthetic walk-through + H5 replication
-- [`../tutorials/cvprofiles_diagnostics_tour.ipynb`](../tutorials/cvprofiles_diagnostics_tour.ipynb) — v2.0 measure-discipline tour
+| Tutorial | What it covers |
+|---|---|
+| [`../tutorials/cvprofiles_tutorial.ipynb`](../tutorials/cvprofiles_tutorial.ipynb) | Synthetic walk-through + WVS/GPS patience flagship replication |
+| [`../tutorials/cvprofiles_diagnostics_tour.ipynb`](../tutorials/cvprofiles_diagnostics_tour.ipynb) | v2.0 measure-discipline tour: all evaluators + diagnostics |
+| [`../tutorials/cvprofiles_irt_scoring_tutorial.ipynb`](../tutorials/cvprofiles_irt_scoring_tutorial.ipynb) | IRT as a SCORE-upstream scoring technology |
+| [`../tutorials/cvprofiles_sensemakr_tutorial.ipynb`](../tutorials/cvprofiles_sensemakr_tutorial.ipynb) | OVB sensitivity (Cinelli–Hazlett) on a survivor |
+| [`../tutorials/cvprofiles_wvs_gps_inputs.ipynb`](../tutorials/cvprofiles_wvs_gps_inputs.ipynb) | WVS/GPS input-builder + E2E (patience + risk-taking) — synthetic oracle walk-through, then authoring the four frozen inputs for the WVS Wave 7 × GPS lane |
 
 ## Governance and logs (append-only / locked)
 
@@ -23,8 +28,8 @@ Tutorials (run against the installed package, inputs generated inline):
 | [`12_Decision_Engineering_Log.md`](12_Decision_Engineering_Log.md) | Append-only engineering/scope decisions |
 | [`13_Evaluations_Log.md`](13_Evaluations_Log.md) | Evidence interpretations and artifact pointers |
 | [`16_Paper_Protocol_Freeze.md`](16_Paper_Protocol_Freeze.md) | Paper-facing locks, open fields, provenance rule |
-| [`17_H5_Trust_Design.md`](17_H5_Trust_Design.md) | H5 Trust design lock — **historical** (re-graded 2026-08-07) |
-| [`18_IVS_Cultural_Map.md`](18_IVS_Cultural_Map.md) | v3 IVS cultural-values lane design container (Augusto-authored; run gated) |
+| [`17_H5_Trust_Design.md`](17_H5_Trust_Design.md) | H5 Trust design lock (run gated) — **historical** (re-graded 2026-08-07); not the v3 headline |
+| [`18_IVS_Cultural_Map.md`](18_IVS_Cultural_Map.md) | v3 IVS cultural-values lane design container (Augusto-authored; run gated; deferred per `docs/16` §11) |
 | [`PROJECT_MANIFEST.md`](PROJECT_MANIFEST.md) | Machine-readable project state and locks |
 
 ## Archive

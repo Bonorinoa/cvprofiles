@@ -1,0 +1,56 @@
+{
+  "M_star": [
+    "m_gps_patience",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi"
+  ],
+  "M_star_robust": [
+    "m_gps_patience",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi"
+  ],
+  "M_star_select": [
+    "m_gps_patience",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi"
+  ],
+  "delta": 0.0,
+  "empty": false,
+  "empty_R": false,
+  "holdout": {
+    "holdout_frame": null,
+    "select_frame": null,
+    "units": null,
+    "verdict": {
+      "m_composite": [
+        "mono_edu"
+      ],
+      "m_noise": [
+        "mono_edu"
+      ],
+      "m_wvs_q13": [
+        "mono_edu"
+      ],
+      "m_wvs_q14": [
+        "mono_edu"
+      ]
+    }
+  },
+  "n_admissible": 3,
+  "n_menu": 7,
+  "point_id": false,
+  "rejected": {
+    "m_composite": [
+      "conv_edu"
+    ],
+    "m_noise": [
+      "conv_edu"
+    ],
+    "m_wvs_q13": [
+      "conv_edu"
+    ],
+    "m_wvs_q14": [
+      "conv_edu"
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "headline_lambda": 1.0,
+  "lambda_scales": [
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "note": "Diagnostic theta-sensitivity surface only. Headline [L,U] is always lambda=1.0; lambda is never auto-selected.",
+  "purpose": "diagnostic_theta_sensitivity",
+  "rows": [
+    {
+      "L": 0.24490977928094967,
+      "U": 0.5560518882390949,
+      "admissible": [
+        "m_wvs_q13",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "empty": false,
+      "lambda": 0.5,
+      "n_admissible": 3,
+      "network_hash": "d28a06f331b1ea99ca2afb5fb19df332f75392cac335812be5532668f1e819c4",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.1,
+        "mono_edu_cell": 0.075
+      }
+    },
+    {
+      "L": 0.24490977928094967,
+      "U": 0.5560518882390949,
+      "admissible": [
+        "m_wvs_q13",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "empty": false,
+      "lambda": 1.0,
+      "n_admissible": 3,
+      "network_hash": "f0d1582c64237be2b11057f75e055a94ccbf535fcde9d99506fbda76de1e6031",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.2,
+        "mono_edu_cell": 0.15
+      }
+    },
+    {
+      "L": 0.4166221419825753,
+      "U": 0.5560518882390949,
+      "admissible": [
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "empty": false,
+      "lambda": 1.5,
+      "n_admissible": 2,
+      "network_hash": "ee14121082b8d5062eef39ac217890277a5cf0fbc7437dc1a61bc2ccd27920df",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.30000000000000004,
+        "mono_edu_cell": 0.22499999999999998
+      }
+    },
+    {
+      "L": 0.4166221419825753,
+      "U": 0.5560518882390949,
+      "admissible": [
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "empty": false,
+      "lambda": 2.0,
+      "n_admissible": 2,
+      "network_hash": "07828376fb7b35a0eac907f462bdc22587d8449fcdacb2c8d8bfb5c8c7402865",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.4,
+        "mono_edu_cell": 0.3
+      }
+    }
+  ],
+  "schema_version": "1"
+}

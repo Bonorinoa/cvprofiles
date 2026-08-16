@@ -1,0 +1,170 @@
+{
+  "L": 0.10682921214895848,
+  "M_star": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite",
+    "m_llm_trust_llama"
+  ],
+  "M_star_robust": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite",
+    "m_llm_trust_llama"
+  ],
+  "M_star_select": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_composite",
+    "m_llm_trust_llama"
+  ],
+  "U": 0.4812536174997371,
+  "anchors_hash": "68e155f6775d94313deb30856e689244b23690c9a6d2d1784bb26ebd310d3201",
+  "baselines": {
+    "best_abs_beta": "m_llm_trust_llama",
+    "best_abs_beta_holdout_pass_rate": 1.0,
+    "best_abs_beta_value": 0.4812536174997371,
+    "canonical": "m_trust_general",
+    "canonical_holdout_pass_rate": 1.0,
+    "canonical_in_menu": true,
+    "menu_without_noise": [
+      "m_gps_trust",
+      "m_trust_general",
+      "m_trust_in_group",
+      "m_trust_out_group",
+      "m_trust_institution",
+      "m_trust_composite",
+      "m_llm_trust_llama",
+      "m_llm_trust_phi"
+    ],
+    "n_draws": 500,
+    "per_measure_holdout": {
+      "m_gps_trust": 0.0,
+      "m_llm_trust_llama": 1.0,
+      "m_llm_trust_phi": 1.0,
+      "m_trust_composite": 0.0,
+      "m_trust_general": 1.0,
+      "m_trust_in_group": 1.0,
+      "m_trust_institution": 0.0,
+      "m_trust_out_group": 1.0
+    },
+    "random_k1": {
+      "pass_rate_mean": 0.59,
+      "pass_rate_p50": 1.0,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 0.41
+    },
+    "random_k2": {
+      "pass_rate_mean": 0.61,
+      "pass_rate_p50": 0.5,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 0.642
+    },
+    "random_k3": {
+      "pass_rate_mean": 0.64,
+      "pass_rate_p50": 0.6666666666666666,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 0.8
+    },
+    "tool_holdout_pass_rate": 0.8
+  },
+  "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+  "beta_values": {
+    "m_gps_trust": 0.10902294590510236,
+    "m_llm_trust_llama": 0.4812536174997371,
+    "m_llm_trust_phi": 0.3864416294337175,
+    "m_noise": 0.02835077310905364,
+    "m_trust_composite": 0.10682921214895848,
+    "m_trust_general": 0.39059801989030046,
+    "m_trust_in_group": 0.19181229950916978,
+    "m_trust_institution": -0.09228547256256103,
+    "m_trust_out_group": 0.2664556374680704
+  },
+  "bootstrap": {
+    "artifact": "bootstrap.json",
+    "band_L": -0.039153004459550965,
+    "band_U": 0.730077957143841,
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 0.001,
+    "n_boot": 1000,
+    "note": null,
+    "replicates_degenerate": 0,
+    "replicates_empty": 1,
+    "replicates_nonempty": 999,
+    "seed": 20260814
+  },
+  "coverage": {
+    "alpha": 0.1,
+    "artifact": "coverage.json",
+    "band_L": -0.016141306569644305,
+    "band_U": 0.6987605855951458,
+    "kappa": 2.0,
+    "n_boundary": 9,
+    "quantiles": [
+      0.05,
+      0.95
+    ]
+  },
+  "coverage_band": [
+    -0.016141306569644305,
+    0.6987605855951458
+  ],
+  "delta_grid": null,
+  "empty": false,
+  "empty_replicate_rate": 0.001,
+  "headline_posture": "restriction_stage_split_M_star_select",
+  "holdout_verdict": {
+    "m_gps_trust": [
+      "conv_edu_hold"
+    ],
+    "m_noise": [
+      "conv_edu_hold"
+    ],
+    "m_trust_composite": [
+      "conv_edu_hold"
+    ],
+    "m_trust_institution": [
+      "conv_edu_hold"
+    ]
+  },
+  "id": "trust_country_llm",
+  "n_boot": 1000,
+  "n_units": 35,
+  "network_hash": "27490da9292c755027cb295162238dbfda45e5f032d037775bf1d10e21b951e4",
+  "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country_llm",
+  "package_version": "3.0.1",
+  "point_id": false,
+  "rejected": {
+    "m_gps_trust": [
+      "conv_rule_of_law"
+    ],
+    "m_llm_trust_phi": [
+      "disc_gini"
+    ],
+    "m_noise": [
+      "conv_rule_of_law",
+      "disc_gini"
+    ],
+    "m_trust_institution": [
+      "conv_rule_of_law"
+    ]
+  },
+  "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country_llm/report.html",
+  "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country_llm/report.json",
+  "run_id": "9e4c75e3deb73b43d70c84a0bb59ea26d76e92501a20e773d484417e90010d1a",
+  "scores_hash": "45639af3e4ec38a42cf3240b2fed2394a356e78f9faa73c3ebdacf9c05d72f1d",
+  "theta_grid": {
+    "artifact": "theta_grid.json",
+    "headline_lambda": 1.0,
+    "lambdas": [
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "rows": 4
+  }
+}

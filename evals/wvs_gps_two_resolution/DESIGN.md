@@ -6,6 +6,8 @@
 
 This is the paper’s confirmatory application. The 2026-08-10 \(K=5\) patience freeze is a **pilot / appendix**. LLM columns are not in the confirmatory menus.
 
+**2026-08-15 architecture lock (does not amend this file’s θ/R/β):** delete the 2026-08-10 pilot. Country-level human + fresh LLM = underpowered appendix. Demeaned cells remain the powered main application and now include the same LLM battery (sex×age persona; education not in the prompt). Individual-level scoring is a later estimand. See `DESIGN_LLM_EXTENSION.md`.
+
 ## Constructs
 
 > **Patience** is time preference: the disposition to value future relative to present outcomes, observable in delayed-reward choices. Operationalization follows the GPS intertemporal module (Falk et al. 2018). A valid measure should rise with human capital (education) and should not collapse into risk preference.
@@ -101,7 +103,15 @@ Rebuild country WVS means from `WVS_wave7.dta` with the same recipes (mask \(-1\
 
 Allowed: \(M^*\) and \([L,U]\) under the stated network at each resolution; Q13/Q14 failing country and/or cells; Q57 vs composite disagreement; empty sets.
 
-Forbidden: “culture”; promoting the 2026-08-10 posture-(a) freeze as confirmatory; moving \(\theta\) after slacks; treating GPS failing monotonicity as a software error; cell-level GDP claims; citing the 2026-08-14 *pooled* cell \(M^*\) as the within-country conclusion.
+Forbidden: “culture”; promoting the 2026-08-10 posture-(a) freeze as confirmatory; moving \(\theta\) after slacks; treating GPS failing monotonicity as a software error; cell-level GDP claims; citing the 2026-08-14 *pooled* cell \(M^*\) as the within-country conclusion; calling Llama/Phi two independent methods; calling Phi a valid trust measure because it cleared education.
+
+## Amendment 2026-08-15 — trust-cell education bar stays
+
+After seeing demeaned-cell trust slacks (human menu empty; Llama slack \(-0.077\); Phi admitted with \(\beta=-0.317\) vs GPS trust), **do not** drop, loosen, or re-stage `corr_min(q275_cell)` \(\theta=0.20\). The bar was locked from Falk Table 5 before slacks. The wrong-way singleton is a result about the pair \((M,R)\), not a reason to edit \(R\).
+
+A different cell-trust network is allowed only as a **dated, pre-slack contrast** (new YAML, new run id, labeled as such). It must not replace Table 1.
+
+Education remains out of the LLM persona.
 
 ## Amendment 2026-08-14 18:03 MST — cell country-demeaning
 

@@ -1,0 +1,167 @@
+{
+  "baselines": {
+    "1": {
+      "draws": 500,
+      "pass_rate_mean": 0.32,
+      "pass_rate_p05": 0.0,
+      "pass_rate_p50": 0.0,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 1.0,
+      "width_mean": 0.0,
+      "width_p50": 0.0
+    },
+    "2": {
+      "draws": 500,
+      "pass_rate_mean": 0.292,
+      "pass_rate_p05": 0.0,
+      "pass_rate_p50": 0.5,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 1.0,
+      "width_mean": 0.3301931679010105,
+      "width_p50": 0.3539771362731624
+    },
+    "3": {
+      "draws": 500,
+      "pass_rate_mean": 0.2706666666666666,
+      "pass_rate_p05": 0.0,
+      "pass_rate_p50": 0.3333333333333333,
+      "pass_rate_p95": 0.6666666666666666,
+      "tool_percentile": 1.0,
+      "width_mean": 0.49933368507418435,
+      "width_p50": 0.5684518082638434
+    },
+    "4": {
+      "draws": 500,
+      "pass_rate_mean": 0.2835,
+      "pass_rate_p05": 0.0,
+      "pass_rate_p50": 0.25,
+      "pass_rate_p95": 0.5,
+      "tool_percentile": 1.0,
+      "width_mean": 0.5751664681755815,
+      "width_p50": 0.5926250378458425
+    }
+  },
+  "construct": "patience",
+  "headline": {
+    "L": 0.32750285347671965,
+    "M_star_select": [
+      "m_gps_patience",
+      "m_prompt_a"
+    ],
+    "U": 0.40246334068031847,
+    "empty": false,
+    "method": "min_max_beta_on_M_star_select",
+    "note": "Reporting posture (a): selection across all pooled folds is primary; holdout verdicts are power-limited diagnostics."
+  },
+  "holdout": {
+    "compliant_all_folds": [],
+    "folds": [
+      [
+        "BGD",
+        "GRC",
+        "GTM",
+        "IND",
+        "JOR",
+        "KEN",
+        "MAR",
+        "MEX",
+        "ZWE"
+      ],
+      [
+        "BOL",
+        "CHL",
+        "NLD",
+        "PHL",
+        "ROU",
+        "TUR",
+        "USA",
+        "VNM"
+      ],
+      [
+        "CAN",
+        "GBR",
+        "JPN",
+        "KOR",
+        "NGA",
+        "NIC",
+        "PAK",
+        "THA"
+      ],
+      [
+        "BRA",
+        "CHN",
+        "CZE",
+        "IDN",
+        "IRN",
+        "PER",
+        "RUS",
+        "UKR"
+      ],
+      [
+        "ARG",
+        "AUS",
+        "COL",
+        "DEU",
+        "EGY",
+        "IRQ",
+        "KAZ",
+        "SRB"
+      ]
+    ],
+    "note": "Per-fold holdout n small (power-limited); empty pooled robust is a test-power limitation, not a construct verdict.",
+    "per_fold_compliant": [
+      [
+        "m_prompt_a",
+        "m_noise"
+      ],
+      [
+        "m_wvs_q13"
+      ],
+      [
+        "m_prompt_a",
+        "m_prompt_b"
+      ],
+      [],
+      [
+        "m_gps_patience",
+        "m_prompt_a"
+      ]
+    ],
+    "per_fold_select": [
+      [
+        "m_gps_patience",
+        "m_prompt_a"
+      ],
+      [
+        "m_gps_patience",
+        "m_prompt_a"
+      ],
+      [
+        "m_gps_patience",
+        "m_prompt_a"
+      ],
+      [
+        "m_gps_patience",
+        "m_prompt_a",
+        "m_prompt_b"
+      ],
+      [
+        "m_gps_patience",
+        "m_prompt_a"
+      ]
+    ],
+    "pooled_robust": []
+  },
+  "k": 5,
+  "n_units": 41,
+  "package_version": "3.0.0",
+  "schema_version": "1",
+  "seed": 20260810,
+  "split_seed": 17,
+  "tool_holdout_pass_rate": 1.0,
+  "tool_range_width": 0.0,
+  "verifier": {
+    "status": "run separately on frozen inputs + run dir",
+    "tool": "tools/verify_wvs_gps.py"
+  }
+}

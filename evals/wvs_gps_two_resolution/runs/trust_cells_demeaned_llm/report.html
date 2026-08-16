@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>cvprofiles report — 324283e3c98e</title>
+  <style>
+    :root {
+      --ink: #1a1410;
+      --muted: #5c534c;
+      --paper: #f7f1e8;
+      --card: #fffdf8;
+      --line: #d9cfc0;
+      --ok: #1f6b3a;
+      --bad: #8b1e1e;
+      --accent: #6b2c2c;
+      --chip: #efe6d8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.35rem;
+    }
+    h1 { font-size: 1.75rem; margin: 0 0 0.35rem; font-weight: 600; }
+    .sub { color: var(--muted); margin: 0; font-size: 0.98rem; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 760px) {
+      .grid.two { grid-template-columns: 1.1fr 0.9fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.75rem;
+      font-family: Helvetica, Arial, sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .range-box {
+      border-left: 4px solid var(--ok);
+      padding: 0.85rem 1rem;
+      background: #eef6f0;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 0.75rem;
+    }
+    .range-box .label {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin: 0 0 0.25rem;
+    }
+    .range-box .value {
+      font-size: 1.45rem;
+      font-variant-numeric: tabular-nums;
+      margin: 0;
+    }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.45rem 0.35rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .tag {
+      display: inline-block;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      background: var(--chip);
+    }
+    .tag.ok { background: #d9eedf; color: var(--ok); }
+    .tag.bad { background: #f0d6d6; color: var(--bad); }
+    .tag.empty { background: #f0d6d6; color: var(--bad); }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.82rem;
+      word-break: break-all;
+    }
+    ul.compact { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+    footer {
+      margin-top: 1.75rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    .empty-callout {
+      border: 1px solid #e0b4b4;
+      background: #fbf1f1;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .empty-callout h2 { color: var(--bad); margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">cvprofiles · construct-validity profile</p>
+      <h1>Trust — cells demeaned + LLM</h1>
+      <p class="sub">
+        Admissible measurement set under a stated nomological network, and the
+        image of <em>β</em> on that set. Empty sets and wide ranges are scientific features.
+      </p>
+    </header>
+
+    
+
+    
+
+    <div class="grid two">
+      <section class="card">
+        <h2>Construct-identified range</h2>
+        <div class="range-box">
+          <p class="label">[L, U] · method = min/max B*</p>
+          
+          <p class="value">[-0.317486, -0.317486]</p>
+          <p class="muted" style="margin:0.4rem 0 0">
+            Width = 0.000000
+            · point-ID
+            
+            
+            · bootstrap percentile band = [-0.394007, -0.199811]
+            
+            
+          </p>
+          
+        </div>
+        <p class="muted" style="margin:0">
+          Target β = <span class="mono">corr_y</span>
+          on outcome <span class="mono">gps_trust_cell</span>.
+          Range uses <strong>only</strong> measures in M*; rejected β values are shown below but never enter [L,U].
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Run freeze</h2>
+        <table>
+          <tr><th>run_id</th><td class="mono">324283e3c98e43bc58fc1d2a870b68cd633204996e272acc4cdf34a7180c76d0</td></tr>
+          <tr><th>package</th><td class="mono">3.0.1</td></tr>
+          <tr><th>scores_hash</th><td class="mono">c324fa471b00184b5153253862c6894f16b77792e828db22745dd868c031fa7b</td></tr>
+          <tr><th>network_hash</th><td class="mono">d0afa9002b03c34746a448be1fbb9affc2c0ca99f9b3f2dd5956160912e218d0</td></tr>
+          <tr><th>beta_hash</th><td class="mono">19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e</td></tr>
+          <tr><th>δ</th><td class="mono">0.0</td></tr>
+          <tr><th>seed</th><td class="mono">20260814</td></tr>
+          <tr><th>network</th><td>trust_cells_llm_extension</td></tr>
+        </table>
+      </section>
+    </div>
+
+    
+    <section class="card" style="margin-top:1rem">
+      <h2>Bootstrap inference · additive to headline range</h2>
+      <p class="muted" style="margin-top:0">
+        Units-only Efron resampling; percentile band over non-empty replicates.
+        The headline [L, U] above remains min/max β(M*) on the full sample.
+      </p>
+      <table>
+        <tr><th>replicates</th><td>1000</td></tr>
+        <tr><th>seed</th><td>20260814</td></tr>
+        <tr><th>quantiles</th><td>[0.025, 0.975]</td></tr>
+        <tr><th>non-empty</th><td>1000</td></tr>
+        <tr><th>empty</th><td>0 (0.000)</td></tr>
+        <tr><th>degenerate</th><td>0 (0.000)</td></tr>
+        <tr><th>band</th><td>[-0.394007, -0.199811]</td></tr>
+      </table>
+      
+    </section>
+    
+
+    
+    <section class="card" style="margin-top:1rem">
+      <h2>Uncertainty band · additive to headline range</h2>
+      <p class="muted" style="margin-top:0">
+        Per-side α/2 quantiles over non-empty bootstrap replicates (α = 0.1).
+        Heuristic band — <strong>not a confidence interval</strong>, not a holdout-robustness band.
+        The headline [L, U] above remains min/max β(M*) on the full sample.
+      </p>
+      <table>
+        <tr><th>α</th><td>0.1</td></tr>
+        <tr><th>κ</th><td>2.0</td></tr>
+        <tr><th>quantiles</th><td>[0.05, 0.95]</td></tr>
+        <tr><th>band</th><td>[-0.382417, -0.239745]</td></tr>
+        <tr><th>empty rate</th><td>0.000</td></tr>
+        <tr><th>degenerate rate</th><td>0.000</td></tr>
+      </table>
+      
+      <h3 style="margin:1rem 0 0.4rem">Boundary attribution · |margin| ≤ κ·SE</h3>
+      <table>
+        <thead><tr><th>measure</th><th>margin</th><th>SE</th><th>boundary</th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_trust_general</td>
+            <td>-0.176854</td>
+            <td>0.049025</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_in_group</td>
+            <td>-0.268407</td>
+            <td>0.043041</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_out_group</td>
+            <td>-0.274989</td>
+            <td>0.051229</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_institution</td>
+            <td>-0.627369</td>
+            <td>0.039714</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_composite</td>
+            <td>-0.473703</td>
+            <td>0.045587</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_llm_trust_llama</td>
+            <td>-0.077267</td>
+            <td>0.040003</td>
+            <td>yes</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_llm_trust_phi</td>
+            <td>0.132638</td>
+            <td>0.043311</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            <td>-0.171912</td>
+            <td>0.048268</td>
+            <td>no</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      
+      <h3 style="margin:1rem 0 0.4rem">Admission frequency p̂<sub>m</sub></h3>
+      <table>
+        <thead><tr><th>measure</th><th>p̂<sub>m</sub></th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_trust_general</td>
+            <td>0.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_in_group</td>
+            <td>0.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_out_group</td>
+            <td>0.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_institution</td>
+            <td>0.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_composite</td>
+            <td>0.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_llm_trust_llama</td>
+            <td>0.022</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_llm_trust_phi</td>
+            <td>1.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            <td>0.000</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      <p class="muted" style="margin-bottom:0">Heuristic uncertainty band over non-empty bootstrap replicates (selection uncertainty on the pooled sample; holdout verdict is a full-sample point finding outside the band). Not a confidence interval; not a holdout-robustness band. Boundary attribution: |margin_m| <= kappa * SE_m.</p>
+    </section>
+    
+
+    
+    <section class="card" style="margin-top:1rem">
+      <h2>θ-grid sensitivity · diagnostic viewport</h2>
+      <p class="muted" style="margin-top:0">
+        λ scales threshold magnitudes only. λ is never auto-selected; the headline is always λ=1.0.
+        This grid is not part of the freeze preimage.
+      </p>
+      <table>
+        <thead><tr><th>λ</th><th>|M*|</th><th>empty</th><th>L</th><th>U</th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td>0.5</td>
+            <td>2</td>
+            <td>no</td>
+            <td>-0.317486</td>
+            <td>0.179299</td>
+          </tr>
+          
+          <tr>
+            <td>1.0</td>
+            <td>1</td>
+            <td>no</td>
+            <td>-0.317486</td>
+            <td>-0.317486</td>
+          </tr>
+          
+          <tr>
+            <td>1.5</td>
+            <td>1</td>
+            <td>no</td>
+            <td>-0.317486</td>
+            <td>-0.317486</td>
+          </tr>
+          
+          <tr>
+            <td>2.0</td>
+            <td>0</td>
+            <td>yes</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+    
+
+    
+
+    
+    <section class="card" style="margin-top:1rem">
+      <h2>θ-anchors · pre-data audit</h2>
+      <p class="muted" style="margin-top:0">
+        One pre-data anchor per restriction (hash <span class="mono">07533ac8ce87…</span>).
+        The engine enforces completeness + hash; "pre-data" is a process commitment, not a temporal claim.
+      </p>
+      <table>
+        <thead><tr><th>restriction</th><th>kind</th><th>pre-data</th><th>anchor</th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">conv_edu_cell</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>falk2018_table_v — Same education implication applied within country (cell means). θ=0.20.</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">mono_edu_cell</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>falk2018_table_v — Leftover within-country rank-monotone education restriction. θ=0.15.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+    
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Menu admission</h2>
+      <p class="muted" style="margin-top:0">
+        M* size = 1 / 8.
+        Slack rule: admit if s<sub>r</sub>(m) ≥ −δ for all r.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            <th>status</th>
+            <th>β(m)</th>
+            <th>failed restrictions</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_trust_general</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.052428</td>
+            <td class="mono">
+              
+                conv_edu_cell
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_in_group</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.223931</td>
+            <td class="mono">
+              
+                conv_edu_cell
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_out_group</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.211423</td>
+            <td class="mono">
+              
+                conv_edu_cell
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_institution</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.284723</td>
+            <td class="mono">
+              
+                conv_edu_cell
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_composite</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.317611</td>
+            <td class="mono">
+              
+                conv_edu_cell
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_llm_trust_llama</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.179299</td>
+            <td class="mono">
+              
+                conv_edu_cell
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_llm_trust_phi</td>
+            <td>
+              
+              <span class="tag ok">admissible</span>
+              
+            </td>
+            <td>-0.317486</td>
+            <td class="mono">
+              
+                —
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.014662</td>
+            <td class="mono">
+              
+                conv_edu_cell
+              
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Slack matrix s<sub>r</sub>(m)</h2>
+      <p class="muted" style="margin-top:0">Positive / zero ≈ satisfied at δ=0.0. Negative = violation magnitude.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            
+            <th class="mono">conv_edu_cell</th>
+            
+            <th class="mono">mono_edu_cell</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_trust_general</td>
+            
+            <td>-0.176854</td>
+            
+            <td>-0.131341</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_in_group</td>
+            
+            <td>-0.268407</td>
+            
+            <td>-0.233353</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_out_group</td>
+            
+            <td>-0.274989</td>
+            
+            <td>-0.224794</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_institution</td>
+            
+            <td>-0.627369</td>
+            
+            <td>-0.552204</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_composite</td>
+            
+            <td>-0.473703</td>
+            
+            <td>-0.414333</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_llm_trust_llama</td>
+            
+            <td>-0.077267</td>
+            
+            <td>-0.065537</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_llm_trust_phi</td>
+            
+            <td>0.148808</td>
+            
+            <td>0.132638</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            
+            <td>-0.171912</td>
+            
+            <td>-0.119007</td>
+            
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Network (researcher-owned)</h2>
+      <ul class="compact">
+        
+        <li>
+          <span class="mono">conv_edu_cell</span>
+          · type <span class="mono">corr_min</span>
+          · θ=0.2
+          · params <span class="mono">{'variable': 'q275_cell'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">mono_edu_cell</span>
+          · type <span class="mono">monotone_rank</span>
+          · θ=0.15
+          · params <span class="mono">{'variable': 'q275_cell', 'sign': 1}</span>
+        </li>
+        
+      </ul>
+      <p class="muted" style="margin:0.75rem 0 0">
+        Engine does not invent restrictions. Agent may author oracle R for synthetic DGPs only.
+      </p>
+    </section>
+
+    <footer>
+      cvprofiles 3.0.1
+      · four-state spine SCORE → RESTRICT → IDENTIFY → REPORT
+      · v1.1/v2.0 inference: bootstrap + θ-grid + δ-grid + coverage (diagnostic)
+      · generated 2026-08-15T19:43:35Z
+    </footer>
+  </div>
+</body>
+</html>

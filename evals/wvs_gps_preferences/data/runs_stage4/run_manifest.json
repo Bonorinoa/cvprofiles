@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "run_id": "5a7a6e580cad6b9add0134a89e0bf01fe97b06ed85d6eba03a58bad9fe0e046b",
+  "freeze": {
+    "scores_hash": "e3955779149057f1a019eea4972e38c8c7ca67c33ae331d01f4a7e7abc5e7ab4",
+    "network_hash": "d1003f68f6cda1c054b9772f78963697392f9cbaa1fbdca3a9a1350dc3cfc088",
+    "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+    "package_version": "3.0.0",
+    "schema_version": "1",
+    "seed": 20260810,
+    "delta": 0.0,
+    "n_boot": 100,
+    "config": {
+      "holdout_units": [
+        "BGD",
+        "GTM",
+        "IND",
+        "JOR",
+        "KEN",
+        "MAR",
+        "MEX",
+        "ZWE"
+      ]
+    }
+  },
+  "created_at": "2026-08-10T23:03:52Z",
+  "artifact_paths": {
+    "S_frozen.parquet": "S_frozen.parquet",
+    "S_frozen.csv": "S_frozen.csv",
+    "score_manifest.json": "score_manifest.json",
+    "network_resolved.json": "network_resolved.json",
+    "beta_resolved.json": "beta_resolved.json",
+    "restrict_bundle.json": "restrict_bundle.json",
+    "slacks.csv": "slacks.csv",
+    "slacks.parquet": "slacks.parquet",
+    "admissible.json": "admissible.json",
+    "beta_values.json": "beta_values.json",
+    "range.json": "range.json",
+    "bootstrap.json": "bootstrap.json",
+    "coverage.json": "coverage.json",
+    "run_manifest.json": "run_manifest.json",
+    "report.html": "report.html",
+    "report.json": "report.json"
+  },
+  "notes": "v2.0 spine; inference: bootstrap + theta-grid + delta-grid + anchors (diagnostic)",
+  "anchors_hash": null
+}

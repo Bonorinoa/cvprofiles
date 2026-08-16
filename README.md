@@ -69,6 +69,15 @@ The CLI prints one JSON summary to stdout (machine-clean) and writes `report.htm
 
 For a fully self-contained walkthrough that builds its inputs inline, see the tutorials (below).
 
+## What's new in v3
+
+- **Named `empty_R` unrestricted-multiverse special case (3.0.1).** When the researcher pins an empty nomological network `R = ∅`, the engine now returns the full menu as the admissible set `M* = M` and the spec-curve range over all β values. The accidental-empty case still fails loud — the named special case is opt-in via `empty_R: true` in the network YAML.
+- **Flagship application: WVS/GPS patience (3.0.0).** Country-level patience measured through a menu of WVS Wave 7 facets + a GPS patience anchor, disciplined by a literature-anchored `disc_risk` bar (`θ = 0.35`). Accepted frozen run: `M*_select = [m_gps_patience, m_prompt_a]`, headline `[L, U] = [0.328, 0.402]`. See `evals/wvs_gps_preferences/` and the input-builder tutorial.
+- **Posture (a) reporting discipline (3.0.0).** `M*_select` is the primary headline; empty `M*_robust` from a units-split is a power-limited diagnostic, not a paper failure. See `docs/16` §11.
+- **Engine stays model-free and score-agnostic.** No LLM client in the import graph; the LLM-extension work (3.0.1) is an upstream scoring protocol, not engine feature work.
+
+Upgrading from v2.x? v2.5.2 was the last PyPI release before v3; the v3.0.x API is a strict superset.
+
 ## What this package does
 
 Researcher supplies unit×measure scores (**SCORE**). Researcher authors a nomological network R with thresholds θ and a target β(·) (**RESTRICT**). Engine computes sample slacks, keeps admissible measures M\*, maps survivors through β, and reports the image B\* as the range [L,U] = [min B\*, max B\*] (**IDENTIFY**). Bootstrap, the coverage uncertainty band, the θ-grid, and the δ-grid are additive diagnostics that never replace the headline range (**REPORT**). A P4b units-split holdout is not a diagnostic: when `holdout_units` is set, selection runs on train units, compliance on held-out units, and the headline becomes the robust set M\*_robust.
@@ -109,34 +118,29 @@ Full positioning in the methodology doc (`docs/METHODOLOGY.md`).
 - Not a generic causal-sensitivity package: it disciplines *measurement* given a stated β.
 - Not “automate all of empirical economics”: it answers one question well.
 
-## Positioning and inference stance
-
-**Model-free by design.** The engine never fits a model inside the validity layer: a p-value requires a null distribution, a Bayes factor requires priors, a likelihood ratio requires a model — all of which smuggle in distributional assumptions the engine refuses to own. It computes transparent sample moments against researcher-declared thresholds.
-
-**Diagnostic surfaces.** θ-grid and δ-grid show how $M^*$ and $[L,U]$ move with threshold and tolerance choices — the specification-curve (Simonsohn et al. 2020) / multiverse (Steegen et al. 2016) idea applied to measurement admissibility. Descriptive by design: they reveal *where* admissibility flips; they make no inferential claim about the surface.
-
-**Honest inference posture.** The range is a fragility audit over sample-admissible measures, not a confidence set — no coverage theorem is claimed. Bootstrap output is an uncertainty band, never a CI. The units-split holdout is the out-of-sample check: select on train units, verdict on held-out units.
-
 ## Documentation
 
 Start here, then follow in order:
 
 | Doc | Purpose |
 |---|---|
-| `docs/METHODOLOGY.md` | The method: menu, slacks, M\*, B\*, inference stance |
-| `docs/USER_GUIDE.md` | How to prepare inputs, run a profile, read the report |
-| `docs/ARCHITECTURE.md` | Four-state machine, IO contracts, determinism |
-| `docs/16_Paper_Protocol_Freeze.md` | Paper-facing locks and open fields |
-| `docs/18_IVS_Cultural_Map.md` | v3 IVS cultural-values lane design container (Augusto-authored; run gated) |
-| `docs/17_H5_Trust_Design.md` | H5 Trust design lock — **historical** (re-graded 2026-08-07) |
-| `tutorials/cvprofiles_tutorial.ipynb` | Synthetic walk-through + H5 replication |
+| [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) | The method: menu, slacks, M\*, B\*, inference stance |
+| [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) | How to prepare inputs, run a profile, read the report |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Four-state machine, IO contracts, determinism |
+| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Live roadmap (maintained with the engineering log) |
+| [`docs/README.md`](docs/README.md) | Doc index — public docs + governance/lock docs |
+
+Tutorials (run against the installed package, inputs generated inline):
+
+| Tutorial | What it covers |
+|---|---|
+| `tutorials/cvprofiles_tutorial.ipynb` | Synthetic walk-through + WVS/GPS patience flagship replication |
 | `tutorials/cvprofiles_diagnostics_tour.ipynb` | v2.0 measure-discipline tour: all evaluators + diagnostics |
 | `tutorials/cvprofiles_irt_scoring_tutorial.ipynb` | IRT as a SCORE-upstream scoring technology |
 | `tutorials/cvprofiles_sensemakr_tutorial.ipynb` | OVB sensitivity (Cinelli–Hazlett) on a survivor |
 | `tutorials/cvprofiles_wvs_gps_inputs.ipynb` | WVS/GPS input-builder + E2E (patience + risk-taking): synthetic oracle walk-through, then authoring the four frozen inputs for the WVS Wave 7 × GPS lane, incl. the country-level units-split holdout |
-| `docs/PROJECT_MANIFEST.md` | Machine-readable project state |
 
-Live internal logs (append-only): `docs/12_Decision_Engineering_Log.md`, `docs/13_Evaluations_Log.md`. Pre-consolidation scaffold docs live in `docs/archive/` (historical reference only).
+Governance, decisions, and paper-protocol locks live in [`docs/README.md#governance`](docs/README.md). Pre-consolidation scaffold docs are in `docs/archive/` (historical reference only).
 
 ## Roadmap
 
@@ -144,7 +148,11 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md) — maintained as a live document along
 
 ## Museum PoC
 
-`evals/synthetic/v0_poc.py` is a historical monolith kept for reference. It is not part of the package and must not be imported from `src/`.
+`evals/synthetic/v0_poc.py` is a historical monolith kept for reference. It is not part of the package and must not be imported from `src/`. See `AGENTS.md` for the contract.
+
+## Citation
+
+The canonical method statement is `docs/METHODOLOGY.md`. A paper citation block will be added once the v3 paper freeze is final (see `docs/16`).
 
 ## Acknowledgments
 

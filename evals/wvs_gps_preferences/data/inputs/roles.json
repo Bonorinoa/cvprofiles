@@ -1,0 +1,17 @@
+{
+  "unit_id": "unit_id",
+  "measures": [
+    "m_gps_patience",
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_prompt_a",
+    "m_prompt_b",
+    "m_noise"
+  ],
+  "aux": [
+    "risktaking",
+    "q275_mean"
+  ],
+  "outcome": "log_gdp_pc"
+}

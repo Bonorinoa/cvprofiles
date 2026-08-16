@@ -1,0 +1,80 @@
+{
+  "alpha": 0.1,
+  "band_L": 0.15709249882514403,
+  "band_U": 0.673721699168387,
+  "boundary": [
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": 0.0754271992033701,
+      "measure": "m_gps_patience",
+      "se": 0.1063697409351
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.5331642993979104,
+      "measure": "m_wvs_q13",
+      "se": 0.12481369445119926
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.7767790765438531,
+      "measure": "m_wvs_q14",
+      "se": 0.09468882770203318
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.7218147055040101,
+      "measure": "m_composite",
+      "se": 0.10242084770540014
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": 0.027208109569777816,
+      "measure": "m_llm_patience_llama",
+      "se": 0.12418612938716825
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": 0.07133016125401742,
+      "measure": "m_llm_patience_phi",
+      "se": 0.13780490289798966
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": -0.26549104807529866,
+      "measure": "m_noise",
+      "se": 0.15226939581396992
+    }
+  ],
+  "degenerate_replicate_rate": 0.0,
+  "empty_replicate_rate": 0.089,
+  "headline_note": "Headline [L,U] remains min/max B* on the full sample; the uncertainty band is additive metadata and never replaces it.",
+  "kappa": 2.0,
+  "note": "Heuristic uncertainty band over non-empty bootstrap replicates (selection uncertainty on the pooled sample; holdout verdict is a full-sample point finding outside the band). Not a confidence interval; not a holdout-robustness band. Boundary attribution: |margin_m| <= kappa * SE_m.",
+  "p_hat_m": {
+    "m_composite": 0.0,
+    "m_gps_patience": 0.7552140504939627,
+    "m_llm_patience_llama": 0.54006586169045,
+    "m_llm_patience_phi": 0.686059275521405,
+    "m_noise": 0.04061470911086718,
+    "m_wvs_q13": 0.0,
+    "m_wvs_q14": 0.0
+  },
+  "purpose": "coverage_uncertainty_band",
+  "quantiles": [
+    0.05,
+    0.95
+  ],
+  "replicates_degenerate": 0,
+  "replicates_empty": 89,
+  "replicates_nonempty": 911,
+  "replicates_total": 1000,
+  "schema_version": "1"
+}

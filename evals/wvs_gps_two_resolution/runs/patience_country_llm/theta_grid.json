@@ -1,0 +1,85 @@
+{
+  "headline_lambda": 1.0,
+  "lambda_scales": [
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "note": "Diagnostic theta-sensitivity surface only. Headline [L,U] is always lambda=1.0; lambda is never auto-selected.",
+  "purpose": "diagnostic_theta_sensitivity",
+  "rows": [
+    {
+      "L": 0.44701963725653376,
+      "U": 0.5649061435421557,
+      "admissible": [
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "empty": false,
+      "lambda": 0.5,
+      "n_admissible": 2,
+      "network_hash": "1600b8a114feb06945c7de6a4b03cba55ac7f42618149e940980995e23b14c76",
+      "point_id": false,
+      "thetas": {
+        "conv_edu": 0.1,
+        "disc_risk": 0.175,
+        "mono_edu": 0.075
+      }
+    },
+    {
+      "L": 0.40246334068031847,
+      "U": 0.5649061435421557,
+      "admissible": [
+        "m_gps_patience",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "empty": false,
+      "lambda": 1.0,
+      "n_admissible": 3,
+      "network_hash": "f2d17ff29958683d39a2e14e8d2c013bda43635d3da8348baf950f7f851b348b",
+      "point_id": false,
+      "thetas": {
+        "conv_edu": 0.2,
+        "disc_risk": 0.35,
+        "mono_edu": 0.15
+      }
+    },
+    {
+      "L": 0.40246334068031847,
+      "U": 0.40246334068031847,
+      "admissible": [
+        "m_gps_patience"
+      ],
+      "empty": false,
+      "lambda": 1.5,
+      "n_admissible": 1,
+      "network_hash": "23416d7f629bc4906568bfae313bffcbec113bb7b1c5474e32fcfd14926e8bfd",
+      "point_id": true,
+      "thetas": {
+        "conv_edu": 0.30000000000000004,
+        "disc_risk": 0.5249999999999999,
+        "mono_edu": 0.22499999999999998
+      }
+    },
+    {
+      "L": 0.40246334068031847,
+      "U": 0.40246334068031847,
+      "admissible": [
+        "m_gps_patience"
+      ],
+      "empty": false,
+      "lambda": 2.0,
+      "n_admissible": 1,
+      "network_hash": "d59b1141d21ef2e8a33bdd252c0be193e2b53632250de3b83816a5b5a469262b",
+      "point_id": true,
+      "thetas": {
+        "conv_edu": 0.4,
+        "disc_risk": 0.7,
+        "mono_edu": 0.3
+      }
+    }
+  ],
+  "schema_version": "1"
+}
