@@ -1422,3 +1422,17 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 **Authorized by this entry:** schema/identify/report/docs/tests for empty_R; version posture 3.0.1; feature-branch PR against Bonorinoa/cvprofiles. Not a PyPI publish, not a tag, not a paper rewrite.
 
 **2026-08-14 close-out (Augusto direct instruction):** branch evaluation green (382 tests, full battery); merged to `main`; annotated tag `v3.0.1` pushed; PyPI publish owner-run. The "not a tag / not a publish" line above is superseded for this release by that instruction.
+
+## 2026-08-16 — Public-surface sprint (demo + README + tutorial honesty)
+
+**Context:** independent audit (2026-08-16) said first-run friction, not engine correctness, is the adoption limit. Local check on `main` @ `be19d41`: README Quickstart pointed at repo-only `data/fixtures/mini_v1/`; the core tutorial still sold H5 Trust as the live replication after the 2026-08-07 re-grade.
+
+**Decisions (Augusto chose cut B):**
+- Add `cvprofiles demo`: emit the existing `mini_v1` four-file bundle from package data, run it, keep stdout JSON-only, teaching crumbs on stderr. No second teaching DGP. No `python -m cvprofiles.demo`.
+- README first screen: purpose → install → `cvprofiles demo` → four-file table → what the numbers mean. Do not claim the published 3.0.1 wheel ships `demo`.
+- Relabel H5 Part 2 as historical. Leave notebook code cells and outputs untouched. Flagship pointer = WVS/GPS.
+- No engine expansion. No version bump. No PyPI / tag / push by this entry.
+
+**Authorized by this entry:** the three commits on `feat/public-surface` plus this log line and the sprint notes under `audits/2026-08-16_*`.
+
+**Not authorized by this entry:** 3.0.2 bump, PyPI, tag, push, new notebooks, evaluator/β/inference work, deleting H5 Part 2.
