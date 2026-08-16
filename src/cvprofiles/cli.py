@@ -4,12 +4,15 @@ from __future__ import annotations
 
 import json
 import math
+from importlib.resources import files
 from pathlib import Path
 from typing import Annotated
 
 import typer
 
 from cvprofiles import __version__
+
+_DEMO_INPUTS = ("scores.csv", "roles.json", "network.yaml", "beta.yaml")
 
 app = typer.Typer(
     name="cvprofiles",
@@ -287,6 +290,86 @@ def run_cmd(
             fg=typer.colors.GREEN,
             err=True,
         )
+
+
+def _emit_mini_v1(dest: Path) -> None:
+    """Write the packaged mini_v1 four-file bundle into dest."""
+    dest.mkdir(parents=True, exist_ok=True)
+    root = files("cvprofiles") / "data" / "mini_v1"
+    for name in _DEMO_INPUTS:
+        (dest / name).write_bytes((root / name).read_bytes())
+
+
+def _refuse_nonempty_out(out: Path) -> None:
+    if out.exists() and any(out.iterdir()):
+        typer.secho(
+            f"error: --out {out} exists and is not empty (pass --force to overwrite)",
+            fg=typer.colors.RED,
+            err=True,
+        )
+        raise typer.Exit(code=2)
+
+
+@app.command("demo")
+def demo_cmd(
+    out: Annotated[
+        Path,
+        typer.Option("--out", help="Directory for the four input files and report."),
+    ] = Path("cvprofiles_demo"),
+    force: Annotated[
+        bool,
+        typer.Option("--force", help="Overwrite a non-empty --out directory."),
+    ] = False,
+) -> None:
+    """Emit the mini_v1 four-file bundle and run it. Empty M* exits 0.
+
+    stdout is always a single JSON summary (same contract as ``run``).
+    Teaching crumbs go to stderr only.
+    """
+    from cvprofiles.identify.pipeline import IdentifyError
+    from cvprofiles.pipeline import run_profile, summary_dict
+    from cvprofiles.report.pipeline import ReportError
+    from cvprofiles.restrict.pipeline import RestrictError
+    from cvprofiles.score.pipeline import ScoreError
+
+    if not force:
+        _refuse_nonempty_out(out)
+
+    _emit_mini_v1(out)
+    try:
+        result = run_profile(
+            scores=out / "scores.csv",
+            roles=out / "roles.json",
+            network=out / "network.yaml",
+            beta=out / "beta.yaml",
+            out_dir=out,
+            policy="none",
+            seed=0,
+            title="cvprofiles demo (mini_v1)",
+        )
+    except (ScoreError, RestrictError, IdentifyError, ReportError, ValueError) as exc:
+        typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1) from exc
+
+    summary = summary_dict(result)
+    typer.echo(json.dumps(summary, indent=2))
+
+    ident = result.identify
+    typer.secho(
+        f"Wrote four-file bundle + report to {out}",
+        err=True,
+    )
+    typer.secho(
+        f"M*={ident.admissible}  [L,U]=[{ident.range_L}, {ident.range_U}]",
+        fg=typer.colors.GREEN,
+        err=True,
+    )
+    for measure, rids in ident.rejected.items():
+        typer.secho(f"rejected {measure}: {rids}", err=True)
+    typer.secho(
+        "Empty M* is a scientific finding, not a crash — this fixture is non-empty.",
+        err=True,
+    )
 
 
 if __name__ == "__main__":

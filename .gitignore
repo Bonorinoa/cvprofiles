@@ -95,3 +95,6 @@ data/tmp_runs/
 # is already ignored separately. Add more paths here if new model caches
 # appear outside `evals/`.
 models/
+
+# Default output of `cvprofiles demo` (four-file bundle + report)
+/cvprofiles_demo/

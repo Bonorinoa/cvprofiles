@@ -1,0 +1,7 @@
+{
+  "unit_id": "unit_id",
+  "measures": ["m_good", "m_weak", "m_slop"],
+  "aux": ["v_aux"],
+  "outcome": "y",
+  "diagnostic": ["V_star"]
+}
