@@ -7,11 +7,10 @@ Open, high-observability research tooling that treats construct validity as **pa
 | | |
 |---|---|
 | **Version** | **3.0.1** — patch: named `empty_R` unrestricted-multiverse special case (2026-08-14); 3.0.0 remains the flagship-application release |
-| **Status** | Public repo; tags `v0.1`, `v1.1.0`, `v2.0.0`, `v2.5.0`, `v2.5.1`, `v2.5.2` frozen; protocol provisional synthetic-only; H5 Trust evidence **re-graded to historical/regression witness** (2026-08-07, Gate A); **v3.0.0 release 2026-08-10** — flagship application = WVS/GPS patience (accepted frozen run); IVS cultural-values lane deferred (RESERVED); P6 deferred to v3.1 |
+| **Status** | Public methods package (Alpha). Latest tag `v3.0.1`. |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
 | **CI** | [![ci](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml) |
-| **Proof summary** | `reports/summaries/v1_1_package_synth_summary.json`, `v1_1_protocol_synth_mc50_summary.json` (provisional synthetic-only protocol table; not a paper result) |
 
 ## Install
 
@@ -21,39 +20,25 @@ pip install cvprofiles
 
 Requires Python ≥ 3.11. No GPU, no model weights, no API keys — the engine is a pure Python/numpy/pandas computation over the score columns you supply.
 
-### Install from source (pinned)
+The published 3.0.1 wheel is the engine. The one-command demo below lives in this source tree (install the checkout).
 
-`main` is development; the version tags are the paper anchors. Clone the tag that matches your paper run:
+### Install from source (this checkout)
 
 ```bash
-git clone -b v3.0.0 --depth 1 https://github.com/Bonorinoa/cvprofiles.git
+git clone https://github.com/Bonorinoa/cvprofiles.git
 cd cvprofiles
 pip install -e .
 ```
 
+`main` is development; version tags are the paper anchors. Clone a tag (`-b v3.0.1`) when you need a frozen paper run.
+
 ## Quickstart
 
-A profile needs exactly four input files, all plain text:
-
-| File | Contents |
-|---|---|
-| `scores.csv` (or `.parquet`) | One row per unit; one column per candidate measure, plus optional auxiliary/outcome columns |
-| `roles.json` | Which columns are measures, auxiliaries, outcome, unit id |
-| `network.yaml` | Your nomological network: restrictions with thresholds θ |
-| `beta.yaml` | The target functional β(·) you want a range for |
-
-Minimal example (from the repo's `data/fixtures/mini_v1/`):
-
 ```bash
-cvprofiles run \
-  --scores data/fixtures/mini_v1/scores.csv \
-  --roles data/fixtures/mini_v1/roles.json \
-  --network data/fixtures/mini_v1/network.yaml \
-  --beta data/fixtures/mini_v1/beta.yaml \
-  --out my_first_profile --seed 0
+cvprofiles demo
 ```
 
-The CLI prints one JSON summary to stdout (machine-clean) and writes `report.html` plus machine-readable artifacts into `my_first_profile/`:
+Writes the four-file teaching bundle into `./cvprofiles_demo/` and runs it. Open `cvprofiles_demo/report.html` for the human artifact. stdout is one JSON summary:
 
 ```json
 {
@@ -67,16 +52,31 @@ The CLI prints one JSON summary to stdout (machine-clean) and writes `report.htm
 }
 ```
 
+**What these numbers mean.** `M*` is the admissible set — the measures that survived the researcher-authored network. `[L,U]` is the image of β on **survivors only**. Rejected measures are reported (here `m_slop` fails the aux-correlation restrictions) but never enter the range.
+
+**Empty M\* is a finding.** If theory + data reject every candidate, the engine exits 0 and writes a clean report. That is success, not a crash. This demo fixture is non-empty so you can see a range; the empty-set contrast is in the core tutorial.
+
+A profile is always the same four plain-text files:
+
+| File | Contents |
+|---|---|
+| `scores.csv` (or `.parquet`) | One row per unit; one column per candidate measure, plus optional auxiliary/outcome columns |
+| `roles.json` | Which columns are measures, auxiliaries, outcome, unit id |
+| `network.yaml` | Your nomological network: restrictions with thresholds θ |
+| `beta.yaml` | The target functional β(·) you want a range for |
+
+`cvprofiles demo` emits a known-hash copy of that contract. To run your own files:
+
+```bash
+cvprofiles run \
+  --scores scores.csv \
+  --roles roles.json \
+  --network network.yaml \
+  --beta beta.yaml \
+  --out my_first_profile --seed 0
+```
+
 For a fully self-contained walkthrough that builds its inputs inline, see the tutorials (below).
-
-## What's new in v3
-
-- **Named `empty_R` unrestricted-multiverse special case (3.0.1).** When the researcher pins an empty nomological network `R = ∅`, the engine now returns the full menu as the admissible set `M* = M` and the spec-curve range over all β values. The accidental-empty case still fails loud — the named special case is opt-in via `empty_R: true` in the network YAML.
-- **Flagship application: WVS/GPS patience (3.0.0).** Country-level patience measured through a menu of WVS Wave 7 facets + a GPS patience anchor, disciplined by a literature-anchored `disc_risk` bar (`θ = 0.35`). Accepted frozen run: `M*_select = [m_gps_patience, m_prompt_a]`, headline `[L, U] = [0.328, 0.402]`. See `evals/wvs_gps_preferences/` and the input-builder tutorial.
-- **Posture (a) reporting discipline (3.0.0).** `M*_select` is the primary headline; empty `M*_robust` from a units-split is a power-limited diagnostic, not a paper failure. See `docs/16` §11.
-- **Engine stays model-free and score-agnostic.** No LLM client in the import graph; the LLM-extension work (3.0.1) is an upstream scoring protocol, not engine feature work.
-
-Upgrading from v2.x? v2.5.2 was the last PyPI release before v3; the v3.0.x API is a strict superset.
 
 ## What this package does
 
@@ -118,6 +118,15 @@ Full positioning in the methodology doc (`docs/METHODOLOGY.md`).
 - Not a generic causal-sensitivity package: it disciplines *measurement* given a stated β.
 - Not “automate all of empirical economics”: it answers one question well.
 
+## What's new in v3
+
+- **Named `empty_R` unrestricted-multiverse special case (3.0.1).** When the researcher pins an empty nomological network `R = ∅`, the engine now returns the full menu as the admissible set `M* = M` and the spec-curve range over all β values. The accidental-empty case still fails loud — the named special case is opt-in via `empty_R: true` in the network YAML.
+- **Flagship application: WVS/GPS patience (3.0.0).** Country-level patience measured through a menu of WVS Wave 7 facets + a GPS patience anchor, disciplined by a literature-anchored `disc_risk` bar (`θ = 0.35`). Accepted frozen run: `M*_select = [m_gps_patience, m_prompt_a]`, headline `[L, U] = [0.328, 0.402]`. See `evals/wvs_gps_preferences/` and the input-builder tutorial.
+- **Posture (a) reporting discipline (3.0.0).** `M*_select` is the primary headline; empty `M*_robust` from a units-split is a power-limited diagnostic, not a paper failure. See `docs/16` §11.
+- **Engine stays model-free and score-agnostic.** No LLM client in the import graph; LLM scoring is an upstream protocol, not an engine feature.
+
+Upgrading from v2.x? v2.5.2 was the last PyPI release before v3; the v3.0.x API is a strict superset.
+
 ## Documentation
 
 Start here, then follow in order:
@@ -134,11 +143,11 @@ Tutorials (run against the installed package, inputs generated inline):
 
 | Tutorial | What it covers |
 |---|---|
-| `tutorials/cvprofiles_tutorial.ipynb` | Synthetic walk-through + WVS/GPS patience flagship replication |
+| `tutorials/cvprofiles_tutorial.ipynb` | **Core.** Synthetic walk-through + empty-set contrast; Part 2 is a **historical** H5 Trust appendix (not the v3 flagship) |
 | `tutorials/cvprofiles_diagnostics_tour.ipynb` | v2.0 measure-discipline tour: all evaluators + diagnostics |
 | `tutorials/cvprofiles_irt_scoring_tutorial.ipynb` | IRT as a SCORE-upstream scoring technology |
 | `tutorials/cvprofiles_sensemakr_tutorial.ipynb` | OVB sensitivity (Cinelli–Hazlett) on a survivor |
-| `tutorials/cvprofiles_wvs_gps_inputs.ipynb` | WVS/GPS input-builder + E2E (patience + risk-taking): synthetic oracle walk-through, then authoring the four frozen inputs for the WVS Wave 7 × GPS lane, incl. the country-level units-split holdout |
+| `tutorials/cvprofiles_wvs_gps_inputs.ipynb` | **Flagship inputs.** WVS/GPS patience input-builder + E2E: synthetic oracle, then the four frozen inputs for the WVS Wave 7 × GPS lane |
 
 Governance, decisions, and paper-protocol locks live in [`docs/README.md#governance`](docs/README.md). Pre-consolidation scaffold docs are in `docs/archive/` (historical reference only).
 
