@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "roles": {
+    "unit_id": "unit_id",
+    "measures": [
+      "m_wvs_q13",
+      "m_wvs_q14",
+      "m_composite",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi",
+      "m_noise"
+    ],
+    "aux": [
+      "q275_cell"
+    ],
+    "outcome": "gps_patience_cell",
+    "diagnostic": []
+  },
+  "n_rows": 480,
+  "n_measures": 6,
+  "measure_columns": [
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi",
+    "m_noise"
+  ],
+  "normalization": {
+    "policy": "none",
+    "zscore_measures": false,
+    "ddof": null,
+    "columns_transformed": []
+  },
+  "scores_hash": "b1dd9590ea89e700d574eeead5948ec68a1ee175bdf0060ef6f32bd67f48f8cb",
+  "dtypes": {
+    "unit_id": "str",
+    "m_wvs_q13": "float64",
+    "m_wvs_q14": "float64",
+    "m_composite": "float64",
+    "m_llm_patience_llama": "float64",
+    "m_llm_patience_phi": "float64",
+    "m_noise": "float64",
+    "q275_cell": "float64",
+    "gps_patience_cell": "float64"
+  }
+}

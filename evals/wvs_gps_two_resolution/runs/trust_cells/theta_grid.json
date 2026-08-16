@@ -1,0 +1,84 @@
+{
+  "headline_lambda": 1.0,
+  "lambda_scales": [
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "note": "Diagnostic theta-sensitivity surface only. Headline [L,U] is always lambda=1.0; lambda is never auto-selected.",
+  "purpose": "diagnostic_theta_sensitivity",
+  "rows": [
+    {
+      "L": 0.25065551141738696,
+      "U": 0.31700309764786105,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group"
+      ],
+      "empty": false,
+      "lambda": 0.5,
+      "n_admissible": 3,
+      "network_hash": "89b1b1ba02ec6aac9136493561f7795573ac1891d623c343db7510720f9776d9",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.1,
+        "mono_edu_cell": 0.075
+      }
+    },
+    {
+      "L": 0.25065551141738696,
+      "U": 0.31700309764786105,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group"
+      ],
+      "empty": false,
+      "lambda": 1.0,
+      "n_admissible": 3,
+      "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.2,
+        "mono_edu_cell": 0.15
+      }
+    },
+    {
+      "L": 0.25065551141738696,
+      "U": 0.25173134723234997,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_out_group"
+      ],
+      "empty": false,
+      "lambda": 1.5,
+      "n_admissible": 2,
+      "network_hash": "558df5623b42e9596786bf387866644ee709d20f3603201ea646e9003bd7c701",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.30000000000000004,
+        "mono_edu_cell": 0.22499999999999998
+      }
+    },
+    {
+      "L": 0.25065551141738696,
+      "U": 0.25173134723234997,
+      "admissible": [
+        "m_trust_general",
+        "m_trust_out_group"
+      ],
+      "empty": false,
+      "lambda": 2.0,
+      "n_admissible": 2,
+      "network_hash": "80027acb97a40d46ef7991deebbec7044fca572693bea566c55b565653185f55",
+      "point_id": false,
+      "thetas": {
+        "conv_edu_cell": 0.4,
+        "mono_edu_cell": 0.3
+      }
+    }
+  ],
+  "schema_version": "1"
+}

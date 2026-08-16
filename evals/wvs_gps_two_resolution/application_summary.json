@@ -1,0 +1,594 @@
+{
+  "n_boot": 1000,
+  "package_version": "3.0.1",
+  "profiles": [
+    {
+      "L": 0.40246334068031847,
+      "M_star": [
+        "m_gps_patience"
+      ],
+      "M_star_robust": [
+        "m_gps_patience"
+      ],
+      "M_star_select": [
+        "m_gps_patience"
+      ],
+      "U": 0.40246334068031847,
+      "anchors_hash": "e68030d19e060d5a7ff1617bca64cc7712e44e90808415f95750f1d91eff426c",
+      "baselines": {
+        "best_abs_beta": "m_gps_patience",
+        "best_abs_beta_holdout_pass_rate": 1.0,
+        "best_abs_beta_value": 0.40246334068031847,
+        "canonical": "m_wvs_q13",
+        "canonical_holdout_pass_rate": 0.0,
+        "canonical_in_menu": true,
+        "menu_without_noise": [
+          "m_gps_patience",
+          "m_wvs_q13",
+          "m_wvs_q14",
+          "m_composite"
+        ],
+        "n_draws": 500,
+        "per_measure_holdout": {
+          "m_composite": 0.0,
+          "m_gps_patience": 1.0,
+          "m_wvs_q13": 0.0,
+          "m_wvs_q14": 0.0
+        },
+        "random_k1": {
+          "pass_rate_mean": 0.262,
+          "pass_rate_p50": 0.0,
+          "pass_rate_p95": 1.0,
+          "tool_percentile": 1.0
+        },
+        "random_k2": {
+          "pass_rate_mean": 0.263,
+          "pass_rate_p50": 0.5,
+          "pass_rate_p95": 0.5,
+          "tool_percentile": 1.0
+        },
+        "random_k3": {
+          "pass_rate_mean": 0.24,
+          "pass_rate_p50": 0.3333333333333333,
+          "pass_rate_p95": 0.3333333333333333,
+          "tool_percentile": 1.0
+        },
+        "tool_holdout_pass_rate": 1.0
+      },
+      "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+      "beta_values": {
+        "m_composite": -0.21874650645411,
+        "m_gps_patience": 0.40246334068031847,
+        "m_noise": 0.019901395118570066,
+        "m_wvs_q13": -0.16598846758352492,
+        "m_wvs_q14": -0.1948399555130896
+      },
+      "bootstrap": {
+        "artifact": "bootstrap.json",
+        "band_L": -0.07698337190302755,
+        "band_U": 0.603114554556168,
+        "degenerate_replicate_rate": 0.0,
+        "empty_replicate_rate": 0.297,
+        "n_boot": 1000,
+        "note": null,
+        "replicates_degenerate": 0,
+        "replicates_empty": 297,
+        "replicates_nonempty": 703,
+        "seed": 20260814
+      },
+      "coverage": {
+        "alpha": 0.1,
+        "artifact": "coverage.json",
+        "band_L": 0.07861359426010246,
+        "band_U": 0.5628626683398689,
+        "kappa": 2.0,
+        "n_boundary": 5,
+        "quantiles": [
+          0.05,
+          0.95
+        ]
+      },
+      "coverage_band": [
+        0.07861359426010246,
+        0.5628626683398689
+      ],
+      "delta_grid": null,
+      "empty": false,
+      "empty_replicate_rate": 0.297,
+      "headline_posture": "restriction_stage_split_M_star_select",
+      "holdout_verdict": {
+        "m_composite": [
+          "mono_edu"
+        ],
+        "m_noise": [
+          "mono_edu"
+        ],
+        "m_wvs_q13": [
+          "mono_edu"
+        ],
+        "m_wvs_q14": [
+          "mono_edu"
+        ]
+      },
+      "id": "patience_country",
+      "n_boot": 1000,
+      "n_units": 41,
+      "network_hash": "3cdf089fbb4a9a419d4a89ad707d68a0f6cae96438fe43fba503403f2642ea66",
+      "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country",
+      "package_version": "3.0.1",
+      "point_id": true,
+      "rejected": {
+        "m_composite": [
+          "conv_edu"
+        ],
+        "m_noise": [
+          "conv_edu"
+        ],
+        "m_wvs_q13": [
+          "conv_edu"
+        ],
+        "m_wvs_q14": [
+          "conv_edu"
+        ]
+      },
+      "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country/report.html",
+      "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country/report.json",
+      "run_id": "9ed0289512beecaf01749f8d35ac6cd86d9cf2e18450ac0265c92059d7420be8",
+      "scores_hash": "ba400cce52f2dc214385323f88511d9914b15b6686b526f06a486126cc3b35c8",
+      "theta_grid": {
+        "artifact": "theta_grid.json",
+        "headline_lambda": 1.0,
+        "lambdas": [
+          0.5,
+          1.0,
+          1.5,
+          2.0
+        ],
+        "rows": 4
+      }
+    },
+    {
+      "L": 0.10682921214895848,
+      "M_star": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_composite"
+      ],
+      "M_star_robust": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_composite"
+      ],
+      "M_star_select": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_composite"
+      ],
+      "U": 0.39059801989030046,
+      "anchors_hash": "68e155f6775d94313deb30856e689244b23690c9a6d2d1784bb26ebd310d3201",
+      "baselines": {
+        "best_abs_beta": "m_trust_general",
+        "best_abs_beta_holdout_pass_rate": 1.0,
+        "best_abs_beta_value": 0.39059801989030046,
+        "canonical": "m_trust_general",
+        "canonical_holdout_pass_rate": 1.0,
+        "canonical_in_menu": true,
+        "menu_without_noise": [
+          "m_gps_trust",
+          "m_trust_general",
+          "m_trust_in_group",
+          "m_trust_out_group",
+          "m_trust_institution",
+          "m_trust_composite"
+        ],
+        "n_draws": 500,
+        "per_measure_holdout": {
+          "m_gps_trust": 0.0,
+          "m_trust_composite": 0.0,
+          "m_trust_general": 1.0,
+          "m_trust_in_group": 1.0,
+          "m_trust_institution": 0.0,
+          "m_trust_out_group": 1.0
+        },
+        "random_k1": {
+          "pass_rate_mean": 0.52,
+          "pass_rate_p50": 1.0,
+          "pass_rate_p95": 1.0,
+          "tool_percentile": 0.48
+        },
+        "random_k2": {
+          "pass_rate_mean": 0.494,
+          "pass_rate_p50": 0.5,
+          "pass_rate_p95": 1.0,
+          "tool_percentile": 0.812
+        },
+        "random_k3": {
+          "pass_rate_mean": 0.5126666666666666,
+          "pass_rate_p50": 0.5,
+          "pass_rate_p95": 1.0,
+          "tool_percentile": 0.936
+        },
+        "tool_holdout_pass_rate": 0.75
+      },
+      "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+      "beta_values": {
+        "m_gps_trust": 0.10902294590510236,
+        "m_noise": 0.02835077310905364,
+        "m_trust_composite": 0.10682921214895848,
+        "m_trust_general": 0.39059801989030046,
+        "m_trust_in_group": 0.19181229950916978,
+        "m_trust_institution": -0.09228547256256103,
+        "m_trust_out_group": 0.2664556374680704
+      },
+      "bootstrap": {
+        "artifact": "bootstrap.json",
+        "band_L": -0.039166724340843846,
+        "band_U": 0.6798549743841862,
+        "degenerate_replicate_rate": 0.0,
+        "empty_replicate_rate": 0.002,
+        "n_boot": 1000,
+        "note": null,
+        "replicates_degenerate": 0,
+        "replicates_empty": 2,
+        "replicates_nonempty": 998,
+        "seed": 20260814
+      },
+      "coverage": {
+        "alpha": 0.1,
+        "artifact": "coverage.json",
+        "band_L": -0.016173341685614434,
+        "band_U": 0.6388574757401789,
+        "kappa": 2.0,
+        "n_boundary": 7,
+        "quantiles": [
+          0.05,
+          0.95
+        ]
+      },
+      "coverage_band": [
+        -0.016173341685614434,
+        0.6388574757401789
+      ],
+      "delta_grid": null,
+      "empty": false,
+      "empty_replicate_rate": 0.002,
+      "headline_posture": "restriction_stage_split_M_star_select",
+      "holdout_verdict": {
+        "m_gps_trust": [
+          "conv_edu_hold"
+        ],
+        "m_noise": [
+          "conv_edu_hold"
+        ],
+        "m_trust_composite": [
+          "conv_edu_hold"
+        ],
+        "m_trust_institution": [
+          "conv_edu_hold"
+        ]
+      },
+      "id": "trust_country",
+      "n_boot": 1000,
+      "n_units": 35,
+      "network_hash": "1eb3060a9f91564e6f6fecd71212b3d64fb6a717badd396512b25ce4ffddf6e2",
+      "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country",
+      "package_version": "3.0.1",
+      "point_id": false,
+      "rejected": {
+        "m_gps_trust": [
+          "conv_rule_of_law"
+        ],
+        "m_noise": [
+          "conv_rule_of_law",
+          "disc_gini"
+        ],
+        "m_trust_institution": [
+          "conv_rule_of_law"
+        ]
+      },
+      "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country/report.html",
+      "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country/report.json",
+      "run_id": "533d3313bf76e08b79c2a9d0bcdf3f5648d96719fe4c2e0dca8d0ed87f24e35e",
+      "scores_hash": "4e5383842cc9a8b540961ccee4d0a2741537388dd1c803b48394f360ba58ed0b",
+      "theta_grid": {
+        "artifact": "theta_grid.json",
+        "headline_lambda": 1.0,
+        "lambdas": [
+          0.5,
+          1.0,
+          1.5,
+          2.0
+        ],
+        "rows": 4
+      }
+    },
+    {
+      "L": null,
+      "M_star": [],
+      "M_star_robust": [],
+      "M_star_select": [],
+      "U": null,
+      "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
+      "baselines": {
+        "best_abs_beta": "m_wvs_q14",
+        "best_abs_beta_holdout_pass_rate": 0.0,
+        "best_abs_beta_value": -0.2472008348875648,
+        "canonical": "m_wvs_q13",
+        "canonical_holdout_pass_rate": 0.0,
+        "canonical_in_menu": true,
+        "menu_without_noise": [
+          "m_wvs_q13",
+          "m_wvs_q14",
+          "m_composite"
+        ],
+        "n_draws": 500,
+        "per_measure_holdout": {
+          "m_composite": 0.0,
+          "m_wvs_q13": 0.0,
+          "m_wvs_q14": 0.0
+        },
+        "random_k1": {
+          "pass_rate_mean": 0.0,
+          "pass_rate_p50": 0.0,
+          "pass_rate_p95": 0.0,
+          "tool_percentile": null
+        },
+        "random_k2": {
+          "pass_rate_mean": 0.0,
+          "pass_rate_p50": 0.0,
+          "pass_rate_p95": 0.0,
+          "tool_percentile": null
+        },
+        "random_k3": {
+          "pass_rate_mean": 0.0,
+          "pass_rate_p50": 0.0,
+          "pass_rate_p95": 0.0,
+          "tool_percentile": null
+        },
+        "tool_holdout_pass_rate": 0.0
+      },
+      "beta_hash": "93ecc94543944de5860e399f0b91f9f1c5038e5b4d418e5f3444d3b0a8bc23c7",
+      "beta_values": {
+        "m_composite": -0.23153370178541896,
+        "m_noise": -0.03727579745652488,
+        "m_wvs_q13": -0.13254342072785588,
+        "m_wvs_q14": -0.2472008348875648
+      },
+      "bootstrap": {
+        "artifact": "bootstrap.json",
+        "band_L": null,
+        "band_U": null,
+        "degenerate_replicate_rate": 0.0,
+        "empty_replicate_rate": 1.0,
+        "n_boot": 1000,
+        "note": "all replicates empty (or degenerate): band is null; headline [L,U] unchanged",
+        "replicates_degenerate": 0,
+        "replicates_empty": 1000,
+        "replicates_nonempty": 0,
+        "seed": 20260814
+      },
+      "coverage": {
+        "alpha": 0.1,
+        "artifact": "coverage.json",
+        "band_L": null,
+        "band_U": null,
+        "kappa": 2.0,
+        "n_boundary": 0,
+        "quantiles": [
+          0.05,
+          0.95
+        ]
+      },
+      "coverage_band": [
+        null,
+        null
+      ],
+      "delta_grid": null,
+      "empty": true,
+      "empty_replicate_rate": 1.0,
+      "headline_posture": "restriction_stage_split_M_star_select",
+      "holdout_verdict": {
+        "m_composite": [
+          "mono_edu_cell"
+        ],
+        "m_noise": [
+          "mono_edu_cell"
+        ],
+        "m_wvs_q13": [
+          "mono_edu_cell"
+        ],
+        "m_wvs_q14": [
+          "mono_edu_cell"
+        ]
+      },
+      "id": "patience_cells",
+      "n_boot": 1000,
+      "n_units": 480,
+      "network_hash": "1ed753b6c1ed159c4451ced75d2c8dba44318ce91b4f30dfbfb234d1dff7caf4",
+      "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells",
+      "package_version": "3.0.1",
+      "point_id": false,
+      "rejected": {
+        "m_composite": [
+          "conv_edu_cell"
+        ],
+        "m_noise": [
+          "conv_edu_cell"
+        ],
+        "m_wvs_q13": [
+          "conv_edu_cell"
+        ],
+        "m_wvs_q14": [
+          "conv_edu_cell"
+        ]
+      },
+      "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells/report.html",
+      "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells/report.json",
+      "run_id": "df095cc1869f06d5a9adbb325d702fab3539a8439228e5812de8e4bc7804806e",
+      "scores_hash": "c34a535733fd27fba28ba235cd4b459fede1a068d34cd7d04930698ae9a4dc6a",
+      "theta_grid": {
+        "artifact": "theta_grid.json",
+        "headline_lambda": 1.0,
+        "lambdas": [
+          0.5,
+          1.0,
+          1.5,
+          2.0
+        ],
+        "rows": 4
+      }
+    },
+    {
+      "L": 0.25065551141738696,
+      "M_star": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group"
+      ],
+      "M_star_robust": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group"
+      ],
+      "M_star_select": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group"
+      ],
+      "U": 0.31700309764786105,
+      "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
+      "baselines": {
+        "best_abs_beta": "m_trust_composite",
+        "best_abs_beta_holdout_pass_rate": 0.0,
+        "best_abs_beta_value": 0.4491016676252868,
+        "canonical": "m_trust_general",
+        "canonical_holdout_pass_rate": 1.0,
+        "canonical_in_menu": true,
+        "menu_without_noise": [
+          "m_trust_general",
+          "m_trust_in_group",
+          "m_trust_out_group",
+          "m_trust_institution",
+          "m_trust_composite"
+        ],
+        "n_draws": 500,
+        "per_measure_holdout": {
+          "m_trust_composite": 0.0,
+          "m_trust_general": 1.0,
+          "m_trust_in_group": 1.0,
+          "m_trust_institution": 0.0,
+          "m_trust_out_group": 1.0
+        },
+        "random_k1": {
+          "pass_rate_mean": 0.596,
+          "pass_rate_p50": 1.0,
+          "pass_rate_p95": 1.0,
+          "tool_percentile": 1.0
+        },
+        "random_k2": {
+          "pass_rate_mean": 0.592,
+          "pass_rate_p50": 0.5,
+          "pass_rate_p95": 1.0,
+          "tool_percentile": 1.0
+        },
+        "random_k3": {
+          "pass_rate_mean": 0.6026666666666667,
+          "pass_rate_p50": 0.6666666666666666,
+          "pass_rate_p95": 1.0,
+          "tool_percentile": 1.0
+        },
+        "tool_holdout_pass_rate": 1.0
+      },
+      "beta_hash": "19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e",
+      "beta_values": {
+        "m_noise": 0.04993159988468224,
+        "m_trust_composite": 0.4491016676252868,
+        "m_trust_general": 0.25173134723234997,
+        "m_trust_in_group": 0.31700309764786105,
+        "m_trust_institution": 0.4202641863453586,
+        "m_trust_out_group": 0.25065551141738696
+      },
+      "bootstrap": {
+        "artifact": "bootstrap.json",
+        "band_L": 0.15969135728330508,
+        "band_U": 0.38741426590258904,
+        "degenerate_replicate_rate": 0.0,
+        "empty_replicate_rate": 0.0,
+        "n_boot": 1000,
+        "note": null,
+        "replicates_degenerate": 0,
+        "replicates_empty": 0,
+        "replicates_nonempty": 1000,
+        "seed": 20260814
+      },
+      "coverage": {
+        "alpha": 0.1,
+        "artifact": "coverage.json",
+        "band_L": 0.16989443648775254,
+        "band_U": 0.3720459543053392,
+        "kappa": 2.0,
+        "n_boundary": 6,
+        "quantiles": [
+          0.05,
+          0.95
+        ]
+      },
+      "coverage_band": [
+        0.16989443648775254,
+        0.3720459543053392
+      ],
+      "delta_grid": null,
+      "empty": false,
+      "empty_replicate_rate": 0.0,
+      "headline_posture": "restriction_stage_split_M_star_select",
+      "holdout_verdict": {
+        "m_noise": [
+          "mono_edu_cell"
+        ],
+        "m_trust_composite": [
+          "mono_edu_cell"
+        ],
+        "m_trust_institution": [
+          "mono_edu_cell"
+        ]
+      },
+      "id": "trust_cells",
+      "n_boot": 1000,
+      "n_units": 480,
+      "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
+      "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells",
+      "package_version": "3.0.1",
+      "point_id": false,
+      "rejected": {
+        "m_noise": [
+          "conv_edu_cell"
+        ],
+        "m_trust_composite": [
+          "conv_edu_cell"
+        ],
+        "m_trust_institution": [
+          "conv_edu_cell"
+        ]
+      },
+      "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells/report.html",
+      "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells/report.json",
+      "run_id": "4866aa42e97e9f7a1ca45c3c140897e89c9f27776ddebe58e665892dad7b1908",
+      "scores_hash": "21d293b65f3811abfcf5951f8a67851bc02a79f0cad240aad4ad9d7939ca830c",
+      "theta_grid": {
+        "artifact": "theta_grid.json",
+        "headline_lambda": 1.0,
+        "lambdas": [
+          0.5,
+          1.0,
+          1.5,
+          2.0
+        ],
+        "rows": 4
+      }
+    }
+  ],
+  "seed": 20260814
+}

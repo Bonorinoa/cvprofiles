@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>cvprofiles report — 7e8622e46c20</title>
+  <style>
+    :root {
+      --ink: #1a1410;
+      --muted: #5c534c;
+      --paper: #f7f1e8;
+      --card: #fffdf8;
+      --line: #d9cfc0;
+      --ok: #1f6b3a;
+      --bad: #8b1e1e;
+      --accent: #6b2c2c;
+      --chip: #efe6d8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.35rem;
+    }
+    h1 { font-size: 1.75rem; margin: 0 0 0.35rem; font-weight: 600; }
+    .sub { color: var(--muted); margin: 0; font-size: 0.98rem; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 760px) {
+      .grid.two { grid-template-columns: 1.1fr 0.9fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.75rem;
+      font-family: Helvetica, Arial, sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .range-box {
+      border-left: 4px solid var(--bad);
+      padding: 0.85rem 1rem;
+      background: #f8ecec;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 0.75rem;
+    }
+    .range-box .label {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin: 0 0 0.25rem;
+    }
+    .range-box .value {
+      font-size: 1.45rem;
+      font-variant-numeric: tabular-nums;
+      margin: 0;
+    }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.45rem 0.35rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .tag {
+      display: inline-block;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      background: var(--chip);
+    }
+    .tag.ok { background: #d9eedf; color: var(--ok); }
+    .tag.bad { background: #f0d6d6; color: var(--bad); }
+    .tag.empty { background: #f0d6d6; color: var(--bad); }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.82rem;
+      word-break: break-all;
+    }
+    ul.compact { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+    footer {
+      margin-top: 1.75rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    .empty-callout {
+      border: 1px solid #e0b4b4;
+      background: #fbf1f1;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .empty-callout h2 { color: var(--bad); margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">cvprofiles · construct-validity profile</p>
+      <h1>MTMM patience x trust (engine applies every r to every m)</h1>
+      <p class="sub">
+        Admissible measurement set under a stated nomological network, and the
+        image of <em>β</em> on that set. Empty sets and wide ranges are scientific features.
+      </p>
+    </header>
+
+    
+
+    
+    <section class="empty-callout">
+      <h2>Empty admissible set — success, not a crash</h2>
+      <p style="margin:0">
+        Under this network and thresholds, <strong>no candidate measure survives</strong>.
+        The engine is not broken: the theory + data reject the whole menu.
+        Reported range is undefined; do not auto-loosen θ.
+      </p>
+    </section>
+    
+
+    <div class="grid two">
+      <section class="card">
+        <h2>Construct-identified range</h2>
+        <div class="range-box">
+          <p class="label">[L, U] · method = min/max B*</p>
+          
+          <p class="value">∅ &nbsp;<span class="tag empty">empty M*</span></p>
+          <p class="muted" style="margin:0.4rem 0 0">No survivors → no image of β. Inference diagnostics are additive and never loosen θ.</p>
+          
+        </div>
+        <p class="muted" style="margin:0">
+          Target β = <span class="mono">ols_coef</span>
+          on outcome <span class="mono">log_gdp_pc</span>.
+          Range uses <strong>only</strong> measures in M*; rejected β values are shown below but never enter [L,U].
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Run freeze</h2>
+        <table>
+          <tr><th>run_id</th><td class="mono">7e8622e46c20155e3e38cd523b2492aeda2636b82226a28baaac6bd17b3747f7</td></tr>
+          <tr><th>package</th><td class="mono">3.0.1</td></tr>
+          <tr><th>scores_hash</th><td class="mono">8e56d2b4c6f54cbabd9b296fe2b8d0827be74c2308bbc124185b147bd407766c</td></tr>
+          <tr><th>network_hash</th><td class="mono">bf527e5e678657dfed9396ad777a568a6a66b2709f1eb2f809272b0d93b572b6</td></tr>
+          <tr><th>beta_hash</th><td class="mono">40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe</td></tr>
+          <tr><th>δ</th><td class="mono">0.0</td></tr>
+          <tr><th>seed</th><td class="mono">20260814</td></tr>
+          <tr><th>network</th><td>mtmm_patience_trust_country</td></tr>
+        </table>
+      </section>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+    <section class="card" style="margin-top:1rem">
+      <h2>θ-anchors · pre-data audit</h2>
+      <p class="muted" style="margin-top:0">
+        One pre-data anchor per restriction (hash <span class="mono">7d23bb8d3b4e…</span>).
+        The engine enforces completeness + hash; "pre-data" is a process commitment, not a temporal claim.
+      </p>
+      <table>
+        <thead><tr><th>restriction</th><th>kind</th><th>pre-data</th><th>anchor</th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">conv_gps_patience_vs_wvs</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>oecd2017_falk2018_table_ii — OECD 2017 survey–behavioral trust r≈0.29; Falk et al. 2018 Table II GPS–WVS trust Spearman=0.49 (n=60). Convergent floor set at 0.30, at the published survey–behavioral bound and below the GPS–WVS trust correlation. Falk Table II GPS patience vs WVS long-term orientation = 0.09 (p=.52); a 0.30 bar is expected to reject WVS patience if that relationship holds.</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">conv_wvs_patience_vs_gps</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>oecd2017_falk2018_table_ii — Same convergent floor 0.30 as the directed partner cell (OECD 2017 r≈0.29; Falk 2018 Table II trust r=0.49).</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">conv_gps_trust_vs_wvs</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>falk2018_table_ii — Falk et al. 2018 Table II: GPS trust vs WVS trust Spearman rho=0.49, p<.01, n=60. Floor 0.30 sits below that published correlation.</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">conv_wvs_trust_vs_gps</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>falk2018_table_ii — Same convergent floor 0.30 as the directed partner cell (Falk 2018 Table II r=0.49).</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">disc_gps_patience_vs_gps_trust</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>falk2018_table_iv — Falk et al. 2018 Table IV country-level Corr(patience, trust)=0.190. Discriminant bar 0.35 admits that published association with margin and still rejects r≳0.6.</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">disc_wvs_patience_vs_wvs_trust</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>falk2018_table_iv — Same discriminant bar 0.35 as the GPS heterotrait–monomethod cell (Falk 2018 Table IV r=0.190).</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">disc_gps_patience_vs_wvs_trust</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>falk2018_table_iv — Heterotrait–heteromethod discriminant; same 0.35 bar (Falk 2018 Table IV patience–trust r=0.190).</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">disc_gps_trust_vs_wvs_patience</td>
+            <td>literature</td>
+            <td>yes</td>
+            <td>falk2018_table_iv — Heterotrait–heteromethod discriminant; same 0.35 bar (Falk 2018 Table IV patience–trust r=0.190).</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+    
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Menu admission</h2>
+      <p class="muted" style="margin-top:0">
+        M* size = 0 / 4.
+        Slack rule: admit if s<sub>r</sub>(m) ≥ −δ for all r.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            <th>status</th>
+            <th>β(m)</th>
+            <th>failed restrictions</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">gps_patience</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.402463</td>
+            <td class="mono">
+              
+                conv_gps_patience_vs_wvs, conv_wvs_trust_vs_gps, disc_wvs_patience_vs_wvs_trust, disc_gps_patience_vs_wvs_trust
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_patience_child_qualities</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>-0.202747</td>
+            <td class="mono">
+              
+                conv_wvs_patience_vs_gps, conv_gps_trust_vs_wvs, conv_wvs_trust_vs_gps, disc_wvs_patience_vs_wvs_trust, disc_gps_patience_vs_wvs_trust, disc_gps_trust_vs_wvs_patience
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">gps_trust</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.129198</td>
+            <td class="mono">
+              
+                conv_gps_patience_vs_wvs, conv_wvs_patience_vs_gps, conv_gps_trust_vs_wvs, disc_gps_patience_vs_gps_trust
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_general</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.411002</td>
+            <td class="mono">
+              
+                conv_gps_patience_vs_wvs, conv_wvs_trust_vs_gps, disc_wvs_patience_vs_wvs_trust, disc_gps_patience_vs_wvs_trust, disc_gps_trust_vs_wvs_patience
+              
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Slack matrix s<sub>r</sub>(m)</h2>
+      <p class="muted" style="margin-top:0">Positive / zero ≈ satisfied at δ=0.0. Negative = violation magnitude.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            
+            <th class="mono">conv_gps_patience_vs_wvs</th>
+            
+            <th class="mono">conv_wvs_patience_vs_gps</th>
+            
+            <th class="mono">conv_gps_trust_vs_wvs</th>
+            
+            <th class="mono">conv_wvs_trust_vs_gps</th>
+            
+            <th class="mono">disc_gps_patience_vs_gps_trust</th>
+            
+            <th class="mono">disc_wvs_patience_vs_wvs_trust</th>
+            
+            <th class="mono">disc_gps_patience_vs_wvs_trust</th>
+            
+            <th class="mono">disc_gps_trust_vs_wvs_patience</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">gps_patience</td>
+            
+            <td>-0.551877</td>
+            
+            <td>0.700000</td>
+            
+            <td>0.524857</td>
+            
+            <td>-0.162339</td>
+            
+            <td>0.212339</td>
+            
+            <td>-0.474857</td>
+            
+            <td>-0.474857</td>
+            
+            <td>0.098123</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_patience_child_qualities</td>
+            
+            <td>0.700000</td>
+            
+            <td>-0.551877</td>
+            
+            <td>-0.710765</td>
+            
+            <td>-0.058696</td>
+            
+            <td>0.108696</td>
+            
+            <td>-0.060765</td>
+            
+            <td>-0.060765</td>
+            
+            <td>-0.650000</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">gps_trust</td>
+            
+            <td>-0.058696</td>
+            
+            <td>-0.162339</td>
+            
+            <td>-0.015737</td>
+            
+            <td>0.700000</td>
+            
+            <td>-0.650000</td>
+            
+            <td>0.065737</td>
+            
+            <td>0.065737</td>
+            
+            <td>0.108696</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_general</td>
+            
+            <td>-0.710765</td>
+            
+            <td>0.524857</td>
+            
+            <td>0.700000</td>
+            
+            <td>-0.015737</td>
+            
+            <td>0.065737</td>
+            
+            <td>-0.650000</td>
+            
+            <td>-0.650000</td>
+            
+            <td>-0.060765</td>
+            
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Network (researcher-owned)</h2>
+      <ul class="compact">
+        
+        <li>
+          <span class="mono">conv_gps_patience_vs_wvs</span>
+          · type <span class="mono">corr_min</span>
+          · θ=0.3
+          · params <span class="mono">{'variable': 'm_patience_child_qualities'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">conv_wvs_patience_vs_gps</span>
+          · type <span class="mono">corr_min</span>
+          · θ=0.3
+          · params <span class="mono">{'variable': 'gps_patience'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">conv_gps_trust_vs_wvs</span>
+          · type <span class="mono">corr_min</span>
+          · θ=0.3
+          · params <span class="mono">{'variable': 'm_trust_general'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">conv_wvs_trust_vs_gps</span>
+          · type <span class="mono">corr_min</span>
+          · θ=0.3
+          · params <span class="mono">{'variable': 'gps_trust'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">disc_gps_patience_vs_gps_trust</span>
+          · type <span class="mono">corr_zero</span>
+          · θ=0.35
+          · params <span class="mono">{'variable': 'gps_trust'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">disc_wvs_patience_vs_wvs_trust</span>
+          · type <span class="mono">corr_zero</span>
+          · θ=0.35
+          · params <span class="mono">{'variable': 'm_trust_general'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">disc_gps_patience_vs_wvs_trust</span>
+          · type <span class="mono">corr_zero</span>
+          · θ=0.35
+          · params <span class="mono">{'variable': 'm_trust_general'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">disc_gps_trust_vs_wvs_patience</span>
+          · type <span class="mono">corr_zero</span>
+          · θ=0.35
+          · params <span class="mono">{'variable': 'm_patience_child_qualities'}</span>
+        </li>
+        
+      </ul>
+      <p class="muted" style="margin:0.75rem 0 0">
+        Engine does not invent restrictions. Agent may author oracle R for synthetic DGPs only.
+      </p>
+    </section>
+
+    <footer>
+      cvprofiles 3.0.1
+      · four-state spine SCORE → RESTRICT → IDENTIFY → REPORT
+      · v1.1/v2.0 inference: bootstrap + θ-grid + δ-grid + coverage (diagnostic)
+      · generated 2026-08-15T00:39:20Z
+    </footer>
+  </div>
+</body>
+</html>

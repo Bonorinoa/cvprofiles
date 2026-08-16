@@ -1,0 +1,14 @@
+{
+  "admissible_flag": {
+    "gps_patience": false,
+    "gps_trust": false,
+    "m_patience_child_qualities": false,
+    "m_trust_general": false
+  },
+  "beta_values": {
+    "gps_patience": 0.402463340625296,
+    "gps_trust": 0.12919755333265634,
+    "m_patience_child_qualities": -0.20274733819507956,
+    "m_trust_general": 0.4110022513414336
+  }
+}

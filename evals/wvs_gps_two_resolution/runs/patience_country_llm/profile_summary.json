@@ -1,0 +1,157 @@
+{
+  "L": 0.40246334068031847,
+  "M_star": [
+    "m_gps_patience",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi"
+  ],
+  "M_star_robust": [
+    "m_gps_patience",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi"
+  ],
+  "M_star_select": [
+    "m_gps_patience",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi"
+  ],
+  "U": 0.5649061435421557,
+  "anchors_hash": "e68030d19e060d5a7ff1617bca64cc7712e44e90808415f95750f1d91eff426c",
+  "baselines": {
+    "best_abs_beta": "m_llm_patience_phi",
+    "best_abs_beta_holdout_pass_rate": 1.0,
+    "best_abs_beta_value": 0.5649061435421557,
+    "canonical": "m_wvs_q13",
+    "canonical_holdout_pass_rate": 0.0,
+    "canonical_in_menu": true,
+    "menu_without_noise": [
+      "m_gps_patience",
+      "m_wvs_q13",
+      "m_wvs_q14",
+      "m_composite",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi"
+    ],
+    "n_draws": 500,
+    "per_measure_holdout": {
+      "m_composite": 0.0,
+      "m_gps_patience": 1.0,
+      "m_llm_patience_llama": 1.0,
+      "m_llm_patience_phi": 1.0,
+      "m_wvs_q13": 0.0,
+      "m_wvs_q14": 0.0
+    },
+    "random_k1": {
+      "pass_rate_mean": 0.48,
+      "pass_rate_p50": 0.0,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 1.0
+    },
+    "random_k2": {
+      "pass_rate_mean": 0.506,
+      "pass_rate_p50": 0.5,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 1.0
+    },
+    "random_k3": {
+      "pass_rate_mean": 0.48733333333333334,
+      "pass_rate_p50": 0.5,
+      "pass_rate_p95": 0.6666666666666666,
+      "tool_percentile": 1.0
+    },
+    "tool_holdout_pass_rate": 1.0
+  },
+  "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+  "beta_values": {
+    "m_composite": -0.21874650645411,
+    "m_gps_patience": 0.40246334068031847,
+    "m_llm_patience_llama": 0.44701963725653376,
+    "m_llm_patience_phi": 0.5649061435421557,
+    "m_noise": 0.019901395118570066,
+    "m_wvs_q13": -0.16598846758352492,
+    "m_wvs_q14": -0.1948399555130896
+  },
+  "bootstrap": {
+    "artifact": "bootstrap.json",
+    "band_L": -0.04074613040071245,
+    "band_U": 0.6929469422944936,
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 0.089,
+    "n_boot": 1000,
+    "note": null,
+    "replicates_degenerate": 0,
+    "replicates_empty": 89,
+    "replicates_nonempty": 911,
+    "seed": 20260814
+  },
+  "coverage": {
+    "alpha": 0.1,
+    "artifact": "coverage.json",
+    "band_L": 0.15709249882514403,
+    "band_U": 0.673721699168387,
+    "kappa": 2.0,
+    "n_boundary": 7,
+    "quantiles": [
+      0.05,
+      0.95
+    ]
+  },
+  "coverage_band": [
+    0.15709249882514403,
+    0.673721699168387
+  ],
+  "delta_grid": null,
+  "empty": false,
+  "empty_replicate_rate": 0.089,
+  "headline_posture": "restriction_stage_split_M_star_select",
+  "holdout_verdict": {
+    "m_composite": [
+      "mono_edu"
+    ],
+    "m_noise": [
+      "mono_edu"
+    ],
+    "m_wvs_q13": [
+      "mono_edu"
+    ],
+    "m_wvs_q14": [
+      "mono_edu"
+    ]
+  },
+  "id": "patience_country_llm",
+  "n_boot": 1000,
+  "n_units": 41,
+  "network_hash": "f2d17ff29958683d39a2e14e8d2c013bda43635d3da8348baf950f7f851b348b",
+  "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm",
+  "package_version": "3.0.1",
+  "point_id": false,
+  "rejected": {
+    "m_composite": [
+      "conv_edu"
+    ],
+    "m_noise": [
+      "conv_edu"
+    ],
+    "m_wvs_q13": [
+      "conv_edu"
+    ],
+    "m_wvs_q14": [
+      "conv_edu"
+    ]
+  },
+  "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.html",
+  "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.json",
+  "run_id": "7e8c78ca1d7c32f6d491551d33bd94fb2c78ca31737295d41ef42b001af05ed5",
+  "scores_hash": "1ddba816b0130adc0e5abf01898cd5c5bfbf60865585edd0790378c71f4f3398",
+  "theta_grid": {
+    "artifact": "theta_grid.json",
+    "headline_lambda": 1.0,
+    "lambdas": [
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "rows": 4
+  }
+}

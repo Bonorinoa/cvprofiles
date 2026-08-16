@@ -1,0 +1,9 @@
+{
+  "L": null,
+  "U": null,
+  "bootstrap": null,
+  "empty": true,
+  "method": "min_max_B_star",
+  "note": "range is min/max of beta on M*; bootstrap band is additive metadata (bootstrap.json) when enabled",
+  "point_id": false
+}

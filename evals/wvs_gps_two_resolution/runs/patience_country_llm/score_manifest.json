@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "roles": {
+    "unit_id": "unit_id",
+    "measures": [
+      "m_gps_patience",
+      "m_wvs_q13",
+      "m_wvs_q14",
+      "m_composite",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi",
+      "m_noise"
+    ],
+    "aux": [
+      "risktaking",
+      "q275_mean"
+    ],
+    "outcome": "log_gdp_pc",
+    "diagnostic": []
+  },
+  "n_rows": 41,
+  "n_measures": 7,
+  "measure_columns": [
+    "m_gps_patience",
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi",
+    "m_noise"
+  ],
+  "normalization": {
+    "policy": "none",
+    "zscore_measures": false,
+    "ddof": null,
+    "columns_transformed": []
+  },
+  "scores_hash": "1ddba816b0130adc0e5abf01898cd5c5bfbf60865585edd0790378c71f4f3398",
+  "dtypes": {
+    "unit_id": "str",
+    "m_gps_patience": "float64",
+    "m_wvs_q13": "float64",
+    "m_wvs_q14": "float64",
+    "m_composite": "float64",
+    "m_llm_patience_llama": "float64",
+    "m_llm_patience_phi": "float64",
+    "m_noise": "float64",
+    "risktaking": "float64",
+    "q275_mean": "float64",
+    "log_gdp_pc": "float64"
+  }
+}

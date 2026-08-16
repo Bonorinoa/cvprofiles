@@ -1,0 +1,145 @@
+{
+  "L": 0.40246334068031847,
+  "M_star": [
+    "m_gps_patience"
+  ],
+  "M_star_robust": [
+    "m_gps_patience"
+  ],
+  "M_star_select": [
+    "m_gps_patience"
+  ],
+  "U": 0.40246334068031847,
+  "anchors_hash": "e68030d19e060d5a7ff1617bca64cc7712e44e90808415f95750f1d91eff426c",
+  "baselines": {
+    "best_abs_beta": "m_gps_patience",
+    "best_abs_beta_holdout_pass_rate": 1.0,
+    "best_abs_beta_value": 0.40246334068031847,
+    "canonical": "m_wvs_q13",
+    "canonical_holdout_pass_rate": 0.0,
+    "canonical_in_menu": true,
+    "menu_without_noise": [
+      "m_gps_patience",
+      "m_wvs_q13",
+      "m_wvs_q14",
+      "m_composite"
+    ],
+    "n_draws": 500,
+    "per_measure_holdout": {
+      "m_composite": 0.0,
+      "m_gps_patience": 1.0,
+      "m_wvs_q13": 0.0,
+      "m_wvs_q14": 0.0
+    },
+    "random_k1": {
+      "pass_rate_mean": 0.262,
+      "pass_rate_p50": 0.0,
+      "pass_rate_p95": 1.0,
+      "tool_percentile": 1.0
+    },
+    "random_k2": {
+      "pass_rate_mean": 0.263,
+      "pass_rate_p50": 0.5,
+      "pass_rate_p95": 0.5,
+      "tool_percentile": 1.0
+    },
+    "random_k3": {
+      "pass_rate_mean": 0.24,
+      "pass_rate_p50": 0.3333333333333333,
+      "pass_rate_p95": 0.3333333333333333,
+      "tool_percentile": 1.0
+    },
+    "tool_holdout_pass_rate": 1.0
+  },
+  "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+  "beta_values": {
+    "m_composite": -0.21874650645411,
+    "m_gps_patience": 0.40246334068031847,
+    "m_noise": 0.019901395118570066,
+    "m_wvs_q13": -0.16598846758352492,
+    "m_wvs_q14": -0.1948399555130896
+  },
+  "bootstrap": {
+    "artifact": "bootstrap.json",
+    "band_L": -0.07698337190302755,
+    "band_U": 0.603114554556168,
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 0.297,
+    "n_boot": 1000,
+    "note": null,
+    "replicates_degenerate": 0,
+    "replicates_empty": 297,
+    "replicates_nonempty": 703,
+    "seed": 20260814
+  },
+  "coverage": {
+    "alpha": 0.1,
+    "artifact": "coverage.json",
+    "band_L": 0.07861359426010246,
+    "band_U": 0.5628626683398689,
+    "kappa": 2.0,
+    "n_boundary": 5,
+    "quantiles": [
+      0.05,
+      0.95
+    ]
+  },
+  "coverage_band": [
+    0.07861359426010246,
+    0.5628626683398689
+  ],
+  "delta_grid": null,
+  "empty": false,
+  "empty_replicate_rate": 0.297,
+  "headline_posture": "restriction_stage_split_M_star_select",
+  "holdout_verdict": {
+    "m_composite": [
+      "mono_edu"
+    ],
+    "m_noise": [
+      "mono_edu"
+    ],
+    "m_wvs_q13": [
+      "mono_edu"
+    ],
+    "m_wvs_q14": [
+      "mono_edu"
+    ]
+  },
+  "id": "patience_country",
+  "n_boot": 1000,
+  "n_units": 41,
+  "network_hash": "3cdf089fbb4a9a419d4a89ad707d68a0f6cae96438fe43fba503403f2642ea66",
+  "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country",
+  "package_version": "3.0.1",
+  "point_id": true,
+  "rejected": {
+    "m_composite": [
+      "conv_edu"
+    ],
+    "m_noise": [
+      "conv_edu"
+    ],
+    "m_wvs_q13": [
+      "conv_edu"
+    ],
+    "m_wvs_q14": [
+      "conv_edu"
+    ]
+  },
+  "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country/report.html",
+  "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country/report.json",
+  "run_id": "9ed0289512beecaf01749f8d35ac6cd86d9cf2e18450ac0265c92059d7420be8",
+  "scores_hash": "ba400cce52f2dc214385323f88511d9914b15b6686b526f06a486126cc3b35c8",
+  "theta_grid": {
+    "artifact": "theta_grid.json",
+    "headline_lambda": 1.0,
+    "lambdas": [
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "rows": 4
+  }
+}

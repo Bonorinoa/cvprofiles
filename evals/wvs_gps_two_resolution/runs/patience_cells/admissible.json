@@ -1,0 +1,44 @@
+{
+  "M_star": [],
+  "M_star_robust": [],
+  "M_star_select": [],
+  "delta": 0.0,
+  "empty": true,
+  "empty_R": false,
+  "holdout": {
+    "holdout_frame": null,
+    "select_frame": null,
+    "units": null,
+    "verdict": {
+      "m_composite": [
+        "mono_edu_cell"
+      ],
+      "m_noise": [
+        "mono_edu_cell"
+      ],
+      "m_wvs_q13": [
+        "mono_edu_cell"
+      ],
+      "m_wvs_q14": [
+        "mono_edu_cell"
+      ]
+    }
+  },
+  "n_admissible": 0,
+  "n_menu": 4,
+  "point_id": false,
+  "rejected": {
+    "m_composite": [
+      "conv_edu_cell"
+    ],
+    "m_noise": [
+      "conv_edu_cell"
+    ],
+    "m_wvs_q13": [
+      "conv_edu_cell"
+    ],
+    "m_wvs_q14": [
+      "conv_edu_cell"
+    ]
+  }
+}

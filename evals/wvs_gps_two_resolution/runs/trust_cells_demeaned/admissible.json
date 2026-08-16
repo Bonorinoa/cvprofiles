@@ -1,0 +1,56 @@
+{
+  "M_star": [],
+  "M_star_robust": [],
+  "M_star_select": [],
+  "delta": 0.0,
+  "empty": true,
+  "empty_R": false,
+  "holdout": {
+    "holdout_frame": null,
+    "select_frame": null,
+    "units": null,
+    "verdict": {
+      "m_noise": [
+        "mono_edu_cell"
+      ],
+      "m_trust_composite": [
+        "mono_edu_cell"
+      ],
+      "m_trust_general": [
+        "mono_edu_cell"
+      ],
+      "m_trust_in_group": [
+        "mono_edu_cell"
+      ],
+      "m_trust_institution": [
+        "mono_edu_cell"
+      ],
+      "m_trust_out_group": [
+        "mono_edu_cell"
+      ]
+    }
+  },
+  "n_admissible": 0,
+  "n_menu": 6,
+  "point_id": false,
+  "rejected": {
+    "m_noise": [
+      "conv_edu_cell"
+    ],
+    "m_trust_composite": [
+      "conv_edu_cell"
+    ],
+    "m_trust_general": [
+      "conv_edu_cell"
+    ],
+    "m_trust_in_group": [
+      "conv_edu_cell"
+    ],
+    "m_trust_institution": [
+      "conv_edu_cell"
+    ],
+    "m_trust_out_group": [
+      "conv_edu_cell"
+    ]
+  }
+}

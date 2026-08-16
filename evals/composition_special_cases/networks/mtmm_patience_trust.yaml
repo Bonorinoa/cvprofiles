@@ -1,0 +1,56 @@
+schema_version: "1"
+name: mtmm_patience_trust_country
+delta: 0.0
+empty_R: false
+restrictions:
+  # Monotrait–heteromethod (convergent). Each directed cell is its own restriction.
+  - id: conv_gps_patience_vs_wvs
+    type: corr_min
+    theta: 0.30
+    stage: select
+    params:
+      variable: m_patience_child_qualities
+  - id: conv_wvs_patience_vs_gps
+    type: corr_min
+    theta: 0.30
+    stage: select
+    params:
+      variable: gps_patience
+  - id: conv_gps_trust_vs_wvs
+    type: corr_min
+    theta: 0.30
+    stage: select
+    params:
+      variable: m_trust_general
+  - id: conv_wvs_trust_vs_gps
+    type: corr_min
+    theta: 0.30
+    stage: select
+    params:
+      variable: gps_trust
+  # Heterotrait–monomethod (discriminant)
+  - id: disc_gps_patience_vs_gps_trust
+    type: corr_zero
+    theta: 0.35
+    stage: select
+    params:
+      variable: gps_trust
+  - id: disc_wvs_patience_vs_wvs_trust
+    type: corr_zero
+    theta: 0.35
+    stage: select
+    params:
+      variable: m_trust_general
+  # Heterotrait–heteromethod (discriminant)
+  - id: disc_gps_patience_vs_wvs_trust
+    type: corr_zero
+    theta: 0.35
+    stage: select
+    params:
+      variable: m_trust_general
+  - id: disc_gps_trust_vs_wvs_patience
+    type: corr_zero
+    theta: 0.35
+    stage: select
+    params:
+      variable: m_patience_child_qualities

@@ -1,0 +1,28 @@
+{
+  "anchors": [
+    {
+      "anchor_kind": "literature",
+      "citation_key": "aghion2010_h5",
+      "pre_data": true,
+      "restriction_id": "conv_rule_of_law",
+      "source_phrase": "Trust\u2013institutions correlations typically \u22650.4 (Aghion, Algan, Cahuc, Shleifer 2010). H5 historical floor 0.30."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "bjornskov2008_h5",
+      "pre_data": true,
+      "restriction_id": "disc_gini",
+      "source_phrase": "Bj\u00f8rnskov 2008: negative trust\u2013inequality relationship. H5 historical \u03b8=0.10 on corr_sign."
+    },
+    {
+      "anchor_kind": "literature",
+      "citation_key": "falk2018_table_v",
+      "pre_data": true,
+      "restriction_id": "conv_edu_hold",
+      "source_phrase": "Falk et al. 2018 Table V: trust increases with cognitive ability in almost all countries. Leftover country-level education bar \u03b8=0.20."
+    }
+  ],
+  "anchors_hash": "68e155f6775d94313deb30856e689244b23690c9a6d2d1784bb26ebd310d3201",
+  "n_anchors": 3,
+  "schema_version": "1"
+}

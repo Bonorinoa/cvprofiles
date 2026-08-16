@@ -1,0 +1,27 @@
+{
+  "alpha": 0.1,
+  "band_L": null,
+  "band_U": null,
+  "boundary": [],
+  "degenerate_replicate_rate": 0.0,
+  "empty_replicate_rate": 1.0,
+  "headline_note": "Headline [L,U] remains min/max B* on the full sample; the uncertainty band is additive metadata and never replaces it.",
+  "kappa": 2.0,
+  "note": "all replicates empty (or degenerate): uncertainty band is null; boundary set empty; admission frequencies null. Heuristic band \u2014 not a confidence interval and not a holdout-robustness band.",
+  "p_hat_m": {
+    "m_composite": null,
+    "m_noise": null,
+    "m_wvs_q13": null,
+    "m_wvs_q14": null
+  },
+  "purpose": "coverage_uncertainty_band",
+  "quantiles": [
+    0.05,
+    0.95
+  ],
+  "replicates_degenerate": 0,
+  "replicates_empty": 1000,
+  "replicates_nonempty": 0,
+  "replicates_total": 1000,
+  "schema_version": "1"
+}

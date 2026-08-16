@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>cvprofiles report — 5a7a6e580cad</title>
+  <style>
+    :root {
+      --ink: #1a1410;
+      --muted: #5c534c;
+      --paper: #f7f1e8;
+      --card: #fffdf8;
+      --line: #d9cfc0;
+      --ok: #1f6b3a;
+      --bad: #8b1e1e;
+      --accent: #6b2c2c;
+      --chip: #efe6d8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.35rem;
+    }
+    h1 { font-size: 1.75rem; margin: 0 0 0.35rem; font-weight: 600; }
+    .sub { color: var(--muted); margin: 0; font-size: 0.98rem; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 760px) {
+      .grid.two { grid-template-columns: 1.1fr 0.9fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.75rem;
+      font-family: Helvetica, Arial, sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .range-box {
+      border-left: 4px solid var(--ok);
+      padding: 0.85rem 1rem;
+      background: #eef6f0;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 0.75rem;
+    }
+    .range-box .label {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin: 0 0 0.25rem;
+    }
+    .range-box .value {
+      font-size: 1.45rem;
+      font-variant-numeric: tabular-nums;
+      margin: 0;
+    }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.45rem 0.35rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .tag {
+      display: inline-block;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      background: var(--chip);
+    }
+    .tag.ok { background: #d9eedf; color: var(--ok); }
+    .tag.bad { background: #f0d6d6; color: var(--bad); }
+    .tag.empty { background: #f0d6d6; color: var(--bad); }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.82rem;
+      word-break: break-all;
+    }
+    ul.compact { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+    footer {
+      margin-top: 1.75rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    .empty-callout {
+      border: 1px solid #e0b4b4;
+      background: #fbf1f1;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .empty-callout h2 { color: var(--bad); margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">cvprofiles · construct-validity profile</p>
+      <h1>WVS/GPS patience application</h1>
+      <p class="sub">
+        Admissible measurement set under a stated nomological network, and the
+        image of <em>β</em> on that set. Empty sets and wide ranges are scientific features.
+      </p>
+    </header>
+
+    
+
+    <div class="grid two">
+      <section class="card">
+        <h2>Construct-identified range</h2>
+        <div class="range-box">
+          <p class="label">[L, U] · method = min/max B*</p>
+          
+          <p class="value">[0.327503, 0.327503]</p>
+          <p class="muted" style="margin:0.4rem 0 0">
+            Width = 0.000000
+            · point-ID
+            
+            
+            · bootstrap percentile band = [-0.128634, 0.626681]
+            
+            
+          </p>
+          
+        </div>
+        <p class="muted" style="margin:0">
+          Target β = <span class="mono">ols_coef</span>
+          on outcome <span class="mono">log_gdp_pc</span>.
+          Range uses <strong>only</strong> measures in M*; rejected β values are shown below but never enter [L,U].
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Run freeze</h2>
+        <table>
+          <tr><th>run_id</th><td class="mono">5a7a6e580cad6b9add0134a89e0bf01fe97b06ed85d6eba03a58bad9fe0e046b</td></tr>
+          <tr><th>package</th><td class="mono">3.0.0</td></tr>
+          <tr><th>scores_hash</th><td class="mono">e3955779149057f1a019eea4972e38c8c7ca67c33ae331d01f4a7e7abc5e7ab4</td></tr>
+          <tr><th>network_hash</th><td class="mono">d1003f68f6cda1c054b9772f78963697392f9cbaa1fbdca3a9a1350dc3cfc088</td></tr>
+          <tr><th>beta_hash</th><td class="mono">40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe</td></tr>
+          <tr><th>δ</th><td class="mono">0.0</td></tr>
+          <tr><th>seed</th><td class="mono">20260810</td></tr>
+          <tr><th>network</th><td>wvs_gps_patience_application</td></tr>
+        </table>
+      </section>
+    </div>
+
+    
+    <section class="card" style="margin-top:1rem">
+      <h2>Bootstrap inference · additive to headline range</h2>
+      <p class="muted" style="margin-top:0">
+        Units-only Efron resampling; percentile band over non-empty replicates.
+        The headline [L, U] above remains min/max β(M*) on the full sample.
+      </p>
+      <table>
+        <tr><th>replicates</th><td>100</td></tr>
+        <tr><th>seed</th><td>20260810</td></tr>
+        <tr><th>quantiles</th><td>[0.025, 0.975]</td></tr>
+        <tr><th>non-empty</th><td>99</td></tr>
+        <tr><th>empty</th><td>1 (0.010)</td></tr>
+        <tr><th>degenerate</th><td>0 (0.000)</td></tr>
+        <tr><th>band</th><td>[-0.128634, 0.626681]</td></tr>
+      </table>
+      
+    </section>
+    
+
+    
+    <section class="card" style="margin-top:1rem">
+      <h2>Uncertainty band · additive to headline range</h2>
+      <p class="muted" style="margin-top:0">
+        Per-side α/2 quantiles over non-empty bootstrap replicates (α = 0.1).
+        Heuristic band — <strong>not a confidence interval</strong>, not a holdout-robustness band.
+        The headline [L, U] above remains min/max β(M*) on the full sample.
+      </p>
+      <table>
+        <tr><th>α</th><td>0.1</td></tr>
+        <tr><th>κ</th><td>2.0</td></tr>
+        <tr><th>quantiles</th><td>[0.05, 0.95]</td></tr>
+        <tr><th>band</th><td>[0.100645, 0.560993]</td></tr>
+        <tr><th>empty rate</th><td>0.010</td></tr>
+        <tr><th>degenerate rate</th><td>0.000</td></tr>
+      </table>
+      
+      <h3 style="margin:1rem 0 0.4rem">Boundary attribution · |margin| ≤ κ·SE</h3>
+      <table>
+        <thead><tr><th>measure</th><th>margin</th><th>SE</th><th>boundary</th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_gps_patience</td>
+            <td>0.075427</td>
+            <td>0.106023</td>
+            <td>yes</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_wvs_q13</td>
+            <td>-0.533164</td>
+            <td>0.120450</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_wvs_q14</td>
+            <td>-0.776779</td>
+            <td>0.093119</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_composite</td>
+            <td>-0.721815</td>
+            <td>0.097638</td>
+            <td>no</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_prompt_a</td>
+            <td>0.184956</td>
+            <td>0.115525</td>
+            <td>yes</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_prompt_b</td>
+            <td>-0.011528</td>
+            <td>0.115189</td>
+            <td>yes</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            <td>-0.265491</td>
+            <td>0.161708</td>
+            <td>yes</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      
+      <h3 style="margin:1rem 0 0.4rem">Admission frequency p̂<sub>m</sub></h3>
+      <table>
+        <thead><tr><th>measure</th><th>p̂<sub>m</sub></th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_gps_patience</td>
+            <td>0.697</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_wvs_q13</td>
+            <td>0.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_wvs_q14</td>
+            <td>0.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_composite</td>
+            <td>0.000</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_prompt_a</td>
+            <td>0.889</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_prompt_b</td>
+            <td>0.515</td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            <td>0.061</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      <p class="muted" style="margin-bottom:0">Heuristic uncertainty band over non-empty bootstrap replicates (selection uncertainty on the pooled sample; holdout verdict is a full-sample point finding outside the band). Not a confidence interval; not a holdout-robustness band. Boundary attribution: |margin_m| <= kappa * SE_m.</p>
+    </section>
+    
+
+    
+
+    
+
+    
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Menu admission</h2>
+      <p class="muted" style="margin-top:0">
+        M* size = 1 / 7.
+        Slack rule: admit if s<sub>r</sub>(m) ≥ −δ for all r.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            <th>status</th>
+            <th>β(m)</th>
+            <th>failed restrictions</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_gps_patience</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.402463</td>
+            <td class="mono">
+              
+                —
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_wvs_q13</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>-0.165988</td>
+            <td class="mono">
+              
+                conv_edu
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_wvs_q14</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>-0.194840</td>
+            <td class="mono">
+              
+                conv_edu
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_composite</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>-0.218747</td>
+            <td class="mono">
+              
+                conv_edu
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_prompt_a</td>
+            <td>
+              
+              <span class="tag ok">admissible</span>
+              
+            </td>
+            <td>0.327503</td>
+            <td class="mono">
+              
+                —
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_prompt_b</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.373879</td>
+            <td class="mono">
+              
+                conv_edu
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.019901</td>
+            <td class="mono">
+              
+                conv_edu
+              
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Slack matrix s<sub>r</sub>(m)</h2>
+      <p class="muted" style="margin-top:0">Positive / zero ≈ satisfied at δ=0.0. Negative = violation magnitude.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            
+            <th class="mono">conv_edu</th>
+            
+            <th class="mono">mono_edu</th>
+            
+            <th class="mono">disc_risk</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_gps_patience</td>
+            
+            <td>0.298963</td>
+            
+            <td>-0.340476</td>
+            
+            <td>0.014938</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_wvs_q13</td>
+            
+            <td>-0.458187</td>
+            
+            <td>-0.364286</td>
+            
+            <td>0.163450</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_wvs_q14</td>
+            
+            <td>-0.733978</td>
+            
+            <td>-0.626190</td>
+            
+            <td>0.329858</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_composite</td>
+            
+            <td>-0.672759</td>
+            
+            <td>-0.554762</td>
+            
+            <td>0.259030</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_prompt_a</td>
+            
+            <td>0.140675</td>
+            
+            <td>0.397619</td>
+            
+            <td>0.310342</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_prompt_b</td>
+            
+            <td>-0.060932</td>
+            
+            <td>-0.102381</td>
+            
+            <td>0.238962</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            
+            <td>-0.338713</td>
+            
+            <td>0.207143</td>
+            
+            <td>0.225354</td>
+            
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Network (researcher-owned)</h2>
+      <ul class="compact">
+        
+        <li>
+          <span class="mono">conv_edu</span>
+          · type <span class="mono">corr_min</span>
+          · θ=0.2
+          · params <span class="mono">{'variable': 'q275_mean'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">mono_edu</span>
+          · type <span class="mono">monotone_rank</span>
+          · θ=0.15
+          · params <span class="mono">{'variable': 'q275_mean', 'sign': 1}</span>
+        </li>
+        
+        <li>
+          <span class="mono">disc_risk</span>
+          · type <span class="mono">corr_zero</span>
+          · θ=0.35
+          · params <span class="mono">{'variable': 'risktaking'}</span>
+        </li>
+        
+      </ul>
+      <p class="muted" style="margin:0.75rem 0 0">
+        Engine does not invent restrictions. Agent may author oracle R for synthetic DGPs only.
+      </p>
+    </section>
+
+    <footer>
+      cvprofiles 3.0.0
+      · four-state spine SCORE → RESTRICT → IDENTIFY → REPORT
+      · v1.1/v2.0 inference: bootstrap + θ-grid + δ-grid + coverage (diagnostic)
+      · generated 2026-08-10T23:03:52Z
+    </footer>
+  </div>
+</body>
+</html>

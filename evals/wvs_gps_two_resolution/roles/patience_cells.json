@@ -1,0 +1,13 @@
+{
+  "unit_id": "unit_id",
+  "measures": [
+    "m_wvs_q13",
+    "m_wvs_q14",
+    "m_composite",
+    "m_noise"
+  ],
+  "aux": [
+    "q275_cell"
+  ],
+  "outcome": "gps_patience_cell"
+}

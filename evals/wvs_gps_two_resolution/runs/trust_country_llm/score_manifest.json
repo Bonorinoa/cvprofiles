@@ -1,0 +1,60 @@
+{
+  "schema_version": "1",
+  "roles": {
+    "unit_id": "unit_id",
+    "measures": [
+      "m_gps_trust",
+      "m_trust_general",
+      "m_trust_in_group",
+      "m_trust_out_group",
+      "m_trust_institution",
+      "m_trust_composite",
+      "m_llm_trust_llama",
+      "m_llm_trust_phi",
+      "m_noise"
+    ],
+    "aux": [
+      "rule_of_law",
+      "gini",
+      "q275_mean"
+    ],
+    "outcome": "log_gdp_pc",
+    "diagnostic": []
+  },
+  "n_rows": 35,
+  "n_measures": 9,
+  "measure_columns": [
+    "m_gps_trust",
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_institution",
+    "m_trust_composite",
+    "m_llm_trust_llama",
+    "m_llm_trust_phi",
+    "m_noise"
+  ],
+  "normalization": {
+    "policy": "none",
+    "zscore_measures": false,
+    "ddof": null,
+    "columns_transformed": []
+  },
+  "scores_hash": "45639af3e4ec38a42cf3240b2fed2394a356e78f9faa73c3ebdacf9c05d72f1d",
+  "dtypes": {
+    "unit_id": "str",
+    "m_gps_trust": "float64",
+    "m_trust_general": "float64",
+    "m_trust_in_group": "float64",
+    "m_trust_out_group": "float64",
+    "m_trust_institution": "float64",
+    "m_trust_composite": "float64",
+    "m_llm_trust_llama": "float64",
+    "m_llm_trust_phi": "float64",
+    "m_noise": "float64",
+    "rule_of_law": "float64",
+    "gini": "float64",
+    "q275_mean": "float64",
+    "log_gdp_pc": "float64"
+  }
+}

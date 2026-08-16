@@ -1,0 +1,42 @@
+schema_version: "1"
+anchors:
+  - restriction_id: conv_edu
+    citation_key: falk2018_schooling
+    source_phrase: "Falk et al. 2018: country patience vs average years of schooling ρ=0.65 (p<.01); individual patience–education coefficient positive in >90% of countries."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: disc_risk
+    citation_key: falk2018_table_iv_hanushek2022
+    source_phrase: "Falk et al. 2018 Table IV Corr(patience, risktaking)=0.230 (n=76); Hanushek et al. 2022 r=0.358 (n=49). θ=0.35 admits the published range and rejects r≳0.6."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: mono_edu
+    citation_key: falk2018_schooling
+    source_phrase: "Same human-capital implication as conv_edu, written as a leftover rank restriction (θ=0.15)."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: conv_rule_of_law
+    citation_key: aghion2010_h5
+    source_phrase: "Trust–institutions correlations typically ≥0.4 (Aghion, Algan, Cahuc, Shleifer 2010). H5 historical floor 0.30."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: disc_gini
+    citation_key: bjornskov2008_h5
+    source_phrase: "Bjørnskov 2008: negative trust–inequality relationship. H5 historical θ=0.10 on corr_sign."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: conv_edu_hold
+    citation_key: falk2018_table_v
+    source_phrase: "Falk et al. 2018 Table V: trust increases with cognitive ability in almost all countries. Leftover country-level education bar θ=0.20."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: conv_edu_cell
+    citation_key: falk2018_table_v
+    source_phrase: "Same education implication applied within country (cell means). θ=0.20."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: mono_edu_cell
+    citation_key: falk2018_table_v
+    source_phrase: "Leftover within-country rank-monotone education restriction. θ=0.15."
+    anchor_kind: literature
+    pre_data: true

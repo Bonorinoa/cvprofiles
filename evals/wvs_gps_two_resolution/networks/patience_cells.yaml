@@ -1,0 +1,17 @@
+schema_version: "1"
+name: patience_cells_two_resolution
+delta: 0.0
+restrictions:
+  - id: conv_edu_cell
+    type: corr_min
+    theta: 0.20
+    stage: select
+    params:
+      variable: q275_cell
+  - id: mono_edu_cell
+    type: monotone_rank
+    theta: 0.15
+    stage: holdout
+    params:
+      variable: q275_cell
+      sign: 1

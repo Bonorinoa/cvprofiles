@@ -1,0 +1,324 @@
+{
+  "L": null,
+  "M_star_robust": [],
+  "M_star_select": [],
+  "U": null,
+  "admissible": [],
+  "anchors": {
+    "anchors": [
+      {
+        "anchor_kind": "literature",
+        "citation_key": "falk2018_table_v",
+        "pre_data": true,
+        "restriction_id": "conv_edu_cell",
+        "source_phrase": "Same education implication applied within country (cell means). \u03b8=0.20."
+      },
+      {
+        "anchor_kind": "literature",
+        "citation_key": "falk2018_table_v",
+        "pre_data": true,
+        "restriction_id": "mono_edu_cell",
+        "source_phrase": "Leftover within-country rank-monotone education restriction. \u03b8=0.15."
+      }
+    ],
+    "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
+    "n_anchors": 2,
+    "schema_version": "1"
+  },
+  "artifact_paths": {
+    "S_frozen.csv": "S_frozen.csv",
+    "S_frozen.parquet": "S_frozen.parquet",
+    "admissible.json": "admissible.json",
+    "anchors.json": "anchors.json",
+    "beta_resolved.json": "beta_resolved.json",
+    "beta_values.json": "beta_values.json",
+    "bootstrap.json": "bootstrap.json",
+    "coverage.json": "coverage.json",
+    "network_resolved.json": "network_resolved.json",
+    "range.json": "range.json",
+    "restrict_bundle.json": "restrict_bundle.json",
+    "score_manifest.json": "score_manifest.json",
+    "slacks.csv": "slacks.csv",
+    "slacks.parquet": "slacks.parquet",
+    "theta_grid.json": "theta_grid.json"
+  },
+  "beta_hash": "19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e",
+  "beta_type": "corr_y",
+  "beta_values": {
+    "m_noise": 0.014662177714558534,
+    "m_trust_composite": 0.3176110329997308,
+    "m_trust_general": 0.05242762548062067,
+    "m_trust_in_group": 0.2239306766609153,
+    "m_trust_institution": 0.2847229755917614,
+    "m_trust_out_group": 0.21142295058171512
+  },
+  "bootstrap": {
+    "band_L": null,
+    "band_U": null,
+    "band_method": "percentile_nonempty",
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 1.0,
+    "headline_note": "Headline [L,U] remains min/max B* on the full sample; the bootstrap band is additive metadata.",
+    "method": "efron_units_only",
+    "n_boot": 1000,
+    "note": "all replicates empty (or degenerate): band is null; headline [L,U] unchanged",
+    "quantile_method": "linear",
+    "quantiles": [
+      0.025,
+      0.975
+    ],
+    "replicates_degenerate": 0,
+    "replicates_empty": 1000,
+    "replicates_nonempty": 0,
+    "replicates_total": 1000,
+    "samples": {
+      "L": [],
+      "U": []
+    },
+    "schema_version": "1",
+    "seed": 20260814
+  },
+  "coverage": {
+    "alpha": 0.1,
+    "band_L": null,
+    "band_U": null,
+    "boundary": [],
+    "degenerate_replicate_rate": 0.0,
+    "empty_replicate_rate": 1.0,
+    "headline_note": "Headline [L,U] remains min/max B* on the full sample; the uncertainty band is additive metadata and never replaces it.",
+    "kappa": 2.0,
+    "note": "all replicates empty (or degenerate): uncertainty band is null; boundary set empty; admission frequencies null. Heuristic band \u2014 not a confidence interval and not a holdout-robustness band.",
+    "p_hat_m": {
+      "m_noise": null,
+      "m_trust_composite": null,
+      "m_trust_general": null,
+      "m_trust_in_group": null,
+      "m_trust_institution": null,
+      "m_trust_out_group": null
+    },
+    "purpose": "coverage_uncertainty_band",
+    "quantiles": [
+      0.05,
+      0.95
+    ],
+    "replicates_degenerate": 0,
+    "replicates_empty": 1000,
+    "replicates_nonempty": 0,
+    "replicates_total": 1000,
+    "schema_version": "1"
+  },
+  "created_at": "2026-08-15T01:04:26Z",
+  "delta": 0.0,
+  "delta_grid": null,
+  "empty": true,
+  "empty_R": false,
+  "freeze": {
+    "beta_hash": "19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e",
+    "config": {},
+    "delta": 0.0,
+    "n_boot": 1000,
+    "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
+    "package_version": "3.0.1",
+    "schema_version": "1",
+    "scores_hash": "e1a11178ef331502d1f88e3f1dfa2494b8cf1d2d7c27e06aa1026ad6538e62ac",
+    "seed": 20260814
+  },
+  "holdout": {
+    "holdout_frame": null,
+    "select_frame": null,
+    "units": null,
+    "verdict": {
+      "m_noise": [
+        "mono_edu_cell"
+      ],
+      "m_trust_composite": [
+        "mono_edu_cell"
+      ],
+      "m_trust_general": [
+        "mono_edu_cell"
+      ],
+      "m_trust_in_group": [
+        "mono_edu_cell"
+      ],
+      "m_trust_institution": [
+        "mono_edu_cell"
+      ],
+      "m_trust_out_group": [
+        "mono_edu_cell"
+      ]
+    }
+  },
+  "measures": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_institution",
+    "m_trust_composite",
+    "m_noise"
+  ],
+  "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
+  "network_name": "trust_cells_two_resolution",
+  "outcome": "gps_trust_cell",
+  "package_version": "3.0.1",
+  "point_id": false,
+  "range": {
+    "L": null,
+    "U": null,
+    "bootstrap": {
+      "band_L": null,
+      "band_U": null,
+      "n_boot": 1000,
+      "see": "bootstrap.json"
+    },
+    "empty": true,
+    "method": "min_max_B_star",
+    "note": "range is min/max of beta on M*; bootstrap band is additive metadata (v2.0) and never replaces the headline",
+    "point_id": false
+  },
+  "rejected": {
+    "m_noise": [
+      "conv_edu_cell"
+    ],
+    "m_trust_composite": [
+      "conv_edu_cell"
+    ],
+    "m_trust_general": [
+      "conv_edu_cell"
+    ],
+    "m_trust_in_group": [
+      "conv_edu_cell"
+    ],
+    "m_trust_institution": [
+      "conv_edu_cell"
+    ],
+    "m_trust_out_group": [
+      "conv_edu_cell"
+    ]
+  },
+  "restriction_ids": [
+    "conv_edu_cell",
+    "mono_edu_cell"
+  ],
+  "restrictions": [
+    {
+      "id": "conv_edu_cell",
+      "params": {
+        "variable": "q275_cell"
+      },
+      "stage": "select",
+      "theta": 0.2,
+      "type": "corr_min"
+    },
+    {
+      "id": "mono_edu_cell",
+      "params": {
+        "sign": 1,
+        "variable": "q275_cell"
+      },
+      "stage": "holdout",
+      "theta": 0.15,
+      "type": "monotone_rank"
+    }
+  ],
+  "run_id": "ae52cba4148850918d60554189d714b152825401856a996f256d4491c382f75c",
+  "schema_version": "1",
+  "scores_hash": "e1a11178ef331502d1f88e3f1dfa2494b8cf1d2d7c27e06aa1026ad6538e62ac",
+  "seed": 20260814,
+  "slacks": {
+    "m_noise": {
+      "conv_edu_cell": -0.17191154663712352,
+      "mono_edu_cell": -0.11900664632351501
+    },
+    "m_trust_composite": {
+      "conv_edu_cell": -0.4737028482419085,
+      "mono_edu_cell": -0.4143326431628568
+    },
+    "m_trust_general": {
+      "conv_edu_cell": -0.17685380538233852,
+      "mono_edu_cell": -0.13134149533500744
+    },
+    "m_trust_in_group": {
+      "conv_edu_cell": -0.26840722757035784,
+      "mono_edu_cell": -0.23335328513542186
+    },
+    "m_trust_institution": {
+      "conv_edu_cell": -0.6273687357208168,
+      "mono_edu_cell": -0.552204393308033
+    },
+    "m_trust_out_group": {
+      "conv_edu_cell": -0.2749894004417675,
+      "mono_edu_cell": -0.22479427196934104
+    }
+  },
+  "theta_grid": {
+    "headline_lambda": 1.0,
+    "lambda_scales": [
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "note": "Diagnostic theta-sensitivity surface only. Headline [L,U] is always lambda=1.0; lambda is never auto-selected.",
+    "purpose": "diagnostic_theta_sensitivity",
+    "rows": [
+      {
+        "L": null,
+        "U": null,
+        "admissible": [],
+        "empty": true,
+        "lambda": 0.5,
+        "n_admissible": 0,
+        "network_hash": "89b1b1ba02ec6aac9136493561f7795573ac1891d623c343db7510720f9776d9",
+        "point_id": false,
+        "thetas": {
+          "conv_edu_cell": 0.1,
+          "mono_edu_cell": 0.075
+        }
+      },
+      {
+        "L": null,
+        "U": null,
+        "admissible": [],
+        "empty": true,
+        "lambda": 1.0,
+        "n_admissible": 0,
+        "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
+        "point_id": false,
+        "thetas": {
+          "conv_edu_cell": 0.2,
+          "mono_edu_cell": 0.15
+        }
+      },
+      {
+        "L": null,
+        "U": null,
+        "admissible": [],
+        "empty": true,
+        "lambda": 1.5,
+        "n_admissible": 0,
+        "network_hash": "558df5623b42e9596786bf387866644ee709d20f3603201ea646e9003bd7c701",
+        "point_id": false,
+        "thetas": {
+          "conv_edu_cell": 0.30000000000000004,
+          "mono_edu_cell": 0.22499999999999998
+        }
+      },
+      {
+        "L": null,
+        "U": null,
+        "admissible": [],
+        "empty": true,
+        "lambda": 2.0,
+        "n_admissible": 0,
+        "network_hash": "80027acb97a40d46ef7991deebbec7044fca572693bea566c55b565653185f55",
+        "point_id": false,
+        "thetas": {
+          "conv_edu_cell": 0.4,
+          "mono_edu_cell": 0.3
+        }
+      }
+    ],
+    "schema_version": "1"
+  },
+  "title": "Trust \u2014 cells (country-demeaned)"
+}

@@ -1,0 +1,96 @@
+{
+  "alpha": 0.1,
+  "band_L": -0.016141306569644305,
+  "band_U": 0.6987605855951458,
+  "boundary": [
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": -0.19706416379524583,
+      "measure": "m_gps_trust",
+      "se": 0.15619684975338702
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": 0.3068653537019153,
+      "measure": "m_trust_general",
+      "se": 0.12164736233119249
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": 0.0976665237477175,
+      "measure": "m_trust_in_group",
+      "se": 0.11605201439242378
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": 0.21997294410987636,
+      "measure": "m_trust_out_group",
+      "se": 0.11416824991065043
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.5626023815042679,
+      "measure": "m_trust_institution",
+      "se": 0.12515130629891935
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": -0.05199093225296578,
+      "measure": "m_trust_composite",
+      "se": 0.12180591715515406
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": 0.19662419946972562,
+      "measure": "m_llm_trust_llama",
+      "se": 0.13202627236586226
+    },
+    {
+      "boundary": true,
+      "kappa": 2.0,
+      "margin": -0.158091734504482,
+      "measure": "m_llm_trust_phi",
+      "se": 0.18846620695530708
+    },
+    {
+      "boundary": false,
+      "kappa": 2.0,
+      "margin": -0.37387597048115295,
+      "measure": "m_noise",
+      "se": 0.15701674639579635
+    }
+  ],
+  "degenerate_replicate_rate": 0.0,
+  "empty_replicate_rate": 0.001,
+  "headline_note": "Headline [L,U] remains min/max B* on the full sample; the uncertainty band is additive metadata and never replaces it.",
+  "kappa": 2.0,
+  "note": "Heuristic uncertainty band over non-empty bootstrap replicates (selection uncertainty on the pooled sample; holdout verdict is a full-sample point finding outside the band). Not a confidence interval; not a holdout-robustness band. Boundary attribution: |margin_m| <= kappa * SE_m.",
+  "p_hat_m": {
+    "m_gps_trust": 0.12712712712712712,
+    "m_llm_trust_llama": 0.9009009009009009,
+    "m_llm_trust_phi": 0.16716716716716717,
+    "m_noise": 0.007007007007007007,
+    "m_trust_composite": 0.7877877877877878,
+    "m_trust_general": 0.996996996996997,
+    "m_trust_in_group": 0.908908908908909,
+    "m_trust_institution": 0.001001001001001001,
+    "m_trust_out_group": 0.944944944944945
+  },
+  "purpose": "coverage_uncertainty_band",
+  "quantiles": [
+    0.05,
+    0.95
+  ],
+  "replicates_degenerate": 0,
+  "replicates_empty": 1,
+  "replicates_nonempty": 999,
+  "replicates_total": 1000,
+  "schema_version": "1"
+}

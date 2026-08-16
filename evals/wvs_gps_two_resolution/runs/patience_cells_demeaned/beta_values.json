@@ -1,0 +1,14 @@
+{
+  "admissible_flag": {
+    "m_composite": false,
+    "m_noise": false,
+    "m_wvs_q13": true,
+    "m_wvs_q14": false
+  },
+  "beta_values": {
+    "m_composite": -0.026645024957689563,
+    "m_noise": -0.0027757931043006115,
+    "m_wvs_q13": 0.24490977928094967,
+    "m_wvs_q14": -0.32579694816692806
+  }
+}

@@ -1,0 +1,12 @@
+schema_version: "1"
+anchors:
+  - restriction_id: conv_edu_cell
+    citation_key: falk2018_table_v
+    source_phrase: "Same education implication applied within country (cell means). θ=0.20."
+    anchor_kind: literature
+    pre_data: true
+  - restriction_id: mono_edu_cell
+    citation_key: falk2018_table_v
+    source_phrase: "Leftover within-country rank-monotone education restriction. θ=0.15."
+    anchor_kind: literature
+    pre_data: true

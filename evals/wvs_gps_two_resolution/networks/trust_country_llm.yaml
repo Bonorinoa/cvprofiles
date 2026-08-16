@@ -1,0 +1,23 @@
+schema_version: "1"
+name: trust_country_llm_extension
+delta: 0.0
+restrictions:
+  - id: conv_rule_of_law
+    type: corr_min
+    theta: 0.30
+    stage: select
+    params:
+      variable: rule_of_law
+  - id: disc_gini
+    type: corr_sign
+    theta: 0.10
+    stage: select
+    params:
+      variable: gini
+      sign: -1
+  - id: conv_edu_hold
+    type: corr_min
+    theta: 0.20
+    stage: holdout
+    params:
+      variable: q275_mean

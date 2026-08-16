@@ -1,0 +1,41 @@
+{
+  "M_star": [],
+  "M_star_robust": [],
+  "M_star_select": [],
+  "delta": 0.0,
+  "empty": true,
+  "empty_R": false,
+  "holdout": null,
+  "n_admissible": 0,
+  "n_menu": 4,
+  "point_id": false,
+  "rejected": {
+    "gps_patience": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust"
+    ],
+    "gps_trust": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_patience_vs_gps",
+      "conv_gps_trust_vs_wvs",
+      "disc_gps_patience_vs_gps_trust"
+    ],
+    "m_patience_child_qualities": [
+      "conv_wvs_patience_vs_gps",
+      "conv_gps_trust_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust",
+      "disc_gps_trust_vs_wvs_patience"
+    ],
+    "m_trust_general": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust",
+      "disc_gps_trust_vs_wvs_patience"
+    ]
+  }
+}

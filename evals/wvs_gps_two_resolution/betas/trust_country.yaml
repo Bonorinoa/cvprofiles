@@ -1,0 +1,6 @@
+schema_version: "1"
+type: ols_coef
+outcome: log_gdp_pc
+params:
+  controls:
+    - q275_mean

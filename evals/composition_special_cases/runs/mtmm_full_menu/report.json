@@ -1,0 +1,292 @@
+{
+  "L": null,
+  "M_star_robust": [],
+  "M_star_select": [],
+  "U": null,
+  "admissible": [],
+  "anchors": {
+    "anchors": [
+      {
+        "anchor_kind": "literature",
+        "citation_key": "oecd2017_falk2018_table_ii",
+        "pre_data": true,
+        "restriction_id": "conv_gps_patience_vs_wvs",
+        "source_phrase": "OECD 2017 survey\u2013behavioral trust r\u22480.29; Falk et al. 2018 Table II GPS\u2013WVS trust Spearman=0.49 (n=60). Convergent floor set at 0.30, at the published survey\u2013behavioral bound and below the GPS\u2013WVS trust correlation. Falk Table II GPS patience vs WVS long-term orientation = 0.09 (p=.52); a 0.30 bar is expected to reject WVS patience if that relationship holds."
+      },
+      {
+        "anchor_kind": "literature",
+        "citation_key": "oecd2017_falk2018_table_ii",
+        "pre_data": true,
+        "restriction_id": "conv_wvs_patience_vs_gps",
+        "source_phrase": "Same convergent floor 0.30 as the directed partner cell (OECD 2017 r\u22480.29; Falk 2018 Table II trust r=0.49)."
+      },
+      {
+        "anchor_kind": "literature",
+        "citation_key": "falk2018_table_ii",
+        "pre_data": true,
+        "restriction_id": "conv_gps_trust_vs_wvs",
+        "source_phrase": "Falk et al. 2018 Table II: GPS trust vs WVS trust Spearman rho=0.49, p<.01, n=60. Floor 0.30 sits below that published correlation."
+      },
+      {
+        "anchor_kind": "literature",
+        "citation_key": "falk2018_table_ii",
+        "pre_data": true,
+        "restriction_id": "conv_wvs_trust_vs_gps",
+        "source_phrase": "Same convergent floor 0.30 as the directed partner cell (Falk 2018 Table II r=0.49)."
+      },
+      {
+        "anchor_kind": "literature",
+        "citation_key": "falk2018_table_iv",
+        "pre_data": true,
+        "restriction_id": "disc_gps_patience_vs_gps_trust",
+        "source_phrase": "Falk et al. 2018 Table IV country-level Corr(patience, trust)=0.190. Discriminant bar 0.35 admits that published association with margin and still rejects r\u22730.6."
+      },
+      {
+        "anchor_kind": "literature",
+        "citation_key": "falk2018_table_iv",
+        "pre_data": true,
+        "restriction_id": "disc_wvs_patience_vs_wvs_trust",
+        "source_phrase": "Same discriminant bar 0.35 as the GPS heterotrait\u2013monomethod cell (Falk 2018 Table IV r=0.190)."
+      },
+      {
+        "anchor_kind": "literature",
+        "citation_key": "falk2018_table_iv",
+        "pre_data": true,
+        "restriction_id": "disc_gps_patience_vs_wvs_trust",
+        "source_phrase": "Heterotrait\u2013heteromethod discriminant; same 0.35 bar (Falk 2018 Table IV patience\u2013trust r=0.190)."
+      },
+      {
+        "anchor_kind": "literature",
+        "citation_key": "falk2018_table_iv",
+        "pre_data": true,
+        "restriction_id": "disc_gps_trust_vs_wvs_patience",
+        "source_phrase": "Heterotrait\u2013heteromethod discriminant; same 0.35 bar (Falk 2018 Table IV patience\u2013trust r=0.190)."
+      }
+    ],
+    "anchors_hash": "7d23bb8d3b4ee594f4545bacd8e552e8427ceb7b792c8fd72d2711247c65e9e5",
+    "n_anchors": 8,
+    "schema_version": "1"
+  },
+  "artifact_paths": {
+    "S_frozen.csv": "S_frozen.csv",
+    "S_frozen.parquet": "S_frozen.parquet",
+    "admissible.json": "admissible.json",
+    "anchors.json": "anchors.json",
+    "beta_resolved.json": "beta_resolved.json",
+    "beta_values.json": "beta_values.json",
+    "network_resolved.json": "network_resolved.json",
+    "range.json": "range.json",
+    "restrict_bundle.json": "restrict_bundle.json",
+    "score_manifest.json": "score_manifest.json",
+    "slacks.csv": "slacks.csv",
+    "slacks.parquet": "slacks.parquet"
+  },
+  "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+  "beta_type": "ols_coef",
+  "beta_values": {
+    "gps_patience": 0.402463340625296,
+    "gps_trust": 0.12919755333265634,
+    "m_patience_child_qualities": -0.20274733819507956,
+    "m_trust_general": 0.4110022513414336
+  },
+  "bootstrap": null,
+  "coverage": null,
+  "created_at": "2026-08-15T00:39:20Z",
+  "delta": 0.0,
+  "delta_grid": null,
+  "empty": true,
+  "empty_R": false,
+  "freeze": {
+    "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
+    "config": {},
+    "delta": 0.0,
+    "n_boot": null,
+    "network_hash": "bf527e5e678657dfed9396ad777a568a6a66b2709f1eb2f809272b0d93b572b6",
+    "package_version": "3.0.1",
+    "schema_version": "1",
+    "scores_hash": "8e56d2b4c6f54cbabd9b296fe2b8d0827be74c2308bbc124185b147bd407766c",
+    "seed": 20260814
+  },
+  "holdout": null,
+  "measures": [
+    "gps_patience",
+    "m_patience_child_qualities",
+    "gps_trust",
+    "m_trust_general"
+  ],
+  "network_hash": "bf527e5e678657dfed9396ad777a568a6a66b2709f1eb2f809272b0d93b572b6",
+  "network_name": "mtmm_patience_trust_country",
+  "outcome": "log_gdp_pc",
+  "package_version": "3.0.1",
+  "point_id": false,
+  "range": {
+    "L": null,
+    "U": null,
+    "bootstrap": null,
+    "empty": true,
+    "method": "min_max_B_star",
+    "note": "range is min/max of beta on M*; bootstrap band is additive metadata (v2.0) and never replaces the headline",
+    "point_id": false
+  },
+  "rejected": {
+    "gps_patience": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust"
+    ],
+    "gps_trust": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_patience_vs_gps",
+      "conv_gps_trust_vs_wvs",
+      "disc_gps_patience_vs_gps_trust"
+    ],
+    "m_patience_child_qualities": [
+      "conv_wvs_patience_vs_gps",
+      "conv_gps_trust_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust",
+      "disc_gps_trust_vs_wvs_patience"
+    ],
+    "m_trust_general": [
+      "conv_gps_patience_vs_wvs",
+      "conv_wvs_trust_vs_gps",
+      "disc_wvs_patience_vs_wvs_trust",
+      "disc_gps_patience_vs_wvs_trust",
+      "disc_gps_trust_vs_wvs_patience"
+    ]
+  },
+  "restriction_ids": [
+    "conv_gps_patience_vs_wvs",
+    "conv_wvs_patience_vs_gps",
+    "conv_gps_trust_vs_wvs",
+    "conv_wvs_trust_vs_gps",
+    "disc_gps_patience_vs_gps_trust",
+    "disc_wvs_patience_vs_wvs_trust",
+    "disc_gps_patience_vs_wvs_trust",
+    "disc_gps_trust_vs_wvs_patience"
+  ],
+  "restrictions": [
+    {
+      "id": "conv_gps_patience_vs_wvs",
+      "params": {
+        "variable": "m_patience_child_qualities"
+      },
+      "stage": "select",
+      "theta": 0.3,
+      "type": "corr_min"
+    },
+    {
+      "id": "conv_wvs_patience_vs_gps",
+      "params": {
+        "variable": "gps_patience"
+      },
+      "stage": "select",
+      "theta": 0.3,
+      "type": "corr_min"
+    },
+    {
+      "id": "conv_gps_trust_vs_wvs",
+      "params": {
+        "variable": "m_trust_general"
+      },
+      "stage": "select",
+      "theta": 0.3,
+      "type": "corr_min"
+    },
+    {
+      "id": "conv_wvs_trust_vs_gps",
+      "params": {
+        "variable": "gps_trust"
+      },
+      "stage": "select",
+      "theta": 0.3,
+      "type": "corr_min"
+    },
+    {
+      "id": "disc_gps_patience_vs_gps_trust",
+      "params": {
+        "variable": "gps_trust"
+      },
+      "stage": "select",
+      "theta": 0.35,
+      "type": "corr_zero"
+    },
+    {
+      "id": "disc_wvs_patience_vs_wvs_trust",
+      "params": {
+        "variable": "m_trust_general"
+      },
+      "stage": "select",
+      "theta": 0.35,
+      "type": "corr_zero"
+    },
+    {
+      "id": "disc_gps_patience_vs_wvs_trust",
+      "params": {
+        "variable": "m_trust_general"
+      },
+      "stage": "select",
+      "theta": 0.35,
+      "type": "corr_zero"
+    },
+    {
+      "id": "disc_gps_trust_vs_wvs_patience",
+      "params": {
+        "variable": "m_patience_child_qualities"
+      },
+      "stage": "select",
+      "theta": 0.35,
+      "type": "corr_zero"
+    }
+  ],
+  "run_id": "7e8622e46c20155e3e38cd523b2492aeda2636b82226a28baaac6bd17b3747f7",
+  "schema_version": "1",
+  "scores_hash": "8e56d2b4c6f54cbabd9b296fe2b8d0827be74c2308bbc124185b147bd407766c",
+  "seed": 20260814,
+  "slacks": {
+    "gps_patience": {
+      "conv_gps_patience_vs_wvs": -0.5518765868099758,
+      "conv_gps_trust_vs_wvs": 0.5248565176350739,
+      "conv_wvs_patience_vs_gps": 0.7,
+      "conv_wvs_trust_vs_gps": -0.1623387021102129,
+      "disc_gps_patience_vs_gps_trust": 0.21233870211021288,
+      "disc_gps_patience_vs_wvs_trust": -0.47485651763507386,
+      "disc_gps_trust_vs_wvs_patience": 0.09812341319002416,
+      "disc_wvs_patience_vs_wvs_trust": -0.47485651763507386
+    },
+    "gps_trust": {
+      "conv_gps_patience_vs_wvs": -0.05869560525082071,
+      "conv_gps_trust_vs_wvs": -0.015736772591326775,
+      "conv_wvs_patience_vs_gps": -0.1623387021102129,
+      "conv_wvs_trust_vs_gps": 0.6999999999999997,
+      "disc_gps_patience_vs_gps_trust": -0.6499999999999998,
+      "disc_gps_patience_vs_wvs_trust": 0.06573677259132676,
+      "disc_gps_trust_vs_wvs_patience": 0.1086956052508207,
+      "disc_wvs_patience_vs_wvs_trust": 0.06573677259132676
+    },
+    "m_patience_child_qualities": {
+      "conv_gps_patience_vs_wvs": 0.7,
+      "conv_gps_trust_vs_wvs": -0.7107651003936546,
+      "conv_wvs_patience_vs_gps": -0.5518765868099758,
+      "conv_wvs_trust_vs_gps": -0.05869560525082071,
+      "disc_gps_patience_vs_gps_trust": 0.1086956052508207,
+      "disc_gps_patience_vs_wvs_trust": -0.060765100393654625,
+      "disc_gps_trust_vs_wvs_patience": -0.65,
+      "disc_wvs_patience_vs_wvs_trust": -0.060765100393654625
+    },
+    "m_trust_general": {
+      "conv_gps_patience_vs_wvs": -0.7107651003936546,
+      "conv_gps_trust_vs_wvs": 0.6999999999999997,
+      "conv_wvs_patience_vs_gps": 0.5248565176350739,
+      "conv_wvs_trust_vs_gps": -0.015736772591326775,
+      "disc_gps_patience_vs_gps_trust": 0.06573677259132676,
+      "disc_gps_patience_vs_wvs_trust": -0.6499999999999998,
+      "disc_gps_trust_vs_wvs_patience": -0.06076510039365468,
+      "disc_wvs_patience_vs_wvs_trust": -0.6499999999999998
+    }
+  },
+  "theta_grid": null,
+  "title": "MTMM patience x trust (engine applies every r to every m)"
+}
