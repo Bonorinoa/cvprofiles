@@ -65,7 +65,7 @@
   "beta_values": {
     "m_composite": -0.21874650645411,
     "m_gps_patience": 0.40246334068031847,
-    "m_llm_patience_llama": 0.44701963725653376,
+    "m_llm_patience_llama": 0.4470196372565337,
     "m_llm_patience_phi": 0.5649061435421557,
     "m_noise": 0.019901395118570066,
     "m_wvs_q13": -0.16598846758352492,
@@ -141,8 +141,8 @@
   },
   "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.html",
   "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.json",
-  "run_id": "7e8c78ca1d7c32f6d491551d33bd94fb2c78ca31737295d41ef42b001af05ed5",
-  "scores_hash": "1ddba816b0130adc0e5abf01898cd5c5bfbf60865585edd0790378c71f4f3398",
+  "run_id": "75869a0885782e036328cd85db3795d8a68fa23303a42e5a067c715751ad2f5a",
+  "scores_hash": "fcfb171381e56d99762863e320d6173b854a1ca082fee871e665b14247596293",
   "theta_grid": {
     "artifact": "theta_grid.json",
     "headline_lambda": 1.0,

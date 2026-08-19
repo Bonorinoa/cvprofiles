@@ -5,6 +5,7 @@ Does not overwrite the 2026-08-14 confirmatory human runs.
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -114,8 +115,23 @@ def build_frames() -> None:
 
 
 def main() -> None:
-    print("building extension frames...")
-    build_frames()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--skip-build",
+        action="store_true",
+        help="use committed *_llm_extension.csv frames; do not rebuild from raw LLM JSONL",
+    )
+    args = parser.parse_args()
+    if args.skip_build:
+        missing = [
+            str(spec["scores"]) for spec in PROFILES if not Path(spec["scores"]).is_file()
+        ]
+        if missing:
+            raise SystemExit(f"--skip-build: missing committed extension frames: {missing}")
+        print("using committed extension frames (skip-build)")
+    else:
+        print("building extension frames...")
+        build_frames()
     print("package", __version__)
     summaries = []
     for spec in PROFILES:

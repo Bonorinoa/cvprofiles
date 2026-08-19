@@ -1,35 +1,35 @@
 {
   "alpha": 0.1,
-  "band_L": -0.38241729147649134,
-  "band_U": -0.2397452851208833,
+  "band_L": -0.3824172914764916,
+  "band_U": -0.23974528512088336,
   "boundary": [
     {
       "boundary": false,
       "kappa": 2.0,
-      "margin": -0.17685380538233852,
+      "margin": -0.17685380538233855,
       "measure": "m_trust_general",
-      "se": 0.049025112370170806
+      "se": 0.04902511237017081
     },
     {
       "boundary": false,
       "kappa": 2.0,
       "margin": -0.26840722757035784,
       "measure": "m_trust_in_group",
-      "se": 0.043041019750911125
+      "se": 0.04304101975091113
     },
     {
       "boundary": false,
       "kappa": 2.0,
-      "margin": -0.2749894004417675,
+      "margin": -0.2749894004417674,
       "measure": "m_trust_out_group",
-      "se": 0.05122932194474146
+      "se": 0.05122932194474145
     },
     {
       "boundary": false,
       "kappa": 2.0,
-      "margin": -0.6273687357208168,
+      "margin": -0.6273687357208166,
       "measure": "m_trust_institution",
-      "se": 0.039714001227303744
+      "se": 0.03971400122730375
     },
     {
       "boundary": false,
@@ -41,16 +41,16 @@
     {
       "boundary": true,
       "kappa": 2.0,
-      "margin": -0.07726749679586951,
+      "margin": -0.0772674967958696,
       "measure": "m_llm_trust_llama",
-      "se": 0.04000270399112289
+      "se": 0.0400027039911229
     },
     {
       "boundary": false,
       "kappa": 2.0,
       "margin": 0.13263768187572658,
       "measure": "m_llm_trust_phi",
-      "se": 0.04331091637128301
+      "se": 0.04331091637128302
     },
     {
       "boundary": false,

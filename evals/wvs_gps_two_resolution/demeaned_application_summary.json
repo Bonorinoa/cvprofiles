@@ -5,7 +5,7 @@
   "package_version": "3.0.1",
   "profiles": [
     {
-      "L": 0.24490977928094967,
+      "L": 0.2449097792809495,
       "M_star": [
         "m_wvs_q13"
       ],
@@ -15,12 +15,12 @@
       "M_star_select": [
         "m_wvs_q13"
       ],
-      "U": 0.24490977928094967,
+      "U": 0.2449097792809495,
       "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
       "baselines": {
         "best_abs_beta": "m_wvs_q14",
         "best_abs_beta_holdout_pass_rate": 0.0,
-        "best_abs_beta_value": -0.32579694816692806,
+        "best_abs_beta_value": -0.3257969481669279,
         "canonical": "m_wvs_q13",
         "canonical_holdout_pass_rate": 1.0,
         "canonical_in_menu": true,
@@ -57,15 +57,15 @@
       },
       "beta_hash": "93ecc94543944de5860e399f0b91f9f1c5038e5b4d418e5f3444d3b0a8bc23c7",
       "beta_values": {
-        "m_composite": -0.026645024957689563,
-        "m_noise": -0.0027757931043006115,
-        "m_wvs_q13": 0.24490977928094967,
-        "m_wvs_q14": -0.32579694816692806
+        "m_composite": -0.026645024957689552,
+        "m_noise": -0.0027757931043006366,
+        "m_wvs_q13": 0.2449097792809495,
+        "m_wvs_q14": -0.3257969481669279
       },
       "bootstrap": {
         "artifact": "bootstrap.json",
-        "band_L": 0.1578868302270349,
-        "band_U": 0.34809392502653785,
+        "band_L": 0.15788683022703495,
+        "band_U": 0.34809392502653774,
         "degenerate_replicate_rate": 0.0,
         "empty_replicate_rate": 0.17,
         "n_boot": 1000,
@@ -78,8 +78,8 @@
       "coverage": {
         "alpha": 0.1,
         "artifact": "coverage.json",
-        "band_L": 0.17438727511428373,
-        "band_U": 0.33467292969473245,
+        "band_L": 0.17438727511428376,
+        "band_U": 0.3346729296947324,
         "kappa": 2.0,
         "n_boundary": 4,
         "quantiles": [
@@ -88,8 +88,8 @@
         ]
       },
       "coverage_band": [
-        0.17438727511428373,
-        0.33467292969473245
+        0.17438727511428376,
+        0.3346729296947324
       ],
       "delta_grid": null,
       "empty": false,
@@ -126,8 +126,8 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned/report.json",
-      "run_id": "d8a406f61fac615a93b279d9782f05af7bb7ace42f16682eda2bff8dbc85e011",
-      "scores_hash": "74c5a537ddc0b6e895b20e483d6c6315b043278411847eef5fdf1fe71c7edfa4",
+      "run_id": "435b47343b84a63af2f1967e8862086d3d11300b26efe734c83983c5015d174e",
+      "scores_hash": "542ac41e4c60ab0c1dc2bc311c682779d084de37dae77a6dc418981f120c2742",
       "theta_grid": {
         "artifact": "theta_grid.json",
         "headline_lambda": 1.0,
@@ -150,7 +150,7 @@
       "baselines": {
         "best_abs_beta": "m_trust_composite",
         "best_abs_beta_holdout_pass_rate": 0.0,
-        "best_abs_beta_value": 0.3176110329997308,
+        "best_abs_beta_value": 0.31761103299973087,
         "canonical": "m_trust_general",
         "canonical_holdout_pass_rate": 0.0,
         "canonical_in_menu": true,
@@ -191,12 +191,12 @@
       },
       "beta_hash": "19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e",
       "beta_values": {
-        "m_noise": 0.014662177714558534,
-        "m_trust_composite": 0.3176110329997308,
-        "m_trust_general": 0.05242762548062067,
-        "m_trust_in_group": 0.2239306766609153,
-        "m_trust_institution": 0.2847229755917614,
-        "m_trust_out_group": 0.21142295058171512
+        "m_noise": 0.014662177714558557,
+        "m_trust_composite": 0.31761103299973087,
+        "m_trust_general": 0.052427625480620785,
+        "m_trust_in_group": 0.22393067666091518,
+        "m_trust_institution": 0.2847229755917616,
+        "m_trust_out_group": 0.21142295058171526
       },
       "bootstrap": {
         "artifact": "bootstrap.json",
@@ -280,8 +280,8 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned/report.json",
-      "run_id": "ae52cba4148850918d60554189d714b152825401856a996f256d4491c382f75c",
-      "scores_hash": "e1a11178ef331502d1f88e3f1dfa2494b8cf1d2d7c27e06aa1026ad6538e62ac",
+      "run_id": "d65260cb8fb8b0b23882717439451f95d173056eb44fc02d7c17ba065a1e2655",
+      "scores_hash": "5338e3e4ccec220a8da6b2ab30559ef5e1bb7cc13e99e6a29098cf5f152e8c25",
       "theta_grid": {
         "artifact": "theta_grid.json",
         "headline_lambda": 1.0,

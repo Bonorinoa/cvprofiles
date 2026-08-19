@@ -24,12 +24,28 @@ PATIENCE_INPUTS = REPO / "evals" / "wvs_gps_preferences" / "data" / "inputs"
 VALIDITY = Path(
     "/Users/bonorinoa/Desktop/Github_Repositories/SCA2_PofW/data/validity"
 )
+# Current seven-measure country patience menu (F7): fresh LLM columns joined
+# onto the human frame; roles define GPS, Q13, Q14, composite, Llama, Phi, noise.
+EMPTY_R_SCORES = (
+    REPO / "evals" / "wvs_gps_two_resolution" / "data" / "country" / "patience_llm_extension.csv"
+)
+EMPTY_R_ROLES = (
+    REPO / "evals" / "wvs_gps_two_resolution" / "roles" / "patience_country_llm.json"
+)
+EMPTY_R_BETA = (
+    REPO / "evals" / "wvs_gps_two_resolution" / "betas" / "patience_country.yaml"
+)
 OUT = ROOT / "runs"
 OUT.mkdir(parents=True, exist_ok=True)
 
+# 2026-08-18 closeout (F7): empty_R re-frozen on the CURRENT seven-measure
+# country patience menu (GPS, Q13, Q14, composite, Llama, Phi, noise).
+# Superseded values (-0.219, 0.402) covered the 2026-08-10 pilot menu whose
+# prompt columns were m_prompt_a/m_prompt_b; the current menu's max beta is
+# Phi = 0.5649.
 PAPER_L = -0.2187
-PAPER_U = 0.4025
-PAPER_ROUND = (-0.219, 0.402)
+PAPER_U = 0.5649
+PAPER_ROUND = (-0.219, 0.565)
 
 MTMM_MEASURES = [
     "gps_patience",
@@ -129,13 +145,13 @@ def _write_json(path: Path, payload: dict) -> None:
 
 def run_empty_r() -> dict:
     result = run_profile(
-        scores=PATIENCE_INPUTS / "scores.csv",
-        roles=PATIENCE_INPUTS / "roles.json",
+        scores=EMPTY_R_SCORES,
+        roles=EMPTY_R_ROLES,
         network=ROOT / "networks" / "empty_R.yaml",
-        beta=PATIENCE_INPUTS / "beta.yaml",
-        out_dir=OUT / "empty_R",
+        beta=EMPTY_R_BETA,
+        out_dir=OUT / "empty_R_current_menu",
         seed=20260814,
-        title="Unrestricted multiverse (empty R) — patience menu",
+        title="Unrestricted multiverse (empty R) — current seven-measure country patience menu",
     )
     summary = summary_dict(result)
     betas = result.identify.beta_values
@@ -148,6 +164,10 @@ def run_empty_r() -> dict:
     payload = {
         "package_version": __version__,
         "empty_R": True,
+        "note": (
+            "2026-08-18 re-freeze (F7): current seven-measure country patience menu. "
+            "Superseded run: runs/empty_R (2026-08-10 pilot menu, paper_round [-0.219, 0.402])."
+        ),
         "n_units": int(result.score.frame.shape[0]),
         "M_star": list(result.identify.admissible),
         "menu": list(result.identify.measures),

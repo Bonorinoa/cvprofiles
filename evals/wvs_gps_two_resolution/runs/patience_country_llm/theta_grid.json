@@ -10,7 +10,7 @@
   "purpose": "diagnostic_theta_sensitivity",
   "rows": [
     {
-      "L": 0.44701963725653376,
+      "L": 0.4470196372565337,
       "U": 0.5649061435421557,
       "admissible": [
         "m_llm_patience_llama",

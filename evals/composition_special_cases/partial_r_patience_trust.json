@@ -1,0 +1,17 @@
+{
+  "construct_pair": [
+    "m_trust_general",
+    "gps_patience"
+  ],
+  "controls": [
+    "q275_mean",
+    "log_gdp_pc"
+  ],
+  "n": 41,
+  "note": "2026-08-18 closeout: commits the partial-r computation behind the paper's 0.706 claim.",
+  "package_version": "3.0.1",
+  "partial_r": 0.7059469104582132,
+  "rounded_3dp": 0.706,
+  "se": 0.11643800805283,
+  "t": 6.062856298073328
+}

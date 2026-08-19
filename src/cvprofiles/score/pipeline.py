@@ -44,7 +44,10 @@ def load_table(path: Path | str) -> pd.DataFrame:
         raise ScoreError(f"scores file not found: {p}")
     suffix = p.suffix.lower()
     if suffix == ".csv":
-        return pd.read_csv(p)
+        # F1 (2026-08-16 audit): pin round-trip float parsing so scores_hash
+        # (and run_id) re-verify from committed CSV bytes on every platform.
+        # The default fast parser is not correctly rounded on all libcs.
+        return pd.read_csv(p, float_precision="round_trip")
     if suffix in {".parquet", ".pq"}:
         return pd.read_parquet(p)
     raise ScoreError(f"unsupported scores format: {suffix} (use .csv or .parquet)")

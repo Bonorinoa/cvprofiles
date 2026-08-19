@@ -68,7 +68,7 @@
   "beta_type": "ols_coef",
   "beta_values": {
     "m_gps_trust": 0.10902294590510236,
-    "m_noise": 0.02835077310905364,
+    "m_noise": 0.028350773109053658,
     "m_trust_composite": 0.10682921214895848,
     "m_trust_general": 0.39059801989030046,
     "m_trust_in_group": 0.19181229950916978,
@@ -593,7 +593,7 @@
         -0.007894129167448043,
         0.23540899034124138,
         0.16096394120690644,
-        0.02234641401484398,
+        0.02234641401484388,
         0.23610728420121985,
         0.12570368271901025,
         0.11221709642029482,
@@ -1456,7 +1456,7 @@
         0.3822923811678955,
         0.30718425967627194,
         0.4335509538657752,
-        0.4214938185890032,
+        0.42149381858900353,
         0.3930669297129362,
         0.5203400849094995,
         0.4094590996572129,
@@ -2151,7 +2151,7 @@
         "kappa": 2.0,
         "margin": -0.37387597048115295,
         "measure": "m_noise",
-        "se": 0.15708894474940835
+        "se": 0.15708894474940832
       }
     ],
     "degenerate_replicate_rate": 0.0,
@@ -2179,7 +2179,7 @@
     "replicates_total": 1000,
     "schema_version": "1"
   },
-  "created_at": "2026-08-15T00:47:53Z",
+  "created_at": "2026-08-19T14:27:06Z",
   "delta": 0.0,
   "delta_grid": null,
   "empty": false,
@@ -2192,7 +2192,7 @@
     "network_hash": "1eb3060a9f91564e6f6fecd71212b3d64fb6a717badd396512b25ce4ffddf6e2",
     "package_version": "3.0.1",
     "schema_version": "1",
-    "scores_hash": "4e5383842cc9a8b540961ccee4d0a2741537388dd1c803b48394f360ba58ed0b",
+    "scores_hash": "6fdc7534585bac517e1ee86866b3d94b2b62ba1099df7957f2d4ef1516519ac4",
     "seed": 20260814
   },
   "holdout": {
@@ -2289,9 +2289,9 @@
       "type": "corr_min"
     }
   ],
-  "run_id": "533d3313bf76e08b79c2a9d0bcdf3f5648d96719fe4c2e0dca8d0ed87f24e35e",
+  "run_id": "d9d1f2eac33d1122e9ee08c6ad3ba7ca5d189ad1eecdcf8288966fff1f6fe543",
   "schema_version": "1",
-  "scores_hash": "4e5383842cc9a8b540961ccee4d0a2741537388dd1c803b48394f360ba58ed0b",
+  "scores_hash": "6fdc7534585bac517e1ee86866b3d94b2b62ba1099df7957f2d4ef1516519ac4",
   "seed": 20260814,
   "slacks": {
     "m_gps_trust": {
@@ -2300,9 +2300,9 @@
       "disc_gini": 0.003542862821366094
     },
     "m_noise": {
-      "conv_edu_hold": -0.10169438394795519,
+      "conv_edu_hold": -0.10169438394795516,
       "conv_rule_of_law": -0.37387597048115295,
-      "disc_gini": -0.004826874755037541
+      "disc_gini": -0.004826874755037583
     },
     "m_trust_composite": {
       "conv_edu_hold": -0.05199093225296578,

@@ -11,7 +11,7 @@
   "beta_values": {
     "m_composite": -0.21874650645411,
     "m_gps_patience": 0.40246334068031847,
-    "m_llm_patience_llama": 0.44701963725653376,
+    "m_llm_patience_llama": 0.4470196372565337,
     "m_llm_patience_phi": 0.5649061435421557,
     "m_noise": 0.019901395118570066,
     "m_wvs_q13": -0.16598846758352492,

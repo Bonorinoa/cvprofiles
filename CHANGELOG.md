@@ -4,6 +4,18 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
+## [main] — 2026-08-18 (2026-08-16 audit closeout; pre-paper-freeze)
+
+Reproducibility closeout for the external audit (2026-08-16). No version bump: the package stays 3.0.1; the paper-freeze tag `paper-2026-08-18` carries these changes.
+
+- **F1:** SCORE CSV loading pins `float_precision="round_trip"` so `scores_hash` (and `run_id`) re-verify from committed CSV bytes on every platform. All confirmatory runs re-frozen under the fixed parser; scientific outputs unchanged to displayed precision (last-ulp diffs only; new run_ids).
+- **F5:** golden float assertions in `test_cli_demo.py` carry a tolerance (`pytest.approx`).
+- **F6:** `join_and_run_llm_profiles.py --skip-build` consumes committed `*_llm_extension.csv` frames without raw LLM JSONL/GGUF.
+- **F7:** `empty_R` re-frozen on the current seven-measure country patience menu → `[-0.219, 0.565]` (min composite −0.2187, max Phi 0.5649); superseded pilot artifact preserved as `runs/empty_R`.
+- **Partial r:** committed computation behind the paper's MTMM partial r = 0.706 (`evals/composition_special_cases/compute_partial_r.py`).
+- **F4:** `CITATION.cff` added (Zenodo DOI pending deposit at acceptance); data/code-availability statement added to the paper.
+- Tests: 369 passed.
+
 ## [3.0.1] — 2026-08-14 (patch: named empty_R unrestricted multiverse)
 
 Schema relaxation so the unrestricted-multiverse special case is a first-class, fail-loud contract rather than a hand calculation.

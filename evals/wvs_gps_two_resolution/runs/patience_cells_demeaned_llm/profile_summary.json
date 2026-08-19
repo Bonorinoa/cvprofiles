@@ -1,5 +1,5 @@
 {
-  "L": 0.24490977928094967,
+  "L": 0.2449097792809495,
   "M_star": [
     "m_wvs_q13",
     "m_llm_patience_llama",
@@ -15,12 +15,12 @@
     "m_llm_patience_llama",
     "m_llm_patience_phi"
   ],
-  "U": 0.5560518882390949,
+  "U": 0.5560518882390948,
   "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
   "baselines": {
     "best_abs_beta": "m_llm_patience_phi",
     "best_abs_beta_holdout_pass_rate": 1.0,
-    "best_abs_beta_value": 0.5560518882390949,
+    "best_abs_beta_value": 0.5560518882390948,
     "canonical": "m_wvs_q13",
     "canonical_holdout_pass_rate": 1.0,
     "canonical_in_menu": true,
@@ -61,17 +61,17 @@
   },
   "beta_hash": "93ecc94543944de5860e399f0b91f9f1c5038e5b4d418e5f3444d3b0a8bc23c7",
   "beta_values": {
-    "m_composite": -0.026645024957689563,
-    "m_llm_patience_llama": 0.4166221419825753,
-    "m_llm_patience_phi": 0.5560518882390949,
-    "m_noise": -0.0027757931043006115,
-    "m_wvs_q13": 0.24490977928094967,
-    "m_wvs_q14": -0.32579694816692806
+    "m_composite": -0.026645024957689552,
+    "m_llm_patience_llama": 0.4166221419825751,
+    "m_llm_patience_phi": 0.5560518882390948,
+    "m_noise": -0.0027757931043006366,
+    "m_wvs_q13": 0.2449097792809495,
+    "m_wvs_q14": -0.3257969481669279
   },
   "bootstrap": {
     "artifact": "bootstrap.json",
     "band_L": 0.16472192761471147,
-    "band_U": 0.6226653396365651,
+    "band_U": 0.6226653396365653,
     "degenerate_replicate_rate": 0.0,
     "empty_replicate_rate": 0.0,
     "n_boot": 1000,
@@ -84,8 +84,8 @@
   "coverage": {
     "alpha": 0.1,
     "artifact": "coverage.json",
-    "band_L": 0.17867717723943724,
-    "band_U": 0.6142069610388943,
+    "band_L": 0.1786771772394372,
+    "band_U": 0.6142069610388944,
     "kappa": 2.0,
     "n_boundary": 6,
     "quantiles": [
@@ -94,8 +94,8 @@
     ]
   },
   "coverage_band": [
-    0.17867717723943724,
-    0.6142069610388943
+    0.1786771772394372,
+    0.6142069610388944
   ],
   "delta_grid": null,
   "empty": false,
@@ -132,8 +132,8 @@
   },
   "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned_llm/report.html",
   "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned_llm/report.json",
-  "run_id": "059dfec5f675d11cd19204505044c162321dff1c32bba7a85f2ed0d54669747b",
-  "scores_hash": "b1dd9590ea89e700d574eeead5948ec68a1ee175bdf0060ef6f32bd67f48f8cb",
+  "run_id": "8f98013d071d76f3717ff45d63e5ff770c739df6ae31ec72a9ed1e11430fc3c6",
+  "scores_hash": "b1febee0f30cb536903ad84abfa4b24b41192aaf92bbda74a3f066d01d3b4af9",
   "theta_grid": {
     "artifact": "theta_grid.json",
     "headline_lambda": 1.0,

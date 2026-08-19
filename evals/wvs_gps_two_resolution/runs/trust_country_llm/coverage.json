@@ -1,7 +1,7 @@
 {
   "alpha": 0.1,
   "band_L": -0.016141306569644305,
-  "band_U": 0.6987605855951458,
+  "band_U": 0.6987605855951456,
   "boundary": [
     {
       "boundary": true,
@@ -48,7 +48,7 @@
     {
       "boundary": true,
       "kappa": 2.0,
-      "margin": 0.19662419946972562,
+      "margin": 0.19662419946972573,
       "measure": "m_llm_trust_llama",
       "se": 0.13202627236586226
     },

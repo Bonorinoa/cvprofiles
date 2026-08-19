@@ -8,7 +8,7 @@
   "baselines": {
     "best_abs_beta": "m_wvs_q14",
     "best_abs_beta_holdout_pass_rate": 0.0,
-    "best_abs_beta_value": -0.2472008348875648,
+    "best_abs_beta_value": -0.24720083488756472,
     "canonical": "m_wvs_q13",
     "canonical_holdout_pass_rate": 0.0,
     "canonical_in_menu": true,
@@ -45,10 +45,10 @@
   },
   "beta_hash": "93ecc94543944de5860e399f0b91f9f1c5038e5b4d418e5f3444d3b0a8bc23c7",
   "beta_values": {
-    "m_composite": -0.23153370178541896,
+    "m_composite": -0.23153370178541893,
     "m_noise": -0.03727579745652488,
-    "m_wvs_q13": -0.13254342072785588,
-    "m_wvs_q14": -0.2472008348875648
+    "m_wvs_q13": -0.13254342072785583,
+    "m_wvs_q14": -0.24720083488756472
   },
   "bootstrap": {
     "artifact": "bootstrap.json",
@@ -120,8 +120,8 @@
   },
   "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells/report.html",
   "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells/report.json",
-  "run_id": "df095cc1869f06d5a9adbb325d702fab3539a8439228e5812de8e4bc7804806e",
-  "scores_hash": "c34a535733fd27fba28ba235cd4b459fede1a068d34cd7d04930698ae9a4dc6a",
+  "run_id": "9d6dc526d4b86b8ffc0f2a61fec60a5306722747e81405f43564db1cd6318437",
+  "scores_hash": "4cb7bf92b516babd1d51b9cc3830e53a5cacc81e4bb2da1aef28844086262a37",
   "theta_grid": {
     "artifact": "theta_grid.json",
     "headline_lambda": 1.0,

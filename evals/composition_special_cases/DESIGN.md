@@ -19,6 +19,8 @@ This lane is **not** the paper's confirmatory application. It recovers two neste
 
 **Acceptance.** Engine \([L,U]\) equals min/max of the seven already-reported \(\beta\) values. Paper-facing rounding must be \([-0.219, 0.402]\).
 
+**2026-08-18 amendment (F7 closeout).** The empty-R special case is re-frozen on the **current** seven-measure country patience menu (GPS, Q13, Q14, composite, Llama, Phi, noise): scores `evals/wvs_gps_two_resolution/data/country/patience_llm_extension.csv`, roles `evals/wvs_gps_two_resolution/roles/patience_country_llm.json`, beta `evals/wvs_gps_two_resolution/betas/patience_country.yaml`; run at `runs/empty_R_current_menu/` (run_id `9ed84690…`). Paper-facing rounding must now be **[-0.219, 0.565]** (min composite −0.2187, max Phi 0.5649). The superseded pilot-menu artifact (`runs/empty_R/`, paper_round [-0.219, 0.402]) is retained as history. The paper (`position_paper_cvprofiles.tex` §5.3) asserts the new range.
+
 ## 2. Campbell–Fiske as ordinary restrictions (patience × trust)
 
 **Constructs (prose).**

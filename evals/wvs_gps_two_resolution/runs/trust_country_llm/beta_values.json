@@ -12,7 +12,7 @@
   },
   "beta_values": {
     "m_gps_trust": 0.10902294590510236,
-    "m_llm_trust_llama": 0.4812536174997371,
+    "m_llm_trust_llama": 0.48125361749973733,
     "m_llm_trust_phi": 0.3864416294337175,
     "m_noise": 0.02835077310905364,
     "m_trust_composite": 0.10682921214895848,

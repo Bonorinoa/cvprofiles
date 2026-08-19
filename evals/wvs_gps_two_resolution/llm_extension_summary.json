@@ -69,7 +69,7 @@
       "beta_values": {
         "m_composite": -0.21874650645411,
         "m_gps_patience": 0.40246334068031847,
-        "m_llm_patience_llama": 0.44701963725653376,
+        "m_llm_patience_llama": 0.4470196372565337,
         "m_llm_patience_phi": 0.5649061435421557,
         "m_noise": 0.019901395118570066,
         "m_wvs_q13": -0.16598846758352492,
@@ -145,8 +145,8 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.json",
-      "run_id": "7e8c78ca1d7c32f6d491551d33bd94fb2c78ca31737295d41ef42b001af05ed5",
-      "scores_hash": "1ddba816b0130adc0e5abf01898cd5c5bfbf60865585edd0790378c71f4f3398",
+      "run_id": "75869a0885782e036328cd85db3795d8a68fa23303a42e5a067c715751ad2f5a",
+      "scores_hash": "fcfb171381e56d99762863e320d6173b854a1ca082fee871e665b14247596293",
       "theta_grid": {
         "artifact": "theta_grid.json",
         "headline_lambda": 1.0,
@@ -182,12 +182,12 @@
         "m_trust_composite",
         "m_llm_trust_llama"
       ],
-      "U": 0.4812536174997371,
+      "U": 0.48125361749973733,
       "anchors_hash": "68e155f6775d94313deb30856e689244b23690c9a6d2d1784bb26ebd310d3201",
       "baselines": {
         "best_abs_beta": "m_llm_trust_llama",
         "best_abs_beta_holdout_pass_rate": 1.0,
-        "best_abs_beta_value": 0.4812536174997371,
+        "best_abs_beta_value": 0.48125361749973733,
         "canonical": "m_trust_general",
         "canonical_holdout_pass_rate": 1.0,
         "canonical_in_menu": true,
@@ -235,7 +235,7 @@
       "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
       "beta_values": {
         "m_gps_trust": 0.10902294590510236,
-        "m_llm_trust_llama": 0.4812536174997371,
+        "m_llm_trust_llama": 0.48125361749973733,
         "m_llm_trust_phi": 0.3864416294337175,
         "m_noise": 0.02835077310905364,
         "m_trust_composite": 0.10682921214895848,
@@ -261,7 +261,7 @@
         "alpha": 0.1,
         "artifact": "coverage.json",
         "band_L": -0.016141306569644305,
-        "band_U": 0.6987605855951458,
+        "band_U": 0.6987605855951456,
         "kappa": 2.0,
         "n_boundary": 9,
         "quantiles": [
@@ -271,7 +271,7 @@
       },
       "coverage_band": [
         -0.016141306569644305,
-        0.6987605855951458
+        0.6987605855951456
       ],
       "delta_grid": null,
       "empty": false,
@@ -315,8 +315,8 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country_llm/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country_llm/report.json",
-      "run_id": "9e4c75e3deb73b43d70c84a0bb59ea26d76e92501a20e773d484417e90010d1a",
-      "scores_hash": "45639af3e4ec38a42cf3240b2fed2394a356e78f9faa73c3ebdacf9c05d72f1d",
+      "run_id": "743bc01bbc7700a1b9b541e940a9e72b052bd5991ac294b935229af0fc54b190",
+      "scores_hash": "0b115ce85abef8fdd43764332a20f660534099656635cc553d279bc5f6254860",
       "theta_grid": {
         "artifact": "theta_grid.json",
         "headline_lambda": 1.0,
@@ -330,7 +330,7 @@
       }
     },
     {
-      "L": 0.24490977928094967,
+      "L": 0.2449097792809495,
       "M_star": [
         "m_wvs_q13",
         "m_llm_patience_llama",
@@ -346,12 +346,12 @@
         "m_llm_patience_llama",
         "m_llm_patience_phi"
       ],
-      "U": 0.5560518882390949,
+      "U": 0.5560518882390948,
       "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
       "baselines": {
         "best_abs_beta": "m_llm_patience_phi",
         "best_abs_beta_holdout_pass_rate": 1.0,
-        "best_abs_beta_value": 0.5560518882390949,
+        "best_abs_beta_value": 0.5560518882390948,
         "canonical": "m_wvs_q13",
         "canonical_holdout_pass_rate": 1.0,
         "canonical_in_menu": true,
@@ -392,17 +392,17 @@
       },
       "beta_hash": "93ecc94543944de5860e399f0b91f9f1c5038e5b4d418e5f3444d3b0a8bc23c7",
       "beta_values": {
-        "m_composite": -0.026645024957689563,
-        "m_llm_patience_llama": 0.4166221419825753,
-        "m_llm_patience_phi": 0.5560518882390949,
-        "m_noise": -0.0027757931043006115,
-        "m_wvs_q13": 0.24490977928094967,
-        "m_wvs_q14": -0.32579694816692806
+        "m_composite": -0.026645024957689552,
+        "m_llm_patience_llama": 0.4166221419825751,
+        "m_llm_patience_phi": 0.5560518882390948,
+        "m_noise": -0.0027757931043006366,
+        "m_wvs_q13": 0.2449097792809495,
+        "m_wvs_q14": -0.3257969481669279
       },
       "bootstrap": {
         "artifact": "bootstrap.json",
         "band_L": 0.16472192761471147,
-        "band_U": 0.6226653396365651,
+        "band_U": 0.6226653396365653,
         "degenerate_replicate_rate": 0.0,
         "empty_replicate_rate": 0.0,
         "n_boot": 1000,
@@ -415,8 +415,8 @@
       "coverage": {
         "alpha": 0.1,
         "artifact": "coverage.json",
-        "band_L": 0.17867717723943724,
-        "band_U": 0.6142069610388943,
+        "band_L": 0.1786771772394372,
+        "band_U": 0.6142069610388944,
         "kappa": 2.0,
         "n_boundary": 6,
         "quantiles": [
@@ -425,8 +425,8 @@
         ]
       },
       "coverage_band": [
-        0.17867717723943724,
-        0.6142069610388943
+        0.1786771772394372,
+        0.6142069610388944
       ],
       "delta_grid": null,
       "empty": false,
@@ -463,8 +463,8 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned_llm/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned_llm/report.json",
-      "run_id": "059dfec5f675d11cd19204505044c162321dff1c32bba7a85f2ed0d54669747b",
-      "scores_hash": "b1dd9590ea89e700d574eeead5948ec68a1ee175bdf0060ef6f32bd67f48f8cb",
+      "run_id": "8f98013d071d76f3717ff45d63e5ff770c739df6ae31ec72a9ed1e11430fc3c6",
+      "scores_hash": "b1febee0f30cb536903ad84abfa4b24b41192aaf92bbda74a3f066d01d3b4af9",
       "theta_grid": {
         "artifact": "theta_grid.json",
         "headline_lambda": 1.0,
@@ -478,7 +478,7 @@
       }
     },
     {
-      "L": -0.3174862117773897,
+      "L": -0.3174862117773899,
       "M_star": [
         "m_llm_trust_phi"
       ],
@@ -488,12 +488,12 @@
       "M_star_select": [
         "m_llm_trust_phi"
       ],
-      "U": -0.3174862117773897,
+      "U": -0.3174862117773899,
       "anchors_hash": "07533ac8ce87b841d99f45b9da425e769657960f8a39e380cb978c45e85f0efe",
       "baselines": {
         "best_abs_beta": "m_trust_composite",
         "best_abs_beta_holdout_pass_rate": 0.0,
-        "best_abs_beta_value": 0.3176110329997308,
+        "best_abs_beta_value": 0.31761103299973087,
         "canonical": "m_trust_general",
         "canonical_holdout_pass_rate": 0.0,
         "canonical_in_menu": true,
@@ -538,19 +538,19 @@
       },
       "beta_hash": "19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e",
       "beta_values": {
-        "m_llm_trust_llama": 0.17929884606727964,
-        "m_llm_trust_phi": -0.3174862117773897,
-        "m_noise": 0.014662177714558534,
-        "m_trust_composite": 0.3176110329997308,
-        "m_trust_general": 0.05242762548062067,
-        "m_trust_in_group": 0.2239306766609153,
-        "m_trust_institution": 0.2847229755917614,
-        "m_trust_out_group": 0.21142295058171512
+        "m_llm_trust_llama": 0.17929884606727967,
+        "m_llm_trust_phi": -0.3174862117773899,
+        "m_noise": 0.014662177714558557,
+        "m_trust_composite": 0.31761103299973087,
+        "m_trust_general": 0.052427625480620785,
+        "m_trust_in_group": 0.22393067666091518,
+        "m_trust_institution": 0.2847229755917616,
+        "m_trust_out_group": 0.21142295058171526
       },
       "bootstrap": {
         "artifact": "bootstrap.json",
-        "band_L": -0.39400676397739287,
-        "band_U": -0.19981091447324148,
+        "band_L": -0.3940067639773931,
+        "band_U": -0.1998109144732415,
         "degenerate_replicate_rate": 0.0,
         "empty_replicate_rate": 0.0,
         "n_boot": 1000,
@@ -563,8 +563,8 @@
       "coverage": {
         "alpha": 0.1,
         "artifact": "coverage.json",
-        "band_L": -0.38241729147649134,
-        "band_U": -0.2397452851208833,
+        "band_L": -0.3824172914764916,
+        "band_U": -0.23974528512088336,
         "kappa": 2.0,
         "n_boundary": 8,
         "quantiles": [
@@ -573,8 +573,8 @@
         ]
       },
       "coverage_band": [
-        -0.38241729147649134,
-        -0.2397452851208833
+        -0.3824172914764916,
+        -0.23974528512088336
       ],
       "delta_grid": null,
       "empty": false,
@@ -635,8 +635,8 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned_llm/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned_llm/report.json",
-      "run_id": "324283e3c98e43bc58fc1d2a870b68cd633204996e272acc4cdf34a7180c76d0",
-      "scores_hash": "c324fa471b00184b5153253862c6894f16b77792e828db22745dd868c031fa7b",
+      "run_id": "7509d61fb4569466f3eb4474331ef119e748dcf35a644db385014f06495b0cc8",
+      "scores_hash": "ff11b172db7ec3ea13d700b6abad6724c7ad68ecb27585a1caf542397f92499b",
       "theta_grid": {
         "artifact": "theta_grid.json",
         "headline_lambda": 1.0,

@@ -1,8 +1,8 @@
 {
   "schema_version": "1",
-  "run_id": "324283e3c98e43bc58fc1d2a870b68cd633204996e272acc4cdf34a7180c76d0",
+  "run_id": "7509d61fb4569466f3eb4474331ef119e748dcf35a644db385014f06495b0cc8",
   "freeze": {
-    "scores_hash": "c324fa471b00184b5153253862c6894f16b77792e828db22745dd868c031fa7b",
+    "scores_hash": "ff11b172db7ec3ea13d700b6abad6724c7ad68ecb27585a1caf542397f92499b",
     "network_hash": "d0afa9002b03c34746a448be1fbb9affc2c0ca99f9b3f2dd5956160912e218d0",
     "beta_hash": "19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e",
     "package_version": "3.0.1",
@@ -12,7 +12,7 @@
     "n_boot": 1000,
     "config": {}
   },
-  "created_at": "2026-08-15T19:43:35Z",
+  "created_at": "2026-08-19T14:27:21Z",
   "artifact_paths": {
     "S_frozen.parquet": "S_frozen.parquet",
     "S_frozen.csv": "S_frozen.csv",

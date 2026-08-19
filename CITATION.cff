@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "cvprofiles: Construct-Validity Profiles as Partial Identification over Measurement Menus"
+authors:
+  - family-names: Gonzalez-Bonorino
+    given-names: Augusto
+    affiliation: "Arizona State University; EconLLM Lab"
+version: 3.0.1
+date-released: "2026-08-14"
+url: "https://github.com/Bonorinoa/cvprofiles"
+license: MIT
+keywords:
+  - construct validity
+  - partial identification
+  - measurement
+  - multiverse
+  - AI measurement
+# TODO: deposit on Zenodo at journal acceptance and add:
+# doi: 10.5281/zenodo.XXXXXXX

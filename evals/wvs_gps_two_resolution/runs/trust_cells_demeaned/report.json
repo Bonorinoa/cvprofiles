@@ -45,12 +45,12 @@
   "beta_hash": "19fe88c41c4644897cee8c770b625bd57adbae206e1efc2774599c116eacd51e",
   "beta_type": "corr_y",
   "beta_values": {
-    "m_noise": 0.014662177714558534,
-    "m_trust_composite": 0.3176110329997308,
-    "m_trust_general": 0.05242762548062067,
-    "m_trust_in_group": 0.2239306766609153,
-    "m_trust_institution": 0.2847229755917614,
-    "m_trust_out_group": 0.21142295058171512
+    "m_noise": 0.014662177714558557,
+    "m_trust_composite": 0.31761103299973087,
+    "m_trust_general": 0.052427625480620785,
+    "m_trust_in_group": 0.22393067666091518,
+    "m_trust_institution": 0.2847229755917616,
+    "m_trust_out_group": 0.21142295058171526
   },
   "bootstrap": {
     "band_L": null,
@@ -107,7 +107,7 @@
     "replicates_total": 1000,
     "schema_version": "1"
   },
-  "created_at": "2026-08-15T01:04:26Z",
+  "created_at": "2026-08-19T14:27:13Z",
   "delta": 0.0,
   "delta_grid": null,
   "empty": true,
@@ -120,7 +120,7 @@
     "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
     "package_version": "3.0.1",
     "schema_version": "1",
-    "scores_hash": "e1a11178ef331502d1f88e3f1dfa2494b8cf1d2d7c27e06aa1026ad6538e62ac",
+    "scores_hash": "5338e3e4ccec220a8da6b2ab30559ef5e1bb7cc13e99e6a29098cf5f152e8c25",
     "seed": 20260814
   },
   "holdout": {
@@ -220,9 +220,9 @@
       "type": "monotone_rank"
     }
   ],
-  "run_id": "ae52cba4148850918d60554189d714b152825401856a996f256d4491c382f75c",
+  "run_id": "d65260cb8fb8b0b23882717439451f95d173056eb44fc02d7c17ba065a1e2655",
   "schema_version": "1",
-  "scores_hash": "e1a11178ef331502d1f88e3f1dfa2494b8cf1d2d7c27e06aa1026ad6538e62ac",
+  "scores_hash": "5338e3e4ccec220a8da6b2ab30559ef5e1bb7cc13e99e6a29098cf5f152e8c25",
   "seed": 20260814,
   "slacks": {
     "m_noise": {
@@ -234,7 +234,7 @@
       "mono_edu_cell": -0.4143326431628568
     },
     "m_trust_general": {
-      "conv_edu_cell": -0.17685380538233852,
+      "conv_edu_cell": -0.17685380538233855,
       "mono_edu_cell": -0.13134149533500744
     },
     "m_trust_in_group": {
@@ -242,11 +242,11 @@
       "mono_edu_cell": -0.23335328513542186
     },
     "m_trust_institution": {
-      "conv_edu_cell": -0.6273687357208168,
+      "conv_edu_cell": -0.6273687357208166,
       "mono_edu_cell": -0.552204393308033
     },
     "m_trust_out_group": {
-      "conv_edu_cell": -0.2749894004417675,
+      "conv_edu_cell": -0.2749894004417674,
       "mono_edu_cell": -0.22479427196934104
     }
   },

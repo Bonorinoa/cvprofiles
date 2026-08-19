@@ -1,7 +1,7 @@
 {
   "alpha": 0.1,
-  "band_L": 0.17867717723943724,
-  "band_U": 0.6142069610388943,
+  "band_L": 0.1786771772394372,
+  "band_U": 0.6142069610388944,
   "boundary": [
     {
       "boundary": true,
@@ -20,23 +20,23 @@
     {
       "boundary": false,
       "kappa": 2.0,
-      "margin": -0.2495109489189942,
+      "margin": -0.24951094891899422,
       "measure": "m_composite",
-      "se": 0.05793552954442705
+      "se": 0.05793552954442706
     },
     {
       "boundary": false,
       "kappa": 2.0,
       "margin": 0.32199722216078547,
       "measure": "m_llm_patience_llama",
-      "se": 0.03369338948481446
+      "se": 0.03369338948481447
     },
     {
       "boundary": false,
       "kappa": 2.0,
-      "margin": 0.4402486462274347,
+      "margin": 0.44024864622743504,
       "measure": "m_llm_patience_phi",
-      "se": 0.028916253961164318
+      "se": 0.028916253961164314
     },
     {
       "boundary": false,

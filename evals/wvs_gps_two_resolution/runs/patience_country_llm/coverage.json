@@ -34,9 +34,9 @@
     {
       "boundary": true,
       "kappa": 2.0,
-      "margin": 0.027208109569777816,
+      "margin": 0.02720810956977765,
       "measure": "m_llm_patience_llama",
-      "se": 0.12418612938716825
+      "se": 0.12418612938716823
     },
     {
       "boundary": true,

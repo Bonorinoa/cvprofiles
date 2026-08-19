@@ -7,6 +7,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 INPUT_NAMES = ("scores.csv", "roles.json", "network.yaml", "beta.yaml")
 
 
@@ -37,8 +39,11 @@ def test_demo_writes_mini_v1_inputs_and_matches_golden_freeze(
     assert summary["empty"] is False
     assert summary["M_star"] == ["m_good", "m_weak"]
     assert summary["rejected"] == {"m_slop": ["r_corr_min_aux", "r_corr_sign_aux"]}
-    assert summary["L"] == 0.9908134006120914
-    assert summary["U"] == 0.9929645567186532
+    # F5 (2026-08-16 audit): golden floats on derived OLS coefficients must
+    # carry a tolerance — last-ulp differences across BLAS/platforms are
+    # expected and are not a scientific change.
+    assert summary["L"] == pytest.approx(0.9908134006120914, rel=1e-12)
+    assert summary["U"] == pytest.approx(0.9929645567186532, rel=1e-12)
     assert (out / "report.html").is_file()
     assert "m_slop" in proc.stderr
     assert "finding" in proc.stderr.lower()

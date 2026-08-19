@@ -67,7 +67,7 @@
   "beta_hash": "40040c2105c1d9b34e212dddd8ca9487fdb315d4db2ebee0ebaf29129df5cafe",
   "beta_values": {
     "m_gps_trust": 0.10902294590510236,
-    "m_noise": 0.02835077310905364,
+    "m_noise": 0.028350773109053658,
     "m_trust_composite": 0.10682921214895848,
     "m_trust_general": 0.39059801989030046,
     "m_trust_in_group": 0.19181229950916978,
@@ -142,8 +142,8 @@
   },
   "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country/report.html",
   "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country/report.json",
-  "run_id": "533d3313bf76e08b79c2a9d0bcdf3f5648d96719fe4c2e0dca8d0ed87f24e35e",
-  "scores_hash": "4e5383842cc9a8b540961ccee4d0a2741537388dd1c803b48394f360ba58ed0b",
+  "run_id": "d9d1f2eac33d1122e9ee08c6ad3ba7ca5d189ad1eecdcf8288966fff1f6fe543",
+  "scores_hash": "6fdc7534585bac517e1ee86866b3d94b2b62ba1099df7957f2d4ef1516519ac4",
   "theta_grid": {
     "artifact": "theta_grid.json",
     "headline_lambda": 1.0,

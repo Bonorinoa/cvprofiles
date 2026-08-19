@@ -6,25 +6,25 @@
     "m_wvs_q13",
     "m_wvs_q14",
     "m_composite",
-    "m_prompt_a",
-    "m_prompt_b",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi",
     "m_noise"
   ],
-  "U": 0.40246334068031847,
-  "U_from_full_menu": 0.40246334068031847,
+  "U": 0.5649061435421557,
+  "U_from_full_menu": 0.5649061435421557,
   "beta_values": {
     "m_composite": -0.21874650645411,
     "m_gps_patience": 0.40246334068031847,
+    "m_llm_patience_llama": 0.4470196372565337,
+    "m_llm_patience_phi": 0.5649061435421557,
     "m_noise": 0.019901395118570066,
-    "m_prompt_a": 0.32750285347671965,
-    "m_prompt_b": 0.3738785313917325,
     "m_wvs_q13": -0.16598846758352492,
     "m_wvs_q14": -0.1948399555130896
   },
   "empty_R": true,
   "engine_summary": {
     "L": -0.21874650645411,
-    "U": 0.40246334068031847,
+    "U": 0.5649061435421557,
     "empty": false
   },
   "matches_min_max_beta": true,
@@ -34,18 +34,19 @@
     "m_wvs_q13",
     "m_wvs_q14",
     "m_composite",
-    "m_prompt_a",
-    "m_prompt_b",
+    "m_llm_patience_llama",
+    "m_llm_patience_phi",
     "m_noise"
   ],
   "n_units": 41,
+  "note": "2026-08-18 re-freeze (F7): current seven-measure country patience menu. Superseded run: runs/empty_R (2026-08-10 pilot menu, paper_round [-0.219, 0.402]).",
   "package_version": "3.0.1",
   "paper_round": [
     -0.219,
-    0.402
+    0.565
   ],
   "paper_table5_L": -0.2187,
-  "paper_table5_U": 0.4025,
+  "paper_table5_U": 0.5649,
   "recovers_full_menu": true,
-  "run_id": "9fe0b889d5ea1c0ffb65ebc6e9bc7019ff06af2fd58b2814eec7537532c0c13f"
+  "run_id": "9ed846901811a3ddf2d33b0a66d721485bfbd7bbfa333532c809579335fa12fb"
 }
