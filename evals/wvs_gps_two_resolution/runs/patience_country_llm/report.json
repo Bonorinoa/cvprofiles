@@ -2002,7 +2002,7 @@
     "replicates_total": 1000,
     "schema_version": "1"
   },
-  "created_at": "2026-08-19T14:27:15Z",
+  "created_at": "2026-08-19T14:40:35Z",
   "delta": 0.0,
   "delta_grid": null,
   "empty": false,
@@ -2013,7 +2013,7 @@
     "delta": 0.0,
     "n_boot": 1000,
     "network_hash": "f2d17ff29958683d39a2e14e8d2c013bda43635d3da8348baf950f7f851b348b",
-    "package_version": "3.0.1",
+    "package_version": "3.0.2",
     "schema_version": "1",
     "scores_hash": "fcfb171381e56d99762863e320d6173b854a1ca082fee871e665b14247596293",
     "seed": 20260814
@@ -2049,7 +2049,7 @@
   "network_hash": "f2d17ff29958683d39a2e14e8d2c013bda43635d3da8348baf950f7f851b348b",
   "network_name": "patience_country_llm_extension",
   "outcome": "log_gdp_pc",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "point_id": false,
   "range": {
     "L": 0.40246334068031847,
@@ -2114,7 +2114,7 @@
       "type": "monotone_rank"
     }
   ],
-  "run_id": "75869a0885782e036328cd85db3795d8a68fa23303a42e5a067c715751ad2f5a",
+  "run_id": "24c0a435c0c540df668b0e4128662b5e02b15f7044273cd19cef6a0482ca6f85",
   "schema_version": "1",
   "scores_hash": "fcfb171381e56d99762863e320d6173b854a1ca082fee871e665b14247596293",
   "seed": 20260814,

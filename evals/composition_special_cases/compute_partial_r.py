@@ -41,7 +41,7 @@ def main() -> None:
     se = float(np.sqrt((1.0 - r * r) / (n - k - 2)))
     t = float(r / se)
     payload = {
-        "package_version": "3.0.1",
+        "package_version": "3.0.2",
         "note": "2026-08-18 closeout: commits the partial-r computation behind the paper's 0.706 claim.",
         "construct_pair": list(PAIR),
         "controls": CONTROLS,

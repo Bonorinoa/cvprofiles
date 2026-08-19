@@ -1,6 +1,6 @@
 # Architecture
 
-How the package is built, what the IO contracts are, and how determinism is guaranteed. This supersedes the earlier `02_System_Architecture.md`, `06_Tech_Stack.md`, and `08_Observability_and_Evaluations.md` scaffolds (archived) and reflects the shipped v3.0.1 package.
+How the package is built, what the IO contracts are, and how determinism is guaranteed. This supersedes the earlier `02_System_Architecture.md`, `06_Tech_Stack.md`, and `08_Observability_and_Evaluations.md` scaffolds (archived) and reflects the shipped v3.0.2 package.
 
 ## 1. Four-state machine
 

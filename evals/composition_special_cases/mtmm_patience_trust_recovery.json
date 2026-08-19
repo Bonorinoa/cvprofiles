@@ -53,7 +53,7 @@
   "empty": true,
   "n_units": 41,
   "note": "Engine evaluates every restriction on every measure. This is stricter than classical per-instrument MTMM inspection.",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "pair_slacks": {
     "gps_patience": {
       "conv_gps_patience_vs_wvs": -0.5518765868099758,
@@ -105,7 +105,7 @@
       "disc_gps_trust_vs_wvs_patience"
     ]
   },
-  "run_id": "7e8622e46c20155e3e38cd523b2492aeda2636b82226a28baaac6bd17b3747f7",
+  "run_id": "fdbc17ced48e9af1025f10267fee77ba49ac118df0821f84a1b2704d6d56bd1a",
   "tau_conv": 0.3,
   "tau_disc": 0.35
 }

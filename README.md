@@ -6,8 +6,8 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **3.0.1** — patch: named `empty_R` unrestricted-multiverse special case (2026-08-14); 3.0.0 remains the flagship-application release |
-| **Status** | Public methods package (Alpha). Latest tag `v3.0.1`. |
+| **Version** | **3.0.2** — reproducibility patch (2026-08-18): round-trip CSV parsing, audit F1–F8 closeout; 3.0.1 (2026-08-14) added the named `empty_R` unrestricted-multiverse special case |
+| **Status** | Public methods package (Alpha). Latest tag `v3.0.2`. |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
 | **CI** | [![ci](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml) |

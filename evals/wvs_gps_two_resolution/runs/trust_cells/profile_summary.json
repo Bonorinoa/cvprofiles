@@ -117,7 +117,7 @@
   "n_units": 480,
   "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
   "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "point_id": false,
   "rejected": {
     "m_noise": [
@@ -132,7 +132,7 @@
   },
   "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells/report.html",
   "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells/report.json",
-  "run_id": "2de39e7650b6bf393e035113b8e2a76eb4ed7b6d9e980af0a399802f501f2de4",
+  "run_id": "4871250796844cce0317723edc93ad365cd52dc7519c27a33a55f6e89b1baf5b",
   "scores_hash": "364c6cdaf6a215cd36b606ba82c02eaafa06ac3258c2c210439a62fb037b5fce",
   "theta_grid": {
     "artifact": "theta_grid.json",

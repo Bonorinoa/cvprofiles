@@ -4,9 +4,9 @@ All notable project milestones live here. Detailed decisions → `docs/12_Decisi
 
 Format: keep newest first.
 
-## [main] — 2026-08-18 (2026-08-16 audit closeout; pre-paper-freeze)
+## [3.0.2] — 2026-08-18 (2026-08-16 audit closeout; reproducibility patch)
 
-Reproducibility closeout for the external audit (2026-08-16). No version bump: the package stays 3.0.1; the paper-freeze tag `paper-2026-08-18` carries these changes.
+Reproducibility closeout for the external audit (2026-08-16). Version bump 3.0.1 → 3.0.2; the paper-freeze tag is `v3.0.2`.
 
 - **F1:** SCORE CSV loading pins `float_precision="round_trip"` so `scores_hash` (and `run_id`) re-verify from committed CSV bytes on every platform. All confirmatory runs re-frozen under the fixed parser; scientific outputs unchanged to displayed precision (last-ulp diffs only; new run_ids).
 - **F5:** golden float assertions in `test_cli_demo.py` carry a tolerance (`pytest.approx`).

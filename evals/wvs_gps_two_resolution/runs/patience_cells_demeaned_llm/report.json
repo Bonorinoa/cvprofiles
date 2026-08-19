@@ -2164,7 +2164,7 @@
     "replicates_total": 1000,
     "schema_version": "1"
   },
-  "created_at": "2026-08-19T14:27:19Z",
+  "created_at": "2026-08-19T14:40:39Z",
   "delta": 0.0,
   "delta_grid": null,
   "empty": false,
@@ -2175,7 +2175,7 @@
     "delta": 0.0,
     "n_boot": 1000,
     "network_hash": "f0d1582c64237be2b11057f75e055a94ccbf535fcde9d99506fbda76de1e6031",
-    "package_version": "3.0.1",
+    "package_version": "3.0.2",
     "schema_version": "1",
     "scores_hash": "b1febee0f30cb536903ad84abfa4b24b41192aaf92bbda74a3f066d01d3b4af9",
     "seed": 20260814
@@ -2207,7 +2207,7 @@
   "network_hash": "f0d1582c64237be2b11057f75e055a94ccbf535fcde9d99506fbda76de1e6031",
   "network_name": "patience_cells_llm_extension",
   "outcome": "gps_patience_cell",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "point_id": false,
   "range": {
     "L": 0.2449097792809495,
@@ -2259,7 +2259,7 @@
       "type": "monotone_rank"
     }
   ],
-  "run_id": "8f98013d071d76f3717ff45d63e5ff770c739df6ae31ec72a9ed1e11430fc3c6",
+  "run_id": "02005bf2737740e3b37636e837801f40ef68f3b65a2d59fd7e929d89b8666db8",
   "schema_version": "1",
   "scores_hash": "b1febee0f30cb536903ad84abfa4b24b41192aaf92bbda74a3f066d01d3b4af9",
   "seed": 20260814,

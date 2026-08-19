@@ -1,6 +1,6 @@
 # User Guide
 
-How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v3.0.1 package (empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split + pooled K-fold application), and the P5 coverage uncertainty band.
+How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v3.0.2 package (reproducibility patch: round-trip CSV parsing; 3.0.1 added the empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split + pooled K-fold application), and the P5 coverage uncertainty band.
 
 ## 1. The four input files
 

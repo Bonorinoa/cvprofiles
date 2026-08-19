@@ -1,6 +1,6 @@
 {
   "n_boot": 1000,
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "profiles": [
     {
       "L": 0.40246334068031847,
@@ -115,7 +115,7 @@
       "n_units": 41,
       "network_hash": "3cdf089fbb4a9a419d4a89ad707d68a0f6cae96438fe43fba503403f2642ea66",
       "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country",
-      "package_version": "3.0.1",
+      "package_version": "3.0.2",
       "point_id": true,
       "rejected": {
         "m_composite": [
@@ -133,7 +133,7 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country/report.json",
-      "run_id": "9ed0289512beecaf01749f8d35ac6cd86d9cf2e18450ac0265c92059d7420be8",
+      "run_id": "be0f4841cadf5d3fb9412eef0d527f0fddb7e4a9af53391d68ef08b76649bf6b",
       "scores_hash": "ba400cce52f2dc214385323f88511d9914b15b6686b526f06a486126cc3b35c8",
       "theta_grid": {
         "artifact": "theta_grid.json",
@@ -275,7 +275,7 @@
       "n_units": 35,
       "network_hash": "1eb3060a9f91564e6f6fecd71212b3d64fb6a717badd396512b25ce4ffddf6e2",
       "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country",
-      "package_version": "3.0.1",
+      "package_version": "3.0.2",
       "point_id": false,
       "rejected": {
         "m_gps_trust": [
@@ -291,7 +291,7 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country/report.json",
-      "run_id": "d9d1f2eac33d1122e9ee08c6ad3ba7ca5d189ad1eecdcf8288966fff1f6fe543",
+      "run_id": "7fc7827d89a8587a4b9cfae1e60722832dfb975e65ff62f1ea7d41debeaf8242",
       "scores_hash": "6fdc7534585bac517e1ee86866b3d94b2b62ba1099df7957f2d4ef1516519ac4",
       "theta_grid": {
         "artifact": "theta_grid.json",
@@ -409,7 +409,7 @@
       "n_units": 480,
       "network_hash": "1ed753b6c1ed159c4451ced75d2c8dba44318ce91b4f30dfbfb234d1dff7caf4",
       "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells",
-      "package_version": "3.0.1",
+      "package_version": "3.0.2",
       "point_id": false,
       "rejected": {
         "m_composite": [
@@ -427,7 +427,7 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells/report.json",
-      "run_id": "9d6dc526d4b86b8ffc0f2a61fec60a5306722747e81405f43564db1cd6318437",
+      "run_id": "ddce19a9ddccac2d28d8b229049bdbe377bd7cb8cacce6d228514e08dffb1a88",
       "scores_hash": "4cb7bf92b516babd1d51b9cc3830e53a5cacc81e4bb2da1aef28844086262a37",
       "theta_grid": {
         "artifact": "theta_grid.json",
@@ -560,7 +560,7 @@
       "n_units": 480,
       "network_hash": "55f9b1ac9fa6bd3cbc4bc9f3150b0f2669fe1edfd5beb7bf754f89767f3f8f74",
       "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells",
-      "package_version": "3.0.1",
+      "package_version": "3.0.2",
       "point_id": false,
       "rejected": {
         "m_noise": [
@@ -575,7 +575,7 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells/report.json",
-      "run_id": "2de39e7650b6bf393e035113b8e2a76eb4ed7b6d9e980af0a399802f501f2de4",
+      "run_id": "4871250796844cce0317723edc93ad365cd52dc7519c27a33a55f6e89b1baf5b",
       "scores_hash": "364c6cdaf6a215cd36b606ba82c02eaafa06ac3258c2c210439a62fb037b5fce",
       "theta_grid": {
         "artifact": "theta_grid.json",

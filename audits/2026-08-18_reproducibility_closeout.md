@@ -1,12 +1,12 @@
 # Reproducibility audit closeout — 2026-08-18
 
-External audit (2026-08-16, "Fable 5") findings F1–F8 and their status at the paper-freeze tag `paper-2026-08-18`.
+External audit (2026-08-16, "Fable 5") findings F1–F8 and their status at the release tag `v3.0.2`.
 
 | Finding | Status | Closeout |
 |---|---|---|
 | F1 — run_id not reproducible from committed inputs (CSV float parsing) | **CLOSED** | `float_precision="round_trip"` pinned in `src/cvprofiles/score/pipeline.py`; all confirmatory runs re-frozen under the fixed parser; new run_ids committed |
 | F2 — bibliography errors (self-citation, Wallach venue) | **CLOSED** (paper) | `capra2025` and `wallach2025` corrected in `position_paper_cvprofiles.tex` |
-| F3 — no tag contains the paper's runs | **CLOSED** | tag `paper-2026-08-18` cut at this commit; paper cites it |
+| F3 — no tag contains the paper's runs | **CLOSED** | tag `v3.0.2` cut at this commit; paper cites it |
 | F4 — no CITATION.cff / DOI / data statement | **CLOSED (partial)** | `CITATION.cff` added; Zenodo DOI pending deposit at acceptance; data/code-availability statement added to paper |
 | F5 — golden float equality across platforms | **CLOSED** | `pytest.approx` tolerance in `test_cli_demo.py` |
 | F6 — LLM-lane driver requires gitignored raw generations | **CLOSED** | `--skip-build` path consumes committed `*_llm_extension.csv` frames |

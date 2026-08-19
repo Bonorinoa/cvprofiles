@@ -105,7 +105,7 @@
   "n_units": 480,
   "network_hash": "1ed753b6c1ed159c4451ced75d2c8dba44318ce91b4f30dfbfb234d1dff7caf4",
   "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "point_id": true,
   "rejected": {
     "m_composite": [
@@ -120,7 +120,7 @@
   },
   "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned/report.html",
   "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned/report.json",
-  "run_id": "435b47343b84a63af2f1967e8862086d3d11300b26efe734c83983c5015d174e",
+  "run_id": "587664d7ff0fde4a67bf4016c47d2c1b71c502a20cff8a13597fedf5202cbe2b",
   "scores_hash": "542ac41e4c60ab0c1dc2bc311c682779d084de37dae77a6dc418981f120c2742",
   "theta_grid": {
     "artifact": "theta_grid.json",

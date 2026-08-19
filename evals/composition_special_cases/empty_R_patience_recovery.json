@@ -40,7 +40,7 @@
   ],
   "n_units": 41,
   "note": "2026-08-18 re-freeze (F7): current seven-measure country patience menu. Superseded run: runs/empty_R (2026-08-10 pilot menu, paper_round [-0.219, 0.402]).",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "paper_round": [
     -0.219,
     0.565
@@ -48,5 +48,5 @@
   "paper_table5_L": -0.2187,
   "paper_table5_U": 0.5649,
   "recovers_full_menu": true,
-  "run_id": "9ed846901811a3ddf2d33b0a66d721485bfbd7bbfa333532c809579335fa12fb"
+  "run_id": "f7fcdd761933647faa06d6a1780aa7aefad6af8c78da5fd75d0d6ae94bb29743"
 }

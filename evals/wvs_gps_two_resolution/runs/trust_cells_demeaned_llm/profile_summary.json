@@ -129,7 +129,7 @@
   "n_units": 480,
   "network_hash": "d0afa9002b03c34746a448be1fbb9affc2c0ca99f9b3f2dd5956160912e218d0",
   "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned_llm",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "point_id": true,
   "rejected": {
     "m_llm_trust_llama": [
@@ -156,7 +156,7 @@
   },
   "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned_llm/report.html",
   "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned_llm/report.json",
-  "run_id": "7509d61fb4569466f3eb4474331ef119e748dcf35a644db385014f06495b0cc8",
+  "run_id": "9461b368443ff5ad950c9b466d2ccc178b14655997f1408e2b0f8f88f59a9a77",
   "scores_hash": "ff11b172db7ec3ea13d700b6abad6724c7ad68ecb27585a1caf542397f92499b",
   "theta_grid": {
     "artifact": "theta_grid.json",

@@ -1,6 +1,6 @@
 {
   "n_boot": 1000,
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "profiles": [
     {
       "L": 0.40246334068031847,
@@ -127,7 +127,7 @@
       "n_units": 41,
       "network_hash": "f2d17ff29958683d39a2e14e8d2c013bda43635d3da8348baf950f7f851b348b",
       "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm",
-      "package_version": "3.0.1",
+      "package_version": "3.0.2",
       "point_id": false,
       "rejected": {
         "m_composite": [
@@ -145,7 +145,7 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.json",
-      "run_id": "75869a0885782e036328cd85db3795d8a68fa23303a42e5a067c715751ad2f5a",
+      "run_id": "24c0a435c0c540df668b0e4128662b5e02b15f7044273cd19cef6a0482ca6f85",
       "scores_hash": "fcfb171381e56d99762863e320d6173b854a1ca082fee871e665b14247596293",
       "theta_grid": {
         "artifact": "theta_grid.json",
@@ -296,7 +296,7 @@
       "n_units": 35,
       "network_hash": "27490da9292c755027cb295162238dbfda45e5f032d037775bf1d10e21b951e4",
       "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country_llm",
-      "package_version": "3.0.1",
+      "package_version": "3.0.2",
       "point_id": false,
       "rejected": {
         "m_gps_trust": [
@@ -315,7 +315,7 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country_llm/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_country_llm/report.json",
-      "run_id": "743bc01bbc7700a1b9b541e940a9e72b052bd5991ac294b935229af0fc54b190",
+      "run_id": "de21a795a0dee6202efdf3928900da59ba74c174ed5ba48124c7e28adb5806a2",
       "scores_hash": "0b115ce85abef8fdd43764332a20f660534099656635cc553d279bc5f6254860",
       "theta_grid": {
         "artifact": "theta_grid.json",
@@ -448,7 +448,7 @@
       "n_units": 480,
       "network_hash": "f0d1582c64237be2b11057f75e055a94ccbf535fcde9d99506fbda76de1e6031",
       "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned_llm",
-      "package_version": "3.0.1",
+      "package_version": "3.0.2",
       "point_id": false,
       "rejected": {
         "m_composite": [
@@ -463,7 +463,7 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned_llm/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_cells_demeaned_llm/report.json",
-      "run_id": "8f98013d071d76f3717ff45d63e5ff770c739df6ae31ec72a9ed1e11430fc3c6",
+      "run_id": "02005bf2737740e3b37636e837801f40ef68f3b65a2d59fd7e929d89b8666db8",
       "scores_hash": "b1febee0f30cb536903ad84abfa4b24b41192aaf92bbda74a3f066d01d3b4af9",
       "theta_grid": {
         "artifact": "theta_grid.json",
@@ -608,7 +608,7 @@
       "n_units": 480,
       "network_hash": "d0afa9002b03c34746a448be1fbb9affc2c0ca99f9b3f2dd5956160912e218d0",
       "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned_llm",
-      "package_version": "3.0.1",
+      "package_version": "3.0.2",
       "point_id": true,
       "rejected": {
         "m_llm_trust_llama": [
@@ -635,7 +635,7 @@
       },
       "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned_llm/report.html",
       "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/trust_cells_demeaned_llm/report.json",
-      "run_id": "7509d61fb4569466f3eb4474331ef119e748dcf35a644db385014f06495b0cc8",
+      "run_id": "9461b368443ff5ad950c9b466d2ccc178b14655997f1408e2b0f8f88f59a9a77",
       "scores_hash": "ff11b172db7ec3ea13d700b6abad6724c7ad68ecb27585a1caf542397f92499b",
       "theta_grid": {
         "artifact": "theta_grid.json",

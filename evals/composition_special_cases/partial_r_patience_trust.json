@@ -9,7 +9,7 @@
   ],
   "n": 41,
   "note": "2026-08-18 closeout: commits the partial-r computation behind the paper's 0.706 claim.",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "partial_r": 0.7059469104582132,
   "rounded_3dp": 0.706,
   "se": 0.11643800805283,

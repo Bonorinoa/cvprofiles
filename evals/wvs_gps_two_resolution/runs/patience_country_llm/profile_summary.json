@@ -123,7 +123,7 @@
   "n_units": 41,
   "network_hash": "f2d17ff29958683d39a2e14e8d2c013bda43635d3da8348baf950f7f851b348b",
   "out_dir": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm",
-  "package_version": "3.0.1",
+  "package_version": "3.0.2",
   "point_id": false,
   "rejected": {
     "m_composite": [
@@ -141,7 +141,7 @@
   },
   "report_html": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.html",
   "report_json": "/Users/bonorinoa/Hermes/Projects/cvprofiles/evals/wvs_gps_two_resolution/runs/patience_country_llm/report.json",
-  "run_id": "75869a0885782e036328cd85db3795d8a68fa23303a42e5a067c715751ad2f5a",
+  "run_id": "24c0a435c0c540df668b0e4128662b5e02b15f7044273cd19cef6a0482ca6f85",
   "scores_hash": "fcfb171381e56d99762863e320d6173b854a1ca082fee871e665b14247596293",
   "theta_grid": {
     "artifact": "theta_grid.json",
