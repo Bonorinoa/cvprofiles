@@ -1,4 +1,6 @@
-# 18 — IVS Cultural Map: v3 empirical lane design (skeleton)
+# IVS Cultural Map: v3 empirical lane design (skeleton)
+
+> Relocated from `docs/18_IVS_Cultural_Map.md` to `governance/` 2026-08-21 (public-release hygiene reorganization).
 
 **Status:** `RESERVED — IVS DESIGN; run gated` (created 2026-08-07, Gate A bundle). This document is the **design container** for the v3 empirical lane: a Tao et al. (2024)-style evaluation of LLM cultural alignment on the Joint EVS/WVS 2017–2022 dataset, with Inglehart–Welzel axes as the target.
 

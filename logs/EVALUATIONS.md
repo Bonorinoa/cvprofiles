@@ -1,5 +1,7 @@
 # Evaluations Log
 
+> Continuation of `docs/13_Evaluations_Log.md` (entries through v3.0.2, 2026-08-18). Relocated to `logs/` 2026-08-21 in the public-release hygiene reorganization.
+
 This is a **live** document. Append a short entry after every meaningful synthetic battery, golden-oracle stress, or (later) frozen real-baseline run.
 
 Do **not** paste raw bootstrap draws here. Point to `reports/runs/<run_id>/` for full artifacts.

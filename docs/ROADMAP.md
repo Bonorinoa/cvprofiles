@@ -1,6 +1,6 @@
 # Roadmap
 
-**Live document.** This is the current-state roadmap for cvprofiles. It evolves together with the engineering log (`docs/12_Decision_Engineering_Log.md`) — when scope changes, the roadmap and the log change in the same review. The README carries only current posture, not this history.
+**Live document.** This is the current-state roadmap for cvprofiles. It evolves together with the engineering log (`logs/DECISIONS.md`) — when scope changes, the roadmap and the log change in the same review. The README carries only current posture, not this history.
 
 ## Shipped
 
@@ -17,7 +17,7 @@
 - Units-only bootstrap with conservative, additive percentile diagnostics
 - Deterministic θ-grid sensitivity surface; headline remains [L,U]=min/max B\*
 - Pipeline, CLI, JSON/HTML audit panels, package-native evidence, and minimal CI
-- Provisional synthetic-only protocol lock (`docs/16`) with an audited MC50 proof table (seeds 0..49); H5 Trust design locked (`docs/17`), first frozen run (n=35) accepted as **preliminary paper-facing evidence**; empirical/paper inputs remain Augusto-owned *[H5 re-graded 2026-08-07 to historical/regression witness — docs/16 §9; v3 headline is the IVS cultural-values lane]*
+- Provisional synthetic-only protocol lock (now `governance/PAPER_PROTOCOL_FREEZE.md`) with an audited MC50 proof table (seeds 0..49); first frozen H5 run (n=35) accepted as preliminary evidence *[H5 later re-graded historical and removed from the repo 2026-08-21; empirical inputs researcher-owned]*
 
 ### v2.0 (published on PyPI 2026-08-06 — tag `v2.0.0`)
 
@@ -46,11 +46,11 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 
 ## Current backlog
 
-- **Paper-facing protocol freeze:** [`docs/16_Paper_Protocol_Freeze.md`](16_Paper_Protocol_Freeze.md) — construct, score matrix, menu, researcher-authored R, θ, δ, β, and evidence posture (synthetic-only portion locked provisional; **§9 Gate A amendment 2026-08-07** opens the IVS designated-evaluation box, run gated; **§11 amendment 2026-08-10 promotes the WVS/GPS patience application to flagship empirical example and defers IVS**)
-- **M10 / H5:** country-level generalized trust — design **LOCKED as historical** (`docs/17`); n=35 run **re-graded to historical/regression witness** (2026-08-07); reproducible via `tools/verify_h5_trust.py`; not the v3 evidence base
-- **v3 IVS cultural-values lane:** [`docs/18_IVS_Cultural_Map.md`](18_IVS_Cultural_Map.md) — Tao et al. (2024)-style evaluation on Joint EVS/WVS 2017–2022 v5.0; design fields **Augusto-authored**, run **gated** (Gate B); **DEFERRED 2026-08-10 (`docs/16` §11)** — design container stays RESERVED; hard items Y003/PC2′ remain open; open-weight policy (no adapters, no proprietary APIs)
-- **Next-sprint scope box:** **P6 SUPERSEDED → v3.1** (decision 2026-08-10, docs/16 §12): the benchmark kit + IVS harness scaffold are deferred to v3.1; the v3.0.0 empirical evidence base is the WVS/GPS patience flagship application (§11, accepted frozen run). Then P7/Gate C → `v3.0.0` (in progress). Plan authority: `reports/DEVELOPMENT_PLAN_v3_REV3.md`; application authority: `reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md`
-- **WVS/GPS preferences intermediate lane:** `evals/wvs_gps_preferences/` — patience + risk-taking on **local** GPS (Falk et al. 2018, country + individual) + WVS Wave 7 (codebook-verified Q13/Q14/Q48/Q49/Q275/R/Q279; missing codes -1..-5 masked, never imputed); interactive input-builder notebook (no form GUI); **PROMOTED to flagship public-facing empirical example 2026-08-10 (`docs/16` §11)** — patience application, 7-measure menu (GPS positive control, WVS proxies, composite C=F(φ), two llama.cpp prompting measures, noise negative control), aux-only network, OLS β on log GDP pc, 80/20 country units-split vs random-selection baseline; monolith `run_application.py` + `verify_wvs_gps.py`; plan `reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md`; **frozen-run gated, not a paper headline result; IVS deferred**
+- **Methods paper:** source now lives in [`paper/`](../paper/) (moved from the lab repository 2026-08-21); protocol locks in `governance/PAPER_PROTOCOL_FREEZE.md`; evidence base = WVS/GPS two-resolution lane + flagship application frozen runs
+- **IVS cultural-values lane:** `governance/IVS_CULTURAL_MAP.md` — design container RESERVED; **DEFERRED 2026-08-10** (`governance/PAPER_PROTOCOL_FREEZE.md` §11); run gated
+- **P6 benchmark kit → v3.1:** superseded for v3.0.0 by the application milestone; lands in v3.1 if reopened
+- **WVS/GPS two-resolution extension:** LLM join and cell-level results under `evals/wvs_gps_two_resolution/` feed the paper (`paper/position_paper.tex`)
+- **H5 Trust:** historical — evaluation lane removed from the repository 2026-08-21 (design record retained at `governance/H5_TRUST_DESIGN.md`)
 
 ## Change log
 

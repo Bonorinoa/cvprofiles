@@ -122,7 +122,7 @@ Full positioning in the methodology doc (`docs/METHODOLOGY.md`).
 
 - **Named `empty_R` unrestricted-multiverse special case (3.0.1).** When the researcher pins an empty nomological network `R = ∅`, the engine now returns the full menu as the admissible set `M* = M` and the spec-curve range over all β values. The accidental-empty case still fails loud — the named special case is opt-in via `empty_R: true` in the network YAML.
 - **Flagship application: WVS/GPS patience (3.0.0).** Country-level patience measured through a menu of WVS Wave 7 facets + a GPS patience anchor, disciplined by a literature-anchored `disc_risk` bar (`θ = 0.35`). Accepted frozen run: `M*_select = [m_gps_patience, m_prompt_a]`, headline `[L, U] = [0.328, 0.402]`. See `evals/wvs_gps_preferences/` and the input-builder tutorial.
-- **Posture (a) reporting discipline (3.0.0).** `M*_select` is the primary headline; empty `M*_robust` from a units-split is a power-limited diagnostic, not a paper failure. See `docs/16` §11.
+- **Posture (a) reporting discipline (3.0.0).** `M*_select` is the primary headline; empty `M*_robust` from a units-split is a power-limited diagnostic, not a paper failure. See `governance/PAPER_PROTOCOL_FREEZE.md` §11.
 - **Engine stays model-free and score-agnostic.** No LLM client in the import graph; LLM scoring is an upstream protocol, not an engine feature.
 
 Upgrading from v2.x? v2.5.2 was the last PyPI release before v3; the v3.0.x API is a strict superset.
@@ -149,7 +149,7 @@ Tutorials (run against the installed package, inputs generated inline):
 | `tutorials/cvprofiles_sensemakr_tutorial.ipynb` | OVB sensitivity (Cinelli–Hazlett) on a survivor |
 | `tutorials/cvprofiles_wvs_gps_inputs.ipynb` | **Flagship inputs.** WVS/GPS patience input-builder + E2E: synthetic oracle, then the four frozen inputs for the WVS Wave 7 × GPS lane |
 
-Governance, decisions, and paper-protocol locks live in [`docs/README.md#governance`](docs/README.md). Pre-consolidation scaffold docs are in `docs/archive/` (historical reference only).
+Governance, decision logs, and paper-protocol locks live in [`logs/`](logs/) (append-only decision + evaluation records) and [`governance/`](governance/) (project-state locks), kept public for auditability.
 
 ## Roadmap
 
@@ -161,7 +161,7 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md) — maintained as a live document along
 
 ## Citation
 
-The canonical method statement is `docs/METHODOLOGY.md`. A paper citation block will be added once the v3 paper freeze is final (see `docs/16`).
+The canonical method statement is `docs/METHODOLOGY.md`. A paper citation block will be added once the paper freeze is final (see `paper/` and `governance/PAPER_PROTOCOL_FREEZE.md`).
 
 ## Acknowledgments
 

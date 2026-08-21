@@ -4,10 +4,10 @@
 project: cvprofiles
 display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
-status: v2_5_2_published
+status: v3_0_2_tagged
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "3.0.0"        # current package version (infrastructure + flagship application release 2026-08-10)
-target_version: "3.0.0"   # current release 2026-08-10 (was Gate C target; shipped)
+dev_version: "3.0.2"        # current package version (reproducibility patch, 2026-08-18)
+target_version: "3.0.2"   # current release (tag v3.0.2 pushed; PyPI + GitHub Release at closeout)
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles
@@ -49,13 +49,13 @@ v1_1:
   evidence_summary: reports/summaries/v1_1_package_synth_summary.json
   evidence_parent_sha: 098e2fa
   handoff: no_tag_no_pypi_release_review_owns_release
-  protocol: docs/16_Paper_Protocol_Freeze.md
+  protocol: governance/PAPER_PROTOCOL_FREEZE.md
   protocol_status: provisional_synthetic_locked
   protocol_evidence_summary: reports/summaries/v1_1_protocol_synth_mc50_summary.json
   protocol_evidence_parent_sha: 5bfea25
 
 h5_trust:
-  design: docs/17_H5_Trust_Design.md
+  design: governance/H5_TRUST_DESIGN.md
   status: preliminary_paper_facing_evidence
   evidence_summary: reports/summaries/h5_trust_evidence_summary.json
   evidence_generator: tools/make_h5_trust_summary.py
@@ -72,7 +72,7 @@ h5_trust:
 
 v2_0:
   status: measure_discipline_published
-  plan: docs/archive/18_Measure_Discipline_Plan.md
+  plan: (historical, untracked since 2026-08-21) docs/archive/18_Measure_Discipline_Plan.md
   threads: [delta_grid, evaluator_registry, theta_anchor_discipline]
   version: 2.0.0  # published on PyPI 2026-08-06 (tag v2.0.0 @ 6abb6e4)
   checkpoint: per_thread
@@ -89,8 +89,8 @@ v3_0:
   status: release_in_progress  # docs/16 §12 2026-08-10: infra + flagship app; Gate C authorized
   plan: reports/DEVELOPMENT_PLAN_v3_REV3.md  # Rev 3 authority; Rev 2 historical
   inventory: reports/VERIFIED_TASK_INVENTORY.md
-  amendment: docs/16_Paper_Protocol_Freeze.md  # §9 2026-08-07; §11 2026-08-10 (flagship = WVS/GPS patience app; IVS deferred); §12 2026-08-10 (release; P6 → v3.1)
-  design_doc: docs/18_IVS_Cultural_Map.md  # RESERVED; DEFERRED 2026-08-10 (docs/16 §11)
+  amendment: governance/PAPER_PROTOCOL_FREEZE.md  # §9 2026-08-07; §11 2026-08-10 (flagship = WVS/GPS patience app; IVS deferred); §12 2026-08-10 (release; P6 → v3.1)
+  design_doc: governance/IVS_CULTURAL_MAP.md  # RESERVED; DEFERRED 2026-08-10 (PAPER_PROTOCOL_FREEZE §11)
   target_version: "3.0.0"
   headline: wvs_gps_patience_application  # promoted 2026-08-10 (docs/16 §11); IVS deferred
   application_plan: reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md

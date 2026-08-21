@@ -131,8 +131,8 @@ The HTML and JSON share one payload, so they cannot disagree about numbers. The 
 Progress is read from on-disk artifacts, not chat transcripts:
 
 - slack matrices, admissible sets, ranges, `report.html`
-- `docs/13_Evaluations_Log.md` — the narrative eval log
-- `docs/12_Decision_Engineering_Log.md` — append-only engineering decisions
+- `logs/EVALUATIONS.md` — the narrative eval log
+- `logs/DECISIONS.md` — append-only engineering decisions
 
 Run directories are gitignored; allow-listed proof summaries under `reports/summaries/` are tracked.
 

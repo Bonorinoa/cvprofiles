@@ -1,5 +1,7 @@
 # Decision and Engineering Log
 
+> Continuation of `docs/12_Decision_Engineering_Log.md` (entries through v3.0.2, 2026-08-18). Relocated to `logs/` 2026-08-21 in the public-release hygiene reorganization.
+
 This is a **live** document. Update whenever project direction, implementation details, or important lessons change. Do not rewrite history — reverse a decision with a new dated entry.
 
 Coding agents: read this before inventing architecture.

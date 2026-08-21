@@ -1,4 +1,6 @@
-# 16 — Paper Protocol Freeze
+# Paper Protocol Freeze
+
+> Relocated from `docs/16_Paper_Protocol_Freeze.md` to `governance/` 2026-08-21 (public-release hygiene reorganization). Section numbering (§1–§12) is retained for citation stability.
 
 **Status:** `protocol-v1-synth-provisional` — provisional synthetic-only lock; empirical/paper fields remain open. **§9 amendment (2026-08-07) opens the IVS designated-evaluation box** (run gated at Gate B); H5 Trust re-graded to historical. **§11 amendment (2026-08-10): WVS/GPS patience application promoted to flagship empirical example; IVS deferred (box remains valid, not active).**
 

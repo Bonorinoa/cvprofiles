@@ -1,4 +1,8 @@
-# 17 — H5 Trust Design (country-level generalized trust)
+# H5 Trust Design (country-level generalized trust)
+
+> **SUPERSEDED 2026-08-21:** the H5 evaluation lane was removed from the repository in the public-release hygiene sprint (re-graded historical 2026-08-07; regression contract covered by the golden mini fixture + WVS/GPS verifier). This design document is retained under `governance/` as the historical record. Files deleted: `evals/h5_trust/`, `tools/verify_h5_trust.py`, H5 tests, proof summary.
+>
+> Relocated from `docs/17_H5_Trust_Design.md` to `governance/` 2026-08-21 (public-release hygiene reorganization).
 
 **Status:** `LOCKED AS H5 DESIGN` (2026-08-04) — construct, unit/universe, menu/roles, network, θ, δ, β, and claims boundary are fixed as design. **Empirical run gated:** no run, no paper number, no `docs/13` claim until frozen scores + pinned seed + package version exist and an independent audit passes.
 

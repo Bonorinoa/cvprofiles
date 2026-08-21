@@ -1,6 +1,6 @@
 # Changelog
 
-All notable project milestones live here. Detailed decisions → `docs/12_Decision_Engineering_Log.md`. Eval learnings → `docs/13_Evaluations_Log.md`.
+All notable project milestones live here. Detailed decisions → `logs/DECISIONS.md`. Eval learnings → `logs/EVALUATIONS.md`.
 
 Format: keep newest first.
 

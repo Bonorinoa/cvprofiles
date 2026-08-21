@@ -1,8 +1,8 @@
 # Synthetic evaluation harness
 
-Scenario specs: `docs/04_Synthetic_DGPs.md`.  
-Eval narrative: `docs/13_Evaluations_Log.md`.  
-Method metrics: `docs/03_Methodology.md`, `docs/05_Pre_Registration.md`.
+Scenario specs: superseded — the shipped method statement is `docs/METHODOLOGY.md`.  
+Eval narrative: `logs/EVALUATIONS.md` (formerly `docs/13_Evaluations_Log.md`).  
+Method metrics: `docs/METHODOLOGY.md`, `governance/PAPER_PROTOCOL_FREEZE.md`.
 
 ## Historical PoC (keep — do not import into `src/`)
 
