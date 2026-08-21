@@ -1,0 +1,6 @@
+{
+  "schema_version": "1",
+  "type": "corr_y",
+  "outcome": "log_gdp_pc",
+  "params": {}
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1",
+  "run_id": "81a7f3d4298431cf81b9ea952dd65eaab46c35511ea2de205d03f607c663b728",
+  "freeze": {
+    "scores_hash": "5e8d1afcfef8dd2be4f23dde0f4f7b41f9372acbe2ec66bd01c712c94fb3ffdf",
+    "network_hash": "0dab2afaedd40dc295efe04b4faf4d606b2f5089cf0a83c38b1daaf9aa9c0646",
+    "beta_hash": "1959ede5aaf9dd4a1866f642577f7d5c50d61676de50d6ff58c1671447c1555d",
+    "package_version": "1.1.0a1",
+    "schema_version": "1",
+    "seed": 0,
+    "delta": 0.0,
+    "n_boot": null,
+    "config": {}
+  },
+  "created_at": "2026-08-05T06:34:57Z",
+  "artifact_paths": {
+    "S_frozen.csv": "S_frozen.csv",
+    "score_manifest.json": "score_manifest.json",
+    "network_resolved.json": "network_resolved.json",
+    "beta_resolved.json": "beta_resolved.json",
+    "restrict_bundle.json": "restrict_bundle.json",
+    "slacks.csv": "slacks.csv",
+    "slacks.parquet": "slacks.parquet",
+    "admissible.json": "admissible.json",
+    "beta_values.json": "beta_values.json",
+    "range.json": "range.json",
+    "run_manifest.json": "run_manifest.json",
+    "report.html": "report.html",
+    "report.json": "report.json"
+  },
+  "notes": "v1.1 spine; inference layer: bootstrap over units + theta-grid (diagnostic)"
+}

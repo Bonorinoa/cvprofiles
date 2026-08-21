@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>cvprofiles report — 81a7f3d42984</title>
+  <style>
+    :root {
+      --ink: #1a1410;
+      --muted: #5c534c;
+      --paper: #f7f1e8;
+      --card: #fffdf8;
+      --line: #d9cfc0;
+      --ok: #1f6b3a;
+      --bad: #8b1e1e;
+      --accent: #6b2c2c;
+      --chip: #efe6d8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.35rem;
+    }
+    h1 { font-size: 1.75rem; margin: 0 0 0.35rem; font-weight: 600; }
+    .sub { color: var(--muted); margin: 0; font-size: 0.98rem; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 760px) {
+      .grid.two { grid-template-columns: 1.1fr 0.9fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.75rem;
+      font-family: Helvetica, Arial, sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .range-box {
+      border-left: 4px solid var(--ok);
+      padding: 0.85rem 1rem;
+      background: #eef6f0;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 0.75rem;
+    }
+    .range-box .label {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin: 0 0 0.25rem;
+    }
+    .range-box .value {
+      font-size: 1.45rem;
+      font-variant-numeric: tabular-nums;
+      margin: 0;
+    }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.45rem 0.35rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .tag {
+      display: inline-block;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      background: var(--chip);
+    }
+    .tag.ok { background: #d9eedf; color: var(--ok); }
+    .tag.bad { background: #f0d6d6; color: var(--bad); }
+    .tag.empty { background: #f0d6d6; color: var(--bad); }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.82rem;
+      word-break: break-all;
+    }
+    ul.compact { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+    footer {
+      margin-top: 1.75rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    .empty-callout {
+      border: 1px solid #e0b4b4;
+      background: #fbf1f1;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .empty-callout h2 { color: var(--bad); margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">cvprofiles · construct-validity profile</p>
+      <h1>H5 Trust — country-level generalized trust</h1>
+      <p class="sub">
+        Admissible measurement set under a stated nomological network, and the
+        image of <em>β</em> on that set. Empty sets and wide ranges are scientific features.
+      </p>
+    </header>
+
+    
+
+    <div class="grid two">
+      <section class="card">
+        <h2>Construct-identified range</h2>
+        <div class="range-box">
+          <p class="label">[L, U] · method = min/max B*</p>
+          
+          <p class="value">[0.370754, 0.623891]</p>
+          <p class="muted" style="margin:0.4rem 0 0">
+            Width = 0.253136
+            · 2 survivors
+            
+            · bootstrap: off
+            
+          </p>
+          
+        </div>
+        <p class="muted" style="margin:0">
+          Target β = <span class="mono">corr_y</span>
+          on outcome <span class="mono">log_gdp_pc</span>.
+          Range uses <strong>only</strong> measures in M*; rejected β values are shown below but never enter [L,U].
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Run freeze</h2>
+        <table>
+          <tr><th>run_id</th><td class="mono">81a7f3d4298431cf81b9ea952dd65eaab46c35511ea2de205d03f607c663b728</td></tr>
+          <tr><th>package</th><td class="mono">1.1.0a1</td></tr>
+          <tr><th>scores_hash</th><td class="mono">5e8d1afcfef8dd2be4f23dde0f4f7b41f9372acbe2ec66bd01c712c94fb3ffdf</td></tr>
+          <tr><th>network_hash</th><td class="mono">0dab2afaedd40dc295efe04b4faf4d606b2f5089cf0a83c38b1daaf9aa9c0646</td></tr>
+          <tr><th>beta_hash</th><td class="mono">1959ede5aaf9dd4a1866f642577f7d5c50d61676de50d6ff58c1671447c1555d</td></tr>
+          <tr><th>δ</th><td class="mono">0.0</td></tr>
+          <tr><th>seed</th><td class="mono">0</td></tr>
+          <tr><th>network</th><td>h5_trust_generalized</td></tr>
+        </table>
+      </section>
+    </div>
+
+    
+
+    
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Menu admission</h2>
+      <p class="muted" style="margin-top:0">
+        M* size = 2 / 6.
+        Slack rule: admit if s<sub>r</sub>(m) ≥ −δ for all r.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            <th>status</th>
+            <th>β(m)</th>
+            <th>failed restrictions</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_trust_general</td>
+            <td>
+              
+              <span class="tag ok">admissible</span>
+              
+            </td>
+            <td>0.623891</td>
+            <td class="mono">
+              
+                —
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_in_group</td>
+            <td>
+              
+              <span class="tag ok">admissible</span>
+              
+            </td>
+            <td>0.370754</td>
+            <td class="mono">
+              
+                —
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_out_group</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.539962</td>
+            <td class="mono">
+              
+                r_corr_min_gps_trust
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_institution</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>-0.318833</td>
+            <td class="mono">
+              
+                r_corr_min_rule_of_law
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>0.069919</td>
+            <td class="mono">
+              
+                r_corr_min_gps_trust, r_corr_min_rule_of_law, r_corr_sign_gini_neg
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mono">m_share_agriculture</td>
+            <td>
+              
+              <span class="tag bad">rejected</span>
+              
+            </td>
+            <td>-0.918498</td>
+            <td class="mono">
+              
+                r_corr_min_gps_trust, r_corr_min_rule_of_law, r_corr_sign_gini_neg
+              
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Slack matrix s<sub>r</sub>(m)</h2>
+      <p class="muted" style="margin-top:0">Positive / zero ≈ satisfied at δ=0.0. Negative = violation magnitude.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>measure</th>
+            
+            <th class="mono">r_corr_min_gps_trust</th>
+            
+            <th class="mono">r_corr_min_rule_of_law</th>
+            
+            <th class="mono">r_corr_sign_gini_neg</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="mono">m_trust_general</td>
+            
+            <td>0.032350</td>
+            
+            <td>0.404767</td>
+            
+            <td>0.421874</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_in_group</td>
+            
+            <td>0.057260</td>
+            
+            <td>0.182494</td>
+            
+            <td>0.509629</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_out_group</td>
+            
+            <td>-0.001303</td>
+            
+            <td>0.358501</td>
+            
+            <td>0.219973</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_trust_institution</td>
+            
+            <td>0.169142</td>
+            
+            <td>-0.424613</td>
+            
+            <td>0.175068</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_noise</td>
+            
+            <td>-0.073909</td>
+            
+            <td>-0.291478</td>
+            
+            <td>-0.296414</td>
+            
+          </tr>
+          
+          <tr>
+            <td class="mono">m_share_agriculture</td>
+            
+            <td>-0.417018</td>
+            
+            <td>-1.006332</td>
+            
+            <td>-0.301805</td>
+            
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2>Network (researcher-owned)</h2>
+      <ul class="compact">
+        
+        <li>
+          <span class="mono">r_corr_min_gps_trust</span>
+          · type <span class="mono">corr_min</span>
+          · θ=0.3
+          · params <span class="mono">{'variable': 'gps_trust'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">r_corr_min_rule_of_law</span>
+          · type <span class="mono">corr_min</span>
+          · θ=0.3
+          · params <span class="mono">{'variable': 'rule_of_law'}</span>
+        </li>
+        
+        <li>
+          <span class="mono">r_corr_sign_gini_neg</span>
+          · type <span class="mono">corr_sign</span>
+          · θ=0.1
+          · params <span class="mono">{'variable': 'gini', 'sign': -1}</span>
+        </li>
+        
+      </ul>
+      <p class="muted" style="margin:0.75rem 0 0">
+        Engine does not invent restrictions. Agent may author oracle R for synthetic DGPs only.
+      </p>
+    </section>
+
+    <footer>
+      cvprofiles 1.1.0a1
+      · four-state spine SCORE → RESTRICT → IDENTIFY → REPORT
+      · v1.1 inference: bootstrap over units + θ-grid (diagnostic)
+      · generated 2026-08-05T06:34:57Z
+    </footer>
+  </div>
+</body>
+</html>

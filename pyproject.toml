@@ -68,10 +68,6 @@ src = ["src", "tests"]
 select = ["E", "F", "I", "UP", "B"]
 
 [tool.ruff.lint.per-file-ignores]
-# The verify_h5_trust.py docstring carries the long canonical invocation as a
-# single copy-paste line (E501 inside a docstring is string content, so noqa
-# cannot suppress it).
-"tools/verify_h5_trust.py" = ["E501"]
 # build_tutorials.py embeds LaTeX display lines inside notebook markdown cell
 # strings; splitting them would change the emitted notebook cells.
 "tools/build_tutorials.py" = ["E501"]

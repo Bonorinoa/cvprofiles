@@ -1,8 +1,7 @@
 """TDD tests for the WVS/GPS application verifier (tools/verify_wvs_gps.py).
 
-The verifier is a READ-ONLY structural auditor (pattern:
-tools/verify_h5_trust.py). It checks frozen-input integrity + scientific
-gates against the design lock (docs/16 §11):
+The verifier is a READ-ONLY structural auditor. It checks frozen-input
+integrity + scientific gates against the design lock (docs/16 §11):
 
   G1 positive control   m_gps_patience survives (in M* when non-empty)
   G2 negative control   m_noise never in M* (rejected)

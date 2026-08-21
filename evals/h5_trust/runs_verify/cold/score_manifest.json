@@ -1,0 +1,56 @@
+{
+  "schema_version": "1",
+  "roles": {
+    "unit_id": "iso3",
+    "measures": [
+      "m_trust_general",
+      "m_trust_in_group",
+      "m_trust_out_group",
+      "m_trust_institution",
+      "m_noise",
+      "m_share_agriculture"
+    ],
+    "aux": [
+      "gps_trust",
+      "rule_of_law",
+      "gini"
+    ],
+    "outcome": "log_gdp_pc",
+    "diagnostic": [
+      "n_trust_general",
+      "n_trust_in_group",
+      "n_trust_out_group",
+      "n_trust_institution"
+    ]
+  },
+  "n_rows": 35,
+  "n_measures": 6,
+  "measure_columns": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_institution",
+    "m_noise",
+    "m_share_agriculture"
+  ],
+  "normalization": {
+    "policy": "none",
+    "zscore_measures": false,
+    "ddof": null,
+    "columns_transformed": []
+  },
+  "scores_hash": "5e8d1afcfef8dd2be4f23dde0f4f7b41f9372acbe2ec66bd01c712c94fb3ffdf",
+  "dtypes": {
+    "iso3": "str",
+    "m_trust_general": "float64",
+    "m_trust_in_group": "float64",
+    "m_trust_out_group": "float64",
+    "m_trust_institution": "float64",
+    "m_noise": "float64",
+    "m_share_agriculture": "float64",
+    "gps_trust": "float64",
+    "rule_of_law": "float64",
+    "gini": "float64",
+    "log_gdp_pc": "float64"
+  }
+}

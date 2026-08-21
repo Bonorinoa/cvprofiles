@@ -1,0 +1,155 @@
+{
+  "L": 0.37075446228800285,
+  "U": 0.62389053803067,
+  "admissible": [
+    "m_trust_general",
+    "m_trust_in_group"
+  ],
+  "artifact_paths": {
+    "S_frozen.csv": "S_frozen.csv",
+    "admissible.json": "admissible.json",
+    "beta_resolved.json": "beta_resolved.json",
+    "beta_values.json": "beta_values.json",
+    "network_resolved.json": "network_resolved.json",
+    "range.json": "range.json",
+    "restrict_bundle.json": "restrict_bundle.json",
+    "score_manifest.json": "score_manifest.json",
+    "slacks.csv": "slacks.csv",
+    "slacks.parquet": "slacks.parquet"
+  },
+  "beta_hash": "1959ede5aaf9dd4a1866f642577f7d5c50d61676de50d6ff58c1671447c1555d",
+  "beta_type": "corr_y",
+  "beta_values": {
+    "m_noise": 0.06991895733204516,
+    "m_share_agriculture": -0.9184982111513076,
+    "m_trust_general": 0.62389053803067,
+    "m_trust_in_group": 0.37075446228800285,
+    "m_trust_institution": -0.3188332545035705,
+    "m_trust_out_group": 0.5399621158439111
+  },
+  "bootstrap": null,
+  "created_at": "2026-08-05T06:34:57Z",
+  "delta": 0.0,
+  "empty": false,
+  "freeze": {
+    "beta_hash": "1959ede5aaf9dd4a1866f642577f7d5c50d61676de50d6ff58c1671447c1555d",
+    "config": {},
+    "delta": 0.0,
+    "n_boot": null,
+    "network_hash": "0dab2afaedd40dc295efe04b4faf4d606b2f5089cf0a83c38b1daaf9aa9c0646",
+    "package_version": "1.1.0a1",
+    "schema_version": "1",
+    "scores_hash": "5e8d1afcfef8dd2be4f23dde0f4f7b41f9372acbe2ec66bd01c712c94fb3ffdf",
+    "seed": 0
+  },
+  "measures": [
+    "m_trust_general",
+    "m_trust_in_group",
+    "m_trust_out_group",
+    "m_trust_institution",
+    "m_noise",
+    "m_share_agriculture"
+  ],
+  "network_hash": "0dab2afaedd40dc295efe04b4faf4d606b2f5089cf0a83c38b1daaf9aa9c0646",
+  "network_name": "h5_trust_generalized",
+  "outcome": "log_gdp_pc",
+  "package_version": "1.1.0a1",
+  "point_id": false,
+  "range": {
+    "L": 0.37075446228800285,
+    "U": 0.62389053803067,
+    "bootstrap": null,
+    "empty": false,
+    "method": "min_max_B_star",
+    "note": "range is min/max of beta on M*; bootstrap band is additive metadata (v1.1) and never replaces the headline",
+    "point_id": false
+  },
+  "rejected": {
+    "m_noise": [
+      "r_corr_min_gps_trust",
+      "r_corr_min_rule_of_law",
+      "r_corr_sign_gini_neg"
+    ],
+    "m_share_agriculture": [
+      "r_corr_min_gps_trust",
+      "r_corr_min_rule_of_law",
+      "r_corr_sign_gini_neg"
+    ],
+    "m_trust_institution": [
+      "r_corr_min_rule_of_law"
+    ],
+    "m_trust_out_group": [
+      "r_corr_min_gps_trust"
+    ]
+  },
+  "restriction_ids": [
+    "r_corr_min_gps_trust",
+    "r_corr_min_rule_of_law",
+    "r_corr_sign_gini_neg"
+  ],
+  "restrictions": [
+    {
+      "id": "r_corr_min_gps_trust",
+      "params": {
+        "variable": "gps_trust"
+      },
+      "theta": 0.3,
+      "type": "corr_min"
+    },
+    {
+      "id": "r_corr_min_rule_of_law",
+      "params": {
+        "variable": "rule_of_law"
+      },
+      "theta": 0.3,
+      "type": "corr_min"
+    },
+    {
+      "id": "r_corr_sign_gini_neg",
+      "params": {
+        "sign": -1,
+        "variable": "gini"
+      },
+      "theta": 0.1,
+      "type": "corr_sign"
+    }
+  ],
+  "run_id": "81a7f3d4298431cf81b9ea952dd65eaab46c35511ea2de205d03f607c663b728",
+  "schema_version": "1",
+  "scores_hash": "5e8d1afcfef8dd2be4f23dde0f4f7b41f9372acbe2ec66bd01c712c94fb3ffdf",
+  "seed": 0,
+  "slacks": {
+    "m_noise": {
+      "r_corr_min_gps_trust": -0.07390909504380969,
+      "r_corr_min_rule_of_law": -0.29147785608348165,
+      "r_corr_sign_gini_neg": -0.2964138934588453
+    },
+    "m_share_agriculture": {
+      "r_corr_min_gps_trust": -0.4170183209947529,
+      "r_corr_min_rule_of_law": -1.0063322388068472,
+      "r_corr_sign_gini_neg": -0.30180498736169015
+    },
+    "m_trust_general": {
+      "r_corr_min_gps_trust": 0.03235042450021863,
+      "r_corr_min_rule_of_law": 0.40476663954341113,
+      "r_corr_sign_gini_neg": 0.42187444520436623
+    },
+    "m_trust_in_group": {
+      "r_corr_min_gps_trust": 0.05725989747781901,
+      "r_corr_min_rule_of_law": 0.18249393337163117,
+      "r_corr_sign_gini_neg": 0.5096293390334099
+    },
+    "m_trust_institution": {
+      "r_corr_min_gps_trust": 0.16914177417212717,
+      "r_corr_min_rule_of_law": -0.42461265021299954,
+      "r_corr_sign_gini_neg": 0.17506755823774026
+    },
+    "m_trust_out_group": {
+      "r_corr_min_gps_trust": -0.0013031324768273955,
+      "r_corr_min_rule_of_law": 0.35850084691361145,
+      "r_corr_sign_gini_neg": 0.21997294410987636
+    }
+  },
+  "theta_grid": null,
+  "title": "H5 Trust \u2014 cold rerun"
+}

@@ -48,9 +48,16 @@ reports/summaries/*
 !reports/summaries/v1_0_package_synth_summary.json
 !reports/summaries/v1_1_package_synth_summary.json
 !reports/summaries/v1_1_protocol_synth_mc50_summary.json
-!reports/summaries/h5_trust_evidence_summary.json
 !reports/summaries/wvs_gps_application_summary.json
 !reports/.gitkeep
+
+# Internal project-management docs: kept locally, not shipped. Tracked under
+# reports/ are the math spec, the final engineering report, and proof summaries.
+reports/DEVELOPMENT_PLAN*.md
+reports/VERIFIED_TASK_INVENTORY.md
+reports/cvprofiles_scan.md
+reports/REPO_HYGIENE_REVIEW_*.md
+reports/synth_v3_gate_spec.md
 
 # Large local data (fixtures small enough to commit are OK under data/fixtures)
 data/synthetic/generated/
@@ -67,12 +74,6 @@ credentials.json
 # Real-world audit run dumps (keep data/ + proof JSON; regenerate runs)
 evals/realworld/**/runs_*/
 evals/realworld/**/*.parquet
-
-# H5 Trust: large local raw + aux caches (fetched/copied locally; frozen
-# scores.csv + manifest are committed under evals/h5_trust/data/)
-data/h5_trust_raw/
-data/h5_trust_aux/
-evals/h5_trust/runs_verify/
 
 # WVS/GPS patience application: model GGUFs (multi-GB, never commit), smoke
 # staging dirs, and API caches are regenerable. Frozen inputs under
