@@ -1,36 +1,29 @@
 # cvprofiles tutorials
 
 Notebooks run against the **installed package** matching this checkout.
-Part 1 of the core notebook and the diagnostics / IRT / sensemakr tours generate
-every input inline. The historical H5 appendix and the WVS/GPS flagship builder
-need the repository checkout for frozen files.
+The core notebook and the diagnostics / IRT / sensemakr tours generate every
+input inline — no repository files needed. The WVS/GPS flagship builder uses
+the repository checkout for its frozen inputs.
 
 ## Audience levels
 
 | Level | Notebook | Who it is for |
 |---|---|---|
-| **Core** | `cvprofiles_tutorial.ipynb` | First run: synthetic SCORE→REPORT + empty-set contrast. Part 2 is a **historical** H5 Trust appendix, not the v3 flagship. |
+| **Core** | `cvprofiles_tutorial.ipynb` | First run: synthetic SCORE→REPORT + empty-set contrast. Fully self-contained (pip install is enough). |
 | **Diagnostics** | `cvprofiles_diagnostics_tour.ipynb` | Next: full evaluator + bootstrap / θ-grid / δ-grid / anchors tour on one designed menu. |
 | **Upstream / downstream** | `cvprofiles_irt_scoring_tutorial.ipynb`, `cvprofiles_sensemakr_tutorial.ipynb` | IRT as a SCORE-upstream scorer; Cinelli–Hazlett OVB on a survivor (orthogonal to the validity layer). |
 | **Flagship inputs** | `cvprofiles_wvs_gps_inputs.ipynb` | Authoring the four frozen inputs for the WVS/GPS **patience** flagship (`evals/wvs_gps_preferences/`). |
 
 ## 1. `cvprofiles_tutorial.ipynb` — the core walk-through
 
-Two parts:
-
-1. **Part 1 (synthetic):** builds a scores matrix inline, writes the SCORE/RESTRICT
-   inputs to disk, runs a full profile, and shows the empty-set contrast. Needs no
-   repository files — only the installed package.
-2. **Part 2 (historical H5 Trust):** reproduces the frozen country-level
-   generalized-trust evaluation (n=35) from `evals/h5_trust/data/`. Re-graded
-   2026-08-07 to a historical/regression witness. **Not the v3 flagship.**
-   The live flagship is WVS/GPS patience (`evals/wvs_gps_preferences/`,
-   `tutorials/cvprofiles_wvs_gps_inputs.ipynb`).
+Builds a scores matrix inline, writes the SCORE/RESTRICT inputs to disk, runs a
+full profile, and shows the empty-set contrast. Needs only the installed
+package.
 
 ## 2. `cvprofiles_diagnostics_tour.ipynb` — the v2.0 measure-discipline tour
 
 A single synthetic construct with a designed menu of five measures exercises the full
-**v2.0 diagnostic stack**:
+diagnostic stack:
 
 - all four restriction evaluators in one network (`corr_min`, `corr_sign`, `mean_order`,
   `rank_agree`);
@@ -71,14 +64,12 @@ framework (the `sensemakr` method) to a survivor's standardized OLS coefficient:
 
 Synthetic oracle walk-through, then authoring the four frozen inputs for the
 WVS Wave 7 × GPS **patience** flagship (including the country-level units-split
-holdout). This is the public-facing empirical example, not H5.
+holdout). This is the public-facing empirical example.
 
 ## Why "independent"
 
 Verification installs the package from **this checkout** (or a matching wheel) into a
-fresh virtual environment, then executes the notebook. Part 2 of the core tutorial
-needs the checkout for the frozen H5 inputs, so point it at the repo via
-`CVPROFILES_REPO`:
+fresh virtual environment, then executes the notebook:
 
 ```bash
 # fresh venv, checkout install (PYTHONPATH unset so a different src tree cannot leak in)
@@ -93,10 +84,6 @@ env -u PYTHONPATH /tmp/cvp_tutorial_venv/bin/python -m jupyter nbconvert \
     --output /tmp/cvp_tour_exec_out.ipynb
 ```
 
-For the core tutorial's historical H5 part, add `CVPROFILES_REPO=/path/to/cvprofiles`
-to the nbconvert command (nbconvert kernels start in the notebook's folder, so
-relative data paths fail outside the checkout).
-
 The Phase-3 notebooks (IRT scoring, sensemakr) are regenerated from
 `tools/build_tutorials.py`:
 
@@ -110,5 +97,3 @@ python tools/build_tutorials.py   # emits both notebooks into tutorials/
 - The engine is score-agnostic and model-free; the menu and network are researcher-owned.
 - IRT and OVB-sensitivity code is intentionally hand-rolled and self-contained — the point
   is auditable upstream/downstream patterns, not new dependencies.
-- The H5 replication is a **historical / regression witness** (re-graded 2026-08-07).
-  It is not a final paper lock and not the v3 flagship.

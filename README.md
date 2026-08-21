@@ -143,7 +143,7 @@ Tutorials (run against the installed package, inputs generated inline):
 
 | Tutorial | What it covers |
 |---|---|
-| `tutorials/cvprofiles_tutorial.ipynb` | **Core.** Synthetic walk-through + empty-set contrast; Part 2 is a **historical** H5 Trust appendix (not the v3 flagship) |
+| `tutorials/cvprofiles_tutorial.ipynb` | **Core.** Synthetic walk-through + empty-set contrast; fully self-contained (pip install is enough) |
 | `tutorials/cvprofiles_diagnostics_tour.ipynb` | v2.0 measure-discipline tour: all evaluators + diagnostics |
 | `tutorials/cvprofiles_irt_scoring_tutorial.ipynb` | IRT as a SCORE-upstream scoring technology |
 | `tutorials/cvprofiles_sensemakr_tutorial.ipynb` | OVB sensitivity (Cinelli–Hazlett) on a survivor |

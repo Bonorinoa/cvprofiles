@@ -1,0 +1,62 @@
+name: release
+
+# Tag-push release pipeline: build → fresh-venv smoke → GitHub Release.
+# PyPI publish is owner-run (`uv publish`) after the smoke passes; this keeps
+# the trusted-publisher/token question out of the automated path.
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-release:
+    name: build + smoke + GitHub Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          python-version: "3.11"
+
+      - name: Build wheel + sdist
+        run: uv build
+
+      - name: Fresh-venv install from wheel + demo smoke
+        run: |
+          uv venv /tmp/release_venv --python 3.11
+          uv pip install --python /tmp/release_venv/bin/python dist/*.whl
+          /tmp/release_venv/bin/cvprofiles --version
+          /tmp/release_venv/bin/cvprofiles demo --out /tmp/release_demo >/dev/null
+          test -f /tmp/release_demo/report.html
+          test -f /tmp/release_demo/range.json
+          /tmp/release_venv/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path("/tmp/release_demo/range.json").read_text())
+          a = json.loads(Path("/tmp/release_demo/admissible.json").read_text())
+          assert r["empty"] is False
+          assert set(a["M_star"]) == {"m_good", "m_weak"}
+          print("release smoke ok", a["M_star"], r["L"], r["U"])
+          PY
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
