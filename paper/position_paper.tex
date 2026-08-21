@@ -1,0 +1,1319 @@
+\documentclass[10pt,letterpaper]{article}
+
+% -----------------------------------------------------------------------------
+% Measuring What We Mean — position paper v8 (2026-08-15 LLM join)
+% Construct-identified inference (composition of CV, multiverse, PI).
+% Engine: cvprofiles 3.0.2. Main application: demeaned cells + fresh
+% open-weight scores. Country human+LLM is the underpowered appendix.
+% 2026-08-10 K=5 freeze deleted (not recycled).
+% -----------------------------------------------------------------------------
+\usepackage[margin=0.88in,top=0.82in,bottom=0.82in]{geometry}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{assumption}{Assumption}[section]
+\usepackage{booktabs,array,tabularx}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,fit,backgrounds,decorations.pathreplacing}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+
+\definecolor{econblue}{RGB}{20,55,95}
+\definecolor{slate}{RGB}{79,89,104}
+\definecolor{mist}{RGB}{242,245,249}
+\definecolor{rulegray}{RGB}{203,210,220}
+\definecolor{warm}{RGB}{132,85,38}
+\definecolor{passgreen}{RGB}{42,104,78}
+\definecolor{failred}{RGB}{150,55,55}
+\definecolor{amber}{RGB}{170,120,40}
+
+\hypersetup{colorlinks=true,linkcolor=econblue,citecolor=econblue,urlcolor=econblue,
+  pdftitle={Measuring What We Mean: Construct Validity When Measures Are Cheap},
+  pdfauthor={Augusto Gonzalez-Bonorino, Kseniia Biriukova, and Monica Capra}}
+\setlength{\parindent}{1.15em}
+\setlength{\parskip}{0.18em}
+\setlength{\headheight}{20pt}
+\titlespacing*{\section}{0pt}{1.0em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.68em}{0.22em}
+\titleformat{\section}{\large\bfseries\color{econblue}}{\thesection.}{0.55em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{econblue}}{\thesubsection}{0.45em}{}
+\setlist[itemize]{leftmargin=1.3em,itemsep=0.12em,topsep=0.15em}
+\setlist[enumerate]{leftmargin=1.45em,itemsep=0.12em,topsep=0.15em}
+\captionsetup{font=small,labelfont={bf,color=econblue},skip=4pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{slate} EconLLM Lab \textperiodcentered\ Position paper v8}
+\fancyhead[R]{\small\color{slate}\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rulegray}\leaders\hrule height \headrulewidth\hfill}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\color{slate}\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+\newcommand{\SCA}{\textsc{sca}}
+\newcommand{\LLM}{\textsc{llm}}
+\newcommand{\DPO}{\textsc{dpo}}
+\newcommand{\GPS}{\textsc{gps}}
+\newcommand{\WVS}{\textsc{wvs}}
+\newcommand{\WEIRD}{\textsc{weird}}
+\newcommand{\cvp}{\texttt{cvprofiles}}
+\newcommand{\M}{\ensuremath{\mathcal{M}}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Rset}{\mathcal{R}}
+\newcommand{\Bset}{\mathcal{B}}
+
+\begin{document}
+
+% Cover
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.1cm}
+{\color{econblue}\rule{\textwidth}{1.15pt}}\\[0.45em]
+{\LARGE\bfseries\color{econblue} Measuring What We Mean}\\[0.16em]
+{\LARGE\bfseries\color{econblue} Construct Validity When Measures Are Cheap}\\[0.45em]
+{\color{econblue}\rule{\textwidth}{0.55pt}}\\[0.75em]
+{\large A position paper on construct-identified inference in the age of AI}\\[0.95em]
+{\large\textbf{Augusto Gonzalez-Bonorino}\textsuperscript{1}\quad
+\textbf{Kseniia Biriukova}\textsuperscript{2}\quad
+\textbf{Monica Capra}\textsuperscript{1,3}}\\[0.5em]
+{\small\textsuperscript{1}Department of Economics, Arizona State University; EconLLM Lab.\\
+\textsuperscript{2}Department of Information Systems, Arizona State University; EconLLM Lab.\\
+\textsuperscript{3}Department of Economics, Claremont Graduate University; EconLLM Lab.}\\[0.75em]
+{\normalsize August 2026 \textperiodcentered\ Working paper / position paper}\\[0.35em]
+{\color{econblue}\rule{0.28\textwidth}{0.35pt}}
+\end{center}
+
+\vspace{0.6em}
+
+% --- Status box ---------------------------------------------------------------
+\noindent\colorbox{mist}{\parbox{0.965\textwidth}{\small\vspace{0.3em}
+\textbf{Status.}
+The companion package \cvp{}~3.0.2 is released in the public repository (tag \texttt{v3.0.2}); version 3.0.1 is the current PyPI release (2026-08-14 local / 2026-08-15 UTC).
+This version reports a two-resolution application of construct-identified inference to patience and trust.
+The powered surface is 480 country-demeaned sex-by-age cells; two freshly scored open-weight log-probability columns face the same frozen human networks.
+The country-level profiles ($n=41$ and $n=35$), including those cheap columns, are a complete but underpowered appendix.
+Empty admissible sets, wide uncertainty bands, model disagreement, and screen-versus-estimand conflict are reported as findings.
+\vspace{0.3em}}}
+
+\vspace{0.85em}
+
+% --- Statement of significance -------------------------------------------------
+\section*{Statement of significance}
+Scientists work through measures of constructs they cannot see.
+Cheap model scores multiply the representations.
+This paper reports only the image of a downstream estimand over measures that survive a declared nomological network.
+On patience and trust, an empty network sign-switches; a classical multitrait--multimethod screen retains no instrument; country-demeaned cells admit thrift and two open-weight patience scores while perseverance fails; the only cheap trust score that clears the same education bar points against \GPS{} trust.
+Two models given identical prompts do not agree on trust.
+The change is a reporting rule, not a preferred score: if the network cannot retain a representation, the paper cannot retain the conclusion.
+
+% --- Abstract ------------------------------------------------------------------
+\section*{Abstract}
+Candidate measures of latent constructs are cheap: a survey module, a proxy item, a composite, a prompted language model, or a trained policy can each score the same construct, and different scores can move conclusions.
+This paper reports only the range of a downstream scientific quantity over the measures that survive a declared validity screen---a set of predeclared convergent and discriminant implications with researcher-owned thresholds.
+With no validity restriction, that range is the unrestricted specification curve.
+Selection can be held out and can fail, and sampling fragility induced by data-dependent screening is reported additively as an uncertainty band, not as a confidence set for the headline range.
+
+The framework is implemented in the open package \cvp{}~3.0.2.
+On a frozen seven-measure patience menu the empty-network special case recovers the sign-switching range $[-0.219,0.565]$; a Campbell--Fiske $2\times 2$ retains no instrument, because the canonical \WVS{} trust item tracks \GPS{} patience more closely than \GPS{} trust.
+On 480 country-demeaned demographic cells, thrift and two open-weight patience scores survive a predeclared education bar and recover \GPS{} patience in $[0.245,0.556]$ while perseverance is anti-aligned; no \WVS{} trust measure clears that bar, and the only cheap trust score that does is negatively associated with \GPS{} trust.
+
+Two models given identical prompts are not two methods, and neither application yields a preferred measure: the same screen produces different speaker lists at different resolutions, and those disagreements are what the composition is for.
+
+\noindent\textbf{Keywords:}
+construct validity; measurement uncertainty; partial identification; multiverse; AI measurement
+
+\section*{Plain-language abstract}
+Scientists rarely observe things like patience or trust directly; they observe scores---survey answers, composite indexes, or, increasingly, outputs of language models---and different measures can lead to different conclusions.
+Artificial intelligence has made candidate measures cheap, so the hard problem is deciding which measures are trustworthy and which conclusions survive that decision.
+This paper proposes a reporting rule: researchers declare a menu of candidate measures and a set of pre-registered expectations a credible measure should satisfy (for example, a patience measure should rise with education and should not collapse into risk-taking); measures that satisfy every expectation are admissible, and the paper reports the range of the scientific result across those admissible measures rather than a single preferred score.
+If no measure survives, that emptiness is a finding, not a failure.
+The rule is implemented in a free, open-source software package and demonstrated on international survey data on patience and trust, including scores produced by two open-weight language models.
+The demonstration shows the rule does real work: an unrestricted menu of patience measures sign-switches on a development question; the canonical trust item behaves more like a patience measure than a trust measure; and the only cheap trust score that clears the education bar points against the criterion it was asked to recover.
+The paper's conclusion is that disagreement across measures, models, and resolutions is the measurement result---information to be reported, not noise to be hidden.
+
+\section{The inferential problem when measures become cheap}
+\label{sec:problem}
+
+\subsection{Science is a pipeline}
+Empirical science is a pipeline.
+Hypothesis generation proposes constructs and candidate operationalizations; measurement generation maps inputs into scores; construct validation asks whether those scores support the interpretation they are given; estimation uses the scores in downstream analyses; and a conclusion stage reports what has been learned.
+Each stage has its own tools and its own failure modes, and the stages compose: a conclusion is only as strong as the weakest link in the chain (Figure~\ref{fig:systems}).
+For most of the history of empirical social science, the binding constraint sat at the measurement stage: producing a new measure was costly, and validation effort concentrated on a few carefully constructed instruments.
+Artificial intelligence relaxes that constraint.
+Prompted language models, log-probability elicitation, embeddings, and trained policies can each produce a candidate score for the same construct at low marginal cost~\cite{horton2023,manning2024}, and the supply of candidate scores grows quickly.
+What does not grow is the evidence that any particular score column measures the construct.
+In particular, a standard error computed conditional on a chosen score column---however small---cannot establish that the column measures the construct: sampling variability and construct validity are different objects, and no amount of the former substitutes for the latter.
+When measures become cheap, validation becomes the scarce stage of the pipeline.
+
+% Figure 1 — systems view of empirical knowledge production (input from §1.1)
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  lane/.style={draw=econblue, rounded corners=3pt, fill=mist, align=center,
+               text width=1.02in, minimum height=0.95in, inner sep=5pt, line width=0.7pt},
+  tool/.style={draw=slate!70, dashed, rounded corners=2pt, fill=white, align=center,
+               text width=0.98in, minimum height=0.6in, inner sep=3pt, font=\scriptsize},
+  cvbox/.style={draw=passgreen, rounded corners=3pt, fill=passgreen!10, align=center,
+                text width=1.6in, inner sep=5pt, line width=0.8pt},
+  arr/.style={-{Stealth[length=2.0mm]}, line width=0.8pt, color=slate},
+  darr/.style={-{Stealth[length=2.0mm]}, line width=0.7pt, color=slate, dashed},
+  tag/.style={font=\scriptsize\itshape\color{slate}}]
+% lane row
+\node[lane] (h) at (0,0) {\textbf{Hypothesis}\\\textbf{generation}\\\scriptsize\color{slate}what to mean};
+\node[lane, right=0.16in of h] (g) {\textbf{Measurement}\\\textbf{generation}\\\scriptsize\color{slate}how to operationalize};
+\node[lane, right=0.16in of g] (v) {\textbf{Construct \&}\\\textbf{measure}\\\textbf{validation}\\\scriptsize\color{slate}which interpretations};
+\node[lane, right=0.16in of v] (e) {\textbf{Estimation \&}\\\textbf{inference}\\\scriptsize\color{slate}what follows};
+\node[lane, right=0.16in of e] (c) {\textbf{Conclusion}\\\scriptsize\color{slate}what survives choice};
+\draw[arr] (h)--(g); \draw[arr] (g)--(v); \draw[arr] (v)--(e); \draw[arr] (e)--(c);
+% tool row
+\node[tool, below=0.62in of h] (ht) {theory, prior\\ evidence, registry};
+\node[tool, below=0.62in of g] (gt) {surveys, experiments,\\ LLMs, embeddings,\\ trained policies};
+\node[tool, below=0.62in of e] (et) {regression, causal ID,\\ prediction, ranking};
+\node[tool, below=0.62in of c] (ct) {robust result set\\ $\Bset^*$, $[L,U]$};
+\draw[arr] (h)--(ht); \draw[arr] (g)--(gt); \draw[arr] (e)--(et); \draw[arr] (c)--(ct);
+% cvprofiles span
+\node[cvbox, below=0.62in of v] (cv) {\textbf{\texttt{cvprofiles}} (validation lane)\\[1pt]
+ $\M^*$, $\Bset^*$, $[L,U]$; uncertainty band,\\ empty rate, holdout verdicts, boundary flags};
+\draw[arr] (v)--(cv);
+% braces
+\draw[decorate,decoration={brace,amplitude=3pt}, color=slate]
+  ([yshift=0.08in]h.north west) -- ([yshift=0.08in]g.north east)
+  node[midway, above=4pt, font=\scriptsize\bfseries\color{slate}] {Theory \& design};
+\draw[decorate,decoration={brace,amplitude=3pt}, color=econblue]
+  ([yshift=0.08in]v.north west) -- ([yshift=0.08in]c.north east)
+  node[midway, above=4pt, font=\scriptsize\bfseries\color{econblue}] {Empirical science};
+% activity tags (one compact line, clear of the cv box)
+\node[tag, align=center, anchor=north, text width=5.4in] at (cv.south) [yshift=-0.42in]
+  {hypothesis testing $\to$ estimation \textperiodcentered\ sensitivity $\to$ dotted diagnostics
+   \textperiodcentered\ robustness $\to$ dashed into validation};
+% dashed robustness arrow into the validation lane
+\draw[darr] (et.north) to[out=90,in=-40] (cv.south east);
+\end{tikzpicture}
+\caption{A systems view of empirical knowledge production.
+AI primarily expands the measurement-generation stage; this paper disciplines the bridge from construct validation to estimation and conclusions.
+Solid arrows denote artifacts, dashed denote researcher-owned commitments, and the diagnostics that monitor the validation lane are reported separately from the headline outputs.}
+\label{fig:systems}
+\end{figure}
+
+
+\subsection{The measured failure mode}
+The change is not hypothetical; practice has been audited.
+Baumann et al.~replicate annotation tasks from published social-science studies and show that plausible LLM prompt choices produce incorrect downstream conclusions for roughly 31\% of hypotheses~\cite{bauman2026}.
+Desai, Card, and Jacobs audit LLM-based measurement in flagship social-science journals and find validation practices inconsistent and often limited relative to the centrality of the measurements~\cite{desai2026}.
+Kim et al.~document that LLM errors are correlated far beyond chance---same-wrong-answer agreement of 42\% against a 13\% chance baseline, with better models \emph{more} correlated, not less~\cite{kim2025}.
+Those audits document undeclared menus and correlated generator error; they are not, as reported, failed restrictions against a human criterion, and they are not evidence that $\Bset^*$ is empty.
+Two implications follow.
+First, agreement across models is weak evidence of validity: models that share training pipelines can share mistakes, and consensus may reflect correlated error rather than construct-relevant signal.
+Second, engineering quality is not a substitute for validation.
+Yin, Vu, and Persico show that LLM-based occupational-exposure scores---inputs to a large applied literature---are unstable across model choices~\cite{yinvu2026}.
+The scale is measurable: in Hall's hand-coded classification of the PolMeth 2026 program, 26\% of presentations were core generative-AI, and annotation plus measurement accounted for about 60\% of those~\cite{hall2026}.
+Measurement generation has arrived in the pipeline; validation practice has not kept pace.
+
+\subsection{The missing composition}
+The audits above share a feature: each documents a failure inside a single stage of the pipeline.
+What is missing is the composition---an account of how measurement, validation, and estimation combine into a scientific conclusion, and of what a robustness claim means once measures are cheap.
+Without such an account, two reflexes dominate.
+One declares a result fragile because it shifts under any new operationalization, treating every plausible score column as equally entitled to enter the analysis.
+The other declares a result robust because a single operationalization was retained.
+Both reflexes confuse the menu of candidate measures with the evidence about the menu.
+The claim this paper works from is boxed below.
+
+\vspace{0.5em}
+\noindent\fcolorbox{rulegray}{mist}{\parbox{0.94\textwidth}{%
+\textbf{CORE CLAIM.}
+A scientific conclusion should not be declared fragile because it changes under operationalizations that fail a declared validity argument, nor robust because a single operationalization was retained.
+The relevant robustness set is the image of the downstream estimand over the surviving set: $\Bset^*=\{\beta(m):m\in\M^*\}$.}}
+\vspace{0.5em}
+
+The boxed claim relocates the burden of robustness: stability is required over measures that survive a declared validity argument, not over all plausible operationalizations.
+The claim is deliberately one-directional: validity evidence screens measures.
+Classical construct validation is reciprocal---anomalous patterns among rejected measures can motivate revising the construct or the network---and we state that discovery channel explicitly in Appendix~\ref{app:automation} rather than collapsing it into the confirmatory screen.
+The rest of this section makes the objects precise and states the contributions.
+
+\subsection{Four objects}
+The framework needs four objects.
+A \emph{construct} $C$ is the scientific concept of interest, defined by its intended interpretation rather than by any single column.
+A \emph{menu} $\M$ is the finite set of candidate measures the researcher declares.
+A \emph{validity argument} $\Rset(C)$ encodes what a measure of $C$ should do: convergent and discriminant implications derived from the construct's nomological role, written as moment inequalities $\E[g_r(m,V;\tau_r)]\ge 0$ over auxiliary variables $V$, with researcher-owned thresholds $\tau_r$.
+A \emph{downstream estimand} $\beta(m)$ is the scientific quantity computed when measure $m$ is used.
+The validity argument screens the menu: a measure survives when its sample slack $s_r(m)$ clears every restriction,
+\begin{equation}
+\M^* \;=\; \bigl\{ m \in \M : s_r(m) \ge 0 \text{ for every } r \in \Rset(C) \bigr\},
+\label{eq:admissible-set}
+\end{equation}
+and the surviving set $\M^*$---not a single retained operationalization---is the object of inference.
+Remaining measurement choice is then propagated into the result: the robust result set is the image of the estimand over survivors,
+\begin{equation}
+\Bset^* \;=\; \bigl\{ \beta(m) : m \in \M^* \bigr\},
+\label{eq:robust-image}
+\end{equation}
+summarized for a scalar estimand by its range,
+\begin{equation}
+[L,U] \;=\; \Bigl[ \min_{m\in\M^*} \beta(m),\; \max_{m\in\M^*} \beta(m) \Bigr].
+\label{eq:headline-range}
+\end{equation}
+Equations~\eqref{eq:admissible-set}--\eqref{eq:headline-range} define the admissible set, the robust result set, and the headline range.
+Validity here is whether a score warrants the intended interpretation of $C$, operationalized as nonnegative slack on a declared $\Rset(C)$; robustness is whether $\beta$ survives remaining measurement choice inside $\M^*$; the uncertainty band of Section~\ref{sec:uncertainty} is selection uncertainty, not a confidence interval.
+The construct-identified result set is deliberately conditional---on the construct, the menu, the validity argument, the thresholds, and the sampling frame.
+Change any component and $\M^*$, $\Bset^*$, and $[L,U]$ are different objects; every component must therefore be declared and auditable rather than inferred from the data.
+
+\subsection{Four contributions}
+The contributions follow in deliberately conservative order.
+\textit{(i) Validity-constrained measurement robustness.}
+$\Bset^*$ is the image of the estimand over measures that survive a declared validity argument, not an unrestricted multiverse; fragility and robustness are therefore attributed to the right cause.
+\textit{(ii) A falsifiable selection rule.}
+Restrictions or units can be held out prospectively, and validity-guided selection can fail---against held-out evidence and against a random-selection baseline.
+\textit{(iii) Separation of headline from diagnostics.}
+The headline range is reported separately from additive sampling diagnostics: an uncertainty band (selection uncertainty, not a confidence set), an empty-replicate rate, and boundary attribution.
+\textit{(iv) An auditable, model-free implementation and a two-resolution application.}
+The method ships in the released package \cvp{}~3.0.2~\cite{cvprofiles}.
+The confirmatory application places human measures of patience and of trust under one contract at two resolutions, with leftover restrictions, additive sampling diagnostics, and two nested special cases computed on the same objects.
+
+\subsection{Roadmap}
+The remainder of the paper locks two commitments.
+Novelty is claimed only in the operational composition of three existing traditions, in a selection rule that can fail, and in a released implementation.
+The application is evidence about two constructs at two resolutions, not a general standard journals should require and not a measure of culture.
+Section~2 situates the argument among three traditions; Section~3 formalizes the objects, including the empty-network and Campbell--Fiske special cases; Section~4 documents the released implementation; Section~5 reports the two-resolution application; Section~6 states what the framework does and does not claim; Section~7 concludes.
+
+\section{Three traditions, one missing layer}
+\label{sec:traditions}
+
+\subsection{Construct validity supplies the restrictions}
+Construct validity is the oldest and most mature of the three traditions.
+Cronbach and Meehl introduced the nomological network: a construct earns its meaning through the laws and observable implications in which it participates, and validation consists of testing those implications~\cite{cronbach1955}.
+Campbell and Fiske sharpened the empirical content into convergent and discriminant criteria, operationalized through the multitrait--multimethod matrix~\cite{campbell1959}.
+Messick and, later, Kane reframed validity as the defensibility of score interpretation and use---a property of interpretations and uses, not of instruments~\cite{messick1995,kane2013}.
+Borsboom and colleagues added a realist caution: a measure is valid for a construct only if the construct exists and causally produces the score~\cite{borsboom2004}.
+This paper takes the observable-implication strand~\cite{cronbach1955,campbell1959}.
+Kane's view is the pair $(C,\beta(m))$, not an extra screen on $m$; Borsboom's causal-production standard is not required for the plug-in admissible set, so an empty $\M^*$ is a failed nomological test, not a failed existence claim.
+Computational social science has begun importing this vocabulary.
+Li et al.~formalize the proxy presumption---treating embeddings as measures without evidence---and propose a construct-validity protocol with discriminant, incremental, and predictive checks~\cite{proxy2026}.
+Halterman and Keith stage validation for LLM-based coding systems~\cite{halterman2026}.
+Licht et al.~show that the elicitation protocol, such as pairwise comparison over direct scoring, materially changes what LLM-based measures record~\cite{licht2025}.
+These contributions share a unit: each validates a \emph{procedure}---a scoring method, an item, an instrument---against a criterion.
+Campbell and Fiske already place several measures in one matrix; the matrix is evidence about each cell.
+What that literature does not do is take the survivors as the domain of a downstream estimand and report $\Bset^*=\{\beta(m):m\in\M^*\}$.
+
+\subsection{Multiverses expose operationalization uncertainty but do not adjudicate meaning}
+A second tradition quantifies how conclusions depend on analytic choices.
+Multiverse analysis enumerates a large space of defensible specifications and reports the distribution of results across it~\cite{steegen2016}; specification-curve analysis supplies a reporting discipline for the same idea~\cite{simonsohn2020}.
+At the measurement layer the logic is striking: Hanel and Zarzeczna enumerate 262{,}143 operationalizations of well-being and show that conclusions about the well-being of religious groups depend on which operationalization one examines~\cite{hanelzarzeczna2023}.
+The multiverse is an exploratory surface: it maps where conclusions live under alternative choices.
+It does not, by itself, adjudicate which choices carry the intended interpretation.
+Del Giudice and Gangestad make the point sharply: candidate measures differ in validity and reliability, and treating them as interchangeable branches of a multiverse can itself mislead~\cite{delgiudice2021}.
+The relevant robustness set is therefore not the image of the estimand over every plausible operationalization; it is the image over the measures that survive a declared validity argument.
+An unrestricted multiverse describes the space of analytic choice; the image of $\beta$ over $\M^*$, not over $\M$, is the robustness object.
+The economics tradition reached the same fork a generation earlier.
+Extreme-bounds analysis ranged the estimand over every defensible specification, with no admissibility test separating credible from incredible choices~\cite{leamer1983}; the resulting verdict---``everything is fragile''---treated that breadth as the collapse of specification robustness~\cite{salaimartin1997}.
+The forking-paths critique generalized the mechanism: with enough analytic freedom, some defensible path produces any desired conclusion~\cite{gelmanloken2014}.
+This paper's screen is the admissibility test EBA lacked, moved from specifications to measurement functions: the unrestricted multiverse over $\M$ is the named special case, and robustness is judged over the survivors $\M^*$, with the validity argument itself held-out falsifiable (Section~\ref{sec:falsify}).
+
+\subsection{Partial identification supplies the set logic, not the validity argument}
+The third tradition supplies the formal set logic.
+Partial identification asks what can be learned about a parameter from data and maintained assumptions alone, reporting identified sets rather than point estimates~\cite{manski2003,molinari2020}; confidence sets for partially identified parameters extend the logic to sampling uncertainty~\cite{imbensmanski2004,stoye2009}.
+The connection to measurement is recent and explicit.
+In the 2026 NBER Summer Institute Methods Lectures, \emph{Estimation and Inference with AI-Generated Data}, Dell and Rambachan frame the nomological network as partial identification under theoretically motivated moment restrictions---Dell on measurement and construct validity, Rambachan on multiple measurements and data fusion---and explicitly call for principled, widely accepted methods for construct validity~\cite{dellrambachan2026}.
+The nearest formal neighbor is Chen, Rambachan, and Tamer, whose restrictions are benchmark-informed bounds on error correlation for a downstream parameter~\cite{chenrttamer2026}.
+The present framework differs in the object of inference: our restrictions are menu-level nomological moment inequalities, the surviving set $\M^*$ is the object, and the selection rule is held-out falsifiable.
+Other recent work occupies adjacent territory without a surviving set: Ogut and Yin derive curvature bounds from multiple nonlinear measurements~\cite{ogutyin2026}; Messing shows that naive standard errors in LLM evaluation pipelines can be 40--60\% too small---a diagnosis about evaluation scores, not construct measures~\cite{messing2026}; Canen and Enamorado correct regressor measurement error by split-sample procedures---a correction, not a selection~\cite{canenenamorado2026}.
+None performs menu-level validation with a surviving set and a falsifiable selection rule.
+
+\subsection{AI makes the old problem large}
+The fourth development is not a tradition but a shock.
+AI measurement generators---prompted elicitation, log-probability scoring, persona steering~\cite{disca2026}, preference fine-tuning~\cite{plural2026,palms2026}, and synthetic-agent pipelines such as \SCA{}~\cite{capra2025}---expand the supply of candidate scores at low marginal cost.
+Each technology enters $\M$ only as a map on the same declared units; pipelines that replace the sample, including some \SCA{}-style designs, are not menu expansions under Definitions~A.1--A.3.
+Engineering sophistication is not construct validity: a fluent generator can produce a score column that fails every nomological implication of the construct it purports to measure.
+The correct discipline is to keep generators and validators separate.
+Generators expand the menu; they do not adjudicate it.
+That separation, long standard for conventional measures, becomes the central discipline when measures are cheap.
+AI does not create the measurement problem; it makes an old problem large.
+
+\subsection{Synthesis}
+Each tradition contributes one piece.
+Psychometrics supplies the restrictions and the interpretation-based conception of validity.
+The multiverse tradition supplies the demand that conclusions be reported across choices rather than under a single one.
+Partial identification supplies the set logic in which a surviving set and its image are well-defined.
+The composition those traditions do not jointly supply is the map $\Rset(C)\to\M^*\to\Bset^*$.
+A holdout that makes screening prospectively falsifiable, and a freeze that makes it auditable, are protocol commitments; they are not implied by the map.
+That composition---the ordering of established ideas rather than a new taxonomy---is the contribution of this paper.
+
+% \E \cvp \LLM (etc.) and packages (amsmath, booktabs, tabularx) come from the
+% assembled document's preamble. Math is faithful to the v7 formal spine.
+\section{Construct-identified inference}
+\label{sec:construct}
+
+This section fixes the objects, the screen, the falsification designs, and the sampling diagnostics.
+
+% Figure 2 — core objects and epistemic ownership (input from §3.1)
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  upbox/.style={draw=slate, dashed, rounded corners=2pt, fill=white, align=center,
+                text width=1.1in, minimum height=0.72in, inner sep=3pt},
+  box/.style={draw=econblue, rounded corners=2pt, fill=mist, align=center,
+              text width=1.1in, minimum height=0.72in, inner sep=3pt},
+  msbox/.style={draw=passgreen, rounded corners=2pt, fill=passgreen!10, align=center,
+                text width=1.1in, minimum height=0.72in, inner sep=3pt},
+  downbox/.style={draw=econblue, rounded corners=2pt, fill=mist, align=center,
+                  text width=1.2in, minimum height=0.72in, inner sep=3pt},
+  diagbox/.style={draw=amber, dotted, rounded corners=2pt, fill=amber!8, align=center,
+                  text width=1.2in, minimum height=0.55in, inner sep=3pt},
+  arr/.style={-{Stealth[length=1.8mm]}, line width=0.7pt, color=slate},
+  dottedarr/.style={-{Stealth[length=1.6mm]}, line width=0.6pt, color=amber, dotted},
+  pinbox/.style={draw=warm, rounded corners=2pt, fill=warm!8, align=center,
+                 text width=0.95in, minimum height=0.5in, inner sep=3pt},
+  col/.style={font=\scriptsize\bfseries}]
+% column labels
+\node[col, color=slate] at (0,1.62) {Upstream};
+\node[col, color=econblue] at (5.3,1.62) {Validity layer};
+\node[col, color=passgreen] at (8.0,1.62) {Object of inference};
+\node[col, color=econblue] at (11.6,1.62) {Scientific outputs};
+% top row
+\node[upbox] (gen) at (0,0.4) {\textbf{Generators}\\\scriptsize survey, LLM,\\ multimodal, policies};
+\node[upbox] (C2) at (0,-0.95) {\textbf{Construct $C$}\\\scriptsize prose definition};
+\node[box] (menu) at (2.6,0.4) {\textbf{Menu $\M$}\\\scriptsize unit$\times$score table};
+\node[box] (net) at (5.3,0.4) {\textbf{Network}\\\scriptsize $\Rset$, $\tau$, $\delta$; aux $V$};
+\node[box] (hold) at (5.3,-0.95) {\textbf{Holdout}\\\scriptsize stage and/or units};
+\node[msbox] (ms) at (8.0,0.4) {\textbf{Admissible set}\\\scriptsize $\M^*$};
+\node[downbox] (b) at (10.7,0.4) {\textbf{Downstream}\\\scriptsize $\beta$ on survivors};
+\node[downbox] (range) at (13.2,0.4) {\textbf{Robust result}\\\scriptsize $\Bset^*$, $[L,U]$};
+% diagnostics dotted lane (separate row, clear of everything above)
+\node[diagbox] (band) at (10.7,-1.75) {\textbf{Uncertainty band}\\ empty rate, boundary};
+\node[diagbox] (grid) at (13.2,-1.75) {\textbf{Sensitivity}\\ $\tau$-grids, diagnostics};
+% arrows
+\draw[arr] (gen)--(menu); \draw[arr] (C2)--(net);
+\draw[arr] (menu)--(net); \draw[arr] (net)--(hold);
+\draw[arr] (hold)--(ms); \draw[arr] (ms)--(b); \draw[arr] (b)--(range);
+\draw[dottedarr] (ms.south) to[out=-90,in=135] (band.north);
+\draw[dottedarr] (band)--(grid);
+% freeze pin between commitments and compute
+\node[pinbox] (pin) at (6.7,-2.75) {\textbf{Freeze / run-id}\\\scriptsize pins commitments};
+\draw[dottedarr] (pin.north) to[out=90,in=-90] (hold.south);
+\node[font=\scriptsize\color{slate}, text width=5.9in, anchor=west] at (-0.6,-3.45)
+  {Dashed boxes are researcher- or generator-owned; the engine computes consequences and never authors $C$, $\M$, $\Rset$, or $\tau$.};
+\end{tikzpicture}
+\caption{Core objects and epistemic ownership of construct-identified inference.
+The admissible set $\M^*$ is the object of inference; $\Bset^*$ and $[L,U]$ are downstream scientific outputs computed only over survivors; sampling and sensitivity diagnostics live in a separate dotted lane; and a freeze/run-id pin sits between researcher commitments and engine compute.}
+\label{fig:core}
+\end{figure}
+
+
+\subsection{Primitives and notation}
+\label{sec:primitives}
+
+Every object of the framework has a formal counterpart; Table~\ref{tab:objects} collects them and Figure~\ref{fig:core} assembles them into the workflow.
+A \emph{construct} $C$ is the scientific concept of interest, defined in prose by its intended interpretation and independent of any score column.
+A \emph{measurement function} $m:\mathcal{X}\to\mathbb{R}$ maps available inputs to a unit-level score, or to a vector followed by a \emph{declared} scalarization.
+The \emph{menu} $\M=\{m_1,\ldots,m_J\}$ is the finite set of candidates declared by the researcher.
+\emph{Auxiliaries} $V$ are observed variables used to evaluate validity implications; they are not the construct.
+The \emph{nomological network} $\Rset(C)$ encodes those implications as moment restrictions with substantive thresholds $\tau_r$, following the classical validation tradition~\cite{cronbach1955,campbell1959} and its recent partial-identification reading~\cite{dellrambachan2026}.
+We reserve \emph{nomological network} for the broader theory from which $\Rset(C)$ is derived; $\Rset(C)$ itself is the finite, operationalized set of thresholded implications actually screened.
+A failed restriction can therefore mean either that $m$ is a poor measure or that the network supplied the wrong implication---the screen cannot by itself distinguish the two.
+The admissible set $\M^*$ retains the measures that pass every restriction; $\beta(m)$ is the downstream target; $\Bset^*$ is its image over $\M^*$, with scalar summary $[L,U]$; and $G(D,C)$ denotes a measurement-generation technology producing candidate measures from evidence $D$ and construct $C$.
+The owner column of Table~\ref{tab:objects} states the division of labor: commitments are authored upstream; the engine computes their consequences.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Objects of construct-identified inference.
+The owner column records who authors each object: the researcher or theory, the measurement generator jointly with the researcher, or the engine itself.
+The engine computes consequences of commitments; it does not author the construct, the menu, the restrictions, or the thresholds.}
+\label{tab:objects}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.6cm} X >{\raggedright\arraybackslash}p{2.7cm}@{}}
+\toprule
+\textbf{Object} & \textbf{Definition} & \textbf{Scientific owner} \\
+\midrule
+$C$ & Construct defined in prose by its intended interpretation, independent of any score column & researcher / theory \\
+$m$ & Measurement function $m:\mathcal{X}\to\mathbb{R}$, or a declared scalarization; maps inputs to a unit-level score & generator + researcher \\
+$\M=\{m_1,\ldots,m_J\}$ & Finite declared menu of candidate measures & researcher / theory \\
+$V$ & Auxiliaries: observed variables used to evaluate validity implications & researcher / theory \\
+$\Rset(C)$; $\tau_r$ & Nomological restrictions with substantive thresholds & researcher / theory \\
+$\M^*$ & Admissible set: measures passing every restriction up to tolerance $\delta$ & computed \\
+$\beta(m)$ & Downstream target functional evaluated at measure $m$ & researcher / theory \\
+$\Bset^*$; $[L,U]$ & Image of $\beta$ over $\M^*$; min--max scalar summary & computed \\
+$G(D,C)$ & Measurement-generation technology: evidence $D$ and construct $C$ produce candidate measures & generator + researcher \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Restrictions as observable implications}
+\label{sec:restrictions}
+
+A validity restriction must be a decision rule with a prespecified direction.
+We write each restriction $r\in\Rset(C)$ as a population moment inequality,
+\begin{equation}
+r:\qquad \E\bigl[g_r\bigl(m(X),V;\tau_r\bigr)\bigr]\ge 0,
+\label{eq:restriction}
+\end{equation}
+where $\tau_r$ is the \emph{substantive threshold}: a researcher-owned commitment justified by theory, prior literature, or a preregistered tolerance, and \emph{not} a parameter estimated by the admissibility procedure.
+Weak inequalities are the normal form of one-sided validity content (``at least this association,'' ``no more than this contamination'').
+A numeric gloss fixes the reading: $\tau_{\mathrm{conv}}=0.39$ means that any measure whose population correlation with the convergent criterion falls below $0.39$ fails the declared admissibility gate under $\Rset(C)$, regardless of how well it predicts $Y$.
+Let $s_r(m)$ denote the sample slack of restriction $r$ on measure $m$ (positive when satisfied).
+For a declared tolerance $\delta\ge 0$, the admissible set is
+\begin{equation}
+\M^*(C;\M,\Rset,\delta)=\bigl\{m\in\M:\ s_r(m)\ge-\delta\ \ \forall r\in\Rset(C)\bigr\}.
+\label{eq:Mstar}
+\end{equation}
+Passing is conditional evidence: $m\in\M^*$ means $m$ is consistent with the declared interpretation---not that $m$ is the construct, that the menu is exhaustive, or that $m$ is valid for uses the tests do not represent.
+An empty admissible set is a valid finding: it rejects the pair $(\M,\Rset)$ as an operationalization of $C$, not $C$ itself.
+A poor restriction can reject a useful measure; a weak network can admit a poor one; and a misspecified network can manufacture apparent homogeneity by excluding a coherent family of counterexamples.
+The force of the screen is therefore conditional on the restrictions being correct implications of the construct (Assumption~A.2): pre-specification fixes researcher degrees of freedom, but it does not by itself establish that a restriction is substantively necessary for the intended interpretation.
+The framework disciplines these commitments by making them explicit and auditable---it does not make them disappear.
+
+The screen is deliberately not a classical joint hypothesis test: there is no likelihood, no null distribution, and no prior; the engine computes transparent moments against declared thresholds and reports which measures clear them.
+The scientific content is the intersection of the restrictions, not an aggregate statistic.
+Concrete convergent, discriminant, and predictive tests fit this form~\cite{proxy2026,halterman2026}, in contrast to restrictions that bound measurement-error correlation structure~\cite{chenrttamer2026}.
+
+\subsection{From admissible measures to scientific conclusions}
+\label{sec:propagate}
+
+Researchers usually care about an effect, association, ranking, or forecast rather than the score itself; let $\beta(m)$ denote the result when measure $m$ is used.
+Once the admissible set is defined, the conclusions licensed under the validity argument are the image
+\begin{equation}
+\Bset^*(C;\M,\Rset)=\bigl\{\beta(m):m\in\M^*\bigr\},
+\label{eq:Theta}
+\end{equation}
+with the transparent scalar summary
+\begin{equation}
+[L,U]=\Bigl[\min_{m\in\M^*}\beta(m),\ \max_{m\in\M^*}\beta(m)\Bigr],
+\label{eq:range}
+\end{equation}
+defined whenever $\M^*\neq\emptyset$.
+
+The contrast with an unrestricted multiverse makes the ordering concrete~\cite{simonsohn2020}.
+If $\Rset=\emptyset$, then $\M^*=\M$ and $[L,U]$ is the specification-curve range over the full menu: every candidate is entitled to speak, and remaining disagreement is reported rather than screened.
+That object is a named special case of \eqref{eq:range}, not a missing network.
+Suppose five candidate measures deliver $\beta$ values $0.10$, $0.12$, $0.35$, $-0.04$, and $0.38$.
+Reported over the full menu, the conclusion ranges from $-0.04$ to $0.38$: sign-switching, and fragile on its face.
+If the validity argument retains only the two measures with $\beta(m)=0.35$ and $\beta(m)=0.38$, the construct-identified range $[0.35,0.38]$ is narrow, and the conclusion survives measurement choice.
+If all five survive, every candidate meets $\Rset(C)$ but admissible measures disagree on $\beta$, so no single estimand conclusion survives measurement choice within the declared menu.
+The multiverse domain is $\M$; the construct-identified domain is $\M^*$.
+$\Bset^*$ is not an unconditional identified set for the latent construct; it is the set of results produced by measures that survive a declared validity argument~\cite{manski2003,molinari2020}.
+The unrestricted image over $\M$ and the conditional image over $\M^*$ answer different questions; where both are computable this paper reports both, and the contrast between them is informative rather than a defect.
+
+The same equations recover two classical objects.
+If $\M^*$ is treated as known, endpoint inference for $[L,U]$ is ordinary inference for extrema over a fixed finite set, and a Bonferroni union of intervals is a conservative cross-check in the spirit of Imbens and Manski~\cite{imbensmanski2004}.
+If each $g_r$ is a Chen--Rambachan--Tamer restriction on error correlation~\cite{chenrttamer2026}, the identified set defined by \eqref{eq:restriction}--\eqref{eq:range} is their set.
+Campbell and Fiske's monotrait--heteromethod and heterotrait--monomethod cells~\cite{campbell1959} are likewise instances of \eqref{eq:restriction}: a convergent floor $\tau_{\mathrm{conv}}$ is a $\mathrm{corr\_min}$ restriction against a partner column, and a discriminant ceiling $\tau_{\mathrm{disc}}$ is a $\mathrm{corr\_zero}$ restriction.
+The paper computes both special cases on frozen scores in Section~\ref{sec:app-special}.
+
+\subsection{Falsifying the validity rule}
+\label{sec:falsify}
+
+A validity framework can become circular: inspect available evidence, write restrictions after seeing which columns would pass, and report that they pass.
+The two designs below test different claims about a \emph{frozen} contract; they do not constrain how $\Rset$ was written.
+A validity argument chosen after inspecting the same scores it will screen remains circular even if a later split is labeled a holdout (Table~\ref{tab:designs}).
+
+\paragraph{Restriction-stage split.}
+Partition the prespecified restrictions into
+\begin{equation}
+\Rset=\Rset_S\cup\Rset_H,\qquad \Rset_S\cap\Rset_H=\emptyset,
+\label{eq:partition}
+\end{equation}
+and admit on $\Rset_S$ only:
+\begin{equation}
+\M^*_S=\bigl\{m\in\M:\ m\text{ passes every }r\in\Rset_S\bigr\}.
+\label{eq:Mselect}
+\end{equation}
+The held-out restrictions $\Rset_H$ then ask whether the survivors satisfy validity implications that never voted on admission.
+Holdout verdicts are scientific \emph{findings} about the selection rule; under a pure stage split they do not redefine the headline set, which is defined by $\Rset_S$ unless the protocol says otherwise.
+
+\paragraph{Units split.}
+Partition the units into training and hold frames.
+Admission uses training units only; the hold frame demands compliance of the selected measures.
+The robust set is
+\begin{equation}
+\M^*_{\mathrm{robust}}=\M^*_{\mathrm{select}}\cap\bigl\{m:\ \text{$m$ passes the hold-frame screen}\bigr\},
+\label{eq:Mrobust}
+\end{equation}
+and, when the protocol so defines, the headline range is the image of $\beta$ on $\M^*_{\mathrm{robust}}$, with $\beta$ evaluated on the full pooled sample.
+Empty robust sets are valid findings.
+
+\paragraph{Comparative claim.}
+Let $L_H(m)$ be a declared loss over the held-out restrictions.
+The falsifiable prediction is not that every survivor passes every unseen test; it is that construct-guided selection improves unseen validity relative to competing rules:
+\begin{equation}
+\E\bigl[L_H(m)\mid m\in\M^*_S\bigr]
+\;<\;
+\E\bigl[L_H(m)\mid m\in\M^*_B\bigr],
+\label{eq:falsifiable}
+\end{equation}
+where $\M^*_B$ is selected by a baseline rule---single-anchor fit, best predictive fit, an \LLM{} judge, or random or convenience selection as the floor.
+Failure is informative: if survivors do no better than random, the network has not demonstrated predictive scientific content.
+Pre-data discipline fixes the partition, $\delta$, the baseline rule, and the seed before any holdout data are examined; the freeze/run-id contract hash-pins the network, anchors, stage split, and holdout unit list before holdout scoring~\cite{cvprofiles}.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Two falsification designs.
+They answer different questions and are never conflated; the protocol states which design (if any) redefines the headline set.}
+\label{tab:designs}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.9cm} X X X@{}}
+\toprule
+\textbf{Design} & \textbf{Admission uses} & \textbf{Holdout asks} & \textbf{Headline consequence} \\
+\midrule
+Restriction-stage split ($\Rset=\Rset_S\cup\Rset_H$) & $\Rset_S$ only; $\Rset_H$ never votes on admission & Whether survivors satisfy unseen validity implications; verdicts are findings & Selection set $\M^*_S$, unless the protocol says otherwise \\
+Units split (training / hold frames) & Training units only & Whether selected measures comply on held-out units & Robust set $\M^*_{\mathrm{robust}}$; headline range on the robust set when the protocol so defines \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Sampling uncertainty after data-dependent admission}
+\label{sec:uncertainty}
+
+The headline object remains the plug-in range \eqref{eq:range}: the image of $\beta$ on the estimated $\M^*$, with no model and no shrinkage.
+Because $\M^*$ is estimated, the following reporting layer is \emph{mandatory and additive}:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Uncertainty band.}
+A units-resampling bootstrap recomputes slacks, $\M^*$, and the endpoints in every replicate (seeded); report per-side quantiles over non-empty replicates.
+The resampling unit must be declared so that every slack and every $\beta(m)$ is a function of the resampled units; in the country profiles the unit is the country, and in the cell profiles the unit is the demographic cell.
+Label the object an \emph{uncertainty band}: selection uncertainty on the pooled sample, not a confidence interval and not a holdout-robustness band.
+The fixed-selection literature takes the admissible set as given~\cite{imbensmanski2004,stoye2009}; here selection is estimated.
+\item \textbf{Empty-replicate rate.}
+The share of replicates with empty $\M^*$ is reported explicitly; the band is conditional on non-empty admissible sets.
+If that share is large, the empty-replicate rate is the primary sampling-fragility summary.
+\item \textbf{Boundary attribution.}
+Flag measures whose absolute slack margin satisfies $|\mathrm{margin}_m|\le\kappa\cdot\mathrm{SE}_m$ ($\kappa=2$ default): near-threshold admissions and near-miss rejections are fragile; far-rejected measures are not.
+\item \textbf{Conservative cross-check (optional).}
+Compare a units bootstrap that re-forms $\M^*$ in every replicate with the same bootstrap that freezes $\M^*$ at the original estimate; only that contrast isolates admission--endpoint coupling from ordinary endpoint sampling error.
+A Bonferroni union computed on a fixed $\M^*$ measures interval conservatism, not coupling.
+\item \textbf{Validity-argument sensitivity (roadmap).}
+The $\tau$-grid varies numeric thresholds while holding the validity theory fixed; sensitivity across substantively defensible networks $\Rset_1,\Rset_2,\ldots$ is a separate layer that the current application does not execute (Section~\ref{sec:community}).
+\end{enumerate}
+Under uniform consistency of the slacks and the target functional, and a separation condition excluding measures exactly on the admissibility boundary, the plug-in admissible set and range converge in probability to their population counterparts (Appendix~A).
+The documented failure regime is coupling: a near-boundary measure that is also $\beta$-extreme couples admission with the endpoints, because its inclusion or exclusion moves the range directly.
+
+\subsection{Scope and composition}
+\label{sec:scope}
+
+The framework covers finite, scalarized menus: every candidate reduces to a declared scalar (or scalarized) object, so survey items, composites, and trained policies enter symmetrically.
+It is level-agnostic: a menu exists at every level of the latent hierarchy---item scores, composite scores, population aggregates---and the same screen applies at each level.
+Composition with causal analysis is direct: if a design with assumptions $\mathcal{A}$ yields an identified set $\Theta(m;\mathcal{A})$ for each fixed measure, the measurement-robust causal object is
+\begin{equation}
+\bigcup_{m\in\M^*}\Theta(m;\mathcal{A}),
+\label{eq:compose}
+\end{equation}
+the union over the admissible set.
+Construct identification determines which measures may carry the interpretation; causal identification proceeds within the survivors.
+Neither step substitutes for the other.
+
+% against the accepted frozen run: reports/summaries/wvs_gps_application_summary.json,
+% seed 20260810, split_seed 17, package 3.0.0).
+\section{An auditable implementation}
+\label{sec:impl}
+
+\cvp{} is the open Python implementation of the measurement-selection layer~\cite{cvprofiles}.
+Its design goal is modest: accept a frozen unit-by-measure score table, a researcher-authored set of restrictions, thresholds, and a downstream functional; return a full measure-by-restriction profile, the admissible set, the robust result set, and the sensitivity diagnostics.
+The engine implements the state machine
+\begin{equation}
+\texttt{SCORE} \;\longrightarrow\; \texttt{RESTRICT} \;\longrightarrow\; \texttt{IDENTIFY} \;\longrightarrow\; \texttt{REPORT},
+\label{eq:statemachine}
+\end{equation}
+and accepts four plain-text inputs---scores, roles, network, and target specification---producing slacks, $\M^*$, $\Bset^*$, a survivors-only range, holdout verdicts, and the additive diagnostics of Section~\ref{sec:uncertainty}.
+Frozen runs hash the score matrix, network, and target specification into a reproducibility record, and an empty $\M^*$ is an exit-success scientific finding rather than an exception.
+The engine is deliberately score-agnostic: it contains no language model, searches no prompt space, and writes no theory, and its validity layer fits no likelihood, prior, or null.
+Score-agnostic does not mean upstream measurement models are irrelevant---a composite's reliability or an LLM's prompt protocol shapes the score columns and hence the slacks---but the engine itself is agnostic about how scores were produced.
+This separation is a paper--package contract: the package is released in the public repository (tag \texttt{v3.0.2}; version 3.0.1 on PyPI, 2026-08-14 local / 2026-08-15 UTC) and used here as an instrument.
+Version 3.0.1 added a named \texttt{empty\_R} contract so that $\Rset=\emptyset$ is expressible and fail-loud rather than a silent admit-all; default \texttt{empty\_R=false} is omitted from the network hash, so pre-3.0.1 freezes remain bit-stable.
+Version 3.0.2 pins round-trip CSV parsing so run identities re-verify from committed inputs on every platform; all runs reported here are 3.0.2 freezes.
+Software cannot resolve disagreements about what patience or trust means; it can make those disagreements inspectable.
+Competing researchers can author different networks, thresholds, or menus and see exactly which commitment changes the conclusion---a feature, not a hidden optimizer.
+
+\section{Two constructs, two resolutions}
+\label{sec:app}
+
+The framework is applied to patience and trust at two resolutions, under networks and thresholds frozen before slacks were inspected.
+Human columns are the \GPS{} scores, \WVS{} Wave~7 items and composites, and a seeded noise control.
+Two open-weight log-probability columns---Meta-Llama-3.1-8B-Instruct and Phi-4-mini, Q8\_0, temperature~0, sha-pinned---are scored from scratch on the published GPS qualitative items and, for trust, the \WVS{} Q57 stem, then reduced to one scalar per model (Appendix~\ref{app:llm}).
+Country identity is in the prompt; this is silicon sampling, not an unconditioned policy.
+The two models see identical prompt bytes.
+The powered surface is the cell resolution ($n=480$).
+Country profiles ($n=41$ and $n=35$) are the complete but underpowered appendix (Appendix~\ref{app:country}).
+Country $\beta$ is the standardized OLS coefficient of the measure on log GDP per capita with a country-mean education control; cell $\beta$ is the correlation of the measure with the matching \GPS{} cell mean after country demeaning.
+Headline admission uses the restriction-stage split of Section~\ref{sec:falsify}.
+Every run reports an uncertainty band, an empty-replicate rate, and a $\tau$-grid ($n_{\mathrm{boot}}=1000$, $\alpha=0.10$, seed 20260814).
+
+\subsection{Constructs, frames, and menus}
+\label{sec:app-construct}
+
+Patience is time preference as operationalized by the Global Preference Survey, whose module was designed by selecting and weighting survey items for predictive validity against incentivized experimental measures and validated across countries~\cite{falk2018,falk2023}.
+A valid measure should rise with human capital and should not collapse into risk preference.
+Trust is the belief that other people have good intentions, or that most people can be trusted.
+\GPS{} trust is a single experimentally validated item; \WVS{} Q57 is the canonical survey item; in-group, out-group, and institution facets are distinct objects of trust~\cite{glaser2000,sapienza2013}.
+A valid measure should co-move with institutional quality and move opposite income inequality~\cite{aghion2010,bjornskov2008}.
+When \GPS{} trust sits in the menu it is a peer candidate, not a bar.
+
+The country frame is the inner join of \GPS{}, \WVS{} Wave~7, and a pinned WDI snapshot, after a respondent floor of 30 and after masking \WVS{} missing codes $-1$ through $-5$ without imputation.
+Patience is observed for 41 countries; trust, which also requires WGI rule of law and a gini series, for 35.
+Cells are sex-by-age-band means (six bands from 18--24 through 65+) built separately in \GPS{} individual files and in \WVS{}, then inner-joined, with a minimum of 20 respondents per cell and at least six cells per country: 480 cells in 42 countries.
+The confirmatory cell estimand country-demeans every column that enters $\Rset$ or $\beta$ before SCORE.
+A pooled (undemeaned) cell run remains on disk as a contrast; it is not the within-country conclusion.
+
+The patience country menu is \GPS{} patience, \WVS{} Q13 (thrift), Q14 (perseverance), their declared composite $z(\mathrm{Q13})+z(\mathrm{Q14})$, the two open-weight columns, and noise.
+The trust country menu is \GPS{} trust, Q57, in-group, out-group, institution, the mean of the three multi-item facets (Q57 excluded), the two open-weight columns, and noise.
+Cell menus drop the \GPS{} column from $\M$ and use it only as the $\beta$ outcome, so recovery cannot be tautological; they add the same two cheap columns.
+Education never enters the persona: it is the admission bar.
+
+\subsection{Networks}
+\label{sec:app-network}
+
+Patience at the country level is screened by $\mathrm{Corr}(m,\mathrm{q275\_mean})\ge 0.20$ (select) and $|\mathrm{Corr}(m,\mathrm{risktaking})|\le 0.35$ (select), with leftover rank-monotonicity in education at $0.15$.
+The education floor sits well below the published country association of patience with years of schooling~\cite{falk2018}; the discriminant bar admits the published patience--risk range of $0.230$~\cite{falk2018} to $0.358$~\cite{hanushek2022} and still rejects $r\gtrsim 0.6$.
+Trust at the country level is screened by $\mathrm{Corr}(m,\mathrm{rule\_of\_law})\ge 0.30$ and a negative $\mathrm{corr\_sign}$ on gini at $0.10$, with leftover education at $0.20$.
+There is no $\mathrm{corr\_min}$ against \GPS{} trust, because that column is in the menu.
+Cell networks keep only the education implication, now on country-demeaned cell education, with leftover rank-monotonicity; GDP, gini, and rule of law do not vary within country and are not used.
+
+\subsection{Nested special cases}
+\label{sec:app-special}
+
+On the present seven-measure country patience menu, setting $\Rset=\emptyset$ in \cvp{}~3.0.2 admits the full menu and returns $[L,U]=[-0.219,0.565]$, the minimum and maximum of those seven $\beta$ values (composite $-0.219$; Phi $0.565$).
+The composition claim of Section~\ref{sec:propagate} is therefore a computed result, not a verbal nesting.
+An unrestricted multiverse of patience operationalizations still sign-switches on the development estimand.
+The unrestricted range is reported by design alongside the screened range: the contrast shows how much apparent fragility the validity argument removes and how much survives it.
+The two objects answer different questions---heterogeneity across plausible operationalizations versus heterogeneity among operationalizations licensed by $\Rset(C)$---and their disagreement is not a defect.
+That contrast is the extreme-bounds lesson restated at the measurement layer: Leamer's bounds ranged over specifications with no admissibility test~\cite{leamer1983}, and the ``everything is fragile'' verdict~\cite{salaimartin1997} is precisely what a validity screen prevents---conditional on the validity argument itself being correct (Assumption~A.2).
+
+Campbell and Fiske's $2\times 2$ is written as eight ordinary restrictions on a peer menu of \GPS{} patience, \WVS{} child-qualities, \GPS{} trust, and Q57, with $\tau_{\mathrm{conv}}=0.30$ and $\tau_{\mathrm{disc}}=0.35$ ($n=41$).
+The convergent floor sits at a published survey--behavioral trust bound and below the Falk et al.\ GPS--WVS trust Spearman of $0.49$~\cite{falk2018}; the discriminant ceiling admits their country Corr(patience, trust) of $0.190$.
+Both the classical per-instrument retain set and the engine's global $\M^*$ are empty.
+The binding cells are not subtle: \GPS{} patience versus child-qualities is $r=-0.252$; \GPS{} trust versus Q57 is $r=0.284$, just under the floor; Q57 versus \GPS{} \emph{patience} is $r=0.825$.
+Partialling log GDP per capita and education leaves that last association at $0.706$.
+The inequalities are Campbell--Fiske cells, so the original correlational MTMM criteria are nested as a special case of the general restriction framework.
+This recovers the classical correlation-based MTMM logic; modern latent-variable MTMM (e.g., trait--method models such as CT-C($M-1$)) is a broader family this framework does not implement.
+Substantively the $2\times 2$ rejects every instrument: at country level the canonical \WVS{} trust item is closer to \GPS{} time preference than to \GPS{} ``best intentions.''
+That is a finding about the named special case, not a reason to lower $\tau$ after seeing slacks.
+
+\subsection{Within-country cells}
+\label{sec:app-cells}
+
+Table~\ref{tab:twores} is the powered application.
+Country-demeaning the 480 cells is required: Q13 was rejected in the undemeaned table because richer countries have both more education and lower thrift endorsement.
+Inside countries the sign flips.
+Q13's education slack is $+0.051$, leftover monotonicity $+0.060$, and $\beta$ versus \GPS{} patience $+0.245$.
+Q14 stays anti-aligned (slack $-0.564$, $\beta=-0.326$).
+The composite is Q13 dragged under the bar by Q14.
+The rejected family is coherent: Q13, Q14, and their composite all point negatively on the development estimand at country level, and Q14 remains anti-aligned inside countries.
+Under the reciprocal reading of construct validation, that coherence is evidence---of measurement failure or of a divisible construct---and a candidate input to theory revision, not merely noise the screen removed.
+
+Both open-weight patience columns clear the same education bar with room (slacks $+0.322$ and $+0.440$) and leftover monotonicity.
+Their cell $\beta$s are $+0.417$ and $+0.556$.
+The admissible set is $\{\mathrm{Q13},\mathrm{Llama},\mathrm{Phi}\}$ with plug-in range $[0.245,0.556]$, coverage $[0.179,0.614]$, and an empty-replicate rate of zero.
+Without the cheap columns the set was the Q13 singleton $0.245$ with empty-replicate rate $0.17$.
+Q13's education slack remains knife-edge; $\lambda=1.5$ still empties a human-only menu.
+The cheap columns are not knife-edge on that bar.
+They do not make Q14 admissible, and they are not a second method: they share architecture, pretraining-era geographic associations, and the same prompts.
+
+Every \WVS{} trust facet still fails the education bar after demeaning, including at $\lambda=0.5$.
+Llama fails it as well (slack $-0.077$).
+Phi passes (slack $+0.149$, leftover $+0.133$) and is the singleton.
+Its $\beta$ versus \GPS{} trust is $-0.317$, with coverage $[-0.382,-0.240]$ entirely negative.
+In-group, out-group, institution, and the composite still co-move with \GPS{} trust ($0.224$, $0.211$, $0.285$, $0.318$) without tracking within-country education; Q57 does not ($0.052$).
+The only speaker the screen admits is a cheap measure that points against the criterion the estimand asked to recover.
+
+\subsection{What the application is allowed to mean}
+\label{sec:app-read}
+
+Validity decides which measures may enter the conditional robustness set; rejected measures are not epistemically silent, and a coherent rejected family is evidence about the adequacy of $\Rset(C)$ and of the construct definition---the input to a discovery channel (revise, refreeze, test on new data) that this paper does not execute.
+The range reports leftover disagreement among those admitted; the band reports that the speaker list itself is noisy.
+
+Read that way, the cell application does not deliver a preferred measure of patience or of trust.
+Thrift and perseverance are not interchangeable proxies.
+Two open-weight patience scores survive the same bar as thrift and pull \GPS{} recovery from a knife-edge $0.245$ to $[0.245,0.556]$.
+The same education implication empties the human trust menu and admits only Phi, whose association with \GPS{} trust is negative.
+Llama and Phi do not agree on trust at either resolution (Appendix~\ref{app:country}).
+Those are disagreements the composition is designed to make inspectable.
+They are not a license to move $\tau$, to treat two GGUFs as two methods, or to call the menus a measure of culture.
+
+Country samples are small, so the country profiles---including the cheap columns---are the complete underpowered appendix rather than the headline.
+Thresholds remain researcher-owned.
+Cell country-demeaning was a dated estimand amendment, not a post-hoc rescue of $\theta$.
+Circularity is a standing risk rather than a solved problem.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Powered application: country-demeaned cells with fresh open-weight columns (\cvp{}~3.0.2, seed 20260814, $n_{\mathrm{boot}}=1000$).
+Cell $\beta$ is the correlation with the matching \GPS{} cell mean after country demeaning.
+Coverage is the additive uncertainty band at $\alpha=0.10$.
+Country profiles are Appendix~\ref{app:country}.}
+\label{tab:twores}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.9cm} r >{\raggedright\arraybackslash}p{3.6cm} r r r@{}}
+\toprule
+\textbf{Profile} & $n$ & $\M^*$ & $[L,U]$ & \textbf{Coverage} & \textbf{Empty-rep.} \\
+\midrule
+Patience, cells & 480 & \{Q13, Llama, Phi\} & $[0.245,0.556]$ & $[0.179,0.614]$ & $0.000$ \\
+Trust, cells & 480 & \{Phi\} & $-0.317$ & $[-0.382,-0.240]$ & $0.000$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{What follows---and what does not}
+\label{sec:discussion}
+
+\subsection{Transparency and openness}
+\label{sec:transparency}
+\textbf{Data and materials.}
+Frozen score matrices, roles, networks, thresholds, and all run artifacts behind the reported tables are committed in the public repository (\url{https://github.com/Bonorinoa/cvprofiles}, tag \texttt{v3.0.2}).
+Raw \WVS{} Wave~7 and \GPS{} microdata are license-restricted and are not redistributed; the derived country- and cell-level score tables are committed.
+Open-weight model artifacts (Meta-Llama-3.1-8B-Instruct and Phi-4-mini, Q8\_0) are pinned by SHA-256 checksum, and the scored columns are committed.
+A versioned deposit of the run artifacts with a persistent DOI will be made at acceptance.
+
+\textbf{Code.}
+The engine is the open-source package \cvp{} (version 3.0.2, MIT license), with a documented state machine (SCORE $\to$ RESTRICT $\to$ IDENTIFY $\to$ REPORT), frozen-run hash contracts, and a test suite of 369 tests; version 3.0.1 remains the PyPI release.
+
+\textbf{Preregistration.}
+This study was not preregistered in a public registry.
+The framework's falsifiability discipline is procedural and is documented in the paper: networks and thresholds were authored and frozen before slacks were inspected, the restriction-stage split of Section~\ref{sec:falsify} holds out restrictions that never vote on admission, and the freeze/run-id contract hash-pins scores, network, and target before scoring.
+
+\textbf{Reporting of AI use.}
+Language models were used as measurement instruments: the open-weight columns (Appendix~\ref{app:llm}) were produced by prompted, temperature-zero scoring of published survey items under a documented adapter card.
+An AI writing assistant (Hermes Agent, Nous Research~\cite{hermesagent}) was used for editing and formatting assistance; all scientific content, analysis, and research decisions are the authors'.
+No AI system is an author.
+
+\subsection{What an empty or wide set means}
+An empty $\M^*$ rejects the pair consisting of the current menu and the validity argument on the stated sampling frame; it does not refute the existence of the construct.
+A wide $\Bset^*$ says the scientific conclusion remains sensitive even after the validity screen; a narrow $\Bset^*$ says the conclusion is robust across the surviving operationalizations.
+All of these outcomes are scientifically interpretable, and none should be tuned away by relaxing $\delta$ after seeing the result.
+
+\subsection{The hierarchy of uncertainties}
+The paper does not claim to discover a new category called measurement uncertainty.
+Psychometrics, metrology, latent-variable models, and multiverse work have long separated measurement from sampling and analytic choices.
+The claim is compositional: construct validity determines which measurement alternatives deserve scientific standing; measurement robustness propagates the unresolved choice among them; specification robustness can then vary analytic decisions conditional on each admissible measure; and sampling inference quantifies repeated-sample uncertainty within that design.
+The layers answer different questions and should not be collapsed into one standard error.
+
+\subsection{Beyond social-science measures}
+Benchmark scores are measurement functions too: they map model behavior into quantities interpreted as reasoning, safety, or knowledge.
+A family of task families can therefore be treated as a menu, with held-out task families and cross-method evidence supplying a validity network (Appendix~\ref{app:bench}).
+The same logic applies to medical risk scores, remote-sensing proxies, and administrative indices.
+Domain-specific validity evidence changes; the composition does not.
+
+\subsection{Researcher-owned validation gates in automated science}
+Automation can expand the menu, compute scores, and execute a frozen network.
+It should not silently redefine the construct, rewrite the network after seeing results, or treat correlated model outputs as independent evidence.
+A credible automated-science architecture therefore needs a researcher-owned, contestable validation gate---one that can itself fail, and whose commitments can be compared across research teams (Appendix~\ref{app:automation}).
+The most direct failure mode is Goodharting: a generator trained explicitly against the known restrictions.
+The defenses are procedural rather than magical---freeze the network and thresholds before final scoring, preserve negative controls, reserve restrictions or units, and keep generator provenance separate from validity evidence.
+Anti-circularity must not become anti-learning: revising a construct or network after structured anomalies is legitimate theory development, provided the revised contract is frozen and tested on new data; what is forbidden is silently rewriting $\Rset$ or $\tau$ after seeing slacks to rescue the current result.
+
+\subsection{What this application decides---and what remains}
+\label{sec:agenda}
+The empirical results of Section~\ref{sec:app} are not a preliminary agenda waiting for future experiments to decide whether construct-identified inference has bite.
+On the powered cell surface, the screen discriminates among semantically related proxies and among cheap generators: thrift and both open-weight patience scores survive and recover \GPS{} patience in $[0.245,0.556]$, perseverance is anti-aligned, and the only cheap trust score that clears education points against \GPS{} trust.
+The unrestricted country patience menu still sign-switches; once the same cheap columns face the country network they join \GPS{} and widen the development range, while the two models disagree on trust (Appendix~\ref{app:country}).
+
+What remains is scale, not the necessity of the composition: individual-level gradient tests that keep residual variance the cell means discard, and open libraries of networks and thresholds so that research teams can contest measurement definitions without silently rewriting them.
+
+\subsection{Open implementation and community}
+\label{sec:community}
+The registry of restriction types, target functionals, and generators is deliberately small, and its gaps are known: stability is schema-only, slacks are never learned, and coupling theory is deferred to a companion methods paper.
+The contribution we invite is concrete---new restriction types, $\beta$-functionals, and measurement generators---not a leaderboard.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Science does not become easier merely because candidate measures become cheap.
+Abundance moves the bottleneck from producing an operationalization to justifying one.
+The appropriate response is not to rank human surveys above AI, or fine-tuning above prompting, but to make competing measures answer to the same construct-level evidence.
+The framework asks five questions in order: What do we mean?
+How might we measure it?
+What should a credible measure do?
+Which measures survive?
+Which scientific conclusions survive with them?
+Formally,
+\[
+C\;\longrightarrow\;\M\;\xrightarrow{\;\Rset\;}\;\M^*\;\longrightarrow\;\Bset^*.
+\]
+The novelty is not construct validity, multiverse analysis, partial identification, or sampling inference in isolation; it is their operational composition at the measurement layer.
+When measures are cheap, validity becomes the scarce resource.
+
+\section*{Data and code availability}
+Frozen score matrices, roles, networks, thresholds, and all run artifacts behind the tables are committed in the public repository \url{https://github.com/Bonorinoa/cvprofiles} at tag \texttt{v3.0.2} (package version 3.0.2); version 3.0.1 is on PyPI.
+Raw \WVS{} Wave~7 and \GPS{} microdata are license-restricted and are not redistributed; the derived country and cell score tables are committed.
+Open-weight model artifacts (Meta-Llama-3.1-8B-Instruct and Phi-4-mini, Q8\_0) are pinned by SHA-256 checksum, and the scored columns are committed.
+A versioned DOI will be deposited on Zenodo at acceptance.
+
+\section*{Author contributions}
+Augusto Gonzalez-Bonorino: conceptualization, methodology, software, formal analysis, investigation, data curation, writing---original draft, visualization.
+Kseniia Biriukova: methodology, investigation, writing---review and editing.
+Monica Capra: conceptualization, supervision, writing---review and editing.
+
+\section*{Author note}
+This work has not been presented at a conference or posted as a preprint.
+The companion software package \cvp{} is publicly released (GitHub tag v3.0.2; PyPI version 3.0.1).
+Generative AI was used in two ways: open-weight language models were used as measurement instruments (documented in Appendix~\ref{app:llm}), and an AI writing assistant (Hermes Agent, Nous Research) was used for editing and formatting assistance; all scientific content, analyses, decisions, and nomological networks are the authors'.
+
+\begin{thebibliography}{99}\small
+
+\bibitem{aghion2010} Aghion, P., Algan, Y., Cahuc, P., \& Shleifer, A. (2010). Regulation and distrust. \textit{Quarterly Journal of Economics, 125}(3), 1015--1049. https://doi.org/10.1162/qjec.2010.125.3.1015
+
+\bibitem{bauman2026} Baumann, J., R\"ottger, P., Urman, A., Wendsj\"o, A., Plaza-del-Arco, F.~M., Gruber, J.~B., \& Hovy, D. (2025). \textit{Large language model hacking: Quantifying the hidden risks of using LLMs for text annotation} [Preprint]. arXiv. https://arxiv.org/abs/2509.08825
+
+\bibitem{bean2025} Bean, A.~M., et al. (2025). \textit{Measuring what matters: Construct validity in large language model benchmarks} [Conference paper]. NeurIPS 2025 Datasets and Benchmarks Track. https://arxiv.org/abs/2511.04703
+
+\bibitem{bjornskov2008} Bj\o rnskov, C. (2008). Social capital and happiness in the United States. \textit{Social Indicators Research, 86}(1), 269--282. https://doi.org/10.1007/s11205-007-9106-8
+
+\bibitem{borsboom2004} Borsboom, D., Mellenbergh, G.~J., \& van Heerden, J. (2004). The concept of validity. \textit{Psychological Review, 111}(4), 1061--1071. https://doi.org/10.1037/0033-295X.111.4.1061
+
+\bibitem{butler2016} Butler, J.~V., Giuliano, P., \& Guiso, L. (2016). The right amount of trust. \textit{Journal of the European Economic Association, 14}(5), 1155--1188. https://doi.org/10.1111/jeea.12178
+
+\bibitem{campbell1959} Campbell, D.~T., \& Fiske, D.~W. (1959). Convergent and discriminant validation by the multitrait--multimethod matrix. \textit{Psychological Bulletin, 56}(2), 81--105. https://doi.org/10.1037/h0046016
+
+\bibitem{canenenamorado2026} Canen, N., \& Enamorado, T. (2026). \textit{When predictions become regressors: A split-sample correction for biases in downstream inference} [Preprint]. arXiv. https://arxiv.org/abs/2608.02909
+
+\bibitem{capra2025} Gonzalez-Bonorino, A., Capra, C.~M., \& Pantoja, E. (in press). LLMs can model non-WEIRD behavior: Experiments with synthetic cultural agents. In \textit{Artificial intelligence and experimental methods} (Research in Experimental Economics, Vol.~23). Emerald. https://arxiv.org/abs/2501.06834
+
+\bibitem{chenrttamer2026} Chen, X., Rambachan, A., \& Tamer, E. (2026). \textit{Partial identification from LLM prompts} [Preprint]. arXiv. https://arxiv.org/abs/2606.15031
+
+\bibitem{cronbach1955} Cronbach, L.~J., \& Meehl, P.~E. (1955). Construct validity in psychological tests. \textit{Psychological Bulletin, 52}(4), 281--302. https://doi.org/10.1037/h0040957
+
+\bibitem{cvprofiles} Gonzalez-Bonorino, A. (2026). \textit{cvprofiles: Construct-validity profiles as partial identification over measurement menus} (Version 3.0.2) [Computer software]. GitHub. https://github.com/Bonorinoa/cvprofiles
+
+\bibitem{hermesagent} Hermes Agent (Nous Research). (2026). \textit{Hermes Agent} [Computer software]. https://hermes-agent.nousresearch.com
+
+\bibitem{delgiudice2021} Del Giudice, M., \& Gangestad, S.~W. (2021). A traveler's guide to the multiverse: Promises, pitfalls, and a framework for the evaluation of analytic decisions. \textit{Advances in Methods and Practices in Psychological Science, 4}(1). https://doi.org/10.1177/2515245920954925
+
+\bibitem{dellrambachan2026} Dell, M., \& Rambachan, A. (2026). \textit{Estimation and inference with AI-generated data} [Paper presentation]. NBER Summer Institute 2026 Methods Lectures.
+
+\bibitem{desai2026} Desai, M., Card, D., \& Jacobs, A.~Z. (2026). \textit{Validating LLMs in social science: Epistemic threats and emerging norms} [Preprint]. arXiv. https://arxiv.org/abs/2607.07915
+
+\bibitem{disca2026} Kiet, H.~T., et al. (2026). \textit{Training-free cultural alignment of large language models via persona disagreement} [Preprint]. arXiv. https://arxiv.org/abs/2605.10843
+
+\bibitem{dohmen2011} Dohmen, T., Falk, A., Huffman, D., Sunde, U., Schupp, J., \& Wagner, G.~G. (2011). Individual risk attitudes: Measurement, determinants, and behavioral consequences. \textit{Journal of the European Economic Association, 9}(3), 522--550. https://doi.org/10.1111/j.1542-4774.2011.01015.x
+
+\bibitem{falk2018} Falk, A., Becker, A., Dohmen, T., Enke, B., Huffman, D., \& Sunde, U. (2018). Global evidence on economic preferences. \textit{Quarterly Journal of Economics, 133}(4), 1645--1692. https://doi.org/10.1093/qje/qjy013
+
+\bibitem{falkhermle2018} Falk, A., \& Hermle, J. (2018). Relationship of gender differences in preferences to economic development and gender equality. \textit{Science, 362}(6412), Article eaas9899. https://doi.org/10.1126/science.aas9899
+
+\bibitem{falk2023} Falk, A., Becker, A., Dohmen, T., Huffman, D., \& Sunde, U. (2023). The preference survey module: A validated instrument for measuring risk, time, and social preferences. \textit{Management Science, 69}(4), 1935--1950. https://doi.org/10.1287/mnsc.2022.4455
+
+\bibitem{gelmanloken2014} Gelman, A., \& Loken, E. (2014). The statistical crisis in science. \textit{American Scientist, 102}(6), 460--465. https://doi.org/10.1511/2014.111.460
+
+\bibitem{glaser2000} Glaeser, E.~L., Laibson, D.~I., Scheinkman, J.~A., \& Soutter, C.~L. (2000). Measuring trust. \textit{Quarterly Journal of Economics, 115}(3), 811--846. https://doi.org/10.1162/003355300554926
+
+\bibitem{hai2026} Stanford Institute for Human-Centered Artificial Intelligence. (2026). \textit{AI index report 2026} [Report]. Stanford University. https://hai.stanford.edu/ai-index/2026-ai-index-report
+
+\bibitem{hall2026} Hall, A.~B. (2026). \textit{AI research topics at PolMeth 2026} [Data set]. GitHub. https://github.com/andybhall/polmeth-2026-ai
+
+\bibitem{halterman2026} Halterman, A., \& Keith, K.~A. (2026). Codebook LLMs: Evaluating LLMs as measurement tools for political science concepts. \textit{Political Analysis, 34}(2), 188--204. https://doi.org/10.1017/pan.2025.10017
+
+\bibitem{hanelzarzeczna2023} Hanel, P.~H.~P., \& Zarzeczna, N. (2023). From multiverse analysis to multiverse operationalisations: 262,143 ways of measuring well-being. \textit{Religion, Brain \& Behavior, 13}(3), 309--313. https://doi.org/10.1080/2153599X.2022.2070259
+
+\bibitem{hanushek2022} Hanushek, E.~A., Kinne, L., Lergetporer, P., \& Woessmann, L. (2022). Patience, risk-taking, and human capital investment across countries. \textit{The Economic Journal, 132}(646). https://doi.org/10.1093/ej/ueab105
+
+\bibitem{horton2023} Horton, J.~J. (2023; revised 2026 with A. Filippas \& B.~S. Manning). Large language models as simulated economic agents: What can we learn from homo silicus? (NBER Working Paper No. 31122). National Bureau of Economic Research. https://doi.org/10.3386/w31122
+
+\bibitem{hullman2026} Hullman, J., Broska, D., Sun, H., \& Shaw, A. (2026). \textit{This human study did not involve human subjects: Validating LLM simulations as behavioral evidence} [Preprint]. arXiv. https://arxiv.org/abs/2602.15785
+
+\bibitem{illusion2026} Lin, V., Yun, T., Matari\'c, M., Canny, J., Gretton, A., \& D'Amour, A. (2026). \textit{The illusion of intervention: Your LLM-simulated experiment is an observational study} [Preprint]. arXiv. https://arxiv.org/abs/2605.20767
+
+\bibitem{imbensmanski2004} Imbens, G.~W., \& Manski, C.~F. (2004). Confidence intervals for partially identified parameters. \textit{Econometrica, 72}(6), 1845--1857. https://doi.org/10.1111/j.1468-0262.2004.00555.x
+
+\bibitem{kane2013} Kane, M.~T. (2013). Validating the interpretations and uses of test scores. \textit{Journal of Educational Measurement, 50}(1), 1--73. https://doi.org/10.1111/jedm.12000
+
+\bibitem{kim2025} Kim, E.~M., Garg, A., Peng, K., \& Garg, N. (2025). Correlated errors in large language models. In \textit{Proceedings of the 42nd International Conference on Machine Learning} (PMLR 267, pp. 30038--30066).
+
+\bibitem{kirgis2026} Kirgis, P., et al. (2026). \textit{Can AI agents conduct open-ended AI research? Early evidence from two case studies} [Preprint]. arXiv. https://arxiv.org/abs/2607.27191
+
+\bibitem{leamer1983} Leamer, E.~E. (1983). Let's take the con out of econometrics. \textit{American Economic Review, 73}(1), 31--43.
+
+\bibitem{licht2025} Licht, H., et al. (2025). \textit{Measuring scalar constructs in social science with LLMs} [Conference paper]. EMNLP 2025. https://arxiv.org/abs/2509.03116
+
+\bibitem{manning2024} Manning, B.~S., Zhu, K., \& Horton, J.~J. (2024). \textit{Automated social science: Language models as scientist and subjects} (NBER Working Paper No. 32381). National Bureau of Economic Research. https://doi.org/10.3386/w32381
+
+\bibitem{manski2003} Manski, C.~F. (2003). \textit{Partial identification of probability distributions}. Springer.
+
+\bibitem{messick1995} Messick, S. (1995). Validity of psychological assessment. \textit{American Psychologist, 50}(9), 741--749. https://doi.org/10.1037/0003-066X.50.9.741
+
+\bibitem{messing2026} Messing, S. (2026). \textit{Hidden measurement error in LLM pipelines distorts annotation, evaluation, and benchmarking} [Preprint]. arXiv. https://arxiv.org/abs/2604.11581
+
+\bibitem{molinari2020} Molinari, F. (2020). Microeconometrics with partial identification. In \textit{Handbook of econometrics} (Vol.~7A, pp. 355--486). Elsevier.
+
+\bibitem{ogutyin2026} O\u{g}ut, B., \& Yin, M. (2026). \textit{Partial identification with multiple nonlinear measurements of a latent regressor} [Preprint]. arXiv. https://arxiv.org/abs/2607.12219
+
+\bibitem{palms2026} Dey, P., et al. (2026). \textit{PALMs: Using multi construct-grounded rationales for modeling population preferences in LLMs} [Preprint]. arXiv. https://arxiv.org/abs/2608.01458
+
+\bibitem{plural2026} Agarwal, D., et al. (2026). \textit{PLURAL: A global dataset for value alignment} [Preprint]. arXiv. https://arxiv.org/abs/2607.08034
+
+\bibitem{proxy2026} Li, B., Yu, T., Koa, K.~J.~L., \& Huang, K.-W. (2026). The proxy presumption: From semantic embeddings to valid social measures. In \textit{Proceedings of ACL 2026} (pp. 22892--22910). https://doi.org/10.18653/v1/2026.acl-long.1048
+
+\bibitem{rafailov2023} Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C.~D., \& Finn, C. (2023). Direct preference optimization: Your language model is secretly a reward model. In \textit{Advances in Neural Information Processing Systems} (Vol.~36).
+
+\bibitem{salaimartin1997} Sala-i-Martin, X. (1997). I just ran two million regressions. \textit{American Economic Review, 87}(2), 178--183.
+
+\bibitem{sapienza2013} Sapienza, P., Toldr\'a-Simats, A., \& Zingales, L. (2013). Understanding trust. \textit{The Economic Journal, 123}(573), 1313--1332. https://doi.org/10.1111/ecoj.12036
+
+\bibitem{simonsohn2020} Simonsohn, U., Simmons, J.~P., \& Nelson, L.~D. (2020). Specification curve analysis. \textit{Nature Human Behaviour, 4}, 1208--1214. https://doi.org/10.1038/s41562-020-0912-z
+
+\bibitem{steegen2016} Steegen, S., Tuerlinckx, F., Gelman, A., \& Vanpaemel, W. (2016). Increasing transparency through a multiverse analysis. \textit{Perspectives on Psychological Science, 11}(5), 702--712. https://doi.org/10.1177/1745691616658637
+
+\bibitem{stoye2009} Stoye, J. (2009). More on confidence intervals for partially identified parameters. \textit{Econometrica, 77}(4), 1299--1315. https://doi.org/10.3982/ECTA7347
+
+\bibitem{truong2026} Truong, S., Wang, S., Wang, A., Truong, N., Reuel, A., Haber, N., \& Koyejo, S. (2026). \textit{Public AI benchmarks are broken, but are private benchmarks the answer?} [Manuscript in preparation]. https://aimslab.stanford.edu/papers/Truong2026PublicPrivate.pdf
+
+\bibitem{wallach2025} Wallach, H., Desai, M., Pangakis, N., Cooper, A.~F., et al. (2024). Evaluating generative AI systems is a social science measurement challenge. In \textit{NeurIPS 2024 Workshop on Evaluating Evaluations (EvalEval)}. https://arxiv.org/abs/2411.10939
+
+\bibitem{yinvu2026} Yin, M., Vu, H., \& Persico, C. (2026). \textit{How (un)stable are LLM occupational exposure scores? Evidence from multi-model replication} (NBER Working Paper No. 35110). National Bureau of Economic Research. https://doi.org/10.3386/w35110
+
+\bibitem{zeinfeld2026} Zeinfeld, L., Strugatski, A., Bar-Dov, Z., \& Blonder, R. (2026). \textit{Assessment design in the AI era: A method for identifying items functioning differentially for humans and chatbots} [Preprint]. arXiv. https://arxiv.org/abs/2603.23682
+
+\end{thebibliography}
+
+\clearpage
+\appendix
+
+\section{First-principles formalization}
+\label{app:formal}
+
+\subsection{Primitives}
+\begin{definition}[Measurement function and menu]
+A \emph{measurement function} is a map $m:\mathcal{X}\to\mathbb{R}$ (or to a finite choice simplex) producing a score or response distribution from available inputs $X\in\mathcal{X}$; a map to a vector followed by a \emph{declared} scalar reduction is part of the measure's definition.
+A \emph{menu} is a finite collection $\M=\{m_1,\ldots,m_J\}$ declared by the researcher.
+\end{definition}
+
+\begin{definition}[Nomological restriction]
+Given auxiliaries $V$ and a threshold $\tau_r\in\mathbb{R}$, a \emph{restriction} is a functional inequality $\E[g_r(m(X),V;\tau_r)]\ge 0$.
+The \emph{sample slack} $s_r(m)$ is a sample analogue of the left-hand side; the sign convention is $s_r(m)\ge 0$ when the restriction is satisfied.
+\end{definition}
+
+\begin{definition}[Admissible set and admissible-result set]
+For tolerance $\delta\ge 0$,
+\[
+\M^*=\bigl\{m\in\M:\ s_r(m)\ge-\delta\ \forall r\in\Rset\bigr\}.
+\]
+For a target functional $\beta:\M\to\mathbb{R}$,
+\[
+\Bset^*=\bigl\{\beta(m):m\in\M^*\bigr\},\qquad
+[L,U]=\bigl[\min\Bset^*,\ \max\Bset^*\bigr]\quad(\M^*\neq\emptyset).
+\]
+\end{definition}
+
+\begin{definition}[Menu-level validity]
+Inference is \emph{menu-level} when the object of scientific interest is $\M^*$ (and functionals of $\M^*$), not a single preferred $m$.
+Per-measure protocols~\cite{proxy2026,halterman2026} validate individual operationalizations; they are complementary inputs to a menu, not substitutes for menu-level inference.
+\end{definition}
+
+\subsection{Maintained assumptions}
+\begin{assumption}[Menu coverage]
+$\M$ contains the operationalizations of scientific interest for the research question; coverage is argued from literature and design, never proven.
+\end{assumption}
+\begin{assumption}[Restriction validity]
+Each $g_r$ is a correct testable implication of the construct definition and auxiliaries $V$; restrictions are researcher-owned and falsifiable by data.
+\end{assumption}
+\begin{assumption}[Sampling]
+The unit-by-measure score matrix is drawn under a stated sampling model (e.g., exchangeable country-level aggregates), frozen with the run.
+\end{assumption}
+\begin{assumption}[Tolerance policy]
+$\delta\ge 0$ is declared ex ante (default $0$) and is never tuned to rescue an empty set.
+\end{assumption}
+
+\subsection{Consistency of the plug-in objects}
+\begin{proposition}[Consistency of the admissible set and range]
+\label{prop:consistency}
+Assume A1--A4.
+Suppose
+\[
+\max_{m\in\M}\max_{r\in\Rset}\bigl|\hat s_r(m)-s_r(m)\bigr|\xrightarrow{p}0,
+\qquad
+\max_{m\in\M}\bigl|\hat\beta(m)-\beta(m)\bigr|\xrightarrow{p}0,
+\]
+and suppose separation: the slack margin $\mu(m):=\min_r s_r(m)+\delta$ satisfies $\mu(m)\neq 0$ for all $m\in\M$.
+Then $\Pr(\hat\M^*=\M^*)\to 1$ and $[\hat L,\hat U]\xrightarrow{p}[L,U]$.
+\end{proposition}
+\begin{proof}[Proof sketch]
+Let $\eta:=\min_m|\mu(m)|>0$ by separation.
+Uniform consistency gives $\Pr(\max_{m,r}|\hat s_r-s_r|<\eta/2)\to 1$.
+On that event, $\hat\mu(m)$ has the sign of $\mu(m)$ for every $m$, so $\hat\M^*=\M^*$; on the same event the endpoints are extrema of $\hat\beta$ over the fixed finite set $\M^*$, and the asserted convergence follows from the uniform bound on $\hat\beta$.
+Boundary measures with $\mu(m)=0$ are the only obstruction: their admission is decided by sampling noise.
+\end{proof}
+
+\begin{remark}[Empty sets]
+$\M^*=\emptyset$ rejects the pair $(\M,\Rset)$, not the construct $C$; it is a finding, not an error.
+\end{remark}
+
+\begin{remark}[Consistency is not validity]
+Proposition~\ref{prop:consistency} says the plug-in objects are well-posed.
+Validity claims come from the restrictions themselves (A2) and from the informativeness of $\Bset^*$.
+\end{remark}
+
+\subsection{Holdout null and claim}
+\begin{assumption}[Pre-data discipline]
+The partition $(\Rset_S,\Rset_H)$, tolerance $\delta$, baseline rule $B$, and random seed are fixed before any holdout data are examined.
+\end{assumption}
+
+\begin{proposition}[Null and claim]
+\label{prop:holdout}
+Under pre-data discipline, $\M^*_S$ does not depend on $\Rset_H$.
+Let $H(m)=\mathbf{1}\{m\text{ passes every }r\in\Rset_H\}$.
+The claim is $\E[H(m)\mid m\in\M^*_S]>\E[H(m)\mid m\in\M^*_B]$; the null is equality (selection restrictions carry no predictive content for holdout restrictions).
+\end{proposition}
+
+The natural estimator is the share of survivors passing holdout, $\hat p=|\M^*_S|^{-1}\sum_{m\in\M^*_S}H(m)$, compared with the baseline analogue on the same holdout set.
+
+\subsection{Coupling and the uncertainty band}
+The plug-in range inherits sampling error from both $\hat\beta(m)$ and $\hat\M^*$.
+When a measure is near the boundary and $\beta$-extreme, the two errors are coupled.
+Endpoint inference for fixed identified sets~\cite{imbensmanski2004,stoye2009} takes selection as given; here selection is estimated.
+The main-text protocol---uncertainty band, empty-replicate rate, boundary attribution, optional conservative projection---is an uncertainty summary under a stated reading, not a simultaneous confidence region under arbitrary dependence.
+Sample splitting decorrelates admission and endpoints at the cost of effective sample size.
+Formal simultaneous-coverage theory is the subject of the companion methods paper.
+
+\subsection{Notation at a glance}
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C$ & Scientific construct \\
+$m$ & Candidate measure / measurement function \\
+$\M$ & Declared finite menu \\
+$V$ & Auxiliaries used in validity restrictions \\
+$\Rset(C)$ & Validity restrictions / nomological network \\
+$\tau_r$ & Substantive threshold (researcher-owned) \\
+$\Rset_S,\Rset_H$ & Selection and holdout partitions \\
+$s_r(m)$ & Sample slack of restriction $r$ on measure $m$ \\
+$\delta$ & Slack tolerance (default $0$) \\
+$\M^*$ & Admissible set \\
+$\M^*_{\mathrm{select}},\M^*_{\mathrm{robust}}$ & Select and robust sets under holdout designs \\
+$\beta(m)$ & Scientific result using measure $m$ \\
+$\Bset^*$ & Admissible-result set (construct-identified) \\
+$[L,U]$ & Assumption-indexed admissible-measure range \\
+$G(D,C)$ & Measurement-generation technology \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Synthetic data-generating processes}
+\label{app:dgp}
+
+Synthetic examples remain useful because population truth is known.
+Consider standardized latent $C$, a convergent criterion $V_c$ with $\mathrm{Corr}(V_c,C)=0.80$, a discriminant foil $V_d$ orthogonal to $C$, an outcome $Y$ with $\mathrm{Corr}(Y,C)=0.60$, and a known-groups latent gap of $0.80$.
+The menu contains a high-quality measure loading $0.90$ on $C$, a weak measure loading $0.50$, a contaminated measure loading $0.70$ on $C$ and $0.55$ on $V_d$, a method-variance-dominated measure loading $0.20$, and pure noise (Table~\ref{tab:loadings}).
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Population menu for hand-verifiable synthetic examples.}
+\label{tab:loadings}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Measure & Loading on $C$ & Loading on $V_d$ & Method variance & Intended role \\
+\midrule
+$m_{\mathrm{true}}$   & $0.90$ & $0$    & residual & High-quality operationalization \\
+$m_{\mathrm{weak}}$   & $0.50$ & $0$    & residual & Valid but noisy \\
+$m_{\mathrm{contam}}$ & $0.70$ & $0.55$ & residual & Contaminated by discriminant foil \\
+$m_{\mathrm{method}}$ & $0.20$ & $0$    & dominant & Method-variance dominated \\
+$m_{\mathrm{noise}}$  & $0$    & $0$    & $1$     & Negative control \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{DGP A: clean separation.}
+Selection restrictions are $\mathrm{Corr}(m,V_c)\ge 0.39$, $|\mathrm{Corr}(m,V_d)|\le 0.25$, and a known-groups gap of at least $0.25$; target $\beta(m)=\mathrm{Corr}(m,Y)$.
+Population slacks are $+0.33$, $+0.01$, $+0.17$, $-0.23$, $-0.39$ on convergence; $+0.25$, $+0.25$, $-0.30$, $+0.25$, $+0.25$ on discrimination; and $+0.47$, $+0.15$, $+0.31$, $-0.09$, $-0.25$ on the group gap.
+Only $m_{\mathrm{true}}$ and $m_{\mathrm{weak}}$ survive, and
+\[
+\Bset^*=\bigl\{0.54,\,0.30\bigr\},\qquad [L,U]=[0.30,\,0.54].
+\]
+Every admissible slack is strictly positive: separation holds.
+
+\paragraph{DGP B: boundary measures and coupling.}
+Raise the convergent threshold to $0.70$.
+Then $m_{\mathrm{true}}$ remains admissible by a $+0.02$ margin and $m_{\mathrm{weak}}$ is rejected ($-0.30$); the plug-in range collapses to the singleton $\{0.54\}$.
+If instead the threshold is set at the weak measure's population correlation ($0.40$), $m_{\mathrm{weak}}$ lies exactly on the boundary: in finite samples its admission is decided by sampling noise, and because it attains the lower endpoint whenever admitted, admission error and endpoint error are coupled---the regime the boundary-attribution protocol monitors.
+
+\paragraph{DGP C: empty $\M^*$ is a finding.}
+Replace the discriminant restriction with $\mathrm{Corr}(m,V_d)\ge 0.50$ and raise the convergent threshold to $0.60$.
+No measure can load heavily on both $C$ (hence on $V_c$) and the orthogonal foil at once: $m_{\mathrm{true}}$ passes convergence ($+0.12$) but fails the foil ($-0.50$); $m_{\mathrm{contam}}$ passes the foil ($+0.05$) but narrowly fails convergence ($-0.04$).
+The admissible set is empty---a rejection of the pair $(\M,\Rset)$, not of $C$.
+The honest response is to revise the menu or the network, never the tolerance $\delta$.
+
+\paragraph{DGP D: holdout discipline.}
+Use a lenient selection screen, $\mathrm{Corr}(m,V_c)\ge 0.40$ and $|\mathrm{Corr}(m,V_d)|\le 0.60$, and a stricter holdout screen, $|\mathrm{Corr}(m,V_d)|\le 0.20$ and a group gap of at least $0.25$.
+Selection admits $m_{\mathrm{true}}$, $m_{\mathrm{weak}}$, and $m_{\mathrm{contam}}$; on holdout, $m_{\mathrm{contam}}$ fails the tight discriminant test ($-0.35$) while the other two pass, giving a construct-guided pass rate of $2/3$.
+An anchor-fit baseline that keeps the two measures with the largest convergent correlations retains $m_{\mathrm{true}}$ and $m_{\mathrm{contam}}$, of which only one survives holdout: pass rate $1/2$.
+In this population-limit example, construct-guided selection beats single-anchor selection on held-out validity---the direction of the falsifiable claim.
+
+\paragraph{DGP E: theory misspecification (a divisible construct).}
+Suppose the construct is initially treated as unitary but the menu actually contains two coherent families with opposite nomological relations: four measures load $0.80$ or $0.60$ on a subconstruct $C_1$ and four load $0.80$ or $0.60$ on $C_2$ (with $C_1\perp C_2$), plus noise.
+Let the convergent criterion be $V_c=0.80\,C_1-0.20\,C_2+\varepsilon$ and the outcome $Y=0.60\,C_1-0.50\,C_2+\varepsilon$, both standardized.
+A screen $\mathrm{Corr}(m,V_c)\ge 0.39$ admits the $C_1$ family (population convergent correlations $0.64$ and $0.48$) and rejects the $C_2$ family ($-0.16$ and $-0.12$).
+The unrestricted image over $\M$ is $[-0.40,0.48]$---broad and structured, with a coherent negative block from the rejected family; the conditional image is $\Bset^*=[0.36,0.48]$, narrow and positive.
+Both objects are correct under their own questions: the conditional set is valid inference under $\Rset$, and the structured disagreement in the full menu is exactly the evidence that $C$ may be divisible.
+The framework decides which measures may speak under the declared argument; it does not decide whether the rejected family is invalid measurement or evidence that $C$ should be split---that decision belongs to the discovery channel (Appendix~\ref{app:automation}), which revises, refreezes, and tests on new data.
+
+\paragraph{DGP F: reliability attenuation (measurement precision).}
+Hold latent validity constant and vary only the psychometric precision of two otherwise equivalent composites.
+Let $C$ be standardized with a criterion $B$ at $\mathrm{Corr}(C,B)=0.70$, and let $A_1$ and $A_2$ be means of five items each loading $0.90$ and $0.50$ on $C$ (independent errors), giving composite reliabilities $\omega_1=0.955$ and $\omega_2=0.625$.
+The observed criterion correlations are $\mathrm{Corr}(A_1,B)=0.70\sqrt{0.955}=0.684$ and $\mathrm{Corr}(A_2,B)=0.70\sqrt{0.625}=0.553$: identical latent validity, different admissibility.
+A convergent gate $\mathrm{Corr}(m,B)\ge 0.60$ admits $A_1$ and rejects $A_2$ purely because of reliability, and the same attenuation makes $A_2$ look cleaner on an upper-bound discriminant gate against a slightly contaminated foil ($\mathrm{Corr}(A_2,V_d)=0.079$ versus $0.098$ for $A_1$ when $\mathrm{Corr}(V_d,C)=0.10$).
+The lesson is that admissibility can depend on the machinery of score construction, not only on substantive construct differences---the motivation for the measurement-precision layer on the roadmap (Section~\ref{sec:community}), and a caution the paper's own reliability-naive composite $z(\mathrm{Q13})+z(\mathrm{Q14})$, dragged under the bar by Q14, illustrates empirically.
+
+A finite-sample engine check under the shipped implementation reproduces the qualitative structure of DGPs A--F; run identifiers are recorded in the companion repository.
+
+\section{Benchmarks as measurement menus}
+\label{app:bench}
+
+A benchmark maps model behavior into a score interpreted as a capability.
+If several task families purport to measure the same capability, they form a measurement menu, and construct-identified benchmark inference would define the capability and intended use, declare the benchmark families, specify convergent and discriminant evidence, reserve held-out task families, and report model comparisons over the admissible benchmark set~\cite{wallach2025,bean2025}.
+This perspective does not solve contamination or benchmark governance~\cite{truong2026}, but it clarifies the scientific object: a leaderboard score is an operationalization, not the capability itself.
+The motivation is empirical: the AI Index reports capability-benchmark reporting by leading developers as near-universal while responsible-AI benchmark reporting remains uneven~\cite{hai2026}.
+
+\section{Validation gates in automated social science}
+\label{app:automation}
+
+Language models can help generate hypotheses, propose coding schemes, construct candidate measures, and simulate respondents~\cite{manning2024}.
+The design question is which commitments must remain inspectable when the workflow becomes agentic.
+Automation may propose hypotheses, generate candidates, compute frozen scores, and execute declared restrictions; it must not silently choose the construct definition, rewrite thresholds after observing outcomes, or validate one model with another model's correlated outputs as though they were independent evidence.
+Interventions in LLM-simulated-user experiments can induce user drift, motivating negative-control outcomes as a diagnostic~\cite{illusion2026}; prompt-engineering and fine-tuning repairs must be distinguished from statistical calibration using auxiliary human data under explicit assumptions~\cite{hullman2026}; and early case studies find that frontier agents complete engineering work without substantially answering the research questions~\cite{kirgis2026}.
+The most direct Goodharting failure is training a generator against the known restriction network; the defenses are procedural---freeze $\Rset$ and $\tau$ before final scoring, preserve negative controls, reserve restrictions or units, and keep generator provenance separate from validity evidence.
+The medium-run opportunity is a community registry of construct definitions, frozen score matrices, researcher-authored networks, and reproducible audits---a way to make disagreements legible rather than a closed ``verifiable reward'' for autonomous science.
+
+\section{Open-weight LLM measurement protocol}
+\label{app:llm}
+
+LLM outputs enter the framework only after they are reduced to declared score columns.
+For a binary or ordered response prompt, a log-probability scalarization uses the model-implied probability assigned to prespecified answer tokens.
+The prompt template, model identity, quantization, tokenizer, decoding settings, answer-token mapping, and scalar reduction are part of the measurement function $m$ and must be frozen with the score provenance.
+Temperature-zero decoding improves reproducibility but does not establish validity; open weights improve auditability but do not confer scientific standing.
+
+The scores in Section~\ref{sec:app} and Appendix~\ref{app:country} use Meta-Llama-3.1-8B-Instruct Q8\_0 and Phi-4-mini Q8\_0, GGUF-pinned by checksum, scored with llama.cpp at temperature~0 and seed 20260815.
+Both models see identical prompt bytes: a silicon-sampling wrapper (typical adult, or woman/man aged in a named band, living in the English country name) plus the published GPS qualitative item and, for trust, the WVS Q57 stem.
+The country score is the mean of a $0$--$10$ expected rating and a binary $P(B)$, each mapped to the unit interval.
+Table~\ref{tab:adapter} states the required provenance record.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Minimum adapter card for an LLM measurement function.}
+\label{tab:adapter}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.0cm} X@{}}
+\toprule
+\textbf{Field} & \textbf{Required record} \\
+\midrule
+Construct prompt & Exact text and response format. \\
+Model & Repository/model identifier and pinned artifact hash. \\
+Runtime & Inference engine, quantization, and tokenizer. \\
+Decoding & Temperature, seed, and any sampling parameters. \\
+Scalarization & Exact map from token probabilities/outputs to the score column. \\
+Provenance & Whether prompts/models were screened before the menu freeze; all exclusions. \\
+Independence & Any overlap between training data, validity auxiliaries, and downstream outcomes. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Country profiles (underpowered complete application)}
+\label{app:country}
+
+These profiles use the same frozen networks and the same two cheap columns as Section~\ref{sec:app}.
+They are not the powered application: $n=41$ and $n=35$ do not support a units-split headline.
+
+Both open-weight patience columns survive the education and risk-discriminant screen with leftover monotonicity, joining \GPS{} patience.
+Llama's education slack is $+0.027$ (boundary); Phi's is $+0.071$.
+\WVS{} Q13, Q14, and the composite still fail education.
+The plug-in range is $[0.402,0.565]$ (GPS $0.402$, Llama $0.447$, Phi $0.565$), with coverage $[0.157,0.674]$ and empty-replicate rate $0.089$.
+Without the cheap columns the set was the GPS singleton $0.402$ with empty-replicate rate $0.297$.
+
+On trust, Llama survives rule of law and the gini sign restriction (slacks $+0.475$ and $+0.197$) and leftover education ($+0.221$), with $\beta=0.481$.
+Phi fails gini (slack $-0.158$) despite passing rule of law.
+\GPS{} trust still fails rule of law.
+The admissible set is $\{\mathrm{Q57},\mathrm{in},\mathrm{out},\mathrm{composite},\mathrm{Llama}\}$ with range $[0.107,0.481]$ and coverage $[-0.016,0.699]$ that still crosses zero.
+The two models are not two methods: they disagree on the inequality bar, and only one of them may speak.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Country appendix (\cvp{}~3.0.2, seed 20260814, $n_{\mathrm{boot}}=1000$).
+Country $\beta$ is standardized OLS on log GDP per capita with an education control.}
+\label{tab:country_llm}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.8cm} r >{\raggedright\arraybackslash}p{4.2cm} r r r@{}}
+\toprule
+\textbf{Profile} & $n$ & $\M^*$ & $[L,U]$ & \textbf{Coverage} & \textbf{Empty-rep.} \\
+\midrule
+Patience, country & 41 & \{\GPS{}, Llama, Phi\} & $[0.402,0.565]$ & $[0.157,0.674]$ & $0.089$ \\
+Trust, country & 35 & \{Q57, in, out, composite, Llama\} & $[0.107,0.481]$ & $[-0.016,0.699]$ & $0.001$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Synthesis of contributions and empirical grounding}
+\label{app:synthesis}
+
+Table~\ref{tab:synthesis_contributions} summarizes the scope and depth of our methodological and substantive contributions, framing construct-identified inference as a formal bridge across psychometrics, multiverse reporting, and partial identification.
+Figure~\ref{fig:traditions_flow} details the synthesis of these three traditions in response to the AI measurement shock.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  shock/.style={draw=failred, fill=failred!8, rounded corners=3pt, align=center,
+                text width=4.8in, minimum height=0.45in, line width=0.8pt},
+  tradbox/.style={draw=econblue, fill=mist, rounded corners=3pt, align=left,
+                  text width=4.6in, minimum height=0.62in, inner sep=5pt, line width=0.7pt},
+  conclbox/.style={draw=passgreen, fill=passgreen!10, rounded corners=3pt, align=center,
+                   text width=4.8in, minimum height=0.45in, line width=0.8pt},
+  arr/.style={-{Stealth[length=2.2mm]}, line width=0.9pt, color=slate},
+  lbl/.style={font=\scriptsize\itshape\color{slate}, fill=white, inner sep=2pt}]
+
+\node[shock] (s) at (0, 3.3) {\textbf{\color{failred}THE AI MEASUREMENT SHOCK}\\
+Generative models, prompt elicitation, and synthetic agents produce cheap candidate score columns.};
+
+\node[tradbox] (t1) at (0, 2.0) {\textbf{\color{econblue}Tradition 1: Psychometrics} \cite{cronbach1955,campbell1959,messick1995}\\
+\textit{Nomological Network $\Rset(C)$}: Encodes theory-derived convergent and discriminant moment restrictions $\E[g_r(m(X),V;\tau_r)]\ge 0$ with researcher-owned substantive thresholds.};
+
+\node[tradbox] (t2) at (0, 0.7) {\textbf{\color{econblue}Tradition 2: Multiverse Analysis} \cite{steegen2016,simonsohn2020}\\
+\textit{Measurement Menu $\M$}: Declares candidate operationalizations, exposing model choices rather than optimizing a single preferred specification.};
+
+\node[tradbox] (t3) at (0, -0.6) {\textbf{\color{econblue}Tradition 3: Partial Identification} \cite{manski2003,imbensmanski2004,dellrambachan2026}\\
+\textit{Construct-Identified Set $\Bset^*$}: Evaluates the downstream target functional $\beta(m)$ only on the admissible set $\M^*=\{m\in\M : s_r(m)\ge -\delta\}$, reporting the range $[L,U]$ and additive uncertainty band.};
+
+\node[conclbox] (c) at (0, -1.9) {\textbf{\color{passgreen}SCIENTIFIC CONCLUSION}\\
+Headline bounds $[L,U]$ on survivors $+$ additive bootstrap uncertainty band $+$ cross-resolution audits.};
+
+\draw[arr] (s) -- (t1);
+\draw[arr] (t1) -- node[lbl] {Restrictions $\Rset(C)$} (t2);
+\draw[arr] (t2) -- node[lbl] {Admissible set $\M^*$} (t3);
+\draw[arr] (t3) -- node[lbl] {Image $\Bset^* = \{\beta(m): m\in\M^*\}$} (c);
+
+\end{tikzpicture}
+\caption{The three traditions composed by construct-identified inference.
+Nomological restrictions from psychometrics screen candidate operationalizations from a declared multiverse, and partial identification propagates the remaining measurement choice into downstream scientific conclusions.}
+\label{fig:traditions_flow}
+\end{figure}
+
+\begin{table}[p]
+\centering
+\small
+\caption{Summary of methodological contributions and their empirical grounding in this paper.}
+\label{tab:synthesis_contributions}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{3.1cm} >{\raggedright\arraybackslash}p{2.6cm} X@{}}
+\toprule
+\textbf{Claimed Contribution} & \textbf{Methodological Anchor} & \textbf{Key Literature} & \textbf{Empirical Grounding in This Paper} \\
+\midrule
+\textbf{I. Unrestricted Multiverse Recovery} & Setting $\Rset=\emptyset$ recovers the raw specification curve as a named special case of $[L, U]$. & Simonsohn et al.~\cite{simonsohn2020}; Steegen et al.~\cite{steegen2016} & On the present 7-measure country patience menu, $\Rset=\emptyset$ returns $[-0.219, 0.565]$, so raw multiverse reporting still sign-switches on development. \\
+\addlinespace
+\textbf{II. Formal MTMM Matrix Recovery} & Campbell--Fiske convergent ($\tau_{\text{conv}}$) and discriminant ($\tau_{\text{disc}}$) cells are ordinary $\mathrm{corr\_min}$ / $\mathrm{corr\_zero}$ restrictions. & Campbell \& Fiske~\cite{campbell1959}; Falk et al.~\cite{falk2018} & The $2\times 2$ matrix of patience and trust empties: WVS Q57 tracks GPS patience ($r=0.825$; partial $r=0.706$) far more than GPS trust ($r=0.284$). \\
+\addlinespace
+\textbf{III. Sampling Fragility \& Uncertainty Bands} & Selection on sample moments is data-dependent; units bootstrap bands and empty-replicate rates are reported additively alongside $[L, U]$. & Imbens \& Manski~\cite{imbensmanski2004}; Stoye~\cite{stoye2009} & Cheap patience columns join GPS at country level ($[0.402,0.565]$, empty-rep.\ $0.089$); coverage remains wide. \\
+\addlinespace
+\textbf{IV. Resolution Shifts \& Ecological Confounds} & Testing across macro (country) and within-country demographic cell resolutions reveals whether proxy failure is construct mismatch or aggregation bias. & Falk \& Hermle~\cite{falkhermle2018}; Messick~\cite{messick1995} & WVS Thrift (Q13) fails at country level ($-0.33$) but survives within-country demeaning ($+0.25$, $\beta=0.245$), while Perseverance (Q14) is anti-aligned at both levels ($-0.33$). \\
+\addlinespace
+\textbf{V. Construct Selection vs.\ Estimand Co-movement} & Predeclared nomological gates and criterion-recovery estimands can cleanly pull apart without invalidating the framework. & Kane~\cite{kane2013}; Borsboom et al.~\cite{borsboom2004} & Human trust cells remain empty under the education gate; only Phi is admitted and its $\beta$ versus GPS trust is $-0.317$, while multi-item facets still co-move with GPS trust ($r=0.21$--$0.32$). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

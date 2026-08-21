@@ -99,3 +99,9 @@ models/
 
 # Default output of `cvprofiles demo` (four-file bundle + report)
 /cvprofiles_demo/
+
+# Paper build artifacts (compile locally; source only is tracked)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.pdf
