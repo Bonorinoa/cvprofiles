@@ -105,3 +105,6 @@ paper/*.aux
 paper/*.log
 paper/*.out
 paper/*.pdf
+
+# H5 aux caches: orphaned with the H5 lane removal (2026-08-21); local copies remain on disk
+data/h5_trust_aux/
