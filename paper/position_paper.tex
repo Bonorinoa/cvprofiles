@@ -704,6 +704,7 @@ The only speaker the screen admits is a cheap measure that points against the cr
 
 Validity decides which measures may enter the conditional robustness set; rejected measures are not epistemically silent, and a coherent rejected family is evidence about the adequacy of $\Rset(C)$ and of the construct definition---the input to a discovery channel (revise, refreeze, test on new data) that this paper does not execute.
 The range reports leftover disagreement among those admitted; the band reports that the admissible set itself is noisy.
+The inadmissible set is profiled directly in Appendix~\ref{app:inadmissible}: rejection is restriction-concentrated rather than scattered, and the alignment between failing the screen and disagreeing with the estimand runs in opposite directions for the two constructs---perfectly positive for patience, strongly negative for trust.
 
 Read that way, the cell application does not deliver a preferred measure of patience or of trust.
 Thrift and perseverance are not interchangeable proxies.
@@ -1278,6 +1279,37 @@ Two readings travel with the table.
 First, the patience homogeneity is not an artifact of one boundary choice: the screened range is identical for every floor a reasonable author might defend up to $0.25$, and remains strictly positive under floors that admit only the open-weight columns.
 Second, the trust result is genuinely validity-argument-dependent: at a lenient floor a second cheap score with positive association to \GPS{} trust enters, moving the range across zero, while a very strict floor produces the empty set.
 The screen-versus-estimand conflict reported in Section~\ref{sec:app-cells} is therefore itself conditional on where the education bar sits---which is precisely the information the contrast between the unrestricted and conditional images is designed to expose, and why the grid accompanies every future freeze rather than replacing the $\tau$-grid.
+
+\section{Profiling the inadmissible set}
+\label{app:inadmissible}
+
+A validity argument is a selection rule, and a selection rule is tested by what it selects \emph{out}.
+This appendix profiles $\M\setminus\M^*$ across all four frozen runs: which restrictions reject, whether rejections cluster, and whether the rejected columns carry criterion-relevant signal.
+Four findings survive inspection; all numbers come from the same freezes as Tables~\ref{tab:twores}--\ref{tab:country_llm} (package 3.0.2 primitives, no re-scoring).
+
+\paragraph{Finding 1: rejection is restriction-concentrated, not scattered.}
+At the powered cell resolution every human rejection comes from the single education floor---rejection rates are $1.0$ for $\mathrm{conv\_edu}$ and $0.0$ for all other select restrictions on the patience menu, and $1.0$ versus $0.5$ (rule of law versus gini) on the trust country menu.
+No measure fails by scattering small violations across unrelated implications; each reject has one binding reason.
+Concentrated rejection supports reading the screen as testing one substantive expectation per measure family, rather than accumulating many weak cuts whose intersection would be uninterpretable.
+
+\paragraph{Finding 2: patience rejects are coherent and estimand-aligned; the screen and the estimand agree.}
+The three rejected patience operationalizations form one tight family (mean inter-reject Spearman $+0.72$ at country level) with uniformly negative development associations, and among human cell measures the rank correlation between the education slack and $\beta$ is exactly $+1.0$: failing the gate and pointing against the estimand carry the same information.
+For patience, screening removes nothing the estimand wanted; the A1/A2 concern (Appendix~\ref{app:dgp}, DGP~E) does not bind on this application.
+
+\paragraph{Finding 3: trust rejects are coherent and estimand-\emph{anti}-aligned; the screen and the estimand disagree systematically.}
+Among human trust-cell measures the correlation between the education slack and $\beta$ is $-0.82$: the measures that co-move most strongly with \GPS{} trust inside countries ($\beta=0.21$--$0.32$) fail the education floor hardest, while the unique passer points negative.
+This is not a cheap-column artifact---the statistic is computed on human measures only---and it upgrades the Section~\ref{sec:app-cells} disagreement from a singleton conflict to a structural property of the menu: within countries, the declared education implication and criterion recovery are opposed, which is precisely the pattern in which a failed restriction should be read as evidence about the network rather than about the measures.
+
+\paragraph{Finding 4: the validated instrument is the outlier in its own construct family.}
+At country level, \GPS{} trust correlates with rule of law at $r=+0.12$ while every \WVS{} facet sits between $0.48$ and $0.71$, and \GPS{} trust also fails the leftover education check.
+The experimentally validated behavioral item behaves unlike every other column that claims the construct---so the country-level verdict that ``\GPS{} trust fails rule of law'' is better read symmetrically: either the behavioral measure records something the institutional facets do not, or the institutional expectations in $\Rset$ apply to belief-trust rather than behavioral trust.
+The framework cannot decide between those readings; profiling the inadmissible set is what makes the choice visible instead of buried under a per-instrument pass/fail.
+
+\medskip
+\noindent
+Together the findings sharpen what the framework promises.
+Screening is not lossless compression of the menu: for patience it is nearly free (aligned screen and estimand), while for trust it buys admissibility at the price of criterion relevance---and the price is now measured, not merely conceded.
+The discovery channel of Appendix~\ref{app:automation} takes Finding 3 as its concrete input: a revised network for within-country trust (for example, replacing the pooled education implication with a level-appropriate one) is exactly the kind of hypothesis that should be frozen and tested on fresh data.
 
 \section{Synthesis of contributions and empirical grounding}
 \label{app:synthesis}

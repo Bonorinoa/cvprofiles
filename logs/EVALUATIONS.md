@@ -538,3 +538,20 @@ Design: select-stage education floor swept θ ∈ {0.10, 0.15, 0.20, 0.25, 0.30,
 **Artifacts:** `evals/wvs_gps_two_resolution/network_sensitivity_summary.json` (committed); script `evals/wvs_gps_two_resolution/scripts/network_sensitivity_grid.py`; paper Appendix G + Table 7 (position_paper v9+, commits 3774312 / 8e14f80). Package version recorded: 3.0.2 primitives; no new freeze created.
 
 **Not paper evidence beyond what Augusto locks:** the grid is a sensitivity description of already-frozen runs; it does not promote any network variant to headline status.
+
+---
+
+## 2026-08-22 — inadmissible-set profile across the four frozen runs (read-only diagnostic)
+
+**Evidence interpretation (recorded):** deliverable (iii) of the reviewer pass — profiled M∖M\* on the same four freezes via their committed slacks/betas; no re-scoring, no engine change. Script `scripts/inadmissible_set_profile.py`, artifact `inadmissible_set_profile.json`.
+
+Findings:
+
+1. **Restriction-concentrated rejection.** Cell-level human rejections come entirely from the education floor (rate 1.0 vs 0.0 elsewhere); trust country: rule-of-law 0.75 / gini 0.5. No scattered multi-restriction failures.
+2. **Patience: screen and estimand agree.** Reject family coherent (mean inter-reject Spearman +0.72 country level); corr(education slack, β) over human cell measures = **+1.0**. A1/A2 concern does not bind here.
+3. **Trust: screen and estimand anti-aligned.** corr(education slack, β) over HUMAN trust-cell measures = **−0.82** — strongest GPS-trust recoverers fail the floor hardest; unique passer points negative. Structural menu property, not a cheap-column artifact. Concrete input for the discovery channel (level-appropriate replacement implication, frozen and tested on fresh data).
+4. **GPS trust is the outlier in its own construct family.** Corr(GPS trust, rule_of_law) = +0.12 vs +0.48…0.71 for every WVS facet; GPS trust also fails leftover education. Country verdict should be read symmetrically (behavioral vs belief-trust mismatch), not as per-instrument failure.
+
+Paper: new Appendix H (`app:inadmissible`) + §5.6 pointer; compiled 26 pp.
+
+**Not paper evidence beyond what Augusto locks:** findings describe the existing freezes; Finding 3 motivates but does not authorize any network revision.

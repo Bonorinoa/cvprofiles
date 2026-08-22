@@ -1,0 +1,371 @@
+{
+  "patience_cells_demeaned_llm": {
+    "admitted": [
+      "m_llm_patience_llama",
+      "m_llm_patience_phi",
+      "m_wvs_q13"
+    ],
+    "mean_beta_gap_rejected_minus_admitted": -0.524,
+    "menu_beta_sign_agreement": 0.2,
+    "n_admitted": 3,
+    "n_menu": 6,
+    "n_rejected": 3,
+    "profile": "patience_cells_demeaned_llm",
+    "reject_beta_sign_agreement": 1.0,
+    "reject_majority_sign": -1,
+    "rejected_profiles": [
+      {
+        "beta": -0.027,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.25,
+          "mono_edu_cell": -0.222
+        },
+        "measure": "m_composite",
+        "n_fail_select": 1,
+        "sign_of_beta": "-"
+      },
+      {
+        "beta": -0.003,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.231,
+          "mono_edu_cell": -0.165
+        },
+        "measure": "m_noise",
+        "n_fail_select": 1,
+        "sign_of_beta": "-"
+      },
+      {
+        "beta": -0.326,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.564,
+          "mono_edu_cell": -0.499
+        },
+        "measure": "m_wvs_q14",
+        "n_fail_select": 1,
+        "sign_of_beta": "-"
+      }
+    ],
+    "rejection_rate_by_restriction": {
+      "conv_edu_cell": 1.0
+    }
+  },
+  "patience_country_llm": {
+    "admitted": [
+      "m_gps_patience",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi"
+    ],
+    "mean_beta_gap_rejected_minus_admitted": -0.611,
+    "menu_beta_sign_agreement": 0.0,
+    "n_admitted": 3,
+    "n_menu": 7,
+    "n_rejected": 4,
+    "profile": "patience_country_llm",
+    "reject_beta_sign_agreement": 0.5,
+    "reject_majority_sign": -1,
+    "rejected_profiles": [
+      {
+        "beta": -0.219,
+        "fails_holdout": [
+          "mono_edu"
+        ],
+        "fails_select": [
+          "conv_edu"
+        ],
+        "margins": {
+          "conv_edu": -0.722,
+          "mono_edu": -0.679
+        },
+        "measure": "m_composite",
+        "n_fail_select": 1,
+        "sign_of_beta": "-"
+      },
+      {
+        "beta": 0.02,
+        "fails_holdout": [
+          "mono_edu"
+        ],
+        "fails_select": [
+          "conv_edu"
+        ],
+        "margins": {
+          "conv_edu": -0.265,
+          "mono_edu": -0.237
+        },
+        "measure": "m_noise",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": -0.166,
+        "fails_holdout": [
+          "mono_edu"
+        ],
+        "fails_select": [
+          "conv_edu"
+        ],
+        "margins": {
+          "conv_edu": -0.533,
+          "mono_edu": -0.47
+        },
+        "measure": "m_wvs_q13",
+        "n_fail_select": 1,
+        "sign_of_beta": "-"
+      },
+      {
+        "beta": -0.195,
+        "fails_holdout": [
+          "mono_edu"
+        ],
+        "fails_select": [
+          "conv_edu"
+        ],
+        "margins": {
+          "conv_edu": -0.777,
+          "mono_edu": -0.698
+        },
+        "measure": "m_wvs_q14",
+        "n_fail_select": 1,
+        "sign_of_beta": "-"
+      }
+    ],
+    "rejection_rate_by_restriction": {
+      "conv_edu": 1.0,
+      "disc_risk": 0.0
+    }
+  },
+  "trust_cells_demeaned_llm": {
+    "admitted": [
+      "m_llm_trust_phi"
+    ],
+    "mean_beta_gap_rejected_minus_admitted": 0.501,
+    "menu_beta_sign_agreement": 0.714,
+    "n_admitted": 1,
+    "n_menu": 8,
+    "n_rejected": 7,
+    "profile": "trust_cells_demeaned_llm",
+    "reject_beta_sign_agreement": 1.0,
+    "reject_majority_sign": 1,
+    "rejected_profiles": [
+      {
+        "beta": 0.179,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.077,
+          "mono_edu_cell": -0.066
+        },
+        "measure": "m_llm_trust_llama",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": 0.015,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.172,
+          "mono_edu_cell": -0.119
+        },
+        "measure": "m_noise",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": 0.318,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.474,
+          "mono_edu_cell": -0.414
+        },
+        "measure": "m_trust_composite",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": 0.052,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.177,
+          "mono_edu_cell": -0.131
+        },
+        "measure": "m_trust_general",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": 0.224,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.268,
+          "mono_edu_cell": -0.233
+        },
+        "measure": "m_trust_in_group",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": 0.285,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.627,
+          "mono_edu_cell": -0.552
+        },
+        "measure": "m_trust_institution",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": 0.211,
+        "fails_holdout": [
+          "mono_edu_cell"
+        ],
+        "fails_select": [
+          "conv_edu_cell"
+        ],
+        "margins": {
+          "conv_edu_cell": -0.275,
+          "mono_edu_cell": -0.225
+        },
+        "measure": "m_trust_out_group",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      }
+    ],
+    "rejection_rate_by_restriction": {
+      "conv_edu_cell": 1.0
+    }
+  },
+  "trust_country_llm": {
+    "admitted": [
+      "m_llm_trust_llama",
+      "m_trust_composite",
+      "m_trust_general",
+      "m_trust_in_group",
+      "m_trust_out_group"
+    ],
+    "mean_beta_gap_rejected_minus_admitted": -0.18,
+    "menu_beta_sign_agreement": 0.75,
+    "n_admitted": 5,
+    "n_menu": 9,
+    "n_rejected": 4,
+    "profile": "trust_country_llm",
+    "reject_beta_sign_agreement": 0.5,
+    "reject_majority_sign": 1,
+    "rejected_profiles": [
+      {
+        "beta": 0.109,
+        "fails_holdout": [
+          "conv_edu_hold"
+        ],
+        "fails_select": [
+          "conv_rule_of_law"
+        ],
+        "margins": {
+          "conv_edu_hold": -0.197,
+          "conv_rule_of_law": -0.176
+        },
+        "measure": "m_gps_trust",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": 0.386,
+        "fails_holdout": [],
+        "fails_select": [
+          "disc_gini"
+        ],
+        "margins": {
+          "disc_gini": -0.158
+        },
+        "measure": "m_llm_trust_phi",
+        "n_fail_select": 1,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": 0.028,
+        "fails_holdout": [
+          "conv_edu_hold"
+        ],
+        "fails_select": [
+          "conv_rule_of_law",
+          "disc_gini"
+        ],
+        "margins": {
+          "conv_edu_hold": -0.102,
+          "conv_rule_of_law": -0.374,
+          "disc_gini": -0.005
+        },
+        "measure": "m_noise",
+        "n_fail_select": 2,
+        "sign_of_beta": "+"
+      },
+      {
+        "beta": -0.092,
+        "fails_holdout": [
+          "conv_edu_hold"
+        ],
+        "fails_select": [
+          "conv_rule_of_law"
+        ],
+        "margins": {
+          "conv_edu_hold": -0.563,
+          "conv_rule_of_law": -0.425
+        },
+        "measure": "m_trust_institution",
+        "n_fail_select": 1,
+        "sign_of_beta": "-"
+      }
+    ],
+    "rejection_rate_by_restriction": {
+      "conv_rule_of_law": 0.75,
+      "disc_gini": 0.5
+    }
+  }
+}
