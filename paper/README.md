@@ -21,8 +21,11 @@ cd paper
 pdflatex position_paper.tex && pdflatex position_paper.tex   # twice for refs
 ```
 
-No bibliography tool or figure assets are required. Build artifacts (`*.aux`,
-`*.log`, `*.out`, `*.pdf`) are gitignored; compile locally to read the PDF.
+No bibliography tool or figure assets are required. Build side-products
+(`*.aux`, `*.log`, `*.out`) are gitignored; **the compiled
+[`position_paper.pdf`](position_paper.pdf) is tracked** so readers can download
+it without a LaTeX toolchain. Rebuild it with the command above after editing
+the source.
 
 ## Numbers provenance
 

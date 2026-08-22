@@ -100,11 +100,11 @@ models/
 # Default output of `cvprofiles demo` (four-file bundle + report)
 /cvprofiles_demo/
 
-# Paper build artifacts (compile locally; source only is tracked)
+# Paper build side-products (aux/log/out only; the compiled PDF is tracked
+# so readers can download it without a LaTeX toolchain)
 paper/*.aux
 paper/*.log
 paper/*.out
-paper/*.pdf
 
 # H5 aux caches: orphaned with the H5 lane removal (2026-08-21); local copies remain on disk
 data/h5_trust_aux/
