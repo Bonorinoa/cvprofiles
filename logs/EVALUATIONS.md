@@ -519,3 +519,22 @@ empirical lane is the IVS cultural-values evaluation (`docs/18`, `docs/16` §9).
 **Artifacts:** `reports/summaries/wvs_gps_application_summary.json` (allow-listed); frozen inputs `evals/wvs_gps_preferences/data/inputs/` (sha-pinned model provenance); pooled run `evals/wvs_gps_preferences/data/pool_runs/`; verifier `tools/verify_wvs_gps.py` (exit 0). Package version recorded: `2.5.2` at freeze time; stage-5 rerun under `3.0.0` refreshes run_ids by design (values must match).
 
 **Not paper evidence:** paper narrative, claims, and reporting placement remain Augusto's; IVS lane remains deferred (docs/16 §9/§11).
+
+---
+
+## 2026-08-22 — validity-argument sensitivity grid on the powered cell freezes (read-only diagnostic)
+
+**Evidence interpretation (recorded):** executed the §3.5(v) layer named in the position paper (v9): seven substantively defensible networks R_i over the *existing* 2026-08-19 demeaned cell freezes (`runs/patience_cells_demeaned_llm/`, `runs/trust_cells_demeaned_llm/`), computed via released 3.0.2 primitives (`slack_matrix` / `evaluate_beta`) on the freezes' own `S_frozen.csv`. **No engine change, no threshold moved, no freeze re-written** — this sits in the diagnostics lane of PAPER_PROTOCOL_FREEZE, not a new estimand claim. R0 asserted to reproduce both shipped M*'s exactly before sweeping.
+
+Design: select-stage education floor swept θ ∈ {0.10, 0.15, 0.20, 0.25, 0.30, 0.40}; leftover holdout monotonicity (θ=0.15) held fixed; δ=0; no bootstrap (this layer is not sampling uncertainty). Final row is the named empty_R unrestricted special case.
+
+| Profile | Result across R_i |
+|---|---|
+| Patience cells | B\*(R) = [0.245, 0.556] invariant for θ ≤ 0.25; [0.417, 0.556] at θ ∈ {0.30, 0.40} (Q13 drops, still positive); unrestricted [−0.326, 0.556] sign-switches |
+| Trust cells | θ=0.10 admits Llama → [−0.317, 0.179] crosses zero; frozen band 0.15–0.30 → Phi singleton [−0.317, −0.317]; θ=0.40 → M\* = ∅; unrestricted [−0.317, 0.318] |
+
+**Interpretation:** patience homogeneity is robust-to-the-argument within the plausible floor band; trust conclusion is validity-argument-dependent (sign, width, and nonemptiness all hinge on the education bar). This asymmetry is the paper-facing finding — it demonstrates the two-sensitivities distinction of §1.4 on real data rather than asserting it.
+
+**Artifacts:** `evals/wvs_gps_two_resolution/network_sensitivity_summary.json` (committed); script `evals/wvs_gps_two_resolution/scripts/network_sensitivity_grid.py`; paper Appendix G + Table 7 (position_paper v9+, commits 3774312 / 8e14f80). Package version recorded: 3.0.2 primitives; no new freeze created.
+
+**Not paper evidence beyond what Augusto locks:** the grid is a sensitivity description of already-frozen runs; it does not promote any network variant to headline status.
