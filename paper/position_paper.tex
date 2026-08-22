@@ -698,7 +698,7 @@ Llama fails it as well (slack $-0.077$).
 Phi passes (slack $+0.149$, leftover $+0.133$) and is the singleton.
 Its $\beta$ versus \GPS{} trust is $-0.317$, with coverage $[-0.382,-0.240]$ entirely negative.
 In-group, out-group, institution, and the composite still co-move with \GPS{} trust ($0.224$, $0.211$, $0.285$, $0.318$) without tracking within-country education; Q57 does not ($0.052$).
-The only speaker the screen admits is a cheap measure that points against the criterion the estimand asked to recover.
+The only measure the screen admits is a cheap score that points against the criterion the estimand asked to recover.
 
 \subsection{What the application is allowed to mean}
 \label{sec:app-read}
@@ -1337,6 +1337,43 @@ Between-country variance dominates every trust column (89--94\%), so within-coun
 \medskip
 \noindent
 Verdict for this application: no evidence of structural noninvariance in the derived frames---the cross-resolution findings survive their most plausible psychometric rival on the available evidence, with item-level invariance testing flagged as the remaining stronger test (Section~\ref{sec:community}).
+
+\section{Response to the psychometrician's review}
+\label{app:response}
+
+An earlier draft received a detailed review from a psychometrician; this revision is built around it, and we thank the reviewer publicly here.
+The comments clustered into four threads, each of which changed the paper: (A) the robustness claim was conditional on the validity argument and read as one-way adjudication; (B) measurement precision and reliability were absent from both the screen's inputs and its interpretation; (C) cross-resolution reversals could reflect measurement noninvariance rather than construct relations; (D) the paper claimed too much of the validity ecosystem for what it operationalizes.
+This appendix records where each thread landed, so that readers---and the reviewer---can audit the response without diffing drafts.
+
+\paragraph{Thread A: conditionality and the reciprocal channel (comments on the core claim, M*, thresholds).}
+Adopted throughout.
+Robustness language was replaced by heterogeneity-of-results framing; survivors are written $\M^*(\Rset)$ to make their dependence on the declared argument visible; every headline is conditional on restriction validity, now a formal main-text assumption (Assumption~\ref{ass:restriction}); unrestricted and screened images are always reported side by side.
+The confirmation-bias concern behind the A1/A2 example was taken seriously enough to be tested twice: DGP~E (Appendix~\ref{app:dgp}) simulates it, and Appendix~\ref{app:netsens} executes the competing-networks layer the comments proposed---seven defensible arguments on one frozen surface, showing patience homogeneity survives argument variation while trust does not.
+Appendix~\ref{app:inadmissible} profiles $\M\setminus\M^*$ directly and finds the reviewer's concern empirically confirmed on one construct: among human trust-cell measures the correlation between education slack and estimand alignment is $-0.82$, so screening there buys admissibility at a measured price in criterion relevance---the finding is reported as such and handed to the discovery channel, not tuned away.
+The ``validity decides who may speak'' metaphor was withdrawn; rejected measures are treated as evidence throughout.
+
+\paragraph{Thread B: precision and reliability.}
+Adopted as a named roadmap commitment with its motivating analysis already in the paper: reliability attenuation has its own DGP (Appendix~\ref{app:dgp}, DGP~F), Section~\ref{sec:community} specifies the planned extension (optional per-measure reliability metadata; disattenuated slack and $\beta$ variants reported alongside naive ones), and auxiliaries are explicitly flagged as fallible when they are themselves construct scores.
+Not yet implemented in the engine; deliberately not promised as done.
+
+\paragraph{Thread C: noninvariance.}
+Adopted and executed to the limit of available data.
+Appendix~\ref{app:dif} runs the strongest test the derived frames permit---three-level association comparisons plus within-country slope heterogeneity---finds no structural reorganization of any measure across levels, and locates thrift's reversal in level-dependent binding of the education implication rather than item functioning.
+Item-level multi-group invariance testing remains flagged as the stronger unrun test wherever microdata access permits.
+
+\paragraph{Thread D: positioning within the validity ecosystem.}
+Adopted.
+The paper now claims criterion-related validity assessment across competing measures---relations-to-other-variables evidence under a declared argument---rather than construct validation generally; keywords, abstract, and Section~2 carry the narrowed claim; the Campbell--Fiske special case is explicitly correlational-criteria nesting, not latent-variable MTMM recovery.
+
+\paragraph{Where we differ, and why.}
+Two suggestions were partially declined, with reasons.
+First, renaming the pipeline around ``heterogeneity'' alone: we kept \emph{construct-identified inference} as the frame because the partial-identification register is what makes two-set reporting constitutive rather than decorative, but every interpretive sentence now carries the heterogeneity reading the reviewer preferred.
+Second, fully reciprocal theory revision inside the confirmatory lane: the paper keeps revision in a frozen-and-retested discovery channel (Appendices~\ref{app:automation}, \ref{app:inadmissible}) because folding it into the screen would recreate the circularity the same review warned against; we note the reviewer's own framing anticipates this in requiring revised contracts to face new data.
+We record these declines so the disagreement can be adjudicated by readers rather than buried.
+
+\medskip
+\noindent
+Remaining gaps, stated plainly: the precision layer is unimplemented; the competing-networks grid covers threshold variation within one network family, not between-family alternatives; item-level invariance testing awaits licensed microdata; and the within-country trust revision motivated by Finding 3 of Appendix~\ref{app:inadmissible} is specified but not yet frozen or fielded.
 
 \section{Synthesis of contributions and empirical grounding}
 \label{app:synthesis}
