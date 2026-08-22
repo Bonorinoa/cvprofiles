@@ -1,0 +1,78 @@
+{
+  "country_slopes_vs_education": {
+    "m_wvs_q13": {
+      "mean": 0.209,
+      "median": 0.324,
+      "n_countries": 42,
+      "q10": -0.419,
+      "q90": 0.628,
+      "share_positive": 0.786
+    },
+    "m_wvs_q14": {
+      "mean": -0.377,
+      "median": -0.411,
+      "n_countries": 42,
+      "q10": -0.629,
+      "q90": 0.025,
+      "share_positive": 0.119
+    }
+  },
+  "education_assoc_by_level": {
+    "m_wvs_q13": {
+      "country_level": -0.329,
+      "pooled_cell": -0.171,
+      "within_cell": 0.251
+    },
+    "m_wvs_q14": {
+      "country_level": -0.592,
+      "pooled_cell": -0.525,
+      "within_cell": -0.364
+    }
+  },
+  "measure_vs_gps_by_level": {
+    "m_composite": {
+      "country_level_corr": -0.268,
+      "pooled_cell_corr": -0.232,
+      "within_cell_corr": -0.027
+    },
+    "m_wvs_q13": {
+      "country_level_corr": -0.214,
+      "pooled_cell_corr": -0.133,
+      "within_cell_corr": 0.245
+    },
+    "m_wvs_q14": {
+      "country_level_corr": -0.246,
+      "pooled_cell_corr": -0.247,
+      "within_cell_corr": -0.326
+    }
+  },
+  "n_cells": 480,
+  "n_countries": 42,
+  "variance_decomposition": {
+    "gps_patience_cell": {
+      "between_share": 0.847,
+      "var_total": 0.1966,
+      "within_share": 0.153
+    },
+    "m_composite": {
+      "between_share": 0.897,
+      "var_total": 2.6956,
+      "within_share": 0.103
+    },
+    "m_wvs_q13": {
+      "between_share": 0.794,
+      "var_total": 0.0131,
+      "within_share": 0.206
+    },
+    "m_wvs_q14": {
+      "between_share": 0.852,
+      "var_total": 0.0221,
+      "within_share": 0.148
+    },
+    "q275_cell": {
+      "between_share": 0.663,
+      "var_total": 1.2952,
+      "within_share": 0.337
+    }
+  }
+}

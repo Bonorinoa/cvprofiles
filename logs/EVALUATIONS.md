@@ -555,3 +555,19 @@ Findings:
 Paper: new Appendix H (`app:inadmissible`) + §5.6 pointer; compiled 26 pp.
 
 **Not paper evidence beyond what Augusto locks:** findings describe the existing freezes; Finding 3 motivates but does not authorize any network revision.
+
+---
+
+## 2026-08-22 — level-dependence / DIF diagnostic (read-only; derived frames)
+
+**Evidence interpretation (recorded):** comment #29 follow-up. Question: is the pooled-vs-demeaned reversal driven by ecological aggregation or by a level-dependent measurement function? Ran the strongest test available on derived frames (no item microdata → no multi-group CFA): variance decomposition, measure–education association at three levels (country means / pooled cells / demeaned cells), and country-slope heterogeneity within countries. Script `scripts/dif_level_dependence.py`, artifact `dif_level_dependence.json`.
+
+Results:
+
+1. **Q13 reversal = expectation-level-dependence, not item DIF.** Education assoc flips sign across levels (−0.33 country / −0.17 pooled / +0.25 within) BUT within-country slope positive in 79% of 42 countries (mean +0.21); Q13–Q14 co-movement stable across levels (0.83 country / 0.52 pooled). The implication's binding changes with level; the item's functioning does not reorganize.
+2. **Q14 uniformly negative at every level** (−0.59/−0.53/−0.36; negative slope in 88% of countries). Level-robust substantive distinctness from time preference.
+3. **Trust facets: smooth attenuation, no reorganization.** GPS-trust recovery ordered identically at both levels; composite education assoc declines monotonically (+0.15→+0.08→−0.27). Between-country variance 89–94% ⇒ within-country tests are intrinsically low-information — the empty human trust cell menu partly reflects variance geometry, not only the bar.
+
+Verdict: cross-resolution findings survive their most plausible psychometric rival on the available evidence; item-level invariance testing flagged in §6.6 as the remaining stronger test. Paper: new Appendix I (`app:dif`), §5.5 pointer updated; compiled 27 pp.
+
+**Not paper evidence beyond what Augusto locks:** diagnostic description of existing frames; does not adjudicate item-level invariance claims.

@@ -676,7 +676,8 @@ That is a finding about the named special case, not a reason to lower $\tau$ aft
 Table~\ref{tab:twores} is the powered application.
 Country-demeaning the 480 cells is required: Q13 was rejected in the undemeaned table because richer countries have both more education and lower thrift endorsement.
 One competing explanation for such cross-resolution reversals is measurement noninvariance: if a multi-item measure's structure differs across the pooled versus within-country levels, the same nominal column need not represent the same construct at both, so part of a reversal can reflect a changed measurement function rather than a changed construct relation.
-Invariance and differential-item-functioning evidence upstream of the screen is a natural extension (Section~\ref{sec:community}).
+The diagnostic of Appendix~\ref{app:dif} separates the two mechanisms for this application: thrift's reversal is level-dependence of the education \emph{expectation} (its sign flips inside countries while Q13--Q14 co-movement is stable), not item-level differential functioning; perseverance is uniformly negative at every level.
+Invariance and differential-item-functioning evidence from item-level microdata remains the stronger test and a natural extension (Section~\ref{sec:community}).
 Inside countries the sign flips.
 Q13's education slack is $+0.051$, leftover monotonicity $+0.060$, and $\beta$ versus \GPS{} patience $+0.245$.
 Q14 stays anti-aligned (slack $-0.564$, $\beta=-0.326$).
@@ -1310,6 +1311,32 @@ The framework cannot decide between those readings; profiling the inadmissible s
 Together the findings sharpen what the framework promises.
 Screening is not lossless compression of the menu: for patience it is nearly free (aligned screen and estimand), while for trust it buys admissibility at the price of criterion relevance---and the price is now measured, not merely conceded.
 The discovery channel of Appendix~\ref{app:automation} takes Finding 3 as its concrete input: a revised network for within-country trust (for example, replacing the pooled education implication with a level-appropriate one) is exactly the kind of hypothesis that should be frozen and tested on fresh data.
+
+\section{Level-dependence diagnostic for the cross-resolution reversal}
+\label{app:dif}
+
+Section~\ref{sec:app-cells} noted that measurement noninvariance could compete with the substantive reading of the pooled-versus-demeaned reversal.
+This appendix runs the strongest test available on derived frames---no item-level microdata, so classical multi-group invariance testing is out of scope---and asks whether the \emph{measurement function} or the \emph{expectation} carries the level-dependence (480 cells, 42 countries; package 3.0.2 inputs).
+
+\paragraph{Design.}
+Three comparisons per measure: variance decomposition of each cell column into between- and within-country shares; the association between measure and education auxiliary at country level (country means), pooled cells, and within-country (demeaned) cells; and country-slope heterogeneity of the measure--education association inside countries.
+
+\paragraph{Result 1: thrift's reversal is expectation-level-dependence, not item DIF.}
+Q13's education association flips sign across levels ($-0.33$ country, $-0.17$ pooled, $+0.25$ within), but its within-country slope is positive in 79\% of the 42 countries (mean $+0.21$, median $+0.32$)---the within-country expectation holds nearly everywhere rather than being manufactured by aggregation.
+Meanwhile Q13--Q14 co-movement is stable across levels ($r=0.83$ at country level, $0.52$ pooled cells): the relation between the two thrift-family items does not reorganize across resolutions.
+The reversal therefore lives in how the education implication binds at different levels, not in Q13's item functioning; classical item-level DIF remains the stronger unrun test.
+
+\paragraph{Result 2: perseverance is uniformly negative---a stable property, not an artifact.}
+Q14's education association is negative at every level ($-0.59$ country, $-0.53$ pooled, $-0.36$ within) and its within-country slope is negative in 88\% of countries (mean $-0.38$).
+Its anti-alignment is a level-robust feature of the measure, consistent with treating perseverance as substantively distinct from time preference rather than as a resolution-dependent artifact.
+
+\paragraph{Result 3: trust facets show no structural reorganization either.}
+Every facet's association with \GPS{} trust attenuates smoothly from country to within-cell level ($0.27$–$0.47$ down to $0.05$–$0.32$, ordered identically at both levels), and the composite's education association declines monotonically ($+0.15 \to +0.08 \to -0.27$) without sign reorganization among facets.
+Between-country variance dominates every trust column (89--94\%), so within-country tests are intrinsically low-information---the empty human trust cell menu partly reflects this variance geometry, not only the education bar.
+
+\medskip
+\noindent
+Verdict for this application: no evidence of structural noninvariance in the derived frames---the cross-resolution findings survive their most plausible psychometric rival on the available evidence, with item-level invariance testing flagged as the remaining stronger test (Section~\ref{sec:community}).
 
 \section{Synthesis of contributions and empirical grounding}
 \label{app:synthesis}
