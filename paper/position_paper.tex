@@ -230,6 +230,7 @@ Validity here is whether a score warrants the intended interpretation of $C$, op
 The construct-identified result set is deliberately conditional---on the construct, the menu, the validity argument, the thresholds, and the sampling frame.
 Change any component and $\M^*$, $\Bset^*$, and $[L,U]$ are different objects; every component must therefore be declared and auditable rather than inferred from the data.
 Two distinct sensitivities follow: sampling sensitivity at fixed $\Rset$, quantified by the diagnostics of Section~\ref{sec:uncertainty}, and sensitivity of $\M^*(\Rset)$ and $\Bset^*(\Rset)$ across substantively defensible validity arguments $\Rset_1,\Rset_2,\ldots$, which is not sampling uncertainty and does not shrink under resampling.
+The second layer is executed for the powered application in Appendix~\ref{app:netsens}.
 
 \subsection{Four contributions}
 The contributions follow in deliberately conservative order.
@@ -437,6 +438,12 @@ A poor restriction can reject a useful measure; a weak network can admit a poor 
 The force of the screen is therefore conditional on the restrictions being correct implications of the construct (Assumption~A.2): pre-specification fixes researcher degrees of freedom, but it does not by itself establish that a restriction is substantively necessary for the intended interpretation.
 The framework disciplines these commitments by making them explicit and auditable---it does not make them disappear.
 
+Because every downstream claim inherits it, the maintained assumption is stated formally in the main text rather than left to the appendix:
+\begin{assumption}[Restriction validity]\label{ass:restriction}
+Each $g_r$ is a correct testable implication of the construct definition and its auxiliaries $V$; restrictions are researcher-owned and falsifiable by data.
+If a restriction fails in data, that failure is prima facie evidence against the measure---but the strength of prior evidence behind the restriction determines how much weight any conclusion conditional on it can bear.
+\end{assumption}
+
 The screen is deliberately not a classical joint hypothesis test: there is no likelihood, no null distribution, and no prior; the engine computes transparent moments against declared thresholds and reports which measures clear them.
 The scientific content is the intersection of the restrictions, not an aggregate statistic.
 Concrete tests based on relations to other variables---convergent, discriminant, criterion-related, and broader nomological expectations---fit this form~\cite{proxy2026,halterman2026}, in contrast to restrictions that bound measurement-error correlation structure~\cite{chenrttamer2026}.
@@ -554,8 +561,10 @@ Flag measures whose absolute slack margin satisfies $|\mathrm{margin}_m|\le\kapp
 \item \textbf{Conservative cross-check (optional).}
 Compare a units bootstrap that re-forms $\M^*$ in every replicate with the same bootstrap that freezes $\M^*$ at the original estimate; only that contrast isolates admission--endpoint coupling from ordinary endpoint sampling error.
 A Bonferroni union computed on a fixed $\M^*$ measures interval conservatism, not coupling.
-\item \textbf{Validity-argument sensitivity (roadmap).}
-The $\tau$-grid varies numeric thresholds while holding the validity theory fixed; sensitivity across substantively defensible networks $\Rset_1,\Rset_2,\ldots$ is a separate layer that the current application does not execute (Section~\ref{sec:community}).
+\item \textbf{Validity-argument sensitivity (executed).}
+The $\tau$-grid varies numeric thresholds while holding the validity theory fixed; sensitivity across substantively defensible networks $\Rset_1,\Rset_2,\ldots$ is a separate layer, and Section~5's application executes it: seven networks spanning education floors $\theta\in[0.10,0.40]$ plus the unrestricted special case are run on the same frozen cell scores (Appendix~\ref{app:netsens}).
+The patience result is invariant over the plausible band---$\Bset^*(\Rset)=[0.245,0.556]$ for $\theta\le 0.25$, narrowing upward to $[0.417,0.556]$---while the trust result is argument-dependent: a lenient floor admits a second cheap score whose positive $\beta$ moves the range across zero, a very strict floor empties the set entirely.
+Which conclusions are robust to the argument, and which are artifacts of one particular boundary choice, is exactly what this layer exposes.
 \end{enumerate}
 Under uniform consistency of the slacks and the target functional, and a separation condition excluding measures exactly on the admissibility boundary, the plug-in admissible set and range converge in probability to their population counterparts (Appendix~A).
 The documented failure regime is coupling: a near-boundary measure that is also $\beta$-extreme couples admission with the endpoints, because its inclusion or exclusion moves the range directly.
@@ -784,9 +793,12 @@ The unrestricted country patience menu still sign-switches; once the same cheap 
 
 What remains is scale, not the necessity of the composition: individual-level gradient tests that keep residual variance the cell means discard, and open libraries of networks and thresholds so that research teams can contest measurement definitions without silently rewriting them.
 
-\subsection{Open implementation and community}
+\subsection{Open implementation, precision layer, and community}
 \label{sec:community}
 The registry of restriction types, target functionals, and generators is deliberately small, and its gaps are known: stability is schema-only, slacks are never learned, and coupling theory is deferred to a companion methods paper.
+One gap has a named plan: a \emph{measurement-precision layer}.
+Admissibility today is judged on reliability-naive sample moments, so two composites with identical latent validity can land on opposite sides of a gate purely because of attenuation (DGP~F, Appendix~\ref{app:dgp}).
+The planned extension accepts optional per-measure reliability metadata and reports disattenuated slack and $\beta(m)$ variants alongside the naive ones, so that admissibility decisions can be audited against the score-construction machinery, not only the substantive construct.
 The contribution we invite is concrete---new restriction types, $\beta$-functionals, and measurement generators---not a leaderboard.
 
 \section{Conclusion}
@@ -1128,6 +1140,9 @@ The unrestricted image over $\M$ is $[-0.40,0.48]$---broad and structured, with 
 Both objects are correct under their own questions: the conditional set is valid inference under $\Rset$, and the structured disagreement in the full menu is exactly the evidence that $C$ may be divisible.
 The framework decides which measures may speak under the declared argument; it does not decide whether the rejected family is invalid measurement or evidence that $C$ should be split---that decision belongs to the discovery channel (Appendix~\ref{app:automation}), which revises, refreezes, and tests on new data.
 
+\paragraph{Empirical companion: validity-argument sensitivity.}
+The network grid of Appendix~\ref{app:netsens} instantiates both regimes on real data: the trust application behaves like this misspecification case---the qualitative conclusion depends on where the education floor sits---while the patience application behaves like the clean case.
+
 \paragraph{DGP F: reliability attenuation (measurement precision).}
 Hold latent validity constant and vary only the psychometric precision of two otherwise equivalent composites.
 Let $C$ be standardized with a criterion $B$ at $\mathrm{Corr}(C,B)=0.70$, and let $A_1$ and $A_2$ be means of five items each loading $0.90$ and $0.50$ on $C$ (independent errors), giving composite reliabilities $\omega_1=0.955$ and $\omega_2=0.625$.
@@ -1221,6 +1236,48 @@ Trust, country & 35 & \{Q57, in, out, composite, Llama\} & $[0.107,0.481]$ & $[-
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\section{Validity-argument sensitivity grid}
+\label{app:netsens}
+
+This appendix executes the layer named in Section~\ref{sec:uncertainty}: seven substantively defensible validity arguments run on the same frozen, country-demeaned cell scores and estimands as the powered application (package 3.0.2 primitives, $\delta=0$, no bootstrap---this layer is not sampling uncertainty).
+All variants hold the leftover holdout monotonicity restriction ($\theta=0.15$) fixed and vary only the select-stage education floor; the last row is the named unrestricted special case ($\Rset=\emptyset$).
+The frozen confirmatory network is row $\Rset_0$ and reproduces Table~\ref{tab:twores} exactly.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Validity-argument sensitivity on the powered cell surface.
+$\theta_{\mathrm{edu}}$ is the select-stage education floor ($\mathrm{Corr}(m,\mathrm{q275\_cell})\ge\theta_{\mathrm{edu}}$); all other structure held at the frozen values.
+Ranges are the plug-in image $[L,U]$ over $\M^*(\Rset_i)$, rounded to three decimals.}
+\label{tab:netsens}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.4cm} l X r@{}}
+\toprule
+\textbf{Network} & $\theta_{\mathrm{edu}}$ & $\M^*(\Rset_i)$ & $[L,U]$ \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Patience, cells ($n=480$)}} \\
+$\Rset_0$ (frozen)    & $0.20$ & Q13, Llama, Phi & $[0.245,0.556]$ \\
+$\Rset_1$             & $0.10$ & Q13, Llama, Phi & $[0.245,0.556]$ \\
+$\Rset_2$             & $0.15$ & Q13, Llama, Phi & $[0.245,0.556]$ \\
+$\Rset_3$             & $0.25$ & Q13, Llama, Phi & $[0.245,0.556]$ \\
+$\Rset_4$             & $0.30$ & Llama, Phi      & $[0.417,0.556]$ \\
+$\Rset_5$             & $0.40$ & Llama, Phi      & $[0.417,0.556]$ \\
+$\Rset_6$ (unrestricted) & --- & all five        & $[-0.326,0.556]$ \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Trust, cells ($n=480$)}} \\
+$\Rset_0$ (frozen)    & $0.20$ & Phi              & $[-0.317,-0.317]$ \\
+$\Rset_1$             & $0.10$ & Llama, Phi       & $[-0.317,0.179]$ \\
+$\Rset_2$--$\Rset_4$  & $0.15$--$0.30$ & Phi      & $[-0.317,-0.317]$ \\
+$\Rset_5$             & $0.40$ & $\emptyset$      & --- \\
+$\Rset_6$ (unrestricted) & --- & all seven        & $[-0.317,0.318]$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Two readings travel with the table.
+First, the patience homogeneity is not an artifact of one boundary choice: the screened range is identical for every floor a reasonable author might defend up to $0.25$, and remains strictly positive under floors that admit only the open-weight columns.
+Second, the trust result is genuinely validity-argument-dependent: at a lenient floor a second cheap score with positive association to \GPS{} trust enters, moving the range across zero, while a very strict floor produces the empty set.
+The screen-versus-estimand conflict reported in Section~\ref{sec:app-cells} is therefore itself conditional on where the education bar sits---which is precisely the information the contrast between the unrestricted and conditional images is designed to expose, and why the grid accompanies every future freeze rather than replacing the $\tau$-grid.
 
 \section{Synthesis of contributions and empirical grounding}
 \label{app:synthesis}

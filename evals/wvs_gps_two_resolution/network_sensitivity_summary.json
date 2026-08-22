@@ -1,0 +1,290 @@
+{
+  "patience_cells_demeaned_llm": {
+    "baseline_M_star_check_matches_freeze": [
+      "m_wvs_q13",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi"
+    ],
+    "beta_by_measure": {
+      "m_composite": -0.0266,
+      "m_llm_patience_llama": 0.4166,
+      "m_llm_patience_phi": 0.5561,
+      "m_wvs_q13": 0.2449,
+      "m_wvs_q14": -0.3258
+    },
+    "delta": 0.0,
+    "grid": [
+      {
+        "B_star_sorted": [
+          0.2449,
+          0.4166,
+          0.5561
+        ],
+        "L": 0.2449,
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "U": 0.5561,
+        "empty": false,
+        "n_admissible": 3,
+        "network": "R0_frozen_0.20",
+        "theta_edu_select": 0.2
+      },
+      {
+        "B_star_sorted": [
+          0.2449,
+          0.4166,
+          0.5561
+        ],
+        "L": 0.2449,
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "U": 0.5561,
+        "empty": false,
+        "n_admissible": 3,
+        "network": "R1_lenient_0.10",
+        "theta_edu_select": 0.1
+      },
+      {
+        "B_star_sorted": [
+          0.2449,
+          0.4166,
+          0.5561
+        ],
+        "L": 0.2449,
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "U": 0.5561,
+        "empty": false,
+        "n_admissible": 3,
+        "network": "R2_0.15",
+        "theta_edu_select": 0.15
+      },
+      {
+        "B_star_sorted": [
+          0.2449,
+          0.4166,
+          0.5561
+        ],
+        "L": 0.2449,
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "U": 0.5561,
+        "empty": false,
+        "n_admissible": 3,
+        "network": "R3_0.25",
+        "theta_edu_select": 0.25
+      },
+      {
+        "B_star_sorted": [
+          0.4166,
+          0.5561
+        ],
+        "L": 0.4166,
+        "M_star": [
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "U": 0.5561,
+        "empty": false,
+        "n_admissible": 2,
+        "network": "R4_strict_0.30",
+        "theta_edu_select": 0.3
+      },
+      {
+        "B_star_sorted": [
+          0.4166,
+          0.5561
+        ],
+        "L": 0.4166,
+        "M_star": [
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "U": 0.5561,
+        "empty": false,
+        "n_admissible": 2,
+        "network": "R5_vstrict_0.40",
+        "theta_edu_select": 0.4
+      },
+      {
+        "B_star_sorted": [
+          -0.3258,
+          -0.0266,
+          0.2449,
+          0.4166,
+          0.5561
+        ],
+        "L": -0.3258,
+        "M_star": [
+          "m_wvs_q13",
+          "m_wvs_q14",
+          "m_composite",
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "U": 0.5561,
+        "empty": false,
+        "n_admissible": 5,
+        "network": "R6_unrestricted",
+        "theta_edu_select": null
+      }
+    ],
+    "menu_no_noise": [
+      "m_wvs_q13",
+      "m_wvs_q14",
+      "m_composite",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi"
+    ],
+    "package_version": "3.0.2",
+    "profile": "patience_cells_demeaned_llm"
+  },
+  "trust_cells_demeaned_llm": {
+    "baseline_M_star_check_matches_freeze": [
+      "m_llm_trust_phi"
+    ],
+    "beta_by_measure": {
+      "m_llm_trust_llama": 0.1793,
+      "m_llm_trust_phi": -0.3175,
+      "m_trust_composite": 0.3176,
+      "m_trust_general": 0.0524,
+      "m_trust_in_group": 0.2239,
+      "m_trust_institution": 0.2847,
+      "m_trust_out_group": 0.2114
+    },
+    "delta": 0.0,
+    "grid": [
+      {
+        "B_star_sorted": [
+          -0.3175
+        ],
+        "L": -0.3175,
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "U": -0.3175,
+        "empty": false,
+        "n_admissible": 1,
+        "network": "R0_frozen_0.20",
+        "theta_edu_select": 0.2
+      },
+      {
+        "B_star_sorted": [
+          -0.3175,
+          0.1793
+        ],
+        "L": -0.3175,
+        "M_star": [
+          "m_llm_trust_llama",
+          "m_llm_trust_phi"
+        ],
+        "U": 0.1793,
+        "empty": false,
+        "n_admissible": 2,
+        "network": "R1_lenient_0.10",
+        "theta_edu_select": 0.1
+      },
+      {
+        "B_star_sorted": [
+          -0.3175
+        ],
+        "L": -0.3175,
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "U": -0.3175,
+        "empty": false,
+        "n_admissible": 1,
+        "network": "R2_0.15",
+        "theta_edu_select": 0.15
+      },
+      {
+        "B_star_sorted": [
+          -0.3175
+        ],
+        "L": -0.3175,
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "U": -0.3175,
+        "empty": false,
+        "n_admissible": 1,
+        "network": "R3_0.25",
+        "theta_edu_select": 0.25
+      },
+      {
+        "B_star_sorted": [
+          -0.3175
+        ],
+        "L": -0.3175,
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "U": -0.3175,
+        "empty": false,
+        "n_admissible": 1,
+        "network": "R4_strict_0.30",
+        "theta_edu_select": 0.3
+      },
+      {
+        "B_star_sorted": [],
+        "L": null,
+        "M_star": [],
+        "U": null,
+        "empty": true,
+        "n_admissible": 0,
+        "network": "R5_vstrict_0.40",
+        "theta_edu_select": 0.4
+      },
+      {
+        "B_star_sorted": [
+          -0.3175,
+          0.0524,
+          0.1793,
+          0.2114,
+          0.2239,
+          0.2847,
+          0.3176
+        ],
+        "L": -0.3175,
+        "M_star": [
+          "m_trust_general",
+          "m_trust_in_group",
+          "m_trust_out_group",
+          "m_trust_institution",
+          "m_trust_composite",
+          "m_llm_trust_llama",
+          "m_llm_trust_phi"
+        ],
+        "U": 0.3176,
+        "empty": false,
+        "n_admissible": 7,
+        "network": "R6_unrestricted",
+        "theta_edu_select": null
+      }
+    ],
+    "menu_no_noise": [
+      "m_trust_general",
+      "m_trust_in_group",
+      "m_trust_out_group",
+      "m_trust_institution",
+      "m_trust_composite",
+      "m_llm_trust_llama",
+      "m_llm_trust_phi"
+    ],
+    "package_version": "3.0.2",
+    "profile": "trust_cells_demeaned_llm"
+  }
+}
