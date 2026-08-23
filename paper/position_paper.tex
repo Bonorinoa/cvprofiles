@@ -49,7 +49,7 @@
 
 \newcommand{\SCA}{\textsc{sca}}
 \newcommand{\LLM}{\textsc{llm}}
-\newcommand{\DPO}{\textsc{dpo}}
+
 \newcommand{\GPS}{\textsc{gps}}
 \newcommand{\WVS}{\textsc{wvs}}
 \newcommand{\WEIRD}{\textsc{weird}}
@@ -296,7 +296,7 @@ None performs menu-level validation with a surviving set and a falsifiable selec
 
 \subsection{AI makes the old problem large}
 The fourth development is not a tradition but a shock.
-AI measurement generators---prompted elicitation, log-probability scoring, persona steering~\cite{disca2026}, preference fine-tuning~\cite{plural2026,palms2026}, and synthetic-agent pipelines such as \SCA{}~\cite{capra2025}---expand the supply of candidate scores at low marginal cost.
+AI measurement generators---prompted elicitation, log-probability scoring, persona steering~\cite{disca2026}, preference fine-tuning~\cite{rafailov2023,plural2026,palms2026}, and synthetic-agent pipelines such as \SCA{}~\cite{capra2025}---expand the supply of candidate scores at low marginal cost.
 Each technology enters $\M$ only as a map on the same declared units; pipelines that replace the sample, including some \SCA{}-style designs, are not menu expansions under Definitions~A.1--A.3.
 Engineering sophistication is not construct validity: a fluent generator can produce a score column that fails every nomological implication of the construct it purports to measure.
 The correct discipline is to keep generators and validators separate.
@@ -600,7 +600,7 @@ and accepts four plain-text inputs---scores, roles, network, and target specific
 Frozen runs hash the score matrix, network, and target specification into a reproducibility record, and an empty $\M^*$ is an exit-success scientific finding rather than an exception.
 The engine is deliberately score-agnostic: it contains no language model, searches no prompt space, and writes no theory, and its validity layer fits no likelihood, prior, or null.
 Score-agnostic does not mean upstream measurement models are irrelevant---a composite's reliability or an LLM's prompt protocol shapes the score columns and hence the slacks---but the engine itself is agnostic about how scores were produced.
-This separation is a paper--package contract: the package is released in the public repository (tag \texttt{v3.0.2}; version 3.0.1 on PyPI, 2026-08-14 local / 2026-08-15 UTC) and used here as an instrument.
+This separation is a paper--package contract: the package is released in the public repository (tag \texttt{v3.0.2}, version 3.0.2, released on GitHub and PyPI) and used here as an instrument.
 Version 3.0.1 added a named \texttt{empty\_R} contract so that $\Rset=\emptyset$ is expressible and fail-loud rather than a silent admit-all; default \texttt{empty\_R=false} is omitted from the network hash, so pre-3.0.1 freezes remain bit-stable.
 Version 3.0.2 pins round-trip CSV parsing so run identities re-verify from committed inputs on every platform; all runs reported here are 3.0.2 freezes.
 Software cannot resolve disagreements about what patience or trust means; it can make those disagreements inspectable.
@@ -624,9 +624,9 @@ Every run reports an uncertainty band, an empty-replicate rate, and a $\tau$-gri
 \label{sec:app-construct}
 
 Patience is time preference as operationalized by the Global Preference Survey, whose module was designed by selecting and weighting survey items for predictive validity against incentivized experimental measures and validated across countries~\cite{falk2018,falk2023}.
-Under the declared validity argument, a patience measure is expected to rise with human capital and not to collapse into risk preference; the strength of prior evidence behind each expectation conditions how much weight the admission decision can bear.
+Under the declared validity argument, a patience measure is expected to rise with human capital and not to collapse into risk preference~\cite{dohmen2011}; the strength of prior evidence behind each expectation conditions how much weight the admission decision can bear.
 Trust is the belief that other people have good intentions, or that most people can be trusted.
-\GPS{} trust is a single experimentally validated item; \WVS{} Q57 is the canonical survey item; in-group, out-group, and institution facets are distinct objects of trust~\cite{glaser2000,sapienza2013}.
+\GPS{} trust is a single experimentally validated item; \WVS{} Q57 is the canonical survey item; in-group, out-group, and institution facets are distinct objects of trust~\cite{butler2016,glaser2000,sapienza2013}.
 Under the declared argument, a trust measure is expected to co-move with institutional quality and to move opposite income inequality~\cite{aghion2010,bjornskov2008}.
 When \GPS{} trust sits in the menu it is a peer candidate, not a bar.
 
@@ -677,7 +677,7 @@ Table~\ref{tab:twores} is the powered application.
 Country-demeaning the 480 cells is required: Q13 was rejected in the undemeaned table because richer countries have both more education and lower thrift endorsement.
 One competing explanation for such cross-resolution reversals is measurement noninvariance: if a multi-item measure's structure differs across the pooled versus within-country levels, the same nominal column need not represent the same construct at both, so part of a reversal can reflect a changed measurement function rather than a changed construct relation.
 The diagnostic of Appendix~\ref{app:dif} separates the two mechanisms for this application: thrift's reversal is level-dependence of the education \emph{expectation} (its sign flips inside countries while Q13--Q14 co-movement is stable), not item-level differential functioning; perseverance is uniformly negative at every level.
-Invariance and differential-item-functioning evidence from item-level microdata remains the stronger test and a natural extension (Section~\ref{sec:community}).
+Invariance and differential-item-functioning evidence from item-level microdata remains the stronger test and a natural extension~\cite{zeinfeld2026} (Section~\ref{sec:community}).
 Inside countries the sign flips.
 Q13's education slack is $+0.051$, leftover monotonicity $+0.060$, and $\beta$ versus \GPS{} patience $+0.245$.
 Q14 stays anti-aligned (slack $-0.564$, $\beta=-0.326$).
@@ -750,7 +750,7 @@ Open-weight model artifacts (Meta-Llama-3.1-8B-Instruct and Phi-4-mini, Q8\_0) a
 A versioned deposit of the run artifacts with a persistent DOI will be made at acceptance.
 
 \textbf{Code.}
-The engine is the open-source package \cvp{} (version 3.0.2, MIT license), with a documented state machine (SCORE $\to$ RESTRICT $\to$ IDENTIFY $\to$ REPORT), frozen-run hash contracts, and a test suite of 369 tests; version 3.0.1 remains the PyPI release.
+The engine is the open-source package \cvp{} (version 3.0.2, MIT license), with a documented state machine (SCORE $\to$ RESTRICT $\to$ IDENTIFY $\to$ REPORT), frozen-run hash contracts, and an executable regression test suite; the same release is on PyPI.
 
 \textbf{Preregistration.}
 This study was not preregistered in a public registry.
@@ -825,7 +825,7 @@ The novelty is not construct validity, multiverse analysis, partial identificati
 When measures are cheap, validity becomes the scarce resource.
 
 \section*{Data and code availability}
-Frozen score matrices, roles, networks, thresholds, and all run artifacts behind the tables are committed in the public repository \url{https://github.com/Bonorinoa/cvprofiles} at tag \texttt{v3.0.2} (package version 3.0.2); version 3.0.1 is on PyPI.
+Frozen score matrices, roles, networks, thresholds, and all run artifacts behind the tables are committed in the public repository \url{https://github.com/Bonorinoa/cvprofiles} at tag \texttt{v3.0.2}; version 3.0.2 is on PyPI.
 Raw \WVS{} Wave~7 and \GPS{} microdata are license-restricted and are not redistributed; the derived country and cell score tables are committed.
 Open-weight model artifacts (Meta-Llama-3.1-8B-Instruct and Phi-4-mini, Q8\_0) are pinned by SHA-256 checksum, and the scored columns are committed.
 A versioned DOI will be deposited on Zenodo at acceptance.
@@ -837,16 +837,18 @@ Monica Capra: conceptualization, supervision, writing---review and editing.
 
 \section*{Author note}
 This work has not been presented at a conference or posted as a preprint.
-The companion software package \cvp{} is publicly released (GitHub tag v3.0.2; PyPI version 3.0.1).
+The companion software package \cvp{} is publicly released (GitHub tag v3.0.2; PyPI version 3.0.2).
 Generative AI was used in two ways: open-weight language models were used as measurement instruments (documented in Appendix~\ref{app:llm}), and an AI writing assistant (Hermes Agent, Nous Research) was used for editing and formatting assistance; all scientific content, analyses, decisions, and nomological networks are the authors'.
 
 \begin{thebibliography}{99}\small
+
+\bibitem{plural2026} Agarwal, D., Shukla, A., Goyal, T., \& Vashistha, A. (2026). \textit{PLURAL: A global dataset for value alignment} [Preprint]. arXiv. https://arxiv.org/abs/2607.08034
 
 \bibitem{aghion2010} Aghion, P., Algan, Y., Cahuc, P., \& Shleifer, A. (2010). Regulation and distrust. \textit{Quarterly Journal of Economics, 125}(3), 1015--1049. https://doi.org/10.1162/qjec.2010.125.3.1015
 
 \bibitem{bauman2026} Baumann, J., R\"ottger, P., Urman, A., Wendsj\"o, A., Plaza-del-Arco, F.~M., Gruber, J.~B., \& Hovy, D. (2025). \textit{Large language model hacking: Quantifying the hidden risks of using LLMs for text annotation} [Preprint]. arXiv. https://arxiv.org/abs/2509.08825
 
-\bibitem{bean2025} Bean, A.~M., et al. (2025). \textit{Measuring what matters: Construct validity in large language model benchmarks} [Conference paper]. NeurIPS 2025 Datasets and Benchmarks Track. https://arxiv.org/abs/2511.04703
+\bibitem{bean2025} Bean, A.~M., Kearns, R.~O., Romanou, A., Hafner, F.~S., Mayne, H., Batzner, J., Foroutan, N., Schmitz, C., Korgul, K., Batra, H., Deb, O., Beharry, E., Emde, C., Foster, T., Gausen, A., Grandury, M., Han, S., Hofmann, V., Ibrahim, L., \ldots{} Mahdi, A. (2025). \textit{Measuring what matters: Construct validity in large language model benchmarks} [Conference paper]. NeurIPS 2025 Datasets and Benchmarks Track. https://arxiv.org/abs/2511.04703
 
 \bibitem{bjornskov2008} Bj\o rnskov, C. (2008). Social capital and happiness in the United States. \textit{Social Indicators Research, 86}(1), 269--282. https://doi.org/10.1007/s11205-007-9106-8
 
@@ -858,15 +860,9 @@ Generative AI was used in two ways: open-weight language models were used as mea
 
 \bibitem{canenenamorado2026} Canen, N., \& Enamorado, T. (2026). \textit{When predictions become regressors: A split-sample correction for biases in downstream inference} [Preprint]. arXiv. https://arxiv.org/abs/2608.02909
 
-\bibitem{capra2025} Gonzalez-Bonorino, A., Capra, C.~M., \& Pantoja, E. (in press). LLMs can model non-WEIRD behavior: Experiments with synthetic cultural agents. In \textit{Artificial intelligence and experimental methods} (Research in Experimental Economics, Vol.~23). Emerald. https://arxiv.org/abs/2501.06834
-
 \bibitem{chenrttamer2026} Chen, X., Rambachan, A., \& Tamer, E. (2026). \textit{Partial identification from LLM prompts} [Preprint]. arXiv. https://arxiv.org/abs/2606.15031
 
 \bibitem{cronbach1955} Cronbach, L.~J., \& Meehl, P.~E. (1955). Construct validity in psychological tests. \textit{Psychological Bulletin, 52}(4), 281--302. https://doi.org/10.1037/h0040957
-
-\bibitem{cvprofiles} Gonzalez-Bonorino, A. (2026). \textit{cvprofiles: Construct-validity profiles as partial identification over measurement menus} (Version 3.0.2) [Computer software]. GitHub. https://github.com/Bonorinoa/cvprofiles
-
-\bibitem{hermesagent} Hermes Agent (Nous Research). (2026). \textit{Hermes Agent} [Computer software]. https://hermes-agent.nousresearch.com
 
 \bibitem{delgiudice2021} Del Giudice, M., \& Gangestad, S.~W. (2021). A traveler's guide to the multiverse: Promises, pitfalls, and a framework for the evaluation of analytic decisions. \textit{Advances in Methods and Practices in Psychological Science, 4}(1). https://doi.org/10.1177/2515245920954925
 
@@ -874,23 +870,25 @@ Generative AI was used in two ways: open-weight language models were used as mea
 
 \bibitem{desai2026} Desai, M., Card, D., \& Jacobs, A.~Z. (2026). \textit{Validating LLMs in social science: Epistemic threats and emerging norms} [Preprint]. arXiv. https://arxiv.org/abs/2607.07915
 
-\bibitem{flake2020} Flake, J.~K., \& Fried, E.~I. (2020). Measurement schmeasurement: Questionable measurement practices and how to avoid them. \textit{Advances in Methods and Practices in Psychological Science, 3}(4), 456--465. https://doi.org/10.1177/2515245920952393
-
-\bibitem{disca2026} Kiet, H.~T., et al. (2026). \textit{Training-free cultural alignment of large language models via persona disagreement} [Preprint]. arXiv. https://arxiv.org/abs/2605.10843
+\bibitem{palms2026} Dey, P., Joshi, B., Poddar, P., Zhao, J., \& Ferrara, E. (2026). \textit{PALMs: Using multi construct-grounded rationales for modeling population preferences in LLMs} [Preprint]. arXiv. https://arxiv.org/abs/2608.01458
 
 \bibitem{dohmen2011} Dohmen, T., Falk, A., Huffman, D., Sunde, U., Schupp, J., \& Wagner, G.~G. (2011). Individual risk attitudes: Measurement, determinants, and behavioral consequences. \textit{Journal of the European Economic Association, 9}(3), 522--550. https://doi.org/10.1111/j.1542-4774.2011.01015.x
 
 \bibitem{falk2018} Falk, A., Becker, A., Dohmen, T., Enke, B., Huffman, D., \& Sunde, U. (2018). Global evidence on economic preferences. \textit{Quarterly Journal of Economics, 133}(4), 1645--1692. https://doi.org/10.1093/qje/qjy013
 
+\bibitem{falk2023} Falk, A., Becker, A., Dohmen, T., Huffman, D., \& Sunde, U. (2023). The preference survey module: A validated instrument for measuring risk, time, and social preferences. \textit{Management Science, 69}(4), 1935--1950. https://doi.org/10.1287/mnsc.2022.4455
+
 \bibitem{falkhermle2018} Falk, A., \& Hermle, J. (2018). Relationship of gender differences in preferences to economic development and gender equality. \textit{Science, 362}(6412), Article eaas9899. https://doi.org/10.1126/science.aas9899
 
-\bibitem{falk2023} Falk, A., Becker, A., Dohmen, T., Huffman, D., \& Sunde, U. (2023). The preference survey module: A validated instrument for measuring risk, time, and social preferences. \textit{Management Science, 69}(4), 1935--1950. https://doi.org/10.1287/mnsc.2022.4455
+\bibitem{flake2020} Flake, J.~K., \& Fried, E.~I. (2020). Measurement schmeasurement: Questionable measurement practices and how to avoid them. \textit{Advances in Methods and Practices in Psychological Science, 3}(4), 456--465. https://doi.org/10.1177/2515245920952393
 
 \bibitem{gelmanloken2014} Gelman, A., \& Loken, E. (2014). The statistical crisis in science. \textit{American Scientist, 102}(6), 460--465. https://doi.org/10.1511/2014.111.460
 
 \bibitem{glaser2000} Glaeser, E.~L., Laibson, D.~I., Scheinkman, J.~A., \& Soutter, C.~L. (2000). Measuring trust. \textit{Quarterly Journal of Economics, 115}(3), 811--846. https://doi.org/10.1162/003355300554926
 
-\bibitem{hai2026} Stanford Institute for Human-Centered Artificial Intelligence. (2026). \textit{AI index report 2026} [Report]. Stanford University. https://hai.stanford.edu/ai-index/2026-ai-index-report
+\bibitem{cvprofiles} Gonzalez-Bonorino, A. (2026). \textit{cvprofiles: Construct-validity profiles as partial identification over measurement menus} (Version 3.0.2) [Computer software]. GitHub. https://github.com/Bonorinoa/cvprofiles
+
+\bibitem{capra2025} Gonzalez-Bonorino, A., Capra, C.~M., \& Pantoja, E. (in press). LLMs can model non-WEIRD behavior: Experiments with synthetic cultural agents. In \textit{Artificial intelligence and experimental methods} (Research in Experimental Economics, Vol.~23). Emerald. https://arxiv.org/abs/2501.06834
 
 \bibitem{hall2026} Hall, A.~B. (2026). \textit{AI research topics at PolMeth 2026} [Data set]. GitHub. https://github.com/andybhall/polmeth-2026-ai
 
@@ -900,23 +898,27 @@ Generative AI was used in two ways: open-weight language models were used as mea
 
 \bibitem{hanushek2022} Hanushek, E.~A., Kinne, L., Lergetporer, P., \& Woessmann, L. (2022). Patience, risk-taking, and human capital investment across countries. \textit{The Economic Journal, 132}(646). https://doi.org/10.1093/ej/ueab105
 
-\bibitem{horton2023} Horton, J.~J. (2023; revised 2026 with A. Filippas \& B.~S. Manning). Large language models as simulated economic agents: What can we learn from homo silicus? (NBER Working Paper No. 31122). National Bureau of Economic Research. https://doi.org/10.3386/w31122
+\bibitem{horton2023} Horton, J.~J., Filippas, A., \& Manning, B.~S. (2023). Large language models as simulated economic agents: What can we learn from homo silicus? (NBER Working Paper No. 31122). National Bureau of Economic Research. https://doi.org/10.3386/w31122
 
 \bibitem{hullman2026} Hullman, J., Broska, D., Sun, H., \& Shaw, A. (2026). \textit{This human study did not involve human subjects: Validating LLM simulations as behavioral evidence} [Preprint]. arXiv. https://arxiv.org/abs/2602.15785
-
-\bibitem{illusion2026} Lin, V., Yun, T., Matari\'c, M., Canny, J., Gretton, A., \& D'Amour, A. (2026). \textit{The illusion of intervention: Your LLM-simulated experiment is an observational study} [Preprint]. arXiv. https://arxiv.org/abs/2605.20767
 
 \bibitem{imbensmanski2004} Imbens, G.~W., \& Manski, C.~F. (2004). Confidence intervals for partially identified parameters. \textit{Econometrica, 72}(6), 1845--1857. https://doi.org/10.1111/j.1468-0262.2004.00555.x
 
 \bibitem{kane2013} Kane, M.~T. (2013). Validating the interpretations and uses of test scores. \textit{Journal of Educational Measurement, 50}(1), 1--73. https://doi.org/10.1111/jedm.12000
 
+\bibitem{disca2026} Kiet, H.~T., Minh, D.~S.~D., Nguyen, T., Tran, C.-N., Pham, P.-H., Quy, N.~L.~P., Han, T.~A., \& Tran-Thanh, L. (2026). \textit{Training-free cultural alignment of large language models via persona disagreement} [Preprint]. arXiv. https://arxiv.org/abs/2605.10843
+
 \bibitem{kim2025} Kim, E.~M., Garg, A., Peng, K., \& Garg, N. (2025). Correlated errors in large language models. In \textit{Proceedings of the 42nd International Conference on Machine Learning} (PMLR 267, pp. 30038--30066).
 
-\bibitem{kirgis2026} Kirgis, P., et al. (2026). \textit{Can AI agents conduct open-ended AI research? Early evidence from two case studies} [Preprint]. arXiv. https://arxiv.org/abs/2607.27191
+\bibitem{kirgis2026} Kirgis, P., Kapoor, S., Schwartz, A., Rabanser, S., Africa, D., Voudouris, K., Nguyen, V., Pilditch, T., Dubois, M., Coppock, H., Ududec, C., Nadgir, N., Orona, M., Bayer, T., Chan-Sew, D., Ling, Y., Shetty, A., Toner, H., Hadfield, G., \ldots{} Narayanan, A. (2026). \textit{Can AI agents conduct open-ended AI research? Early evidence from two case studies} [Preprint]. arXiv. https://arxiv.org/abs/2607.27191
 
 \bibitem{leamer1983} Leamer, E.~E. (1983). Let's take the con out of econometrics. \textit{American Economic Review, 73}(1), 31--43.
 
-\bibitem{licht2025} Licht, H., et al. (2025). \textit{Measuring scalar constructs in social science with LLMs} [Conference paper]. EMNLP 2025. https://arxiv.org/abs/2509.03116
+\bibitem{proxy2026} Li, B., Yu, T., Koa, K.~J.~L., \& Huang, K.-W. (2026). The proxy presumption: From semantic embeddings to valid social measures. In \textit{Proceedings of ACL 2026} (pp. 22892--22910). https://doi.org/10.18653/v1/2026.acl-long.1048
+
+\bibitem{licht2025} Licht, H., Sarkar, R., Wu, P.~Y., Goel, P., Stoehr, N., Ash, E., \& Hoyle, A.~M. (2025). \textit{Measuring scalar constructs in social science with LLMs} [Conference paper]. EMNLP 2025. https://arxiv.org/abs/2509.03116
+
+\bibitem{illusion2026} Lin, V., Yun, T., Matari\'c, M., Canny, J., Gretton, A., \& D'Amour, A. (2026). \textit{The illusion of intervention: Your LLM-simulated experiment is an observational study} [Preprint]. arXiv. https://arxiv.org/abs/2605.20767
 
 \bibitem{manning2024} Manning, B.~S., Zhu, K., \& Horton, J.~J. (2024). \textit{Automated social science: Language models as scientist and subjects} (NBER Working Paper No. 32381). National Bureau of Economic Research. https://doi.org/10.3386/w32381
 
@@ -928,13 +930,9 @@ Generative AI was used in two ways: open-weight language models were used as mea
 
 \bibitem{molinari2020} Molinari, F. (2020). Microeconometrics with partial identification. In \textit{Handbook of econometrics} (Vol.~7A, pp. 355--486). Elsevier.
 
+\bibitem{hermesagent} Nous Research. (2026). \textit{Hermes Agent} [Computer software]. https://hermes-agent.nousresearch.com
+
 \bibitem{ogutyin2026} O\u{g}ut, B., \& Yin, M. (2026). \textit{Partial identification with multiple nonlinear measurements of a latent regressor} [Preprint]. arXiv. https://arxiv.org/abs/2607.12219
-
-\bibitem{palms2026} Dey, P., et al. (2026). \textit{PALMs: Using multi construct-grounded rationales for modeling population preferences in LLMs} [Preprint]. arXiv. https://arxiv.org/abs/2608.01458
-
-\bibitem{plural2026} Agarwal, D., et al. (2026). \textit{PLURAL: A global dataset for value alignment} [Preprint]. arXiv. https://arxiv.org/abs/2607.08034
-
-\bibitem{proxy2026} Li, B., Yu, T., Koa, K.~J.~L., \& Huang, K.-W. (2026). The proxy presumption: From semantic embeddings to valid social measures. In \textit{Proceedings of ACL 2026} (pp. 22892--22910). https://doi.org/10.18653/v1/2026.acl-long.1048
 
 \bibitem{rafailov2023} Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C.~D., \& Finn, C. (2023). Direct preference optimization: Your language model is secretly a reward model. In \textit{Advances in Neural Information Processing Systems} (Vol.~36).
 
@@ -944,13 +942,15 @@ Generative AI was used in two ways: open-weight language models were used as mea
 
 \bibitem{simonsohn2020} Simonsohn, U., Simmons, J.~P., \& Nelson, L.~D. (2020). Specification curve analysis. \textit{Nature Human Behaviour, 4}, 1208--1214. https://doi.org/10.1038/s41562-020-0912-z
 
+\bibitem{hai2026} Stanford Institute for Human-Centered Artificial Intelligence. (2026). \textit{AI index report 2026} [Report]. Stanford University. https://hai.stanford.edu/ai-index/2026-ai-index-report
+
 \bibitem{steegen2016} Steegen, S., Tuerlinckx, F., Gelman, A., \& Vanpaemel, W. (2016). Increasing transparency through a multiverse analysis. \textit{Perspectives on Psychological Science, 11}(5), 702--712. https://doi.org/10.1177/1745691616658637
 
 \bibitem{stoye2009} Stoye, J. (2009). More on confidence intervals for partially identified parameters. \textit{Econometrica, 77}(4), 1299--1315. https://doi.org/10.3982/ECTA7347
 
 \bibitem{truong2026} Truong, S., Wang, S., Wang, A., Truong, N., Reuel, A., Haber, N., \& Koyejo, S. (2026). \textit{Public AI benchmarks are broken, but are private benchmarks the answer?} [Manuscript in preparation]. https://aimslab.stanford.edu/papers/Truong2026PublicPrivate.pdf
 
-\bibitem{wallach2025} Wallach, H., Desai, M., Pangakis, N., Cooper, A.~F., et al. (2024). Evaluating generative AI systems is a social science measurement challenge. In \textit{NeurIPS 2024 Workshop on Evaluating Evaluations (EvalEval)}. https://arxiv.org/abs/2411.10939
+\bibitem{wallach2025} Wallach, H., Desai, M., Pangakis, N., Cooper, A.~F., Wang, A., Barocas, S., Chouldechova, A., Atalla, C., Blodgett, S.~L., Corvi, E., Dow, P.~A., Garcia-Gathright, J., Olteanu, A., Reed, S., Sheng, E., Vann, D., Vaughan, J.~W., Vogel, M., Washington, H., \& Jacobs, A.~Z. (2024). Evaluating generative AI systems is a social science measurement challenge. In \textit{NeurIPS 2024 Workshop on Evaluating Evaluations (EvalEval)}. https://arxiv.org/abs/2411.10939
 
 \bibitem{yinvu2026} Yin, M., Vu, H., \& Persico, C. (2026). \textit{How (un)stable are LLM occupational exposure scores? Evidence from multi-model replication} (NBER Working Paper No. 35110). National Bureau of Economic Research. https://doi.org/10.3386/w35110
 
