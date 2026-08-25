@@ -17,8 +17,9 @@ the repository checkout for its frozen inputs.
 ## 1. `cvprofiles_tutorial.ipynb` — the core walk-through
 
 Builds a scores matrix inline, writes the SCORE/RESTRICT inputs to disk, runs a
-full profile, and shows the empty-set contrast. Needs only the installed
-package.
+full profile, reads the slack table (per-measure, per-restriction signed
+distances), shows the empty-set contrast, and contrasts a tightened network's
+point range against the baseline range. Needs only the installed package.
 
 ## 2. `cvprofiles_diagnostics_tour.ipynb` — the v2.0 measure-discipline tour
 
