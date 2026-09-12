@@ -113,9 +113,13 @@ Options:
 | `--kappa` | Boundary-attribution rule: \|margin_m\| ≤ κ·SE_m (requires `--n-boot` > 0) | `2.0` |
 | `--title` | Report title | "Construct-validity profile" |
 
-**Contract:** stdout is always a single JSON summary (machine-clean). Human status messages go to stderr only. Empty `M*` exits 0 — it is a clean success.
+**Contract:** stdout is always a single JSON summary (machine-clean). Human status messages go to stderr only. Empty `M*` exits 0 — it is a clean success. `cvprofiles run` and `cvprofiles demo` are thin wrappers over `run_profile` (below).
 
 ### Python API
+
+`run_profile` in `cvprofiles.pipeline` is the in-process entry point. Notebooks, batch scripts, and other in-process drivers should call it directly rather than subprocess the CLI (the CLI pays interpreter startup on every invocation; the engine call is the same object).
+
+The function is keyword-only and returns `FullRunResult`. Arguments match the CLI flags (`out_dir`, `policy`, `seed`, `title`, `n_boot`, `theta_grid_lambdas`, `delta_grid_deltas`, `anchors`, `holdout_units`, `alpha`, `kappa`). `write_parquet=True` by default.
 
 ```python
 from cvprofiles.pipeline import run_profile, summary_dict
@@ -141,6 +145,25 @@ result = run_profile(
 )
 print(summary_dict(result))
 ```
+
+### Reusing an output directory
+
+`--out` / `out_dir` is created if missing and reused silently if it already has artifacts. Headline files (`range.json`, `report.html`, and the other SCORE/RESTRICT/IDENTIFY/REPORT artifacts) are overwritten. Inference-layer files from a *previous* run into the same directory — `bootstrap.json`, `coverage.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json` — are deleted when that layer is off on the new run. The directory is meant to mirror this run, not a history of runs.
+
+That is a trap for subset sweeps, sensitivity loops, and demos that keep one folder: a missing `bootstrap.json` means "bootstrap was off this time," not "bootstrap never ran." Use a fresh `out_dir` per run if you need to compare layer artifacts. The engine does not refuse a populated directory. (`cvprofiles demo` is the exception: it refuses a non-empty `--out` unless `--force`.)
+
+### Dropping a measure from the menu
+
+Removing a measure from the score table **and** from `roles.measures` is a different validated input. `scores_hash` changes, so `run_id` changes. Same validated inputs ⇒ same `run_id`; a different menu is not the same input. The new id is expected, not a freeze-contract break.
+
+The subset is clean when every restriction and β binds only to columns that remain (auxiliaries, outcome, remaining measures). That is the `mini_v1` and WVS/GPS flagship shape: restrictions keyed on an aux column, not on a menu member.
+
+If a restriction or β still names the dropped measure, RESTRICT fails loud (`RestrictError`):
+
+- `corr_min` / `corr_sign` / `corr_zero` / `monotone_rank` with `params.variable` equal to the dropped measure
+- `rank_agree` with `params.ref_measure` equal to the dropped measure
+
+Rewrite the network (or β) before dropping the column. `map_distance` binds `{measure}__{item}` columns for *remaining* menu members; dropping a measure does not by itself raise unless that measure stays in `roles.measures` or a remaining measure's item columns are missing.
 
 ## 3. What comes out
 
@@ -288,6 +311,7 @@ Each profile gets its own frozen run directory (`profiles/<id>/`) with the usual
 - [ ] Anchor roles named
 - [ ] One construct per run
 - [ ] Empty M* acceptable; no auto-loosen plan in default path
+- [ ] If dropping a measure, rewrite any restriction/β that names it; expect a new `run_id`
 
 ### Paper / thesis citation
 

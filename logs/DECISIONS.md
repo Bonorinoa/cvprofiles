@@ -1438,3 +1438,25 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 **Authorized by this entry:** the three commits on `feat/public-surface` plus this log line and the sprint notes under `audits/2026-08-16_*`.
 
 **Not authorized by this entry:** 3.0.2 bump, PyPI, tag, push, new notebooks, evaluator/β/inference work, deleting H5 Part 2.
+
+## 2026-09-11 — Independent review F1–F5: docs + version-checker gap; no engine change
+
+**Context:** an independent review of the tree (while assessing an in-process driver) reported six findings. Each was re-read against source and re-run on `data/fixtures/mini_v1/` before acting. F6 is a runtime measurement only.
+
+**Verified:**
+- F1: `docs/ARCHITECTURE.md` §11 said Current package version `3.0.1` while `__version__` is `3.0.2`. The D4 checker still exited 0 because it only matched the intro "reflects the shipped v" line (already `3.0.2`).
+- F2: `run_profile` is the composition entry point; `cli.py` `run` and `demo` both call it + `summary_dict`. USER_GUIDE already had a short Python example; it did not say this is the driver API.
+- F3: `pipeline.py` unlinks `bootstrap.json` / `coverage.json` / `theta_grid.json` / `delta_grid.json` / `anchors.json` when that layer is off on a reuse of `out_dir`. Confirmed: n_boot=8 then n_boot off into the same dir removes bootstrap/coverage and keeps `range.json`.
+- F4: dropping `m_slop` from scores + `roles.measures` on aux-anchored `mini_v1` succeeds. `corr_min` with `variable: m_slop` and `rank_agree` with `ref_measure: m_slop` raise `RestrictError` after the drop. **Pushback:** `map_distance` does *not* fail merely because a measure left the menu — it binds `{measure}__{item}` for remaining members.
+- F5: the `m_slop` subset forks `run_id` (`90d58e80…` → `cf7948e1…`) because `scores_hash` is in the freeze preimage. Expected.
+- F6: in-process `run_profile` on `mini_v1` in this project's uv env was ~0.022 s/run (six-run sum ~0.13 s). Not written into public docs (goes stale).
+
+**Decisions:**
+- Close F1 in `docs/ARCHITECTURE.md` §11 (`3.0.1` → `3.0.2`) and add a second ARCHITECTURE posture regex to `tools/check_version_consistency.py` so the §11 bullet cannot lag the intro again.
+- Document F2–F5 in `docs/USER_GUIDE.md` (programmatic API, fresh `out_dir` per run, menu-subset binding, `run_id` fork) and the matching freeze/IO notes in `docs/ARCHITECTURE.md`.
+- Do **not** add an `out_dir` occupancy guard (behavior change). Caller requirement only.
+- No engine, freeze-preimage, or paper-evidence change.
+
+**Authorized by this entry:** the docs + checker/test edits in this commit; a local commit if the battery is green.
+
+**Not authorized by this entry:** tag, PyPI, push, history rewrite, `v0.1` peel, an `out_dir` refuse-populated guard, Streamlit/GUI work, quoting F6 in public docs, paper/eval edits.

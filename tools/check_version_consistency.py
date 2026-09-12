@@ -45,6 +45,12 @@ Contract table (file -> regex -> rationale):
     describes; same drift shape as USER_GUIDE's intro claim. (?i) so the
     sentence-start "Reflects" spelling is accepted.
 
+  docs/ARCHITECTURE.md
+    ^-\\s*Current package version:.*?`(\\d+\\.\\d+\\.\\d+)`
+    The §11 Package posture bullet. The intro "reflects the shipped v"
+    line can be current while this bullet lags (the 3.0.1/3.0.2 miss).
+    Historical tag lists in the same section do not use this prefix.
+
   docs/METHODOLOGY.md
     ^(?:-\\s*)?Package version:.*?`(\\d+\\.\\d+\\.\\d+)`
     The canonical method statement must name the engine version it
@@ -100,6 +106,11 @@ DOC_SPECS: tuple[Spec, ...] = (
         "docs/ARCHITECTURE.md",
         r"(?i)reflects the shipped v(\d+\.\d+(?:\.\d+)?)",
         'keep the phrase "reflects the shipped vX.Y.Z package" in the intro',
+    ),
+    Spec(
+        "docs/ARCHITECTURE.md",
+        rf"^-\s*Current package version:.*?`({VERSION_RE})`",
+        'keep the "- Current package version: `X.Y.Z`" bullet in §11 Package posture',
     ),
     Spec(
         "docs/METHODOLOGY.md",

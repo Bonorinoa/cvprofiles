@@ -57,8 +57,8 @@ How the package is built, what the IO contracts are, and how determinism is guar
 ```text
 src/cvprofiles/
   __init__.py            # version
-  cli.py                 # thin Typer CLI: `cvprofiles run`
-  pipeline.py            # run_profile() composition + freeze bundle
+  cli.py                 # thin Typer CLI wrapping run_profile (`cvprofiles run` / `demo`)
+  pipeline.py            # run_profile() — programmatic entry point + freeze bundle
   freeze.py              # hashing, run_id, n_boot normalization
   score/                 # load → validate → normalize → freeze hash + manifest
   restrict/              # network/beta parsers, column binding, hashing
@@ -103,10 +103,12 @@ Each state is a pure-ish transform with explicit on-disk inputs/outputs. A full 
 | `report.html` | primary human audit trail |
 | `report.json` | machine-complete dump of the same payload |
 
+Reusing an `out_dir` overwrites headline artifacts. Inference-layer files (`bootstrap.json`, `coverage.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json`) from a previous run into the same directory are **unlinked when that layer is off**. The directory mirrors this run, not a history of runs. Callers who need to keep prior layer artifacts must use a fresh directory per run. The engine does not refuse a populated directory (`cvprofiles demo` is the exception: non-empty `--out` requires `--force`).
+
 ## 4. Determinism and the freeze contract
 
 1. Every full run writes a run directory under `reports/runs/<run_id>/` (or `--out`).
-2. `run_id` = content hash of the frozen score matrix, network, β, seed, and package version. Same inputs ⇒ same id; colliding ids with different outputs is a critical bug.
+2. `run_id` = content hash of the frozen score matrix, network, β, seed, and package version. Same *validated* inputs ⇒ same id; colliding ids with different outputs is a critical bug. A different menu (dropped or added freeze-list columns) changes `scores_hash` and therefore `run_id` — expected, not a contract break.
 3. Paper path: only artifacts from a run directory with pinned hashes are citable.
 4. Bootstrap RNG is a seeded `numpy.random.Generator` (never the global `np.random`).
 5. Float comparisons for slacks use the declared tolerance δ (default 0) — never raw `== 0` without policy.
@@ -176,4 +178,4 @@ Upstream scorers (LLM APIs, dictionaries, PCA) are user workflows that produce c
 
 - `v0.1` tag is immovable and peels to the museum PoC (`evals/synthetic/v0_poc.py`, unimported from src).
 - `v1.1.0` (MVP + inference layer), `v2.0.0` (measure discipline, PyPI 2026-08-06), and `v2.5.0` (P1–P5 engine infrastructure checkpoint, 2026-08-08) are tagged.
-- Current package version: `3.0.1` (empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release).
+- Current package version: `3.0.2` (reproducibility patch; 3.0.1 added the empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release).

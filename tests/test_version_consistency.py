@@ -11,8 +11,8 @@ Posture lines checked (see the tool's docstring contract table):
   README.md                    | **Version** | **X.Y.Z** |
   docs/USER_GUIDE.md           ... shipped vX.Y.Z ...
   docs/ARCHITECTURE.md         ... reflects the shipped vX.Y.Z package ...
-  docs/METHODOLOGY.md          - Package version: `X.Y.Z`  (currently absent
-                                in the real repo; checker must demand it)
+  docs/ARCHITECTURE.md         - Current package version: `X.Y.Z`
+  docs/METHODOLOGY.md          - Package version: `X.Y.Z`
 """
 
 from __future__ import annotations
@@ -49,7 +49,8 @@ def _write_tree(root: Path) -> None:
         encoding="utf-8",
     )
     (root / "docs" / "ARCHITECTURE.md").write_text(
-        f"# Architecture\n\nReflects the shipped v{FAKE} package.\n",
+        f"# Architecture\n\nReflects the shipped v{FAKE} package.\n"
+        f"- Current package version: `{FAKE}`\n",
         encoding="utf-8",
     )
     (root / "docs" / "METHODOLOGY.md").write_text(
@@ -88,6 +89,13 @@ def test_consistent_tree_passes(tmp_path: Path) -> None:
         # old version) while the package is 3.0.0 - must be flagged as drift.
         ("docs/USER_GUIDE.md", f"shipped v{FAKE}", "shipped v2.0", "USER_GUIDE.md"),
         ("docs/ARCHITECTURE.md", f"shipped v{FAKE}", "shipped v0.0.0", "ARCHITECTURE.md"),
+        # F1 shape: intro "shipped v" current, §11 Current package version stale.
+        (
+            "docs/ARCHITECTURE.md",
+            f"Current package version: `{FAKE}`",
+            "Current package version: `0.0.0`",
+            "ARCHITECTURE.md",
+        ),
         ("AGENTS.md", f"`{FAKE}`", "`0.0.0`", "AGENTS.md"),
         ("README.md", f"**{FAKE}**", "**0.0.0**", "README.md"),
         ("docs/METHODOLOGY.md", f"`{FAKE}`", "`0.0.0`", "METHODOLOGY.md"),
@@ -114,6 +122,20 @@ def test_sources_disagree_fails(tmp_path: Path) -> None:
     assert "pyproject.toml" in res.stdout
     assert "src/cvprofiles/__init__.py" in res.stdout
     assert "0.0.0" in res.stdout
+
+
+def test_architecture_current_package_version_missing_fails(tmp_path: Path) -> None:
+    """Intro 'shipped v' present is not enough; §11 bullet is a separate posture line."""
+    _write_tree(tmp_path)
+    (tmp_path / "docs" / "ARCHITECTURE.md").write_text(
+        f"# Architecture\n\nReflects the shipped v{FAKE} package.\n",
+        encoding="utf-8",
+    )
+    res = _run(tmp_path)
+    assert res.returncode == 1, res.stdout + res.stderr
+    assert "ARCHITECTURE.md" in res.stdout
+    assert "no current-version posture line" in res.stdout
+    assert "Current package version" in res.stdout
 
 
 def test_methodology_missing_posture_line_fails(tmp_path: Path) -> None:
@@ -146,6 +168,11 @@ def test_historical_version_mentions_are_immune(tmp_path: Path) -> None:
     (tmp_path / "docs" / "USER_GUIDE.md").write_text(
         (tmp_path / "docs" / "USER_GUIDE.md").read_text(encoding="utf-8")
         + "Supersedes the v1.1.0-era scaffold (but this is not a 'shipped v' claim).\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "docs" / "ARCHITECTURE.md").write_text(
+        (tmp_path / "docs" / "ARCHITECTURE.md").read_text(encoding="utf-8")
+        + "v1.1.0, v2.0.0, and v3.0.1 are tagged historical releases.\n",
         encoding="utf-8",
     )
     res = _run(tmp_path)
