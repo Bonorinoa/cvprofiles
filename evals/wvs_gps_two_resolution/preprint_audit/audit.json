@@ -1,0 +1,1211 @@
+{
+  "seed": 20260814,
+  "package_note": "read-only over committed freezes; no engine write",
+  "n_checks": 73,
+  "n_pass": 66,
+  "n_fail": 7,
+  "n_unverified": 0,
+  "checks": [
+    {
+      "claim": "patience_cells L",
+      "claimed": 0.245,
+      "observed": 0.245,
+      "delta": 9e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_cells U",
+      "claimed": 0.556,
+      "observed": 0.556,
+      "delta": 5.2e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_cells band_L",
+      "claimed": 0.179,
+      "observed": 0.179,
+      "delta": 0.000323,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_cells band_U",
+      "claimed": 0.614,
+      "observed": 0.614,
+      "delta": 0.000207,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_cells empty_rep",
+      "claimed": 0.0,
+      "observed": 0.0,
+      "delta": 0.0,
+      "tol": 1e-12,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_cells n",
+      "claimed": 480,
+      "observed": 480,
+      "delta": 0.0,
+      "tol": 0,
+      "status": "PASS"
+    },
+    {
+      "claim": "Q13 edu slack",
+      "claimed": 0.051,
+      "observed": 0.051,
+      "delta": 8.6e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Q13 leftover",
+      "claimed": 0.06,
+      "observed": 0.06,
+      "delta": 0.00012,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Q13 beta",
+      "claimed": 0.245,
+      "observed": 0.245,
+      "delta": 9e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Q14 slack",
+      "claimed": -0.564,
+      "observed": -0.564,
+      "delta": 0.000248,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Q14 beta",
+      "claimed": -0.326,
+      "observed": -0.326,
+      "delta": 0.000203,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Llama slack",
+      "claimed": 0.322,
+      "observed": 0.322,
+      "delta": 3e-06,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Llama beta",
+      "claimed": 0.417,
+      "observed": 0.417,
+      "delta": 0.000378,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Phi slack",
+      "claimed": 0.44,
+      "observed": 0.44,
+      "delta": 0.000249,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Phi beta",
+      "claimed": 0.556,
+      "observed": 0.556,
+      "delta": 5.2e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "human-only empty_rep",
+      "claimed": 0.17,
+      "observed": 0.17,
+      "delta": 0.0,
+      "tol": 1e-12,
+      "status": "PASS"
+    },
+    {
+      "claim": "human-only L",
+      "claimed": 0.245,
+      "observed": 0.245,
+      "delta": 9e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_cells L",
+      "claimed": -0.317,
+      "observed": -0.317,
+      "delta": 0.000486,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_cells U",
+      "claimed": -0.317,
+      "observed": -0.317,
+      "delta": 0.000486,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_cells band_L",
+      "claimed": -0.382,
+      "observed": -0.382,
+      "delta": 0.000417,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_cells band_U",
+      "claimed": -0.24,
+      "observed": -0.24,
+      "delta": 0.000255,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_cells empty_rep",
+      "claimed": 0.0,
+      "observed": 0.0,
+      "delta": 0.0,
+      "tol": 1e-12,
+      "status": "PASS"
+    },
+    {
+      "claim": "Llama trust slack",
+      "claimed": -0.077,
+      "observed": -0.077,
+      "delta": 0.000267,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Phi trust select slack",
+      "claimed": 0.149,
+      "observed": 0.149,
+      "delta": 0.000192,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Phi trust leftover",
+      "claimed": 0.133,
+      "observed": 0.133,
+      "delta": 0.000362,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Q57 cell beta",
+      "claimed": 0.052,
+      "observed": 0.052,
+      "delta": 0.000428,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "in-group cell beta",
+      "claimed": 0.224,
+      "observed": 0.224,
+      "delta": 6.9e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "out-group cell beta",
+      "claimed": 0.211,
+      "observed": 0.211,
+      "delta": 0.000423,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "institution cell beta",
+      "claimed": 0.285,
+      "observed": 0.285,
+      "delta": 0.000277,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "composite cell beta",
+      "claimed": 0.318,
+      "observed": 0.318,
+      "delta": 0.000389,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_country L",
+      "claimed": 0.402,
+      "observed": 0.402,
+      "delta": 0.000463,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_country U",
+      "claimed": 0.565,
+      "observed": 0.565,
+      "delta": 9.4e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_country band_L",
+      "claimed": 0.157,
+      "observed": 0.157,
+      "delta": 9.2e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_country band_U",
+      "claimed": 0.674,
+      "observed": 0.674,
+      "delta": 0.000278,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience_country empty_rep",
+      "claimed": 0.089,
+      "observed": 0.089,
+      "delta": 0.0,
+      "tol": 1e-12,
+      "status": "PASS"
+    },
+    {
+      "claim": "Llama country edu slack",
+      "claimed": 0.027,
+      "observed": 0.027,
+      "delta": 0.000208,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "empty_R L",
+      "claimed": -0.219,
+      "observed": -0.219,
+      "delta": 0.000253,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "empty_R U",
+      "claimed": 0.565,
+      "observed": 0.565,
+      "delta": 9.4e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "human-only country empty_rep",
+      "claimed": 0.297,
+      "observed": 0.297,
+      "delta": 0.0,
+      "tol": 1e-12,
+      "status": "PASS"
+    },
+    {
+      "claim": "human-only country L",
+      "claimed": 0.402,
+      "observed": 0.402,
+      "delta": 0.000463,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_country L",
+      "claimed": 0.107,
+      "observed": 0.107,
+      "delta": 0.000171,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_country U",
+      "claimed": 0.481,
+      "observed": 0.481,
+      "delta": 0.000254,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_country band_L",
+      "claimed": -0.016,
+      "observed": -0.016,
+      "delta": 0.000141,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust_country band_U",
+      "claimed": 0.699,
+      "observed": 0.699,
+      "delta": 0.000239,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "Phi gini slack",
+      "claimed": -0.158,
+      "observed": -0.158,
+      "delta": 9.2e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "GPS trust vs rule_of_law r",
+      "claimed": 0.12,
+      "observed": 0.124,
+      "delta": 0.003585,
+      "tol": 0.005,
+      "status": "PASS"
+    },
+    {
+      "claim": "MTMM GPS patience vs child-qualities",
+      "claimed": -0.252,
+      "observed": -0.252,
+      "delta": 0.000123,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "MTMM GPS trust vs Q57",
+      "claimed": 0.284,
+      "observed": 0.284,
+      "delta": 0.000263,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "MTMM Q57 vs GPS patience",
+      "claimed": 0.825,
+      "observed": 0.825,
+      "delta": 0.000143,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "partial r Q57 vs GPS patience",
+      "claimed": 0.706,
+      "observed": 0.706,
+      "delta": 5.3e-05,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppI Q13 country edu",
+      "claimed": -0.33,
+      "observed": -0.329,
+      "delta": 0.001,
+      "tol": 0.005,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppI Q13 pooled edu",
+      "claimed": -0.17,
+      "observed": -0.171,
+      "delta": 0.001,
+      "tol": 0.005,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppI Q13 within edu",
+      "claimed": 0.25,
+      "observed": 0.251,
+      "delta": 0.001,
+      "tol": 0.005,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppI Q14 country edu",
+      "claimed": -0.59,
+      "observed": -0.592,
+      "delta": 0.002,
+      "tol": 0.005,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppI Q14 pooled edu",
+      "claimed": -0.53,
+      "observed": -0.525,
+      "delta": 0.005,
+      "tol": 0.005,
+      "status": "FAIL"
+    },
+    {
+      "claim": "AppI Q14 within edu",
+      "claimed": -0.36,
+      "observed": -0.364,
+      "delta": 0.004,
+      "tol": 0.005,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppI Q13 share_positive",
+      "claimed": 0.79,
+      "observed": 0.786,
+      "delta": 0.004,
+      "tol": 0.01,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppI Q14 share_negative",
+      "claimed": 0.88,
+      "observed": 0.881,
+      "delta": 0.001,
+      "tol": 0.01,
+      "status": "PASS"
+    },
+    {
+      "claim": "Table8 Q14 both-levels -0.33 vs country edu",
+      "claimed": -0.33,
+      "observed": -0.592,
+      "delta": 0.262,
+      "tol": 0.01,
+      "status": "FAIL"
+    },
+    {
+      "claim": "Table8 Q14 both-levels -0.33 vs within edu",
+      "claimed": -0.33,
+      "observed": -0.364,
+      "delta": 0.034,
+      "tol": 0.01,
+      "status": "FAIL"
+    },
+    {
+      "claim": "AppI Q13-Q14 country r",
+      "claimed": 0.83,
+      "observed": 0.52,
+      "delta": 0.309571,
+      "tol": 0.01,
+      "status": "FAIL"
+    },
+    {
+      "claim": "AppI Q13-Q14 pooled r",
+      "claimed": 0.52,
+      "observed": 0.345,
+      "delta": 0.174995,
+      "tol": 0.01,
+      "status": "FAIL"
+    },
+    {
+      "claim": "n countries in cells",
+      "claimed": 42,
+      "observed": 42,
+      "delta": 0.0,
+      "tol": 0,
+      "status": "PASS"
+    },
+    {
+      "claim": "patience country n",
+      "claimed": 41,
+      "observed": 41,
+      "delta": 0.0,
+      "tol": 0,
+      "status": "PASS"
+    },
+    {
+      "claim": "trust country n",
+      "claimed": 35,
+      "observed": 35,
+      "delta": 0.0,
+      "tol": 0,
+      "status": "PASS"
+    },
+    {
+      "claim": "grid patience R0 L",
+      "claimed": 0.245,
+      "observed": 0.245,
+      "delta": 0.0001,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "grid patience R0 U",
+      "claimed": 0.556,
+      "observed": 0.556,
+      "delta": 0.0001,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "grid patience theta0.30 L",
+      "claimed": 0.417,
+      "observed": 0.417,
+      "delta": 0.0004,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "grid trust R1 L",
+      "claimed": -0.317,
+      "observed": -0.318,
+      "delta": 0.0005,
+      "tol": 0.0005,
+      "status": "FAIL"
+    },
+    {
+      "claim": "grid trust R1 U",
+      "claimed": 0.179,
+      "observed": 0.179,
+      "delta": 0.0003,
+      "tol": 0.0005,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppH patience rank corr(slack,beta) human",
+      "claimed": 1.0,
+      "observed": 1.0,
+      "delta": 0.0,
+      "tol": 1e-09,
+      "status": "PASS"
+    },
+    {
+      "claim": "AppH trust corr(slack,beta) human",
+      "claimed": -0.82,
+      "observed": -0.796,
+      "delta": 0.024011,
+      "tol": 0.01,
+      "status": "FAIL"
+    },
+    {
+      "claim": "Phi coverage margin equals leftover (not select)",
+      "claimed": 0.1326376818757265,
+      "observed": 0.133,
+      "delta": 0.0,
+      "tol": 1e-12,
+      "status": "PASS"
+    }
+  ],
+  "facet_rule_of_law_r": {
+    "m_trust_general": 0.705,
+    "m_trust_in_group": 0.482,
+    "m_trust_out_group": 0.659,
+    "m_trust_institution": -0.125,
+    "m_trust_composite": 0.405
+  },
+  "gps_trust_rule_of_law_r": 0.124,
+  "q13_q14_r": {
+    "country": 0.52,
+    "pooled_cells": 0.345,
+    "demeaned_cells": -0.229
+  },
+  "menus": {
+    "patience_cells_unrestricted_all_six_incl_noise": {
+      "columns": [
+        "m_wvs_q13",
+        "m_wvs_q14",
+        "m_composite",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi",
+        "m_noise"
+      ],
+      "n": 6,
+      "L": -0.326,
+      "U": 0.556,
+      "L_measure": "m_wvs_q14",
+      "U_measure": "m_llm_patience_phi"
+    },
+    "patience_cells_unrestricted_five_excl_noise": {
+      "columns": [
+        "m_wvs_q13",
+        "m_wvs_q14",
+        "m_composite",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "n": 5,
+      "L": -0.326,
+      "U": 0.556,
+      "L_measure": "m_wvs_q14",
+      "U_measure": "m_llm_patience_phi"
+    },
+    "trust_cells_unrestricted_all_eight_incl_noise": {
+      "columns": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_institution",
+        "m_trust_composite",
+        "m_llm_trust_llama",
+        "m_llm_trust_phi",
+        "m_noise"
+      ],
+      "n": 8,
+      "L": -0.317,
+      "U": 0.318,
+      "L_measure": "m_llm_trust_phi",
+      "U_measure": "m_trust_composite"
+    },
+    "trust_cells_unrestricted_seven_excl_noise": {
+      "columns": [
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_institution",
+        "m_trust_composite",
+        "m_llm_trust_llama",
+        "m_llm_trust_phi"
+      ],
+      "n": 7,
+      "L": -0.317,
+      "U": 0.318,
+      "L_measure": "m_llm_trust_phi",
+      "U_measure": "m_trust_composite"
+    },
+    "patience_country_seven_incl_noise": {
+      "columns": [
+        "m_gps_patience",
+        "m_wvs_q13",
+        "m_wvs_q14",
+        "m_composite",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi",
+        "m_noise"
+      ],
+      "n": 7,
+      "L": -0.219,
+      "U": 0.565,
+      "L_measure": "m_composite",
+      "U_measure": "m_llm_patience_phi"
+    },
+    "trust_country_nine_incl_noise": {
+      "columns": [
+        "m_gps_trust",
+        "m_trust_general",
+        "m_trust_in_group",
+        "m_trust_out_group",
+        "m_trust_institution",
+        "m_trust_composite",
+        "m_llm_trust_llama",
+        "m_llm_trust_phi",
+        "m_noise"
+      ],
+      "n": 9,
+      "L": -0.092,
+      "U": 0.481,
+      "L_measure": "m_trust_institution",
+      "U_measure": "m_llm_trust_llama"
+    }
+  },
+  "diagnostics_patience_cells": [
+    {
+      "measure": "m_wvs_q13",
+      "admitted": true,
+      "beta": 0.245,
+      "select_slacks": {
+        "conv_edu_cell": 0.051
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": 0.06
+      },
+      "min_slack_margin": 0.051,
+      "boot_SE": 0.051,
+      "kappa2_boundary": true,
+      "p_hat_admission": 0.83
+    },
+    {
+      "measure": "m_wvs_q14",
+      "admitted": false,
+      "beta": -0.326,
+      "select_slacks": {
+        "conv_edu_cell": -0.564
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.499
+      },
+      "min_slack_margin": -0.564,
+      "boot_SE": 0.044,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    },
+    {
+      "measure": "m_composite",
+      "admitted": false,
+      "beta": -0.027,
+      "select_slacks": {
+        "conv_edu_cell": -0.25
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.222
+      },
+      "min_slack_margin": -0.25,
+      "boot_SE": 0.058,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    },
+    {
+      "measure": "m_llm_patience_llama",
+      "admitted": true,
+      "beta": 0.417,
+      "select_slacks": {
+        "conv_edu_cell": 0.322
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": 0.358
+      },
+      "min_slack_margin": 0.322,
+      "boot_SE": 0.034,
+      "kappa2_boundary": false,
+      "p_hat_admission": 1.0
+    },
+    {
+      "measure": "m_llm_patience_phi",
+      "admitted": true,
+      "beta": 0.556,
+      "select_slacks": {
+        "conv_edu_cell": 0.44
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": 0.523
+      },
+      "min_slack_margin": 0.44,
+      "boot_SE": 0.029,
+      "kappa2_boundary": false,
+      "p_hat_admission": 1.0
+    },
+    {
+      "measure": "m_noise",
+      "admitted": false,
+      "beta": -0.003,
+      "select_slacks": {
+        "conv_edu_cell": -0.231
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.165
+      },
+      "min_slack_margin": -0.231,
+      "boot_SE": 0.046,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    }
+  ],
+  "diagnostics_trust_cells": [
+    {
+      "measure": "m_trust_general",
+      "admitted": false,
+      "beta": 0.052,
+      "select_slacks": {
+        "conv_edu_cell": -0.177
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.131
+      },
+      "min_slack_margin": -0.177,
+      "boot_SE": 0.049,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    },
+    {
+      "measure": "m_trust_in_group",
+      "admitted": false,
+      "beta": 0.224,
+      "select_slacks": {
+        "conv_edu_cell": -0.268
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.233
+      },
+      "min_slack_margin": -0.268,
+      "boot_SE": 0.043,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    },
+    {
+      "measure": "m_trust_out_group",
+      "admitted": false,
+      "beta": 0.211,
+      "select_slacks": {
+        "conv_edu_cell": -0.275
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.225
+      },
+      "min_slack_margin": -0.275,
+      "boot_SE": 0.051,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    },
+    {
+      "measure": "m_trust_institution",
+      "admitted": false,
+      "beta": 0.285,
+      "select_slacks": {
+        "conv_edu_cell": -0.627
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.552
+      },
+      "min_slack_margin": -0.627,
+      "boot_SE": 0.04,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    },
+    {
+      "measure": "m_trust_composite",
+      "admitted": false,
+      "beta": 0.318,
+      "select_slacks": {
+        "conv_edu_cell": -0.474
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.414
+      },
+      "min_slack_margin": -0.474,
+      "boot_SE": 0.046,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    },
+    {
+      "measure": "m_llm_trust_llama",
+      "admitted": false,
+      "beta": 0.179,
+      "select_slacks": {
+        "conv_edu_cell": -0.077
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.066
+      },
+      "min_slack_margin": -0.077,
+      "boot_SE": 0.04,
+      "kappa2_boundary": true,
+      "p_hat_admission": 0.022
+    },
+    {
+      "measure": "m_llm_trust_phi",
+      "admitted": true,
+      "beta": -0.317,
+      "select_slacks": {
+        "conv_edu_cell": 0.149
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": 0.133
+      },
+      "min_slack_margin": 0.133,
+      "boot_SE": 0.043,
+      "kappa2_boundary": false,
+      "p_hat_admission": 1.0
+    },
+    {
+      "measure": "m_noise",
+      "admitted": false,
+      "beta": 0.015,
+      "select_slacks": {
+        "conv_edu_cell": -0.172
+      },
+      "holdout_slacks": {
+        "mono_edu_cell": -0.119
+      },
+      "min_slack_margin": -0.172,
+      "boot_SE": 0.048,
+      "kappa2_boundary": false,
+      "p_hat_admission": 0.0
+    }
+  ],
+  "comparative_falsification_patience_cells": {
+    "n_menu": 6,
+    "k": 3,
+    "M_star_S": [
+      "m_wvs_q13",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi"
+    ],
+    "p_hat_S": 1.0,
+    "best_beta_measure": "m_llm_patience_phi",
+    "p_hat_best_beta": 1.0,
+    "best_anchor_measure": "m_llm_patience_phi",
+    "p_hat_best_anchor": 1.0,
+    "random_k_mean": 0.48966666666666664,
+    "random_k_share_S_ge": 0.053,
+    "n_perm": 1000,
+    "seed": 20260814,
+    "without_noise": {
+      "M_star_S": [
+        "m_wvs_q13",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "p_hat_S": 1.0,
+      "best_beta": "m_llm_patience_phi",
+      "p_hat_best_beta": 1.0
+    },
+    "note": "Holdout H(m)=1 iff every holdout slack >= 0. Random is uniform size-k subsets of the declared menu."
+  },
+  "comparative_falsification_trust_cells": {
+    "n_menu": 8,
+    "k": 1,
+    "M_star_S": [
+      "m_llm_trust_phi"
+    ],
+    "p_hat_S": 1.0,
+    "best_beta_measure": "m_trust_composite",
+    "p_hat_best_beta": 0.0,
+    "best_anchor_measure": "m_llm_trust_phi",
+    "p_hat_best_anchor": 1.0,
+    "random_k_mean": 0.129,
+    "random_k_share_S_ge": 0.129,
+    "n_perm": 1000,
+    "seed": 20260814,
+    "without_noise": {
+      "M_star_S": [
+        "m_llm_trust_phi"
+      ],
+      "p_hat_S": 1.0,
+      "best_beta": "m_trust_composite",
+      "p_hat_best_beta": 0.0
+    },
+    "note": "Holdout H(m)=1 iff every holdout slack >= 0. Random is uniform size-k subsets of the declared menu."
+  },
+  "leave_one_out_patience_cells": {
+    "rows": [
+      {
+        "dropped": "m_wvs_q13",
+        "M_star": [
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "L": 0.417,
+        "U": 0.556,
+        "unrestricted_L": -0.326,
+        "unrestricted_U": 0.556,
+        "empty": false
+      },
+      {
+        "dropped": "m_wvs_q14",
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "L": 0.245,
+        "U": 0.556,
+        "unrestricted_L": -0.027,
+        "unrestricted_U": 0.556,
+        "empty": false
+      },
+      {
+        "dropped": "m_composite",
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "L": 0.245,
+        "U": 0.556,
+        "unrestricted_L": -0.326,
+        "unrestricted_U": 0.556,
+        "empty": false
+      },
+      {
+        "dropped": "m_llm_patience_llama",
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_phi"
+        ],
+        "L": 0.245,
+        "U": 0.556,
+        "unrestricted_L": -0.326,
+        "unrestricted_U": 0.556,
+        "empty": false
+      },
+      {
+        "dropped": "m_llm_patience_phi",
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_llama"
+        ],
+        "L": 0.245,
+        "U": 0.417,
+        "unrestricted_L": -0.326,
+        "unrestricted_U": 0.417,
+        "empty": false
+      },
+      {
+        "dropped": "m_noise",
+        "M_star": [
+          "m_wvs_q13",
+          "m_llm_patience_llama",
+          "m_llm_patience_phi"
+        ],
+        "L": 0.245,
+        "U": 0.556,
+        "unrestricted_L": -0.326,
+        "unrestricted_U": 0.556,
+        "empty": false
+      }
+    ]
+  },
+  "leave_one_out_trust_cells": {
+    "rows": [
+      {
+        "dropped": "m_trust_general",
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "L": -0.317,
+        "U": -0.317,
+        "unrestricted_L": -0.317,
+        "unrestricted_U": 0.318,
+        "empty": false
+      },
+      {
+        "dropped": "m_trust_in_group",
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "L": -0.317,
+        "U": -0.317,
+        "unrestricted_L": -0.317,
+        "unrestricted_U": 0.318,
+        "empty": false
+      },
+      {
+        "dropped": "m_trust_out_group",
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "L": -0.317,
+        "U": -0.317,
+        "unrestricted_L": -0.317,
+        "unrestricted_U": 0.318,
+        "empty": false
+      },
+      {
+        "dropped": "m_trust_institution",
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "L": -0.317,
+        "U": -0.317,
+        "unrestricted_L": -0.317,
+        "unrestricted_U": 0.318,
+        "empty": false
+      },
+      {
+        "dropped": "m_trust_composite",
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "L": -0.317,
+        "U": -0.317,
+        "unrestricted_L": -0.317,
+        "unrestricted_U": 0.285,
+        "empty": false
+      },
+      {
+        "dropped": "m_llm_trust_llama",
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "L": -0.317,
+        "U": -0.317,
+        "unrestricted_L": -0.317,
+        "unrestricted_U": 0.318,
+        "empty": false
+      },
+      {
+        "dropped": "m_llm_trust_phi",
+        "M_star": [],
+        "L": null,
+        "U": null,
+        "unrestricted_L": 0.015,
+        "unrestricted_U": 0.318,
+        "empty": true
+      },
+      {
+        "dropped": "m_noise",
+        "M_star": [
+          "m_llm_trust_phi"
+        ],
+        "L": -0.317,
+        "U": -0.317,
+        "unrestricted_L": -0.317,
+        "unrestricted_U": 0.318,
+        "empty": false
+      }
+    ]
+  },
+  "frozen_vs_reformed_patience_cells": {
+    "M_star_frozen": [
+      "m_wvs_q13",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi"
+    ],
+    "theta_select": 0.2,
+    "aux": "q275_cell",
+    "n_boot": 1000,
+    "empty_replicate_rate_reformed": 0.0,
+    "reformed_band": [
+      0.174,
+      0.613
+    ],
+    "frozen_Mstar_band": [
+      0.164,
+      0.613
+    ],
+    "paper_coverage_band": [
+      0.179,
+      0.614
+    ],
+    "note": "Reformed admission = Pearson(m, edu) >= theta on the resample; holdout is not used (engine stage split). Frozen band evaluates beta only on the original M*. Same seed family, independent RNG stream from the shipped bootstrap.json (do not expect bit-match)."
+  },
+  "frozen_vs_reformed_trust_cells": {
+    "M_star_frozen": [
+      "m_llm_trust_phi"
+    ],
+    "theta_select": 0.2,
+    "aux": "q275_cell",
+    "n_boot": 1000,
+    "empty_replicate_rate_reformed": 0.0,
+    "reformed_band": [
+      -0.381,
+      -0.24
+    ],
+    "frozen_Mstar_band": [
+      -0.381,
+      -0.251
+    ],
+    "paper_coverage_band": [
+      -0.382,
+      -0.24
+    ],
+    "note": "Reformed admission = Pearson(m, edu) >= theta on the resample; holdout is not used (engine stage split). Frozen band evaluates beta only on the original M*. Same seed family, independent RNG stream from the shipped bootstrap.json (do not expect bit-match)."
+  },
+  "M_star": {
+    "patience_cells": [
+      "m_wvs_q13",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi"
+    ],
+    "trust_cells": [
+      "m_llm_trust_phi"
+    ],
+    "patience_country": [
+      "m_gps_patience",
+      "m_llm_patience_llama",
+      "m_llm_patience_phi"
+    ],
+    "trust_country": [
+      "m_trust_general",
+      "m_trust_in_group",
+      "m_trust_out_group",
+      "m_trust_composite",
+      "m_llm_trust_llama"
+    ]
+  },
+  "dif_trust_variance": "NOT IN dif_level_dependence.json \u2014 App I Result 3 (89-94% between) is UNVERIFIED against the committed artifact"
+}

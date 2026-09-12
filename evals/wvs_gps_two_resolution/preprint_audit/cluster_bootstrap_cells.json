@@ -1,0 +1,90 @@
+{
+  "n_boot": 1000,
+  "seed": 20260814,
+  "profiles": {
+    "patience_cells": {
+      "profile": "patience_cells",
+      "n_countries": 42,
+      "n_cells": 480,
+      "n_boot": 1000,
+      "seed": 20260814,
+      "headline_M_star": [
+        "m_wvs_q13",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "headline_L": 0.245,
+      "headline_U": 0.556,
+      "paper_Mstar": [
+        "m_wvs_q13",
+        "m_llm_patience_llama",
+        "m_llm_patience_phi"
+      ],
+      "paper_LU": [
+        0.245,
+        0.556
+      ],
+      "paper_cell_exchangeable_band": [
+        0.179,
+        0.614
+      ],
+      "cluster_band_alpha10": [
+        0.174,
+        0.622
+      ],
+      "empty_replicate_rate": 0.0,
+      "degenerate_replicate_rate": 0.0,
+      "replicates_nonempty": 1000,
+      "p_hat_m": {
+        "m_wvs_q13": 0.742,
+        "m_wvs_q14": 0.0,
+        "m_composite": 0.002,
+        "m_llm_patience_llama": 1.0,
+        "m_llm_patience_phi": 1.0,
+        "m_noise": 0.0
+      },
+      "M_star_matches_freeze": true
+    },
+    "trust_cells": {
+      "profile": "trust_cells",
+      "n_countries": 42,
+      "n_cells": 480,
+      "n_boot": 1000,
+      "seed": 20260814,
+      "headline_M_star": [
+        "m_llm_trust_phi"
+      ],
+      "headline_L": -0.317,
+      "headline_U": -0.317,
+      "paper_Mstar": [
+        "m_llm_trust_phi"
+      ],
+      "paper_LU": [
+        -0.317,
+        -0.317
+      ],
+      "paper_cell_exchangeable_band": [
+        -0.382,
+        -0.24
+      ],
+      "cluster_band_alpha10": [
+        -0.4,
+        0.195
+      ],
+      "empty_replicate_rate": 0.001,
+      "degenerate_replicate_rate": 0.0,
+      "replicates_nonempty": 999,
+      "p_hat_m": {
+        "m_trust_general": 0.003,
+        "m_trust_in_group": 0.0,
+        "m_trust_out_group": 0.0,
+        "m_trust_institution": 0.0,
+        "m_trust_composite": 0.0,
+        "m_llm_trust_llama": 0.079,
+        "m_llm_trust_phi": 0.997,
+        "m_noise": 0.0
+      },
+      "M_star_matches_freeze": true
+    }
+  }
+}
