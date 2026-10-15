@@ -108,3 +108,23 @@ paper/*.out
 
 # H5 aux caches: orphaned with the H5 lane removal (2026-08-21); local copies remain on disk
 data/h5_trust_aux/
+
+# --- model weights & raw data (never commit: large, and re-downloads may differ) ---
+# Small deliberate fixtures stay tracked (a few-KB anchor table, a test shard).
+# Ambiguous formats (.arrow/.npy/.parquet/.h5) are intentionally NOT banned here:
+# several repos track small shards of exactly those on purpose.
+/models/
+*.gguf
+*.safetensors
+*.ckpt
+*.onnx
+*.pt
+*.pth
+/data/raw/
+/data/external/
+/data/interim/
+/raw/
+*.dta
+*.sav
+*.rds
+# --- end model weights & raw data ---
