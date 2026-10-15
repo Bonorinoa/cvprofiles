@@ -20,7 +20,7 @@ pip install cvprofiles
 
 Requires Python ≥ 3.11. No GPU, no model weights, no API keys — the engine is a pure Python/numpy/pandas computation over the score columns you supply.
 
-The published 3.0.1 wheel is the engine. The one-command demo below lives in this source tree (install the checkout).
+The published 3.0.2 wheel is the engine. The one-command demo below lives in this source tree (install the checkout).
 
 ### Install from source (this checkout)
 
@@ -30,7 +30,7 @@ cd cvprofiles
 pip install -e .
 ```
 
-`main` is development; version tags are the paper anchors. Clone a tag (`-b v3.0.1`) when you need a frozen paper run.
+`main` is development; version tags are the paper anchors. Clone a tag (`-b v3.0.2`) when you need a frozen paper run.
 
 ## Quickstart
 
