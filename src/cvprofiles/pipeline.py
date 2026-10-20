@@ -40,6 +40,7 @@ from cvprofiles.inference.coverage import CoverageResult, compute_coverage, cove
 from cvprofiles.inference.delta_grid import DeltaGridResult, delta_grid_payload, run_delta_grid
 from cvprofiles.inference.theta_grid import ThetaGridResult, run_theta_grid, theta_grid_payload
 from cvprofiles.report.pipeline import ReportResult, write_report
+from cvprofiles.report.screen_diagnostics import screen_diagnostics_payload
 from cvprofiles.restrict.pipeline import RestrictBundle, run_restrict, write_restrict_artifacts
 from cvprofiles.schemas.run import RunManifest
 from cvprofiles.score.pipeline import (
@@ -69,6 +70,7 @@ class FullRunResult:
     theta_grid: ThetaGridResult | None = None
     delta_grid: DeltaGridResult | None = None
     anchors_hash: str | None = None
+    screen_diagnostics: dict[str, Any] | None = None
 
 
 def run_profile(
@@ -200,6 +202,12 @@ def run_profile(
             boot, score.frame, score.roles, restrict, alpha=alpha, kappa=kappa
         )
 
+    # Report-only screen diagnostics (logs/DECISIONS.md 2026-10-19): read the
+    # identify/coverage results; never feed back into M*, [L,U], or run_id.
+    screen = screen_diagnostics_payload(
+        score.frame, score.roles, restrict, identify, cov
+    )
+
     grid_result: ThetaGridResult | None = None
     if grid is not None:
         grid_result = run_theta_grid(score.frame, score.roles, restrict, grid)
@@ -277,6 +285,7 @@ def run_profile(
         ),
         coverage=coverage_payload(cov) if cov is not None else None,
         anchors=anchors_payload_dict,
+        screen_diagnostics=screen,
     )
     artifact_paths["report.html"] = report.html_path.name
     artifact_paths["report.json"] = report.json_path.name
@@ -306,6 +315,7 @@ def run_profile(
         theta_grid=grid_result,
         delta_grid=delta_grid_result,
         anchors_hash=anchors_hash_value,
+        screen_diagnostics=screen,
     )
 
 
@@ -358,6 +368,19 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
             "n_boundary": len(c.boundary),
             "artifact": "coverage.json",
         }
+    screen_summary: dict[str, Any] | None = None
+    if result.screen_diagnostics is not None:
+        sd = result.screen_diagnostics
+        screen_summary = {
+            "n_criteria_self_rejected": sd["criterion_self_consistency"][
+                "n_self_rejected"
+            ],
+            "n_aux_ceiling_flagged": sd["aux_ceiling"]["n_flagged_measures"],
+            "n_near_threshold_survivors": sd["near_threshold"][
+                "n_near_threshold_survivors"
+            ],
+            "see": "report.json#screen_diagnostics",
+        }
     return {
         "run_id": result.run_id,
         "out_dir": str(result.out_dir),
@@ -378,6 +401,7 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
         "theta_grid": grid_summary,
         "delta_grid": grid2_summary,
         "anchors_hash": result.anchors_hash,
+        "screen_diagnostics": screen_summary,
         "report_html": str(result.report.html_path),
         "report_json": str(result.report.json_path),
     }

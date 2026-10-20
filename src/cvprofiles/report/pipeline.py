@@ -43,13 +43,15 @@ def build_report_payload(
     delta_grid: dict[str, Any] | None = None,
     coverage: dict[str, Any] | None = None,
     anchors: dict[str, Any] | None = None,
+    screen_diagnostics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Machine-complete report dict (also drives HTML).
 
     ``bootstrap`` / ``theta_grid`` / ``delta_grid`` / ``coverage`` are
     inference payloads and ``anchors`` is the θ-anchor audit payload (None
-    when absent). All are additive: the headline range block is always the
-    min/max B* image on M*.
+    when absent). ``screen_diagnostics`` is the report-only screen audit
+    (logs/DECISIONS.md 2026-10-19). All are additive: the headline range
+    block is always the min/max B* image on M*.
     """
     slacks_dict: dict[str, dict[str, float]] = {}
     for m in identify.measures:
@@ -116,6 +118,7 @@ def build_report_payload(
         "delta_grid": delta_grid,
         "coverage": coverage,
         "anchors": anchors,
+        "screen_diagnostics": screen_diagnostics,
         "artifact_paths": run_manifest.artifact_paths,
     }
 
@@ -142,6 +145,7 @@ def write_report(
     delta_grid: dict[str, Any] | None = None,
     coverage: dict[str, Any] | None = None,
     anchors: dict[str, Any] | None = None,
+    screen_diagnostics: dict[str, Any] | None = None,
 ) -> ReportResult:
     """Write report.html + report.json under out_dir."""
     out = Path(out_dir)
@@ -156,6 +160,7 @@ def write_report(
         delta_grid=delta_grid,
         coverage=coverage,
         anchors=anchors,
+        screen_diagnostics=screen_diagnostics,
     )
     json_path = out / "report.json"
     json_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")

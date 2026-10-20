@@ -1460,3 +1460,69 @@ Formal coverage theorem under arbitrary selection coupling; m-out-of-n bootstrap
 **Authorized by this entry:** the docs + checker/test edits in this commit; a local commit if the battery is green.
 
 **Not authorized by this entry:** tag, PyPI, push, history rewrite, `v0.1` peel, an `out_dir` refuse-populated guard, Streamlit/GUI work, quoting F6 in public docs, paper/eval edits.
+
+## 2026-10-19 — PROPOSED: three report-only screen diagnostics (criterion self-consistency, auxiliary ceiling, near-threshold multiplicity)
+
+**Status:** PROPOSED. Awaiting Augusto's approval. No code is written under this entry until it is approved.
+
+**Context:** a 2026-10-17 stress test for a possible public benchmark (`reports/runs/2026-10-17_benchmark_stress/`, git-ignored) found three ways a screen can look clean while saying little. Numbers below were re-measured from committed data on 2026-10-19:
+- **The criterion fails its own screen.** In `evals/wvs_gps_two_resolution`, the trust-cells β is `corr_y` on `gps_trust_cell`. The network's `conv_edu_cell` requires `corr(m, q275_cell) ≥ 0.20`. The criterion itself has `corr(gps_trust_cell, q275_cell)` = **−0.235** on `data/cells_demeaned/trust.csv` and **−0.060** on `data/cells/trust.csv` (n=480 in both). A measure that tracked the criterion perfectly would be rejected, so the screen selects against its own target. Nothing in the report says so today.
+- **Measures built from a public auxiliary pass convergent floors with room to spare.** On `data/cells_demeaned/patience_llm_extension.csv` (n=480), `corr(m_llm_patience_phi, q275_cell)` = **0.640**, while the GPS criterion `gps_patience_cell` has **0.475**. A floor of 0.20 cannot tell "tracks patience" apart from "tracks education better than patience does".
+- **Admission near the threshold is noisy at small n.** In the stress simulation, a measure with true slack +0.05 was admitted in 66% of draws at n=41, 72.5% at n=120, 91.5% at n=480 and 99% at n=2000. The report shows a binary admitted/rejected status. The admission frequency p̂ and the boundary flag sit in `coverage.json`, and nothing ties them to the survivors.
+
+**Decisions (proposed; each item can be struck on its own):**
+- **D1 — Report-only, headline-invariant.** None of the three diagnostics may change `M*`, `M*_select`, `M*_robust`, `[L,U]`, `slacks.csv`, `admissible.json`, `range.json`, `coverage.json`, `scores_hash` / `network_hash` / `beta_hash`, the freeze preimage or `run_id`. They describe the screen. They never reject, admit, tighten or loosen anything.
+- **D2 — Placement.** One new module, `src/cvprofiles/report/screen_diagnostics.py`, holds pure functions with no RNG (numpy/pandas only, reusing `identify.slacks.evaluate_slack` / `pearson_corr` / `spearman_corr`). `pipeline.run_profile` calls it after IDENTIFY and coverage. The payload goes into `report.json` under a new key `screen_diagnostics` and gets an HTML section labeled "Screen diagnostics · report-only". `summary_dict` (CLI stdout) gains three additive counts. No new artifact file and no new CLI flag. stdout stays JSON-only.
+- **D3 — Criterion declaration.** Add an optional `criteria: list[str]` to `ScoreColumnRoles` (roles.json). It is named `criteria`, not `anchors`, because "anchors" already means θ-anchors (`anchors.yaml`, `--anchors`, `anchors.json`). Rules:
+  - every entry must be an engine column (measure, aux or outcome), so every diagnostic number comes from columns already inside `scores_hash`;
+  - entries may overlap other roles, because `criteria` points at columns rather than partitioning them (e.g. the GPS positive control `m_gps_patience` at country level);
+  - when `beta.type == "corr_y"`, the β outcome is included automatically, since β(m) = corr(m, y) makes y the criterion. For other β types (e.g. `ols_coef` on `log_gdp_pc`) the outcome is a downstream target rather than a criterion, so only declared entries count;
+  - `criteria` does not change `freeze_columns_for`, so scores_hash and run_id are unchanged. The key is left out of serialized roles when empty, so existing `score_manifest.json` files stay byte-stable (same pattern as the 3.0.1 `empty_R` default);
+  - an unknown or non-engine criterion column fails loud at roles/RESTRICT binding.
+- **D4 — (a) Criterion self-consistency.** For each criterion c and each restriction r (select and holdout stages), compute s_r(c) with the same evaluator, on the same frame the engine uses for r's stage: the full frame in legacy runs; under a units-split, the train frame for select restrictions and the hold frame for holdout restrictions. Report per-cell slacks plus two flags:
+  - `self_rejected`: some select-stage s_r(c) < −δ, i.e. the criterion would not survive its own screen;
+  - `holdout_noncompliant`: the same test on holdout-stage restrictions.
+  - Invariant: when c is a menu measure, `self_rejected` equals `c ∉ M*_select`.
+- **D5 — (b) Auxiliary ceiling / proxy flag.** Applies to every `corr_min`, `corr_sign` or `monotone_rank` restriction whose `variable` is in `roles.aux`. `corr_sign` is added to the task's two types because it is the same floor-on-association shape; strike it if unwanted. For every menu measure m and criterion c, using D4's frame rule:
+  - assoc_r(m,V) = sign·stat(m,V), where stat is the statistic r already uses (Pearson for `corr_min`/`corr_sign`, Spearman for `monotone_rank`); assoc_r(c,V) is computed the same way;
+  - `exceeds_criterion` = assoc_r(m,V) > assoc_r(c,V);
+  - the first-order Pearson partial correlation pcorr(m, c | V) is reported alongside;
+  - self-pairs (m = c) and undefined values (|r| = 1, zero variance) are null, with a reason;
+  - with no criterion, assoc_r(m,V) is still reported, with no flag and no partial.
+  - Reading rule, stated in the report: `exceeds_criterion` is a description, not a verdict, because a valid measure can beat a noisy criterion (attenuation). The proxy signature is high aux association together with near-zero pcorr(m, c | V).
+- **D6 — (c) Near-threshold multiplicity.** Needs `n_boot ≥ 1`. It reads the existing `CoverageResult`: no second resampling loop and no RNG. For each menu measure it reports:
+  - binary status, `p̂_m`, margin, SE and coverage's `boundary` flag, used as-is;
+  - `n_near_threshold_survivors = |{m ∈ M* : boundary}|`;
+  - a plain-language line such as "admitted; admitted in 66% of 200 non-empty resamples; near threshold (|margin| 0.031 ≤ 2.0·SE 0.040)";
+  - no categorical p̂ cutoffs, because new thresholds are the owner's call.
+  - With bootstrap off, the block is null with a note saying to enable `--n-boot`.
+- **D7 — Known caveat, reported but not fixed.** Coverage's margin (amendment cb566c8) is the minimum over *all* restrictions on the pooled full frame, without δ. Admission uses select-stage restrictions with tolerance δ, and under a units-split it uses the train frame. Bootstrap p̂ is pooled and select-only. So with δ > 0, holdout-stage restrictions or a units-split, (c)'s margin is not exactly the admission distance. (c) prints this caveat. Changing the locked `coverage.json` semantics is not part of this entry.
+- **D8 — Failure policy.** Binding errors (a declared criterion that is missing or is not an engine column) fail loud. Numerical failures inside a diagnostic cell (zero variance, n < 2 in a hold frame) become null plus a reason and never abort a run whose headline succeeded.
+- **D9 — Always on.** (a) and (b) run on every run because they are deterministic and cheap. (c) runs whenever bootstrap is on. Every run's `report.json` gains the `screen_diagnostics` key (`report.json` is not in the preimage).
+
+**Authorized by this entry (on approval):** strict TDD (focused RED test per diagnostic, then minimal GREEN) for D3–D6. Tests must show:
+- golden `mini_v1` run_id unchanged;
+- the same bundle with and without criteria gives the same run_id and byte-identical identify artifacts;
+- M* and [L,U] are unchanged with diagnostics on;
+- the D4 menu-measure invariant;
+- CLI stdout stays JSON.
+Also authorized: the `report.json` / `report.html` / `summary_dict` wiring; `docs/USER_GUIDE.md` (roles.criteria, report section) and `docs/ARCHITECTURE.md` (module map, IO contract); a CHANGELOG `[Unreleased]` line; the full battery; one local commit on the feature branch.
+
+**Not authorized by this entry:**
+- any change to admission, M*, [L,U], `coverage.json` semantics or the freeze preimage;
+- using a diagnostic to reject, admit or re-threshold automatically;
+- new p̂ cutoffs or other thresholds;
+- edits to empirical networks, including `trust_cells.yaml` `conv_edu_cell`; whether the trust-cells network should change after (a) flags it is Augusto's call;
+- regenerating committed eval runs or paper numbers;
+- `docs/METHODOLOGY.md` or paper text;
+- version bump, tag, push or PyPI.
+
+**2026-10-20 approval (Augusto):** "Approved as drafted. Implement D1–D9 under strict TDD and commit on the branch." D1–D9 are now authorized as written above. The Not-authorized list still applies.
+
+**2026-10-20 close-out (implementation):**
+- Landed: `src/cvprofiles/report/screen_diagnostics.py`, `ScoreColumnRoles.criteria`, the `report.json` / `report.html` / `summary_dict` wiring, and 30 new tests (`tests/test_screen_diagnostics*.py`). Each diagnostic was RED, then GREEN. Full battery green (370 passed).
+- Golden `mini_v1` run_id unchanged. All 10 committed `evals/wvs_gps_two_resolution/runs/*` run_ids recompute exactly from their `S_frozen.csv` with and without `criteria` declared. HEAD and the branch give identical ids.
+- Shape note for D6: with bootstrap off, `near_threshold` is `{"available": false, ...}` with nulls and the `--n-boot` note, not a bare `null`.
+- Smoke observations (scratch, not evidence):
+  - demeaned trust cells: `gps_trust_cell` is `self_rejected` (conv_edu_cell slack −0.435), which explains the empty M\*. (b) then flags almost every measure, because any association above −0.235 "exceeds" the criterion's, so (a) is the primary reading in that case.
+  - demeaned patience cells LLM: Phi has 0.640 against GPS's 0.475, but its partial r with the criterion given education is 0.373, not near zero, so it is not a pure aux proxy. `m_wvs_q13` is admitted at p̂ = 0.86 and is near the threshold.

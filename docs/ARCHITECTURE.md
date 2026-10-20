@@ -66,7 +66,7 @@ src/cvprofiles/
   identify/              # slack evaluators, beta evaluators, M*, [L,U]
   inference/             # bootstrap, theta_grid, delta_grid (additive)
   anchors/               # θ-anchor parse, completeness check, payload
-  report/                # JSON dump + Jinja2 HTML (templates/)
+  report/                # JSON dump + Jinja2 HTML (templates/) + report-only screen diagnostics
   synth/                 # DGPs + oracle networks + metrics (eval, not paper path)
 ```
 
@@ -79,7 +79,7 @@ Each state is a pure-ish transform with explicit on-disk inputs/outputs. A full 
 | Artifact | Role | Format |
 |---|---|---|
 | scores | Unit × measures (+ aux/outcome) | CSV or parquet |
-| roles.json | Column role map | JSON |
+| roles.json | Column role map (optional `criteria` pointer list for screen diagnostics) | JSON |
 | network.yaml | Restrictions R + θ + δ | YAML |
 | beta.yaml | Target functional | YAML |
 | anchors.yaml (optional) | Pre-data θ anchors | YAML |
@@ -112,7 +112,7 @@ Reusing an `out_dir` overwrites headline artifacts. Inference-layer files (`boot
 3. Paper path: only artifacts from a run directory with pinned hashes are citable.
 4. Bootstrap RNG is a seeded `numpy.random.Generator` (never the global `np.random`).
 5. Float comparisons for slacks use the declared tolerance δ (default 0) — never raw `== 0` without policy.
-6. **Diagnostics excluded from the preimage:** bootstrap count is normalized (`n_boot < 1 ⇒ null`), and θ-grid / δ-grid / anchors settings do not change the run_id. Same bundle + different grids ⇒ same id, different artifacts.
+6. **Diagnostics excluded from the preimage:** bootstrap count is normalized (`n_boot < 1 ⇒ null`), and θ-grid / δ-grid / anchors settings do not change the run_id. Same bundle + different grids ⇒ same id, different artifacts. `roles.criteria` and the `screen_diagnostics` report block are likewise outside the preimage (`criteria` never changes the freeze column list and is omitted from serialized roles when empty).
 
 ## 5. Slack and beta evaluators
 
@@ -126,7 +126,7 @@ Reusing an `out_dir` overwrites headline artifacts. Inference-layer files (`boot
 - writes `report.json` directly, and
 - renders `report.html` from a Jinja2 template (`report/templates/report.html.j2`).
 
-The HTML and JSON share one payload, so they cannot disagree about numbers. The template is self-contained (no external assets) so `report.html` opens anywhere. Panel structure: construct/menu summary, headline range block, slack matrix, admissible set with binding restrictions, and optional bootstrap / θ-grid / δ-grid / anchor panels.
+The HTML and JSON share one payload, so they cannot disagree about numbers. The template is self-contained (no external assets) so `report.html` opens anywhere. Panel structure: construct/menu summary, headline range block, slack matrix, admissible set with binding restrictions, optional bootstrap / θ-grid / δ-grid / anchor panels, and the always-on "Screen diagnostics · report-only" panel (`report/screen_diagnostics.py`: criterion self-consistency, auxiliary ceiling, near-threshold multiplicity; pure functions, no RNG, reads IDENTIFY/coverage results and never feeds back into M* or [L,U]).
 
 ## 7. Observability
 
