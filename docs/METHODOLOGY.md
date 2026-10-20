@@ -12,7 +12,9 @@ cvprofiles treats **construct validity** as a **partial-identification problem o
 
 > Which operationalizations are admissible under a stated nomological network, and what set of downstream estimates follows?
 
-The closest methodological ancestor is Leamer-style specification uncertainty, moved from regression specifications to measurement functions and disciplined by a researcher-stated network rather than a kitchen-sink search. The formal home is partial identification: the object of inference is a set, not a point.
+This framing follows Dell and Rambachan (2026a), whose NBER Methods Lecture formalizes the nomological network as partial identification and defines the menu, the admissible set $M^*_{R,\theta}$, construct-validity profiles of slacks $s_r(m;\theta_r)$, and the construct-identified set $B^*_{R,\theta}$ and range $[L,U]$; their companion review is Dell and Rambachan (2026b). Both are listed in §10. The objects in §2 follow those definitions, restated with sample slacks.
+
+The closest methodological ancestor is Leamer-style specification uncertainty, moved from regression specifications to measurement functions (the parallel Dell and Rambachan draw to specification search) and disciplined by a researcher-stated network rather than a kitchen-sink search. The formal home is partial identification: the object of inference is a set, not a point.
 
 **Non-claims.** cvprofiles does not claim that all of economics is inequalities. It does not claim new sharp partial-identification theory (sharp theory is optional garnish; transparent slacks plus the reported image of the target functional is the load-bearing claim). It does not put a learned model inside the engine. It does not author the researcher's nomological network for main results.
 
@@ -20,7 +22,7 @@ The closest methodological ancestor is Leamer-style specification uncertainty, m
 
 Researcher supplies unit×measure scores (SCORE). Researcher authors a nomological network $R$ with thresholds $\theta$ and a target functional $\beta(\cdot)$ (RESTRICT). The engine:
 
-1. Computes a sample slack $s_r(m)$ for every restriction $r$ and every measure $m$ (IDENTIFY).
+1. Computes a sample slack $s_r(m)$ for every restriction $r$ and every measure $m$ (IDENTIFY). Together, the slacks of $m$ form its construct-validity profile, the object the package is named for.
 2. Keeps the admissible set $M^* = \{m : s_r(m) \ge -\delta \ \forall r\}$, where $\delta \ge 0$ is a declared tolerance (default $0$).
 3. Evaluates $\beta(m)$ for every measure, marks survivors, and reports the construct-identified range
    $$[L,U] = \left[\min_{m \in M^*} \beta(m),\ \max_{m \in M^*} \beta(m)\right]$$
@@ -108,6 +110,8 @@ Paper-facing numbers come only from: frozen score matrix (hash), pinned network 
 
 ## 9. Notation
 
+Notation follows Dell and Rambachan (2026a), with sample slacks in place of population moments and the subscripts on $M^*_{R,\theta}$ and $B^*_{R,\theta}$ dropped. One difference: their $\delta$ is the known-groups threshold inside $\theta$; here $\delta$ is the admission tolerance.
+
 | Symbol | Meaning |
 |---|---|
 | $C$ | Latent construct (researcher-defined, one paragraph of prose) |
@@ -120,3 +124,8 @@ Paper-facing numbers come only from: frozen score matrix (hash), pinned network 
 | $B^*$ | $\{\beta(m) : m \in M^*\}$ |
 | $[L,U]$ | Reported construct-identified range |
 | $y$ | Outcome used by $\beta$ |
+
+## 10. References
+
+- Dell, M., & Rambachan, A. (2026a). *Construct validity: Credibility when measurement is cheap* [Lecture slides]. NBER Summer Institute 2026 Methods Lectures. https://conference.nber.org/confer/2026/SI2026/ML/dell3.pdf
+- Dell, M., & Rambachan, A. (2026b). *The measurement revolution? Credible measurement and inference in the age of AI* (NBER Working Paper No. 35744). National Bureau of Economic Research. https://doi.org/10.3386/w35744

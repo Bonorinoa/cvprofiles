@@ -319,3 +319,4 @@ Each profile gets its own frozen run directory (`profiles/<id>/`) with the usual
 - [ ] Menu J and identities of survivors / failures
 - [ ] Binding restrictions named
 - [ ] θ-sensitivity shown for membership-critical gates
+- [ ] Framework cited: Dell and Rambachan (2026a) for the menu, M\*, construct-validity profiles, and construct-identified set (references in `METHODOLOGY.md` §10)
