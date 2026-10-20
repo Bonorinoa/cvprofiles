@@ -1,6 +1,8 @@
-# Attribution edit list — 2026-10-19
+# Attribution edit list — 2026-10-19 (rev. 2)
 
 **Purpose:** proposed edits to `paper/position_paper.tex` (v9, 1574 lines at commit `0524aa8`) for Augusto to accept, edit, or veto one item at a time. Nothing in the `.tex` has been changed, and `pdflatex` has not been run.
+
+**Framing (Augusto, 2026-10-19):** the framework has credited Dell & Rambachan from the start. Their lecture was a call to action for new methods. This paper's contribution is to compose three methods (construct validation, multiverse reporting, and partial identification) into one practice that reliable empirical work needs, and to provide software that makes the best practices Dell and Rambachan emphasize easy to adopt anywhere in the inference pipeline. None of the individual methods is claimed. **Pass A therefore makes the existing credit precise:** it names the objects the deck defines, cites the deck itself, and softens only the claims a reader comparing the two texts would dispute. It does not restate the contributions.
 
 **Lock:** frozen scores, networks, θ, run_ids, and every plug-in `[L,U]` stay as they are. Every number below is either already in the paper or was recomputed from committed data with the commands in §G.
 
@@ -10,330 +12,215 @@
 
 ---
 
-## Why this list exists (read first)
+## Background
 
-Dell & Rambachan's NBER Methods Lecture deck, *Construct Validity: Credibility When Measurement Is Cheap* (15 slides; PDF metadata shows it was created 2026-07-30 and authored by Melissa Dell and Ashesh Rambachan; https://conference.nber.org/confer/2026/SI2026/ML/dell3.pdf), defines the paper's core objects under the same names. I re-checked this on 2026-10-19 against the extracted slide text:
+### Credit already in place
 
-| Slide | Slide title (verbatim) | What it defines |
+- The repo's first commit (`bc56870`, 2026-08-01) says "(Dell–Rambachan frame)" at `docs/03_Methodology.md:8`.
+- Augusto's Substack post "Construct-Identified Inference" (2026-08-30) credits Dell & Rambachan for linking nomological networks to moment inequalities. This was verified by the session that commissioned this list; I did not re-check it.
+- The paper cites them at §2.3 (l. 295), §3.1 (l. 391), and in the Tradition 3 box of the synthesis figure (l. 1535).
+
+### What the deck defines, so the paper can name it
+
+Dell & Rambachan, *Construct Validity: Credibility When Measurement Is Cheap*, NBER Methods Lecture slides (15 slides; the PDF metadata shows it was created 2026-07-30 and authored by Melissa Dell and Ashesh Rambachan; https://conference.nber.org/confer/2026/SI2026/ML/dell3.pdf). Checked on 2026-10-19 against the extracted slide text:
+
+| Slide | Slide title (verbatim) | Content |
 |---|---|---|
 | 5 | AI Raises Important Construct Validity Concerns | Sala-i-Martin specification search moves to "searching across representations"; a construct-definition analogue of Goodhart's law |
-| 6 | Construct Validity as Partial Identification | formalizes the Cronbach–Meehl nomological network as partial identification |
-| 7 | What the Formalization Does—and Does Not—Do | identified set relative to a researcher-specified menu and moment restrictions; cites Borsboom et al. (2004) for the limits |
-| 8 | Candidate Measurement Functions | menu `M = (m_j(·))_{j∈J}`; normalization; β(m) defined consistently across candidates |
-| 9 | Nomological Restrictions | auxiliaries `V=(Z,W,G,Q)`; convergent, discriminant, and known-groups restrictions with thresholds |
-| 10 | The Admissible Set of Measures | `θ=(c_1..c_K, d_1..d_L, δ)`; `E[g_r(m(X),V;θ_r)] ≥ 0`; `M*_{R,θ}`, "a population object" |
-| 11 | Construct-Validity Profiles | slacks `s_r(m;θ_r)`; report the full profile; thresholds grounded in prior evidence |
+| 6 | Construct Validity as Partial Identification | formalizing construct validity is "largely an open question"; outlines the Cronbach–Meehl network as partial identification |
+| 8 | Candidate Measurement Functions | menu `M = (m_j(·))_{j∈J}`; β(m) defined consistently across candidates |
+| 9 | Nomological Restrictions | convergent, discriminant, and known-groups restrictions with thresholds |
+| 10 | The Admissible Set of Measures | `E[g_r(m(X),V;θ_r)] ≥ 0`; `M*_{R,θ}` ("a population object") |
+| 11 | Construct-Validity Profiles | slacks `s_r(m;θ_r)` |
 | 12 | The Construct-Identified Set | `B*_{R,θ} = {β(m) : m ∈ M*_{R,θ}}` |
-| 13 | Inference for the Construct-Identified Range | `[L,U]` = inf/sup over `M*_{R,θ}`; two coupled sources of uncertainty, coupled near the admissibility boundary; "Estimation is beyond today's scope" |
-| 14 | How Credible Are the Auxiliary Measures? | auxiliary credibility; Campbell–Fiske; sparse, well-measured restrictions over dense networks |
+| 13 | Inference for the Construct-Identified Range | `[L,U]`; admission and endpoint uncertainty are coupled near the boundary; "Estimation is beyond today's scope" |
+| 14 | How Credible Are the Auxiliary Measures? | auxiliary credibility; Campbell–Fiske |
 
-The companion review, Dell & Rambachan, *The Measurement Revolution? Credible Measurement and Inference in the Age of AI*, NBER WP 35744 (September 2026, doi 10.3386/w35744), develops this in prose rather than formally. Its §2.2 ("Construct Definition", p. 8) compares the nomological network to partial identification and says that adding restrictions narrows the set of plausible measures. The same section says that when theory is weak, a failed alignment may count against the theory rather than the measure (p. 9). Its introduction (pp. 4–5) makes the Sala-i-Martin analogy: AI moves specification search upstream into measurement. Searching the extracted text found no formal `M*`, slack profile, `B*`, or `[L,U]` in the WP. The formal objects are in the slides.
+The companion review is NBER WP 35744 (September 2026, doi 10.3386/w35744). It gives the partial-identification analogy in prose (§2.2, p. 8). The call to action the software answers is in §3.2 (pp. 13–14): "We are now building toolkits that provide the same discipline for AI-generated measurements." The WP has no formal M\*, profiles, or B\*.
 
-**Repository provenance agrees with this list.** The repo's first commit (`bc56870`, 2026-08-01, two days after the deck's creation date) says in `docs/03_Methodology.md` "(Dell–Rambachan frame)". Its README already uses "construct-validity profiles" and "construct-identified range". The package name is the title of slide 11. Explicit attribution in the paper therefore matches the project's own history. Without it, a reviewer who knows the lecture will likely conclude the paper renamed someone else's objects. That is the paper's largest reviewer risk.
+### What needs fixing
 
-**Notation map** (used in A13):
+- The bib entry cites the lecture-series title, not the deck.
+- §1.4 presents the deck's objects without saying that the deck names them.
+- Two §2.3 sentences ("nearest formal neighbor"; "None performs menu-level validation with a surviving set") would be disputed by a reader who also knows Ogut & Yin.
+- The sentence at l. 295 contains a phrase I could not find in the deck: "principled, widely accepted methods for construct validity".
 
-| Object | Dell–Rambachan | Paper now | Package (YAML / artifacts) |
+### Reviewer notes (not edits; your call)
+
+- WP 35744 §2.2 uses trust as its example and says a trust measure should not "simply reproduc[e] institutional quality". The country trust network uses rule of law as a *convergent* floor (l. 654). One sentence at l. 654–655 explaining why rule of law is convergent evidence rather than contamination would head off the comparison.
+- Title echo (optional): "When Measures Are Cheap" sits close to the deck's "When Measurement Is Cheap". With A1 in place I do not think this is a real risk. Rename only if you want distance.
+
+### Notation map (for the optional item A-opt1)
+
+| Object | Dell–Rambachan | Paper now | Package |
 |---|---|---|---|
-| Threshold | `θ_r` (with `θ` collecting all) | `τ_r` | `theta`, `theta_grid.json` |
+| Threshold | `θ_r` | `τ_r` | `theta`, `theta_grid.json` |
 | Known-groups threshold | `δ` (inside `θ`) | — | — |
 | Admission tolerance | — | `δ` | `delta` |
-| Admissible set | `M*_{R,θ}` (population) | `M*`, `M*(R)` (sample, §1.4/§3.2); `𝓜*_0` (population, App A) | `admissible.json` |
-| Slack | `s_r(m;θ_r)` (population) | `s_r(m)` (sample), `s_r^0(m)` (population) | `slacks.csv` |
-| Image | "construct-identified set" `B*_{R,θ}` | "robust result set" / "admissible-result set" `B*` | `range.json` |
-
-**Two reviewer-risk notes (not edits; your call):**
-- WP 35744 §2.2 uses trust as its example and says a trust measure should not "simply reproduc[e] institutional quality". The paper's country trust network uses rule of law as a *convergent* floor (`Corr ≥ 0.30`, l. 654). "Co-moves with" and "simply reproduces" can both hold, but a reviewer who reads both texts will notice. One sentence at l. 654–655 explaining why rule of law is convergent evidence rather than contamination would close this.
-- Slide 14 recommends separating "well-anchored" restrictions from exploratory ones. The one-gate cell network (l. 656–657) is a sparse network of the kind slide 14 recommends, so citing it there helps. Item C1 below shows, however, that the β criterion for trust fails that same gate. Decide whether education counts as well-anchored for trust before citing slide 14.
+| Admissible set | `M*_{R,θ}` (population) | `M*` (sample); `𝓜*_0` (population, App A) | `admissible.json` |
+| Slack | `s_r(m;θ_r)` | `s_r(m)`, `s_r^0(m)` | `slacks.csv` |
+| Image | construct-identified set `B*_{R,θ}` | robust result set / admissible-result set `B*` | `range.json` |
 
 ---
 
-## Pass A — Attribution to Dell & Rambachan (required item 1)
+## Pass A — Precise attribution (required item 1)
 
-### A1. Statement of significance (l. 80)
-
-**Current**
-```tex
-We answer with a reporting discipline assembled from three existing traditions: construct validation, multiverse analysis, and partial identification.
-```
-**Proposed**
-```tex
-Dell and Rambachan recently formalized construct validation for this setting as partial identification over a researcher-declared menu of measures~\cite{dellrambachan2026}.
-We implement that formalization in open software, add a protocol under which the screen can fail, and report its result beside the unrestricted multiverse.
-```
-**Why:** the significance statement is the first place a reader meets the claim. As written, it presents the composition as the authors' own.
-
-### A2. Abstract (ll. 92–93)
+### A1. Abstract (l. 92)
 
 **Current**
 ```tex
 This paper develops \emph{construct-identified inference}, a reporting discipline for that abundance.
-The researcher declares a menu of candidate measures and a validity argument---pre-stated convergent and discriminant expectations with researcher-owned thresholds---which screens the menu into an admissible set.
 ```
 **Proposed**
 ```tex
-Dell and Rambachan's 2026 NBER Methods Lecture formalizes construct validation for that abundance as partial identification: a researcher declares a menu of candidate measures and thresholded convergent, discriminant, and known-groups restrictions, which screen the menu into an admissible set whose image under the downstream estimand is the construct-identified set.
-The lecture leaves estimation aside.
-This paper supplies, to our knowledge, the first open implementation of that framework and a reporting protocol for using it.
+This paper develops \emph{construct-identified inference}, a reporting discipline for that abundance that builds on Dell and Rambachan's formalization of construct validity as partial identification over a menu of measures (2026 NBER Methods Lecture).
 ```
-**Why:** this names the source of the objects in the abstract. Psychological Methods abstracts carry no `\cite`, so the authors are named in prose. **Check before accepting:** "first open implementation" is a priority claim. Search GitHub and PyPI for other implementations at submission time, or soften it to "an open implementation".
+**Why:** a reader who knows the lecture looks for the link in the abstract first. One clause supplies it. Psychological Methods abstracts carry no `\cite`, so the source is named in prose.
 
-### A3. Plain-language abstract (l. 108, opening clause only)
+### A2. §1.4 "Four objects" — name the deck's objects (ll. 209, 220, 225, 230)
 
-**Current**
-```tex
-This paper proposes a reporting rule: researchers declare a menu of candidate measures ...
-```
-**Proposed**
-```tex
-Building on a framework proposed in 2026 by the economists Melissa Dell and Ashesh Rambachan, this paper implements a reporting rule: researchers declare a menu of candidate measures ...
-```
-**Why:** the plain-language summary is widely read and is often quoted in press coverage. It should not imply that the authors invented the rule.
-
-### A4. Title (l. 65) and `pdftitle` (l. 42) — flag
-
-**Current**
-```tex
-\title{Measuring What We Mean:\\[2pt] Construct-Identified Inference When Measures Are Cheap}
-```
-**Issue:** "When Measures Are Cheap" echoes their title "Credibility When Measurement Is Cheap", and "Construct-Identified" echoes their slide 12 "The Construct-Identified Set". Either echo is acceptable with attribution. Together they read as a variant of their title.
-
-**Alternative 1** (keeps the hook and credits the object):
-```tex
-\title{Measuring What We Mean:\\[2pt] Construct-Identified Sets in Practice, with an Application to Patience and Trust}
-```
-**Alternative 2** (protocol-forward, no echo):
-```tex
-\title{A Screen That Can Fail:\\[2pt] Held-Out Validity Screening and Two-Set Reporting for Competing Measures}
-```
-If you keep the current title, A2 and A9 become more important. Update `pdftitle` (l. 42) to match whichever title you choose. The coined frame name "construct-identified inference" can stay if A7 attributes the underlying set.
-
-### A5. §1.3 heading and opening (ll. 193–195)
-
-**Current**
-```tex
-\subsection{The missing composition}
-The audits above share a feature: each documents a failure inside a single stage of the pipeline.
-What is missing is the composition---an account of how measurement, validation, and estimation combine into a scientific conclusion, and of what a robustness claim means once measures are cheap.
-```
-**Proposed**
-```tex
-\subsection{From formal objects to practice}
-The audits above share a feature: each documents a failure inside a single stage of the pipeline.
-What they lack is the composition---an account of how measurement, validation, and estimation combine into a scientific conclusion, and of what a robustness claim means once measures are cheap.
-Dell and Rambachan's 2026 Methods Lecture supplies its formal objects~\cite{dellrambachan2026}; what has been missing is an implementation researchers can run, a protocol under which the screen can fail, and evidence on how it behaves on data.
-```
-**Why:** "What is missing is the composition" claims a gap that their lecture fills.
-
-### A6. §1.4 "Four objects" — opening (l. 209)
-
-**Current**
+**l. 209 — current**
 ```tex
 The framework needs four objects.
 ```
 **Proposed**
 ```tex
-The framework uses the objects of Dell and Rambachan's formalization~\cite[slides 8--13]{dellrambachan2026}, under their names where they have one; this section restates them with the sample slacks the software computes (their definitions are population objects, which Appendix~\ref{app:formal} separates from the sample analogues).
+The framework needs four objects; the menu, admissible set, slack profiles, and construct-identified set and range below follow the definitions in Dell and Rambachan's Methods Lecture~\cite{dellrambachan2026}, restated with sample slacks.
 ```
-**Why:** §1.4 is where the objects are defined, and it currently credits no one. The population/sample note also lines up with CLAIM_SHRINK Pass 5.1.
-
-### A7. §1.4 — restrictions, image, range, and closing sentence (ll. 212, 220, 225, 230)
-
-**l. 212 — current (end of sentence)**
-```tex
-... written as moment inequalities $\E[g_r(m,V;\tau_r)]\ge 0$ over auxiliary variables $V$, with researcher-owned thresholds $\tau_r$.
-```
-**Proposed**
-```tex
-... written, following Dell and Rambachan, as moment inequalities $\E[g_r(m,V;\tau_r)]\ge 0$ over auxiliary variables $V$, with researcher-owned thresholds $\tau_r$ (their $\theta_r$; convergent, discriminant, and known-groups forms are theirs).
-```
-(If A13 is accepted, drop "(their $\theta_r$ ...)" and use $\theta_r$ throughout.)
-
 **l. 220 — current**
 ```tex
 Remaining measurement choice is then propagated into the result: the robust result set is the image of the estimand over survivors,
 ```
 **Proposed**
 ```tex
-Remaining measurement choice is then propagated into the result: Dell and Rambachan's \emph{construct-identified set} is the image of the estimand over survivors,
+Remaining measurement choice is then propagated into the result: the robust result set (Dell and Rambachan's construct-identified set) is the image of the estimand over survivors,
 ```
-
 **l. 225 — current**
 ```tex
 summarized for a scalar estimand by its range,
 ```
 **Proposed**
 ```tex
-summarized for a scalar estimand by its range---their construct-identified range, for which they note that admission and endpoint uncertainty are coupled near the admissibility boundary and leave estimation beyond the lecture's scope,
+summarized for a scalar estimand by its range (their construct-identified range),
 ```
-
 **l. 230 — current**
 ```tex
 Equations~\eqref{eq:admissible-set}--\eqref{eq:headline-range} define the admissible set, the robust result set, and the headline range.
 ```
 **Proposed**
 ```tex
-Equations~\eqref{eq:admissible-set}--\eqref{eq:headline-range} restate Dell and Rambachan's admissible set, construct-identified set, and range with sample slacks; the per-restriction slacks $s_r(m)$ are their construct-validity profiles, from which the software takes its name.
+Equations~\eqref{eq:admissible-set}--\eqref{eq:headline-range} define the admissible set, the robust result set, and the headline range; the per-restriction slacks $s_r(m)$ are what Dell and Rambachan call construct-validity profiles.
 ```
-**Why:** these four sentences carry the objects the slides define. "Robust result set" gives their B\* a new name. See A14 for the global rename.
+**Why:** §1.4 is where a reader compares the two frameworks object by object. Naming the objects the way the deck does makes that comparison immediate. The paper's own terms ("robust result set", "headline range") stay.
 
-### A8. §1.5 contributions (ll. 237–249) — restate as six
+### A3. §1.5 contributions (i) and (iv) (ll. 240, 248)
 
-**Current**
+**l. 240 — current**
 ```tex
-\subsection{Four contributions}
-The contributions follow in deliberately conservative order.
-\textit{(i) Validity-constrained measurement robustness.}
 $\Bset^*$ is the image of the estimand over measures that survive a declared validity argument, not an unrestricted multiverse; fragility and robustness are therefore attributed to the right cause.
-\textit{(ii) A selection rule that can fail.}
-Leftover restrictions never vote on admission.
-On the frozen cell scores, construct-guided selection is compared with best-$\beta$, best-anchor, and size-matched random subsets (Table~\ref{tab:falsify}).
-At cell resolution the leftover restriction is a rank transform of the selecting education correlation, so the patience comparison is weak; the trust comparison is not: best-$\beta$ picks a rejected composite, construct-guided picks Phi.
-\textit{(iii) Separation of headline from diagnostics.}
-The headline range is reported separately from additive sampling diagnostics: an uncertainty band (selection uncertainty, not a confidence set), an empty-replicate rate, and boundary attribution.
-\textit{(iv) An auditable, score-agnostic implementation and a two-resolution application.}
+```
+**Proposed**
+```tex
+$\Bset^*$, Dell and Rambachan's construct-identified set~\cite{dellrambachan2026}, is reported as the image of the estimand over measures that survive a declared validity argument, beside the unrestricted multiverse; fragility and robustness are therefore attributed to the right cause.
+```
+**l. 248 — current**
+```tex
 The method ships in the released package \cvp{}~3.0.2~\cite{cvprofiles}.
-The confirmatory application places human measures of patience and of trust under one contract at two resolutions, with leftover restrictions, additive sampling diagnostics, and two nested special cases computed on the same objects.
 ```
 **Proposed**
 ```tex
-\subsection{Contributions relative to Dell and Rambachan}
-The menu, the thresholded nomological restrictions, the admissible set, the slack profiles, the construct-identified set and range, and the coupling concern are Dell and Rambachan's~\cite{dellrambachan2026}.
-This paper contributes six things, in deliberately conservative order.
-\textit{(i) An open implementation.}
-To our knowledge \cvp{}~3.0.2~\cite{cvprofiles} is the first open, score-agnostic implementation of those objects, with the additive diagnostics the coupling concern calls for: an uncertainty band (selection uncertainty, not a confidence set), an empty-replicate rate, and boundary attribution.
-\textit{(ii) A held-out selection rule that can fail.}
-Leftover restrictions never vote on admission.
-On the frozen cell scores, construct-guided selection is compared with best-$\beta$, best-anchor, and size-matched random subsets (Table~\ref{tab:falsify}).
-At cell resolution the leftover restriction is a rank transform of the selecting education correlation, so the patience comparison is weak; the trust comparison is not: best-$\beta$ picks a rejected composite, construct-guided picks Phi.
-\textit{(iii) A freeze/run-id protocol.}
-Scores (hence the menu), network, thresholds, and target are hash-pinned before slacks are inspected, so every reported range re-verifies from committed inputs (Section~\ref{sec:impl}).
-\textit{(iv) Two-set reporting.}
-The unrestricted image over $\M$---the specification curve, recovered as the named case $\Rset=\emptyset$---is reported beside the screened image as a standing requirement, so that homogeneity created by the screen is distinguishable from homogeneity that survives it.
-\textit{(v) An executed reciprocal reading of rejected measures.}
-The principle that a failed restriction can indict the network rather than the measure is Cronbach and Meehl's, restated by Dell and Rambachan~\cite{cronbach1955,dellrambachan2026wp}; Appendix~\ref{app:inadmissible} executes it by profiling $\M\setminus\M^*$.
-\textit{(vi) A two-resolution application.}
-Human measures of patience and of trust, with two open-weight columns, are screened under one contract at country and within-country cell resolution, with leftover restrictions, additive diagnostics, and two nested special cases computed on the same objects.
+The method ships in the released package \cvp{}~3.0.2~\cite{cvprofiles}, which turns the Dell--Rambachan objects into a frozen, auditable workflow.
 ```
-**Why:** this is the restatement the brief asks for. The current (i) claims B\*, which is their object. The current (iii) folds into the new (i). The current (ii) text is kept word for word.
+**Why:** both contributions stay as they are: the composition (the screened image reported beside the multiverse) and the software. Each now says which object it builds on.
 
-### A9. §1.6 roadmap (l. 253)
+### A4. §2.2 extreme-bounds paragraph (l. 289, opening clause)
 
 **Current**
 ```tex
-Novelty is claimed only in the operational composition of three existing traditions, in a selection rule that can fail, and in a released implementation.
+This paper's screen is the admissibility test EBA lacked, moved from specifications to measurement functions: ...
 ```
 **Proposed**
 ```tex
-The composition of construct validation and partial identification at the measurement layer is Dell and Rambachan's~\cite{dellrambachan2026}; novelty is claimed only in the implementation, the held-out selection rule, the freeze protocol, two-set reporting, the executed reading of rejected measures, and the application.
+Dell and Rambachan draw the same parallel to specification search~\cite{dellrambachan2026,dellrambachan2026wp}; this paper's screen is the admissibility test EBA lacked, moved from specifications to measurement functions: ...
 ```
+**Why:** slide 5 and the WP's introduction both make the Sala-i-Martin parallel. A reader who has seen either will notice if it goes uncredited.
 
-### A10. §2 heading (l. 257) — optional
+### A5. §2.3 — the core sentences (ll. 295–299)
 
-**Current:** `\section{Three traditions, one missing layer}`
-**Proposed:** `\section{Three traditions and their recent composition}`
-**Why:** the "missing layer" is the layer their lecture supplies.
-
-### A11. §2.2 extreme-bounds paragraph (l. 289)
-
-**Current**
+**l. 295 — current**
 ```tex
-This paper's screen is the admissibility test EBA lacked, moved from specifications to measurement functions: the unrestricted multiverse over $\M$ is the named special case, and robustness is judged over the survivors $\M^*$, with the validity argument itself held-out falsifiable (Section~\ref{sec:falsify}).
-```
-**Proposed**
-```tex
-Dell and Rambachan draw the same analogy: AI moves specification search upstream, from regressions to representations of reality~\cite{dellrambachan2026,dellrambachan2026wp}.
-The screen is the admissibility test EBA lacked, moved from specifications to measurement functions: the unrestricted multiverse over $\M$ is the named special case, and robustness is judged over the survivors $\M^*$, with the validity argument itself held-out falsifiable (Section~\ref{sec:falsify}).
-```
-**Why:** slide 5 and WP pp. 4–5 make the Sala-i-Martin analogy that this paragraph presents as its own.
-
-### A12. §2.3 — the core attribution paragraph (ll. 294–299)
-
-**Current**
-```tex
-The connection to measurement is recent and explicit.
 In the 2026 NBER Summer Institute Methods Lectures, \emph{Estimation and Inference with AI-Generated Data}, Dell and Rambachan frame the nomological network as partial identification under theoretically motivated moment restrictions---Dell on measurement and construct validity, Rambachan on multiple measurements and data fusion---and explicitly call for principled, widely accepted methods for construct validity~\cite{dellrambachan2026}.
+```
+**Proposed**
+```tex
+In their 2026 NBER Methods Lecture, \emph{Construct Validity: Credibility When Measurement Is Cheap}, Dell and Rambachan formalize the nomological network as partial identification under theoretically motivated moment restrictions: they define the candidate menu, the admissible set $\M^*_{\Rset,\theta}$, construct-validity profiles of slacks, and the construct-identified set and range $[L,U]$, note that admission and endpoint uncertainty are coupled, and leave estimation beyond the lecture's scope~\cite{dellrambachan2026}; their companion review calls for toolkits that give AI-generated measurement the discipline causal-inference toolkits gave specification choice~\cite{dellrambachan2026wp}.
+```
+**Why:**
+- This names the deck and lists the specific objects it defines.
+- It replaces "principled, widely accepted methods", which I could not find in the deck, with the WP's verifiable call to action (§3.2, p. 14). If that phrase comes from the talk or another deck, cite that source and keep it.
+- It drops "Dell on …, Rambachan on …", because this deck is co-authored. If the split describes the lecture series, it belongs to a different citation.
+
+**l. 296 — current**
+```tex
 The nearest formal neighbor is Chen, Rambachan, and Tamer, whose restrictions are benchmark-informed bounds on error correlation for a downstream parameter~\cite{chenrttamer2026}.
+```
+**Proposed**
+```tex
+A closely related formal treatment is Chen, Rambachan, and Tamer, whose restrictions are benchmark-informed bounds on error correlation for a downstream parameter~\cite{chenrttamer2026}.
+```
+**l. 297 — current**
+```tex
 The present framework differs in the object of inference: our restrictions are menu-level nomological moment inequalities, the surviving set $\M^*$ is the object, and the selection rule is held-out falsifiable.
-Other recent work occupies adjacent territory without a surviving set: Ogut and Yin derive curvature bounds from multiple nonlinear measurements~\cite{ogutyin2026}; Messing shows that naive standard errors in LLM evaluation pipelines can be 40--60\% too small---a diagnosis about evaluation scores, not construct measures~\cite{messing2026}; Canen and Enamorado correct regressor measurement error by split-sample procedures---a correction, not a selection~\cite{canenenamorado2026}.
+```
+**Proposed**
+```tex
+The present framework differs in the object of inference: following Dell and Rambachan, the restrictions are menu-level nomological moment inequalities and the surviving set $\M^*$ is the object; the selection rule is in addition held-out falsifiable.
+```
+**l. 298 — current (first clause)**
+```tex
+Other recent work occupies adjacent territory without a surviving set: Ogut and Yin derive curvature bounds from multiple nonlinear measurements~\cite{ogutyin2026}; Messing shows ...
+```
+**Proposed**
+```tex
+Ogut and Yin are the nearest empirical analogue: six AI-exposure measures, an ex ante factor-analytic rule that retains five, and Imbens--Manski confidence intervals with the Stoye critical value that attain uniform coverage over their curvature class~\cite{ogutyin2026}; their screen is a measurement-model rule rather than a declared nomological network, and their inference is stronger than the additive band used here.
+Other recent work occupies adjacent territory without a surviving set: Messing shows ...
+```
+(The rest of l. 298, from "Messing shows" onward, is unchanged.)
+
+**l. 299 — current**
+```tex
 None performs menu-level validation with a surviving set and a falsifiable selection rule.
 ```
 **Proposed**
 ```tex
-The connection to measurement is recent and explicit, and the formal objects used in this paper are Dell and Rambachan's.
-In their 2026 NBER Methods Lecture, \emph{Construct Validity: Credibility When Measurement Is Cheap}~\cite{dellrambachan2026}, they formalize the Cronbach--Meehl nomological network as partial identification: a researcher-specified menu $\M$ of candidate measurement functions; convergent, discriminant, and known-groups restrictions written as population moment inequalities with thresholds $\theta$; the admissible set $\M^*_{\Rset,\theta}$; construct-validity profiles of slacks $s_r(m;\theta_r)$; the construct-identified set $\Bset^*_{\Rset,\theta}$ of downstream parameters; and its range $[L,U]$, for which they note that admission and endpoint uncertainty are coupled near the admissibility boundary and leave estimation beyond the lecture's scope (slides 7--13).
-Their companion review develops the partial-identification reading in prose~\cite{dellrambachan2026wp}.
-This paper implements those objects, adds a held-out selection rule, a freeze protocol, and two-set reporting, and applies them; it does not propose them.
-Among formal treatments with inference, Chen, Rambachan, and Tamer bound a downstream parameter under benchmark-informed restrictions on error correlation~\cite{chenrttamer2026}.
-The nearest empirical twin is Ogut and Yin: six AI-exposure measures, an ex ante factor-analytic rule that sets one measure apart as a distinct construct and retains five, and Imbens--Manski confidence intervals with the Stoye critical value that attain uniform coverage over their curvature class~\cite{ogutyin2026,imbensmanski2004,stoye2009}.
-Relative to Chen--Rambachan--Tamer, the restrictions here are nomological inequalities on each measure rather than bounds on error correlation; relative to Ogut--Yin, the screen is a declared set of thresholded restrictions with a held-out stage rather than a factor-analytic rule, and the range carries an additive band rather than a confidence interval with coverage theory---on inference, theirs is the stronger result.
-Other recent work occupies adjacent territory without a surviving set: Messing shows that naive standard errors in LLM evaluation pipelines can be 40--60\% too small---a diagnosis about evaluation scores, not construct measures~\cite{messing2026}; Canen and Enamorado correct regressor measurement error by split-sample procedures---a correction, not a selection~\cite{canenenamorado2026}.
-To our knowledge none of this work combines a declared, thresholded screen with a held-out stage that can fail and an unrestricted image reported beside the screened one; that combination, not the objects, is what this paper adds.
+To our knowledge none combines a declared nomological screen, a held-out stage that can fail, and the unrestricted image reported beside the screened one.
 ```
-**Why:**
-- The slides formalize all six objects. "Frame" understates this.
-- The current sentence names the lecture series instead of the deck, and assigns topics to each author ("Dell on …, Rambachan on …"), but the deck is co-authored.
-- I could not find "principled, widely accepted methods for construct validity" in the slide text. The closest is slide 6: formalizing construct validity is "largely an open question". If that phrase comes from the talk or another deck, cite that source. Otherwise drop it, as the proposal does.
-- Ogut–Yin *do* screen a menu down to a surviving set (five of six measures, via an ex ante factor-analytic rule), and they have uniform-coverage inference. "Without a surviving set" and "None performs menu-level validation with a surviving set" are therefore false as written.
+**Why:** these are the two claims a comparing reader would dispute. Ogut–Yin *do* screen a menu down to survivors (five of six measures), and they report uniform-coverage inference. Also, "nearest formal neighbor" undersells the deck, which is nearer than Chen–Rambachan–Tamer. The new l. 299 still states what is distinctive here, which is the composition.
 
-### A13. Notation: `τ_r` → `θ_r` (global, 23 occurrences of `\tau`) — optional but recommended
-
-**Lines:** 212, 356, 363, 374, 391, 412, 427, 430, 432, 485, 569, 626, 670, 678, 725, 854, 1040, 1062, 1160, 1262, 1374, 1530, 1563 (from `grep -n '\\tau' paper/position_paper.tex`).
-
-**Proposed:** replace `\tau` with `\theta` throughout, and rename "$\tau$-grid" to "$\theta$-grid". Add a footnote at l. 434, where δ is introduced:
-```tex
-\footnote{Dell and Rambachan use $\delta$ for the known-groups threshold inside $\theta$; here $\delta$ is the admission tolerance, as in the software's \texttt{delta} field.}
-```
-**Why:** the paper is currently the odd one out. Dell–Rambachan use θ, the package YAML uses `theta` and writes `theta_grid.json`, and App G and Table 9 (`tab:netsens`) already use `\theta_{\mathrm{edu}}`. Matching their notation makes the attribution visible on every equation. The δ collision is real: their δ is a threshold, while yours is a tolerance.
-
-### A14. "Robust result set" → "construct-identified set" (global) — optional but recommended
-
-**Lines:** 153 (Fig. 1 node `robust result set`), 220 and 230 (covered by A7), 360 (Fig. 2 node `Robust result`), 598 ("the robust result set"), 1169 (notation table: "Admissible-result set (construct-identified)").
-
-**Proposed:** use "construct-identified set" for B\* everywhere. In Fig. 2 use `\textbf{Construct-identified}\\\scriptsize $\Bset^*$, $[L,U]$`. In the l. 1169 notation table use `Construct-identified set (Dell--Rambachan)`.
-
-**Why:** a second name for their object looks like relabeling. "Robust" also overstates what the set guarantees, which is consistent with CLAIM_SHRINK's direction.
-
-### A15. §2.7 synthesis (ll. 316–318)
+### A6. §2.7 synthesis (l. 316)
 
 **Current**
 ```tex
 The composition those traditions do not jointly supply is the map $\Rset(C)\to\M^*(\Rset)\to\Bset^*(\Rset)$, drawn with a return arrow: observed disagreement among measures can motivate revision of $C$ or $\Rset$ for future studies.
-A holdout that makes screening prospectively falsifiable, and a freeze that makes it auditable, are protocol commitments; they are not implied by the map.
-That composition---the ordering of established ideas rather than a new taxonomy---is the contribution of this paper.
 ```
 **Proposed**
 ```tex
-Dell and Rambachan compose those pieces into the map $\Rset(C)\to\M^*(\Rset)\to\Bset^*(\Rset)$~\cite{dellrambachan2026}; the return arrow---observed disagreement among measures can motivate revision of $C$ or $\Rset$ for future studies---is Cronbach and Meehl's.
-A holdout that makes screening prospectively falsifiable, and a freeze that makes it auditable, are protocol commitments; they are not implied by the map.
-Those commitments, an implementation that executes them, and an application that tests them are the contribution of this paper.
+Dell and Rambachan formalize the map $\Rset(C)\to\M^*(\Rset)\to\Bset^*(\Rset)$~\cite{dellrambachan2026}; the composition the three traditions do not jointly supply is that map reported beside the unrestricted multiverse and drawn with a return arrow: observed disagreement among measures can motivate revision of $C$ or $\Rset$ for future studies.
 ```
-**Why:** the current sentence claims the map as the paper's contribution, and the map is slides 10–12.
+**Why:** the map itself is slides 10–12, so a reader comparing the texts would dispute "do not jointly supply the map". What the paper adds is the composition: the map placed beside the multiverse, with the return arrow. Ll. 317–318, which state the composition as the contribution, are unchanged.
 
-### A16. §3.1 notation sentence (l. 391)
+### A7. §3.1 notation sentence (l. 391, end)
 
 **Current**
 ```tex
-The \emph{nomological network} $\Rset(C)$ encodes those implications as moment restrictions with substantive thresholds $\tau_r$, following the classical validation tradition~\cite{cronbach1955,campbell1959} and its recent partial-identification reading~\cite{dellrambachan2026}.
+... following the classical validation tradition~\cite{cronbach1955,campbell1959} and its recent partial-identification reading~\cite{dellrambachan2026}.
 ```
 **Proposed**
 ```tex
-The \emph{nomological network} $\Rset(C)$ encodes those implications as moment restrictions with substantive thresholds $\tau_r$, following the classical validation tradition~\cite{cronbach1955,campbell1959} and Dell and Rambachan's partial-identification formalization of it~\cite{dellrambachan2026}, whose objects Table~\ref{tab:objects} collects.
+... following the classical validation tradition~\cite{cronbach1955,campbell1959} and Dell and Rambachan's partial-identification formalization of it~\cite{dellrambachan2026}, whose objects and names this paper follows.
 ```
 
-### A17. Table 1 caption (ll. 400–402) — append one sentence
-
-**Current (last sentence)**
-```tex
-The engine computes consequences of commitments; it does not author the construct, the menu, the restrictions, or the thresholds.}
-```
-**Proposed**
-```tex
-The engine computes consequences of commitments; it does not author the construct, the menu, the restrictions, or the thresholds.
-$\M$, $\Rset(C)$ with thresholds, $\M^*$, the slacks, $\Bset^*$, and $[L,U]$ follow Dell and Rambachan~\cite{dellrambachan2026}; $G(D,C)$, the owner column, and the tolerance $\delta$ are this paper's.}
-```
-
-### A18. §3.5 coupling (ll. 559, 574)
+### A8. §3.5 coupling (ll. 559, 574)
 
 **l. 559 — current**
 ```tex
@@ -341,8 +228,7 @@ The fixed-selection literature takes the admissible set as given~\cite{imbensman
 ```
 **Proposed**
 ```tex
-The fixed-selection literature takes the admissible set as given~\cite{imbensmanski2004,stoye2009}; here selection is estimated.
-Dell and Rambachan flag this coupling and suggest that existing partial-identification and endpoint-inference methods can be combined into a valid, if conservative, confidence region~\cite{dellrambachan2026}; this paper does not construct that region.
+The fixed-selection literature takes the admissible set as given~\cite{imbensmanski2004,stoye2009}; here selection is estimated, the coupling Dell and Rambachan flag when they note that partial-identification and endpoint-inference methods could be combined into a valid, if conservative, region~\cite{dellrambachan2026}.
 ```
 **l. 574 — current**
 ```tex
@@ -350,11 +236,11 @@ The documented failure regime is coupling: a near-boundary measure that is also 
 ```
 **Proposed**
 ```tex
-The failure regime Dell and Rambachan identify is coupling: a near-boundary measure that is also $\beta$-extreme couples admission with the endpoints, because its inclusion or exclusion moves the range directly.
+The failure regime is coupling, as Dell and Rambachan note: a near-boundary measure that is also $\beta$-extreme couples admission with the endpoints, because its inclusion or exclusion moves the range directly.
 ```
-**Why:** "documented" leaves the source unstated, and the source is slide 13.
+**Why:** "documented" asks the reader to supply a source, and the source is slide 13.
 
-### A19. §4 implementation (l. 597)
+### A9. §4 implementation (l. 597)
 
 **Current**
 ```tex
@@ -362,49 +248,18 @@ The failure regime Dell and Rambachan identify is coupling: a near-boundary meas
 ```
 **Proposed**
 ```tex
-\cvp{} is an open Python implementation of Dell and Rambachan's construct-validity profiles and construct-identified set~\cite{dellrambachan2026,cvprofiles}; its name follows their terminology.
+\cvp{} is the open Python implementation of the measurement-selection layer~\cite{cvprofiles}: it computes Dell and Rambachan's objects---construct-validity profiles, the admissible set, and the construct-identified range---from a frozen score table.
 ```
+**Why:** this states the positioning directly: the tool that operationalizes their objects. The package name comes from slide 11.
 
-### A20. §6.4 Goodharting (l. 852) — see also E3
-
-**Current**
-```tex
-The most direct failure mode is Goodharting: a generator trained explicitly against the known restrictions.
-```
-**Proposed**
-```tex
-Dell and Rambachan name a construct-definition analogue of Goodhart's law for measures embedded in decisions~\cite{dellrambachan2026}; the most direct generator-side failure is a generator trained explicitly against the known restrictions.
-```
-
-### A21. Conclusion (l. 891)
-
-**Current**
-```tex
-The novelty is not construct validity, multiverse analysis, partial identification, or sampling inference in isolation; it is their operational composition at the measurement layer.
-```
-**Proposed**
-```tex
-The objects are Dell and Rambachan's, and the novelty is not their composition of construct validity and partial identification; it is an open implementation, and a protocol under which that composition can fail on data.
-```
-
-### A22. Appendix A opening (after l. 1031) — one sentence
+### A10. Appendix A opening (insert after l. 1031)
 
 **Proposed insertion** (new first line of `\section{First-principles formalization}`):
 ```tex
-Definitions~A.1--A.3 restate Dell and Rambachan's objects~\cite[slides 8--12]{dellrambachan2026} with sample analogues; Definition~A.4 and Propositions~A.1--A.4 are this paper's.
+Definitions~A.1--A.3 restate Dell and Rambachan's objects with sample analogues~\cite{dellrambachan2026}.
 ```
-(The reference to Proposition A.4 assumes E1 is accepted.)
 
-### A23. Smaller touch points (accept or skip as a block)
-
-| Line | Current | Proposed |
-|---|---|---|
-| 838 | "The claim is compositional: construct validity determines ..." | "The claim, following Dell and Rambachan's formalization~\cite{dellrambachan2026}, is compositional: construct validity determines ..." |
-| 1510 | "... framing construct-identified inference as a formal bridge across psychometrics, multiverse reporting, and partial identification." | "... implementing Dell and Rambachan's construct-identified set~\cite{dellrambachan2026} as a bridge across psychometrics, multiverse reporting, and partial identification." |
-| 1565 (`tab:synthesis_contributions`, row III, Key Literature cell) | `Imbens \& Manski~\cite{imbensmanski2004}; Stoye~\cite{stoye2009}` | `Dell \& Rambachan~\cite{dellrambachan2026}; Imbens \& Manski~\cite{imbensmanski2004}; Stoye~\cite{stoye2009}` |
-| 1559 (`tab:synthesis_contributions` header) | `\textbf{Claimed Contribution}` | `\textbf{Component}` (rows I–II are recoveries, not contributions relative to D–R) |
-
-### A24. Bibliography — fix one entry, add one
+### A11. Bibliography — fix one entry, add one
 
 **l. 935 — current**
 ```tex
@@ -416,7 +271,14 @@ Definitions~A.1--A.3 restate Dell and Rambachan's objects~\cite[slides 8--12]{de
 
 \bibitem{dellrambachan2026wp} Dell, M., \& Rambachan, A. (2026b). \textit{The measurement revolution? Credible measurement and inference in the age of AI} (NBER Working Paper No. 35744). National Bureau of Economic Research. https://doi.org/10.3386/w35744
 ```
-**Why:** the deck title on the title slide and in the PDF metadata is "Construct Validity: Credibility When Measurement Is Cheap". APA 7 requires the a/b suffixes for same-author, same-year works, ordered alphabetically by title ignoring "The": "Construct…" comes before "Measurement…". Verified: WP title, authors, September 2026, No. 35744, and the DOI (NBER page and Crossref).
+**Why:** the deck title on the title slide and in the PDF metadata is "Construct Validity: Credibility When Measurement Is Cheap". APA 7 requires the a/b suffixes for same-author, same-year works, ordered by title ignoring "The": "Construct…" comes before "Measurement…". Verified: WP title, authors, September 2026, No. 35744, and the DOI (NBER page and Crossref).
+
+### Optional (one line each; skip freely)
+
+- **A-opt1. Notation τ → θ.** 23 occurrences of `\tau` (`grep -n '\\tau' paper/position_paper.tex`). This would match the deck and the package's `theta`. If you do it, add a footnote at l. 434: "Dell and Rambachan use $\delta$ for the known-groups threshold; here $\delta$ is the admission tolerance."
+- **A-opt2. Rename "robust result set" to "construct-identified set"** at ll. 153, 220, 230, 360, 598, 1169. With A2's parentheticals this is cosmetic.
+- **A-opt3. Goodhart (l. 852).** Prepend "Dell and Rambachan name a construct-definition analogue of Goodhart's law~\cite{dellrambachan2026};" (slide 5).
+- **A-opt4. Synthesis table row III (l. 1565), Key Literature cell.** Add `Dell \& Rambachan~\cite{dellrambachan2026};` before Imbens & Manski.
 
 ---
 
@@ -520,7 +382,7 @@ Desai et al.\ run the convergent--discriminant half of that design on 56 capabil
 
 ### B9. Ogut & Yin (already cited)
 
-Their description is corrected in A12. Accurate summary from the arXiv abstract: six exposure measures; a sign change in the post-2022 employment coefficient between the language-model measures and the Webb patent-text measure; an ex ante factor-analytic rule that sets Webb apart as a distinct construct; a consensus coefficient from the five retained measures; and Imbens–Manski CIs with the Stoye critical value, with uniform coverage over the curvature class including the point-identified boundary.
+Their description is corrected in A5. Accurate summary from the arXiv abstract: six exposure measures; a sign change in the post-2022 employment coefficient between the language-model measures and the Webb patent-text measure; an ex ante factor-analytic rule that sets Webb apart as a distinct construct; a consensus coefficient from the five retained measures; and Imbens–Manski CIs with the Stoye critical value, with uniform coverage over the curvature class including the point-identified boundary.
 
 ---
 
@@ -705,8 +567,8 @@ They are needed because the screen bounds admission, not endpoints: one admissib
 
 ## Pass F — Follow-ups outside the `.tex` (not edits here)
 
-- `README.md` and `docs/METHODOLOGY.md` do not mention Dell or Rambachan, although the first commit's `docs/03_Methodology.md` did. The public docs need the same attribution as the paper. This is a separate change.
-- After you accept items, add a dated `logs/DECISIONS.md` entry (attribution restated, contributions narrowed) and amend `paper/CLAIM_BOUNDARY_BRIEF.md` if A8 changes the allowed contribution sentences.
+- `README.md` and `docs/METHODOLOGY.md` no longer mention Dell or Rambachan. The "(Dell–Rambachan frame)" line in the first commit's `docs/03_Methodology.md` was dropped in the 2026-08-21 docs reorganization (`ed81e5b`). Restoring it is a separate change.
+- After you accept items, add a dated `logs/DECISIONS.md` entry (attribution made precise; contributions unchanged) and amend `paper/CLAIM_BOUNDARY_BRIEF.md` if A3 changes an allowed contribution sentence.
 
 ---
 
@@ -846,8 +708,8 @@ curl -sL https://jmlr.org/papers/v20/18-760.html | grep -o "<title>[^<]*</title>
 
 ## Execution order
 
-1. Pass A (you veto sentence by sentence). A2, A7, A8, A12, A15, A21, and A24 carry the attribution. The rest are follow-through.
-2. Pass B bib entries (mechanical once A24 is in), then the placement sentences B1–B8.
+1. Pass A (you veto sentence by sentence). A1, A2, A5, A6, and A11 carry the attribution. A3, A4, and A7–A10 are one-clause follow-through. The optional items can wait.
+2. Pass B bib entries (mechanical once A11 is in), then the placement sentences B1–B8.
 3. Pass C and Pass D (one sentence plus two table rows; one paragraph).
 4. Pass E (send the proposition to Daniel with CLAIM_SHRINK Pass 5 if you want psychometric sign-off on the wording).
 5. Recompile, then Pass F follow-ups and the DECISIONS entry.
