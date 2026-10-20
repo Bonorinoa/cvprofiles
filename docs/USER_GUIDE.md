@@ -83,6 +83,24 @@ params: {}
 
 `ols_coef` requires `params.controls` (non-empty list of control columns).
 
+**Bring-your-own β** *(unreleased, post-3.0.2)*. If β comes from your own pipeline (fixed effects, IV, clustered SEs in fixest / pyfixest / Stata), declare `type: external` and pass the estimates with `--beta-estimates` (or `beta_estimates=` in Python):
+
+```yaml
+schema_version: "1"
+type: external
+outcome: log_wage_fe   # a label for your model's outcome; not a SCORE column
+params: {}
+```
+
+```text
+measure,beta_hat,se,n_clusters,vcov
+m_gps_patience,0.41,0.10,41,CR1 by country
+m_prompt_a,0.22,0.12,41,CR1 by country
+m_prompt_b,0.90,0.05,41,CR1 by country
+```
+
+Rules: one row per menu measure (no missing, extra or duplicate rows); `beta_hat` finite; `se > 0`. The optional `df` (or `n_clusters`, which implies `df = n_clusters − 1`) switches the confidence region to t critical values. `cluster_var`, `vcov`, `n_obs` and `estimator` are documentation only. Unknown columns fail loud. The headline becomes [min, max] of `beta_hat` over M\*. The table's canonical hash is folded into `beta_hash`, so a different table is a different `run_id`; row and column order do not matter. The engine fits nothing and cannot check that your β was estimated on the same units, or that your SE is valid — that is your claim, and the report says so. With bootstrap on, external β is held fixed in every replicate, so the band shows admission variability only.
+
 ## 2. Running a profile
 
 ### CLI
@@ -111,6 +129,11 @@ Options:
 | `--holdout-units` | Comma-separated unit ids to hold out (select on train units, verdict on held-out units; headline = M*_robust) | off (no units-split) |
 | `--alpha` | Coverage band tail probability: per-side α/2 quantiles over non-empty bootstrap replicates (requires `--n-boot` > 0) | `0.10` |
 | `--kappa` | Boundary-attribution rule: \|margin_m\| ≤ κ·SE_m (requires `--n-boot` > 0) | `2.0` |
+| `--confidence-region` | Add the conservative Bonferroni confidence region (`confidence_region.json`; unreleased, post-3.0.2) | off |
+| `--cr-alpha1` / `--cr-alpha2` | CR admission level / β-interval level; coverage ≥ 1 − α1 − α2 | `0.05` / `0.05` |
+| `--cr-variant` | `endpoint` (Bonferroni over min(2, J)·Q slack pairs) \| `simultaneous` (J·Q; adds menu-wide statements) | `endpoint` |
+| `--cr-se` | Pearson Fisher-z SE: `robust` (influence function) \| `classical` (1/√(n−3)) | `robust` |
+| `--beta-estimates` | Bring-your-own β table for β type `external` (unreleased, post-3.0.2) | off |
 | `--title` | Report title | "Construct-validity profile" |
 
 **Contract:** stdout is always a single JSON summary (machine-clean). Human status messages go to stderr only. Empty `M*` exits 0 — it is a clean success. `cvprofiles run` and `cvprofiles demo` are thin wrappers over `run_profile` (below).
@@ -119,7 +142,7 @@ Options:
 
 `run_profile` in `cvprofiles.pipeline` is the in-process entry point. Notebooks, batch scripts, and other in-process drivers should call it directly rather than subprocess the CLI (the CLI pays interpreter startup on every invocation; the engine call is the same object).
 
-The function is keyword-only and returns `FullRunResult`. Arguments match the CLI flags (`out_dir`, `policy`, `seed`, `title`, `n_boot`, `theta_grid_lambdas`, `delta_grid_deltas`, `anchors`, `holdout_units`, `alpha`, `kappa`). `write_parquet=True` by default.
+The function is keyword-only and returns `FullRunResult`. Arguments match the CLI flags (`out_dir`, `policy`, `seed`, `title`, `n_boot`, `theta_grid_lambdas`, `delta_grid_deltas`, `anchors`, `holdout_units`, `alpha`, `kappa`, and — unreleased, post-3.0.2 — `beta_estimates`, `confidence_region`, `cr_alpha1`, `cr_alpha2`, `cr_variant`, `cr_se`). `write_parquet=True` by default.
 
 ```python
 from cvprofiles.pipeline import run_profile, summary_dict
@@ -148,7 +171,7 @@ print(summary_dict(result))
 
 ### Reusing an output directory
 
-`--out` / `out_dir` is created if missing and reused silently if it already has artifacts. Headline files (`range.json`, `report.html`, and the other SCORE/RESTRICT/IDENTIFY/REPORT artifacts) are overwritten. Inference-layer files from a *previous* run into the same directory — `bootstrap.json`, `coverage.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json` — are deleted when that layer is off on the new run. The directory is meant to mirror this run, not a history of runs.
+`--out` / `out_dir` is created if missing and reused silently if it already has artifacts. Headline files (`range.json`, `report.html`, and the other SCORE/RESTRICT/IDENTIFY/REPORT artifacts) are overwritten. Inference-layer files from a *previous* run into the same directory — `bootstrap.json`, `coverage.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json`, `confidence_region.json` (and `beta_estimates.json` when β is not external) — are deleted when that layer is off on the new run. The directory is meant to mirror this run, not a history of runs.
 
 That is a trap for subset sweeps, sensitivity loops, and demos that keep one folder: a missing `bootstrap.json` means "bootstrap was off this time," not "bootstrap never ran." Use a fresh `out_dir` per run if you need to compare layer artifacts. The engine does not refuse a populated directory. (`cvprofiles demo` is the exception: it refuses a non-empty `--out` unless `--force`.)
 
@@ -181,6 +204,8 @@ Every run directory contains machine-readable artifacts plus the human report:
 | `run_manifest.json` | Hashes, seed, versions, settings (incl. the normalized `holdout_units` when a units-split is used) |
 | `bootstrap.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json` | Only when the corresponding layer is enabled |
 | `coverage.json` | Uncertainty band: α, κ, quantiles, band, empty-replicate rate, boundary attribution, admission frequency p̂_m (only when bootstrap is enabled) |
+| `confidence_region.json` | Conservative confidence region: `CR_L`, `CR_U`, `M_plus`, `M_minus`, per-measure `status`, per-pair slack bounds, β intervals, levels (only with `--confidence-region`; unreleased, post-3.0.2) |
+| `beta_estimates.json` | Canonical external β rows and `beta_estimates_hash` (β type `external` only) |
 
 ### Report anatomy
 
@@ -192,9 +217,25 @@ Every run directory contains machine-readable artifacts plus the human report:
 4. **What is [L,U]?** — headline range block; empty-set panel when M* is empty (with an explanatory note, not a stack trace).
 5. **How does the range move on the θ-grid / δ-grid?** — sensitivity tables, when enabled.
 6. **What is the uncertainty band?** — when bootstrap is on, a coverage panel shows α, κ, the per-side α/2 quantiles, the band, the empty- and degenerate-replicate rates, **boundary attribution** (|margin_m| ≤ κ·SE_m, with margin/SE per measure), and admission frequency p̂_m.
-7. **Did survivors hold out of sample?** — under a units-split, the HTML M* is the robust set (M*_select ∩ holdout-compliant); the per-measure holdout verdict is machine-readable in the `admissible.json` `holdout` block and the stdout summary (there is no dedicated HTML holdout panel).
+7. **What is the confidence region?** — with `--confidence-region`, a panel shows the CR, its nominal level, M⁺ and M⁻, and each measure's status with its β interval (§3.1).
+8. **Did survivors hold out of sample?** — under a units-split, the HTML M* is the robust set (M*_select ∩ holdout-compliant); the per-measure holdout verdict is machine-readable in the `admissible.json` `holdout` block and the stdout summary (there is no dedicated HTML holdout panel).
 
 The report is generated from the same machine payload as `report.json` (Jinja2 template), so the HTML and JSON can never disagree about numbers.
+
+### 3.1 Reading the confidence region *(unreleased, post-3.0.2)*
+
+The confidence region answers the question the headline cannot: where is the **population** range [L₀, U₀], once sampling error in both β̂(m) *and* in the admission decisions is priced in? With probability at least 1 − α1 − α2 (default 0.90), [L₀, U₀] ⊆ CR. The guarantee holds whatever the dependence between slack and β estimates, and it needs no "measures away from the boundary" condition. The headline [L, U] is unchanged and always sits inside the CR.
+
+| Status | Meaning |
+|---|---|
+| certainly admissible (M⁻) | Every select-stage restriction is satisfied even at its lower confidence bound |
+| possibly admissible (M⁺ \ M⁻) | Not rejected, not certified: the data cannot tell |
+| certainly rejected (menu \ M⁺) | Some restriction fails even at its upper confidence bound |
+
+- **Empty M⁺** (null CR, exit 0) is evidence that no menu measure is admissible in the population. It is a conservative test, so a non-empty M⁺ is weak evidence of non-emptiness at small n.
+- **At country-level n (≈ 40) expect a wide CR and an empty M⁻.** In the spec's Monte Carlo the CR was 1.4× the uncertainty band's width at n = 41 and 1.06× at n = 2000. That width is the honest price of admission uncertainty.
+- **Assumptions:** i.i.d. units (clustered rows invalidate it — aggregate to the cluster first); network, θ, δ and β fixed before seeing the data; native β intervals for `corr_y`, `diff_means` and `external` only (`ols_coef` / `map_distance` fail loud: compute β and its SE yourself and use `external`). The CR is refused together with `--holdout-units`.
+- `cr_*` knobs never change `run_id`.
 
 ## 4. Preparing inputs: research hygiene
 

@@ -6,6 +6,8 @@ headline [L,U] = min/max B* is never replaced):
 - θ-grid sensitivity surface (λ scales thresholds; NOT in the freeze preimage)
 - δ-grid tolerance surface (absolute δ; NOT in the freeze preimage)
 - θ-anchor audit (schema'd anchors.yaml; documentation, NOT in the preimage)
+- conservative confidence region (Bonferroni; DECISIONS 2026-10-20; knobs NOT
+  in the preimage; refused together with a holdout_units split)
 
 Freeze rule (docs/12): ``n_boot`` is normalized with
 ``freeze.normalize_n_boot`` (< 1 ⇒ JSON null) before the preimage is built,
@@ -36,6 +38,14 @@ from cvprofiles.identify.pipeline import (
     write_identify_artifacts,
 )
 from cvprofiles.inference.bootstrap import BootstrapResult, bootstrap_payload, run_bootstrap
+from cvprofiles.inference.confidence_region import (
+    ConfidenceRegionError,
+    ConfidenceRegionResult,
+    check_confidence_region_supported,
+    compute_confidence_region,
+    confidence_region_payload,
+    validate_cr_options,
+)
 from cvprofiles.inference.coverage import CoverageResult, compute_coverage, coverage_payload
 from cvprofiles.inference.delta_grid import DeltaGridResult, delta_grid_payload, run_delta_grid
 from cvprofiles.inference.theta_grid import ThetaGridResult, run_theta_grid, theta_grid_payload
@@ -69,6 +79,7 @@ class FullRunResult:
     theta_grid: ThetaGridResult | None = None
     delta_grid: DeltaGridResult | None = None
     anchors_hash: str | None = None
+    confidence_region: ConfidenceRegionResult | None = None
 
 
 def run_profile(
@@ -89,6 +100,12 @@ def run_profile(
     holdout_units: Sequence[str] | None = None,
     alpha: float = 0.10,
     kappa: float = 2.0,
+    beta_estimates: Path | str | None = None,
+    confidence_region: bool = False,
+    cr_alpha1: float = 0.05,
+    cr_alpha2: float = 0.05,
+    cr_variant: str = "endpoint",
+    cr_se: str = "robust",
 ) -> FullRunResult:
     """Compose four states (+ v1.1/v2.0 inference layers) and write a frozen run dir.
 
@@ -111,6 +128,16 @@ def run_profile(
                               hold; headline = M*_robust; order-normalized
                               sorted-unique list in freeze config.holdout_units
                               so list order cannot fork run_id).
+
+    ``beta_estimates`` (DECISIONS 2026-10-20) is the bring-your-own β table,
+    required iff the β type is ``external``; its canonical hash folds into
+    ``beta_hash`` (and so into run_id) for that type only.
+
+    ``confidence_region=True`` adds the conservative Bonferroni CR for the
+    select-stage population range (confidence_region.json). ``cr_alpha1`` /
+    ``cr_alpha2`` / ``cr_variant`` / ``cr_se`` are EXCLUDED from the freeze
+    preimage. Unsupported configurations (holdout_units split, β types without
+    a native interval, n < 4) fail loud before any artifact is written.
     """
     n_boot_norm = normalize_n_boot(n_boot)
     grid = list(theta_grid_lambdas) if theta_grid_lambdas else None
@@ -124,7 +151,7 @@ def run_profile(
     roles_m = load_roles(roles)
     df = load_table(scores)
     score = run_score(df, roles_m, policy=policy)
-    restrict = run_restrict(score.roles, network, beta)
+    restrict = run_restrict(score.roles, network, beta, beta_estimates=beta_estimates)
 
     anchors_hash_value: str | None = None
     if anchors_config is not None:
@@ -141,6 +168,16 @@ def run_profile(
     config: dict[str, Any] = {}
     if norm_units is not None:
         config = {"holdout_units": norm_units}
+
+    if confidence_region:
+        # Pre-flight: refuse unsupported configurations before writing anything.
+        validate_cr_options(cr_alpha1, cr_alpha2, cr_variant, cr_se)
+        if norm_units is not None:
+            raise ConfidenceRegionError(
+                "confidence region targets the select-stage full-frame range and is "
+                "not defined for a holdout_units split (DECISIONS 2026-10-20 D7)"
+            )
+        check_confidence_region_supported(restrict, len(score.frame))
 
     freeze = build_freeze_bundle(
         scores_hash=score.manifest.scores_hash,
@@ -182,6 +219,10 @@ def run_profile(
         (dest / "delta_grid.json").unlink()
     if anchors is None and (dest / "anchors.json").exists():
         (dest / "anchors.json").unlink()
+    if not confidence_region and (dest / "confidence_region.json").exists():
+        (dest / "confidence_region.json").unlink()
+    if restrict.beta_estimates is None and (dest / "beta_estimates.json").exists():
+        (dest / "beta_estimates.json").unlink()
 
     identify = run_identify(
         score.frame, score.roles, restrict, holdout_units=norm_units
@@ -208,6 +249,18 @@ def run_profile(
     if grid_deltas is not None:
         delta_grid_result = run_delta_grid(
             score.frame, score.roles, restrict, grid_deltas
+        )
+
+    cr: ConfidenceRegionResult | None = None
+    if confidence_region:
+        cr = compute_confidence_region(
+            score.frame,
+            score.roles,
+            restrict,
+            alpha1=cr_alpha1,
+            alpha2=cr_alpha2,
+            variant=cr_variant,
+            se_method=cr_se,
         )
 
     paths: dict[str, Path] = {}
@@ -237,6 +290,12 @@ def run_profile(
             + "\n"
         )
         paths["delta_grid.json"] = dgrid_path
+    if cr is not None:
+        cr_path = dest / "confidence_region.json"
+        cr_path.write_text(
+            json.dumps(confidence_region_payload(cr), indent=2, sort_keys=True) + "\n"
+        )
+        paths["confidence_region.json"] = cr_path
     if anchors_payload_dict is not None and anchors_hash_value is not None:
         anchors_path = dest / "anchors.json"
         anchors_path.write_text(
@@ -277,6 +336,7 @@ def run_profile(
         ),
         coverage=coverage_payload(cov) if cov is not None else None,
         anchors=anchors_payload_dict,
+        confidence_region=confidence_region_payload(cr) if cr is not None else None,
     )
     artifact_paths["report.html"] = report.html_path.name
     artifact_paths["report.json"] = report.json_path.name
@@ -306,6 +366,7 @@ def run_profile(
         theta_grid=grid_result,
         delta_grid=delta_grid_result,
         anchors_hash=anchors_hash_value,
+        confidence_region=cr,
     )
 
 
@@ -358,6 +419,22 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
             "n_boundary": len(c.boundary),
             "artifact": "coverage.json",
         }
+    cr_summary: dict[str, Any] | None = None
+    if result.confidence_region is not None:
+        r = result.confidence_region
+        cr_summary = {
+            "variant": r.variant,
+            "alpha1": r.alpha1,
+            "alpha2": r.alpha2,
+            "nominal_coverage": 1.0 - r.alpha1 - r.alpha2,
+            "se_method": r.se_method,
+            "CR_L": r.cr_L,
+            "CR_U": r.cr_U,
+            "empty_outer": r.empty_outer,
+            "M_plus": r.M_plus,
+            "M_minus": r.M_minus,
+            "artifact": "confidence_region.json",
+        }
     return {
         "run_id": result.run_id,
         "out_dir": str(result.out_dir),
@@ -375,9 +452,15 @@ def summary_dict(result: FullRunResult) -> dict[str, Any]:
         "n_boot": result.run_manifest.freeze.n_boot,
         "bootstrap": boot_summary,
         "coverage": coverage_summary,
+        "confidence_region": cr_summary,
         "theta_grid": grid_summary,
         "delta_grid": grid2_summary,
         "anchors_hash": result.anchors_hash,
+        "beta_estimates_hash": (
+            result.restrict.beta_estimates.estimates_hash
+            if result.restrict.beta_estimates is not None
+            else None
+        ),
         "report_html": str(result.report.html_path),
         "report_json": str(result.report.json_path),
     }

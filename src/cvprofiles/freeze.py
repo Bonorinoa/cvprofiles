@@ -7,6 +7,9 @@ Algorithm (LOCKED 2026-08-01 — see docs/12):
    ``allow_nan=False``. Non-JSON types raise.
 3. ``network_hash`` / ``beta_hash``: hash canonical JSON of
    ``model_dump(mode="json")`` for validated NetworkConfig / BetaSpec.
+   β type ``external`` only (DECISIONS 2026-10-20): ``beta_hash`` hashes
+   ``{"beta": dump, "beta_estimates_hash": h}``, where ``h`` is the SHA-256 of
+   the canonical ``beta_estimates.csv`` bytes (rows sorted by measure).
 4. ``scores_hash``: hash canonical CSV text of the score table:
    - columns in declared order (caller supplies column list);
    - rows sorted by ``unit_id`` ascending (string sort);
@@ -169,12 +172,58 @@ def hash_network(network: NetworkConfig | Mapping[str, Any]) -> str:
     return hash_canonical_json(payload)
 
 
-def hash_beta(beta: BetaSpec | Mapping[str, Any]) -> str:
-    """SHA-256 of canonical JSON for a validated beta spec (or raw mapping)."""
+def beta_estimates_canonical_csv_bytes(
+    rows: Sequence[Mapping[str, Any]],
+    columns: Sequence[str],
+) -> bytes:
+    """Canonical CSV bytes of a bring-your-own β table (DECISIONS 2026-10-20).
+
+    Columns exactly as given (callers pass present columns in canonical order);
+    rows sorted by ``measure`` (string sort); cells via the scores-hash rules
+    (``.17g`` floats, integers bare, CSV quoting, null empty, NaN/Inf loud).
+    """
+    if "measure" not in columns:
+        raise ValueError("beta estimates hash requires the 'measure' column")
+    ordered = sorted(rows, key=lambda r: str(r["measure"]))
+    lines: list[str] = [",".join(columns)]
+    for row in ordered:
+        lines.append(",".join(_format_cell(row.get(c)) for c in columns))
+    return ("\n".join(lines) + "\n").encode("utf-8")
+
+
+def hash_beta_estimates(
+    rows: Sequence[Mapping[str, Any]],
+    columns: Sequence[str],
+) -> str:
+    """SHA-256 hex of canonical β-estimates CSV bytes."""
+    return sha256_hex(beta_estimates_canonical_csv_bytes(rows, columns))
+
+
+def hash_beta(
+    beta: BetaSpec | Mapping[str, Any],
+    *,
+    beta_estimates_hash: str | None = None,
+) -> str:
+    """SHA-256 of canonical JSON for a validated beta spec (or raw mapping).
+
+    ``type: external`` (DECISIONS 2026-10-20 D5a) folds the estimate table's
+    hash into ``beta_hash``: H({"beta": spec, "beta_estimates_hash": h}), so
+    the table that defines the headline forks ``run_id``. Every other β type
+    hashes the bare spec exactly as before (byte-identical ``beta_hash``).
+    """
     if isinstance(beta, BetaSpec):
         payload = beta.model_dump(mode="json")
     else:
         payload = BetaSpec.model_validate(dict(beta)).model_dump(mode="json")
+    if payload["type"] == "external":
+        if beta_estimates_hash is None:
+            raise ValueError("external beta requires beta_estimates_hash")
+        _validate_hex64("beta_estimates_hash", beta_estimates_hash)
+        return hash_canonical_json(
+            {"beta": payload, "beta_estimates_hash": beta_estimates_hash}
+        )
+    if beta_estimates_hash is not None:
+        raise ValueError("beta_estimates_hash is only valid for beta type 'external'")
     return hash_canonical_json(payload)
 
 

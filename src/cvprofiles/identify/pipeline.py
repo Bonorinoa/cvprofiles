@@ -120,12 +120,21 @@ def run_identify(
         network = restrict.network
         beta = restrict.beta
         delta = float(restrict.delta)
+        beta_source = restrict
     else:
         if beta_bundle is None:
             raise IdentifyError("beta_bundle required when restrict is NetworkConfig only")
         network = restrict
         beta = beta_bundle.beta
         delta = float(network.delta)
+        beta_source = beta_bundle
+    # External β (DECISIONS 2026-10-20): fixed user-supplied values; bootstrap
+    # replicates therefore hold β fixed and vary admission only.
+    estimates = (
+        beta_source.beta_estimates.beta_hat
+        if beta_source.beta_estimates is not None
+        else None
+    )
 
     if delta_override is not None:
         override = float(delta_override)
@@ -240,7 +249,7 @@ def run_identify(
     beta_values: dict[str, float] = {}
     try:
         for m in measures:
-            beta_values[m] = evaluate_beta(frame, m, beta)
+            beta_values[m] = evaluate_beta(frame, m, beta, estimates)
     except SlackError as exc:
         raise IdentifyError(str(exc)) from exc
 

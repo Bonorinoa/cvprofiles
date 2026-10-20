@@ -169,6 +169,12 @@ def compute_coverage(
                 "|margin_m| <= kappa * SE_m."
             )
 
+    if bundle.beta.type == "external":
+        note = (
+            f"{note} beta supplied externally: replicate beta is held fixed at "
+            "beta_hat, so the band reflects admission variability only."
+        )
+
     return CoverageResult(
         alpha=a,
         kappa=k,

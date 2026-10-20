@@ -6,13 +6,16 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-BetaType = Literal["corr_y", "ols_coef", "diff_means", "map_distance"]
+BetaType = Literal["corr_y", "ols_coef", "diff_means", "map_distance", "external"]
 
 
 class BetaSpec(BaseModel):
     """Named target functional.
 
     v3 evaluators: ``corr_y``, ``ols_coef``, ``diff_means``, ``map_distance``.
+    ``external`` (docs DECISIONS 2026-10-20): β(m) is read from a user-supplied
+    ``beta_estimates.csv`` (bring-your-own β; the engine fits nothing), and
+    ``outcome`` is a descriptive label, not a SCORE column.
     Group/controls/items binding is enforced at RESTRICT, not schema parse time.
     """
 

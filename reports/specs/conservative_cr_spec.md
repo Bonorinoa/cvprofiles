@@ -1,6 +1,6 @@
 # Conservative confidence region for $[L,U]$, plus bring-your-own β
 
-**Status: PROPOSAL (2026-10-20). Awaiting Augusto's approval. No `src/` code has been written.**
+**Status: APPROVED 2026-10-20 (D1–D12 as recommended; `logs/DECISIONS.md`) and implemented on branch `claude/mystifying-swirles-f3c434` (unreleased, post-3.0.2).** The proposal text below is kept as approved; implementation notes are in the DECISIONS implementation record.
 Decision entry: `logs/DECISIONS.md`, "2026-10-20 — PROPOSAL: conservative confidence region (Bonferroni) + bring-your-own β".
 Monte Carlo script: `reports/runs/conservative_cr_mc/mc.py` (git-ignored). Results are in §12.
 
@@ -203,7 +203,7 @@ Unknown columns fail loud. Every violation fails loud at RESTRICT, before any sl
 
 - **Module:** `src/cvprofiles/inference/confidence_region.py` (pure functions, no RNG in analytic mode); `src/cvprofiles/schemas/beta_estimates.py` (pydantic row model + loader); additive `BetaType` literal `"external"`; an optional `RestrictBundle.beta_estimates` field (default `None`); `evaluate_beta` reads external values. Each slack evaluator gains a raw-statistic helper (Pearson $r$, Spearman $r_S$, Welch difference), and a test pins that `evaluate_slack` stays bit-identical when recomputed from that statistic.
 - **API:** `run_profile(..., confidence_region: bool = False, cr_alpha1=0.05, cr_alpha2=0.05, cr_variant="endpoint", cr_se=<D4>, beta_estimates: Path | None = None)`.
-- **CLI (D10):** `--confidence-region`, `--cr-alpha1`, `--cr-alpha2`, `--cr-variant {endpoint,simultaneous}`, `--beta-estimates PATH`. Stdout stays machine-readable JSON; `summary_dict` gains an additive `confidence_region` key (null when off).
+- **CLI (D10):** `--confidence-region`, `--cr-alpha1`, `--cr-alpha2`, `--cr-variant {endpoint,simultaneous}`, `--beta-estimates PATH` (implementation also exposes `--cr-se {robust,classical}`, mirroring the API's `cr_se`). Stdout stays machine-readable JSON; `summary_dict` gains an additive `confidence_region` key (null when off).
 - **Artifact `confidence_region.json`** (present iff requested; removed when the layer is off on reuse of `out_dir`, as the pipeline already does for other layers):
   `schema_version`, `purpose="conservative_confidence_region"`, `label`, `variant`, `alpha1`, `alpha2`, `nominal_coverage`, `se_method`, `n_units`, `n_menu`, `n_select_restrictions`, `delta`, `levels {a_out, a_in, beta_per_side, K_out, K_in}`, `CR_L`, `CR_U`, `empty_outer`, `M_plus`, `M_minus`, `status {measure: certainly_admissible|possibly_admissible|certainly_rejected}`, `slack_bounds [{measure, restriction, statistic, se, slack_hat, ucb, lcb}]`, `beta_intervals [{measure, beta_hat, se, lo, hi, source, df}]`, `beta_estimates_hash`, `target="select_stage_population_range"`, `note`, `headline_note` ("Headline [L,U] remains min/max B* on the full sample; the confidence region is additive and never replaces it.").
 - **Report:** a "Conservative confidence region" panel under the range box with the CR, the nominal level, and a status column per measure. The uncertainty band panel keeps its wording.

@@ -193,6 +193,7 @@
         <p class="muted" style="margin:0">
           Target β = <span class="mono">{{ beta_type }}</span>
           on outcome <span class="mono">{{ outcome }}</span>.
+          {% if beta_estimates_hash %}β supplied externally (sha256 <span class="mono">{{ beta_estimates_hash[:12] }}…</span>); the engine fits nothing, and validity of <span class="mono">se</span> is the user's claim.{% endif %}
           Range uses <strong>only</strong> measures in M*; rejected β values are shown below but never enter [L,U].
         </p>
       </section>
@@ -211,6 +212,40 @@
         </table>
       </section>
     </div>
+
+    {% if confidence_region %}
+    <section class="card" style="margin-top:1rem">
+      <h2>Conservative confidence region · additive to headline range</h2>
+      <p class="muted" style="margin-top:0">
+        Bonferroni region for the <em>population</em> construct-identified range on select-stage
+        restrictions: P([L₀, U₀] ⊆ CR) ≥ {{ "%.2f"|format(confidence_region.nominal_coverage) }}
+        ({{ confidence_region.variant }} variant, α₁ = {{ confidence_region.alpha1 }},
+        α₂ = {{ confidence_region.alpha2 }}, {{ confidence_region.se_method }} SE).
+        Assumes i.i.d. units. The headline [L, U] above remains min/max β(M*) on the full sample.
+      </p>
+      <table>
+        <tr><th>CR</th><td>{% if confidence_region.CR_L is not none and confidence_region.CR_U is not none %}[{{ "%.6f"|format(confidence_region.CR_L) }}, {{ "%.6f"|format(confidence_region.CR_U) }}]{% else %}∅ — outer set M⁺ is empty: evidence that no menu measure is admissible{% endif %}</td></tr>
+        <tr><th>M⁺ (outer)</th><td class="mono">{{ confidence_region.M_plus }}</td></tr>
+        <tr><th>M⁻ (inner)</th><td class="mono">{{ confidence_region.M_minus }}</td></tr>
+        <tr><th>β source</th><td>{{ confidence_region.beta_source }}</td></tr>
+      </table>
+      <h3 style="margin:1rem 0 0.4rem">Status and β intervals</h3>
+      <table>
+        <thead><tr><th>measure</th><th>status</th><th>β̂</th><th>interval</th></tr></thead>
+        <tbody>
+          {% for iv in confidence_region.beta_intervals %}
+          <tr>
+            <td class="mono">{{ iv.measure }}</td>
+            <td>{{ confidence_region.status[iv.measure]|replace("_", " ") }}</td>
+            <td>{{ "%.6f"|format(iv.beta_hat) }}</td>
+            <td>[{{ "%.6f"|format(iv.lo) }}, {{ "%.6f"|format(iv.hi) }}]</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="muted" style="margin-bottom:0">{{ confidence_region.note }}</p>
+    </section>
+    {% endif %}
 
     {% if bootstrap %}
     <section class="card" style="margin-top:1rem">

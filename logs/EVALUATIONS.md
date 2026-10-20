@@ -571,3 +571,22 @@ Results:
 Verdict: cross-resolution findings survive their most plausible psychometric rival on the available evidence; item-level invariance testing flagged in §6.6 as the remaining stronger test. Paper: new Appendix I (`app:dif`), §5.5 pointer updated; compiled 27 pp.
 
 **Not paper evidence beyond what Augusto locks:** diagnostic description of existing frames; does not adjudicate item-level invariance claims.
+
+---
+
+## 2026-10-20 — Conservative CR: Monte Carlo of operating characteristics (synthetic; not paper evidence)
+
+**Evidence interpretation (recorded):** fills the "band has no operating characteristics" gap (paper triage item 2) for the additive confidence-region layer approved 2026-10-20 (`logs/DECISIONS.md`). Design, full tables and caveats: `reports/specs/conservative_cr_spec.md` §12. Script and outputs are git-ignored: `reports/runs/conservative_cr_mc/` (`mc.py`, `tables.py`, `mc_results.json`, `mc_tables.md`).
+
+- **Run:** seed 20261020; 2000 replications × 74 cells; `n_boot` 999. Gaussian grid: n ∈ {41, 120, 480, 2000} × J ∈ {3, 6, 20} × boundary distance d ∈ {−0.10, −0.03, 0, +0.03, +0.10}. Plus $t_5$-tail and empty-population supplements. Network: agent-authored oracle network for the synthetic DGP only (`corr_min` + `corr_zero`, β = `corr_y`).
+- **Provenance checks:** the vectorized MC reproduces the engine's M\*, [L,U] and both bands to 4.4e-16 (`mc.py --check`). The shipped `inference/confidence_region.py` reproduces the MC prototype's M⁺, M⁻ and CR to 2.2e-16 on four cells, so the numbers below describe the package code.
+
+Results:
+
+1. Endpoint CR (robust SE): minimum coverage **0.924** over 60 Gaussian cells (nominal ≥ 0.90). Simultaneous variant: minimum 0.965.
+2. P5 uncertainty band (α = 0.10) at the knife-edge d = 0: coverage **0.48–0.61 for n ≥ 480**; mean 0.881 over the grid. Plug-in [L,U]: mean 0.20.
+3. Width, endpoint CR relative to band (d = +0.03): 1.41–1.45× at n = 41; 1.06× at n = 2000.
+4. Under $t_5$ tails, classical Fisher-z falls below nominal (0.896 at n = 480, d = 0); robust holds (0.951). This motivated D4.
+5. At n = 41, M⁻ is empty in every replication. "M⁺ = ∅" has low power: 0% at a 0.05 miss for n ≤ 480.
+
+**Not paper evidence beyond what Augusto locks:** synthetic operating characteristics of one network shape. The CR has not been run on the WVS/GPS frozen inputs (run gate).
