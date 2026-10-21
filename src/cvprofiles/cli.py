@@ -201,6 +201,40 @@ def run_cmd(
             help="Pre-data θ-anchor YAML (documentation; excluded from run_id).",
         ),
     ] = None,
+    confidence_region: Annotated[
+        bool,
+        typer.Option(
+            "--confidence-region",
+            help="Add the conservative Bonferroni confidence region for the population "
+            "range (confidence_region.json; excluded from run_id).",
+        ),
+    ] = False,
+    cr_alpha1: Annotated[
+        float,
+        typer.Option("--cr-alpha1", help="CR admission level α1 (default 0.05)."),
+    ] = 0.05,
+    cr_alpha2: Annotated[
+        float,
+        typer.Option("--cr-alpha2", help="CR β-interval level α2 (default 0.05)."),
+    ] = 0.05,
+    cr_variant: Annotated[
+        str,
+        typer.Option("--cr-variant", help="CR variant: endpoint (default) | simultaneous."),
+    ] = "endpoint",
+    cr_se: Annotated[
+        str,
+        typer.Option("--cr-se", help="Pearson Fisher-z SE: robust (default) | classical."),
+    ] = "robust",
+    beta_estimates: Annotated[
+        Path | None,
+        typer.Option(
+            "--beta-estimates",
+            exists=True,
+            dir_okay=False,
+            help="Bring-your-own β table (measure, beta_hat, se[, df, n_clusters, ...]) "
+            "for beta type 'external'; hashed into beta_hash.",
+        ),
+    ] = None,
     title: Annotated[
         str,
         typer.Option("--title"),
@@ -251,6 +285,15 @@ def run_cmd(
         typer.secho(f"error: kappa: {exc}", fg=typer.colors.RED, err=True)
         raise typer.Exit(code=2) from exc
 
+    if confidence_region:
+        from cvprofiles.inference.confidence_region import validate_cr_options
+
+        try:
+            validate_cr_options(cr_alpha1, cr_alpha2, cr_variant, cr_se)
+        except ValueError as exc:
+            typer.secho(f"error: confidence region: {exc}", fg=typer.colors.RED, err=True)
+            raise typer.Exit(code=2) from exc
+
     try:
         result = run_profile(
             scores=scores,
@@ -268,6 +311,12 @@ def run_cmd(
             holdout_units=holdout,
             alpha=alpha_ok,
             kappa=kappa_ok,
+            beta_estimates=beta_estimates,
+            confidence_region=confidence_region,
+            cr_alpha1=cr_alpha1,
+            cr_alpha2=cr_alpha2,
+            cr_variant=cr_variant,
+            cr_se=cr_se,
         )
     except (ScoreError, RestrictError, IdentifyError, ReportError, ValueError) as exc:
         typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)

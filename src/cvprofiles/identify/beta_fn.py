@@ -1,8 +1,13 @@
-"""Target functional evaluators (v3: corr_y, ols_coef, diff_means, map_distance)."""
+"""Target functional evaluators (v3: corr_y, ols_coef, diff_means, map_distance).
+
+``external`` (DECISIONS 2026-10-20) is not an evaluator: β(m) is read from the
+user's ``beta_estimates.csv``. The engine fits nothing.
+"""
 
 from __future__ import annotations
 
 import math
+from collections.abc import Mapping
 
 import numpy as np
 import pandas as pd
@@ -125,8 +130,19 @@ def evaluate_beta(
     frame: pd.DataFrame,
     measure: str,
     beta: BetaSpec,
+    estimates: Mapping[str, float] | None = None,
 ) -> float:
-    """Evaluate β(m) for one measure."""
+    """Evaluate β(m) for one measure.
+
+    ``estimates`` (measure → beta_hat) is required for, and only read by, the
+    ``external`` type.
+    """
+    if beta.type == "external":
+        if estimates is None:
+            raise SlackError("external beta requires beta_estimates")
+        if measure not in estimates:
+            raise SlackError(f"beta_estimates has no row for measure {measure!r}")
+        return float(estimates[measure])
     if beta.type == "corr_y":
         if measure not in frame.columns:
             raise SlackError(f"missing measure column {measure!r}")

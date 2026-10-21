@@ -4,14 +4,22 @@ from __future__ import annotations
 
 import json
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 import yaml
+from pydantic import ValidationError
 
-from cvprofiles.freeze import hash_beta, hash_network
+from cvprofiles.freeze import hash_beta, hash_beta_estimates, hash_network
 from cvprofiles.schemas.beta import BetaSpec
+from cvprofiles.schemas.beta_estimates import (
+    CANONICAL_COLUMNS,
+    REQUIRED_COLUMNS,
+    BetaEstimateRow,
+    BetaEstimates,
+)
 from cvprofiles.schemas.network import NetworkConfig
 from cvprofiles.schemas.scores import ScoreColumnRoles
 
@@ -30,6 +38,9 @@ class RestrictBundle:
     beta_hash: str
     roles: ScoreColumnRoles
     delta: float
+    # DECISIONS 2026-10-20: bring-your-own β table, present iff beta.type is
+    # "external". Default None keeps every existing bundle unchanged.
+    beta_estimates: BetaEstimates | None = None
 
 
 def load_network(source: Path | str | NetworkConfig | dict[str, Any]) -> NetworkConfig:
@@ -87,6 +98,93 @@ def load_beta(source: Path | str | BetaSpec | dict[str, Any]) -> BetaSpec:
         raise RestrictError(f"invalid beta schema: {exc}") from exc
 
 
+def _cell(value: Any) -> Any:
+    """CSV cell → Python scalar; missing (NaN / None / pd.NA) → None."""
+    if hasattr(value, "item"):
+        value = value.item()
+    try:
+        if pd.isna(value):
+            return None
+    except (TypeError, ValueError):
+        pass
+    return value
+
+
+def load_beta_estimates(
+    source: Path | str | pd.DataFrame | BetaEstimates,
+    measures: list[str],
+) -> BetaEstimates:
+    """Load and validate a bring-your-own β table against the menu.
+
+    Rows must equal the menu exactly; unknown columns, missing required
+    columns, non-finite values, ``se <= 0``, ``df <= 0`` and
+    ``n_clusters < 2`` all raise ``RestrictError``. CSV is read with the same
+    round-trip float parser as scores so the hash re-verifies from bytes.
+    """
+    if isinstance(source, BetaEstimates):
+        if set(source.rows) != set(measures):
+            raise RestrictError("beta_estimates rows do not match the menu")
+        return source
+    if isinstance(source, pd.DataFrame):
+        df = source
+    else:
+        p = Path(source)
+        if not p.is_file():
+            raise RestrictError(f"beta_estimates file not found: {p}")
+        suffix = p.suffix.lower()
+        if suffix == ".csv":
+            df = pd.read_csv(p, float_precision="round_trip")
+        elif suffix in {".parquet", ".pq"}:
+            df = pd.read_parquet(p)
+        else:
+            raise RestrictError(
+                f"unsupported beta_estimates format: {suffix} (use .csv or .parquet)"
+            )
+
+    cols = [str(c) for c in df.columns]
+    unknown = [c for c in cols if c not in CANONICAL_COLUMNS]
+    if unknown:
+        raise RestrictError(f"unknown column(s) in beta_estimates: {unknown}")
+    missing_cols = [c for c in REQUIRED_COLUMNS if c not in cols]
+    if missing_cols:
+        raise RestrictError(f"beta_estimates missing required column(s): {missing_cols}")
+
+    names = [str(_cell(v)) for v in df["measure"]]
+    dups = sorted({n for n in names if names.count(n) > 1})
+    if dups:
+        raise RestrictError(f"duplicate measure rows in beta_estimates: {dups}")
+    extra = [n for n in names if n not in measures]
+    if extra:
+        raise RestrictError(f"beta_estimates measure(s) not in the menu: {extra}")
+    absent = [m for m in measures if m not in names]
+    if absent:
+        raise RestrictError(f"beta_estimates missing menu measure(s): {absent}")
+
+    rows: dict[str, BetaEstimateRow] = {}
+    for record in df.to_dict(orient="records"):
+        data = {str(k): _cell(v) for k, v in record.items()}
+        data["measure"] = str(data["measure"])
+        try:
+            row = BetaEstimateRow.model_validate(data)
+        except ValidationError as exc:
+            detail = "; ".join(
+                f"{'.'.join(str(x) for x in e['loc'])}: {e['msg']}" for e in exc.errors()
+            )
+            raise RestrictError(
+                f"beta_estimates row {data['measure']!r}: {detail}"
+            ) from exc
+        rows[row.measure] = row
+
+    present = tuple(c for c in CANONICAL_COLUMNS if c in cols)
+    unhashed = BetaEstimates(
+        rows={m: rows[m] for m in measures}, columns=present, estimates_hash=""
+    )
+    return replace(
+        unhashed,
+        estimates_hash=hash_beta_estimates(unhashed.canonical_rows(), present),
+    )
+
+
 def _available_columns(roles: ScoreColumnRoles) -> set[str]:
     cols = {roles.unit_id, *roles.measures, *roles.aux, *roles.diagnostic}
     if roles.outcome is not None:
@@ -138,6 +236,14 @@ def _bind_network_columns(network: NetworkConfig, roles: ScoreColumnRoles) -> No
 
 
 def _bind_beta_columns(beta: BetaSpec, roles: ScoreColumnRoles) -> None:
+    if beta.type == "external":
+        # DECISIONS 2026-10-20 D5: outcome is a descriptive label (the user's
+        # model outcome), never bound to a SCORE column. No params accepted.
+        if beta.params:
+            raise RestrictError(
+                f"external beta takes no params (got {sorted(beta.params)})"
+            )
+        return
     available = _available_columns(roles)
     if beta.outcome not in available:
         raise RestrictError(
@@ -223,8 +329,14 @@ def run_restrict(
     roles: ScoreColumnRoles | dict[str, Any],
     network: Path | str | NetworkConfig | dict[str, Any],
     beta: Path | str | BetaSpec | dict[str, Any],
+    *,
+    beta_estimates: Path | str | pd.DataFrame | BetaEstimates | None = None,
 ) -> RestrictBundle:
-    """Parse network + beta and bind columns against SCORE roles. No slacks."""
+    """Parse network + beta and bind columns against SCORE roles. No slacks.
+
+    ``beta_estimates`` is required iff the β type is ``external`` (bring-your-
+    own β, DECISIONS 2026-10-20); its canonical hash folds into ``beta_hash``.
+    """
     if isinstance(roles, dict):
         roles_m = ScoreColumnRoles.model_validate(roles)
     else:
@@ -235,13 +347,30 @@ def run_restrict(
     _bind_network_columns(network_m, roles_m)
     _bind_beta_columns(beta_m, roles_m)
 
+    estimates: BetaEstimates | None = None
+    if beta_m.type == "external":
+        if beta_estimates is None:
+            raise RestrictError(
+                "beta type 'external' requires beta_estimates (beta_estimates.csv)"
+            )
+        estimates = load_beta_estimates(beta_estimates, list(roles_m.measures))
+        beta_hash = hash_beta(beta_m, beta_estimates_hash=estimates.estimates_hash)
+    else:
+        if beta_estimates is not None:
+            raise RestrictError(
+                f"beta_estimates supplied but beta type is {beta_m.type!r}; "
+                "use type: external"
+            )
+        beta_hash = hash_beta(beta_m)
+
     return RestrictBundle(
         network=network_m,
         beta=beta_m,
         network_hash=hash_network(network_m),
-        beta_hash=hash_beta(beta_m),
+        beta_hash=beta_hash,
         roles=roles_m,
         delta=float(network_m.delta),
+        beta_estimates=estimates,
     )
 
 
@@ -266,6 +395,23 @@ def write_restrict_artifacts(
         "n_restrictions": len(bundle.network.restrictions),
         "beta_type": bundle.beta.type,
     }
+    est = bundle.beta_estimates
+    if est is not None:
+        # External β only: existing bundles keep a byte-identical meta file.
+        meta["beta_estimates_hash"] = est.estimates_hash
+        est_payload = {
+            "schema_version": "1",
+            "beta_estimates_hash": est.estimates_hash,
+            "columns": list(est.columns),
+            "rows": est.canonical_rows(),
+            "note": (
+                "beta supplied externally; the engine fits nothing. Validity of "
+                "se (and same-units estimation) is the user's claim."
+            ),
+        }
+        est_path = out / "beta_estimates.json"
+        est_path.write_text(json.dumps(est_payload, indent=2, sort_keys=True) + "\n")
+        paths["beta_estimates.json"] = est_path
     meta_path = out / "restrict_bundle.json"
     meta_path.write_text(json.dumps(meta, indent=2, sort_keys=True) + "\n")
     paths["restrict_bundle.json"] = meta_path

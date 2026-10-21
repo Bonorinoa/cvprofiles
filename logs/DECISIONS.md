@@ -1526,3 +1526,64 @@ Also authorized: the `report.json` / `report.html` / `summary_dict` wiring; `doc
 - Smoke observations (scratch, not evidence):
   - demeaned trust cells: `gps_trust_cell` is `self_rejected` (conv_edu_cell slack −0.435), which explains the empty M\*. (b) then flags almost every measure, because any association above −0.235 "exceeds" the criterion's, so (a) is the primary reading in that case.
   - demeaned patience cells LLM: Phi has 0.640 against GPS's 0.475, but its partial r with the criterion given education is 0.373, not near zero, so it is not a pure aux proxy. `m_wvs_q13` is admitted at p̂ = 0.86 and is near the threshold.
+
+## 2026-10-20 — PROPOSAL: conservative confidence region (Bonferroni) + bring-your-own β (before code; awaiting Augusto)
+
+**Status: PROPOSAL, not a decision.** Nothing below is authorized until Augusto approves it in a dated follow-up entry. No `src/` code has been written. Spec: `reports/specs/conservative_cr_spec.md`.
+
+**Context:** the only uncertainty output today is the P5 uncertainty band (2026-08-08 lock), labeled "not a CI" by design. Paper triage item 2 names "the band has no operating characteristics" as the largest methods-journal gap. Dell & Rambachan, NBER SI 2026 Methods Lecture slides (`dell3.pdf`), slide 13 "Inference for the Construct-Identified Range", verified verbatim from the PDF text on 2026-10-20: "existing partial-identification and endpoint-inference methods can be combined to estimate a valid, if conservative, confidence region." Augusto also wants cvprofiles to consume β estimated in users' own pipelines.
+
+**Proposal (spec §§3–8):**
+1. **Additive CR layer** for the population range $[L_0,U_0]$. It uses one-sided bounds on every select-stage slack (Fisher-z for correlations, Bonett–Wright for Spearman, Welch for `mean_order`) to form an outer set $M^+$ and an inner set $M^-$. The CR is $[\min_{M^+}\mathrm{lo},\max_{M^+}\mathrm{hi}]$ over per-measure β intervals. The spec proves $P([L_0,U_0]\subseteq\mathrm{CR})\ge1-\alpha_1-\alpha_2$ under any slack/β dependence, with no separation condition. Three statuses are reported per measure: certainly admissible, possibly admissible, certainly rejected. $M^+=\emptyset$ is reported as level-$\alpha_1/2$ evidence that $M^*_0=\emptyset$ (an intersection–union test; the by-product test of Bugni–Canay–Shi 2015). Deterministically, $M^-\subseteq M^*\subseteq M^+$ and $[L,U]\subseteq\mathrm{CR}$.
+2. **Endpoint variant as default.** Bonferroni over $\min(2,J)\cdot Q$ slack pairs and level-$\alpha_2$ β intervals. It is valid because the range endpoints are attained at two fixed population measures (spec Thm 3). The brief's simultaneous variant ($K=JQ$, β at $\alpha_2/J$) stays as an option for menu-wide statements.
+3. **β type `external`** reads `beta_estimates.csv` (`measure, beta_hat, se`, optional `df`/`n_clusters`/documentation columns; rows must equal the menu exactly). For that type the headline is $[\min,\max]$ of `beta_hat` over $M^*$. Canonical-table SHA-256 is folded into `beta_hash` for this type only. The engine fits nothing.
+4. **Freeze:** CR knobs ($\alpha_1$, $\alpha_2$, variant, SE method) are excluded from the preimage. Preimage keys are unchanged. Every existing `beta_hash` and `run_id` is byte-identical. New artifacts: `confidence_region.json` and (for external β) `beta_estimates.json`. `RunManifest`, `bootstrap.json` and `coverage.json` are unchanged.
+
+**Evidence (spec §12; `reports/runs/conservative_cr_mc/`, git-ignored; seed 20261020, 2000 reps × 74 cells, n_boot 999):** the vectorized MC reproduces the engine's $M^*$, $[L,U]$ and both bands to $4.4\times10^{-16}$. The endpoint CR with robust SE covers $[L_0,U_0]$ at $\ge0.924$ in all 60 Gaussian cells ($n\in\{41,120,480,2000\}$, $J\in\{3,6,20\}$, boundary distance $d\in\{-0.10,\dots,+0.10\}$; nominal $\ge0.90$). The current uncertainty band covers 0.48–0.61 at the knife-edge once $n\ge480$. The plug-in covers at mean 0.20. CR/band width is 1.06× at $n=2000$ and 1.41–1.45× at $n=41$. Classical Fisher-z under-covers under $t_5$ tails (0.896), and the robust SE holds (0.951). At $n=41$, $M^-$ is always empty.
+
+**Decisions requested (spec §10, D1–D12).** The main ones: D1 adopt the layer; D2 endpoint variant as default; D3 $\alpha_1=\alpha_2=0.05$; D4 robust SE default; D5 `external` β defines the headline, with its hash folded into `beta_hash`; D7 fail loud with `holdout_units`; D8 fail loud for `ols_coef`/`map_distance` in analytic mode; D9 defer bootstrap-SE mode; D10 CLI flags.
+
+**Would be authorized by approval:** strict-TDD implementation per spec §11 (`inference/confidence_region.py`, `schemas/beta_estimates.py`, the additive `external` β type, report panel, CLI flags, docs); full battery; golden `run_id` check; local commits on the feature branch.
+
+**Not authorized by this entry or by approval of it:** version bump, tag, push, PyPI; changes to the headline, the band's label, or the freeze preimage keys; paper text (Augusto writes claims); running the CR on the WVS/GPS frozen inputs (run gate); clustering, CLR/AKM sharpening, or bootstrap-SE mode without their own dated decisions.
+
+## 2026-10-20 — Conservative CR + bring-your-own β: proposal APPROVED (Augusto)
+
+**Decision (Augusto, 2026-10-20, verbatim):** "Approved: D1–D12 as recommended in reports/specs/conservative_cr_spec.md §10 (endpoint variant default, robust SE, external β folded into beta_hash). Proceed with Step 3 strict TDD; no version bump, tag, push or PyPI."
+
+**Locked by this entry (spec §10):** D1 additive CR layer + `confidence_region.json`; D2 endpoint variant default, simultaneous as option; D3 $\alpha_1=\alpha_2=0.05$; D4 robust (influence-function) Fisher-z SE default; D5a β type `external`, headline from `beta_hat`, estimates hash folded into `beta_hash` for that type only, `outcome` an unbound label; D6 external β with bootstrap allowed, β held fixed, labeled; D7 CR + `holdout_units` fails loud; D8 CR + `ols_coef`/`map_distance` fails loud (analytic mode); D9 bootstrap-SE mode deferred; D10 CLI flags in v1; D11 spec tracked at `reports/specs/`; D12 no version bump/tag/push/PyPI.
+
+**Authorized:** strict-TDD implementation per spec §11; docs pass; full battery; golden `run_id` check; local commits on `claude/mystifying-swirles-f3c434`.
+
+**Not authorized:** version bump, tag, push, PyPI; headline / band-label / preimage-key changes; paper text; running the CR on the WVS/GPS frozen inputs; clustering, CLR/AKM sharpening, bootstrap-SE mode.
+
+## 2026-10-20 — Conservative CR + bring-your-own β: implementation record (after code)
+
+**Shipped (unreleased; version stays 3.0.2).** Strict TDD in three RED→GREEN cycles: external β; CR core; pipeline / report / CLI wiring.
+- `schemas/beta.py`: additive `BetaType` literal `"external"`.
+- `schemas/beta_estimates.py`: row model + `BetaEstimates`.
+- `freeze.py`: `beta_estimates_canonical_csv_bytes`, `hash_beta_estimates`, `hash_beta(..., beta_estimates_hash=)`.
+- `restrict/pipeline.py`: `load_beta_estimates`, `RestrictBundle.beta_estimates`, external binding, `beta_estimates.json`.
+- `identify/`: `evaluate_beta` reads external values.
+- `inference/confidence_region.py`: new module.
+- `pipeline.py`: `run_profile(beta_estimates=, confidence_region=, cr_alpha1=, cr_alpha2=, cr_variant=, cr_se=)`, pre-flight checks, `confidence_region.json`.
+- Report: panel + external-β line.
+- CLI: `--confidence-region`, `--cr-alpha1`, `--cr-alpha2`, `--cr-variant`, `--cr-se`, `--beta-estimates`.
+- Tests: `tests/test_beta_external.py` (30) and `tests/test_confidence_region.py` (48).
+
+**Verification.**
+- Battery: 418 passed (340 before); ruff clean; mypy strict clean; `git diff --check` clean; `v0.1` still peels to `fb62b48`.
+- Golden `run_id`: a before/after script ran five `mini_v1` configurations (plain, bootstrap, θ/δ grids, anchors, harsh network). Every `run_id` is identical. Every artifact is byte-identical except `report.json`, which gains two null keys (`confidence_region`, `beta_estimates_hash`); stripping them restores equality. `summary_dict` gains the same two keys. This is the "key present, null when off" convention used by every earlier layer.
+- Parity: the package CR equals the Monte Carlo prototype (M⁺, M⁻, CR) to 2.2e-16 on four cells. The spec §12 numbers therefore describe the shipped code.
+
+**Implementation choices within the approved scope (recorded for review):**
+- `--cr-se` CLI flag added (mirrors the API's `cr_se`; the spec's CLI list omitted it).
+- Bounds are clamped to bracket the engine's point slack / β̂ (`ucb = max(ucb, ŝ)`), so Proposition 4 nesting holds under floating-point rounding of `tanh(atanh(r))`. The clamp is a no-op in exact arithmetic.
+- $|\hat r|\ge 1-10^{-12}$ is treated as deterministic (se = 0). Example: `rank_agree` against itself, where `np.corrcoef` returns 0.999… rather than 1.
+- First `scipy` import in `src/`: `scipy.special.stdtrit` for Welch and external-df t quantiles. scipy was already a core dependency; it has one `type: ignore[import-untyped]`.
+- External β accepts no `params`. A coverage band under external β appends "β held fixed" to `coverage.json`'s existing `note` (D6). `bootstrap.json` is unchanged.
+- Pre-flight (option validation, `holdout_units`, β type, n ≥ 4) runs before the output directory is created.
+
+**Docs:** METHODOLOGY §4/§5, USER_GUIDE (β file, flags, artifacts, §3.1 reading the CR), ARCHITECTURE (module map, IO, freeze item 7, registries), ROADMAP, EVALUATIONS (MC entry). New features are labeled "unreleased, post-3.0.2".
+
+**Left for Augusto:** README is untouched, because it describes the published 3.0.2 wheel; update it at release time. Paper sentences that change if the CR is cited: l.97, l.1144, App. A.5. Also left for him: any version, tag, push or PyPI step, and running the CR on the WVS/GPS frozen inputs.

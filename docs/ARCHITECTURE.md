@@ -64,7 +64,7 @@ src/cvprofiles/
   restrict/              # network/beta parsers, column binding, hashing
   schemas/               # pydantic: scores, network, beta, run
   identify/              # slack evaluators, beta evaluators, M*, [L,U]
-  inference/             # bootstrap, theta_grid, delta_grid (additive)
+  inference/             # bootstrap, coverage, theta_grid, delta_grid, confidence_region (additive)
   anchors/               # θ-anchor parse, completeness check, payload
   report/                # JSON dump + Jinja2 HTML (templates/) + report-only screen diagnostics
   synth/                 # DGPs + oracle networks + metrics (eval, not paper path)
@@ -83,6 +83,7 @@ Each state is a pure-ish transform with explicit on-disk inputs/outputs. A full 
 | network.yaml | Restrictions R + θ + δ | YAML |
 | beta.yaml | Target functional | YAML |
 | anchors.yaml (optional) | Pre-data θ anchors | YAML |
+| beta_estimates.csv (β type `external` only; unreleased, post-3.0.2) | Bring-your-own β: `measure, beta_hat, se` (+ optional `df`, `n_clusters`, documentation columns) | CSV or parquet |
 
 ### Outputs (per run directory)
 
@@ -100,10 +101,12 @@ Each state is a pure-ish transform with explicit on-disk inputs/outputs. A full 
 | `theta_grid.json` | sensitivity surface summary (when enabled) |
 | `delta_grid.json` | tolerance surface summary (when enabled) |
 | `anchors.json` | anchor audit payload (when enabled) |
+| `confidence_region.json` | conservative Bonferroni CR, statuses, per-pair bounds (when enabled; unreleased, post-3.0.2) |
+| `beta_estimates.json` | canonical external β rows + `beta_estimates_hash` (β type `external` only) |
 | `report.html` | primary human audit trail |
 | `report.json` | machine-complete dump of the same payload |
 
-Reusing an `out_dir` overwrites headline artifacts. Inference-layer files (`bootstrap.json`, `coverage.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json`) from a previous run into the same directory are **unlinked when that layer is off**. The directory mirrors this run, not a history of runs. Callers who need to keep prior layer artifacts must use a fresh directory per run. The engine does not refuse a populated directory (`cvprofiles demo` is the exception: non-empty `--out` requires `--force`).
+Reusing an `out_dir` overwrites headline artifacts. Inference-layer files (`bootstrap.json`, `coverage.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json`, `confidence_region.json`, and `beta_estimates.json` when β is not external) from a previous run into the same directory are **unlinked when that layer is off**. The directory mirrors this run, not a history of runs. Callers who need to keep prior layer artifacts must use a fresh directory per run. The engine does not refuse a populated directory (`cvprofiles demo` is the exception: non-empty `--out` requires `--force`).
 
 ## 4. Determinism and the freeze contract
 
@@ -112,12 +115,14 @@ Reusing an `out_dir` overwrites headline artifacts. Inference-layer files (`boot
 3. Paper path: only artifacts from a run directory with pinned hashes are citable.
 4. Bootstrap RNG is a seeded `numpy.random.Generator` (never the global `np.random`).
 5. Float comparisons for slacks use the declared tolerance δ (default 0) — never raw `== 0` without policy.
-6. **Diagnostics excluded from the preimage:** bootstrap count is normalized (`n_boot < 1 ⇒ null`), and θ-grid / δ-grid / anchors settings do not change the run_id. Same bundle + different grids ⇒ same id, different artifacts. `roles.criteria` and the `screen_diagnostics` report block are likewise outside the preimage (`criteria` never changes the freeze column list and is omitted from serialized roles when empty).
+6. **Diagnostics excluded from the preimage:** bootstrap count is normalized (`n_boot < 1 ⇒ null`), and θ-grid / δ-grid / anchors / confidence-region settings (`cr_alpha1`, `cr_alpha2`, `cr_variant`, `cr_se`) do not change the run_id. Same bundle + different grids ⇒ same id, different artifacts. `roles.criteria` and the `screen_diagnostics` report block are likewise outside the preimage (`criteria` never changes the freeze column list and is omitted from serialized roles when empty).
+7. **External β (unreleased, post-3.0.2):** for β type `external` only, `beta_hash` = H({"beta": spec, "beta_estimates_hash": h}), where h hashes the canonical estimate table (rows sorted by measure, present columns in canonical order, `.17g` floats). Every other β type's `beta_hash` is unchanged; preimage keys are unchanged.
 
 ## 5. Slack and beta evaluators
 
 - **Restriction registry** (`identify/slacks.py`): `corr_min`, `corr_sign`, `mean_order`, `rank_agree` implemented; `stability` is schema-only and fails loud until a fixture demands it. Unknown types fail loud at parse time. All evaluators are simple, finite-sample sample analogues — no kernel or ML nuisances in the validity layer.
-- **Beta registry** (`identify/beta_fn.py`): `corr_y`, `ols_coef`. `ols_coef` is a numpy closed-form standardized OLS (no statsmodels dependency), requiring a non-empty control list.
+- **Beta registry** (`identify/beta_fn.py`): `corr_y`, `ols_coef`, `diff_means`, `map_distance`, plus `external` (unreleased, post-3.0.2), which reads user-supplied values and fits nothing. `ols_coef` is a numpy closed-form standardized OLS (no statsmodels dependency), requiring a non-empty control list.
+- **Confidence region** (`inference/confidence_region.py`; unreleased, post-3.0.2): analytic, no RNG. Per-pair slack bounds, outer/inner sets, per-measure β intervals; native intervals for `corr_y`, `diff_means`, `external` only (`ols_coef` / `map_distance` fail loud). Pre-flight checks run before any artifact is written.
 
 ## 6. Report construction
 
@@ -126,7 +131,7 @@ Reusing an `out_dir` overwrites headline artifacts. Inference-layer files (`boot
 - writes `report.json` directly, and
 - renders `report.html` from a Jinja2 template (`report/templates/report.html.j2`).
 
-The HTML and JSON share one payload, so they cannot disagree about numbers. The template is self-contained (no external assets) so `report.html` opens anywhere. Panel structure: construct/menu summary, headline range block, slack matrix, admissible set with binding restrictions, optional bootstrap / θ-grid / δ-grid / anchor panels, and the always-on "Screen diagnostics · report-only" panel (`report/screen_diagnostics.py`: criterion self-consistency, auxiliary ceiling, near-threshold multiplicity; pure functions, no RNG, reads IDENTIFY/coverage results and never feeds back into M* or [L,U]).
+The HTML and JSON share one payload, so they cannot disagree about numbers. The template is self-contained (no external assets) so `report.html` opens anywhere. Panel structure: construct/menu summary, headline range block, slack matrix, admissible set with binding restrictions, optional confidence-region / bootstrap / θ-grid / δ-grid / anchor panels, and the always-on "Screen diagnostics · report-only" panel (`report/screen_diagnostics.py`: criterion self-consistency, auxiliary ceiling, near-threshold multiplicity; pure functions, no RNG, reads IDENTIFY/coverage results and never feeds back into M* or [L,U]).
 
 ## 7. Observability
 
