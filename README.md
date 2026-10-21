@@ -20,7 +20,7 @@ pip install cvprofiles
 
 Requires Python ≥ 3.11. No GPU, no model weights, no API keys — the engine is a pure Python/numpy/pandas computation over the score columns you supply.
 
-The published 3.0.2 wheel is the engine. The one-command demo below lives in this source tree (install the checkout).
+The published wheel includes the engine and the one-command demo below (verified on a clean install of 3.0.2).
 
 ### Install from source (this checkout)
 
@@ -88,7 +88,7 @@ The engine is **score-agnostic and model-free**: it does not generate measures, 
 
 **Diagnostic surfaces.** θ-grid and δ-grid show how $M^*$ and $[L,U]$ move with threshold and tolerance choices — the specification-curve (Simonsohn et al. 2020) / multiverse (Steegen et al. 2016) idea applied to measurement admissibility. Descriptive by design: they reveal *where* admissibility flips; they make no inferential claim about the surface.
 
-**Honest inference posture.** The range is a fragility audit over sample-admissible measures, not a confidence set — no coverage theorem is claimed. Bootstrap output is an uncertainty band, never a CI. The units-split holdout is the out-of-sample check: select on train units, verdict on held-out units.
+**Honest inference posture.** The headline range is the plug-in image over sample-admissible measures, not a confidence set. Bootstrap output is an uncertainty band, never a CI. For a statement with a coverage guarantee, use the opt-in **conservative confidence region** (`--confidence-region`, unreleased on `main`): a Bonferroni region with $P([L_0,U_0] \subseteq \mathrm{CR}) \ge 1-\alpha_1-\alpha_2$ that also classifies each measure as certainly admissible, possibly admissible, or certainly rejected. It is conservative and never replaces the headline. The units-split holdout is the out-of-sample check: select on train units, verdict on held-out units.
 
 ## When to use cvprofiles (and when not to)
 
@@ -118,10 +118,16 @@ Full positioning in the methodology doc (`docs/METHODOLOGY.md`).
 - Not a generic causal-sensitivity package: it disciplines *measurement* given a stated β.
 - Not “automate all of empirical economics”: it answers one question well.
 
+## Unreleased on `main` (next release)
+
+- **Conservative confidence region** (`--confidence-region`): an additive Bonferroni region for the population range, with inner and outer admissible sets and a per-measure status. A Monte Carlo (2000 replications × 74 designs) gives coverage ≥ 0.924 at nominal 0.90, including at the admission boundary, where the bootstrap band falls to 0.48. Spec: `reports/specs/conservative_cr_spec.md`.
+- **Bring-your-own β** (β type `external`): pass a `beta_estimates.csv` (`measure, beta_hat, se`) computed in your own pipeline (fixest, Stata, pyfixest). The engine still fits no model.
+- **Report-only screen diagnostics**: whether the criterion survives its own screen, whether a measure looks like a stand-in for an auxiliary, and how many survivors sit near the threshold. None of them change M\*, [L,U] or the run_id.
+
 ## What's new in v3
 
 - **Named `empty_R` unrestricted-multiverse special case (3.0.1).** When the researcher pins an empty nomological network `R = ∅`, the engine now returns the full menu as the admissible set `M* = M` and the spec-curve range over all β values. The accidental-empty case still fails loud — the named special case is opt-in via `empty_R: true` in the network YAML.
-- **Flagship application: WVS/GPS patience (3.0.0).** Country-level patience measured through a menu of WVS Wave 7 facets + a GPS patience anchor, disciplined by a literature-anchored `disc_risk` bar (`θ = 0.35`). Accepted frozen run: `M*_select = [m_gps_patience, m_prompt_a]`, headline `[L, U] = [0.328, 0.402]`. See `evals/wvs_gps_preferences/` and the input-builder tutorial.
+- **Flagship application: WVS/GPS patience (3.0.0).** Country-level patience measured through a menu of WVS Wave 7 facets + a GPS patience anchor, disciplined by a literature-anchored `disc_risk` bar (`θ = 0.35`). Accepted frozen run: `M*_select = [m_gps_patience, m_prompt_a]`, headline `[L, U] = [0.328, 0.402]`. See `evals/wvs_gps_preferences/` and the input-builder tutorial. *Caveat:* the country frame has n = 41. The conservative confidence region on that frame is [−0.285, 0.586] and cannot exclude the noise control (`evals/wvs_gps_preferences/CR_DIAGNOSTIC_NOTE.md`). The powered version of this application is the 480-cell analysis in `evals/wvs_gps_two_resolution/`.
 - **Posture (a) reporting discipline (3.0.0).** `M*_select` is the primary headline; empty `M*_robust` from a units-split is a power-limited diagnostic, not a paper failure. See `governance/PAPER_PROTOCOL_FREEZE.md` §11.
 - **Engine stays model-free and score-agnostic.** No LLM client in the import graph; LLM scoring is an upstream protocol, not an engine feature.
 
