@@ -42,6 +42,8 @@ u02,0.90,0.50,0.20,0.70,0.60,0.90
 
 `measures` defines the menu order. Roles must not overlap; the engine rejects ambiguous columns.
 
+Optional `criteria` (list of column names) declares criterion columns for the report-only screen diagnostics (§3). Unlike the other roles it is a pointer list, not a partition, so it may name a measure, an aux column, or the outcome (e.g. `"criteria": ["m_gps_patience"]` for a positive-control instrument). Only engine columns are allowed, so every diagnostic number comes from data inside `scores_hash`. When β is `corr_y`, the β outcome is a criterion automatically. `criteria` never enters IDENTIFY or the freeze preimage: the same bundle with or without it gives the same `run_id`.
+
 ### 1.3 network.yaml
 
 ```yaml
@@ -182,6 +184,14 @@ Every run directory contains machine-readable artifacts plus the human report:
 | `bootstrap.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json` | Only when the corresponding layer is enabled |
 | `coverage.json` | Uncertainty band: α, κ, quantiles, band, empty-replicate rate, boundary attribution, admission frequency p̂_m (only when bootstrap is enabled) |
 
+`report.json` also carries a `screen_diagnostics` block on every run (report-only; logs/DECISIONS.md 2026-10-19). The CLI stdout summary repeats its three counts:
+
+- **(a) Criterion self-consistency** — each criterion's slack under every restriction, on the frame the engine uses for that restriction's stage. `self_rejected: true` means a measure that tracked the criterion perfectly would be rejected by this network.
+- **(b) Auxiliary ceiling / proxy** — for each `corr_min` / `corr_sign` / `monotone_rank` floor on an aux column V: the measure's association with V next to the criterion's (same statistic and sign as the restriction), plus the Pearson partial correlation of the measure with the criterion given V. `exceeds_criterion` is a description, not a verdict. The proxy signature is high aux association with a near-zero partial.
+- **(c) Near-threshold multiplicity** — with bootstrap on, each measure's status, p̂_m and coverage's boundary flag as a plain-language line ("admitted; admitted in 66% of 200 non-empty resamples; near threshold …"), plus the count of survivors within κ·SE of a threshold. With bootstrap off the block says to enable `--n-boot`.
+
+None of these changes M*, [L,U], or `run_id`, and none auto-rejects or re-thresholds.
+
 ### Report anatomy
 
 `report.html` is a single-page, self-contained audit trail. It answers, for a non-coder:
@@ -192,7 +202,8 @@ Every run directory contains machine-readable artifacts plus the human report:
 4. **What is [L,U]?** — headline range block; empty-set panel when M* is empty (with an explanatory note, not a stack trace).
 5. **How does the range move on the θ-grid / δ-grid?** — sensitivity tables, when enabled.
 6. **What is the uncertainty band?** — when bootstrap is on, a coverage panel shows α, κ, the per-side α/2 quantiles, the band, the empty- and degenerate-replicate rates, **boundary attribution** (|margin_m| ≤ κ·SE_m, with margin/SE per measure), and admission frequency p̂_m.
-7. **Did survivors hold out of sample?** — under a units-split, the HTML M* is the robust set (M*_select ∩ holdout-compliant); the per-measure holdout verdict is machine-readable in the `admissible.json` `holdout` block and the stdout summary (there is no dedicated HTML holdout panel).
+7. **Does the screen agree with its own criterion?** — a "Screen diagnostics · report-only" panel shows (a)–(c) above.
+8. **Did survivors hold out of sample?** — under a units-split, the HTML M* is the robust set (M*_select ∩ holdout-compliant); the per-measure holdout verdict is machine-readable in the `admissible.json` `holdout` block and the stdout summary (there is no dedicated HTML holdout panel).
 
 The report is generated from the same machine payload as `report.json` (Jinja2 template), so the HTML and JSON can never disagree about numbers.
 
@@ -215,7 +226,7 @@ The report is generated from the same machine payload as `report.json` (Jinja2 t
 
 Three roles are overloaded under "anchor":
 
-- **Criterion measure (P1 posture):** one measure is the standard others must recover (e.g. LLM vs GPS). Label the run criterion-validity, not a symmetric profile.
+- **Criterion measure (P1 posture):** one measure is the standard others must recover (e.g. LLM vs GPS). Label the run criterion-validity, not a symmetric profile. Declare it in `roles.criteria` so the report checks whether the network would admit it (§3).
 - **Peer candidate (P2 posture):** no measure is sacred; all face the same external R.
 - **Reference for rank agreement:** `rank_agree(m, m_ref)` — useful as a soft check, dangerous as the only gate.
 

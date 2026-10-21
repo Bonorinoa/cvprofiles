@@ -351,6 +351,80 @@
     </section>
     {% endif %}
 
+    {% if screen_diagnostics %}
+    {% set sd = screen_diagnostics %}
+    {% macro num(x) %}{% if x is not none %}{{ "%.3f"|format(x) }}{% else %}—{% endif %}{% endmacro %}
+    {% macro flag(x) %}{% if x is none %}—{% elif x %}yes{% else %}no{% endif %}{% endmacro %}
+    <section class="card" style="margin-top:1rem">
+      <h2>Screen diagnostics · report-only</h2>
+      <p class="muted" style="margin-top:0">{{ sd.headline_note }}
+        Criteria: {% for c in sd.criteria %}<span class="mono">{{ c.column }}</span> ({{ c.source }}){% if not loop.last %}, {% endif %}{% else %}none declared{% endfor %}.
+      </p>
+
+      <h3 style="margin:1rem 0 0.4rem">(a) Criterion self-consistency</h3>
+      {% if sd.criterion_self_consistency.criteria %}
+      <table>
+        <thead><tr><th>criterion</th>{% for rid in restriction_ids %}<th class="mono">{{ rid }}</th>{% endfor %}<th>self-rejected</th><th>holdout non-compliant</th></tr></thead>
+        <tbody>
+          {% for row in sd.criterion_self_consistency.criteria %}
+          <tr>
+            <td class="mono">{{ row.criterion }}</td>
+            {% for rid in restriction_ids %}<td>{{ num(row.slacks[rid]) }}</td>{% endfor %}
+            <td>{{ flag(row.self_rejected) }}</td>
+            <td>{{ flag(row.holdout_noncompliant) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="muted">{{ sd.criterion_self_consistency.note }}</p>
+      {% else %}
+      <p class="muted">No criterion: β is not corr_y and roles.criteria is empty.</p>
+      {% endif %}
+
+      <h3 style="margin:1rem 0 0.4rem">(b) Auxiliary ceiling / proxy</h3>
+      {% if sd.aux_ceiling.rows %}
+      <table>
+        <thead><tr><th>restriction</th><th>measure</th><th>assoc(m,V)</th><th>criterion</th><th>assoc(c,V)</th><th>exceeds</th><th>partial r(m,c|V)</th></tr></thead>
+        <tbody>
+          {% for row in sd.aux_ceiling.rows %}
+          <tr>
+            <td class="mono">{{ row.restriction }} ({{ row.variable }}, {{ row.statistic }})</td>
+            <td class="mono">{{ row.measure }}</td>
+            <td>{{ num(row.assoc_measure) }}</td>
+            <td class="mono">{{ row.criterion if row.criterion is not none else "—" }}</td>
+            <td>{{ num(row.assoc_criterion) }}</td>
+            <td>{{ flag(row.exceeds_criterion) }}</td>
+            <td>{{ num(row.partial_corr) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="muted">{{ sd.aux_ceiling.reading_rule }}</p>
+      {% else %}
+      <p class="muted">No corr_min / corr_sign / monotone_rank restriction on an aux column.</p>
+      {% endif %}
+
+      <h3 style="margin:1rem 0 0.4rem">(c) Near-threshold multiplicity</h3>
+      {% if sd.near_threshold.available %}
+      <p class="muted" style="margin-top:0">
+        {{ sd.near_threshold.n_near_threshold_survivors }} of {{ sd.near_threshold.n_survivors }} survivors
+        within κ·SE of a threshold (κ = {{ sd.near_threshold.kappa }}).
+      </p>
+      <table>
+        <thead><tr><th>measure</th><th>verdict</th></tr></thead>
+        <tbody>
+          {% for row in sd.near_threshold.rows %}
+          <tr><td class="mono">{{ row.measure }}</td><td>{{ row.verdict }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="muted">{{ sd.near_threshold.caveat }}</p>
+      {% else %}
+      <p class="muted">{{ sd.near_threshold.note }}</p>
+      {% endif %}
+    </section>
+    {% endif %}
+
     <section class="card" style="margin-top:1rem">
       <h2>Menu admission</h2>
       <p class="muted" style="margin-top:0">

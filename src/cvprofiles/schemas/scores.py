@@ -4,7 +4,15 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    SerializerFunctionWrapHandler,
+    field_validator,
+    model_serializer,
+    model_validator,
+)
 
 
 class ScoreColumnRoles(BaseModel):
@@ -24,8 +32,18 @@ class ScoreColumnRoles(BaseModel):
         default_factory=list,
         description="Optional columns retained for eval diagnostics only (e.g. V_star).",
     )
+    # docs: logs/DECISIONS.md 2026-10-19 D3. Pointer list (may overlap other
+    # roles), not a column partition; report-only screen diagnostics read it.
+    # Engine columns only, so every diagnostic number sits inside scores_hash.
+    criteria: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Optional criterion columns (measure/aux/outcome) for report-only "
+            "screen diagnostics. Never enters IDENTIFY or the freeze preimage."
+        ),
+    )
 
-    @field_validator("measures", "aux", "diagnostic")
+    @field_validator("measures", "aux", "diagnostic", "criteria")
     @classmethod
     def _unique_nonempty_names(cls, v: list[str]) -> list[str]:
         if any(not name or not str(name).strip() for name in v):
@@ -53,6 +71,29 @@ class ScoreColumnRoles(BaseModel):
                     )
                 seen[name] = role
         return self
+
+    @model_validator(mode="after")
+    def _criteria_are_engine_columns(self) -> ScoreColumnRoles:
+        engine = {*self.measures, *self.aux}
+        if self.outcome is not None:
+            engine.add(self.outcome)
+        bad = [c for c in self.criteria if c not in engine]
+        if bad:
+            raise ValueError(
+                f"criteria must name engine columns (measures/aux/outcome): {bad}"
+            )
+        return self
+
+    @model_serializer(mode="wrap")
+    def _omit_empty_criteria(
+        self, handler: SerializerFunctionWrapHandler
+    ) -> dict[str, Any]:
+        # Byte-stable roles/score_manifest dumps for runs that declare none
+        # (same pattern as the 3.0.1 empty_R default).
+        data: dict[str, Any] = handler(self)
+        if not self.criteria:
+            data.pop("criteria", None)
+        return data
 
 
 class ScoreManifest(BaseModel):

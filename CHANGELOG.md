@@ -4,6 +4,10 @@ All notable project milestones live here. Detailed decisions → `logs/DECISIONS
 
 Format: keep newest first.
 
+## [Unreleased]
+
+- **Report-only screen diagnostics** (logs/DECISIONS.md 2026-10-19, approved 2026-10-20): `report.json["screen_diagnostics"]` + HTML panel + three stdout summary counts. (a) criterion self-consistency (does the criterion survive its own screen?), (b) auxiliary ceiling / proxy flag (measure vs criterion association with an aux floor variable, plus partial correlation), (c) near-threshold multiplicity (p̂_m and boundary flag as a plain-language line; reads the existing coverage result). Optional `roles.criteria` pointer list; the β outcome counts as a criterion when β is `corr_y`. M*, [L,U], every identify/coverage artifact, and `run_id` are unchanged (golden and all committed two-resolution run_ids re-verified). No version bump.
+
 ## [3.0.2] — 2026-08-18 (2026-08-16 audit closeout; reproducibility patch)
 
 Reproducibility closeout for the external audit (2026-08-16). Version bump 3.0.1 → 3.0.2; the paper-freeze tag is `v3.0.2`.
