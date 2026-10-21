@@ -2,7 +2,7 @@
 
 **Construct-validity profiles for cheap multi-measure AI operationalizations.**
 
-Open, high-observability research tooling that treats construct validity as **partial identification over a menu of measurement functions**, disciplined by a researcher-authored nomological network. The engine returns an admissible measurement set M\* and a construct-identified range [L,U] for a target functional β(·). Empty sets and wide ranges are scientific features, not product failures.
+Open, high-observability research tooling that treats construct validity as **partial identification over a menu of measurement functions**, disciplined by a researcher-authored nomological network. The framing follows Dell and Rambachan's formalization of construct validity as partial identification ([NBER Methods Lecture, 2026](https://conference.nber.org/confer/2026/SI2026/ML/dell3.pdf)), and the package computes the objects their lecture defines: the menu, the admissible set M\*, construct-validity profiles of slacks, and the construct-identified set and range. The engine returns an admissible measurement set M\* and a construct-identified range [L,U] for a target functional β(·). Empty sets and wide ranges are scientific features, not product failures.
 
 | | |
 |---|---|
@@ -162,6 +162,11 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md) — maintained as a live document along
 ## Citation
 
 The canonical method statement is `docs/METHODOLOGY.md`. A paper citation block will be added once the paper freeze is final (see `paper/` and `governance/PAPER_PROTOCOL_FREEZE.md`).
+
+The menu, admissible set, construct-validity profiles, and construct-identified set and range are defined in Dell and Rambachan (2026a); their companion review is Dell and Rambachan (2026b):
+
+- Dell, M., & Rambachan, A. (2026a). *Construct validity: Credibility when measurement is cheap* [Lecture slides]. NBER Summer Institute 2026 Methods Lectures. https://conference.nber.org/confer/2026/SI2026/ML/dell3.pdf
+- Dell, M., & Rambachan, A. (2026b). *The measurement revolution? Credible measurement and inference in the age of AI* (NBER Working Paper No. 35744). National Bureau of Economic Research. https://doi.org/10.3386/w35744
 
 ## Acknowledgments
 
