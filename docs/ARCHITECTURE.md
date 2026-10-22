@@ -1,6 +1,6 @@
 # Architecture
 
-How the package is built, what the IO contracts are, and how determinism is guaranteed. This supersedes the earlier `02_System_Architecture.md`, `06_Tech_Stack.md`, and `08_Observability_and_Evaluations.md` scaffolds (archived) and reflects the shipped v3.0.2 package.
+How the package is built, what the IO contracts are, and how determinism is guaranteed. This supersedes the earlier `02_System_Architecture.md`, `06_Tech_Stack.md`, and `08_Observability_and_Evaluations.md` scaffolds (archived) and reflects the shipped v3.1.0 package.
 
 ## 1. Four-state machine
 
@@ -83,7 +83,7 @@ Each state is a pure-ish transform with explicit on-disk inputs/outputs. A full 
 | network.yaml | Restrictions R + θ + δ | YAML |
 | beta.yaml | Target functional | YAML |
 | anchors.yaml (optional) | Pre-data θ anchors | YAML |
-| beta_estimates.csv (β type `external` only; unreleased, post-3.0.2) | Bring-your-own β: `measure, beta_hat, se` (+ optional `df`, `n_clusters`, documentation columns) | CSV or parquet |
+| beta_estimates.csv (β type `external` only; since 3.1.0) | Bring-your-own β: `measure, beta_hat, se` (+ optional `df`, `n_clusters`, documentation columns) | CSV or parquet |
 
 ### Outputs (per run directory)
 
@@ -101,7 +101,7 @@ Each state is a pure-ish transform with explicit on-disk inputs/outputs. A full 
 | `theta_grid.json` | sensitivity surface summary (when enabled) |
 | `delta_grid.json` | tolerance surface summary (when enabled) |
 | `anchors.json` | anchor audit payload (when enabled) |
-| `confidence_region.json` | conservative Bonferroni CR, statuses, per-pair bounds (when enabled; unreleased, post-3.0.2) |
+| `confidence_region.json` | conservative Bonferroni CR, statuses, per-pair bounds (when enabled; since 3.1.0) |
 | `beta_estimates.json` | canonical external β rows + `beta_estimates_hash` (β type `external` only) |
 | `report.html` | primary human audit trail |
 | `report.json` | machine-complete dump of the same payload |
@@ -116,13 +116,13 @@ Reusing an `out_dir` overwrites headline artifacts. Inference-layer files (`boot
 4. Bootstrap RNG is a seeded `numpy.random.Generator` (never the global `np.random`).
 5. Float comparisons for slacks use the declared tolerance δ (default 0) — never raw `== 0` without policy.
 6. **Diagnostics excluded from the preimage:** bootstrap count is normalized (`n_boot < 1 ⇒ null`), and θ-grid / δ-grid / anchors / confidence-region settings (`cr_alpha1`, `cr_alpha2`, `cr_variant`, `cr_se`) do not change the run_id. Same bundle + different grids ⇒ same id, different artifacts. `roles.criteria` and the `screen_diagnostics` report block are likewise outside the preimage (`criteria` never changes the freeze column list and is omitted from serialized roles when empty).
-7. **External β (unreleased, post-3.0.2):** for β type `external` only, `beta_hash` = H({"beta": spec, "beta_estimates_hash": h}), where h hashes the canonical estimate table (rows sorted by measure, present columns in canonical order, `.17g` floats). Every other β type's `beta_hash` is unchanged; preimage keys are unchanged.
+7. **External β (since 3.1.0):** for β type `external` only, `beta_hash` = H({"beta": spec, "beta_estimates_hash": h}), where h hashes the canonical estimate table (rows sorted by measure, present columns in canonical order, `.17g` floats). Every other β type's `beta_hash` is unchanged; preimage keys are unchanged.
 
 ## 5. Slack and beta evaluators
 
 - **Restriction registry** (`identify/slacks.py`): `corr_min`, `corr_sign`, `mean_order`, `rank_agree` implemented; `stability` is schema-only and fails loud until a fixture demands it. Unknown types fail loud at parse time. All evaluators are simple, finite-sample sample analogues — no kernel or ML nuisances in the validity layer.
-- **Beta registry** (`identify/beta_fn.py`): `corr_y`, `ols_coef`, `diff_means`, `map_distance`, plus `external` (unreleased, post-3.0.2), which reads user-supplied values and fits nothing. `ols_coef` is a numpy closed-form standardized OLS (no statsmodels dependency), requiring a non-empty control list.
-- **Confidence region** (`inference/confidence_region.py`; unreleased, post-3.0.2): analytic, no RNG. Per-pair slack bounds, outer/inner sets, per-measure β intervals; native intervals for `corr_y`, `diff_means`, `external` only (`ols_coef` / `map_distance` fail loud). Pre-flight checks run before any artifact is written.
+- **Beta registry** (`identify/beta_fn.py`): `corr_y`, `ols_coef`, `diff_means`, `map_distance`, plus `external` (since 3.1.0), which reads user-supplied values and fits nothing. `ols_coef` is a numpy closed-form standardized OLS (no statsmodels dependency), requiring a non-empty control list.
+- **Confidence region** (`inference/confidence_region.py`; since 3.1.0): analytic, no RNG. Per-pair slack bounds, outer/inner sets, per-measure β intervals; native intervals for `corr_y`, `diff_means`, `external` only (`ols_coef` / `map_distance` fail loud). Pre-flight checks run before any artifact is written.
 
 ## 6. Report construction
 
@@ -183,4 +183,4 @@ Upstream scorers (LLM APIs, dictionaries, PCA) are user workflows that produce c
 
 - `v0.1` tag is immovable and peels to the museum PoC (`evals/synthetic/v0_poc.py`, unimported from src).
 - `v1.1.0` (MVP + inference layer), `v2.0.0` (measure discipline, PyPI 2026-08-06), and `v2.5.0` (P1–P5 engine infrastructure checkpoint, 2026-08-08) are tagged.
-- Current package version: `3.0.2` (reproducibility patch; 3.0.1 added the empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release).
+- Current package version: `3.1.0` (confidence region, bring-your-own β, screen diagnostics; 3.0.2 was the reproducibility patch; 3.0.1 added the empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release).

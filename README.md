@@ -6,8 +6,8 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **3.0.2** — reproducibility patch (2026-08-18): round-trip CSV parsing, audit F1–F8 closeout; 3.0.1 (2026-08-14) added the named `empty_R` unrestricted-multiverse special case |
-| **Status** | Public methods package (Alpha). Latest tag `v3.0.2`. |
+| **Version** | **3.1.0** — confidence region, bring-your-own β, screen diagnostics (2026-10-21). Previously **3.0.2** — reproducibility patch (2026-08-18): round-trip CSV parsing, audit F1–F8 closeout; 3.0.1 (2026-08-14) added the named `empty_R` unrestricted-multiverse special case |
+| **Status** | Public methods package (Alpha). Latest tag `v3.1.0`. |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
 | **CI** | [![ci](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Bonorinoa/cvprofiles/actions/workflows/ci.yml) |
@@ -20,7 +20,7 @@ pip install cvprofiles
 
 Requires Python ≥ 3.11. No GPU, no model weights, no API keys — the engine is a pure Python/numpy/pandas computation over the score columns you supply.
 
-The published wheel includes the engine and the one-command demo below (verified on a clean install of 3.0.2).
+The published wheel includes the engine and the one-command demo below (verified on clean installs).
 
 ### Install from source (this checkout)
 
@@ -30,7 +30,7 @@ cd cvprofiles
 pip install -e .
 ```
 
-`main` is development; version tags are the paper anchors. Clone a tag (`-b v3.0.2`) when you need a frozen paper run.
+`main` is development; version tags are the paper anchors. Clone a tag (`-b v3.1.0`) when you need a frozen paper run.
 
 ## Quickstart
 
@@ -88,7 +88,7 @@ The engine is **score-agnostic and model-free**: it does not generate measures, 
 
 **Diagnostic surfaces.** θ-grid and δ-grid show how $M^*$ and $[L,U]$ move with threshold and tolerance choices — the specification-curve (Simonsohn et al. 2020) / multiverse (Steegen et al. 2016) idea applied to measurement admissibility. Descriptive by design: they reveal *where* admissibility flips; they make no inferential claim about the surface.
 
-**Honest inference posture.** The headline range is the plug-in image over sample-admissible measures, not a confidence set. Bootstrap output is an uncertainty band, never a CI. For a statement with a coverage guarantee, use the opt-in **conservative confidence region** (`--confidence-region`, unreleased on `main`): a Bonferroni region with $P([L_0,U_0] \subseteq \mathrm{CR}) \ge 1-\alpha_1-\alpha_2$ that also classifies each measure as certainly admissible, possibly admissible, or certainly rejected. It is conservative and never replaces the headline. The units-split holdout is the out-of-sample check: select on train units, verdict on held-out units.
+**Honest inference posture.** The headline range is the plug-in image over sample-admissible measures, not a confidence set. Bootstrap output is an uncertainty band, never a CI. For a statement with a coverage guarantee, use the opt-in **conservative confidence region** (`--confidence-region`, since 3.1.0): a Bonferroni region with $P([L_0,U_0] \subseteq \mathrm{CR}) \ge 1-\alpha_1-\alpha_2$ that also classifies each measure as certainly admissible, possibly admissible, or certainly rejected. It is conservative and never replaces the headline. The units-split holdout is the out-of-sample check: select on train units, verdict on held-out units.
 
 ## When to use cvprofiles (and when not to)
 
@@ -118,7 +118,7 @@ Full positioning in the methodology doc (`docs/METHODOLOGY.md`).
 - Not a generic causal-sensitivity package: it disciplines *measurement* given a stated β.
 - Not “automate all of empirical economics”: it answers one question well.
 
-## Unreleased on `main` (next release)
+## What's new in 3.1
 
 - **Conservative confidence region** (`--confidence-region`): an additive Bonferroni region for the population range, with inner and outer admissible sets and a per-measure status. A Monte Carlo (2000 replications × 74 designs) gives coverage ≥ 0.924 at nominal 0.90, including at the admission boundary, where the bootstrap band falls to 0.48. Spec: `reports/specs/conservative_cr_spec.md`.
 - **Bring-your-own β** (β type `external`): pass a `beta_estimates.csv` (`measure, beta_hat, se`) computed in your own pipeline (fixest, Stata, pyfixest). The engine still fits no model.

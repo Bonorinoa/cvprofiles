@@ -1,6 +1,6 @@
 # User Guide
 
-How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v3.0.2 package (reproducibility patch: round-trip CSV parsing; 3.0.1 added the empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split + pooled K-fold application), and the P5 coverage uncertainty band.
+How to prepare inputs, run a profile, and read the report. This supersedes the earlier `14_Researcher_Input_Guide.md` scaffold (archived) and reflects the shipped v3.1.0 package (reproducibility patch: round-trip CSV parsing; 3.0.1 added the empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release): the P2 evaluators `corr_zero` / `monotone_rank`, the P3 betas `diff_means` / `map_distance`, P4 holdout (restriction `stage` split + country-level units-split + pooled K-fold application), and the P5 coverage uncertainty band.
 
 ## 1. The four input files
 
@@ -85,7 +85,7 @@ params: {}
 
 `ols_coef` requires `params.controls` (non-empty list of control columns).
 
-**Bring-your-own β** *(unreleased, post-3.0.2)*. If β comes from your own pipeline (fixed effects, IV, clustered SEs in fixest / pyfixest / Stata), declare `type: external` and pass the estimates with `--beta-estimates` (or `beta_estimates=` in Python):
+**Bring-your-own β** *(since 3.1.0)*. If β comes from your own pipeline (fixed effects, IV, clustered SEs in fixest / pyfixest / Stata), declare `type: external` and pass the estimates with `--beta-estimates` (or `beta_estimates=` in Python):
 
 ```yaml
 schema_version: "1"
@@ -131,11 +131,11 @@ Options:
 | `--holdout-units` | Comma-separated unit ids to hold out (select on train units, verdict on held-out units; headline = M*_robust) | off (no units-split) |
 | `--alpha` | Coverage band tail probability: per-side α/2 quantiles over non-empty bootstrap replicates (requires `--n-boot` > 0) | `0.10` |
 | `--kappa` | Boundary-attribution rule: \|margin_m\| ≤ κ·SE_m (requires `--n-boot` > 0) | `2.0` |
-| `--confidence-region` | Add the conservative Bonferroni confidence region (`confidence_region.json`; unreleased, post-3.0.2) | off |
+| `--confidence-region` | Add the conservative Bonferroni confidence region (`confidence_region.json`; since 3.1.0) | off |
 | `--cr-alpha1` / `--cr-alpha2` | CR admission level / β-interval level; coverage ≥ 1 − α1 − α2 | `0.05` / `0.05` |
 | `--cr-variant` | `endpoint` (Bonferroni over min(2, J)·Q slack pairs) \| `simultaneous` (J·Q; adds menu-wide statements) | `endpoint` |
 | `--cr-se` | Pearson Fisher-z SE: `robust` (influence function) \| `classical` (1/√(n−3)) | `robust` |
-| `--beta-estimates` | Bring-your-own β table for β type `external` (unreleased, post-3.0.2) | off |
+| `--beta-estimates` | Bring-your-own β table for β type `external` (since 3.1.0) | off |
 | `--title` | Report title | "Construct-validity profile" |
 
 **Contract:** stdout is always a single JSON summary (machine-clean). Human status messages go to stderr only. Empty `M*` exits 0 — it is a clean success. `cvprofiles run` and `cvprofiles demo` are thin wrappers over `run_profile` (below).
@@ -144,7 +144,7 @@ Options:
 
 `run_profile` in `cvprofiles.pipeline` is the in-process entry point. Notebooks, batch scripts, and other in-process drivers should call it directly rather than subprocess the CLI (the CLI pays interpreter startup on every invocation; the engine call is the same object).
 
-The function is keyword-only and returns `FullRunResult`. Arguments match the CLI flags (`out_dir`, `policy`, `seed`, `title`, `n_boot`, `theta_grid_lambdas`, `delta_grid_deltas`, `anchors`, `holdout_units`, `alpha`, `kappa`, and — unreleased, post-3.0.2 — `beta_estimates`, `confidence_region`, `cr_alpha1`, `cr_alpha2`, `cr_variant`, `cr_se`). `write_parquet=True` by default.
+The function is keyword-only and returns `FullRunResult`. Arguments match the CLI flags (`out_dir`, `policy`, `seed`, `title`, `n_boot`, `theta_grid_lambdas`, `delta_grid_deltas`, `anchors`, `holdout_units`, `alpha`, `kappa`, and — since 3.1.0 — `beta_estimates`, `confidence_region`, `cr_alpha1`, `cr_alpha2`, `cr_variant`, `cr_se`). `write_parquet=True` by default.
 
 ```python
 from cvprofiles.pipeline import run_profile, summary_dict
@@ -206,7 +206,7 @@ Every run directory contains machine-readable artifacts plus the human report:
 | `run_manifest.json` | Hashes, seed, versions, settings (incl. the normalized `holdout_units` when a units-split is used) |
 | `bootstrap.json`, `theta_grid.json`, `delta_grid.json`, `anchors.json` | Only when the corresponding layer is enabled |
 | `coverage.json` | Uncertainty band: α, κ, quantiles, band, empty-replicate rate, boundary attribution, admission frequency p̂_m (only when bootstrap is enabled) |
-| `confidence_region.json` | Conservative confidence region: `CR_L`, `CR_U`, `M_plus`, `M_minus`, per-measure `status`, per-pair slack bounds, β intervals, levels (only with `--confidence-region`; unreleased, post-3.0.2) |
+| `confidence_region.json` | Conservative confidence region: `CR_L`, `CR_U`, `M_plus`, `M_minus`, per-measure `status`, per-pair slack bounds, β intervals, levels (only with `--confidence-region`; since 3.1.0) |
 | `beta_estimates.json` | Canonical external β rows and `beta_estimates_hash` (β type `external` only) |
 
 `report.json` also carries a `screen_diagnostics` block on every run (report-only; logs/DECISIONS.md 2026-10-19). The CLI stdout summary repeats its three counts:
@@ -233,7 +233,7 @@ None of these changes M*, [L,U], or `run_id`, and none auto-rejects or re-thresh
 
 The report is generated from the same machine payload as `report.json` (Jinja2 template), so the HTML and JSON can never disagree about numbers.
 
-### 3.1 Reading the confidence region *(unreleased, post-3.0.2)*
+### 3.1 Reading the confidence region *(since 3.1.0)*
 
 The confidence region answers the question the headline cannot: where is the **population** range [L₀, U₀], once sampling error in both β̂(m) *and* in the admission decisions is priced in? With probability at least 1 − α1 − α2 (default 0.90), [L₀, U₀] ⊆ CR. The guarantee holds whatever the dependence between slack and β estimates, and it needs no "measures away from the boundary" condition. The headline [L, U] is unchanged and always sits inside the CR.
 

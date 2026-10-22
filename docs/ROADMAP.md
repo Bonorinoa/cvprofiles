@@ -51,7 +51,7 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 - **P6 benchmark kit → v3.1:** superseded for v3.0.0 by the application milestone; lands in v3.1 if reopened
 - **WVS/GPS two-resolution extension:** LLM join and cell-level results under `evals/wvs_gps_two_resolution/` feed the paper (`paper/position_paper.tex`)
 - **H5 Trust:** historical — evaluation lane removed from the repository 2026-08-21 (design record retained at `governance/H5_TRUST_DESIGN.md`)
-- **Conservative confidence region + bring-your-own β (unreleased, post-3.0.2):** additive Bonferroni CR for the population range (`inference/confidence_region.py`, `--confidence-region`) and β type `external` (`--beta-estimates`), approved and implemented 2026-10-20 (`logs/DECISIONS.md`; spec `reports/specs/conservative_cr_spec.md`). Version, tag and PyPI remain Augusto's call. Deferred follow-ups, each needing its own decision: bootstrap-SE mode, cluster-robust slack bounds, CLR / AKM sharpening, a CR on the WVS/GPS frozen inputs.
+- **Conservative confidence region + bring-your-own β (since 3.1.0):** additive Bonferroni CR for the population range (`inference/confidence_region.py`, `--confidence-region`) and β type `external` (`--beta-estimates`), approved and implemented 2026-10-20 (`logs/DECISIONS.md`; spec `reports/specs/conservative_cr_spec.md`). Version, tag and PyPI remain Augusto's call. Deferred follow-ups, each needing its own decision: bootstrap-SE mode, cluster-robust slack bounds, CLR / AKM sharpening, a CR on the WVS/GPS frozen inputs.
 
 ## Change log
 
@@ -66,4 +66,5 @@ Rev 3 P1–P5 engine go closed (synthetic-first):
 | 2026-08-09 | **v2.5.1 PyPI release** — first PyPI since 2.0.0: CLI holdout exposure (`--holdout-units`/`--alpha`/`--kappa`), docs synced to shipped state, version-consistency CI check |
 | 2026-08-10 | **WVS/GPS patience application promoted to flagship empirical example** — `docs/16` §11 amendment (IVS deferred, RESERVED); decision card D1–D10 frozen (menu, aux-only network, OLS β, 80/20 units-split, random-selection baseline, Llama-3.1-8B + Phi-4-mini prompt arms); plan `reports/DEVELOPMENT_PLAN_WVS_GPS_APPLICATION.md` |
 | 2026-08-10 | **Frozen run ACCEPTED; v3.0.0 release path opened** — docs/16 §12: v3.0.0 = infrastructure + flagship application; P6 superseded → v3.1; headline `M*_select = [gps, prompt_a]`, `[L,U] = [0.328, 0.402]`, random-null 100th percentile; verifier exit 0 |
-| 2026-10-20 | **Conservative CR + bring-your-own β approved and implemented (unreleased)** — Bonferroni confidence region for [L₀,U₀] (endpoint variant, robust SE) and β type `external`; Monte Carlo of operating characteristics in the spec §12; no version bump |
+| 2026-10-20 | **Conservative CR + bring-your-own β approved and implemented (released in 3.1.0)** — Bonferroni confidence region for [L₀,U₀] (endpoint variant, robust SE) and β type `external`; Monte Carlo of operating characteristics in the spec §12; no version bump |
+| 2026-10-21 | **v3.1.0 released** — confidence region, bring-your-own β and screen diagnostics; branches merged; PyPI 3.1.0 (logs/DECISIONS.md 2026-10-21) |

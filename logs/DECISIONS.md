@@ -1587,3 +1587,13 @@ Also authorized: the `report.json` / `report.html` / `summary_dict` wiring; `doc
 **Docs:** METHODOLOGY §4/§5, USER_GUIDE (β file, flags, artifacts, §3.1 reading the CR), ARCHITECTURE (module map, IO, freeze item 7, registries), ROADMAP, EVALUATIONS (MC entry). New features are labeled "unreleased, post-3.0.2".
 
 **Left for Augusto:** README is untouched, because it describes the published 3.0.2 wheel; update it at release time. Paper sentences that change if the CR is cited: l.97, l.1144, App. A.5. Also left for him: any version, tag, push or PyPI step, and running the CR on the WVS/GPS frozen inputs.
+
+## 2026-10-21 — v3.1.0 release: merge, push, PyPI
+
+**Context:** the report-only screen diagnostics (2026-10-19 entry, approved 2026-10-20) and the conservative confidence region with bring-your-own β (2026-10-20 entry, approved) were built on separate branches. They were combined on `integration/v3.1` with the docs-credit, WVS/GPS CR diagnostic, paper attribution edit list and RESERVED AI-exposure design branches. The full battery is green (448 tests); golden and committed two-resolution run_ids recompute identically before the version bump.
+
+**Decision (Augusto, 2026-10-21):** "please resolve the branches and push to main. update the pip package too. I want to share this."
+
+**Authorized by this entry:** merge all branches into `main`; version bump 3.0.2 → 3.1.0 across the version-consistency surfaces, CITATION and the manifest; golden `mini_v1` expected_freeze refresh (version pin only: scores/network/beta hashes unchanged); CHANGELOG [3.1.0]; push `main`; annotated tag `v3.1.0` (the release workflow builds, smokes and creates the GitHub Release); PyPI publish of 3.1.0.
+
+**Not authorized by this entry:** changes to `v0.1`; history rewrite; paper text changes (the attribution edit list stays a proposal); activating the RESERVED AI-exposure lane; changes to frozen empirical networks or committed evaluation runs.

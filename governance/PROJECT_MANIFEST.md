@@ -6,8 +6,8 @@ display_name: "Construct-Validity Profiles"
 type: academic_methods_tool
 status: v3_0_2_tagged
 version: "0.1.0"          # first tagged symbolization (methods KB + PoC)
-dev_version: "3.0.2"        # current package version (reproducibility patch, 2026-08-18)
-target_version: "3.0.2"   # current release (tag v3.0.2 pushed; PyPI + GitHub Release at closeout)
+dev_version: "3.1.0"        # current package version (CR + external beta + screen diagnostics, 2026-10-21)
+target_version: "3.1.0"   # current release (tag v3.1.0; PyPI + GitHub Release)
 created: 2026-08-01
 path: ~/Hermes/Projects/cvprofiles
 hermes_profile: cvprofiles

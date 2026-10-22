@@ -4,7 +4,9 @@ All notable project milestones live here. Detailed decisions → `logs/DECISIONS
 
 Format: keep newest first.
 
-## [Unreleased]
+## [3.1.0] — 2026-10-21 (inference + diagnostics release)
+
+Additive release: the headline [L,U], admission rule and freeze preimage keys are unchanged; existing scores/network/beta hashes are byte-identical, and run_ids move only through the version pin.
 
 - **Conservative confidence region + bring-your-own β** (logs/DECISIONS.md 2026-10-20, approved): opt-in `--confidence-region` (`--cr-alpha1`, `--cr-alpha2`, `--cr-variant`, `--cr-se`) writes `confidence_region.json` and an HTML panel. It is an analytic Bonferroni region with $P([L_0,U_0]\subseteq\mathrm{CR})\ge 1-\alpha_1-\alpha_2$, plus outer/inner sets M⁺/M⁻ and a per-measure status. New β type `external` reads `beta_estimates.csv` (`--beta-estimates`), and its hash enters `beta_hash` only for that type. CR knobs are excluded from the freeze preimage, so existing `beta_hash`/`run_id` values are byte-identical. MC evidence: `reports/specs/conservative_cr_spec.md` §12. A diagnostic-only CR on the WVS/GPS country frame is in `evals/wvs_gps_preferences/CR_DIAGNOSTIC_NOTE.md`. No version bump.
 - **Report-only screen diagnostics** (logs/DECISIONS.md 2026-10-19, approved 2026-10-20): `report.json["screen_diagnostics"]` + HTML panel + three stdout summary counts. (a) criterion self-consistency (does the criterion survive its own screen?), (b) auxiliary ceiling / proxy flag (measure vs criterion association with an aux floor variable, plus partial correlation), (c) near-threshold multiplicity (p̂_m and boundary flag as a plain-language line; reads the existing coverage result). Optional `roles.criteria` pointer list; the β outcome counts as a criterion when β is `corr_y`. M*, [L,U], every identify/coverage artifact, and `run_id` are unchanged (golden and all committed two-resolution run_ids re-verified). No version bump.
