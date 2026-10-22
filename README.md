@@ -145,6 +145,8 @@ Start here, then follow in order:
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | Live roadmap (maintained with the engineering log) |
 | [`docs/README.md`](docs/README.md) | Doc index — public docs + governance/lock docs |
 
+For a shorter, non-technical introduction to the idea, see the essay [*Construct-Identified Inference*](https://augustogbonorino.substack.com/p/construct-identified-inference) (Substack, 2026-08-30).
+
 Tutorials (run against the installed package, inputs generated inline):
 
 | Tutorial | What it covers |
