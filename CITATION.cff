@@ -5,8 +5,8 @@ authors:
   - family-names: Gonzalez-Bonorino
     given-names: Augusto
     affiliation: "Arizona State University; EconLLM Lab"
-version: 3.1.0
-date-released: "2026-10-21"
+version: 3.1.1
+date-released: "2026-10-23"
 url: "https://github.com/Bonorinoa/cvprofiles"
 license: MIT
 keywords:

@@ -4,6 +4,13 @@ All notable project milestones live here. Detailed decisions → `logs/DECISIONS
 
 Format: keep newest first.
 
+## [3.1.1] — 2026-10-23 (packaging patch)
+
+Packaging-only patch. No engine, schema, or scientific change: M*, [L,U], every identify/coverage artifact and all existing scores/network/beta hashes are unchanged; run_ids move only through the version pin.
+
+- **sdist hygiene:** the 3.1.0 source distribution was built from a development checkout and swept in local, untracked tool directories (`.claude/worktrees/*`, seven duplicate copies of the repository) plus gitignored `reports/runs/` outputs. Hatchling honors `.gitignore` but not `.git/info/exclude`, which is where the worktree path was ignored. Fixed by tracking `.claude/` in `.gitignore` and adding an explicit `[tool.hatch.build.targets.sdist] exclude` list; the 3.1.1 sdist is verified to contain tracked files only. The 3.1.0 **wheel** was never affected (package files only).
+- Version pin moved in `pyproject.toml`, `__init__.py`, `CITATION.cff`, `uv.lock` and the mini fixture's `expected_freeze.json`.
+
 ## [3.1.0] — 2026-10-21 (inference + diagnostics release)
 
 Additive release: the headline [L,U], admission rule and freeze preimage keys are unchanged; existing scores/network/beta hashes are byte-identical, and run_ids move only through the version pin.

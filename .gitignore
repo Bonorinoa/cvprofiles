@@ -139,3 +139,6 @@ data/h5_trust_aux/
 # sha-pinned paper inputs and are deliberately tracked.
 evals/realworld/calhousing_validity/data/scores.csv
 evals/realworld/calhousing_validity/data/scores_skew.csv
+
+# Claude Code local state (agent worktrees etc.): never part of the package or repo
+.claude/
