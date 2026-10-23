@@ -1,6 +1,6 @@
 # Architecture
 
-How the package is built, what the IO contracts are, and how determinism is guaranteed. This supersedes the earlier `02_System_Architecture.md`, `06_Tech_Stack.md`, and `08_Observability_and_Evaluations.md` scaffolds (archived) and reflects the shipped v3.1.0 package.
+How the package is built, what the IO contracts are, and how determinism is guaranteed. This supersedes the earlier `02_System_Architecture.md`, `06_Tech_Stack.md`, and `08_Observability_and_Evaluations.md` scaffolds (archived) and reflects the shipped v3.1.1 package.
 
 ## 1. Four-state machine
 
@@ -183,4 +183,4 @@ Upstream scorers (LLM APIs, dictionaries, PCA) are user workflows that produce c
 
 - `v0.1` tag is immovable and peels to the museum PoC (`evals/synthetic/v0_poc.py`, unimported from src).
 - `v1.1.0` (MVP + inference layer), `v2.0.0` (measure discipline, PyPI 2026-08-06), and `v2.5.0` (P1–P5 engine infrastructure checkpoint, 2026-08-08) are tagged.
-- Current package version: `3.1.0` (confidence region, bring-your-own β, screen diagnostics; 3.0.2 was the reproducibility patch; 3.0.1 added the empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release).
+- Current package version: `3.1.1` (packaging patch: sdist hygiene only; 3.1.0 added the confidence region, bring-your-own β, screen diagnostics; 3.0.2 was the reproducibility patch; 3.0.1 added the empty_R unrestricted-multiverse special case; 3.0.0 remains the flagship-application release).

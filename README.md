@@ -6,7 +6,7 @@ Open, high-observability research tooling that treats construct validity as **pa
 
 | | |
 |---|---|
-| **Version** | **3.1.0** — confidence region, bring-your-own β, screen diagnostics (2026-10-21). Previously **3.0.2** — reproducibility patch (2026-08-18): round-trip CSV parsing, audit F1–F8 closeout; 3.0.1 (2026-08-14) added the named `empty_R` unrestricted-multiverse special case |
+| **Version** | **3.1.1** — packaging patch: sdist hygiene, no engine change (2026-10-23). **3.1.0** — confidence region, bring-your-own β, screen diagnostics (2026-10-21). Previously **3.0.2** — reproducibility patch (2026-08-18): round-trip CSV parsing, audit F1–F8 closeout; 3.0.1 (2026-08-14) added the named `empty_R` unrestricted-multiverse special case |
 | **Status** | Public methods package (Alpha). Latest tag `v3.1.0`. |
 | **License** | MIT |
 | **GitHub** | https://github.com/Bonorinoa/cvprofiles |
